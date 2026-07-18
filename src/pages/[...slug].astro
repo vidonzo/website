@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { copy, localizedPath, parseRoute, type Locale, type PageKey } from '../i18n/locales';
+
+export function getStaticPaths() {
+  const locales = Object.keys(copy) as Locale[];
+  const pages: PageKey[] = ['home', 'features', 'download', 'support', 'privacy', 'terms'];
+  return locales.flatMap((locale) => pages.map((page) => {
+    const path = localizedPath(locale, page).replace(/^\/|\/$/g, '');
+    return { params: { slug: path || undefined } };
+  }));
+}
+
+const slug = Astro.params.slug ? Astro.params.slug.split('/') : [];
+const { locale, page } = parseRoute(slug);
+const t = copy[locale];
+const pageCopy = t[page];
+const title = page === 'home' ? 'Vidonzo' : `${pageCopy.title} | Vidonzo`;
+const description = pageCopy.lead;
+---
+<Base locale={locale} page={page} title={title} description={description}>
+  {page === 'home' ? (
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">{t.home.eyebrow}</div>
+          <h1>{t.home.title}</h1>
+          <p class="lead">{t.home.lead}</p>
+          <div class="actions">
+            <a class="button" href={localizedPath(locale, 'download')}>{t.home.primary}</a>
+            <a class="button secondary" href={localizedPath(locale, 'features')}>{t.home.secondary}</a>
+          </div>
+          <div class="signal-row">
+            {t.home.sections.map((item) => <div class="signal">{item}</div>)}
+          </div>
+        </div>
+        <figure class="hero-media">
+          <img src="/assets/hero-devices.png" alt="" width="1536" height="864" loading="eager" />
+        </figure>
+      </div>
+    </section>
+  ) : (
+    <section class="page">
+      <div class="page-inner">
+        <h1>{pageCopy.title}</h1>
+        <p class="lead">{pageCopy.lead}</p>
+        {page === 'support' && 'cta' in pageCopy ? <a class="support-card" href="mailto:support@vidonzo.com">{pageCopy.cta}</a> : null}
+      </div>
+    </section>
+  )}
+</Base>

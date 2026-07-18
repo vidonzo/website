@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { copy, locales, localizedPath, navKeys, type Locale, type PageKey } from '../i18n/locales';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  title: string;
+  description: string;
+}
+
+const { locale, page, title, description } = Astro.props;
+const t = copy[locale];
+const localeMeta = locales[locale];
+const canonical = new URL(localizedPath(locale, page), Astro.site).toString();
+---
+<!doctype html>
+<html lang={locale} dir={localeMeta.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {Object.keys(locales).map((code) => (
+      <link rel="alternate" hreflang={code} href={new URL(localizedPath(code as Locale, page), Astro.site).toString()} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL(localizedPath('en', page), Astro.site).toString()} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={localizedPath(locale, 'home')} aria-label="Vidonzo">
+        <span class="mark" aria-hidden="true"></span>
+        <span>Vidonzo</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        {navKeys.map((key) => <a href={localizedPath(locale, key)} aria-current={page === key ? 'page' : undefined}>{t.nav[key]}</a>)}
+      </nav>
+      <div class="locale-switcher" aria-label="Languages">
+        {Object.entries(locales).map(([code, meta]) => (
+          <a href={localizedPath(code as Locale, page)} aria-current={code === locale ? 'true' : undefined}>{meta.label}</a>
+        ))}
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer">
+      <div>
+        <strong>Vidonzo</strong><br />
+        <a href="mailto:support@vidonzo.com">support@vidonzo.com</a>
+      </div>
+      <div class="socials">
+        <a href="https://instagram.com/vidonzo">Instagram</a>
+        <a href="https://youtube.com/@vidonzo">YouTube</a>
+        <a href="https://t.me/vidonzo">Telegram</a>
+        <a href="https://github.com/vidonzo">GitHub</a>
+        <a href="https://x.com/vidonzo">X</a>
+        <a href="https://tiktok.com/@vidonzo">TikTok</a>
+        <a href="https://facebook.com/vidonzo">Facebook</a>
+      </div>
+    </footer>
+  </body>
+</html>
