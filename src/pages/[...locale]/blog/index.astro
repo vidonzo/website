@@ -1,0 +1,96 @@
+---
+import Base from '../../../layouts/Base.astro';
+import AuroraBackground from '../../../components/AuroraBackground.astro';
+import Reveal from '../../../components/Reveal.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { localeRoutes, type LocaleRouteProps } from '../../../i18n/routing';
+import { getLocalizedCollection } from '../../../i18n/content';
+import { defaultLocale, locales, localizedPath, useTranslations } from '../../../i18n';
+import { readingTime } from '../../../lib/reading-time';
+import { site } from '../../../config/site';
+
+export const getStaticPaths = localeRoutes;
+
+const { locale } = Astro.props as LocaleRouteProps;
+const t = useTranslations(locale);
+
+const posts = (await getLocalizedCollection('blog', locale)).sort(
+  (a, b) => b.entry.data.publishedAt.getTime() - a.entry.data.publishedAt.getTime(),
+);
+
+const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: 'medium' });
+---
+
+<Base
+  locale={locale}
+  active="blog"
+  title={`${t.blog.title} | ${site.name}`}
+  description={t.blog.lead}
+>
+  <section class="page-head">
+    <AuroraBackground subtle />
+    <div class="container head-inner">
+      <Reveal>
+        <h1>{t.blog.title}</h1>
+        <p class="lead">{t.blog.lead}</p>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {
+        posts.length === 0 ? (
+          <p class="empty">{t.blog.empty}</p>
+        ) : (
+          <div class="grid">
+            {posts.map((post, index) => (
+              <ArticleCard
+                href={localizedPath(locale, 'blog', post.slug)}
+                title={post.entry.data.title}
+                description={post.entry.data.description}
+                meta={`${dateFormat.format(post.entry.data.publishedAt)} · ${readingTime(post.entry.body ?? '')} ${t.common.minRead}`}
+                tags={post.entry.data.tags}
+                delay={index % 3}
+                contentLang={post.isFallback ? defaultLocale : undefined}
+                contentDir={post.isFallback ? locales[defaultLocale].dir : undefined}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-head {
+    position: relative;
+    padding-block: var(--space-3xl) var(--space-lg);
+    overflow: hidden;
+  }
+
+  .head-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    margin-block-end: var(--space-md);
+  }
+
+  .section {
+    padding-block-start: var(--space-xl);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: var(--space-md);
+  }
+
+  .empty {
+    color: var(--color-text-mid);
+  }
+</style>

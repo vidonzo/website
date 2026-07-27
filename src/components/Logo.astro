@@ -1,0 +1,78 @@
+---
+// The Vidonzo mark: an aurora squircle around a play glyph.
+//
+// The app currently ships the stock Flutter launcher icon, so there was no
+// mark to trace. This one is drawn from the theme instead — the same
+// violet→pink→cyan ramp the app paints its backgrounds with — so it belongs to
+// the product rather than merely sitting next to it.
+interface Props {
+  size?: number;
+  withWordmark?: boolean;
+  /** Unique per instance: gradient ids are document-global. */
+  id?: string;
+  class?: string;
+}
+
+const { size = 36, withWordmark = true, id = 'logo', class: className } = Astro.props;
+const gradientId = `${id}-aurora`;
+const glossId = `${id}-gloss`;
+---
+
+<span class:list={['logo', className]}>
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <linearGradient id={gradientId} x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="var(--color-primary)" />
+        <stop offset="0.55" stop-color="var(--color-accent-pink)" />
+        <stop offset="1" stop-color="var(--color-secondary)" />
+      </linearGradient>
+      <linearGradient id={glossId} x1="24" y1="0" x2="24" y2="30" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff" stop-opacity="0.32" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="14" fill={`url(#${gradientId})`} />
+    <rect width="48" height="48" rx="14" fill={`url(#${glossId})`} />
+    <path
+      d="M19.5 15 L33 24 L19.5 33 Z"
+      fill="#fff"
+      stroke="#fff"
+      stroke-width="3.4"
+      stroke-linejoin="round"
+    />
+  </svg>
+  {withWordmark && <span class="logo-word">Vidonzo</span>}
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .logo-word {
+    /* The wordmark is a brand asset, not body copy — it stays Latin and LTR
+       even on the Persian and Arabic pages. */
+    font-family: var(--font-latin);
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  svg {
+    flex: none;
+    filter: drop-shadow(0 0.35rem 1rem color-mix(in srgb, var(--color-primary) 40%, transparent));
+  }
+</style>

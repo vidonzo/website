@@ -1,0 +1,91 @@
+---
+import GlassCard from './GlassCard.astro';
+import Reveal from './Reveal.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  meta?: string;
+  tags?: string[];
+  delay?: number;
+  /** Language of the title and description, when it is not the page's. */
+  contentLang?: string;
+  contentDir?: 'ltr' | 'rtl';
+}
+
+const {
+  href,
+  title,
+  description,
+  meta,
+  tags = [],
+  delay = 0,
+  contentLang,
+  contentDir,
+} = Astro.props;
+---
+
+<Reveal delay={delay} class="wrap">
+  <GlassCard href={href} padding="lg" class="card">
+    {meta && <p class="meta">{meta}</p>}
+    <h3 lang={contentLang} dir={contentDir}>{title}</h3>
+    <p class="desc" lang={contentLang} dir={contentDir}>{description}</p>
+    {
+      tags.length > 0 && (
+        <ul role="list" class="tags">
+          {tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </GlassCard>
+</Reveal>
+
+<style>
+  .wrap {
+    block-size: 100%;
+  }
+
+  .card {
+    block-size: 100%;
+    display: grid;
+    gap: var(--space-xs);
+    align-content: start;
+  }
+
+  .meta {
+    color: var(--color-text-subtle);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+  }
+
+  .desc {
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin: var(--space-xs) 0 0;
+    padding: 0;
+  }
+
+  .tags li {
+    padding: 0.15rem var(--space-xs);
+    border: 1px solid var(--color-stroke);
+    border-radius: 999px;
+    color: var(--color-text-subtle);
+    font-size: var(--text-xs);
+  }
+</style>

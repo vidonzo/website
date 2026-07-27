@@ -1,0 +1,140 @@
+---
+import Base from '../../layouts/Base.astro';
+import AuroraBackground from '../../components/AuroraBackground.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Reveal from '../../components/Reveal.astro';
+import GlassCard from '../../components/GlassCard.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
+import { useTranslations } from '../../i18n';
+import { site } from '../../config/site';
+
+export const getStaticPaths = localeRoutes;
+
+const { locale } = Astro.props as LocaleRouteProps;
+const t = useTranslations(locale);
+
+/** Stable anchors for the in-page nav, independent of the translated titles. */
+const groupIds = ['sources', 'watching', 'finding', 'offline', 'television', 'privacy'];
+---
+
+<Base
+  locale={locale}
+  active="features"
+  title={`${t.features.title} | ${site.name}`}
+  description={t.features.lead}
+>
+  <section class="page-head">
+    <AuroraBackground subtle />
+    <div class="container head-inner">
+      <Reveal>
+        <h1>{t.features.title}</h1>
+        <p class="lead">{t.features.lead}</p>
+      </Reveal>
+      <Reveal delay={1}>
+        <nav class="jump" aria-label={t.common.onThisPage}>
+          {
+            t.features.groups.map((group, index) => (
+              <a href={`#${groupIds[index]}`}>{group.title}</a>
+            ))
+          }
+        </nav>
+      </Reveal>
+    </div>
+  </section>
+
+  {
+    t.features.groups.map((group, index) => (
+      <section class="section group">
+        <div class="container">
+          <SectionHeading title={group.title} lead={group.lead} id={groupIds[index]} />
+          <div class="items">
+            {group.items.map((item, itemIndex) => (
+              <Reveal delay={itemIndex % 3}>
+                <GlassCard class="item" padding="md">
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </GlassCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <CallToAction locale={locale} />
+</Base>
+
+<style>
+  .page-head {
+    position: relative;
+    padding-block: var(--space-3xl) var(--space-2xl);
+    overflow: hidden;
+  }
+
+  .head-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    margin-block-end: var(--space-md);
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.25rem;
+    padding-inline: var(--space-md);
+    border: 1px solid var(--color-stroke);
+    border-radius: 999px;
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  }
+
+  .jump a:is(:hover, :focus-visible) {
+    border-color: color-mix(in srgb, var(--color-secondary) 55%, var(--color-stroke-strong));
+    color: var(--color-text-high);
+  }
+
+  /* Groups are dense reference material, so they sit closer together than the
+     marketing sections on the home page. */
+  .group {
+    padding-block: var(--space-2xl);
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-md);
+  }
+
+  .item {
+    block-size: 100%;
+    display: grid;
+    gap: var(--space-2xs);
+    align-content: start;
+  }
+
+  .item h3 {
+    font-size: var(--text-base);
+  }
+
+  .item p {
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+</style>

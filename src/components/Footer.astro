@@ -1,0 +1,156 @@
+---
+import Logo from './Logo.astro';
+import { site, socialLinks } from '../config/site';
+import { footerLegalKeys, localizedPath, navKeys, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Rendered at build time, so "this year" is the year of the last deploy. Close
+// enough for a copyright line, and it avoids shipping a date script.
+const year = new Date().getUTCFullYear();
+const yearLabel = year > site.foundedYear ? `${site.foundedYear}–${year}` : `${site.foundedYear}`;
+
+const productKeys = ['features', 'download'] as const;
+const resourceKeys = ['blog', 'help', 'support'] as const;
+---
+
+<footer class="site-footer">
+  <div class="container grid">
+    <div class="about">
+      <Logo size={32} id="footer-logo" />
+      <p>{t.footer.tagline}</p>
+      <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+
+    <nav aria-labelledby="footer-product">
+      <h2 id="footer-product">{t.footer.product}</h2>
+      <ul role="list">
+        {navKeys.filter((key) => productKeys.includes(key as (typeof productKeys)[number])).map((key) => (
+          <li><a href={localizedPath(locale, key)}>{t.nav[key]}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-resources">
+      <h2 id="footer-resources">{t.footer.resources}</h2>
+      <ul role="list">
+        {navKeys.filter((key) => resourceKeys.includes(key as (typeof resourceKeys)[number])).map((key) => (
+          <li><a href={localizedPath(locale, key)}>{t.nav[key]}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-legal">
+      <h2 id="footer-legal">{t.footer.legal}</h2>
+      <ul role="list">
+        {footerLegalKeys.map((key) => (
+          <li><a href={localizedPath(locale, key)}>{t.legal[key]}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-follow">
+      <h2 id="footer-follow">{t.footer.follow}</h2>
+      <ul role="list" class="socials">
+        {socialLinks.map((link) => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer me">{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container bottom">
+    <p>© {yearLabel} {site.name}. {t.footer.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    margin-block-start: var(--space-3xl);
+    padding-block: var(--space-2xl) var(--space-lg);
+    border-block-start: 1px solid var(--color-stroke);
+    background: color-mix(in srgb, var(--color-surface) 60%, transparent);
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(15rem, 1.6fr) repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl) var(--space-lg);
+    align-items: start;
+  }
+
+  .about {
+    display: grid;
+    gap: var(--space-sm);
+    justify-items: start;
+  }
+
+  .about p {
+    max-inline-size: 22rem;
+    line-height: 1.6;
+  }
+
+  .email {
+    color: var(--color-secondary);
+    font-weight: 600;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  h2 {
+    margin-block-end: var(--space-sm);
+    color: var(--color-text-high);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-xs);
+    margin: 0;
+  }
+
+  li a {
+    transition: color var(--duration) var(--ease);
+  }
+
+  li a:is(:hover, :focus-visible) {
+    color: var(--color-text-high);
+  }
+
+  .socials a {
+    /* Platform names stay Latin regardless of the page language. */
+    font-family: var(--font-latin);
+  }
+
+  .bottom {
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-md);
+    border-block-start: 1px solid var(--color-stroke);
+    color: var(--color-text-subtle);
+    font-size: var(--text-xs);
+  }
+
+  @media (max-width: 62rem) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

@@ -1,64 +1,105 @@
 ---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/vazirmatn';
+import '@fontsource-variable/cairo';
 import '../styles/global.css';
-import { copy, locales, localizedPath, navKeys, type Locale, type PageKey } from '../i18n/locales';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+import { localeCodes, locales, localizedPath, useTranslations, type Locale, type PageKey } from '../i18n';
 
 interface Props {
   locale: Locale;
-  page: PageKey;
   title: string;
   description: string;
+  /** Highlights the matching nav item. */
+  active?: PageKey;
+  /**
+   * This same document in each language. Static pages can leave it out; content
+   * pages pass their own map so the switcher lands on the translated article
+   * rather than the site root.
+   */
+  localeHrefs?: Partial<Record<Locale, string>>;
+  /** Languages this page genuinely exists in. Others are left out of hreflang. */
+  availableLocales?: Locale[];
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
 }
 
-const { locale, page, title, description } = Astro.props;
-const t = copy[locale];
-const localeMeta = locales[locale];
-const canonical = new URL(localizedPath(locale, page), Astro.site).toString();
+const {
+  locale,
+  title,
+  description,
+  active,
+  localeHrefs: localeHrefsProp,
+  availableLocales = localeCodes,
+  canonicalPath,
+  ogImage = '/og/default.png',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const t = useTranslations(locale);
+const meta = locales[locale];
+
+const fallbackPage: PageKey = active ?? 'home';
+const localeHrefs = Object.fromEntries(
+  localeCodes.map((code) => [code, localeHrefsProp?.[code] ?? localizedPath(code, fallbackPage)]),
+) as Record<Locale, string>;
+
+const canonical = new URL(canonicalPath ?? localeHrefs[locale], site.url).toString();
+const ogImageUrl = new URL(ogImage, site.url).toString();
 ---
+
 <!doctype html>
-<html lang={locale} dir={localeMeta.dir}>
+<html lang={meta.htmlLang} dir={meta.dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {Object.keys(locales).map((code) => (
-      <link rel="alternate" hreflang={code} href={new URL(localizedPath(code as Locale, page), Astro.site).toString()} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href={new URL(localizedPath('en', page), Astro.site).toString()} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta name="theme-color" content="#0a0b12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} — ${t.blog.title}`} href="/rss.xml" />
+
+    {
+      availableLocales.map((code) => (
+        <link rel="alternate" hreflang={code} href={new URL(localeHrefs[code], site.url).toString()} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(localeHrefs.en, site.url).toString()} />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <slot name="head" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href={localizedPath(locale, 'home')} aria-label="Vidonzo">
-        <span class="mark" aria-hidden="true"></span>
-        <span>Vidonzo</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        {navKeys.map((key) => <a href={localizedPath(locale, key)} aria-current={page === key ? 'page' : undefined}>{t.nav[key]}</a>)}
-      </nav>
-      <div class="locale-switcher" aria-label="Languages">
-        {Object.entries(locales).map(([code, meta]) => (
-          <a href={localizedPath(code as Locale, page)} aria-current={code === locale ? 'true' : undefined}>{meta.label}</a>
-        ))}
-      </div>
-    </header>
-    <main>
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <Header locale={locale} active={active} localeHrefs={localeHrefs} />
+    <main id="main">
       <slot />
     </main>
-    <footer class="footer">
-      <div>
-        <strong>Vidonzo</strong><br />
-        <a href="mailto:support@vidonzo.com">support@vidonzo.com</a>
-      </div>
-      <div class="socials">
-        <a href="https://instagram.com/vidonzo">Instagram</a>
-        <a href="https://youtube.com/@vidonzo">YouTube</a>
-        <a href="https://t.me/vidonzo">Telegram</a>
-        <a href="https://github.com/vidonzo">GitHub</a>
-        <a href="https://x.com/vidonzo">X</a>
-        <a href="https://tiktok.com/@vidonzo">TikTok</a>
-        <a href="https://facebook.com/vidonzo">Facebook</a>
-      </div>
-    </footer>
+    <Footer locale={locale} />
   </body>
 </html>

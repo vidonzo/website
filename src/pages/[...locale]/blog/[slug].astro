@@ -1,0 +1,124 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../../components/ArticleLayout.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { getCollectionSlugs, getLocalizedCollection, getLocalizedEntry } from '../../../i18n/content';
+import {
+  defaultLocale,
+  localeCodes,
+  locales,
+  localizedPath,
+  useTranslations,
+  type Locale,
+} from '../../../i18n';
+import { readingTime } from '../../../lib/reading-time';
+import { site } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const slugs = await getCollectionSlugs('blog');
+  return localeCodes.flatMap((code) =>
+    slugs.map((slug) => ({
+      params: { locale: locales[code].path || undefined, slug },
+      props: { locale: code, slug },
+    })),
+  );
+}
+
+const { locale, slug } = Astro.props as { locale: Locale; slug: string };
+const t = useTranslations(locale);
+
+const post = await getLocalizedEntry('blog', locale, slug);
+if (!post) throw new Error(`blog/[slug]: no entry for "${slug}"`);
+
+const { Content } = await render(post.entry);
+const { data } = post.entry;
+
+const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: 'long' });
+const meta = [
+  dateFormat.format(data.publishedAt),
+  `${readingTime(post.entry.body ?? '')} ${t.common.minRead}`,
+].join(' · ');
+
+const localeHrefs = Object.fromEntries(
+  localeCodes.map((code) => [code, localizedPath(code, 'blog', slug)]),
+) as Record<Locale, string>;
+
+// Same-tag posts first, then anything else, capped at three.
+const related = (await getLocalizedCollection('blog', locale))
+  .filter((other) => other.slug !== slug)
+  .sort((a, b) => {
+    const shared = (item: typeof a) => item.entry.data.tags.filter((tag) => data.tags.includes(tag)).length;
+    return shared(b) - shared(a) || b.entry.data.publishedAt.getTime() - a.entry.data.publishedAt.getTime();
+  })
+  .slice(0, 3);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.publishedAt.toISOString(),
+  dateModified: (data.updatedAt ?? data.publishedAt).toISOString(),
+  author: { '@type': 'Organization', name: data.author },
+  publisher: { '@type': 'Organization', name: site.name },
+  inLanguage: post.isFallback ? 'en' : locale,
+  mainEntityOfPage: new URL(localizedPath(locale, 'blog', slug), site.url).toString(),
+};
+---
+
+<ArticleLayout
+  locale={locale}
+  active="blog"
+  title={data.title}
+  description={data.description}
+  meta={meta}
+  isFallback={post.isFallback}
+  localeHrefs={localeHrefs}
+  availableLocales={post.availableLocales}
+  noindex={post.isFallback}
+  parent={{ label: t.blog.title, href: localizedPath(locale, 'blog') }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
+  <Content />
+
+  {
+    related.length > 0 && (
+      <section class="related" slot="after">
+        <div class="container">
+          <h2>{t.common.related}</h2>
+          <div class="grid">
+            {related.map((other, index) => (
+              <ArticleCard
+                href={localizedPath(locale, 'blog', other.slug)}
+                title={other.entry.data.title}
+                description={other.entry.data.description}
+                tags={other.entry.data.tags}
+                delay={index}
+                contentLang={other.isFallback ? defaultLocale : undefined}
+                contentDir={other.isFallback ? locales[defaultLocale].dir : undefined}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</ArticleLayout>
+
+<style>
+  .related {
+    padding-block: var(--space-2xl);
+    border-block-start: 1px solid var(--color-stroke);
+  }
+
+  .related h2 {
+    margin-block-end: var(--space-lg);
+    font-size: var(--text-xl);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--space-md);
+  }
+</style>

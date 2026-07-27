@@ -1,0 +1,45 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from './ArticleLayout.astro';
+import { getLocalizedEntry } from '../i18n/content';
+import { localeCodes, localizedPath, useTranslations, type Locale, type PageKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  /** File name of the document inside src/content/legal/<locale>/. */
+  slug: 'privacy' | 'terms' | 'account-deletion';
+  page: PageKey;
+}
+
+const { locale, slug, page } = Astro.props;
+
+const doc = await getLocalizedEntry('legal', locale, slug);
+// A missing legal document is a build-breaking mistake, not something to paper
+// over: these URLs are cited by the app store listings.
+if (!doc) throw new Error(`LegalPage: no document "${slug}" in src/content/legal`);
+
+const { Content } = await render(doc.entry);
+const t = useTranslations(locale);
+
+const localeHrefs = Object.fromEntries(
+  localeCodes.map((code) => [code, localizedPath(code, page)]),
+) as Record<Locale, string>;
+
+const updated = doc.entry.data.updatedAt ?? doc.entry.data.publishedAt;
+const dateLabel = new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(updated);
+---
+
+<ArticleLayout
+  locale={locale}
+  active={page}
+  title={doc.entry.data.title}
+  description={doc.entry.data.description}
+  meta={`${t.common.updated}: ${dateLabel}`}
+  isFallback={doc.isFallback}
+  localeHrefs={localeHrefs}
+  availableLocales={doc.availableLocales}
+  noindex={doc.isFallback}
+  parent={{ label: t.footer.legal, href: localizedPath(locale, 'privacy') }}
+>
+  <Content />
+</ArticleLayout>

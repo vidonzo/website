@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import AuroraBackground from './AuroraBackground.astro';
+import TranslationNotice from './TranslationNotice.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import { defaultLocale, locales, localizedPath, useTranslations, type Locale, type PageKey } from '../i18n';
+import { site } from '../config/site';
+
+// The shared shell for anything that is a document rather than a landing page:
+// blog posts, help guides, and the legal texts.
+interface Props {
+  locale: Locale;
+  active: PageKey;
+  title: string;
+  description: string;
+  /** Rendered under the title. Blog posts use it for the date and reading time. */
+  meta?: string;
+  isFallback?: boolean;
+  localeHrefs?: Partial<Record<Locale, string>>;
+  availableLocales?: Locale[];
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  /** A fallback page is a duplicate of the English original as far as a crawler is concerned. */
+  noindex?: boolean;
+  parent: { label: string; href: string };
+}
+
+const {
+  locale,
+  active,
+  title,
+  description,
+  meta,
+  isFallback = false,
+  localeHrefs,
+  availableLocales,
+  canonicalPath,
+  ogType = 'article',
+  noindex = false,
+  parent,
+} = Astro.props;
+
+const t = useTranslations(locale);
+
+// The surrounding chrome is in the reader's language, but the document itself
+// may be the untranslated original. English prose set right-to-left puts full
+// stops at the start of lines, so the body carries its own lang and dir.
+const contentLocale = isFallback ? defaultLocale : locale;
+const contentDir = locales[contentLocale].dir;
+---
+
+<Base
+  locale={locale}
+  active={active}
+  title={`${title} | ${site.name}`}
+  description={description}
+  localeHrefs={localeHrefs}
+  availableLocales={availableLocales}
+  canonicalPath={canonicalPath}
+  ogType={ogType}
+  noindex={noindex}
+>
+  <slot name="head" slot="head" />
+
+  <article>
+    <header class="head">
+      <AuroraBackground subtle />
+      <div class="container head-inner">
+        <Breadcrumb
+          locale={locale}
+          items={[
+            { label: t.common.home, href: localizedPath(locale, 'home') },
+            parent,
+            { label: title },
+          ]}
+        />
+        <h1 lang={contentLocale} dir={contentDir}>{title}</h1>
+        {meta && <p class="meta">{meta}</p>}
+      </div>
+    </header>
+
+    <div class="container body">
+      {isFallback && <TranslationNotice locale={locale} />}
+      <div class="prose" lang={contentLocale} dir={contentDir}>
+        <slot />
+      </div>
+    </div>
+  </article>
+
+  {/* Full-width sections that follow the document — related posts, guide lists. */}
+  <slot name="after" />
+</Base>
+
+<style>
+  .head {
+    position: relative;
+    padding-block: var(--space-2xl) var(--space-xl);
+    overflow: hidden;
+  }
+
+  .head-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    margin-block-start: var(--space-md);
+    font-size: var(--text-2xl);
+    max-inline-size: 24ch;
+  }
+
+  .meta {
+    margin-block-start: var(--space-sm);
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+  }
+
+  .body {
+    display: grid;
+    gap: var(--space-lg);
+    padding-block-end: var(--space-2xl);
+  }
+
+  /* Long-form typography. The base `.prose` rules live in global.css; these are
+     the extras that only a full document needs. */
+  .prose :global(h2) {
+    padding-block-start: var(--space-md);
+    border-block-start: 1px solid var(--color-stroke);
+  }
+
+  .prose :global(blockquote) {
+    margin-inline: 0;
+    padding-inline-start: var(--space-md);
+    border-inline-start: 3px solid var(--color-primary);
+    color: var(--color-text-mid);
+    font-style: italic;
+  }
+
+  .prose :global(pre) {
+    padding: var(--space-md);
+    border: 1px solid var(--color-stroke);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    overflow-x: auto;
+    direction: ltr;
+  }
+
+  .prose :global(pre code) {
+    padding: 0;
+    background: none;
+  }
+
+  .prose :global(hr) {
+    border: 0;
+    border-block-start: 1px solid var(--color-stroke);
+    margin-block: var(--space-xl);
+  }
+
+  .prose :global(table) {
+    inline-size: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .prose :global(th),
+  .prose :global(td) {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-stroke);
+    text-align: start;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--radius-md);
+  }
+</style>

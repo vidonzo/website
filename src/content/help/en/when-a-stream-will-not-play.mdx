@@ -1,0 +1,49 @@
+---
+title: When a stream will not play
+description: Working out whether the problem is the provider, the network, or the app.
+category: troubleshooting
+order: 10
+publishedAt: 2026-07-27
+---
+
+Most playback failures are not the player. This is the order worth checking.
+
+## Does another channel work?
+
+Try two or three other channels from the same playlist.
+
+- **Everything fails** — the problem is the playlist, the account or the network.
+- **One channel fails** — that stream is offline or dead at the provider. Nothing
+  in the app can fix it.
+
+## Is the account still valid?
+
+Xtream accounts expire, and many providers cap how many devices may stream at
+once. If you are watching on the TV and the phone at the same time, you may
+simply be over the limit. Sign out on one device and try again.
+
+## Buffering rather than failing
+
+Raise the cache in **Settings → Playback**. A larger cache absorbs an unstable
+connection at the cost of a slower start. If the stream is 4K and the device is
+old, try a lower-quality variant of the same channel where your provider offers
+one.
+
+## The stream drops mid-playback
+
+Vidonzo reconnects automatically. If it keeps dropping, the provider is
+throttling or the network is unstable — a wired connection on the TV usually
+settles it.
+
+## Nothing loads at all
+
+- Check the playlist still loads: pull to refresh on the home screen.
+- If your network blocks the provider, set a proxy in **Settings → Network**.
+- Check the device clock. A wrong system time breaks TLS, and streams over HTTPS
+  will fail with no obvious reason.
+
+## Still stuck
+
+Write to [support@vidonzo.com](mailto:support@vidonzo.com) with the device, the
+Vidonzo version, whether the source is Xtream or M3U, and what you saw. Those
+four things resolve most reports on the first reply.

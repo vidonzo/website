@@ -1,0 +1,46 @@
+---
+import Reveal from './Reveal.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'start' | 'center';
+  level?: 2 | 3;
+  id?: string;
+}
+
+const { eyebrow, title, lead, align = 'start', level = 2, id } = Astro.props;
+const Heading = `h${level}`;
+---
+
+<Reveal class:list={['heading', align]}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <Heading id={id}>{title}</Heading>
+  {lead && <p class="lead">{lead}</p>}
+</Reveal>
+
+<style>
+  .heading {
+    display: grid;
+    gap: var(--space-sm);
+    margin-block-end: var(--space-2xl);
+  }
+
+  .center {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .center .lead {
+    margin-inline: auto;
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+</style>

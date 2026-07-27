@@ -1,0 +1,360 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import Reveal from '../../components/Reveal.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import GlassCard from '../../components/GlassCard.astro';
+import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
+import { localizedPath, useTranslations } from '../../i18n';
+import { site } from '../../config/site';
+
+export const getStaticPaths = localeRoutes;
+
+const { locale } = Astro.props as LocaleRouteProps;
+const t = useTranslations(locale);
+
+// The six home-page features, in the order the copy lists them.
+const featureIcons = ['live', 'film', 'play', 'download', 'history', 'sliders'] as const;
+const privacyIcons = ['lock', 'shield', 'wifi-off'] as const;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: t.home.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: site.name,
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Android, iOS, iPadOS, Android TV',
+  description: t.home.lead,
+  url: site.url,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+---
+
+<Base
+  locale={locale}
+  active="home"
+  title={`${site.name} — ${t.home.eyebrow}`}
+  description={t.home.lead}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <Hero locale={locale} />
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading title={t.home.featuresTitle} lead={t.home.featuresLead} />
+      <div class="feature-grid">
+        {
+          t.home.features.map((feature, index) => (
+            <FeatureCard
+              title={feature.title}
+              body={feature.body}
+              icon={featureIcons[index]}
+              delay={index % 3}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container remote-grid">
+      <Reveal class="remote-copy">
+        <p class="eyebrow">
+          <Icon name="remote" />
+          {t.home.remoteEyebrow}
+        </p>
+        <h2>{t.home.remoteTitle}</h2>
+        <p class="lead">{t.home.remoteLead}</p>
+        <ul role="list" class="points">
+          {
+            t.home.remotePoints.map((point) => (
+              <li>
+                <span class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 16 16">
+                    <path
+                      d="m3.5 8.5 3 3 6-7"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+        <Button href={localizedPath(locale, 'help')} variant="ghost">{t.home.remoteCta}</Button>
+      </Reveal>
+
+      <Reveal delay={2} class="remote-art">
+        <div class="art" aria-hidden="true">
+          <div class="art-tv">
+            <span class="art-rail"></span>
+            <span class="art-grid"></span>
+          </div>
+          <div class="art-phone">
+            <span class="art-bar"></span>
+            <span class="art-rows"></span>
+          </div>
+          <span class="art-link"></span>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading title={t.home.setupTitle} lead={t.home.setupLead} />
+      <Steps items={t.home.steps} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow={t.home.privacyEyebrow}
+        title={t.home.privacyTitle}
+        lead={t.home.privacyLead}
+      />
+      <div class="privacy-grid">
+        {
+          t.home.privacyPoints.map((point, index) => (
+            <Reveal delay={index}>
+              <GlassCard class="privacy-card" padding="lg">
+                <span class="privacy-icon" aria-hidden="true">
+                  <Icon name={privacyIcons[index]} />
+                </span>
+                <h3>{point.title}</h3>
+                <p>{point.body}</p>
+              </GlassCard>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading title={t.home.faqTitle} />
+      <Faq items={t.home.faq} />
+    </div>
+  </section>
+
+  <CallToAction locale={locale} />
+</Base>
+
+<style>
+  /* Fixed at three rather than auto-fit: six features want two rows of three,
+     and auto-fit gives a lopsided 4 + 2 on a wide desktop. */
+  .feature-grid,
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 62rem) {
+    .feature-grid,
+    .privacy-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .feature-grid,
+    .privacy-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .privacy-card {
+    block-size: 100%;
+    display: grid;
+    gap: var(--space-sm);
+    align-content: start;
+  }
+
+  .privacy-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-secondary) 18%, transparent);
+    color: var(--color-secondary);
+  }
+
+  .privacy-card h3 {
+    font-size: var(--text-lg);
+  }
+
+  .privacy-card p {
+    color: var(--color-text-mid);
+    line-height: 1.65;
+  }
+
+  /* --- The remote-control spotlight ---------------------------------------- */
+
+  .remote-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .remote-copy {
+    display: grid;
+    gap: var(--space-md);
+    justify-items: start;
+  }
+
+  .remote-copy h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .points {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-mid);
+  }
+
+  .points li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    line-height: 1.5;
+  }
+
+  .tick {
+    display: grid;
+    place-items: center;
+    inline-size: 1.4rem;
+    block-size: 1.4rem;
+    flex: none;
+    margin-block-start: 0.1rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-success) 22%, transparent);
+    color: var(--color-success);
+  }
+
+  .tick svg {
+    inline-size: 0.85rem;
+    block-size: 0.85rem;
+  }
+
+  /* An abstract diagram of the pairing rather than a fake screenshot: a TV, a
+     phone, and the link between them, drawn from the theme's own surfaces. */
+  .art {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  .art-tv,
+  .art-phone {
+    position: absolute;
+    border: 1px solid var(--color-stroke-strong);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .art-tv {
+    inset-block-start: 6%;
+    inset-inline-start: 0;
+    inline-size: 78%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-md);
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+  }
+
+  .art-rail {
+    border-inline-end: 1px solid var(--color-stroke);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-primary) 22%, transparent),
+      transparent
+    );
+  }
+
+  .art-grid {
+    margin: 0.7rem;
+    border-radius: var(--radius-sm);
+    background:
+      linear-gradient(90deg, var(--color-surface-high) 32%, transparent 32%) 0 0 / 25% 42% repeat,
+      linear-gradient(180deg, var(--color-surface-high) 74%, transparent 74%) 0 0 / 25% 42% repeat;
+    opacity: 0.9;
+  }
+
+  .art-phone {
+    inset-block-end: 2%;
+    inset-inline-end: 2%;
+    inline-size: 30%;
+    aspect-ratio: 9 / 18;
+    border-radius: var(--radius-lg);
+    padding: 0.55rem;
+    display: grid;
+    grid-template-rows: 1.35rem 1fr;
+    gap: 0.4rem;
+  }
+
+  .art-bar {
+    border-radius: 0.4rem;
+    background: var(--gradient-aurora-soft);
+    opacity: 0.85;
+  }
+
+  .art-rows {
+    border-radius: 0.4rem;
+    background: linear-gradient(180deg, var(--color-surface-high) 62%, transparent 62%) 0 0 / 100%
+      1.5rem repeat;
+  }
+
+  /* The pairing itself: concentric rings radiating from the phone toward the
+     TV. A single straight line read as a stray stroke rather than a link. */
+  .art-link {
+    position: absolute;
+    inset-block-end: 30%;
+    inset-inline-end: 24%;
+    inline-size: 3.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 55%, transparent);
+    box-shadow:
+      0 0 0 0.75rem color-mix(in srgb, var(--color-secondary) 14%, transparent),
+      0 0 0 1.6rem color-mix(in srgb, var(--color-secondary) 7%, transparent);
+  }
+
+  @media (max-width: 62rem) {
+    .remote-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

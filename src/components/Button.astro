@@ -1,0 +1,123 @@
+---
+// Mirrors the app's elevatedButtonTheme: aurora fill, white label, 16px radius,
+// no elevation. The ghost variant stands in for the app's TextButton.
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost' | 'quiet';
+  size?: 'md' | 'lg';
+  /** Adds target/rel and the arrow affordance for off-site links. */
+  external?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  external = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<Tag href={href} class:list={['button', variant, size, className]} {...externalAttrs} {...rest}>
+  <slot name="icon" />
+  <span class="label"><slot /></span>
+  {external && (
+    <svg class="external" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path
+        d="M5.5 3h7.5v7.5M13 3 3.5 12.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )}
+</Tag>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    /* 44px floor: the app is used on touch and on a TV remote, and the site
+       inherits both audiences. */
+    min-block-size: 2.75rem;
+    padding-inline: var(--space-lg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      transform var(--duration-fast) var(--ease),
+      box-shadow var(--duration) var(--ease),
+      background-color var(--duration) var(--ease),
+      border-color var(--duration) var(--ease);
+  }
+
+  .lg {
+    min-block-size: 3.25rem;
+    padding-inline: var(--space-xl);
+    font-size: var(--text-base);
+  }
+
+  .button:active {
+    transform: translateY(1px);
+  }
+
+  .primary {
+    background: var(--gradient-aurora-button);
+    color: #fff;
+    box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--color-primary) 32%, transparent);
+  }
+
+  .primary:is(:hover, :focus-visible) {
+    box-shadow: 0 1rem 2.75rem color-mix(in srgb, var(--color-primary) 48%, transparent);
+  }
+
+  .ghost {
+    background: color-mix(in srgb, var(--color-surface-high) 70%, transparent);
+    border-color: var(--color-stroke-strong);
+    color: var(--color-text-high);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .ghost:is(:hover, :focus-visible) {
+    border-color: color-mix(in srgb, var(--color-secondary) 60%, var(--color-stroke-strong));
+    background: var(--color-surface-high);
+  }
+
+  .quiet {
+    min-block-size: 2.25rem;
+    padding-inline: var(--space-sm);
+    background: none;
+    color: var(--color-secondary);
+  }
+
+  .quiet:is(:hover, :focus-visible) {
+    color: var(--color-text-high);
+  }
+
+  .external {
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+    flex: none;
+    opacity: 0.75;
+  }
+
+  /* The arrow means "leaves this site", a direction that does not flip with
+     the writing mode the way a "next" chevron would. */
+  :global([dir='rtl']) .external {
+    transform: scaleX(-1);
+  }
+</style>

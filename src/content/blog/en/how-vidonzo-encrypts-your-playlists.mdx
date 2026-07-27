@@ -1,0 +1,73 @@
+---
+title: How Vidonzo encrypts your playlists
+description: Why your Xtream password is stored as ciphertext we cannot read, and what that costs you.
+publishedAt: 2026-07-20
+tags: ['privacy', 'engineering']
+---
+
+Your Xtream credentials are, in effect, your paid subscription. Anyone holding
+them can watch on your account, get you rate-limited, or get you cut off. That
+makes them the single most sensitive thing Vidonzo touches — and the thing we
+least want to be able to read.
+
+So we made it impossible to.
+
+## The split
+
+Not everything needs the same treatment. Syncing favourites across devices is
+useful and unremarkable; syncing a provider password is neither. We split the
+data accordingly:
+
+**End-to-end encrypted**: your Xtream host, username and password, and any M3U
+source URL.
+
+**Stored in plain text, protected by per-user access rules**: favourites, watch
+progress, app settings, and the label you gave a playlist — which is your own
+words, not a secret.
+
+That split is deliberate. Encrypting favourites would buy almost nothing and
+would stop a newly added device from showing anything useful until it is
+unlocked.
+
+## How the encryption works
+
+A random 256-bit **data key** is generated on your device — never on a server.
+Each source record is encrypted with AES‑256‑GCM under that key, with a unique
+nonce per record.
+
+The data key itself is then wrapped: your sync password goes through **Argon2id**
+to derive a key-encryption key, and the data key is encrypted with it. Only the
+wrapped result is uploaded. The sync password never crosses the network.
+
+What our database holds for a playlist is a label, a kind, and a blob of
+ciphertext. There is no key on the server to decrypt it with.
+
+## Adding a second device
+
+The interesting problem is not encryption; it is getting the data key onto your
+next device without ever sending it in the clear.
+
+1. The new device signs in. Favourites and progress appear immediately — they
+   were never encrypted.
+2. Playlists show as **locked**.
+3. The new device generates an ephemeral X25519 key pair and shows a QR code.
+4. A device that is already unlocked scans it and asks you to confirm.
+5. The unlocked device derives a shared secret over ECDH, encrypts the data key
+   with it, and uploads that sealed blob.
+6. The new device decrypts it with its private key and stores the result in the
+   iOS Keychain or the Android Keystore.
+
+At no point does the server hold anything it can open.
+
+## The part we cannot soften
+
+**If you lose your sync password and have no unlocked device left, your
+playlists are gone.** Not withheld — mathematically unavailable. We cannot reset
+it, because there is nothing on our side to reset.
+
+This is the honest trade of real end-to-end encryption, and every product that
+claims it either makes this trade or is not doing it. The app says so plainly at
+the moment you set the password, rather than burying it in a policy page.
+
+Re-adding a playlist takes a minute. That is the recovery path, and we would
+rather offer that than hold a key we could be compelled to use.

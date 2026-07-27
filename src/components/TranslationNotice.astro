@@ -1,0 +1,58 @@
+---
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<aside class="notice" role="note">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path
+      d="M12 4.5 21 20H3l9-15.5ZM12 10v4.2M12 17h.01"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <div>
+    <strong>{t.common.translationPendingTitle}</strong>
+    <p>{t.common.translationPendingBody}</p>
+  </div>
+</aside>
+
+<style>
+  .notice {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 40%, transparent);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-warning) 10%, transparent);
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+  }
+
+  svg {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    flex: none;
+    margin-block-start: 0.1rem;
+    color: var(--color-warning);
+  }
+
+  strong {
+    display: block;
+    color: var(--color-text-high);
+  }
+
+  p {
+    margin-block-start: 0.15rem;
+    line-height: 1.55;
+  }
+</style>

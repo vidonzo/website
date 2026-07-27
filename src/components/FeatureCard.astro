@@ -1,0 +1,68 @@
+---
+import GlassCard from './GlassCard.astro';
+import Reveal from './Reveal.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+interface Props {
+  title: string;
+  body: string;
+  icon?: IconName;
+  delay?: number;
+}
+
+const { title, body, icon, delay = 0 } = Astro.props;
+---
+
+{/* Reveal is the grid item itself. It must never be `display: contents`: a box
+    with no layout is never reported by IntersectionObserver, so the card would
+    stay at opacity 0 forever. */}
+<Reveal delay={delay} class="wrap">
+  <GlassCard class="card" padding="lg">
+    {icon && (
+      <span class="icon" aria-hidden="true">
+        <Icon name={icon} />
+      </span>
+    )}
+    <h3>{title}</h3>
+    <p>{body}</p>
+  </GlassCard>
+</Reveal>
+
+<style>
+  .wrap {
+    block-size: 100%;
+  }
+
+  .card {
+    block-size: 100%;
+    display: grid;
+    gap: var(--space-sm);
+    align-content: start;
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-block-end: var(--space-2xs);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    color: var(--color-secondary);
+  }
+
+  .icon :global(svg) {
+    inline-size: 1.4rem;
+    block-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+  }
+
+  p {
+    color: var(--color-text-mid);
+    line-height: 1.65;
+  }
+</style>
