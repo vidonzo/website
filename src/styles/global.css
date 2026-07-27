@@ -70,16 +70,16 @@ h1 { font-size: clamp(56px, 9vw, 118px); line-height: 0.9; margin: 14px 0 24px; 
 
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 34px;
   max-width: 980px;
 }
 
 .download-card {
-  min-height: 88px;
+  min-height: 128px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   padding: 16px;
   border: 1px solid var(--line);
@@ -90,7 +90,8 @@ h1 { font-size: clamp(56px, 9vw, 118px); line-height: 0.9; margin: 14px 0 24px; 
   box-shadow: 0 16px 38px rgba(24, 32, 38, 0.08);
 }
 
-.download-card:hover {
+a.download-card:hover,
+.download-actions a:hover {
   border-color: color-mix(in srgb, var(--teal), var(--line) 25%);
   transform: translateY(-1px);
 }
@@ -110,9 +111,14 @@ h1 { font-size: clamp(56px, 9vw, 118px); line-height: 0.9; margin: 14px 0 24px; 
   fill: currentColor;
 }
 
-.google-play {
+.android {
   color: white;
   background: linear-gradient(135deg, #0f8c84, #2e6eea);
+}
+
+.tv {
+  color: white;
+  background: linear-gradient(135deg, var(--coral), #8a5cf6);
 }
 
 .app-store {
@@ -120,25 +126,71 @@ h1 { font-size: clamp(56px, 9vw, 118px); line-height: 0.9; margin: 14px 0 24px; 
   background: #182026;
 }
 
-.apk {
+.desktop {
   color: white;
-  background: linear-gradient(135deg, var(--coral), #8a5cf6);
+  background: linear-gradient(135deg, var(--teal), var(--sun));
 }
 
-.apk-card {
-  background: color-mix(in srgb, var(--paper), white 62%);
+.windows {
+  color: white;
+  background: #2e6eea;
 }
 
-.apk-card span:last-child {
+.download-card-body {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
-.apk-card small {
+.download-card-body small {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.35;
   font-weight: 600;
+}
+
+.download-card-body em {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.download-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--paper), white 74%);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.download-actions a:first-child {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: white;
+}
+
+.disabled-card {
+  color: color-mix(in srgb, var(--ink), white 28%);
+  background: color-mix(in srgb, var(--paper), white 72%);
+  box-shadow: none;
 }
 
 .footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 34px clamp(20px, 5vw, 72px); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
