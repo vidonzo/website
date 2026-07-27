@@ -1,0 +1,53 @@
+---
+import Button from './Button.astro';
+import Reveal from './Reveal.astro';
+import { localizedPath, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="section">
+  <div class="container">
+    <Reveal class="panel">
+      <h2>{t.home.ctaTitle}</h2>
+      <p>{t.home.ctaLead}</p>
+      <Button href={localizedPath(locale, 'download')} size="lg">{t.home.primaryCta}</Button>
+    </Reveal>
+  </div>
+</section>
+
+<style>
+  .panel {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-md);
+    padding: var(--space-3xl) var(--space-lg);
+    border: 1px solid var(--color-stroke-strong);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        60% 120% at 50% 0%,
+        color-mix(in srgb, var(--color-primary) 28%, transparent),
+        transparent 70%
+      ),
+      var(--color-surface);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    max-inline-size: 20ch;
+  }
+
+  p {
+    color: var(--color-text-mid);
+    font-size: var(--text-md);
+  }
+</style>

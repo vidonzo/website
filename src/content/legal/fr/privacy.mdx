@@ -1,0 +1,70 @@
+---
+title: Politique de confidentialité
+description: Ce que Vidonzo conserve, ce qu’il ne peut pas lire, et comment tout supprimer.
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo est un lecteur multimédia. Il ne vend pas de chaînes, n’héberge aucun
+contenu et n’a pas besoin de savoir ce que vous regardez pour fonctionner. Cette
+politique décrit les données traitées par l’application et par le service
+optionnel de synchronisation.
+
+## Utiliser Vidonzo sans compte
+
+Vous pouvez utiliser Vidonzo sans vous connecter. Dans ce mode, tout — vos
+playlists, favoris, progression, téléchargements et réglages — reste sur votre
+appareil. Rien ne nous est envoyé.
+
+L’application contacte votre propre fournisseur IPTV et toute URL de guide des
+programmes que vous configurez. Ces requêtes partent directement de votre appareil
+vers ce fournisseur, et ce qu’il journalise relève de sa politique, pas de la
+nôtre.
+
+## Si vous activez la synchronisation
+
+La connexion crée un compte afin que vos playlists et votre progression vous
+suivent d’un appareil à l’autre. Nous conservons alors :
+
+- **Compte** : votre adresse e-mail, gérée par notre fournisseur
+  d’authentification, et un nom affiché facultatif.
+- **Sources de playlists** : votre hôte, identifiant et mot de passe Xtream ainsi
+  que toute URL M3U, stockés **chiffrés de bout en bout**. Ils sont chiffrés sur
+  votre appareil en AES‑256‑GCM avant l’envoi, avec une clé dérivée de votre mot
+  de passe de synchronisation via Argon2id. Nous ne détenons que le chiffré et ne
+  pouvons pas les lire. Le libellé que vous donnez à une playlist est conservé en
+  clair, car c’est votre propre nom d’affichage.
+- **Favoris, progression et réglages**, pour qu’ils concordent entre appareils.
+  Ils sont conservés en clair et protégés par des règles d’accès par utilisateur.
+- **Appareils** : un nom que vous choisissez, le type d’appareil, une clé publique
+  et la dernière connexion — le nécessaire pour associer un nouvel appareil et
+  révoquer un appareil perdu.
+
+Votre mot de passe de synchronisation ne quitte jamais votre appareil. C’est
+pourquoi **nous ne pouvons pas le récupérer**, et le perdre signifie que vos
+playlists chiffrées ne seront pas récupérables non plus.
+
+## Ce que nous ne faisons pas
+
+Vidonzo ne contient aucun SDK publicitaire, aucune analytique et aucun suivi
+comportemental. Nous ne constituons pas de profil, ne vendons ni ne partageons de
+données personnelles, et ne traitons aucun paiement.
+
+## Conservation et suppression
+
+Les données de synchronisation sont conservées tant que votre compte existe. Vous
+pouvez supprimer votre compte et tout ce qui y est rattaché à tout moment — voir
+[Suppression du compte et des données](/fr/account-deletion/). Ce qui n’est
+stocké que sur votre appareil se supprime depuis l’application, en effaçant ses
+données ou en désinstallant Vidonzo.
+
+## Enfants
+
+Vidonzo ne s’adresse pas aux enfants de moins de 13 ans et nous ne collectons pas
+sciemment leurs données.
+
+## Modifications et contact
+
+Si cette politique change de façon substantielle, nous mettrons à jour la date
+ci-dessus et le signalerons dans l’application. Questions :
+[support@vidonzo.com](mailto:support@vidonzo.com).

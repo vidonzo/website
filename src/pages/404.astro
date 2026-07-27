@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import AuroraBackground from '../components/AuroraBackground.astro';
+import Button from '../components/Button.astro';
+import { defaultLocale, localizedPath, useTranslations } from '../i18n';
+import { site } from '../config/site';
+
+// A single 404 in the default language: the host serves one document for every
+// unmatched path, so it cannot know which locale the visitor wanted.
+const locale = defaultLocale;
+const t = useTranslations(locale);
+---
+
+<Base
+  locale={locale}
+  title={`${t.notFound.title} | ${site.name}`}
+  description={t.notFound.lead}
+  noindex
+>
+  <section class="wrap">
+    <AuroraBackground animated />
+    <div class="container inner">
+      <p class="code" aria-hidden="true">404</p>
+      <h1>{t.notFound.title}</h1>
+      <p class="lead">{t.notFound.lead}</p>
+      <div class="actions">
+        <Button href={localizedPath(locale, 'home')} size="lg">{t.notFound.cta}</Button>
+        <Button href={localizedPath(locale, 'download')} size="lg" variant="ghost">
+          {t.nav.download}
+        </Button>
+        <Button href={localizedPath(locale, 'help')} size="lg" variant="ghost">{t.nav.help}</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-block-size: min(40rem, calc(100dvh - 4.5rem));
+    padding-block: var(--space-3xl);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-md);
+  }
+
+  .code {
+    font-family: var(--font-latin);
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    background: var(--gradient-aurora);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .lead {
+    margin-inline: auto;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-block-start: var(--space-md);
+  }
+</style>

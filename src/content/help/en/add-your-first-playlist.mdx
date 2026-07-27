@@ -1,0 +1,52 @@
+---
+title: Add your first playlist
+description: Getting an Xtream account, an M3U link or a local file into Vidonzo.
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo ships with no channels. The first thing it asks for is a playlist you
+already have. There are three ways to provide one.
+
+## Xtream Codes
+
+Choose **Xtream Codes** and enter the three values your provider gave you:
+
+- **Host** — the server address, for example `http://example.com:8080`. Include
+  the port if there is one.
+- **Username**
+- **Password**
+
+Xtream is the richest option: live channels, films and series all arrive
+together, along with the programme guide.
+
+## An M3U or M3U8 link
+
+Choose **M3U URL** and paste the address. Vidonzo fetches the playlist, caches
+it, and re-reads it when it changes. If your provider also gives you an XMLTV
+guide URL, add it in **Settings → Programme guide** so live channels show what
+is on now.
+
+## A local M3U file
+
+Choose **Local file** and pick an `.m3u` or `.m3u8` file from your device. Nothing
+leaves your device in this mode, and no internet connection is needed to browse
+the list — only to play a stream that points at one.
+
+## After it loads
+
+The first load reads the whole catalogue and matches artwork, which can take a
+minute on a large playlist. After that it is cached, and re-opening the app is
+immediate.
+
+You can keep several playlists side by side and switch between them from the
+source picker at the top of the home screen.
+
+## If it fails
+
+- **Wrong credentials** — the most common cause. Retype the password rather than
+  pasting it; trailing spaces are easy to copy by accident.
+- **The host is missing its port** — many Xtream servers do not run on port 80.
+- **Your network blocks the provider** — try again on mobile data, or set a proxy
+  in **Settings → Network**.

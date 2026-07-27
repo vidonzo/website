@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// A CSS bezel around a real screenshot. Drawing the frame here rather than
+// baking it into the image keeps the screenshots swappable — they are captured
+// per release and per locale, and re-rendering mockups each time is a tax.
+interface Props {
+  device: 'phone' | 'tv' | 'tablet';
+  src: ImageMetadata;
+  alt: string;
+  /** Eager-load the one above the fold; lazy for the rest. */
+  eager?: boolean;
+  class?: string;
+}
+
+const { device, src, alt, eager = false, class: className } = Astro.props;
+
+const widths = { phone: [280, 420, 560], tablet: [420, 640, 860], tv: [640, 960, 1280] }[device];
+const sizes = {
+  phone: '(max-width: 48rem) 60vw, 17rem',
+  tablet: '(max-width: 48rem) 80vw, 26rem',
+  tv: '(max-width: 62rem) 92vw, 44rem',
+}[device];
+---
+
+<figure class:list={['frame', device, className]}>
+  <div class="screen">
+    <Image
+      src={src}
+      alt={alt}
+      widths={widths}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'sync' : 'async'}
+      fetchpriority={eager ? 'high' : undefined}
+    />
+  </div>
+  {device === 'phone' && <span class="notch" aria-hidden="true" />}
+  {device === 'tv' && <span class="stand" aria-hidden="true" />}
+</figure>
+
+<style>
+  .frame {
+    position: relative;
+    margin: 0;
+    background: linear-gradient(160deg, #2a2d3d, #0d0e16);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .screen {
+    overflow: hidden;
+    background: var(--color-background);
+  }
+
+  .screen :global(img) {
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
+  }
+
+  .phone {
+    inline-size: 100%;
+    max-inline-size: 17rem;
+    padding: 0.5rem;
+    border-radius: 2.5rem;
+  }
+
+  .phone .screen {
+    border-radius: 2.05rem;
+  }
+
+  .notch {
+    position: absolute;
+    inset-block-start: 0.9rem;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    inline-size: 5.25rem;
+    block-size: 1.35rem;
+    border-radius: 1rem;
+    background: #05060a;
+  }
+
+  .tablet {
+    inline-size: 100%;
+    max-inline-size: 26rem;
+    padding: 0.7rem;
+    border-radius: 1.5rem;
+  }
+
+  .tablet .screen {
+    border-radius: 0.9rem;
+  }
+
+  .tv {
+    inline-size: 100%;
+    max-inline-size: 44rem;
+    padding: 0.55rem 0.55rem 0.7rem;
+    border-radius: 0.9rem;
+  }
+
+  .tv .screen {
+    border-radius: 0.5rem;
+  }
+
+  .stand {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    inline-size: 28%;
+    block-size: 0.55rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background: linear-gradient(180deg, #22252f, #0d0e16);
+  }
+</style>

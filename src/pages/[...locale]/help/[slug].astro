@@ -1,0 +1,60 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../../components/ArticleLayout.astro';
+import { getCollectionSlugs, getLocalizedEntry } from '../../../i18n/content';
+import { localeCodes, locales, localizedPath, useTranslations, type Locale } from '../../../i18n';
+import { site } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const slugs = await getCollectionSlugs('help');
+  return localeCodes.flatMap((code) =>
+    slugs.map((slug) => ({
+      params: { locale: locales[code].path || undefined, slug },
+      props: { locale: code, slug },
+    })),
+  );
+}
+
+const { locale, slug } = Astro.props as { locale: Locale; slug: string };
+const t = useTranslations(locale);
+
+const guide = await getLocalizedEntry('help', locale, slug);
+if (!guide) throw new Error(`help/[slug]: no entry for "${slug}"`);
+
+const { Content } = await render(guide.entry);
+const { data } = guide.entry;
+
+const updated = data.updatedAt ?? data.publishedAt;
+const dateLabel = new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(updated);
+
+const localeHrefs = Object.fromEntries(
+  localeCodes.map((code) => [code, localizedPath(code, 'help', slug)]),
+) as Record<Locale, string>;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.publishedAt.toISOString(),
+  dateModified: updated.toISOString(),
+  publisher: { '@type': 'Organization', name: site.name },
+  inLanguage: guide.isFallback ? 'en' : locale,
+};
+---
+
+<ArticleLayout
+  locale={locale}
+  active="help"
+  title={data.title}
+  description={data.description}
+  meta={`${t.common.updated}: ${dateLabel}`}
+  isFallback={guide.isFallback}
+  localeHrefs={localeHrefs}
+  availableLocales={guide.availableLocales}
+  noindex={guide.isFallback}
+  parent={{ label: t.help.title, href: localizedPath(locale, 'help') }}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <Content />
+</ArticleLayout>

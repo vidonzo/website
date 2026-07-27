@@ -1,0 +1,10 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
+
+export const getStaticPaths = localeRoutes;
+
+const { locale } = Astro.props as LocaleRouteProps;
+---
+
+<LegalPage locale={locale} slug="privacy" page="privacy" />

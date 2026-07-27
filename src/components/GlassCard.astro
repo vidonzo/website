@@ -1,0 +1,91 @@
+---
+// Frosted surface, ported from GlassCard in the app: translucent fill, blur,
+// hairline stroke. Renders as <a> when given an href so the whole card is one
+// tab stop rather than a div with a link buried inside it.
+interface Props {
+  href?: string;
+  /** Lifts and brightens the stroke on hover/focus, like the app's poster tiles. */
+  interactive?: boolean;
+  padding?: 'sm' | 'md' | 'lg';
+  radius?: 'md' | 'lg' | 'xl';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  interactive = false,
+  padding = 'md',
+  radius = 'lg',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+const isInteractive = interactive || Boolean(href);
+---
+
+<Tag
+  href={href}
+  class:list={['glass', `pad-${padding}`, `radius-${radius}`, { interactive: isInteractive }, className]}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .glass {
+    position: relative;
+    display: block;
+    background: var(--color-surface-glass);
+    border: 1px solid var(--color-stroke);
+    box-shadow: var(--shadow-card);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  /* Safari and Firefox without backdrop-filter would show the glow straight
+     through the card and drop the text contrast below AA. Opaque fallback. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background: var(--color-surface);
+    }
+  }
+
+  .radius-md {
+    border-radius: var(--radius-md);
+  }
+
+  .radius-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  .radius-xl {
+    border-radius: var(--radius-xl);
+  }
+
+  .pad-sm {
+    padding: var(--space-md);
+  }
+
+  .pad-md {
+    padding: var(--space-lg);
+  }
+
+  .pad-lg {
+    padding: var(--space-xl);
+  }
+
+  .interactive {
+    transition:
+      transform var(--duration) var(--ease),
+      border-color var(--duration) var(--ease),
+      box-shadow var(--duration) var(--ease);
+  }
+
+  .interactive:is(:hover, :focus-visible) {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-stroke-strong));
+    box-shadow: var(--shadow-lift), var(--glow-primary);
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+import AuroraBackground from './AuroraBackground.astro';
+import Button from './Button.astro';
+import Reveal from './Reveal.astro';
+import DeviceFrame from './DeviceFrame.astro';
+import Icon from './Icon.astro';
+import type { ImageMetadata } from 'astro';
+import { localizedPath, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  /** Omitted until a screenshot for this release exists; the hero stands without one. */
+  screenshot?: ImageMetadata;
+  screenshotAlt?: string;
+}
+
+const { locale, screenshot, screenshotAlt = '' } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="hero">
+  <AuroraBackground animated />
+
+  <div class="container inner" class:list={[{ 'with-media': Boolean(screenshot) }]}>
+    <div class="copy">
+      <Reveal>
+        <p class="eyebrow">
+          <Icon name="devices" />
+          {t.home.eyebrow}
+        </p>
+      </Reveal>
+
+      <Reveal delay={1}>
+        <h1>
+          {t.home.title}{' '}
+          <span class="aurora-text">{t.home.titleAccent}</span>
+        </h1>
+      </Reveal>
+
+      <Reveal delay={2}>
+        <p class="lead">{t.home.lead}</p>
+      </Reveal>
+
+      <Reveal delay={3} class="actions">
+        <Button href={localizedPath(locale, 'download')} size="lg">{t.home.primaryCta}</Button>
+        <Button href={localizedPath(locale, 'features')} size="lg" variant="ghost">
+          {t.home.secondaryCta}
+        </Button>
+      </Reveal>
+
+      <Reveal delay={4}>
+        <dl class="stats">
+          {
+            t.home.stats.map((stat) => (
+              <div>
+                <dt>{stat.value}</dt>
+                <dd>{stat.label}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </Reveal>
+    </div>
+
+    {
+      screenshot && (
+        <Reveal delay={2} class="media">
+          <DeviceFrame device="phone" src={screenshot} alt={screenshotAlt} eager />
+        </Reveal>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    align-items: center;
+    /* Full height minus the sticky header, but never taller than the content
+       needs on a short laptop screen. */
+    min-block-size: min(46rem, calc(100dvh - 4.5rem));
+    padding-block: var(--space-3xl);
+    overflow: hidden;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .inner.with-media {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .copy {
+    display: grid;
+    gap: var(--space-lg);
+    justify-items: start;
+  }
+
+  h1 {
+    font-size: var(--text-hero);
+    max-inline-size: 16ch;
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    max-inline-size: 40rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    margin: var(--space-md) 0 0;
+    padding-block-start: var(--space-lg);
+    border-block-start: 1px solid var(--color-stroke);
+    inline-size: 100%;
+    max-inline-size: 44rem;
+  }
+
+  dt {
+    font-family: var(--font-latin);
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    line-height: 1;
+    background: var(--gradient-aurora);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Persian and Arabic digits belong to the page's own typeface. */
+  :global(:root:lang(fa)) dt,
+  :global(:root:lang(ar)) dt {
+    font-family: var(--font-body);
+  }
+
+  dd {
+    margin: var(--space-2xs) 0 0;
+    max-inline-size: 12rem;
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    line-height: 1.45;
+  }
+
+  .media {
+    justify-self: center;
+  }
+
+  @media (max-width: 62rem) {
+    .inner.with-media {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .media {
+      order: -1;
+    }
+  }
+</style>

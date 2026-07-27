@@ -1,0 +1,58 @@
+---
+title: Your phone is a better remote than your remote
+description: Why we built TV control into the app itself instead of shipping a d-pad and hoping.
+publishedAt: 2026-07-06
+tags: ['television', 'engineering']
+---
+
+A d-pad has four directions and an OK button. A typical IPTV playlist has twenty
+thousand channels. These two facts do not get along.
+
+You can paper over the gap with better focus handling and faster scrolling — and
+Vidonzo does both — but the underlying problem is that you are driving a database
+query with an arrow key. Meanwhile there is a device on the sofa arm with a
+touchscreen, a keyboard, and a search field.
+
+## What the remote actually does
+
+Vidonzo's remote is not a virtual d-pad drawn on a phone. Those exist, and they
+are worse than the physical remote they imitate.
+
+Instead, the phone gets the **library**. You browse the television's full
+catalogue on the phone, with the phone's scrolling and the phone's keyboard.
+When you find something, one tap starts it on the television. The screen never
+shows a menu you are navigating — it shows what is playing.
+
+That inverts the usual arrangement. The big screen is for watching; the small
+screen is for deciding.
+
+You also get a queue, so choosing what is next does not interrupt what is on,
+favourites you can toggle from either device, and a trackpad and keyboard for
+the rare moments a TV app really does need text entry.
+
+## Over your network, not through ours
+
+Pairing runs over the local network. The phone finds the television by mDNS —
+Vidonzo announces itself, so there are no codes to type in the normal case — and
+the two talk over a WebSocket on your own LAN.
+
+Nothing about the connection needs our servers, which is why it works when your
+internet is down and why we cannot see what you browse. There is a QR code with
+a short code as the explicit path, for the routers that block discovery between
+wireless clients.
+
+## The watch
+
+A paired smartwatch gets play, pause, skip and volume. It is a deliberately
+small surface — enough to stop the episode when the doorbell goes, without
+pretending a watch is a good place to browse a catalogue.
+
+## What this costs
+
+A local-network feature is harder to support than a cloud one. Guest networks,
+client isolation, and mDNS being blocked all produce the same symptom — the TV
+does not appear — and none of them are visible from our side.
+
+That is what the QR path is for, and it is why
+[the pairing guide](/help/use-your-phone-as-a-remote/) leads with the network
+questions rather than the app ones.

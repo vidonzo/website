@@ -1,0 +1,65 @@
+---
+title: Privacy Policy
+description: What Vidonzo stores, what it cannot read, and how to get rid of all of it.
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo is a media player. It does not sell channels, does not host content, and
+does not need to know what you watch in order to work. This policy describes the
+data the app and the optional sync service handle.
+
+## Using Vidonzo without an account
+
+You can use Vidonzo without signing in. In that mode everything — your
+playlists, favourites, watch progress, downloads and settings — is stored only on
+your device. Nothing is sent to us.
+
+The app contacts your own IPTV provider and any programme-guide URL you
+configure. Those requests go directly from your device to that provider, and
+what they log is governed by their policy, not ours.
+
+## If you turn on sync
+
+Signing in creates an account so your playlists and progress can follow you
+between devices. We then store:
+
+- **Account**: your email address, handled by our authentication provider, and an
+  optional display name.
+- **Playlist sources**: your Xtream host, username and password, and any M3U URL,
+  stored **end-to-end encrypted**. They are encrypted on your device with
+  AES‑256‑GCM before upload, under a key derived from your sync password with
+  Argon2id. We hold only ciphertext and cannot read them. The label you give a
+  playlist is stored in plain text, because it is your own display name for it.
+- **Favourites, watch progress and app settings**, so they match across devices.
+  These are stored in plain text and protected by per-user access rules.
+- **Devices**: a name you choose, the device type, a public key, and when it was
+  last seen — enough to link a new device and to revoke one you have lost.
+
+Your sync password never leaves your device. Because of that, **we cannot
+recover it**, and losing it means your encrypted playlists cannot be recovered
+either.
+
+## What we do not do
+
+Vidonzo contains no advertising SDKs and no analytics or behavioural tracking.
+We do not build a profile of you, do not sell or share personal data, and do not
+process payments.
+
+## Retention and deletion
+
+Sync data is kept while your account exists. You can delete your account and
+everything attached to it at any time — see
+[Account and data deletion](/account-deletion/). Data stored only on your device
+is removed by deleting it in the app, clearing the app's data, or uninstalling
+Vidonzo.
+
+## Children
+
+Vidonzo is not directed at children under 13, and we do not knowingly collect
+their data.
+
+## Changes and contact
+
+If this policy changes materially we will update the date above and note it in
+the app. Questions go to [support@vidonzo.com](mailto:support@vidonzo.com).

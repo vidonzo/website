@@ -1,0 +1,87 @@
+---
+import { site } from '../config/site';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  /** The last item is the current page and carries no href. */
+  items: { label: string; href?: string }[];
+}
+
+const { locale, items } = Astro.props;
+const t = useTranslations(locale);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    ...(item.href ? { item: new URL(item.href, site.url).toString() } : {}),
+  })),
+};
+---
+
+<nav class="crumbs" aria-label={t.common.breadcrumb}>
+  <ol role="list">
+    {
+      items.map((item, index) => (
+        <li>
+          {item.href ? <a href={item.href}>{item.label}</a> : <span aria-current="page">{item.label}</span>}
+          {index < items.length - 1 && (
+            <span class="sep" aria-hidden="true">
+              /
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+
+<style>
+  .crumbs {
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    /* A long article title must not push the trail across three lines. */
+    min-inline-size: 0;
+  }
+
+  a {
+    transition: color var(--duration) var(--ease);
+  }
+
+  a:is(:hover, :focus-visible) {
+    color: var(--color-text-high);
+  }
+
+  [aria-current='page'] {
+    color: var(--color-text-mid);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-inline-size: 28ch;
+  }
+
+  .sep {
+    color: var(--color-stroke-strong);
+  }
+</style>

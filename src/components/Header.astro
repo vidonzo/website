@@ -1,0 +1,217 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import LocaleSwitcher from './LocaleSwitcher.astro';
+import { localizedPath, navKeys, useTranslations, type Locale, type PageKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  /** Which nav item to mark current, if any. */
+  active?: PageKey;
+  /** This same page in every language. */
+  localeHrefs: Record<Locale, string>;
+}
+
+const { locale, active, localeHrefs } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href={localizedPath(locale, 'home')} aria-label="Vidonzo">
+      <Logo size={34} id="header-logo" />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {
+        navKeys.map((key) => (
+          <a href={localizedPath(locale, key)} aria-current={active === key ? 'page' : undefined}>
+            {t.nav[key]}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="tail">
+      <LocaleSwitcher locale={locale} hrefs={localeHrefs} label={t.common.changeLanguage} />
+      <Button href={localizedPath(locale, 'download')} class="header-cta">{t.nav.download}</Button>
+      <details class="mobile" data-dismissable>
+        <summary aria-label={t.common.menu}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </summary>
+        <nav class="mobile-menu" aria-label={t.common.menu}>
+          {
+            navKeys.map((key) => (
+              <a href={localizedPath(locale, key)} aria-current={active === key ? 'page' : undefined}>
+                {t.nav[key]}
+              </a>
+            ))
+          }
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--color-background) 72%, transparent);
+    border-block-end: 1px solid var(--color-stroke);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header {
+      background: var(--color-background);
+    }
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    min-block-size: 4.5rem;
+  }
+
+  .brand {
+    flex: none;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-inline-start: auto;
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .nav a {
+    position: relative;
+    padding-block: 0.35rem;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: 0;
+    block-size: 2px;
+    border-radius: 2px;
+    background: var(--gradient-aurora-soft);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--duration) var(--ease);
+  }
+
+  .nav a:is(:hover, :focus-visible),
+  .nav a[aria-current='page'] {
+    color: var(--color-text-high);
+  }
+
+  .nav a:is(:hover, :focus-visible)::after,
+  .nav a[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .tail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-inline-start: var(--space-sm);
+  }
+
+  .mobile {
+    position: relative;
+    display: none;
+  }
+
+  .mobile summary {
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border: 1px solid var(--color-stroke);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-high);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile summary svg {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    inset-block-start: calc(100% + 0.5rem);
+    inset-inline-end: 0;
+    z-index: 30;
+    display: grid;
+    gap: 2px;
+    min-inline-size: 12rem;
+    padding: var(--space-2xs);
+    border: 1px solid var(--color-stroke-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-high);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .mobile-menu a {
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .mobile-menu a:is(:hover, :focus-visible) {
+    background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    color: var(--color-text-high);
+  }
+
+  .mobile-menu a[aria-current='page'] {
+    color: var(--color-text-high);
+  }
+
+  /* The nav collapses before the links would start wrapping. Persian and
+     Turkish labels are the longest, so the breakpoint is set by them. */
+  @media (max-width: 62rem) {
+    .nav {
+      display: none;
+    }
+
+    .mobile {
+      display: block;
+    }
+
+    .tail {
+      margin-inline-start: auto;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .header-cta {
+      display: none;
+    }
+  }
+</style>

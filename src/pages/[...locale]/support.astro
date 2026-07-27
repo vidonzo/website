@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+import AuroraBackground from '../../components/AuroraBackground.astro';
+import Reveal from '../../components/Reveal.astro';
+import GlassCard from '../../components/GlassCard.astro';
+import Button from '../../components/Button.astro';
+import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
+import { localizedPath, useTranslations } from '../../i18n';
+import { site, socialLinks } from '../../config/site';
+
+export const getStaticPaths = localeRoutes;
+
+const { locale } = Astro.props as LocaleRouteProps;
+const t = useTranslations(locale);
+---
+
+<Base
+  locale={locale}
+  active="support"
+  title={`${t.support.title} | ${site.name}`}
+  description={t.support.lead}
+>
+  <section class="page-head">
+    <AuroraBackground subtle />
+    <div class="container head-inner">
+      <Reveal>
+        <h1>{t.support.title}</h1>
+        <p class="lead">{t.support.lead}</p>
+        <div class="actions">
+          <Button href={`mailto:${site.email}`} size="lg">{t.support.cta}</Button>
+          <Button href={localizedPath(locale, 'help')} size="lg" variant="ghost">{t.nav.help}</Button>
+        </div>
+        <p class="note">{t.support.responseNote}</p>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cols">
+      <Reveal>
+        <GlassCard padding="lg" class="card">
+          <h2>{t.support.beforeTitle}</h2>
+          <p>{t.support.beforeLead}</p>
+          <ul role="list">
+            {t.support.beforePoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </GlassCard>
+      </Reveal>
+
+      <Reveal delay={1}>
+        <GlassCard padding="lg" class="card">
+          <h2>{t.support.followTitle}</h2>
+          <ul role="list" class="socials">
+            {
+              socialLinks.map((link) => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer me">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </GlassCard>
+      </Reveal>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-head {
+    position: relative;
+    padding-block: var(--space-3xl) var(--space-lg);
+    overflow: hidden;
+  }
+
+  .head-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    margin-block-end: var(--space-md);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-block-start: var(--space-lg);
+  }
+
+  .note {
+    margin-block-start: var(--space-md);
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+  }
+
+  .section {
+    padding-block-start: var(--space-xl);
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: var(--space-md);
+    align-items: start;
+  }
+
+  .card {
+    block-size: 100%;
+  }
+
+  .card h2 {
+    font-size: var(--text-lg);
+    margin-block-end: var(--space-sm);
+  }
+
+  .card p {
+    color: var(--color-text-mid);
+    line-height: 1.65;
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-xs);
+    margin-block-start: var(--space-md);
+    padding: 0;
+    color: var(--color-text-mid);
+  }
+
+  ul li {
+    padding-inline-start: var(--space-md);
+    border-inline-start: 2px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+    line-height: 1.5;
+  }
+
+  .socials {
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  }
+
+  .socials li {
+    border: 0;
+    padding-inline-start: 0;
+  }
+
+  .socials a {
+    font-family: var(--font-latin);
+    font-weight: 600;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .socials a:is(:hover, :focus-visible) {
+    color: var(--color-secondary);
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+title: Install Vidonzo on Android TV
+description: Sideloading the TV build on a television or TV box.
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo has a dedicated Android TV build with full remote navigation. It is
+distributed as a direct APK, so it is installed by sideloading.
+
+## Allow installs from unknown sources
+
+On your TV, open **Settings → Security & restrictions → Unknown sources** and
+enable the file manager or browser you are about to use. Different manufacturers
+word this differently; look for "unknown sources" or "install unknown apps".
+
+## Option 1 — a downloader app
+
+1. Install a downloader app from the Play Store on your TV.
+2. Enter the APK address from the [download page](/download/).
+3. Confirm the install when prompted.
+
+## Option 2 — a USB drive
+
+1. Download the Android TV APK on a computer.
+2. Copy it to a USB drive and plug the drive into the TV.
+3. Open it with a file manager and confirm the install.
+
+## Option 3 — from another Android device
+
+With ADB over the network, from a computer on the same network:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Signing in on a television
+
+Typing an email and password with a remote is miserable, so TV sign-in uses a
+six-digit code sent to your email instead. Your playlists then appear as locked
+until you approve the TV from a phone that is already signed in.
+
+## Updating
+
+Sideloaded builds do not update themselves. Install the newer APK over the old
+one — your playlists, favourites and progress are kept.

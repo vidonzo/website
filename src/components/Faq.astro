@@ -1,0 +1,90 @@
+---
+import Reveal from './Reveal.astro';
+
+interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item, index) => (
+      <Reveal delay={Math.min(index, 4)}>
+        <details name="faq" class="item">
+          <summary>
+            <span>{item.question}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M12 6v12M6 12h12"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      </Reveal>
+    ))
+  }
+</div>
+
+<style>
+  .faq {
+    display: grid;
+    gap: var(--space-sm);
+    max-inline-size: 52rem;
+  }
+
+  .item {
+    border: 1px solid var(--color-stroke);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    transition: border-color var(--duration) var(--ease);
+  }
+
+  .item[open] {
+    border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-stroke-strong));
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-md);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:is(:hover, :focus-visible) {
+    color: var(--color-text-high);
+  }
+
+  summary svg {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    flex: none;
+    color: var(--color-secondary);
+    transition: transform var(--duration) var(--ease);
+  }
+
+  .item[open] summary svg {
+    transform: rotate(45deg);
+  }
+
+  p {
+    padding: 0 var(--space-lg) var(--space-lg);
+    color: var(--color-text-mid);
+    line-height: 1.7;
+  }
+</style>

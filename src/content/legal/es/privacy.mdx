@@ -1,0 +1,69 @@
+---
+title: Política de privacidad
+description: Qué guarda Vidonzo, qué no puede leer y cómo eliminarlo todo.
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo es un reproductor. No vende canales, no aloja contenido y no necesita
+saber qué ves para funcionar. Esta política describe los datos que manejan la
+aplicación y el servicio opcional de sincronización.
+
+## Usar Vidonzo sin cuenta
+
+Puedes usar Vidonzo sin iniciar sesión. En ese modo, todo —tus listas, favoritos,
+progreso de reproducción, descargas y ajustes— se guarda solo en tu dispositivo.
+No se nos envía nada.
+
+La aplicación se conecta con tu propio proveedor IPTV y con cualquier URL de guía
+de programación que configures. Esas peticiones van directamente de tu
+dispositivo a ese proveedor, y lo que él registre se rige por su política, no por
+la nuestra.
+
+## Si activas la sincronización
+
+Iniciar sesión crea una cuenta para que tus listas y tu progreso te acompañen
+entre dispositivos. Entonces guardamos:
+
+- **Cuenta**: tu dirección de correo, gestionada por nuestro proveedor de
+  autenticación, y un nombre visible opcional.
+- **Fuentes de listas**: tu host, usuario y contraseña de Xtream y cualquier URL
+  M3U, guardados **cifrados de extremo a extremo**. Se cifran en tu dispositivo
+  con AES‑256‑GCM antes de subirlos, con una clave derivada de tu contraseña de
+  sincronización mediante Argon2id. Solo tenemos texto cifrado y no podemos
+  leerlos. La etiqueta que das a una lista se guarda en claro, porque es tu
+  propio nombre para ella.
+- **Favoritos, progreso de reproducción y ajustes**, para que coincidan entre
+  dispositivos. Se guardan en claro y los protegen reglas de acceso por usuario.
+- **Dispositivos**: un nombre que elijas, el tipo de dispositivo, una clave
+  pública y su última conexión: lo justo para vincular uno nuevo y revocar uno
+  perdido.
+
+Tu contraseña de sincronización nunca sale de tu dispositivo. Por eso **no
+podemos recuperarla**, y perderla implica que tus listas cifradas tampoco podrán
+recuperarse.
+
+## Lo que no hacemos
+
+Vidonzo no incluye SDK publicitarios ni analítica o seguimiento del
+comportamiento. No creamos un perfil tuyo, no vendemos ni compartimos datos
+personales y no procesamos pagos.
+
+## Conservación y eliminación
+
+Los datos de sincronización se conservan mientras exista tu cuenta. Puedes
+eliminar la cuenta y todo lo asociado cuando quieras: consulta
+[Eliminación de cuenta y datos](/es/account-deletion/). Lo que se guarda solo en
+tu dispositivo se elimina borrándolo en la app, limpiando sus datos o
+desinstalando Vidonzo.
+
+## Menores
+
+Vidonzo no está dirigido a menores de 13 años y no recabamos sus datos a
+sabiendas.
+
+## Cambios y contacto
+
+Si esta política cambia de forma sustancial, actualizaremos la fecha superior y
+lo indicaremos en la aplicación. Consultas a
+[support@vidonzo.com](mailto:support@vidonzo.com).
