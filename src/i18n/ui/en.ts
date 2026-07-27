@@ -107,7 +107,7 @@ export const en = {
         body: 'Playlist logins can be encrypted on your device before they ever reach sync.',
       },
       {
-        title: 'No ads, no trackers',
+        title: 'No in-app ad SDKs',
         body: 'Nothing in the app is funded by watching you use it.',
       },
       {
@@ -219,7 +219,7 @@ export const en = {
         items: [
           { title: 'Encryptable credentials', body: 'Playlist logins can be end-to-end encrypted on device.' },
           { title: 'Proxy support', body: 'Route requests through a proxy when your network requires it.' },
-          { title: 'No advertising', body: 'No ad SDKs and no behavioural tracking.' },
+          { title: 'No in-app advertising', body: 'The app has no ad SDKs and no behavioural tracking.' },
           { title: '70 interface languages', body: 'Including full right-to-left layout for Persian, Arabic and Hebrew.' },
         ],
       },

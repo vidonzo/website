@@ -220,7 +220,7 @@ export const tr: UiStrings = {
         items: [
           { title: 'Şifrelenebilir bilgiler', body: 'Liste giriş bilgileri cihazda uçtan uca şifrelenebilir.' },
           { title: 'Proxy desteği', body: 'Ağınız gerektirdiğinde istekleri bir proxy üzerinden geçirin.' },
-          { title: 'Reklamsız', body: 'Reklam SDK’sı yok, davranışsal izleme yok.' },
+          { title: 'Uygulama içi reklamsız', body: 'Uygulamada reklam SDK’sı ve davranışsal izleme yok.' },
           { title: '70 arayüz dili', body: 'Farsça, Arapça ve İbranice için tam sağdan sola düzen dahil.' },
         ],
       },

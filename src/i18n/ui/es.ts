@@ -220,7 +220,7 @@ export const es: UiStrings = {
         items: [
           { title: 'Credenciales cifrables', body: 'Los accesos de la lista pueden cifrarse de extremo a extremo en el dispositivo.' },
           { title: 'Compatible con proxy', body: 'Enruta las peticiones por un proxy cuando tu red lo exige.' },
-          { title: 'Sin publicidad', body: 'Ni SDK de anuncios ni seguimiento del comportamiento.' },
+          { title: 'Sin publicidad en la app', body: 'La app no tiene SDK de anuncios ni seguimiento del comportamiento.' },
           { title: '70 idiomas de interfaz', body: 'Incluida disposición completa de derecha a izquierda para persa, árabe y hebreo.' },
         ],
       },

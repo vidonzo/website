@@ -220,7 +220,7 @@ export const fr: UiStrings = {
         items: [
           { title: 'Identifiants chiffrables', body: 'Les identifiants de playlist peuvent être chiffrés de bout en bout sur l’appareil.' },
           { title: 'Prise en charge du proxy', body: 'Faites passer les requêtes par un proxy quand votre réseau l’exige.' },
-          { title: 'Sans publicité', body: 'Aucun SDK publicitaire, aucun suivi comportemental.' },
+          { title: 'Sans publicité dans l’app', body: 'L’app n’a aucun SDK publicitaire ni suivi comportemental.' },
           { title: '70 langues d’interface', body: 'Y compris une mise en page complète de droite à gauche pour le persan, l’arabe et l’hébreu.' },
         ],
       },

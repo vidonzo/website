@@ -6,6 +6,8 @@ import '../styles/global.css';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MarketingNoscript from '../components/MarketingNoscript.astro';
+import MarketingTags from '../components/MarketingTags.astro';
 import { site } from '../config/site';
 import { localeCodes, locales, localizedPath, useTranslations, type Locale, type PageKey } from '../i18n';
 
@@ -92,9 +94,11 @@ const ogImageUrl = new URL(ogImage, site.url).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
+    <MarketingTags />
     <slot name="head" />
   </head>
   <body>
+    <MarketingNoscript />
     <a class="skip-link" href="#main">{t.common.skipToContent}</a>
     <Header locale={locale} active={active} localeHrefs={localeHrefs} />
     <main id="main">
