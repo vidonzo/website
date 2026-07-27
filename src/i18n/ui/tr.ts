@@ -37,6 +37,10 @@ export const tr: UiStrings = {
     lead: 'Vidonzo her Xtream veya M3U listesini gerçek bir kitaplığa dönüştürür: canlı yayın, afişli film ve diziler, düzgün bir yayın rehberi ve çevrimdışı indirmeler. Telefonunuzda, televizyonunuzda, masaüstünüzde ve tabletinizde.',
     primaryCta: 'Vidonzo’yu indir',
     secondaryCta: 'Neler yaptığına bakın',
+    shotHero: 'Bir iPhone üzerinde Vidonzo canlı kanal listesi; kanal logoları, kategori filtreleri ve favoriler görünüyor.',
+    shotHome: 'Vidonzo ana ekranı, son izlenen kanallar ve bir canlı kanal satırıyla.',
+    shotSettings: 'Vidonzo ayarları; önbellek boyutu, altyazı stili ve donanım çözme görünüyor.',
+    shotLanguage: 'Vidonzo hangi arayüz dilinin kullanılacağını soruyor, liste Farsça görünüyor.',
     stats: [
       { value: '4', label: 'platform, tek uygulama' },
       { value: '70', label: 'arayüz dili' },

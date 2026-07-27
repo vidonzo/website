@@ -37,6 +37,10 @@ export const fr: UiStrings = {
     lead: 'Vidonzo transforme n’importe quelle playlist Xtream ou M3U en véritable bibliothèque : TV en direct, films et séries avec jaquettes, un vrai guide des programmes et des téléchargements hors connexion. Sur votre téléphone, votre téléviseur, votre ordinateur et votre tablette.',
     primaryCta: 'Télécharger Vidonzo',
     secondaryCta: 'Voir ce qu’il fait',
+    shotHero: 'La liste des chaînes en direct de Vidonzo sur un iPhone, avec les logos, les filtres de catégorie et les favoris.',
+    shotHome: 'L’écran d’accueil de Vidonzo avec les chaînes vues récemment et une rangée de chaînes en direct.',
+    shotSettings: 'Les réglages de Vidonzo : taille du cache, style des sous-titres et décodage matériel.',
+    shotLanguage: 'Vidonzo demandant quelle langue d’interface utiliser, la liste affichée en persan.',
     stats: [
       { value: '4', label: 'plateformes pour une seule app' },
       { value: '70', label: 'langues d’interface' },

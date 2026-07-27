@@ -36,7 +36,8 @@ const sizes = {
       fetchpriority={eager ? 'high' : undefined}
     />
   </div>
-  {device === 'phone' && <span class="notch" aria-hidden="true" />}
+  {/* No drawn notch: a simulator capture already contains the device's own
+      status bar and Dynamic Island, and adding one would double it up. */}
   {device === 'tv' && <span class="stand" aria-hidden="true" />}
 </figure>
 
@@ -68,17 +69,6 @@ const sizes = {
 
   .phone .screen {
     border-radius: 2.05rem;
-  }
-
-  .notch {
-    position: absolute;
-    inset-block-start: 0.9rem;
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
-    inline-size: 5.25rem;
-    block-size: 1.35rem;
-    border-radius: 1rem;
-    background: #05060a;
   }
 
   .tablet {
