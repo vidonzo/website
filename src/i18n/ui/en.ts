@@ -35,6 +35,10 @@ export const en = {
     lead: 'Vidonzo turns any Xtream or M3U playlist into a proper streaming library — live TV, films and series with artwork, a real programme guide, and offline downloads. On your phone, your TV, your desktop and your tablet.',
     primaryCta: 'Download Vidonzo',
     secondaryCta: 'See what it does',
+    shotHero: 'The Vidonzo live channel list on an iPhone, showing channel logos, category filters and favourites.',
+    shotHome: 'The Vidonzo home screen with recently watched channels and a live channel row.',
+    shotSettings: 'Vidonzo settings, showing buffer size, subtitle style and hardware decoding.',
+    shotLanguage: 'Vidonzo asking which interface language to use, with the list in Persian.',
     stats: [
       { value: '4', label: 'platforms from one app' },
       { value: '70', label: 'interface languages' },

@@ -10,9 +10,11 @@ import Reveal from '../../components/Reveal.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import GlassCard from '../../components/GlassCard.astro';
+import DeviceFrame from '../../components/DeviceFrame.astro';
 import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
 import { localizedPath, useTranslations } from '../../i18n';
 import { site } from '../../config/site';
+import { appShots, heroShot } from '../../config/screenshots';
 
 export const getStaticPaths = localeRoutes;
 
@@ -56,7 +58,7 @@ const appSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
-  <Hero locale={locale} />
+  <Hero locale={locale} screenshot={heroShot(locale)} screenshotAlt={t.home.shotHero} />
 
   <section class="section">
     <div class="container">
@@ -122,6 +124,27 @@ const appSchema = {
           <span class="art-link"></span>
         </div>
       </Reveal>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        title={t.home.platformsTitle}
+        lead={t.home.platformsLead}
+        align="center"
+      />
+      <div class="shots">
+        <Reveal class="shot">
+          <DeviceFrame device="phone" src={appShots.home} alt={t.home.shotHome} />
+        </Reveal>
+        <Reveal delay={1} class="shot shot-lift">
+          <DeviceFrame device="phone" src={appShots.settings} alt={t.home.shotSettings} />
+        </Reveal>
+        <Reveal delay={2} class="shot">
+          <DeviceFrame device="phone" src={appShots.language} alt={t.home.shotLanguage} />
+        </Reveal>
+      </div>
     </div>
   </section>
 
@@ -215,6 +238,31 @@ const appSchema = {
   .privacy-card p {
     color: var(--color-text-mid);
     line-height: 1.65;
+  }
+
+  /* Three captures, the middle one raised, so the row reads as a set rather
+     than a filmstrip. */
+  .shots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: var(--space-lg);
+  }
+
+  .shot {
+    flex: 0 1 15rem;
+    max-inline-size: 17rem;
+  }
+
+  .shot-lift {
+    margin-block-end: var(--space-xl);
+  }
+
+  @media (max-width: 48rem) {
+    .shot-lift {
+      margin-block-end: 0;
+    }
   }
 
   /* --- The remote-control spotlight ---------------------------------------- */
