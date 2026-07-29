@@ -7,6 +7,7 @@ import { localeRoutes, type LocaleRouteProps } from '../../../i18n/routing';
 import { getLocalizedCollection } from '../../../i18n/content';
 import { defaultLocale, locales, localizedPath, useTranslations } from '../../../i18n';
 import { readingTime } from '../../../lib/reading-time';
+import { featuredImage } from '../../../lib/featured-image';
 import { site } from '../../../config/site';
 
 export const getStaticPaths = localeRoutes;
@@ -51,6 +52,7 @@ const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: 'medium' });
                 description={post.entry.data.description}
                 meta={`${dateFormat.format(post.entry.data.publishedAt)} · ${readingTime(post.entry.body ?? '')} ${t.common.minRead}`}
                 tags={post.entry.data.tags}
+                image={featuredImage(post.isFallback ? defaultLocale : locale, post.key, post.entry.data.heroImage)}
                 delay={index % 3}
                 contentLang={post.isFallback ? defaultLocale : undefined}
                 contentDir={post.isFallback ? locales[defaultLocale].dir : undefined}

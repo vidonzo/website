@@ -9,6 +9,8 @@ interface Props {
   meta?: string;
   tags?: string[];
   delay?: number;
+  /** Featured image for this article in the reader's language. */
+  image?: { social: string; cover: string };
   /** Language of the title and description, when it is not the page's. */
   contentLang?: string;
   contentDir?: 'ltr' | 'rtl';
@@ -21,6 +23,7 @@ const {
   meta,
   tags = [],
   delay = 0,
+  image,
   contentLang,
   contentDir,
 } = Astro.props;
@@ -28,6 +31,13 @@ const {
 
 <Reveal delay={delay} class="wrap">
   <GlassCard href={href} padding="lg" class="card">
+    {
+      image && (
+        <span class="thumb">
+          <img src={image.cover} alt="" width="1200" height="630" loading="lazy" decoding="async" />
+        </span>
+      )
+    }
     {meta && <p class="meta">{meta}</p>}
     <h3 lang={contentLang} dir={contentDir}>{title}</h3>
     <p class="desc" lang={contentLang} dir={contentDir}>{description}</p>
@@ -53,6 +63,21 @@ const {
     display: grid;
     gap: var(--space-xs);
     align-content: start;
+  }
+
+  /* Bleeds to the card edge: the glass padding would otherwise frame the image
+     twice, once in card stroke and once in its own. */
+  .thumb {
+    display: block;
+    margin: calc(var(--space-xl) * -1) calc(var(--space-xl) * -1) var(--space-xs);
+    border-block-end: 1px solid var(--color-stroke);
+    border-start-start-radius: var(--radius-lg);
+    border-start-end-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .thumb img {
+    inline-size: 100%;
   }
 
   .meta {
