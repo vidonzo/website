@@ -1,0 +1,103 @@
+---
+title: "EPG explained: how the on-screen TV guide works"
+description: "The grid of programmes is a separate file from your channels, on its own schedule. Knowing that explains every odd thing a guide ever does."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["television", "playlists"]
+keywords: ["what is epg", "iptv tv guide", "xmltv epg", "epg not showing"]
+heroImageAlt: "A channel row and a programme grid drawn as two separate sheets, joined by a single matching identifier."
+---
+
+The guide — the grid showing what is on now, what is next, and what was on an
+hour ago — is called the **EPG**, for electronic programme guide. On a satellite
+box it arrives inside the broadcast signal. In an IPTV player it does not, and
+that difference explains almost every strange thing a guide ever does.
+
+## It is a second file, not part of the channel list
+
+Your channel list says *where the streams are*. The EPG says *what is on them and
+when*. They are separate documents, fetched separately, updated on different
+schedules.
+
+The usual format is **XMLTV**: an XML file listing channels, then programmes with
+a channel reference, a start time, an end time, a title, and often a description.
+A guide covering a few hundred channels for a week is a large file — tens of
+megabytes is ordinary — which is why a player fetches it in the background rather
+than at the moment you press the guide button.
+
+If you use [Xtream Codes](/blog/xtream-codes-vs-m3u/), the guide usually comes
+along automatically: the API exposes it, and the player collects it without you
+configuring anything. With a plain M3U you often supply the EPG URL yourself,
+because a playlist file has nowhere to put one.
+
+## How a programme finds its channel
+
+This is where guides break, and the reason is unglamorous: the two files have to
+agree on a name.
+
+Each entry in the guide is tagged with a channel identifier. Each channel in your
+playlist can carry one too, in the `tvg-id` attribute. The player matches them.
+When they match, you get a programme grid. When they do not, you get a channel
+that plays perfectly and shows nothing in the guide.
+
+That is the single most common EPG complaint, and it is almost never the player.
+`Channel One HD` in the playlist and `channel.one.hd` in the guide are different
+strings, and nothing can join them but a correction on the provider's side or a
+manual mapping.
+
+## Time zones, the other classic failure
+
+An XMLTV timestamp carries a UTC offset — `20260729180000 +0300`. When a
+provider's file omits the offset, or states one that does not match reality, the
+whole guide slides: everything is right, just an hour or three away from the
+truth.
+
+If your guide is uniformly shifted by a whole number of hours, that is what has
+happened, and it is a provider fix rather than a device setting. If only some
+channels are shifted, they are being sourced from a different guide feed than the
+rest.
+
+## What a good guide gives you
+
+Once it is matching, the EPG stops being decoration:
+
+- **Now and next**, so you can see what you are joining halfway through.
+- **A grid you can scroll ahead in**, which is the only comfortable way to plan an
+  evening across hundreds of channels.
+- **Reminders**, on players that offer them.
+- **Better search**, because you can look for a programme rather than a channel.
+- **Catch-up**, where your provider supports it: the guide is what gives the
+  player something to ask for.
+
+## When the guide is empty
+
+Working through it in order:
+
+1. **Wait.** After adding a playlist, the first EPG fetch takes a while. Nothing
+   is wrong for the first few minutes.
+2. **Check there is a guide at all.** With an M3U source, if you were never given
+   an EPG URL, there is nothing to display. Ask your provider for one.
+3. **Check one channel versus all channels.** A few blank channels is an
+   identifier mismatch. Every channel blank is a fetch problem.
+4. **Refresh the guide** if the player offers it, which re-downloads rather than
+   re-reads the cache.
+5. **Consider the hour.** Some providers publish a narrow window — only today and
+   tomorrow — and it looks empty if you scroll far ahead.
+
+None of these are about playback, which is a useful clue in itself: a channel that
+plays but has no guide entry, and a channel that has a guide entry but will not
+play, are unrelated problems with unrelated causes — the second one is usually
+[the network path](/blog/fix-iptv-buffering/).
+
+## Why the player's part of this matters
+
+A guide is a lot of data to hold gracefully. Parsing tens of megabytes of XML,
+keeping it current, and drawing a scrollable grid for hundreds of channels
+without the interface becoming unusable is real work — and it is the kind of work
+[a player is actually responsible for](/blog/what-an-iptv-player-does/), unlike
+the contents of the guide itself.
+
+It is also a place where privacy quietly matters. A guide fetch is a request to
+your provider's URL and nowhere else; a player that reports back which programmes
+you scrolled past would be collecting a remarkably detailed picture of your
+evening for no reason connected to showing you a grid.

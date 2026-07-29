@@ -1,0 +1,107 @@
+---
+title: "EPG là gì: lịch phát sóng trên màn hình hoạt động ra sao"
+description: "Lưới chương trình là một tệp riêng, tách khỏi danh sách kênh và cập nhật theo lịch riêng. Biết điều đó là giải thích được mọi chuyện lạ của lịch phát sóng."
+urlSlug: epg-la-gi-lich-phat-song
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["truyền hình", "danh sách phát"]
+keywords: ["epg là gì", "lịch phát sóng iptv", "epg không hiển thị", "xmltv là gì"]
+heroImageAlt: "Một hàng kênh và một lưới chương trình vẽ thành hai tờ giấy riêng, nối với nhau bằng đúng một mã định danh trùng khớp."
+---
+
+Cái lưới cho thấy đang chiếu gì, tiếp theo là gì và một tiếng trước đã chiếu gì
+được gọi là **EPG**, viết tắt của *electronic programme guide* — lịch phát sóng
+điện tử. Trên một đầu thu vệ tinh, nó đi kèm ngay bên trong tín hiệu phát. Trong
+một trình phát IPTV thì không, và khác biệt đó giải thích gần như mọi chuyện lạ mà
+một lịch phát sóng từng gây ra.
+
+## Nó là một tệp thứ hai, không nằm trong danh sách kênh
+
+Danh sách kênh của bạn nói *luồng phát nằm ở đâu*. EPG nói *trên đó chiếu gì và vào
+lúc nào*. Chúng là hai tài liệu riêng, tải về riêng, cập nhật theo hai lịch khác
+nhau.
+
+Định dạng thường gặp là **XMLTV**: một tệp XML liệt kê các kênh, rồi đến các chương
+trình kèm một tham chiếu kênh, giờ bắt đầu, giờ kết thúc, tiêu đề, và thường có cả
+mô tả. Một lịch phát sóng phủ vài trăm kênh trong một tuần là một tệp lớn — vài
+chục megabyte là bình thường — nên trình phát tải nó ngầm ở nền thay vì tải vào
+đúng lúc bạn bấm nút xem lịch.
+
+Nếu bạn dùng [Xtream Codes](/vi/blog/xtream-codes-hay-m3u/), lịch phát sóng thường
+về theo luôn: API có sẵn phần đó, và trình phát lấy về mà bạn không phải thiết lập
+gì. Với một tệp M3U thuần, bạn thường phải tự cung cấp đường dẫn EPG, vì một tệp
+danh sách phát không có chỗ nào để đặt nó.
+
+## Một chương trình tìm ra kênh của nó bằng cách nào
+
+Đây là chỗ lịch phát sóng hỏng, và lý do thì chẳng có gì hào nhoáng: hai tệp phải
+thống nhất với nhau về một cái tên.
+
+Mỗi mục trong lịch phát sóng được gắn một mã định danh kênh. Mỗi kênh trong danh
+sách phát của bạn cũng có thể mang một mã như vậy, ở thuộc tính `tvg-id`. Trình
+phát ghép hai bên lại. Khi chúng khớp, bạn có một lưới chương trình. Khi không
+khớp, bạn có một kênh phát rất tốt nhưng trống trơn trong lịch.
+
+Đó là than phiền phổ biến nhất về EPG, và gần như không bao giờ do trình phát.
+`Channel One HD` trong danh sách phát và `channel.one.hd` trong lịch là hai chuỗi
+ký tự khác nhau, và không gì ghép chúng lại được ngoài một chỉnh sửa ở phía nhà
+cung cấp hoặc một bảng ánh xạ làm bằng tay.
+
+## Múi giờ, ca hỏng kinh điển còn lại
+
+Một dấu thời gian XMLTV mang theo độ lệch so với UTC — `20260729180000 +0300`. Khi
+tệp của nhà cung cấp bỏ trống độ lệch đó, hoặc ghi một giá trị không đúng thực tế,
+cả lịch phát sóng trượt đi: mọi thứ vẫn đúng, chỉ là cách sự thật một hoặc vài
+tiếng.
+
+Nếu lịch của bạn lệch đều nhau một số nguyên giờ thì đó chính là chuyện đã xảy ra,
+và đây là việc phải sửa ở phía nhà cung cấp chứ không phải một thiết lập trên thiết
+bị. Nếu chỉ một số kênh bị lệch, những kênh đó đang được lấy từ một nguồn lịch khác
+với phần còn lại.
+
+## Một lịch phát sóng tốt cho bạn những gì
+
+Khi đã khớp, EPG thôi làm vật trang trí:
+
+- **Đang chiếu và tiếp theo**, để bạn biết mình vừa vào giữa chừng thứ gì.
+- **Một lưới cuộn được về phía trước**, cách duy nhất dễ chịu để sắp xếp một buổi
+  tối giữa hàng trăm kênh.
+- **Nhắc giờ**, trên những trình phát có hỗ trợ.
+- **Tìm kiếm tốt hơn**, vì bạn tìm được một chương trình chứ không chỉ một kênh.
+- **Xem lại**, ở nơi nhà cung cấp có hỗ trợ: lịch phát sóng là thứ cho trình phát
+  biết phải hỏi cái gì.
+
+## Khi lịch phát sóng trống trơn
+
+Đi lần lượt:
+
+1. **Hãy chờ.** Sau khi thêm một danh sách phát, lần tải EPG đầu tiên mất một lúc.
+   Vài phút đầu chưa có gì sai cả.
+2. **Kiểm tra xem có lịch hay không.** Với nguồn M3U, nếu bạn chưa từng được đưa
+   một đường dẫn EPG thì không có gì để hiển thị. Hãy hỏi nhà cung cấp.
+3. **So một kênh với tất cả các kênh.** Vài kênh trống là lệch mã định danh. Mọi
+   kênh đều trống là lỗi tải về.
+4. **Làm mới lịch phát sóng** nếu trình phát có chức năng đó, vì nó tải lại chứ
+   không đọc lại bản đã lưu.
+5. **Để ý khoảng thời gian.** Một số nhà cung cấp chỉ phát hành một khung hẹp — chỉ
+   hôm nay và ngày mai — nên nhìn có vẻ trống nếu bạn cuộn xa về phía trước.
+
+Không mục nào ở trên liên quan đến việc phát, và bản thân điều đó đã là một manh
+mối có ích: một kênh phát được nhưng không có mục nào trong lịch, và một kênh có
+mục trong lịch nhưng không chịu phát, là hai vấn đề không liên quan với hai nguyên
+nhân không liên quan — cái thứ hai thường là
+[chuyện đường truyền](/vi/blog/khac-phuc-iptv-giat-lag/).
+
+## Vì sao phần việc của trình phát ở đây lại quan trọng
+
+Một lịch phát sóng là một lượng dữ liệu lớn phải giữ cho gọn gàng. Phân tích vài
+chục megabyte XML, giữ cho nó luôn mới, và vẽ một lưới cuộn được cho hàng trăm kênh
+mà giao diện không trở nên không dùng được là công việc thật — và đúng là loại công
+việc [mà một trình phát chịu trách nhiệm](/vi/blog/trinh-phat-iptv-lam-gi/), khác
+với nội dung nằm bên trong chính cái lịch ấy.
+
+Đây cũng là một chỗ mà quyền riêng tư âm thầm có ý nghĩa. Một lượt tải lịch phát
+sóng là một yêu cầu gửi tới đường dẫn của nhà cung cấp của bạn và không tới đâu
+khác; một trình phát báo ngược về việc bạn đã lướt qua những chương trình nào sẽ
+đang thu thập một bức tranh chi tiết đến đáng ngạc nhiên về buổi tối của bạn, chẳng
+vì lý do nào liên quan đến việc bày ra một cái lưới.

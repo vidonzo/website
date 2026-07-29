@@ -1,0 +1,93 @@
+---
+title: "Das Smartphone als Fernbedienung für den Fernseher"
+description: "Die Kopplung läuft über Ihr eigenes Netz, und das Handy bekommt den Katalog statt eines Steuerkreuzes. Warum die TV-Steuerung in der App selbst steckt."
+urlSlug: smartphone-als-fernbedienung
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["fernsehen", "technik"]
+keywords: ["handy als fernbedienung fernseher", "fernseher mit handy steuern", "iptv fernbedienung app", "handy mit android tv koppeln"]
+heroImageAlt: "Ein Smartphone in einer Hand zeigt eine durchsuchbare Senderliste, dahinter läuft auf dem Fernseher ein einzelner Stream."
+---
+
+Ein Steuerkreuz hat vier Richtungen und eine OK-Taste. Eine typische
+IPTV-Playlist hat zwanzigtausend Sender. Diese beiden Tatsachen vertragen sich
+nicht.
+
+Man kann die Lücke mit besserer Fokusführung und schnellerem Scrollen überdecken
+— Vidonzo tut beides —, aber das zugrunde liegende Problem bleibt, dass Sie eine
+Datenbankabfrage mit einer Pfeiltaste steuern. Gleichzeitig liegt auf der
+Sofalehne ein Gerät mit Touchscreen, Tastatur und Suchfeld. Es als Fernbedienung
+zu benutzen, ist keine nachträglich angeschraubte Bequemlichkeit. Es ist die
+einzige Eingabe im Raum, die zur Größe der Liste passt.
+
+## Was die Fernbedienung tatsächlich tut
+
+Die Fernbedienung von Vidonzo ist kein Steuerkreuz, das auf ein Handy gezeichnet
+wurde. So etwas gibt es, und es ist schlechter als die physische Fernbedienung,
+die es nachahmt: Sie verlieren die ertastbaren Kanten, mit denen sich zweimal
+nach oben drücken lässt, ohne hinzusehen, und gewinnen nichts, weil die
+Oberfläche, die Sie bedienen, weiterhin die auf dem Fernseher ist.
+
+Stattdessen bekommt das Handy den **Katalog**. Sie durchsuchen den vollständigen
+Bestand des Fernsehers auf dem Handy, mit dem Scrollen des Handys und der
+Tastatur des Handys. Haben Sie etwas gefunden, startet ein Tipper es auf dem
+Fernseher. Der Bildschirm zeigt nie ein Menü, durch das Sie sich bewegen — er
+zeigt, was läuft.
+
+Das kehrt die übliche Anordnung um. Der große Bildschirm ist zum Schauen da, der
+kleine zum Entscheiden. Es heißt außerdem, dass nicht der ganze Raum stillsteht,
+solange eine Person sucht: Was auf dem Fernseher läuft, läuft weiter, während
+jemand aussucht, was danach kommt.
+
+Dazu kommt eine Warteschlange, sodass die Wahl des Nächsten das Laufende nicht
+unterbricht, Favoriten, die sich von beiden Geräten aus setzen lassen, sowie ein
+Trackpad und eine Tastatur für die seltenen Momente, in denen eine Fernseh-App
+wirklich Texteingabe braucht.
+
+Vom Handy aus zu suchen ist die im Alltag sichtbarste Änderung, besonders bei
+einem Anbieter, der Sendernamen stark mit Präfixen versieht —
+[was eine lange Liste überhaupt erst erreichbar macht](/de/blog/grosse-playlists-ordnen/).
+
+## Über Ihr Netz, nicht über unseres
+
+Die Kopplung läuft über das lokale Netz. Das Handy findet den Fernseher per mDNS
+— Vidonzo meldet sich selbst an, im Normalfall ist also kein Code einzutippen —
+und die beiden sprechen über einen WebSocket in Ihrem eigenen LAN.
+
+Nichts an dieser Verbindung braucht unsere Server, und das hat zwei Folgen, die
+getrennt genannt werden sollten. Es funktioniert, wenn Ihr Internetanschluss
+ausgefallen ist, denn weder der Steuerkanal noch ein Stream aus einer lokalen
+Quelle hat einen Grund, das Haus zu verlassen. Und wir können nicht sehen, worin
+Sie blättern, weil es auf diesem Weg keine Stelle gibt, an der wir vorkommen —
+dieselbe Überlegung, die sich durch
+[das Modell der mitgebrachten Playlist](/de/blog/eigene-playlist-mitbringen/)
+zieht.
+
+Manche Router unterbinden die Erkennung zwischen WLAN-Geräten, womit mDNS nichts
+mehr erreicht. Dafür gibt es einen ausdrücklichen Weg, der gar nicht von
+Erkennung abhängt: einen QR-Code, dazu einen kurzen Code zum Eintippen, wo das
+Scannen umständlich ist.
+
+## Die Uhr
+
+Eine gekoppelte Smartwatch bekommt Wiedergabe, Pause, Springen und Lautstärke.
+Das ist bewusst eine kleine Oberfläche — genug, um die Folge anzuhalten, wenn es
+an der Tür klingelt, ohne so zu tun, als sei eine Uhr ein guter Ort, um einen
+Katalog zu durchsuchen. Alles darüber hinaus wäre eine schlechtere Kopie des
+Handys, das ohnehin im Raum liegt.
+
+## Was das kostet
+
+Eine Funktion im lokalen Netz zu unterstützen ist schwerer als eine in der Cloud.
+Gastnetze, Client-Isolierung und blockiertes mDNS erzeugen alle dasselbe Symptom
+— der Fernseher taucht nicht auf — und keines davon ist von unserer Seite aus
+sichtbar. Wir erfahren davon, wenn uns jemand schreibt.
+
+Ein Umweg über einen Server würde die Erkennung zum Problem von jemand anderem
+machen. Er würde auch bedeuten, dass jeder Tastendruck durch uns hindurchreist,
+und genau diese Eigenschaft wollten wir nicht. Also bleibt der Handel bestehen:
+Der Verkehr bleibt in Ihrem Netz, und der Aufwand für den Support bleibt bei uns.
+
+Dafür ist der QR-Weg da, und deshalb stehen in
+[den Hinweisen zur Kopplung](/de/help/) die Fragen zum Netzwerk vor denen zur
+App.

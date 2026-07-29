@@ -1,0 +1,117 @@
+---
+title: "Regarder sur grand écran : un lecteur IPTV sur Android TV"
+description: "Un téléviseur n'est pas un grand téléphone. Ce qui change quand vingt mille chaînes se pilotent à la croix directionnelle, à trois mètres de l'écran."
+urlSlug: lecteur-iptv-sur-android-tv
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["television", "produit"]
+keywords: ["lecteur iptv android tv", "application iptv android tv", "iptv sur boîtier android", "installer un apk sur android tv"]
+heroImageAlt: "Un téléviseur affichant une grille de vignettes de chaînes, l'une d'elles entourée d'un cadre de sélection, avec une télécommande posée sur l'accoudoir du canapé."
+---
+
+La même playlist, les mêmes flux et le même compte se comportent très
+différemment dès que l'écran est à trois mètres et que la seule entrée
+disponible est une télécommande au creux d'une main. Une application de
+téléviseur n'est pas une application de téléphone en plus grand. Presque chaque
+interaction doit être repensée, et celles qui survivent telles quelles font
+figure d'exception.
+
+Voici ce qui change réellement sur grand écran, et ce qui ne s'améliore pas,
+quelle que soit la façon dont l'application est construite.
+
+## Cinq touches face à vingt mille chaînes
+
+Une croix directionnelle, c'est quatre directions et un bouton OK. Une playlist
+IPTV ordinaire compte jusqu'à vingt mille chaînes. Toutes les autres décisions
+découlent de ce déséquilibre.
+
+La réponse du téléphone — faire défiler vite, et chercher quand le défilement
+cesse d'être raisonnable — ne se transpose pas, car ses deux moitiés sont peu
+coûteuses sous un pouce et coûteuses sous une télécommande. La disposition du
+téléviseur doit donc resserrer la liste avant votre arrivée : les favoris
+d'abord, puis les catégories, puis la liste complète en dernier recours. Si la
+chaîne que vous regardez la plupart des soirs se trouve à deux pressions plutôt
+qu'à deux cents, la taille de la liste derrière elle cesse d'avoir de
+l'importance. Rien de ce resserrement n'est inventé par le téléviseur. Les
+catégories sont celles de votre fournisseur et les favoris sont les vôtres, tous
+deux fixés
+[au moment où la playlist a été ajoutée](/fr/blog/configurer-sa-premiere-playlist/) ;
+le grand écran n'a plus qu'à les présenter dans le bon ordre.
+
+## Trois mètres, pas trente centimètres
+
+La distance de lecture est la contrainte que l'on sous-estime. Un texte
+confortable à bout de bras est illisible depuis un canapé, et une disposition
+qui tient quarante lignes sur un téléphone ne doit en tenir qu'une petite
+fraction sur un téléviseur.
+
+Il n'y a pas non plus de curseur. Rien ne peut être expliqué par un survol, rien
+ne peut être glissé derrière un appui long qu'une souris aurait révélé, et il
+n'y a pas de second appui pour corriger le premier. Ce que fait un élément doit
+se lire à sa seule apparence.
+
+## La sélection tient lieu d'interface
+
+Sur un écran tactile, ce sur quoi vous allez agir est ce qui se trouve sous
+votre doigt. Sur un téléviseur, c'est une abstraction que l'application doit
+tenir : un seul élément est sélectionné, il doit rester visible en permanence,
+et une pression sur une direction doit déplacer la sélection vers un endroit
+prévisible. Manquez ce point et la sélection tombe dans un coin mort, ou
+disparaît hors de l'écran, et la télécommande semble avoir cessé de fonctionner.
+
+Le travail voisin, tout aussi important, consiste à mémoriser la position.
+Ouvrez une catégorie, regardez quelque chose, revenez : la sélection doit se
+trouver sur l'élément que vous aviez quitté, et non en haut d'une liste qu'il
+faut de nouveau parcourir. L'essentiel de la différence ressentie entre une
+application TV agréable et une application épuisante tient à cela, et non au
+graphisme.
+
+## Le seul véritable avantage : un câble
+
+Un téléviseur ne bouge pas, et il voisine avec d'autres appareils qui ne bougent
+pas non plus, ce qui en fait l'équipement le plus facile du logement à brancher
+en Ethernet. Ce seul changement fait disparaître la plupart des cas de
+buffering, parce que
+[le buffering vient presque toujours du chemin réseau](/fr/blog/regler-le-buffering-iptv/)
+plutôt que du lecteur, et qu'un câble supprime le segment le moins fiable de ce
+chemin.
+
+Si un boîtier TV dispose d'un port Ethernet et que la box est accessible,
+utilisez-le. C'est une amélioration plus grande que n'importe quel réglage dans
+n'importe quel lecteur.
+
+## L'installation : ici, passer par un APK est la voie normale
+
+Android TV permet d'installer des applications à partir d'un fichier APK, et sur
+cette plateforme il s'agit d'un chemin ordinaire plutôt que d'un contournement.
+En pratique, cela consiste à autoriser l'installation depuis des sources
+inconnues pour le gestionnaire de fichiers que vous utilisez, à transférer
+l'APK, puis à l'installer.
+
+Cela veut dire aussi que deux responsabilités vous reviennent. Vérifiez d'où
+vient le fichier, car un APK est du code exécutable et la plateforme ne le
+contrôle pas pour vous. Et les mises à jour sont manuelles : une application
+installée de cette manière n'en reçoit pas depuis la boutique, il faut donc
+revenir chercher chaque nouvelle version.
+
+## Ce que le grand écran ne sait toujours pas faire
+
+Deux limites, énoncées franchement.
+
+**Les boîtiers anciens peuvent manquer de mémoire.** Le matériel Android TV bon
+marché d'il y a quelques années n'a souvent qu'un ou deux gigaoctets de RAM, et
+une playlist de vingt mille entrées accompagnée d'un guide complet représente
+une vraie quantité de données à conserver. Un lecteur peut être soigneux —
+charger la liste par pages, garder des visuels de petite taille, éviter de
+décoder ce qui est hors écran — mais il ne peut pas utiliser une mémoire qui
+n'existe pas. Les symptômes : l'application est évincée en arrière-plan, ou la
+liste saccade au défilement.
+
+**La saisie de texte à la télécommande est réellement pénible.** Une grille de
+lettres parcourue caractère par caractère fait de la recherche dans une liste de
+vingt mille chaînes une chose que l'on évite plutôt qu'une chose que l'on fait.
+Il n'existe aucune astuce du côté du téléviseur ; la solution consiste
+[à taper sur l'appareil qui a déjà un clavier](/fr/blog/telephone-comme-telecommande-tv/).
+
+Le grand écran est fait pour regarder. Il n'a jamais été le bon endroit pour
+décider.

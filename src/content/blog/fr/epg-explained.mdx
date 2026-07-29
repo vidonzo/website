@@ -1,0 +1,115 @@
+---
+title: "L'EPG expliqué : comment fonctionne le guide des programmes"
+description: "La grille des programmes est un fichier distinct de votre liste de chaînes, avec son propre rythme. Cela explique presque toutes ses bizarreries."
+urlSlug: epg-guide-des-programmes
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["television", "playlists"]
+keywords: ["c'est quoi l'epg", "guide des programmes iptv", "epg xmltv", "epg qui ne s'affiche pas"]
+heroImageAlt: "Une rangée de chaînes et une grille de programmes dessinées comme deux feuilles distinctes, reliées par un unique identifiant commun."
+---
+
+Le guide — la grille qui montre ce qui passe maintenant, ce qui suit et ce qui
+passait il y a une heure — s'appelle l'**EPG**, pour *electronic programme
+guide*, le guide électronique des programmes. Sur un décodeur satellite, il
+arrive à l'intérieur du signal diffusé. Dans un lecteur IPTV, non, et cette
+différence explique presque toutes les bizarreries que peut avoir un guide.
+
+## C'est un second fichier, pas une partie de la liste de chaînes
+
+Votre liste de chaînes indique *où se trouvent les flux*. L'EPG indique *ce qui
+y passe et quand*. Ce sont deux documents distincts, récupérés séparément, mis à
+jour selon des rythmes différents.
+
+Le format habituel est **XMLTV** : un fichier XML qui liste des chaînes, puis
+des programmes portant chacun une référence de chaîne, une heure de début, une
+heure de fin, un titre et souvent une description. Un guide couvrant quelques
+centaines de chaînes sur une semaine est un gros fichier — quelques dizaines de
+mégaoctets n'ont rien d'exceptionnel — et c'est pourquoi un lecteur le récupère
+en arrière-plan plutôt qu'au moment où vous appuyez sur la touche guide.
+
+Si vous utilisez [Xtream Codes](/fr/blog/xtream-codes-ou-m3u/), le guide suit en
+général tout seul : l'API l'expose, et le lecteur le collecte sans que vous ayez
+rien à configurer. Avec un M3U ordinaire, vous fournissez souvent l'URL de l'EPG
+vous-même, parce qu'un fichier de playlist n'a nulle part où la loger.
+
+## Comment un programme retrouve sa chaîne
+
+C'est là que les guides cassent, et la raison n'a rien de reluisant : les deux
+fichiers doivent se mettre d'accord sur un nom.
+
+Chaque entrée du guide porte un identifiant de chaîne. Chaque chaîne de votre
+playlist peut en porter un elle aussi, dans l'attribut `tvg-id`. Le lecteur les
+rapproche. Quand ils correspondent, vous obtenez une grille de programmes. Quand
+ce n'est pas le cas, vous obtenez une chaîne qui se lit parfaitement et
+n'affiche rien dans le guide.
+
+C'est de loin la réclamation la plus fréquente au sujet de l'EPG, et ce n'est
+presque jamais le lecteur. `Channel One HD` dans la playlist et `channel.one.hd`
+dans le guide sont deux chaînes de caractères différentes, et rien ne peut les
+réunir sinon une correction du côté du fournisseur, ou une correspondance
+établie à la main.
+
+## Les fuseaux horaires, l'autre panne classique
+
+Un horodatage XMLTV porte un décalage UTC — `20260729180000 +0300`. Quand le
+fichier d'un fournisseur omet ce décalage, ou en indique un qui ne correspond
+pas à la réalité, tout le guide glisse : tout est juste, simplement placé à une
+heure ou trois de la vérité.
+
+Si votre guide est décalé uniformément d'un nombre entier d'heures, c'est ce qui
+s'est produit, et cela se corrige du côté du fournisseur plutôt que dans un
+réglage de l'appareil. Si seules certaines chaînes sont décalées, c'est qu'elles
+proviennent d'une autre source de guide que les autres.
+
+## Ce qu'un bon guide apporte
+
+Une fois la correspondance établie, l'EPG cesse d'être décoratif :
+
+- **En cours et à suivre**, pour voir ce que vous rejoignez en cours de route.
+- **Une grille que vous pouvez parcourir en avant**, seule façon confortable de
+  planifier une soirée sur des centaines de chaînes.
+- **Des rappels**, sur les lecteurs qui en proposent.
+- **Une meilleure recherche**, puisque vous pouvez chercher un programme et pas
+  seulement une chaîne.
+- **Le replay**, quand votre fournisseur le prend en charge : c'est le guide qui
+  donne au lecteur quelque chose à demander.
+
+## Quand le guide reste vide
+
+Dans l'ordre :
+
+1. **Attendez.** Après l'ajout d'une playlist, la première récupération de l'EPG
+   prend un moment. Rien n'est cassé pendant les premières minutes.
+2. **Vérifiez qu'il existe bien un guide.** Avec une source M3U, si l'on ne vous
+   a jamais donné d'URL d'EPG, il n'y a rien à afficher. Demandez-en une à votre
+   fournisseur.
+3. **Comparez une chaîne et l'ensemble des chaînes.** Quelques chaînes vides,
+   c'est un identifiant qui ne correspond pas. Toutes les chaînes vides, c'est
+   un problème de récupération.
+4. **Rafraîchissez le guide** si le lecteur le propose : cela retélécharge le
+   fichier au lieu de relire le cache.
+5. **Pensez à l'horizon couvert.** Certains fournisseurs ne publient qu'une
+   fenêtre étroite — aujourd'hui et demain — et le guide paraît vide si vous
+   avancez loin.
+
+Rien de tout cela ne concerne la lecture, ce qui est en soi un indice utile :
+une chaîne qui se lit mais n'a pas d'entrée dans le guide, et une chaîne qui a
+une entrée dans le guide mais refuse de se lire, sont deux problèmes sans
+rapport, aux causes sans rapport — le second relevant d'ordinaire
+[du chemin réseau](/fr/blog/regler-le-buffering-iptv/).
+
+## Pourquoi la part qui revient au lecteur compte
+
+Un guide, c'est beaucoup de données à tenir avec élégance. Analyser des dizaines
+de mégaoctets de XML, les garder à jour et dessiner une grille défilante pour
+des centaines de chaînes sans que l'interface devienne inutilisable est un vrai
+travail — et c'est exactement le genre de travail
+[dont un lecteur est réellement responsable](/fr/blog/ce-que-fait-un-lecteur-iptv/),
+contrairement au contenu du guide lui-même.
+
+C'est aussi un endroit où la confidentialité compte discrètement. Récupérer un
+guide, c'est adresser une requête à l'URL de votre fournisseur et à personne
+d'autre ; un lecteur qui rapporterait quels programmes vous avez fait défiler
+constituerait un relevé remarquablement détaillé de vos soirées, sans aucun
+rapport avec le fait de vous afficher une grille.

@@ -1,0 +1,105 @@
+---
+title: "La EPG explicada: cómo funciona la guía de programación en pantalla"
+description: "La rejilla de programas es un archivo aparte de tus canales y va a su propio ritmo. Saberlo explica cualquier rareza que llegue a hacer una guía."
+urlSlug: que-es-la-epg-iptv
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televisión", "listas"]
+keywords: ["qué es la epg", "guía de programación iptv", "epg xmltv", "no aparece la epg"]
+heroImageAlt: "Una fila de canales y una rejilla de programas dibujadas como dos hojas separadas, unidas por un único identificador coincidente."
+---
+
+La guía —la rejilla que muestra qué hay ahora, qué viene después y qué hubo hace una
+hora— se llama **EPG**, de guía electrónica de programación. En un descodificador de
+satélite llega dentro de la propia señal. En un reproductor IPTV no, y esa diferencia
+explica casi cualquier rareza que haga una guía.
+
+## Es un segundo archivo, no parte de la lista de canales
+
+Tu lista de canales dice *dónde están los streams*. La EPG dice *qué hay en ellos y
+cuándo*. Son documentos separados, que se descargan por separado y se actualizan a
+ritmos distintos.
+
+El formato habitual es **XMLTV**: un archivo XML que enumera canales y después
+programas con una referencia al canal, una hora de inicio, una hora de fin, un título
+y a menudo una descripción. Una guía que cubre unos cientos de canales durante una
+semana es un archivo grande —decenas de megabytes es lo corriente—, y por eso el
+reproductor la descarga en segundo plano y no en el momento en que pulsas el botón de
+la guía.
+
+Si usas [Xtream Codes](/es/blog/xtream-codes-o-m3u/), la guía suele venir sola: la API
+la expone y el reproductor la recoge sin que configures nada. Con un M3U a secas
+muchas veces tienes que dar tú la URL de la EPG, porque un archivo de lista no tiene
+dónde meterla.
+
+## Cómo encuentra un programa su canal
+
+Aquí es donde se rompen las guías, y el motivo es poco lucido: los dos archivos tienen
+que ponerse de acuerdo en un nombre.
+
+Cada entrada de la guía lleva marcado un identificador de canal. Cada canal de tu
+lista puede llevar otro, en el atributo `tvg-id`. El reproductor los empareja. Cuando
+coinciden, tienes una rejilla de programación. Cuando no, tienes un canal que se ve
+perfectamente y no muestra nada en la guía.
+
+Esa es la queja más frecuente sobre la EPG, y casi nunca es cosa del reproductor.
+`Channel One HD` en la lista y `channel.one.hd` en la guía son cadenas distintas, y no
+hay nada que las una salvo una corrección del lado del proveedor o un emparejado a
+mano.
+
+## Las zonas horarias, el otro fallo clásico
+
+Una marca de tiempo de XMLTV lleva un desfase respecto a UTC: `20260729180000 +0300`.
+Cuando el archivo de un proveedor omite ese desfase, o indica uno que no se corresponde
+con la realidad, la guía entera se desplaza: todo está bien, solo que a una hora o tres
+de la verdad.
+
+Si tu guía está desplazada de manera uniforme un número entero de horas, eso es lo que
+ha pasado, y es un arreglo del proveedor y no un ajuste del aparato. Si solo hay
+algunos canales desplazados, esos vienen de una fuente de guía distinta a la del resto.
+
+## Qué te da una guía en condiciones
+
+En cuanto empareja bien, la EPG deja de ser un adorno:
+
+- **Ahora y a continuación**, para ver a qué te estás incorporando a mitad.
+- **Una rejilla por la que avanzar**, que es la única forma cómoda de planear una noche
+  entre cientos de canales.
+- **Avisos**, en los reproductores que los ofrecen.
+- **Mejores búsquedas**, porque puedes buscar un programa y no un canal.
+- **El catch-up**, la reproducción en diferido, cuando tu proveedor lo admite: la guía
+  es lo que le da al reproductor algo que pedir.
+
+## Cuando la guía está vacía
+
+Repasándolo por orden:
+
+1. **Espera.** Después de añadir una lista, la primera descarga de la EPG tarda un
+   rato. Durante los primeros minutos no pasa nada malo.
+2. **Comprueba que hay guía siquiera.** Con un origen M3U, si nunca te dieron una URL
+   de EPG, no hay nada que mostrar. Pídesela a tu proveedor.
+3. **Mira un canal frente a todos los canales.** Unos pocos canales en blanco son un
+   desajuste de identificadores. Todos los canales en blanco son un problema de
+   descarga.
+4. **Actualiza la guía** si el reproductor lo ofrece, lo que vuelve a descargarla en
+   lugar de releer la caché.
+5. **Ten en cuenta el momento.** Algunos proveedores publican una ventana estrecha
+   —solo hoy y mañana— y parece vacía si avanzas mucho.
+
+Ninguno de estos puntos tiene que ver con la reproducción, lo que ya es una pista útil:
+un canal que se ve pero no tiene entrada en la guía y un canal que tiene entrada en la
+guía pero no arranca son problemas sin relación y con causas sin relación; el segundo
+suele ser [el camino de red](/es/blog/solucionar-cortes-iptv/).
+
+## Por qué importa la parte que le toca al reproductor
+
+Una guía son muchos datos para sostenerlos con soltura. Analizar decenas de megabytes
+de XML, mantenerlos al día y dibujar una rejilla desplazable para cientos de canales
+sin que la interfaz se vuelva inservible es trabajo de verdad, y es justo la clase de
+trabajo [de la que sí responde un reproductor](/es/blog/que-hace-un-reproductor-iptv/),
+al contrario que el contenido de la guía.
+
+También es un sitio donde la privacidad importa en silencio. Descargar la guía es una
+petición a la URL de tu proveedor y a ningún sitio más; un reproductor que informara de
+qué programas has pasado por delante estaría reuniendo un retrato notablemente detallado
+de tu noche sin ningún motivo relacionado con mostrarte una rejilla.

@@ -1,0 +1,90 @@
+---
+title: "Trasforma il telefono nel telecomando del televisore"
+description: "L'abbinamento passa dalla tua rete, e al telefono arriva la libreria invece di un telecomando finto. Perché il controllo del televisore sta dentro l'app."
+urlSlug: telefono-come-telecomando-tv
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["televisione", "tecnica"]
+keywords: ["telefono come telecomando tv", "controllare la tv dal telefono", "app telecomando iptv", "abbinare telefono e android tv"]
+heroImageAlt: "Un telefono tenuto in una mano che mostra una lista di canali con la ricerca, e dietro un televisore che riproduce un solo flusso."
+---
+
+Un telecomando a frecce ha quattro direzioni e un tasto OK. Una playlist IPTV
+tipica ha ventimila canali. Queste due cose non vanno d'accordo.
+
+Il divario si può mascherare con una gestione del fuoco migliore e uno
+scorrimento più veloce — e Vidonzo fa entrambe le cose — ma il problema di fondo
+è che stai pilotando un'interrogazione a un database con un tasto freccia. Intanto
+sul bracciolo del divano c'è un apparecchio con un touchscreen, una tastiera e un
+campo di ricerca. Usarlo come telecomando non è una comodità aggiunta di lato. È
+l'unico ingresso nella stanza che sta alla misura della lista.
+
+## Che cosa fa davvero il telecomando
+
+Il telecomando di Vidonzo non è un telecomando a frecce disegnato su un telefono.
+Quelli esistono, e sono peggio del telecomando fisico che imitano: perdi i bordi
+in rilievo che ti fanno premere due volte in su senza guardare, e non guadagni
+niente, perché l'interfaccia che stai pilotando resta comunque quella sul
+televisore.
+
+Al telefono arriva invece la **libreria**. Sfogli sul telefono l'intero catalogo
+del televisore, con lo scorrimento del telefono e la tastiera del telefono.
+Quando trovi qualcosa, un tocco la avvia sul televisore. Sullo schermo non
+compare mai un menù che stai percorrendo: compare quello che è in onda.
+
+Questo ribalta la disposizione abituale. Il grande schermo serve per guardare, il
+piccolo per decidere. Significa anche che la stanza non resta ostaggio della
+ricerca di una persona sola: quello che è sul televisore continua ad andare
+mentre qualcuno cerca che cosa viene dopo.
+
+C'è poi una coda, così scegliere il prossimo titolo non interrompe quello in
+corso, preferiti che puoi attivare da entrambi i dispositivi, e un trackpad con
+tastiera per le rare volte in cui a un'app da televisore serve davvero scrivere
+del testo.
+
+Cercare dal telefono è il cambiamento più visibile nell'uso di tutti i giorni,
+soprattutto con un fornitore che mette prefissi pesanti sui nomi dei canali —
+[che è poi ciò che rende raggiungibile una lista lunga](/it/blog/organizzare-playlist-grandi/).
+
+## Sulla tua rete, non attraverso la nostra
+
+L'abbinamento avviene sulla rete locale. Il telefono trova il televisore tramite
+mDNS — Vidonzo si annuncia da sé, quindi nel caso normale non c'è nessun codice
+da digitare — e i due parlano su un WebSocket dentro la tua LAN.
+
+Della connessione non fa parte nessun nostro server, e questo ha due conseguenze
+che vale la pena enunciare separatamente. Funziona anche quando la tua linea
+internet è giù, perché né il canale di controllo né un flusso da una sorgente
+locale hanno motivo di uscire di casa. E noi non possiamo vedere che cosa sfogli,
+perché nel percorso non c'è un punto in cui compariamo — lo stesso ragionamento
+che attraversa
+[il modello in cui la playlist la porti tu](/it/blog/porta-la-tua-playlist/).
+
+Alcuni router bloccano il rilevamento tra client wireless, e questo impedisce
+all'mDNS di raggiungere qualsiasi cosa. Per quei casi c'è una strada esplicita
+che dal rilevamento non dipende affatto: un codice QR, con un codice breve da
+digitare dove inquadrare è scomodo.
+
+## L'orologio
+
+A uno smartwatch abbinato arrivano riproduzione, pausa, avanzamento e volume. È
+una superficie deliberatamente piccola: quanto basta per fermare la puntata
+quando suonano al campanello, senza far finta che un orologio sia un buon posto
+per sfogliare un catalogo. Qualsiasi cosa in più ne farebbe una copia peggiore
+del telefono che è già nella stanza.
+
+## Che cosa costa
+
+Una funzione che vive sulla rete locale è più difficile da assistere di una che
+passa dal cloud. Reti ospiti, isolamento dei client e mDNS bloccato producono
+tutti lo stesso sintomo — il televisore non compare — e nessuno di questi è
+visibile dalla nostra parte. Lo scopriamo quando qualcuno ci scrive.
+
+Un inoltro attraverso un server renderebbe il rilevamento un problema di
+qualcun altro. Significherebbe anche che ogni tasto che premi passa da noi, che è
+esattamente la proprietà che non volevamo. Quindi lo scambio resta in piedi: il
+traffico rimane sulla tua rete, e il peso dell'assistenza rimane a noi.
+
+È a questo che serve la strada con il codice QR, ed è il motivo per cui
+[le istruzioni per l'abbinamento](/it/help/) partono dalle domande sulla rete
+prima che da quelle sull'app.

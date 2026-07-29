@@ -1,0 +1,88 @@
+---
+title: "Transforme o seu celular no controle da sua TV"
+description: "O pareamento acontece na sua própria rede, e o celular recebe a biblioteca em vez de um direcional virtual. Por que o controle vive dentro do app."
+urlSlug: celular-como-controle-da-tv
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["televisão", "engenharia"]
+keywords: ["celular como controle da tv", "controlar a tv pelo celular", "parear celular com android tv", "controle remoto para iptv"]
+heroImageAlt: "Um celular na mão exibindo uma lista de canais com campo de busca, e ao fundo uma televisão reproduzindo um único stream."
+---
+
+Um direcional tem quatro direções e um botão OK. Uma lista de IPTV comum tem
+vinte mil canais. Esses dois fatos não se dão bem.
+
+Dá para disfarçar a distância com um foco mais bem resolvido e uma rolagem mais
+rápida — e o Vidonzo faz as duas coisas —, mas o problema de fundo é que você
+está conduzindo uma consulta a banco de dados com uma tecla de seta. Enquanto
+isso, existe no braço do sofá um aparelho com tela de toque, teclado e campo de
+busca. Usá-lo como controle não é uma comodidade pendurada de lado. É a única
+entrada da sala que combina com o tamanho da lista.
+
+## O que o controle faz de verdade
+
+O controle do Vidonzo não é um direcional virtual desenhado em um celular. Esses
+existem, e são piores do que o controle físico que imitam: você perde as bordas
+em relevo que deixam apertar para cima duas vezes sem olhar, e não ganha nada,
+porque a interface que você está conduzindo continua sendo a da televisão.
+
+Em vez disso, o celular recebe a **biblioteca**. Você navega pelo catálogo
+completo da televisão no celular, com a rolagem do celular e o teclado do
+celular. Quando encontra algo, um toque começa a reprodução na televisão. A tela
+nunca exibe um menu sendo percorrido — ela exibe o que está tocando.
+
+Isso inverte o arranjo de sempre. A tela grande é para assistir; a tela pequena
+é para decidir. Significa também que a sala não fica refém da busca de uma
+pessoa só: o que está na televisão continua rodando enquanto alguém procura o
+que vem depois.
+
+Você também ganha uma fila, para escolher o próximo sem interromper o que está
+no ar, favoritos que dá para marcar dos dois aparelhos, e um touchpad e um
+teclado para os raros momentos em que um aplicativo de TV realmente precisa que
+você digite.
+
+Buscar pelo celular é a mudança mais visível no dia a dia, principalmente com um
+provedor que enche os nomes de canal de prefixo —
+[que é o que torna uma lista longa alcançável](/pt/blog/organizar-listas-grandes-de-canais/).
+
+## Pela sua rede, não pela nossa
+
+O pareamento acontece na rede local. O celular encontra a televisão por mDNS — o
+Vidonzo se anuncia, então no caso normal não há código nenhum para digitar — e
+os dois conversam por um WebSocket na sua própria rede.
+
+Nada na conexão precisa dos nossos servidores, e isso tem duas consequências que
+vale enunciar separadamente. Funciona quando a sua internet está fora do ar,
+porque nem o canal de controle nem um stream vindo de uma fonte local têm motivo
+para sair de casa. E não temos como ver o que você navega, porque não existe
+ponto no caminho em que a gente apareça — o mesmo raciocínio que atravessa
+[o modelo de trazer a sua própria lista](/pt/blog/traga-sua-propria-lista/).
+
+Alguns roteadores bloqueiam a descoberta entre clientes sem fio, o que impede o
+mDNS de chegar a qualquer lugar. Para esses, existe um caminho explícito que não
+depende de descoberta nenhuma: um QR code, com um código curto para digitar onde
+escanear for incômodo.
+
+## O relógio
+
+Um smartwatch pareado ganha reproduzir, pausar, pular e volume. É uma superfície
+deliberadamente pequena — o suficiente para parar o episódio quando tocam a
+campainha, sem fingir que um relógio é um bom lugar para navegar por um
+catálogo. Qualquer coisa além disso faria dele uma cópia pior do celular que já
+está na sala.
+
+## O que isso custa
+
+Um recurso de rede local é mais difícil de dar suporte do que um recurso de
+nuvem. Rede de visitantes, isolamento entre clientes e mDNS bloqueado produzem
+todos o mesmo sintoma — a TV não aparece — e nenhum deles é visível do nosso
+lado. A gente descobre quando alguém escreve.
+
+Retransmitir por um servidor nosso faria da descoberta problema de outra pessoa.
+Faria também com que cada botão apertado passasse por nós, que é exatamente a
+propriedade que a gente não queria. Então a troca fica de pé: o tráfego continua
+na sua rede, e o ônus do suporte continua conosco.
+
+É para isso que serve o caminho do QR code, e é por isso que
+[as instruções de pareamento](/pt/help/) começam pelas perguntas de rede e não
+pelas do aplicativo.

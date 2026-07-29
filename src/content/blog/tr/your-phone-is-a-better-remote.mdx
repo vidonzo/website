@@ -1,0 +1,83 @@
+---
+title: "Telefonunuzu televizyonunuzun kumandasına dönüştürün"
+description: "Eşleştirme kendi ağınız üzerinden yürür ve telefona sanal bir yön tuşu takımı değil, kütüphanenin kendisi gelir. TV denetimi neden uygulamanın içinde?"
+urlSlug: telefonu-tv-kumandasina-donusturun
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["televizyon", "teknik"]
+keywords: ["telefonu tv kumandası yapma", "android tv telefondan kontrol", "iptv kumanda uygulaması", "telefonla tv eşleştirme"]
+heroImageAlt: "Tek elde tutulan bir telefonda aranabilir bir kanal listesi; arkasındaki televizyonda tek bir yayın oynuyor."
+---
+
+Bir yön tuşu takımında dört yön ve bir OK tuşu vardır. Tipik bir IPTV oynatma
+listesinde yirmi bin kanal vardır. Bu iki gerçek birbiriyle geçinemiyor.
+
+Aradaki boşluğu daha iyi odak yönetimi ve daha hızlı kaydırmayla örtebilirsiniz —
+Vidonzo ikisini de yapıyor — ama asıl sorun, bir veritabanı sorgusunu ok tuşuyla
+yönetiyor olmanız. Oysa koltuğun kolunda dokunmatik ekranı, klavyesi ve arama
+alanı olan bir cihaz duruyor. Onu kumanda olarak kullanmak yana iliştirilmiş bir
+kolaylık değil; odada listenin büyüklüğüne denk düşen tek girdi yöntemi o.
+
+## Kumanda aslında ne yapıyor
+
+Vidonzo'nun kumandası, telefona çizilmiş sanal bir yön tuşu takımı değil.
+Öyleleri var ve taklit ettikleri fiziksel kumandadan daha kötüler: bakmadan iki
+kez yukarı basmanızı sağlayan kabartılı kenarları kaybedersiniz, karşılığında bir
+şey kazanmazsınız; çünkü yönettiğiniz arayüz hâlâ televizyondaki arayüzdür.
+
+Bunun yerine telefona **kütüphane** gelir. Televizyonun bütün kataloğunu
+telefonda, telefonun kaydırmasıyla ve telefonun klavyesiyle gezersiniz. Bir şey
+bulduğunuzda tek dokunuş onu televizyonda başlatır. Ekran, gezdiğiniz bir menüyü
+hiç göstermez — oynayan şeyi gösterir.
+
+Bu, alışılmış düzeni tersine çevirir. Büyük ekran izlemek için, küçük ekran karar
+vermek içindir. Ayrıca oda, tek bir kişinin aramasına rehin kalmaz: biri
+sonrasında ne izleneceğine bakarken televizyondaki şey oynamayı sürdürür.
+
+Bunun yanında bir sıra elde edersiniz, böylece sıradakini seçmek oynayanı bölmez;
+iki cihazdan da işaretleyebileceğiniz sık kullanılanlar; ve bir TV uygulamasının
+gerçekten yazı girmeye ihtiyaç duyduğu ender anlar için bir dokunmatik yüzey ile
+klavye.
+
+Günlük kullanımda en çok göze çarpan değişiklik telefondan arama; özellikle kanal
+adlarının başına yoğun ön ek koyan bir sağlayıcıda — [uzun bir listeyi
+ulaşılabilir kılan da zaten budur](/tr/blog/buyuk-oynatma-listesi-duzenleme/).
+
+## Bizim üzerimizden değil, kendi ağınız üzerinden
+
+Eşleştirme yerel ağ üzerinden yürür. Telefon televizyonu mDNS ile bulur — Vidonzo
+kendini duyurur, dolayısıyla olağan durumda yazılacak bir kod yoktur — ve ikisi
+kendi yerel ağınızda bir WebSocket üzerinden konuşur.
+
+Bağlantının hiçbir yerinde sunucularımıza ihtiyaç yok ve bunun ayrı ayrı
+söylenmeye değer iki sonucu var. İnternet bağlantınız kesikken de çalışır, çünkü
+ne denetim kanalının ne de yerel bir kaynaktan gelen bir yayının evden çıkmak
+için bir sebebi vardır. Bir de neye baktığınızı göremeyiz, çünkü yolun hiçbir
+noktasında görünmüyoruz — [listeyi kendinizin getirdiği
+modelin](/tr/blog/kendi-listenizi-getirin/) içinden geçen akıl yürütmenin aynısı.
+
+Bazı modemler kablosuz istemciler arasındaki keşfi engeller; bu da mDNS'in
+hiçbir yere ulaşamaması demek. Onlar için keşfe hiç dayanmayan açık bir yol var:
+bir QR kod ve taramanın zahmetli olduğu yerlerde yazılacak kısa bir kod.
+
+## Saat
+
+Eşleştirilmiş bir akıllı saat oynat, duraklat, atla ve ses düzeyini alır.
+Bilinçli olarak küçük tutulmuş bir yüzey — kapı zili çaldığında bölümü durdurmaya
+yetecek kadar, saatin katalog gezmek için iyi bir yer olduğunu iddia etmeden.
+Fazlası, odada zaten bulunan telefonun daha kötü bir kopyası olurdu.
+
+## Bunun bedeli
+
+Yerel ağda çalışan bir özelliği desteklemek, buluttakini desteklemekten zordur.
+Misafir ağları, istemci yalıtımı ve mDNS'in engellenmesi aynı belirtiyi üretir —
+televizyon görünmez — ve hiçbiri bizim taraftan görünmez. Biri bize yazdığında
+öğreniriz.
+
+Sunucu üzerinden bir aktarım, keşfi başkasının sorunu haline getirirdi. Aynı
+zamanda bastığınız her tuşun bizim üzerimizden geçmesi demek olurdu; oysa
+istemediğimiz özellik tam olarak buydu. Yani takas ayakta duruyor: trafik sizin
+ağınızda kalır, destek yükü de bizde.
+
+QR yolunun varlık sebebi bu; [eşleştirme yönergelerinin](/tr/help/) uygulamayla
+ilgili sorulardan önce ağla ilgili soruları öne almasının sebebi de bu.

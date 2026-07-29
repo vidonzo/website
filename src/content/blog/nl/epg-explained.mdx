@@ -1,0 +1,111 @@
+---
+title: "EPG uitgelegd: hoe de programmagids op je scherm werkt"
+description: "Het programmaraster is een apart bestand van je zenderlijst, met een eigen schema. Wie dat weet, begrijpt elk vreemd moment van de gids."
+urlSlug: epg-uitgelegd-programmagids
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televisie", "afspeellijsten"]
+keywords: ["wat is epg", "iptv programmagids", "xmltv epg", "epg werkt niet"]
+heroImageAlt: "Een zenderrij en een programmaraster getekend als twee losse vellen, verbonden door één overeenkomende identificatie."
+---
+
+De gids — het raster dat laat zien wat er nu is, wat er straks komt en wat er een
+uur geleden was — heet de **EPG**, de elektronische programmagids. Op een
+satellietontvanger komt hij mee in het uitzendsignaal. In een IPTV-speler is dat
+niet zo, en dat verschil verklaart vrijwel alles wat een gids ooit vreemd doet.
+
+## Het is een tweede bestand, geen onderdeel van de zenderlijst
+
+Je zenderlijst zegt *waar de streams staan*. De EPG zegt *wat erop komt en
+wanneer*. Het zijn losse documenten, apart opgehaald en bijgewerkt volgens
+verschillende schema's.
+
+Het gebruikelijke formaat is **XMLTV**: een XML-bestand met eerst de zenders en
+daarna de programma's, elk met een verwijzing naar een zender, een begintijd, een
+eindtijd, een titel en vaak een beschrijving. Een gids die een paar honderd
+zenders een week vooruit dekt is een groot bestand — tientallen megabytes is
+gewoon — en daarom haalt een speler hem op de achtergrond op, en niet op het
+moment dat jij op de gidsknop drukt.
+
+Gebruik je [Xtream Codes](/nl/blog/xtream-codes-of-m3u/), dan komt de gids meestal
+vanzelf mee: de API stelt hem beschikbaar en de speler haalt hem op zonder dat je
+iets instelt. Bij een gewone M3U geef je de EPG-URL vaak zelf op, want een
+afspeellijstbestand heeft geen plek om er een in te zetten.
+
+## Hoe een programma zijn zender vindt
+
+Hier gaan gidsen stuk, en de reden is weinig verheffend: de twee bestanden moeten
+het eens zijn over een naam.
+
+Elk item in de gids draagt een zenderidentificatie. Elke zender in je
+afspeellijst kan er ook een dragen, in het attribuut `tvg-id`. De speler legt ze
+naast elkaar. Komen ze overeen, dan krijg je een programmaraster. Komen ze niet
+overeen, dan krijg je een zender die perfect speelt en niets in de gids laat
+zien.
+
+Dat is veruit de meest voorkomende klacht over de EPG, en het ligt vrijwel nooit
+aan de speler. `Channel One HD` in de afspeellijst en `channel.one.hd` in de gids
+zijn verschillende tekenreeksen, en niets brengt ze samen behalve een correctie
+aan de kant van de provider of een handmatige koppeling.
+
+## Tijdzones, de andere klassieke misser
+
+Een XMLTV-tijdstempel draagt een UTC-offset mee — `20260729180000 +0300`. Laat
+het bestand van een provider die offset weg, of staat er een in die niet met de
+werkelijkheid klopt, dan schuift de hele gids op: alles klopt, het staat alleen
+een uur of drie naast de waarheid.
+
+Is je gids gelijkmatig verschoven over een heel aantal uren, dan is dat wat er is
+gebeurd, en het wordt aan de kant van de provider opgelost en niet met een
+instelling op je apparaat. Is maar een deel van de zenders verschoven, dan komen
+die uit een andere gidsbron dan de rest.
+
+## Wat een goede gids je oplevert
+
+Zodra de koppeling klopt, is de EPG geen versiering meer:
+
+- **Nu en straks**, zodat je ziet waar je halverwege instapt.
+- **Een raster waarin je vooruit kunt scrollen**, de enige comfortabele manier om
+  een avond te plannen over honderden zenders.
+- **Herinneringen**, bij spelers die ze aanbieden.
+- **Beter zoeken**, omdat je op een programma kunt zoeken in plaats van op een
+  zender.
+- **Terugkijken**, waar je provider het ondersteunt: de gids is wat de speler
+  iets geeft om op te vragen.
+
+## Als de gids leeg blijft
+
+Op volgorde afwerken:
+
+1. **Wacht even.** Na het toevoegen van een afspeellijst duurt het eerste ophalen
+   van de EPG een tijdje. De eerste paar minuten is er niets mis.
+2. **Kijk of er überhaupt een gids is.** Bij een M3U-bron geldt: heb je nooit een
+   EPG-URL gekregen, dan is er niets om te tonen. Vraag je provider erom.
+3. **Vergelijk één zender met alle zenders.** Een paar lege zenders is een
+   identificatie die niet overeenkomt. Alle zenders leeg is een probleem met het
+   ophalen.
+4. **Ververs de gids** als de speler dat aanbiedt; dat haalt hem opnieuw op in
+   plaats van de cache opnieuw te lezen.
+5. **Let op het tijdstip.** Sommige providers publiceren een smal venster —
+   alleen vandaag en morgen — en dan lijkt het leeg zodra je ver vooruit scrolt.
+
+Geen van deze punten gaat over afspelen, en dat is op zichzelf een nuttige
+aanwijzing: een zender die speelt maar geen gidsitem heeft, en een zender die wel
+een gidsitem heeft maar niet wil spelen, zijn losstaande problemen met
+losstaande oorzaken — het tweede is meestal
+[het netwerkpad](/nl/blog/iptv-buffering-oplossen/).
+
+## Waarom het aandeel van de speler hierin uitmaakt
+
+Een gids is veel gegevens om netjes vast te houden. Tientallen megabytes XML
+ontleden, actueel houden en er een scrollbaar raster van tekenen voor honderden
+zenders zonder dat de bediening onbruikbaar wordt, is echt werk — en het is
+precies het soort werk
+[waar een speler wél verantwoordelijk voor is](/nl/blog/wat-een-iptv-speler-doet/),
+anders dan voor de inhoud van de gids zelf.
+
+Het is ook een plek waar privacy stilletjes van belang is. Een gids ophalen is
+een verzoek aan de URL van je provider en nergens anders; een speler die zou
+doorgeven langs welke programma's je scrolde, zou een opmerkelijk gedetailleerd
+beeld van je avond verzamelen, zonder enige reden die te maken heeft met het
+tonen van een raster.

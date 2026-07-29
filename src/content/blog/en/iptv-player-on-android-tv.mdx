@@ -1,0 +1,102 @@
+---
+title: "Watch on the big screen: an IPTV player on Android TV"
+description: "A television is not a large phone. What changes when twenty thousand channels have to be driven with a d-pad from three metres away."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["television", "product"]
+keywords: ["iptv player android tv", "android tv iptv app", "iptv on a tv box", "sideload apk android tv"]
+heroImageAlt: "A television showing a grid of channel tiles with one tile outlined as the focused item, and a remote on the sofa arm."
+---
+
+The same playlist, the same streams and the same account behave very differently
+once the screen is three metres away and the only input is a remote in someone's
+hand. A television app is not a phone app at a larger size. Almost every
+interaction has to be reconsidered, and the ones that survive unchanged are the
+exceptions.
+
+Here is what actually changes on the big screen, and what does not get better no
+matter how the app is built.
+
+## Five inputs against twenty thousand channels
+
+A d-pad has four directions and an OK button. A typical IPTV playlist has
+somewhere up to twenty thousand channels. Every other decision follows from that
+mismatch.
+
+The phone answer — scroll quickly, and search when scrolling stops being
+reasonable — does not transfer, because both halves of it are cheap under a
+thumb and expensive under a remote. So the television layout has to do the
+narrowing before you arrive: favourites first, then categories, then the full
+list as a last resort. If the channel you watch most evenings is two presses
+away rather than two hundred, the size of the list behind it stops mattering.
+None of that narrowing is invented by the television. The categories are your
+provider's and the favourites are your own, both settled
+[when the playlist was first added](/blog/set-up-your-first-playlist/); the big
+screen only has to present them in the right order.
+
+## Ten feet, not ten inches
+
+Reading distance is the constraint people underestimate. Text that is
+comfortable at arm's length is illegible from a sofa, and a layout that fits
+forty rows on a phone should fit a small fraction of that on a television.
+
+There is also no cursor. Nothing can be explained by a hover state, nothing can
+be tucked behind a long press that a mouse would have revealed, and there is no
+second tap to correct a first one. Whatever an element does has to be legible
+from its appearance alone.
+
+## Focus is the interface
+
+On a touchscreen, the thing you are about to act on is the thing under your
+finger. On a television it is an abstraction the app has to maintain: exactly
+one element is focused, it must always be visible, and pressing a direction must
+move focus somewhere predictable. Get that wrong and focus falls into a dead
+corner, or vanishes off-screen, and the remote appears to have stopped working.
+
+The related and equally important job is remembering position. Open a category,
+watch something, come back, and focus should be on the item you left — not at the
+top of a list you now have to traverse again. Most of the felt difference between
+a pleasant TV app and an exhausting one is this, not visual design.
+
+## The one genuine advantage: a cable
+
+A television sits still, next to other things that sit still, which makes it the
+easiest device in the house to put on wired ethernet. That single change ends
+most buffering outright, because
+[buffering is almost always a network path problem](/blog/fix-iptv-buffering/)
+rather than anything the player did, and a cable removes the least reliable
+segment of that path.
+
+If a TV box has an ethernet port and the router is reachable, use it. It is a
+larger improvement than any setting in any player.
+
+## Installing it: sideloading is ordinary here
+
+Android TV allows applications to be installed from an APK file, and on this
+platform that is a normal path rather than a workaround. In practice it means
+enabling installation from unknown sources for the file manager you are using,
+transferring the APK, and installing it.
+
+It also means two responsibilities land on you. Check where the file came from,
+because an APK is executable code and the platform is not vetting it on your
+behalf. And updates are manual — a sideloaded application does not receive them
+from the store, so you have to return for a new version.
+
+## What the big screen is still bad at
+
+Two honest limits.
+
+**Older boxes can run short of memory.** Cheap Android TV hardware from a few
+years ago often has one or two gigabytes of RAM, and a playlist of twenty
+thousand entries with a full guide loaded is a real amount of data to hold. A
+player can be careful — page the list, keep artwork small, avoid decoding what is
+off-screen — but it cannot use memory that is not there. Symptoms are the app
+being evicted in the background, or the list stuttering while it scrolls.
+
+**Text entry with a remote is genuinely bad.** An on-screen grid navigated one
+letter at a time makes searching a twenty-thousand-channel list something you
+avoid rather than something you do. There is no clever fix at the television end;
+the fix is
+[to type on the device that already has a keyboard](/blog/turn-your-phone-into-a-tv-remote/).
+
+The big screen is for watching. It was never the right place to make decisions.

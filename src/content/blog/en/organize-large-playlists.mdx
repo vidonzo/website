@@ -1,0 +1,96 @@
+---
+title: "Organizing large playlists: favourites, categories, and search"
+description: "Twenty thousand channels is a database, not a menu. Three habits turn an unusable list into one you can drive in seconds."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlists", "product"]
+keywords: ["organize iptv playlist", "iptv favourites", "too many channels iptv", "iptv channel search"]
+heroImageAlt: "A long channel list narrowing into a short row of favourites at the top of a screen."
+---
+
+A typical IPTV subscription arrives with somewhere between two and twenty
+thousand channels. Perhaps forty of them are ones you will ever deliberately
+choose. The gap between those two numbers is the whole user-experience problem,
+and no amount of scrolling solves it.
+
+The fix is not a better scroll. It is to stop browsing the full list at all.
+
+## Favourites: the list you actually watch
+
+Mark forty channels and the other nineteen thousand nine hundred and sixty stop
+mattering. This is the single highest-return minute you will spend on your setup,
+and most people skip it because the list looks too big to start on.
+
+Do not try to curate it in one sitting. Add a channel the moment you find
+yourself hunting for it a second time. After a fortnight the list converges on
+your actual habits, which is more accurate than anything you would have planned
+in advance.
+
+Two details worth knowing:
+
+- **Favourites live with you, not with the playlist.** Replace an expired
+  subscription with a new one from the same provider and your favourites should
+  survive, because they are your data rather than the list's.
+- **They belong on the device you sit with.** Marking a favourite from the phone
+  while the television plays is far quicker than doing it with a d-pad — which is
+  [the whole argument for using the phone as the remote](/blog/turn-your-phone-into-a-tv-remote/).
+
+## Categories: what the format gives you
+
+How much structure you get depends on what your provider handed you, and this is
+one of the clearest practical differences between the two formats.
+
+**Xtream Codes** delivers real categories from the server: live channels grouped
+by genre or country, films, and series properly nested into seasons and episodes.
+The grouping is the provider's, delivered live, and it updates when they change
+it.
+
+**An M3U playlist** carries at most a `group-title` on each line. Many providers
+fill it in usefully. Some fill it in with one group called `LIVE`. You get what
+is in the file, frozen at the moment you fetched it — which is
+[the core difference between the two](/blog/xtream-codes-vs-m3u/).
+
+If your list arrives as one undifferentiated wall of channels, that is the file
+talking. A player can search it and let you favourite from it, but it cannot
+invent groupings that were never provided.
+
+## Search: for everything else
+
+Search is what makes the long tail reachable. The channel you want once a month
+does not deserve a favourite slot and does not deserve five minutes of scrolling
+either.
+
+A few things make search work better in practice:
+
+- **Type less.** Three or four characters is usually enough; longer strings are
+  more likely to miss on a spelling you did not expect.
+- **Watch for naming conventions.** Providers prefix heavily — `UK: `, `FR|`,
+  `[HD] `. Searching for the distinctive part of the name rather than the start
+  of it avoids the prefix entirely.
+- **Search from the phone.** Text entry with a real keyboard versus an on-screen
+  grid is not a close comparison.
+
+## Keeping it tidy over time
+
+Playlists rot. Providers rename channels, retire them, and reshuffle categories,
+and a favourites list slowly fills with entries that no longer resolve.
+
+- **When a favourite stops working, check a neighbour first.** One dead entry is
+  usually a renamed channel. A whole dead category is a provider change.
+- **Refresh rather than re-add.** Re-fetching an M3U or letting the Xtream API
+  resync brings in renames without you rebuilding anything.
+- **Prune once a season.** Two minutes, and the list stops accumulating debris.
+- **Do not confuse a dead favourite with a buffering one.** A channel that starts
+  and stutters is [a network path problem](/blog/fix-iptv-buffering/); a channel
+  that never starts at all is usually gone from the provider's line-up.
+
+## What organizing does not fix
+
+It is worth being clear about the limit. Favourites, categories and search are
+about finding things. They do not change what is in your subscription, they do
+not make a stream more reliable, and they do not add channels that were never in
+your list —
+[the player reads the list you brought, and that is the whole job](/blog/what-an-iptv-player-does/).
+
+What they do change is whether an evening starts with a decision or with a
+scroll.
