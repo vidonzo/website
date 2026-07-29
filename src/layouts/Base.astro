@@ -2,6 +2,15 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/vazirmatn';
 import '@fontsource-variable/cairo';
+// Per-script faces for the non-Latin locales. Each ships with `unicode-range`,
+// so a page only downloads the font whose script it actually renders — an
+// English or German page never fetches the CJK or Devanagari files.
+import '@fontsource-variable/noto-sans-devanagari';
+import '@fontsource-variable/noto-sans-bengali';
+import '@fontsource-variable/noto-sans-thai';
+import '@fontsource-variable/noto-sans-jp';
+import '@fontsource-variable/noto-sans-kr';
+import '@fontsource/noto-nastaliq-urdu';
 import '../styles/global.css';
 
 import Header from '../components/Header.astro';

@@ -73,13 +73,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Per-script typefaces, matching AppTheme._textThemeFor in the app. */
+/* Per-script typefaces, matching AppTheme._textThemeFor in the app.
+   Latin, Cyrillic and Vietnamese locales (de, ru, it, vi, pl, …) are covered
+   by Inter and need no override; only the non-Latin scripts do. */
 :root:lang(fa) {
   --font-body: 'Vazirmatn Variable', var(--font-latin);
 }
 
 :root:lang(ar) {
   --font-body: 'Cairo Variable', var(--font-latin);
+}
+
+:root:lang(ur) {
+  --font-body: 'Noto Nastaliq Urdu', 'Cairo Variable', var(--font-latin);
+}
+
+:root:lang(hi) {
+  --font-body: 'Noto Sans Devanagari Variable', var(--font-latin);
+}
+
+:root:lang(bn) {
+  --font-body: 'Noto Sans Bengali Variable', var(--font-latin);
+}
+
+:root:lang(th) {
+  --font-body: 'Noto Sans Thai Variable', var(--font-latin);
+}
+
+:root:lang(ja) {
+  --font-body: 'Noto Sans JP Variable', var(--font-latin);
+}
+
+:root:lang(ko) {
+  --font-body: 'Noto Sans KR Variable', var(--font-latin);
 }
 
 /* A block explicitly tagged with another language — an untranslated article
@@ -94,6 +120,30 @@
 
 [lang='ar'] {
   font-family: 'Cairo Variable', var(--font-latin);
+}
+
+[lang='ur'] {
+  font-family: 'Noto Nastaliq Urdu', 'Cairo Variable', var(--font-latin);
+}
+
+[lang='hi'] {
+  font-family: 'Noto Sans Devanagari Variable', var(--font-latin);
+}
+
+[lang='bn'] {
+  font-family: 'Noto Sans Bengali Variable', var(--font-latin);
+}
+
+[lang='th'] {
+  font-family: 'Noto Sans Thai Variable', var(--font-latin);
+}
+
+[lang='ja'] {
+  font-family: 'Noto Sans JP Variable', var(--font-latin);
+}
+
+[lang='ko'] {
+  font-family: 'Noto Sans KR Variable', var(--font-latin);
 }
 
 *,
@@ -132,16 +182,17 @@ h4 {
   text-wrap: balance;
 }
 
-/* Persian and Arabic set tight tracking badly — the negative letter-spacing
-   that flatters Inter breaks the joins in Vazirmatn and Cairo. */
-:root:lang(fa) h1,
-:root:lang(fa) h2,
-:root:lang(fa) h3,
-:root:lang(fa) h4,
-:root:lang(ar) h1,
-:root:lang(ar) h2,
-:root:lang(ar) h3,
-:root:lang(ar) h4 {
+/* Non-Latin scripts set tight tracking badly — the negative letter-spacing
+   that flatters Inter breaks the joins in Vazirmatn and Cairo, and is equally
+   wrong for Devanagari, Bengali, Thai, Nastaliq and CJK. */
+:root:lang(fa) :is(h1, h2, h3, h4),
+:root:lang(ar) :is(h1, h2, h3, h4),
+:root:lang(ur) :is(h1, h2, h3, h4),
+:root:lang(hi) :is(h1, h2, h3, h4),
+:root:lang(bn) :is(h1, h2, h3, h4),
+:root:lang(th) :is(h1, h2, h3, h4),
+:root:lang(ja) :is(h1, h2, h3, h4),
+:root:lang(ko) :is(h1, h2, h3, h4) {
   letter-spacing: 0;
   line-height: 1.25;
 }
