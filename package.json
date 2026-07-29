@@ -12,6 +12,8 @@
     "build:brand": "node tool/make-brand-assets.mjs",
     "build:redirects": "node tool/build-redirects.mjs",
     "check:redirects": "node tool/build-redirects.mjs --check",
+    "build:slugs": "node tool/build-slug-registry.mjs",
+    "check:slugs": "node tool/build-slug-registry.mjs --check",
     "build:images": "node tool/build-featured-images.mjs",
     "check:links": "node tool/check-links.mjs",
     "coverage": "node tool/coverage.mjs"
