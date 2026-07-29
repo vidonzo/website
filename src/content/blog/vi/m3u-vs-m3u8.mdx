@@ -1,0 +1,89 @@
+---
+title: "M3U và M3U8: đuôi tệp thật sự nói lên điều gì"
+description: "Con số 8 nói về bảng mã ký tự chứ không phải chất lượng. Đây là khác biệt thật giữa hai định dạng, và vì sao một trong hai hiển thị đúng tên kênh."
+urlSlug: m3u-va-m3u8-khac-gi
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["danh sách phát", "kỹ thuật"]
+keywords: ["m3u8 là gì", "m3u và m3u8 khác nhau", "file m3u8", "danh sách phát utf-8"]
+heroImageAlt: "Cùng một danh sách kênh hiển thị hai lần: một lần chữ có dấu vỡ thành ký tự lạ, một lần hiện đúng."
+---
+
+Nhà cung cấp đưa ra đường dẫn kết thúc bằng `.m3u`, có nơi lại kết thúc bằng `.m3u8`,
+đôi khi cả hai cho cùng một gói cước, và hiếm khi giải thích chúng khác nhau chỗ nào.
+Những phỏng đoán quen thuộc — rằng cái này mới hơn, hoặc chất lượng cao hơn, hoặc
+“bản HD” — đều sai.
+
+Số `8` là viết tắt của **UTF-8**. Đó là toàn bộ khác biệt trong định dạng tệp, và nó
+vừa nhỏ hơn vừa hữu ích hơn những gì lời đồn gợi ra.
+
+## Cả hai đều là cùng một loại tệp
+
+Mở tệp nào trong một trình soạn thảo văn bản bạn cũng thấy đúng một thứ: một dòng
+đầu, rồi từng cặp dòng, một dòng mô tả kênh và một dòng cho địa chỉ của nó.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Hết. Một danh sách phát M3U là bản mục lục văn bản thuần — tên và địa chỉ, không gì
+thêm. Nó không mang video, không mang đăng nhập, và không giữ kết nối trực tiếp nào
+tới nhà cung cấp. Nó là ảnh chụp những gì tồn tại vào đúng lúc bạn tải nó về, và chính
+đặc điểm đó mới là thứ phân biệt nó với
+[API Xtream Codes](/vi/blog/xtream-codes-hay-m3u/).
+
+## Số 8 thay đổi điều gì
+
+Đặc tả M3U ban đầu ra đời trước khi web thống nhất dùng UTF-8. Văn bản khi đó được
+lưu theo bảng mã địa phương mà máy tính tình cờ đang dùng — chạy hoàn hảo, cho tới khi
+tệp đi qua một đường biên giới.
+
+`.m3u8` khai báo rằng tệp là UTF-8. Trên thực tế, điều đó nghĩa là mọi tên kênh đều
+sống sót qua chuyến đi: tiếng Ả Rập, Ba Tư, Hy Lạp, Thái, Nga, Nhật, và cả chữ có dấu
+trong tiếng Pháp, Thổ Nhĩ Kỳ, Ba Lan hay tiếng Việt. Với một tệp `.m3u` mà trình phát
+phải tự đoán bảng mã, những cái tên ấy đến nơi dưới dạng dấu hỏi, hoặc dưới chuỗi ký
+tự vỡ không thể nhầm được — `Viá»‡t` ở chỗ đáng lẽ là `Việt`.
+
+Vậy nên nếu nhà cung cấp có cả hai, hãy lấy bản `.m3u8`. Không có gì khác về luồng
+phát thay đổi cả, chỉ là danh sách kênh của bạn trở nên đọc được.
+
+## Còn một `.m3u8` khác bạn sẽ gặp
+
+Có một lý do thứ hai, không liên quan, khiến bạn thấy cái đuôi tệp này, và nó gây
+nhầm lẫn thật sự.
+
+**HLS** — giao thức phát trực tuyến mà phần lớn máy chủ IPTV dùng — cũng dùng tệp
+M3U8. Khi bạn mở một kênh, trình phát tải về một tệp kê khai `.m3u8` nhỏ, liệt kê vài
+giây video kế tiếp dưới dạng các đoạn riêng lẻ, rồi tải lại tệp đó liên tục trong lúc
+phát. Đây là lý do một luồng trực tiếp có thể bắt đầu từ giữa buổi phát và tự thích
+ứng với đường truyền của bạn.
+
+Vậy `.m3u8` có thể mang hai nghĩa khác nhau:
+
+- **Danh sách phát của gói cước** — hàng trăm hoặc hàng nghìn kênh, mỗi kênh một dòng.
+  Đây là đường dẫn bạn dán vào trình phát.
+- **Tệp kê khai luồng phát** — một kênh duy nhất, liệt kê các đoạn của nó. Trình phát
+  tự tải những tệp này về trong lúc bạn xem; bạn không bao giờ phải dán chúng.
+
+Cả hai đều là tệp văn bản theo định dạng M3U. Nếu bạn dán một tệp kê khai luồng phát
+vào chỗ đáng lẽ là danh sách phát, bạn sẽ nhận được một “danh sách” chỉ có đúng một
+mục không tên — một nhầm lẫn phổ biến và sửa rất dễ.
+
+## Nên đưa cho trình phát cái nào
+
+Trình phát nào tử tế cũng đọc được cả hai, nên đây là một quyết định nhỏ:
+
+- **Ưu tiên `.m3u8`** khi bạn có quyền chọn. Tên kênh hiển thị đúng, không mất gì.
+- **Dùng `.m3u`** khi đó là thứ bạn được đưa. Nó chạy được; chỉ là thỉnh thoảng gặp
+  một cái tên bị vỡ trong các danh sách kênh không dùng chữ Latin.
+- **Không cái nào ảnh hưởng đến chất lượng.** Độ phân giải và bitrate do luồng phát
+  của nhà cung cấp quyết định, chứ không phải do cái đuôi tệp của bản mục lục trỏ tới
+  nó.
+
+Dù bạn cầm cái nào, tệp đó vẫn là một danh sách địa chỉ và trình phát vẫn là thứ đọc
+danh sách ấy. Khi luồng phát khựng, bản mục lục gần như không bao giờ là thủ phạm —
+mà là [đường đi giữa bạn và máy chủ](/vi/blog/khac-phuc-iptv-giat-lag/). Và nếu nhà
+cung cấp có đưa kèm thông tin đăng nhập Xtream, thứ đó cho bạn danh mục, phim bộ và
+lịch phát sóng mà một tệp phẳng không thể có.

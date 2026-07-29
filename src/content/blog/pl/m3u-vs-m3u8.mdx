@@ -1,0 +1,89 @@
+---
+title: "M3U czy M3U8: co naprawdę oznaczają te rozszerzenia"
+description: "Ósemka mówi o kodowaniu tekstu, nie o jakości. Wyjaśniamy, co naprawdę dzieli oba pliki i dlaczego jeden z nich poprawnie pokazuje nazwy kanałów."
+urlSlug: m3u-czy-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlisty", "technikalia"]
+keywords: ["m3u czy m3u8", "różnica m3u m3u8", "plik m3u8 co to", "playlista utf-8"]
+heroImageAlt: "Ta sama lista kanałów pokazana dwa razy: raz z połamanymi polskimi znakami, raz poprawnie."
+---
+
+Dostawcy rozdają linki kończące się na `.m3u` i linki kończące się na `.m3u8`,
+czasem oba do tego samego abonamentu, i rzadko tłumaczą różnicę. Popularne
+domysły — że jeden jest nowszy, lepszej jakości albo „ten w HD” — są po kolei
+błędne.
+
+Ósemka oznacza **UTF-8**. To cała różnica w formacie pliku, mniejsza i bardziej
+użyteczna, niż sugeruje folklor.
+
+## Oba to ten sam rodzaj pliku
+
+Otwórz jeden i drugi w edytorze tekstu, a zobaczysz to samo: wiersz nagłówka,
+a potem pary wierszy — jeden opisuje kanał, drugi podaje jego adres.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Tyle. Playlista M3U to zwykły tekstowy spis — nazwy i adresy, nic więcej. Nie
+niesie obrazu, nie zawiera logowania i nie utrzymuje żywego połączenia
+z dostawcą. Jest migawką tego, co istniało w chwili pobrania, i właśnie ta cecha
+naprawdę odróżnia ją od
+[API Xtream Codes](/pl/blog/xtream-codes-czy-m3u/).
+
+## Co zmienia ósemka
+
+Pierwotna specyfikacja M3U powstała, zanim sieć ustaliła się na UTF-8. Tekst
+zapisywano w tym kodowaniu, którego akurat używała dana maszyna, co działało bez
+zarzutu do chwili, w której plik przekraczał granicę.
+
+`.m3u8` deklaruje, że plik jest w UTF-8. W praktyce oznacza to, że każda nazwa
+kanału przeżywa podróż: arabskie, perskie, greckie, tajskie, cyrylickie
+i japońskie, a także polskie ogonki oraz znaki francuskie, tureckie czy
+wietnamskie. Przy zwykłym `.m3u`, którego kodowanie odtwarzacz musi zgadywać, te
+nazwy przychodzą jako znaki zapytania albo jako ten rozpoznawalny ciąg krzaczków
+— `Ã³` tam, gdzie powinno stać `ó`.
+
+Jeśli więc dostawca daje jedno i drugie, bierz `.m3u8`. W samym strumieniu nic
+się nie zmienia, a lista kanałów staje się czytelna.
+
+## Drugie `.m3u8`, które spotkasz
+
+Jest jeszcze jeden powód, całkiem niezwiązany z poprzednim, dla którego widuje
+się to rozszerzenie, i to on wywołuje prawdziwe zamieszanie.
+
+**HLS** — protokół, którego do transmisji używa większość serwerów IPTV —
+również korzysta z plików M3U8. Gdy odtwarzasz kanał, odtwarzacz pobiera mały
+manifest `.m3u8` wymieniający najbliższe kilka sekund obrazu w postaci osobnych
+segmentów, i pobiera go ponownie w miarę odtwarzania. Dzięki temu transmisja na
+żywo może zacząć się w środku programu i dostosować do Twojego łącza.
+
+`.m3u8` może więc znaczyć dwie różne rzeczy:
+
+- **Twoja playlista abonamentowa** — setki albo tysiące kanałów, każdy
+  w jednym wierszu. To ten link, który wkleja się do odtwarzacza.
+- **Manifest strumienia** — jeden kanał i lista jego segmentów. Odtwarzacz
+  pobiera je sam podczas oglądania; tego nigdy się nie wkleja.
+
+Oba są plikami tekstowymi w formacie M3U. Jeśli wkleisz manifest strumienia tam,
+gdzie powinna być playlista, dostaniesz „playlistę” z jedną pozycją bez nazwy —
+pomyłkę częstą i łatwą do naprawienia.
+
+## Który podać odtwarzaczowi
+
+Każdy sensowny odtwarzacz czyta oba, więc decyzja jest niewielka:
+
+- **Wybierz `.m3u8`**, gdy masz wybór. Poprawne nazwy kanałów, żadnych minusów.
+- **Użyj `.m3u`**, gdy to jedyne, co dostajesz. Działa; na listach spoza
+  alfabetu łacińskiego od czasu do czasu trafi się połamana nazwa.
+- **Żadne z nich nie wpływa na jakość.** Rozdzielczość i bitrate ustala strumień
+  dostawcy, a nie rozszerzenie spisu, który na ten strumień wskazuje.
+
+Którykolwiek masz w ręku, plik jest listą adresów, a odtwarzacz jej
+czytelnikiem. Kiedy strumień się zacina, spis prawie nigdy nie jest winowajcą —
+jest nim [droga między Tobą a serwerem](/pl/blog/jak-naprawic-buforowanie-iptv/).
+A jeśli dostawca udostępnia też dane Xtream, dają one kategorie, seriale
+i program telewizyjny, których płaski plik nie zapewni.

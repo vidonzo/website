@@ -1,0 +1,90 @@
+---
+title: "«Trae tu propia lista»: el modelo de reproductor que respeta tu privacidad"
+description: "Un reproductor que no aporta contenido no tiene nada que aprender de ti. Esa única decisión de arquitectura define casi todo lo que una app sabe."
+urlSlug: trae-tu-propia-lista
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacidad", "producto"]
+keywords: ["reproductor iptv privado", "trae tu propia lista", "reproductor sin rastreo", "app iptv sin publicidad"]
+heroImageAlt: "Una lista pasando directamente de un proveedor a una pantalla, con la app dibujada como un marco vacío que solo atraviesa."
+---
+
+La mayoría de las apps que ponen vídeo en tu pantalla son, por debajo, un catálogo
+con un reproductor pegado. El catálogo es el negocio: decide qué puedes ver,
+necesita una cuenta para saber quién eres y aprende qué ves porque aprenderlo es lo
+que mejora el catálogo y lo que hace vendible la publicidad.
+
+Un reproductor de «trae tu propia lista» le da la vuelta a eso. Se instala sin
+nada. Tú aportas la lista
+—[unos accesos de Xtream o un enlace M3U](/es/blog/xtream-codes-o-m3u/) de un
+proveedor al que ya pagas— y todo el trabajo de la app consiste en leerla bien. No
+hay catálogo, porque no hay nada que catalogar.
+
+Eso no es una postura de marketing. Es una arquitectura, y las arquitecturas tienen
+consecuencias que se pueden comprobar.
+
+## Lo que se cae por el camino
+
+**No hace falta cuenta para ver.** El registro existe solo para sincronizar tus
+propios datos entre tus propios dispositivos. Si te lo saltas, la app sigue
+funcionando entera, porque no hay ningún servidor decidiendo qué te está permitido
+ver.
+
+**No hay historial de reproducción en un servidor.** El stream va del proveedor
+directamente a tu dispositivo. Nada sobre qué canal abriste a las once de la noche
+pasa por nadie que esté en medio; y no por una política, sino porque no hay camino
+por el que pueda viajar.
+
+**No hay motor de recomendaciones.** «Recomendaciones» es el nombre educado de un
+modelo de tu comportamiento. Un reproductor que no elige tu contenido no tiene
+motivo para construir uno.
+
+**No hay nada que rentabilizar mirándote.** Ningún SDK de publicidad, ninguna
+biblioteca de analítica. El argumento habitual a su favor es que financian el
+producto, y un reproductor que no aporta contenido tiene mucho menos que financiar:
+el dinero que hay en juego es el que ya le pagas a tu proveedor, y eso no tiene
+nada que ver con la app.
+
+## Lo que conservas, y dónde vive
+
+Traer tu propia lista no significa renunciar a las comodidades. Significa ser
+preciso sobre dónde se colocan.
+
+Los favoritos, el punto por el que ibas y los ajustes son tuyos y resultan útiles en
+varios dispositivos, así que se sincronizan en claro, protegidos por reglas
+normales de acceso por usuario. Tus datos de acceso al proveedor son otra clase de
+secreto —*son* tu suscripción—, así que se
+[cifran en tu dispositivo antes de guardarse en ningún sitio](/es/blog/por-que-cifrar-tus-credenciales/),
+y lo que llega a un servidor es un bloque del que allí nadie tiene la clave.
+
+Dos tipos de datos, dos tratamientos, decididos por lo que el dato es en realidad.
+
+## El trato que estás aceptando
+
+Este modelo no sale gratis, y conviene nombrar sus costes con claridad.
+
+Tienes que buscarte y pagarte un proveedor por tu cuenta; no viene nada incluido.
+Si falta un canal, o un stream no es fiable, la app no puede arreglarlo: esa es una
+conversación con tu proveedor. Y sin analítica, quienes hacen la app se enteran de
+que algo está roto cuando alguien les escribe, no cuando un panel se pone rojo.
+
+A cambio, la app no tiene ningún motivo comercial para saber nada de tus noches, ni
+ningún dato que entregar si alguna vez se lo pidieran.
+
+## Cómo saber si una app funciona así de verdad
+
+Decirlo es fácil. Hay unas cuantas cosas más difíciles de fingir:
+
+- **¿Funciona sin haber iniciado sesión?** Si la reproducción necesita cuenta, hay
+  algo que no es la reproducción que necesita esa cuenta.
+- **¿Con qué habla?** Un reproductor de «trae tu propia lista» debería conectar con
+  tu proveedor, con la URL de tu guía y —solo si activas la sincronización— con su
+  propio servicio de sincronización. Con nada más.
+- **¿La política de privacidad es una lista o una pose?** «Podemos recopilar cierta
+  información para mejorar tu experiencia» es una pose. Una relación exhaustiva de
+  campos es un compromiso.
+- **¿Cómo guarda tus datos de acceso?** Guardar la contraseña de un proveedor de una
+  forma que el fabricante pueda volver a leer echa por tierra casi todo lo demás.
+
+Si eso se cumple, la app es quien lee tu lista y no quien observa lo que ves,
+[que es en realidad todo lo que un reproductor necesita ser](/es/blog/que-hace-un-reproductor-iptv/).

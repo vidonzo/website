@@ -1,0 +1,100 @@
+---
+title: "« Apportez votre playlist » : le modèle de lecteur qui respecte votre vie privée"
+description: "Un lecteur qui ne fournit aucun contenu n'a rien à apprendre de vous. Ce seul choix d'architecture décide de presque tout ce qu'une application sait."
+urlSlug: apportez-votre-playlist
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["confidentialite", "produit"]
+keywords: ["lecteur iptv sans pub", "lecteur iptv vie privée", "application iptv sans traceur", "lecteur iptv sans compte"]
+heroImageAlt: "Une playlist qui passe directement d'un fournisseur à un écran, l'application étant dessinée comme un cadre vide qu'elle traverse."
+---
+
+La plupart des applications qui mettent de la vidéo sur votre écran sont, au
+fond, un catalogue auquel on a attaché un lecteur. Le catalogue est le commerce :
+c'est lui qui décide de ce que vous pouvez regarder, il a besoin d'un compte pour
+savoir qui vous êtes, et il apprend ce que vous regardez parce que c'est ainsi
+qu'un catalogue s'améliore et que la publicité se vend.
+
+Un lecteur du type « apportez votre playlist » renverse la logique. Il s'installe
+vide. Vous fournissez la liste —
+[des identifiants Xtream ou un lien M3U](/fr/blog/xtream-codes-ou-m3u/) issus
+d'un fournisseur que vous payez déjà — et tout le travail de l'application
+consiste à bien la lire. Il n'y a pas de catalogue, parce qu'il n'y a rien à
+cataloguer.
+
+Ce n'est pas une posture commerciale. C'est une architecture, et les
+architectures ont des conséquences que l'on peut vérifier.
+
+## Ce qui disparaît
+
+**Aucun compte n'est nécessaire pour regarder.** La connexion ne sert qu'à
+synchroniser vos propres données entre vos propres appareils. Ignorez-la et
+l'application fonctionne intégralement, parce qu'aucun serveur ne décide de ce
+que vous avez le droit de voir.
+
+**Il n'y a pas d'historique de visionnage sur un serveur.** Le flux va de votre
+fournisseur directement à votre appareil. Rien de la chaîne que vous avez ouverte
+à onze heures du soir ne passe par un intermédiaire — non pas en vertu d'une
+politique, mais parce qu'il n'existe aucun chemin par lequel cela pourrait
+circuler.
+
+**Il n'y a pas de moteur de recommandation.** « Recommandation » est le nom poli
+d'un modèle comportemental de votre personne. Un lecteur qui ne choisit pas vos
+contenus n'a aucune raison d'en construire un.
+
+**Il n'y a rien à monétiser en vous observant.** Aucun SDK publicitaire, aucune
+bibliothèque de mesure d'audience. L'argument habituel en leur faveur est qu'ils
+financent le produit ; or un lecteur qui ne fournit aucun contenu a bien moins à
+financer — l'argent, dans ce tableau, c'est celui que vous versez déjà à votre
+fournisseur, et il ne concerne en rien l'application.
+
+## Ce que vous gardez, et où cela réside
+
+Apporter sa propre playlist n'oblige à renoncer à aucun confort. Cela oblige à
+être précis sur l'endroit où ce confort se loge.
+
+Les favoris, la progression de lecture et les réglages vous appartiennent et sont
+utiles d'un appareil à l'autre : ils se synchronisent en clair, protégés par de
+simples règles d'accès par utilisateur. Vos identifiants de fournisseur relèvent
+d'une autre catégorie de secret — ils *sont* votre abonnement — et sont donc
+[chiffrés sur votre appareil avant même d'être stockés](/fr/blog/pourquoi-chiffrer-vos-identifiants/) ;
+ce qui arrive sur un serveur n'est qu'un bloc dont personne, là-bas, ne détient
+la clé.
+
+Deux natures de données, deux traitements, décidés par ce que la donnée est
+réellement.
+
+## Le marché que vous passez
+
+Ce modèle n'est pas sans coût, et mieux vaut nommer ces coûts franchement.
+
+Vous devez trouver et payer un fournisseur vous-même ; rien n'est fourni avec. Si
+une chaîne manque, ou si un flux est instable, l'application n'y peut rien — la
+discussion est à avoir avec votre fournisseur. Et sans mesure d'audience, ceux
+qui développent l'application apprennent qu'une chose est cassée quand quelqu'un
+leur écrit, pas quand un tableau de bord passe au rouge.
+
+En échange, l'application n'a aucune raison commerciale de connaître quoi que ce
+soit de vos soirées, et aucune donnée à remettre si on venait à lui en demander.
+
+## Comment vérifier qu'une application fonctionne vraiment ainsi
+
+L'affirmation est facile à formuler. Quelques points sont plus difficiles à
+simuler :
+
+- **Fonctionne-t-elle sans être connecté ?** Si la lecture exige un compte, c'est
+  autre chose que la lecture qui a besoin de ce compte.
+- **À quoi parle-t-elle ?** Un lecteur de ce type doit joindre votre fournisseur,
+  l'URL de votre guide des programmes et — seulement si vous activez la
+  synchronisation — son propre service de synchronisation. Rien d'autre.
+- **La politique de confidentialité est-elle une liste ou une posture ?**
+  « Nous sommes susceptibles de collecter certaines informations afin d'améliorer
+  votre expérience » est une posture. Une liste exhaustive de champs est un
+  engagement.
+- **Comment conserve-t-elle vos identifiants ?** Stocker le mot de passe d'un
+  fournisseur dans une forme que l'éditeur peut relire annule l'essentiel du
+  reste.
+
+Si tout cela tient, l'application est un lecteur de votre liste plutôt qu'un
+observateur de ce que vous regardez —
+[c'est-à-dire, au fond, tout ce qu'un lecteur a besoin d'être](/fr/blog/ce-que-fait-un-lecteur-iptv/).

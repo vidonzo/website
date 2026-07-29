@@ -1,0 +1,99 @@
+---
+title: "Eigene Playlist mitbringen: das Player-Modell, das Ihre Privatsphäre respektiert"
+description: "Ein Player, der keine Inhalte liefert, hat nichts über Sie zu lernen. Diese eine Entscheidung in der Architektur bestimmt fast alles, was eine App weiß."
+urlSlug: eigene-playlist-mitbringen
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privatsphäre", "produkt"]
+keywords: ["iptv player ohne tracking", "privater iptv player", "iptv player ohne werbung", "player für eigene playlist"]
+heroImageAlt: "Eine Playlist-Datei wandert vom Anbieter direkt auf den Bildschirm, die App liegt als leerer Rahmen dazwischen."
+---
+
+Die meisten Apps, die Video auf Ihren Bildschirm bringen, sind im Kern ein
+Katalog mit angehängtem Player. Der Katalog ist das Geschäft: Er entscheidet, was
+Sie schauen können, er braucht ein Konto, um zu wissen, wer Sie sind, und er
+lernt, was Sie schauen, weil genau dieses Wissen den Katalog verbessert und die
+Werbung verkauft.
+
+Ein Player, zu dem Sie Ihre eigene Playlist mitbringen, dreht das um. Er wird
+ohne Inhalte ausgeliefert. Sie liefern die Liste —
+[Xtream-Zugangsdaten oder einen M3U-Link](/de/blog/xtream-codes-oder-m3u/) von
+einem Anbieter, den Sie ohnehin bezahlen — und die gesamte Aufgabe der App
+besteht darin, sie gut zu lesen. Es gibt keinen Katalog, weil es nichts zu
+katalogisieren gibt.
+
+Das ist keine Marketingposition. Es ist eine Architektur, und Architekturen haben
+Folgen, die sich überprüfen lassen.
+
+## Was dabei wegfällt
+
+**Zum Schauen braucht es kein Konto.** Die Anmeldung existiert nur, um Ihre
+eigenen Daten zwischen Ihren eigenen Geräten abzugleichen. Lassen Sie sie weg,
+funktioniert die App vollständig weiter, denn es gibt keinen Server, der
+entscheidet, was Sie sehen dürfen.
+
+**Auf keinem Server entsteht ein Wiedergabeverlauf.** Der Stream geht von Ihrem
+Anbieter direkt auf Ihr Gerät. Welchen Sender Sie um elf Uhr abends geöffnet
+haben, kommt an niemandem dazwischen vorbei — nicht wegen einer Richtlinie,
+sondern weil es keinen Weg gibt, auf dem es reisen könnte.
+
+**Es gibt keine Empfehlungsmaschine.** Empfehlungen sind der höfliche Name für
+ein Verhaltensmodell von Ihnen. Ein Player, der Ihre Inhalte nicht auswählt, hat
+keinen Grund, eines zu bauen.
+
+**Es gibt nichts, woran sich verdienen ließe, indem man Ihnen zusieht.** Kein
+Werbe-SDK, keine Analytik-Bibliothek. Das übliche Argument dafür lautet, sie
+finanzierten das Produkt — und ein Player, der keine Inhalte liefert, hat weit
+weniger zu finanzieren. Das Geld in diesem Bild ist das, was Sie ohnehin Ihrem
+eigenen Anbieter zahlen, und damit hat die App nichts zu tun.
+
+## Was bleibt und wo es liegt
+
+Die eigene Playlist mitzubringen heißt nicht, auf Bequemlichkeit zu verzichten.
+Es heißt, genau zu sein, wo diese Bequemlichkeit liegt.
+
+Favoriten, Wiedergabestand und Einstellungen gehören Ihnen und sind über Geräte
+hinweg nützlich; sie werden im Klartext abgeglichen, geschützt durch gewöhnliche
+Zugriffsregeln pro Benutzer. Ihre Zugangsdaten beim Anbieter sind eine andere
+Klasse von Geheimnis — sie *sind* Ihr Abo — und werden deshalb
+[auf Ihrem Gerät verschlüsselt, bevor sie überhaupt gespeichert werden](/de/blog/playlist-zugangsdaten-verschluesseln/).
+Was einen Server erreicht, ist ein Block, für den dort niemand einen Schlüssel
+hat.
+
+Zwei Arten von Daten, zwei Behandlungen, entschieden danach, was die Daten
+tatsächlich sind.
+
+## Der Handel, den Sie eingehen
+
+Dieses Modell ist nicht umsonst zu haben, und man sollte die Kosten klar
+benennen.
+
+Sie müssen sich selbst einen Anbieter suchen und ihn bezahlen; gebündelt ist
+nichts. Fehlt ein Sender oder läuft ein Stream unzuverlässig, kann die App das
+nicht beheben — das ist ein Gespräch mit Ihrem Anbieter. Und ohne Analytik
+erfahren die Leute, die die App bauen, von einem Fehler erst, wenn ihnen jemand
+schreibt, und nicht, wenn ein Dashboard rot wird.
+
+Im Gegenzug hat die App kein wirtschaftliches Interesse daran, irgendetwas über
+Ihren Abend zu wissen, und keine Daten, die sie herausgeben könnte, falls je
+jemand danach fragen sollte.
+
+## Woran Sie erkennen, ob eine App wirklich so arbeitet
+
+Die Behauptung ist leicht aufgestellt. Ein paar Dinge lassen sich schwerer
+vortäuschen:
+
+- **Funktioniert sie abgemeldet?** Wenn die Wiedergabe ein Konto braucht, braucht
+  etwas anderes als die Wiedergabe dieses Konto.
+- **Mit wem spricht sie?** Ein Player dieser Bauart sollte Ihren Anbieter
+  erreichen, Ihre EPG-Adresse und — nur wenn Sie den Abgleich einschalten —
+  seinen eigenen Sync-Dienst. Sonst nichts.
+- **Ist die Datenschutzerklärung eine Liste oder eine Haltung?** „Wir erheben
+  unter Umständen bestimmte Informationen, um Ihr Erlebnis zu verbessern“ ist
+  eine Haltung. Eine vollständige Aufzählung der Felder ist eine Zusage.
+- **Wie hält sie Ihre Zugangsdaten?** Ein Anbieterpasswort in einer Form zu
+  speichern, die der Hersteller zurücklesen kann, hebt das meiste andere wieder
+  auf.
+
+Halten diese Punkte, dann liest die App Ihre Liste, statt Ihr Schauen zu
+beobachten — [und mehr muss ein Player eigentlich nicht sein](/de/blog/was-ein-iptv-player-tut/).

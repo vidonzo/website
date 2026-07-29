@@ -1,0 +1,92 @@
+---
+title: "M3U o M3U8: che cosa significano davvero le due estensioni"
+description: "L'8 in più riguarda la codifica del testo, non la qualità. Ecco che cosa distingue davvero i due formati e perché uno mostra i nomi dei canali come si deve."
+urlSlug: m3u-o-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlist", "tecnica"]
+keywords: ["differenza m3u e m3u8", "file m3u8", "m3u o m3u8", "playlist utf-8"]
+heroImageAlt: "La stessa lista di canali mostrata due volte, una con le lettere accentate rovinate e una resa correttamente."
+---
+
+I fornitori distribuiscono link che finiscono in `.m3u` e link che finiscono in
+`.m3u8`, a volte entrambi per lo stesso abbonamento, e quasi mai spiegano la
+differenza. Le ipotesi che si sentono più spesso — che uno sia più recente, o di
+qualità migliore, o «quello HD» — sono tutte sbagliate.
+
+L'`8` sta per **UTF-8**. Nel formato del file la differenza è tutta lì, ed è più
+piccola e più utile di quanto racconti la leggenda.
+
+## Sono lo stesso tipo di file
+
+Aprili con un editor di testo e vedrai la stessa cosa: una riga di intestazione,
+poi coppie di righe, una che descrive un canale e una che ne dà l'indirizzo.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Tutto qui. Una playlist M3U è un indice in testo semplice: nomi e indirizzi,
+niente di più. Non contiene video, non contiene un accesso e non tiene aperta
+nessuna connessione con il fornitore. È un'istantanea di quello che esisteva nel
+momento in cui l'hai scaricata, ed è proprio questo il tratto che la distingue
+dall'[API Xtream Codes](/it/blog/xtream-codes-o-m3u/).
+
+## Che cosa cambia l'8
+
+La specifica originale dell'M3U è precedente all'assestamento del web su UTF-8.
+Il testo veniva salvato nella codifica locale che la macchina usava in quel
+momento, e funzionava benissimo finché il file non attraversava un confine.
+
+`.m3u8` dichiara che il file è in UTF-8. In pratica significa che ogni nome di
+canale arriva intatto: arabo, persiano, greco, thai, cirillico, giapponese e le
+lettere accentate di italiano, francese, turco, polacco o vietnamita. Con un
+`.m3u` semplice, la cui codifica il lettore deve tirare a indovinare, quei nomi
+compaiono come punti interrogativi o come quell'inconfondibile sequenza di
+caratteri sbagliati: `Ã¨` al posto di una `è`.
+
+Quindi, se il fornitore te li offre entrambi, prendi il `.m3u8`. Del flusso non
+cambia nient'altro, e la tua lista di canali diventa leggibile.
+
+## L'altro `.m3u8` che incontrerai
+
+C'è un secondo motivo, del tutto scollegato, per cui si vede questa estensione, e
+crea confusione vera.
+
+**HLS** — il protocollo di streaming che usa la maggior parte dei server IPTV —
+si serve anch'esso di file M3U8. Quando riproduci un canale, il lettore scarica
+un piccolo manifesto `.m3u8` che elenca i prossimi secondi di video come segmenti
+separati, e lo riscarica mentre la riproduzione va avanti. È per questo che una
+diretta può partire a trasmissione già iniziata e adattarsi alla tua connessione.
+
+Quindi `.m3u8` può voler dire due cose diverse:
+
+- **La tua playlist di abbonamento** — centinaia o migliaia di canali, una riga
+  ciascuno. È il link che incolli nel lettore.
+- **Un manifesto di flusso** — un solo canale, con l'elenco dei suoi segmenti.
+  È il lettore a scaricarseli da sé mentre guardi; tu non ne incolli mai uno.
+
+Entrambi sono file di testo in formato M3U. Se incolli un manifesto di flusso
+dove andrebbe una playlist, ottieni una «playlist» con una sola voce senza nome:
+uno scambio frequente e facile da correggere.
+
+## Quale dare al lettore
+
+Qualunque lettore decente li legge entrambi, quindi è una decisione di poco
+conto:
+
+- **Preferisci `.m3u8`** quando puoi scegliere. Nomi dei canali corretti, nessuna
+  controindicazione.
+- **Usa `.m3u`** quando è quello che ti hanno dato. Funziona; aspettati qualche
+  nome rovinato nelle liste con canali non latini.
+- **Nessuno dei due incide sulla qualità.** Risoluzione e bitrate li decide il
+  flusso del tuo fornitore, non l'estensione dell'indice che lo indica.
+
+Qualunque dei due tu abbia in mano, il file è un elenco di indirizzi e il lettore
+è chi lo legge. Quando un flusso si interrompe, l'indice non è quasi mai il
+colpevole: lo è
+[il percorso tra te e il server](/it/blog/risolvere-buffering-iptv/). E se il tuo
+fornitore ti dà anche delle credenziali Xtream, quelle ti portano categorie,
+serie e una guida ai programmi che un file piatto non può darti.

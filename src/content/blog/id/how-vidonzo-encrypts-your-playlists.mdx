@@ -1,0 +1,106 @@
+---
+title: "Kenapa pemutar media harus mengenkripsi data login playlist Anda"
+description: "Data login penyedia adalah langganan Anda. Ini standar yang harus dipenuhi sebuah pemutar dalam menyimpannya, dan cara Vidonzo memenuhinya."
+urlSlug: mengenkripsi-data-login-playlist
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privasi", "teknis"]
+keywords: ["keamanan data login iptv", "enkripsi playlist iptv", "kata sandi xtream aman", "enkripsi ujung ke ujung iptv"]
+heroImageAlt: "Satu catatan playlist yang tersimpan, ditampilkan sebagai sebuah label, sebuah jenis, dan segumpal teks tersandi yang tak terbaca."
+---
+
+Data login Xtream Anda, pada praktiknya, adalah langganan berbayar Anda. Siapa
+pun yang memegangnya bisa menonton lewat akun Anda, membuat Anda kena pembatasan
+kecepatan, atau membuat langganan Anda diputus. Itu menjadikannya satu hal paling
+peka yang disentuh sebuah pemutar — sekaligus hal yang paling tidak pantas bisa
+dibaca oleh para pembuatnya.
+
+Standar yang layak dipegang mudah diucapkan dan merepotkan untuk dipenuhi: data
+login itu harus tidak terbaca oleh orang-orang yang menjalankan layanannya, bukan
+sekadar terlindungi oleh niat baik mereka. Kalau sebuah vendor bisa membaca kata
+sandi penyedia Anda, maka siapa pun yang berhasil membobol vendor itu juga bisa,
+begitu pula siapa pun yang berwenang memaksa vendor menyerahkannya.
+
+Berikut cara Vidonzo memenuhi standar itu, cukup rinci untuk Anda periksa.
+
+## Pembagiannya
+
+Tidak semuanya perlu perlakuan yang sama. Menyinkronkan favorit antarperangkat
+itu berguna dan biasa saja; menyinkronkan kata sandi penyedia bukan keduanya.
+Kami membagi datanya sesuai itu:
+
+**Dienkripsi ujung ke ujung**: host, nama pengguna, dan kata sandi Xtream Anda,
+serta URL sumber M3U mana pun.
+
+**Disimpan dalam teks biasa, dilindungi aturan akses per pengguna**: favorit,
+posisi tontonan, pengaturan aplikasi, dan label yang Anda berikan pada sebuah
+playlist — yang isinya kata-kata Anda sendiri, bukan rahasia.
+
+Pembagian itu disengaja. Mengenkripsi favorit hampir tidak memberi keuntungan apa
+pun dan justru membuat perangkat yang baru ditambahkan tidak menampilkan apa-apa
+yang berguna sampai ia dibuka kuncinya.
+
+## Cara enkripsinya bekerja
+
+Sebuah **kunci data** 256-bit acak dibuat di perangkat Anda — tidak pernah di
+server. Setiap catatan sumber dienkripsi dengan AES‑256‑GCM memakai kunci
+tersebut, dengan nonce yang unik untuk tiap catatan.
+
+Kunci data itu sendiri kemudian dibungkus: kata sandi sinkronisasi Anda diproses
+lewat **Argon2id** untuk menurunkan kunci pengenkripsi kunci, lalu kunci data
+dienkripsi dengannya. Hanya hasil bungkusan itu yang diunggah. Kata sandi
+sinkronisasi tidak pernah melintasi jaringan.
+
+Yang dipegang basis data kami untuk sebuah playlist adalah sebuah label, sebuah
+jenis, dan segumpal teks tersandi. Tidak ada kunci di sisi server untuk
+membukanya.
+
+## Menambahkan perangkat kedua
+
+Masalah yang menarik bukanlah enkripsinya, melainkan memindahkan kunci data ke
+perangkat Anda berikutnya tanpa pernah mengirimkannya secara terbuka.
+
+1. Perangkat baru masuk akun. Favorit dan posisi tontonan langsung muncul —
+   keduanya memang tidak pernah dienkripsi.
+2. Playlist tampil dalam keadaan **terkunci**.
+3. Perangkat baru membuat sepasang kunci X25519 sementara lalu menampilkan kode
+   QR.
+4. Perangkat yang sudah terbuka kuncinya memindai kode itu dan meminta Anda
+   mengonfirmasi.
+5. Perangkat yang sudah terbuka tadi menurunkan rahasia bersama lewat ECDH,
+   mengenkripsi kunci data dengannya, lalu mengunggah blok tersegel itu.
+6. Perangkat baru mendekripsinya dengan kunci privatnya lalu menyimpan hasilnya
+   di iOS Keychain atau Android Keystore.
+
+Tidak ada satu titik pun ketika server memegang sesuatu yang bisa ia buka.
+
+## Bagian yang tidak bisa kami perhalus
+
+**Kalau Anda kehilangan kata sandi sinkronisasi dan tidak ada lagi perangkat yang
+terbuka kuncinya, playlist Anda hilang.** Bukan ditahan — secara matematis tidak
+tersedia. Kami tidak bisa menyetel ulangnya, karena tidak ada apa pun di sisi kami
+yang bisa disetel ulang.
+
+Inilah pertukaran jujur dari enkripsi ujung ke ujung yang sungguhan, dan setiap
+produk yang mengklaimnya entah mengambil pertukaran ini atau sebenarnya memang
+tidak melakukannya. Aplikasinya menyatakan hal itu terang-terangan tepat pada
+saat Anda menetapkan kata sandinya, bukan menguburnya di halaman kebijakan.
+
+Menambahkan ulang sebuah playlist memakan waktu semenit. Itulah jalur
+pemulihannya, dan kami lebih memilih menawarkan itu daripada memegang kunci yang
+penggunaannya suatu saat bisa dipaksakan kepada kami.
+
+## Bagaimana ini terlihat dari luar
+
+Anda tidak harus memercayai kriptografinya begitu saja untuk menguji masuk akal
+tidaknya klaim tersebut. Pemutar yang benar-benar tidak bisa membaca data login
+Anda tidak akan bisa menawarkan mengirimkannya kembali lewat surel, tidak bisa
+menampilkannya di perkakas dukungan, dan tidak bisa memulihkannya ketika Anda
+lupa kata sandi yang melindunginya. Kalau salah satu dari itu ditawarkan,
+kuncinya ada di pihak mereka.
+
+Penalarannya sama dengan yang mengalir di
+[model bawa playlist sendiri](/id/blog/bawa-playlist-anda-sendiri/): nilailah apa
+yang mampu dilakukan sebuah vendor, bukan apa yang dijanjikannya. Dan
+[format apa pun yang diberikan penyedia Anda](/id/blog/xtream-codes-atau-m3u/),
+data login di baliknya layak mendapat perlakuan yang sama.

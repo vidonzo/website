@@ -1,0 +1,88 @@
+---
+title: "“Bring your own playlist”: the player model that respects your privacy"
+description: "A player that supplies no content has nothing to learn about you. That single architectural choice decides most of what a media app knows."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['privacy', 'product']
+keywords: ['bring your own playlist', 'private iptv player', 'no tracking media player', 'byo playlist app']
+heroImageAlt: "A playlist file passing straight from a provider to a screen, with the app drawn as an empty frame it travels through."
+---
+
+Most apps that put video on your screen are, underneath, a catalogue with a
+player attached. The catalogue is the business: it decides what you can watch,
+it needs an account to know who you are, and it learns what you watch because
+learning that is how the catalogue improves and how the advertising is sold.
+
+A bring-your-own-playlist player inverts that. It ships with nothing. You supply
+the list — [Xtream credentials or an M3U link](/blog/xtream-codes-vs-m3u/) from a
+provider you already pay — and the app's entire job is to read it well. There is
+no catalogue, because there is nothing to catalogue.
+
+That is not a marketing position. It is an architecture, and architectures have
+consequences you can check.
+
+## What falls away
+
+**No account is needed to watch.** Sign-in exists only to sync your own data
+between your own devices. Skip it and the app still works completely, because
+there is no server deciding what you may see.
+
+**There is no watch history on a server.** The stream goes from your provider
+straight to your device. Nothing about which channel you opened at eleven at
+night passes through anyone in the middle — not because of a policy, but because
+there is no path for it to travel.
+
+**There is no recommendation engine.** Recommendations are the polite name for a
+behavioural model of you. A player that does not choose your content has no
+reason to build one.
+
+**There is nothing to monetise by watching you.** No advertising SDK, no
+analytics library. The usual argument for them is that they fund the product, and
+a player that supplies no content has far less to fund — the money in this picture
+is what you already pay your own provider, which has nothing to do with the app.
+
+## What you keep, and where it lives
+
+Bringing your own playlist does not mean living without conveniences. It means
+being precise about where they sit.
+
+Favourites, watch progress and settings are yours and are useful across devices,
+so they sync in plain form, protected by ordinary per-user access rules. Your
+provider credentials are a different class of secret — they *are* your
+subscription — so they are
+[encrypted on your device before they are stored at all](/blog/why-a-player-should-encrypt-your-credentials/),
+and what reaches a server is a block nobody there holds a key for.
+
+Two kinds of data, two treatments, decided by what the data actually is.
+
+## The trade you are making
+
+This model is not free of cost, and it is worth naming the costs plainly.
+
+You have to find and pay a provider yourself; nothing is bundled. If a channel
+is missing, or a stream is unreliable, the app cannot fix it — that is a
+conversation with your provider. And with no analytics, the people who build the
+app find out something is broken when a person writes to them, not when a
+dashboard turns red.
+
+In exchange, the app has no commercial reason to know anything about your
+evening, and no data to hand over if it were ever asked.
+
+## How to tell whether an app really works this way
+
+The claim is easy to make. A few things are harder to fake:
+
+- **Does it work signed out?** If playback needs an account, something other than
+  playback needs the account.
+- **What does it talk to?** A bring-your-own player should reach your provider,
+  your guide URL, and — only if you enable sync — its own sync service. Nothing
+  else.
+- **Is the privacy policy a list or a posture?** "We may collect certain
+  information to improve your experience" is a posture. An exhaustive list of
+  fields is a commitment.
+- **How does it hold your credentials?** Storing a provider password in a form
+  the vendor can read back undoes most of the rest.
+
+If those hold, the app is a reader of your list rather than an observer of your
+viewing —
+[which is really all a player needs to be](/blog/what-an-iptv-player-does/).

@@ -1,0 +1,101 @@
+---
+title: "Por qué un reproductor debe cifrar los datos de acceso de tu lista"
+description: "Los accesos de tu proveedor son tu suscripción. Este es el listón que un reproductor debería cumplir para guardarlos, y cómo lo cumple Vidonzo."
+urlSlug: por-que-cifrar-tus-credenciales
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privacidad", "ingeniería"]
+keywords: ["seguridad credenciales iptv", "lista iptv cifrada", "contraseña xtream segura", "cifrado extremo a extremo lista iptv"]
+heroImageAlt: "La ficha guardada de una lista, con una etiqueta, un tipo y un bloque de texto cifrado ilegible."
+---
+
+Tus datos de acceso de Xtream son, en la práctica, tu suscripción de pago.
+Cualquiera que los tenga puede ver con tu cuenta, hacer que te limiten la velocidad
+o que te corten el servicio. Eso los convierte en lo más sensible que toca un
+reproductor, y en lo que menos deberían poder leer quienes lo fabrican.
+
+El listón por el que merece la pena insistir es fácil de enunciar e incómodo de
+cumplir: la credencial debería ser ilegible para quienes gestionan el servicio, no
+simplemente estar protegida por sus buenas intenciones. Si un fabricante puede leer
+la contraseña de tu proveedor, también puede leerla cualquiera que lo comprometa, y
+también cualquiera que pueda obligarle a entregarla.
+
+Así es como Vidonzo cumple ese listón, con detalle suficiente para comprobarlo.
+
+## El reparto
+
+No todo necesita el mismo trato. Sincronizar favoritos entre dispositivos es útil y
+poco llamativo; sincronizar la contraseña de un proveedor no es ni lo uno ni lo
+otro. Repartimos los datos en consecuencia:
+
+**Cifrado de extremo a extremo**: tu host, tu usuario y tu contraseña de Xtream, y
+cualquier URL de origen M3U.
+
+**Guardado en texto plano, protegido por reglas de acceso por usuario**: los
+favoritos, el punto de reproducción, los ajustes de la app y el nombre que le
+pusiste a una lista, que son tus propias palabras y no un secreto.
+
+Ese reparto es deliberado. Cifrar los favoritos no aportaría casi nada e impediría
+que un dispositivo recién añadido mostrara algo útil hasta desbloquearlo.
+
+## Cómo funciona el cifrado
+
+En tu dispositivo se genera una **clave de datos** aleatoria de 256 bits, nunca en
+un servidor. Cada registro de origen se cifra con AES-256-GCM bajo esa clave, con
+un nonce único por registro.
+
+La propia clave de datos se envuelve después: tu contraseña de sincronización pasa
+por **Argon2id** para derivar una clave de cifrado de claves, y con ella se cifra la
+clave de datos. Solo se sube el resultado envuelto. La contraseña de sincronización
+no cruza nunca la red.
+
+Lo que nuestra base de datos guarda de una lista es una etiqueta, un tipo y un
+bloque de texto cifrado. En el servidor no hay ninguna clave con la que
+descifrarlo.
+
+## Añadir un segundo dispositivo
+
+El problema interesante no es cifrar, sino hacer llegar la clave de datos a tu
+siguiente dispositivo sin enviarla jamás en claro.
+
+1. El dispositivo nuevo inicia sesión. Los favoritos y el progreso aparecen al
+   momento: nunca estuvieron cifrados.
+2. Las listas se muestran como **bloqueadas**.
+3. El dispositivo nuevo genera un par de claves X25519 efímero y muestra un código
+   QR.
+4. Un dispositivo que ya está desbloqueado lo escanea y te pide que confirmes.
+5. El dispositivo desbloqueado deriva un secreto compartido mediante ECDH, cifra
+   con él la clave de datos y sube ese bloque sellado.
+6. El dispositivo nuevo lo descifra con su clave privada y guarda el resultado en el
+   Keychain de iOS o en el Keystore de Android.
+
+En ningún momento tiene el servidor nada que pueda abrir.
+
+## La parte que no podemos suavizar
+
+**Si pierdes tu contraseña de sincronización y no te queda ningún dispositivo
+desbloqueado, tus listas están perdidas.** No retenidas: matemáticamente
+inaccesibles. No podemos restablecerla, porque de nuestro lado no hay nada que
+restablecer.
+
+Ese es el trato honesto del cifrado de extremo a extremo de verdad, y todo producto
+que lo anuncia o acepta ese trato o no lo está haciendo. La app lo dice sin rodeos
+en el momento en que estableces la contraseña, en vez de enterrarlo en una página
+de condiciones.
+
+Volver a añadir una lista lleva un minuto. Ese es el camino de recuperación, y
+preferimos ofrecer eso antes que guardar una clave que podrían obligarnos a usar.
+
+## Cómo se ve esto desde fuera
+
+No hace falta creerse la criptografía a ciegas para comprobar si la afirmación se
+sostiene. Un reproductor que de verdad no puede leer tus datos de acceso no puede
+ofrecerte enviártelos por correo, ni mostrarlos en una herramienta de soporte, ni
+recuperarlos cuando olvidas la contraseña que los protege. Si te ofrecen cualquiera
+de esas cosas, la clave está de su lado.
+
+Es el mismo razonamiento que recorre
+[el modelo de traer tu propia lista](/es/blog/trae-tu-propia-lista/): fíjate en lo
+que el fabricante *es capaz* de hacer, no en lo que promete. Y sea cual sea
+[el formato que te haya dado tu proveedor](/es/blog/xtream-codes-o-m3u/), la
+credencial que hay detrás merece el mismo trato.

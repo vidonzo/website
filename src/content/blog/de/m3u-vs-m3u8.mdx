@@ -1,0 +1,96 @@
+---
+title: "M3U oder M3U8: Was die Dateiendungen wirklich bedeuten"
+description: "Die 8 steht für die Textkodierung, nicht für die Qualität. Was die beiden wirklich unterscheidet und warum eine davon Ihre Sendernamen richtig anzeigt."
+urlSlug: m3u-oder-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlists", "technik"]
+keywords: ["m3u oder m3u8", "unterschied m3u m3u8", "m3u8 datei", "iptv playlist umlaute"]
+heroImageAlt: "Dieselbe Senderliste zweimal untereinander, oben mit zerschossenen Umlauten, unten korrekt dargestellt."
+---
+
+Anbieter geben Links heraus, die auf `.m3u` enden, und Links, die auf `.m3u8`
+enden, für dasselbe Abo manchmal beide — und erklären den Unterschied selten. Die
+verbreiteten Vermutungen, das eine sei neuer, hochwertiger oder „das mit HD“,
+sind allesamt falsch.
+
+Die `8` steht für **UTF-8**. Das ist der gesamte Unterschied im Dateiformat, und
+er ist kleiner und nützlicher, als der Volksglaube nahelegt.
+
+## Beides ist dieselbe Art Datei
+
+Öffnen Sie eine der beiden in einem Texteditor, sehen Sie dasselbe: eine
+Kopfzeile, danach Zeilenpaare — eines beschreibt einen Sender, eines nennt seine
+Adresse.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Mehr ist es nicht. Eine M3U-Playlist ist ein Textverzeichnis: Namen und Adressen,
+sonst nichts. Sie enthält kein Video, keine Anmeldung und keine laufende
+Verbindung zu Ihrem Anbieter. Sie ist eine Momentaufnahme dessen, was in dem
+Augenblick existierte, in dem Sie sie abgerufen haben — und genau das unterscheidet
+sie von [der Xtream-Codes-API](/de/blog/xtream-codes-oder-m3u/).
+
+## Was die 8 ändert
+
+Die ursprüngliche M3U-Spezifikation ist älter als die Einigung des Webs auf
+UTF-8. Text wurde in der Kodierung gespeichert, die der jeweilige Rechner
+gerade verwendete, und das funktionierte einwandfrei, bis eine Datei eine Grenze
+überquerte.
+
+`.m3u8` erklärt die Datei zu UTF-8. Praktisch heißt das: Jeder Sendername
+übersteht den Weg — die deutschen Umlaute ebenso wie Arabisch, Persisch,
+Griechisch, Thai, Kyrillisch, Japanisch und die Akzente im Französischen,
+Türkischen, Polnischen oder Vietnamesischen. Bei einer schlichten `.m3u`, deren
+Kodierung der Player raten muss, kommen diese Namen als Fragezeichen an oder als
+jene unverkennbare Zeichenfolge — `Ã¼` dort, wo ein `ü` stehen sollte.
+
+Bietet Ihr Anbieter also beides an, nehmen Sie die `.m3u8`. Am Stream ändert sich
+dadurch nichts weiter, und Ihre Senderliste wird lesbar.
+
+## Die andere `.m3u8`, die Ihnen begegnet
+
+Es gibt einen zweiten, davon unabhängigen Grund, warum Ihnen diese Endung
+unterkommt, und er stiftet echte Verwirrung.
+
+**HLS** — das Streaming-Protokoll, über das die meisten IPTV-Server ausliefern —
+verwendet ebenfalls M3U8-Dateien. Spielen Sie einen Sender ab, holt der Player
+ein kleines `.m3u8`-Manifest, das die nächsten paar Sekunden Video als einzelne
+Segmente auflistet, und lädt es während der Wiedergabe immer wieder neu. Deshalb
+kann ein Livestream mitten in der laufenden Sendung einsteigen und sich an Ihre
+Verbindung anpassen.
+
+`.m3u8` kann also zweierlei bedeuten:
+
+- **Ihre Abo-Playlist** — hunderte oder tausende Sender, je eine Zeile. Das ist
+  der Link, den Sie in einen Player einfügen.
+- **Ein Stream-Manifest** — ein einzelner Sender mit seinen Segmenten. Diese holt
+  der Player beim Schauen selbst; eingefügt wird so eines nie.
+
+Beides sind Textdateien im M3U-Format. Fügen Sie ein Stream-Manifest dort ein, wo
+eine Playlist hingehört, bekommen Sie eine „Playlist“ mit einem einzigen
+namenlosen Eintrag — eine häufige Verwechslung, die sich schnell beheben lässt.
+
+## Was Sie Ihrem Player geben sollten
+
+Jeder taugliche Player liest beides, die Entscheidung ist also klein:
+
+- **Bevorzugen Sie `.m3u8`**, wenn Sie die Wahl haben. Korrekte Sendernamen, kein
+  Nachteil.
+- **Nehmen Sie `.m3u`**, wenn Sie das bekommen haben. Es funktioniert; rechnen Sie
+  bei nicht-lateinischen Senderlisten mit dem einen oder anderen entstellten
+  Namen.
+- **Auf die Qualität wirkt sich keines von beiden aus.** Auflösung und Bitrate
+  entscheidet der Stream Ihres Anbieters, nicht die Endung des Verzeichnisses,
+  das darauf zeigt.
+
+Was Sie auch in der Hand halten: Die Datei ist eine Liste von Adressen, und der
+Player liest diese Liste. Stockt ein Stream, ist das Verzeichnis fast nie die
+Ursache — es ist [der Weg zwischen Ihnen und dem Server](/de/blog/iptv-ruckeln-beheben/).
+Und wenn Ihr Anbieter zusätzlich Xtream-Zugangsdaten herausgibt, bekommen Sie
+damit Kategorien, Serien und einen Programmführer, die eine flache Datei nicht
+liefern kann.

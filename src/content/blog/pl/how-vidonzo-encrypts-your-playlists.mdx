@@ -1,0 +1,100 @@
+---
+title: "Dlaczego odtwarzacz powinien szyfrować dane logowania do playlisty"
+description: "Dane od dostawcy to Twój abonament. Oto standard, jaki odtwarzacz powinien spełniać przy ich przechowywaniu — i jak spełnia go Vidonzo."
+urlSlug: dlaczego-szyfrowac-dane-logowania
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["prywatność", "technikalia"]
+keywords: ["bezpieczeństwo danych iptv", "szyfrowanie playlisty", "hasło xtream bezpieczeństwo", "szyfrowanie end-to-end playlisty"]
+heroImageAlt: "Zapisany rekord playlisty pokazany jako etykieta, rodzaj i nieczytelny blok szyfrogramu."
+---
+
+Twoje dane logowania Xtream to w praktyce Twój opłacony abonament. Kto je ma, ten
+ogląda na Twoim koncie, doprowadza do ograniczenia transferu albo do odcięcia. To
+czyni je najbardziej wrażliwą rzeczą, jakiej dotyka odtwarzacz — i tą, której
+jego twórcy powinni najmniej chcieć umieć odczytać.
+
+Poprzeczka, przy której warto obstawać, jest prosta do sformułowania
+i niewygodna do spełnienia: dane dostępowe mają być nieczytelne dla ludzi
+prowadzących usługę, a nie tylko chronione ich dobrymi intencjami. Jeśli
+producent może odczytać Twoje hasło do dostawcy, to może je odczytać także każdy,
+kto się do niego włamie, i każdy, kto może go do tego zmusić.
+
+Oto jak Vidonzo tę poprzeczkę spełnia — na tyle szczegółowo, żeby dało się to
+sprawdzić.
+
+## Podział
+
+Nie wszystko wymaga tego samego traktowania. Synchronizowanie ulubionych między
+urządzeniami jest przydatne i całkiem zwyczajne; synchronizowanie hasła do
+dostawcy nie jest ani jednym, ani drugim. Dane dzielimy więc odpowiednio:
+
+**Szyfrowane end-to-end**: host, nazwa użytkownika i hasło Xtream oraz każdy
+adres źródła M3U.
+
+**Przechowywane jawnie, chronione regułami dostępu przypisanymi do konta**:
+ulubione, postęp oglądania, ustawienia aplikacji i nazwa, którą nadajesz
+playliście — to Twoje własne słowa, nie sekret.
+
+Ten podział jest celowy. Szyfrowanie ulubionych dałoby prawie nic, a nowo dodane
+urządzenie nie pokazywałoby niczego użytecznego, dopóki nie zostanie odblokowane.
+
+## Jak działa szyfrowanie
+
+Losowy 256-bitowy **klucz danych** powstaje na Twoim urządzeniu — nigdy na
+serwerze. Każdy rekord źródła jest szyfrowany algorytmem AES‑256‑GCM tym kluczem,
+z osobnym nonce dla każdego rekordu.
+
+Sam klucz danych zostaje następnie opakowany: Twoje hasło synchronizacji
+przechodzi przez **Argon2id**, z czego powstaje klucz szyfrujący klucz, i to nim
+zaszyfrowany zostaje klucz danych. Wysyłany jest wyłącznie opakowany wynik. Hasło
+synchronizacji nigdy nie przechodzi przez sieć.
+
+To, co nasza baza danych trzyma dla playlisty, to etykieta, rodzaj i blok
+szyfrogramu. Nie ma na serwerze klucza, którym dałoby się go odszyfrować.
+
+## Dodanie drugiego urządzenia
+
+Ciekawym problemem nie jest samo szyfrowanie, tylko przeniesienie klucza danych
+na kolejne urządzenie tak, żeby ani razu nie wysłać go otwartym tekstem.
+
+1. Nowe urządzenie loguje się. Ulubione i postęp pojawiają się od razu — nigdy
+   nie były szyfrowane.
+2. Playlisty są widoczne jako **zablokowane**.
+3. Nowe urządzenie generuje efemeryczną parę kluczy X25519 i pokazuje kod QR.
+4. Urządzenie, które jest już odblokowane, skanuje go i prosi Cię
+   o potwierdzenie.
+5. Odblokowane urządzenie wyprowadza wspólny sekret przez ECDH, szyfruje nim
+   klucz danych i wysyła tak zapieczętowany blok.
+6. Nowe urządzenie odszyfrowuje go swoim kluczem prywatnym i zapisuje wynik
+   w iOS Keychain albo Android Keystore.
+
+W żadnym momencie serwer nie ma u siebie niczego, co mógłby otworzyć.
+
+## Czego nie da się złagodzić
+
+**Jeśli zgubisz hasło synchronizacji i nie zostanie Ci żadne odblokowane
+urządzenie, playlisty przepadają.** Nie zostają zatrzymane — stają się
+matematycznie niedostępne. Nie możemy go zresetować, bo po naszej stronie nie ma
+czego resetować.
+
+Taka jest uczciwa cena prawdziwego szyfrowania end-to-end i każdy produkt, który
+się nim chwali, albo tę cenę płaci, albo go nie stosuje. Aplikacja mówi o tym
+wprost w chwili ustawiania hasła, zamiast chować to na stronie z regulaminem.
+
+Ponowne dodanie playlisty zajmuje minutę. To jest ta ścieżka odzyskiwania
+i wolimy ją oferować, niż trzymać klucz, do którego użycia można nas zmusić.
+
+## Jak to wygląda z zewnątrz
+
+Nie musisz przyjmować kryptografii na wiarę, żeby zdroworozsądkowo sprawdzić tę
+deklarację. Odtwarzacz, który naprawdę nie potrafi odczytać Twoich danych
+logowania, nie zaproponuje odesłania ich mailem, nie pokaże ich w narzędziu
+wsparcia i nie odzyska ich, gdy zapomnisz chroniącego je hasła. Jeśli
+którakolwiek z tych rzeczy jest w ofercie, klucz jest po ich stronie.
+
+To to samo rozumowanie, które przewija się przez
+[model własnej playlisty](/pl/blog/wlasna-playlista-i-prywatnosc/): oceniaj to,
+do czego producent jest zdolny, a nie to, co obiecuje. I niezależnie od tego,
+[w jakim formacie dostawca przekazał Ci dostęp](/pl/blog/xtream-codes-czy-m3u/),
+stojące za nim dane zasługują na dokładnie to samo traktowanie.

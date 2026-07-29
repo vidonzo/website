@@ -295,6 +295,146 @@
       "code": 301,
       "reason": "native ko translation shipped — the English-fallback URL now lives at the localized slug",
       "at": "2026-07-29"
+    },
+    {
+      "from": "/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/blog/why-a-player-should-encrypt-your-credentials/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/fa/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/fa/blog/رمزنگاری-اطلاعات-ورود-پلی-لیست/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/ar/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/ar/blog/لماذا-يشفر-المشغل-بيانات-دخولك/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/es/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/es/blog/por-que-cifrar-tus-credenciales/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/tr/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/tr/blog/giris-bilgileri-neden-sifrelenmeli/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/fr/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/fr/blog/pourquoi-chiffrer-vos-identifiants/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/de/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/de/blog/playlist-zugangsdaten-verschluesseln/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/pt/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/pt/blog/por-que-criptografar-suas-credenciais/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/ru/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/ru/blog/шифрование-учетных-данных-плейлиста/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/id/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/id/blog/mengenkripsi-data-login-playlist/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/it/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/it/blog/perche-cifrare-le-credenziali/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/vi/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/vi/blog/ma-hoa-thong-tin-dang-nhap/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/pl/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/pl/blog/dlaczego-szyfrowac-dane-logowania/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/nl/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/nl/blog/waarom-een-speler-inloggegevens-versleutelt/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/hi/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/hi/blog/प्लेलिस्ट-लॉगिन-एन्क्रिप्शन/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/bn/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/bn/blog/ক্রেডেনশিয়াল-এনক্রিপশন-কেন-জরুরি/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/th/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/th/blog/ทำไมเครื่องเล่น-ควรเข้ารหัส-ข้อมูลล็อกอิน/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/ur/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/ur/blog/پلے-لسٹ-تفصیلات-کی-انکرپشن/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/ja/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/ja/blog/認証情報-を-暗号化-すべき-理由/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
+    },
+    {
+      "from": "/ko/blog/how-vidonzo-encrypts-your-playlists/",
+      "to": "/ko/blog/인증-정보를-암호화해야-하는-이유/",
+      "code": 301,
+      "reason": "article retitled to \"Why a media player should encrypt your playlist credentials\"; the key stays, the URL localizes",
+      "at": "2026-07-29"
     }
   ]
 }

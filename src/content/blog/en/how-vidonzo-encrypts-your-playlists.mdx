@@ -1,16 +1,25 @@
 ---
-title: How Vidonzo encrypts your playlists
-description: Why your Xtream password is stored as ciphertext we cannot read, and what that costs you.
+title: "Why a media player should encrypt your playlist credentials"
+description: "Your provider login is your subscription. Here is the standard a player should meet for holding it — and how Vidonzo meets it."
+urlSlug: why-a-player-should-encrypt-your-credentials
 publishedAt: 2026-07-20
+sourceLocale: en
 tags: ['privacy', 'engineering']
+keywords: ['iptv credentials security', 'encrypted playlist storage', 'xtream password safety', 'end to end encrypted playlist']
+heroImageAlt: "A stored playlist record shown as a label, a type, and an unreadable block of ciphertext."
 ---
 
 Your Xtream credentials are, in effect, your paid subscription. Anyone holding
 them can watch on your account, get you rate-limited, or get you cut off. That
-makes them the single most sensitive thing Vidonzo touches — and the thing we
-least want to be able to read.
+makes them the single most sensitive thing a player touches — and the thing its
+makers should least want to be able to read.
 
-So we made it impossible to.
+The bar worth insisting on is simple to state and awkward to meet: the credential
+should be unreadable to the people who run the service, not merely protected by
+their good intentions. If a vendor can read your provider password, then so can
+anyone who compromises the vendor, and so can anyone who can compel them.
+
+Here is how Vidonzo meets that bar, in enough detail to check.
 
 ## The split
 
@@ -71,3 +80,17 @@ the moment you set the password, rather than burying it in a policy page.
 
 Re-adding a playlist takes a minute. That is the recovery path, and we would
 rather offer that than hold a key we could be compelled to use.
+
+## What this looks like from outside
+
+You do not have to take the cryptography on faith to sanity-check the claim.
+A player that genuinely cannot read your credentials cannot offer to email them
+back to you, cannot show them in a support tool, and cannot recover them when you
+forget the password protecting them. If any of those are on offer, the key is on
+their side.
+
+It is the same reasoning that runs through
+[the bring-your-own-playlist model](/blog/bring-your-own-playlist/): decide what
+the vendor is capable of, not what it promises. And whichever
+[format your provider gave you](/blog/xtream-codes-vs-m3u/), the credential
+behind it deserves the same treatment.

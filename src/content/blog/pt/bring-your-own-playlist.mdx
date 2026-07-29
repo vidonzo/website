@@ -1,0 +1,93 @@
+---
+title: "“Traga a sua própria lista”: o player que respeita a sua privacidade"
+description: "Um player que não fornece conteúdo não tem o que aprender sobre você. Essa única escolha de arquitetura decide quase tudo o que um app sabe."
+urlSlug: traga-sua-propria-lista
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacidade", "produto"]
+keywords: ["player de iptv privacidade", "player sem rastreamento", "app que não coleta dados de uso", "player m3u privado"]
+heroImageAlt: "Uma lista passando direto do provedor para a tela, com o aplicativo desenhado como uma moldura vazia por onde ela atravessa."
+---
+
+A maioria dos aplicativos que coloca vídeo na sua tela é, por baixo, um catálogo
+com um player acoplado. O catálogo é o negócio: é ele que decide o que você pode
+assistir, é ele que precisa de uma conta para saber quem você é, e é ele que
+aprende o que você assiste — porque aprender isso é como o catálogo melhora e
+como a publicidade é vendida.
+
+Um player do tipo “traga a sua própria lista” inverte isso. Ele chega sem nada.
+Você fornece a lista —
+[credenciais do Xtream ou um link M3U](/pt/blog/xtream-codes-ou-m3u/) de um
+provedor que você já paga — e o trabalho inteiro do aplicativo é ler essa lista
+bem. Não há catálogo, porque não há o que catalogar.
+
+Isso não é uma posição de marketing. É uma arquitetura, e arquiteturas têm
+consequências que dá para conferir.
+
+## O que deixa de existir
+
+**Não é preciso conta para assistir.** O login existe só para sincronizar os
+seus próprios dados entre os seus próprios aparelhos. Ignore o login e o
+aplicativo continua funcionando por inteiro, porque não há servidor nenhum
+decidindo o que você pode ver.
+
+**Não existe histórico de reprodução em servidor.** O stream vai do seu provedor
+direto para o seu aparelho. Nada sobre qual canal você abriu às onze da noite
+passa por alguém no meio do caminho — não por causa de uma política, mas porque
+não existe caminho por onde isso viajar.
+
+**Não existe motor de recomendação.** “Recomendação” é o nome educado de um
+modelo do seu comportamento. Um player que não escolhe o seu conteúdo não tem
+motivo para construir um.
+
+**Não há o que monetizar observando você.** Nenhum SDK de anúncios, nenhuma
+biblioteca de analytics. O argumento de sempre a favor deles é que financiam o
+produto, e um player que não fornece conteúdo tem muito menos a financiar — o
+dinheiro nesta história é o que você já paga ao seu provedor, e isso não tem
+relação com o aplicativo.
+
+## O que fica, e onde fica
+
+Trazer a sua própria lista não significa viver sem comodidades. Significa ser
+preciso sobre onde cada uma delas mora.
+
+Favoritos, progresso de reprodução e preferências são seus e são úteis em vários
+aparelhos, então sincronizam em texto claro, protegidos por regras comuns de
+acesso por usuário. As credenciais do seu provedor são outra classe de segredo —
+elas *são* a sua assinatura — então são
+[criptografadas no seu aparelho antes de serem guardadas](/pt/blog/por-que-criptografar-suas-credenciais/),
+e o que chega ao servidor é um bloco para o qual ninguém lá tem chave.
+
+Dois tipos de dado, dois tratamentos, definidos pelo que o dado é de fato.
+
+## A troca que você está fazendo
+
+Esse modelo não sai de graça, e vale nomear os custos com clareza.
+
+Você precisa encontrar e pagar um provedor por conta própria; nada vem embutido.
+Se um canal está faltando, ou se um stream é instável, o aplicativo não conserta
+— essa conversa é com o seu provedor. E, sem analytics, quem constrói o
+aplicativo descobre que algo quebrou quando uma pessoa escreve, e não quando um
+painel fica vermelho.
+
+Em troca, o aplicativo não tem razão comercial nenhuma para saber algo sobre a
+sua noite, nem dado nenhum para entregar caso um dia fosse cobrado.
+
+## Como saber se um app funciona mesmo assim
+
+A promessa é fácil de fazer. Algumas coisas são mais difíceis de fingir:
+
+- **Ele funciona sem login?** Se a reprodução exige conta, alguma outra coisa
+  que não a reprodução precisa dessa conta.
+- **Com o que ele conversa?** Um player desse tipo deveria alcançar o seu
+  provedor, a URL do seu guia e — só se você ligar a sincronização — o serviço
+  de sincronização dele. Nada além.
+- **A política de privacidade é uma lista ou uma pose?** “Podemos coletar certas
+  informações para melhorar a sua experiência” é uma pose. Uma lista exaustiva
+  de campos é um compromisso.
+- **Como ele guarda as suas credenciais?** Manter a senha de um provedor de um
+  jeito que o fornecedor consiga reler desfaz boa parte do resto.
+
+Se tudo isso se sustenta, o aplicativo é um leitor da sua lista e não um
+observador do que você assiste —
+[que é tudo o que um player precisa ser](/pt/blog/o-que-faz-um-player-iptv/).

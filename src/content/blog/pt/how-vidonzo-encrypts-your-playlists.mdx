@@ -1,0 +1,103 @@
+---
+title: "Por que um player deve criptografar as credenciais da sua lista"
+description: "O login do seu provedor é a sua assinatura. Veja o padrão que um player deveria cumprir para guardá-lo — e como o Vidonzo cumpre esse padrão."
+urlSlug: por-que-criptografar-suas-credenciais
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privacidade", "engenharia"]
+keywords: ["segurança das credenciais de iptv", "senha do xtream é segura", "lista iptv criptografada", "criptografia ponta a ponta de lista"]
+heroImageAlt: "Um registro de lista guardado, exibido como um rótulo, um tipo e um bloco ilegível de texto cifrado."
+---
+
+As suas credenciais do Xtream são, na prática, a sua assinatura paga. Quem
+estiver com elas consegue assistir na sua conta, fazer você bater no limite de
+acessos ou fazer o provedor cortar o seu acesso. Isso as torna a coisa mais
+sensível que um player toca — e a coisa que quem fabrica esse player menos
+deveria querer conseguir ler.
+
+O nível que vale exigir é simples de enunciar e incômodo de cumprir: a
+credencial deveria ser ilegível para quem opera o serviço, e não apenas
+protegida pela boa intenção dessas pessoas. Se um fornecedor consegue ler a
+senha do seu provedor, então também consegue quem invadir esse fornecedor, e
+também consegue quem tiver como obrigá-lo a entregar.
+
+Veja como o Vidonzo cumpre esse nível, com detalhe suficiente para conferir.
+
+## A separação
+
+Nem tudo precisa do mesmo tratamento. Sincronizar favoritos entre aparelhos é
+útil e banal; sincronizar a senha de um provedor não é nem uma coisa nem outra.
+Separamos os dados de acordo:
+
+**Criptografado de ponta a ponta**: o host, o usuário e a senha do seu Xtream,
+além de qualquer URL de fonte M3U.
+
+**Guardado em texto claro, protegido por regras de acesso por usuário**:
+favoritos, progresso de reprodução, preferências do aplicativo e o nome que você
+deu a uma lista — que são as suas próprias palavras, e não um segredo.
+
+Essa separação é deliberada. Criptografar favoritos não compraria quase nada e
+faria com que um aparelho recém-adicionado não mostrasse nada de útil até ser
+desbloqueado.
+
+## Como a criptografia funciona
+
+Uma **chave de dados** aleatória de 256 bits é gerada no seu aparelho — nunca em
+um servidor. Cada registro de fonte é criptografado com AES‑256‑GCM sob essa
+chave, com um nonce único por registro.
+
+A própria chave de dados é então embrulhada: a sua senha de sincronização passa
+pelo **Argon2id** para derivar uma chave de criptografia de chave, e a chave de
+dados é criptografada com ela. Só o resultado embrulhado é enviado. A senha de
+sincronização nunca atravessa a rede.
+
+O que o nosso banco de dados guarda para uma lista é um rótulo, um tipo e um
+bloco de texto cifrado. Não existe no servidor chave nenhuma para decifrar isso.
+
+## Adicionando um segundo aparelho
+
+O problema interessante não é a criptografia; é levar a chave de dados até o seu
+próximo aparelho sem nunca enviá-la aberta.
+
+1. O novo aparelho faz login. Favoritos e progresso aparecem na hora — eles
+   nunca foram criptografados.
+2. As listas aparecem como **bloqueadas**.
+3. O novo aparelho gera um par de chaves X25519 efêmero e exibe um QR code.
+4. Um aparelho que já está desbloqueado lê o código e pede a sua confirmação.
+5. O aparelho desbloqueado deriva um segredo compartilhado por ECDH,
+   criptografa a chave de dados com ele e envia esse bloco selado.
+6. O novo aparelho decifra o bloco com a chave privada dele e guarda o resultado
+   no Keychain do iOS ou no Keystore do Android.
+
+Em momento nenhum o servidor guarda algo que ele consiga abrir.
+
+## A parte que não dá para suavizar
+
+**Se você perder a sua senha de sincronização e não sobrar nenhum aparelho
+desbloqueado, as suas listas se foram.** Não é que fiquem retidas — elas ficam
+matematicamente indisponíveis. Não temos como redefinir a senha, porque não há
+nada do nosso lado para redefinir.
+
+Essa é a troca honesta da criptografia de ponta a ponta de verdade, e todo
+produto que a promete ou faz essa troca ou não está fazendo criptografia de
+ponta a ponta. O aplicativo diz isso com todas as letras no momento em que você
+define a senha, em vez de esconder o aviso em uma página de política.
+
+Adicionar a lista de novo leva um minuto. Esse é o caminho de recuperação, e
+preferimos oferecer isso a guardar uma chave que possam nos obrigar a usar.
+
+## Como isso aparece de fora
+
+Você não precisa aceitar a criptografia por fé para checar se a promessa faz
+sentido. Um player que realmente não consegue ler as suas credenciais também não
+consegue oferecer reenviá-las por e-mail, não consegue exibi-las em uma
+ferramenta de suporte e não consegue recuperá-las quando você esquece a senha
+que as protege. Se alguma dessas coisas está no cardápio, a chave está do lado
+de lá.
+
+É o mesmo raciocínio que atravessa
+[o modelo de trazer a sua própria lista](/pt/blog/traga-sua-propria-lista/):
+decidir pelo que o fornecedor é capaz de fazer, e não pelo que ele promete. E
+seja qual for
+[o formato que o seu provedor entregou](/pt/blog/xtream-codes-ou-m3u/), a
+credencial por trás dele merece o mesmo tratamento.

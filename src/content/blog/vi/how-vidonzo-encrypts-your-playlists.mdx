@@ -1,0 +1,99 @@
+---
+title: "Vì sao trình phát nên mã hóa thông tin đăng nhập danh sách phát"
+description: "Thông tin đăng nhập của nhà cung cấp chính là gói cước của bạn. Đây là chuẩn mà một trình phát nên đạt khi giữ nó, và cách Vidonzo đạt chuẩn đó."
+urlSlug: ma-hoa-thong-tin-dang-nhap
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["quyền riêng tư", "kỹ thuật"]
+keywords: ["bảo mật thông tin đăng nhập iptv", "mã hóa danh sách phát", "mật khẩu xtream codes", "mã hóa đầu cuối"]
+heroImageAlt: "Một bản ghi danh sách phát đã lưu, hiện ra dưới dạng một cái nhãn, một loại nguồn và một khối dữ liệu không đọc được."
+---
+
+Thông tin đăng nhập Xtream của bạn, trên thực tế, chính là gói cước bạn đã trả tiền.
+Ai cầm được chúng đều có thể xem bằng tài khoản của bạn, khiến bạn bị giới hạn tốc độ,
+hoặc khiến bạn bị cắt dịch vụ. Điều đó biến chúng thành thứ nhạy cảm nhất mà một trình
+phát chạm tới — và cũng là thứ mà những người làm ra nó nên ít muốn có khả năng đọc
+được nhất.
+
+Cái chuẩn đáng kiên trì thì dễ nói mà khó đạt: thông tin đăng nhập phải là thứ không
+đọc được đối với chính những người vận hành dịch vụ, chứ không chỉ được che chở bằng
+thiện chí của họ. Nếu một nhà phát hành đọc được mật khẩu nhà cung cấp của bạn, thì
+bất cứ ai xâm nhập được vào nhà phát hành ấy cũng đọc được, và bất cứ ai ép buộc được
+họ cũng đọc được.
+
+Dưới đây là cách Vidonzo đạt chuẩn đó, đủ chi tiết để bạn kiểm chứng.
+
+## Chia đôi dữ liệu
+
+Không phải thứ gì cũng cần đối xử như nhau. Đồng bộ kênh yêu thích giữa các thiết bị
+là chuyện có ích và bình thường; đồng bộ mật khẩu nhà cung cấp thì không phải cả hai.
+Chúng tôi chia dữ liệu theo đúng ranh giới đó:
+
+**Mã hóa đầu cuối**: host, tên đăng nhập và mật khẩu Xtream của bạn, cùng mọi đường
+dẫn nguồn M3U.
+
+**Lưu ở dạng thường, bảo vệ bằng quy tắc truy cập theo từng người dùng**: kênh yêu
+thích, tiến độ xem, thiết lập ứng dụng, và cái tên bạn đặt cho danh sách phát — vốn là
+chữ của bạn, không phải bí mật.
+
+Cách chia đó là có chủ ý. Mã hóa kênh yêu thích gần như không đem lại gì, mà lại khiến
+một thiết bị vừa thêm vào không hiển thị được thứ gì có ích cho tới khi nó được mở
+khóa.
+
+## Phần mã hóa hoạt động ra sao
+
+Một **khóa dữ liệu** 256 bit ngẫu nhiên được sinh ra trên thiết bị của bạn — không bao
+giờ trên máy chủ. Mỗi bản ghi nguồn được mã hóa bằng AES‑256‑GCM dưới khóa đó, với một
+nonce riêng cho từng bản ghi.
+
+Bản thân khóa dữ liệu sau đó được bọc lại: mật khẩu đồng bộ của bạn đi qua **Argon2id**
+để dẫn xuất ra một khóa dùng để mã hóa khóa, rồi khóa dữ liệu được mã hóa bằng khóa
+ấy. Chỉ kết quả đã bọc mới được tải lên. Mật khẩu đồng bộ không bao giờ đi qua mạng.
+
+Thứ cơ sở dữ liệu của chúng tôi giữ cho một danh sách phát là một cái nhãn, một loại
+nguồn, và một khối dữ liệu đã mã hóa. Trên máy chủ không có khóa nào để giải mã khối
+đó.
+
+## Thêm thiết bị thứ hai
+
+Bài toán thú vị không phải là mã hóa; mà là đưa được khóa dữ liệu sang thiết bị tiếp
+theo của bạn mà không lúc nào gửi nó ở dạng rõ.
+
+1. Thiết bị mới đăng nhập. Kênh yêu thích và tiến độ xem hiện ra ngay — chúng vốn chưa
+   từng được mã hóa.
+2. Các danh sách phát hiện ở trạng thái **đã khóa**.
+3. Thiết bị mới sinh một cặp khóa X25519 tạm thời và hiện ra một mã QR.
+4. Một thiết bị đang ở trạng thái mở khóa quét mã đó và hỏi bạn xác nhận.
+5. Thiết bị đã mở khóa dẫn xuất một bí mật chung qua ECDH, mã hóa khóa dữ liệu bằng bí
+   mật ấy, rồi tải khối đã niêm phong đó lên.
+6. Thiết bị mới giải mã khối ấy bằng khóa riêng của nó và cất kết quả vào iOS Keychain
+   hoặc Android Keystore.
+
+Không có thời điểm nào máy chủ giữ một thứ mà nó mở được.
+
+## Phần chúng tôi không thể nói nhẹ đi
+
+**Nếu bạn quên mật khẩu đồng bộ và không còn thiết bị nào đang mở khóa, các danh sách
+phát của bạn mất.** Không phải bị giữ lại — mà là không thể lấy được, về mặt toán học.
+Chúng tôi không đặt lại được, vì ở phía chúng tôi không có gì để đặt lại.
+
+Đó là cái giá thành thật của mã hóa đầu cuối thật sự, và mọi sản phẩm tuyên bố có nó
+thì hoặc chấp nhận cái giá này, hoặc không thật sự làm điều đó. Ứng dụng nói thẳng
+điều này ngay lúc bạn đặt mật khẩu, thay vì chôn nó trong một trang chính sách.
+
+Thêm lại một danh sách phát mất một phút. Đó chính là con đường phục hồi, và chúng tôi
+thà đưa ra con đường ấy còn hơn giữ một chiếc khóa mà mình có thể bị ép phải dùng.
+
+## Nhìn từ bên ngoài thì thấy gì
+
+Bạn không cần tin vào phần mật mã học để kiểm tra sơ bộ tuyên bố này. Một trình phát
+thật sự không đọc được thông tin đăng nhập của bạn thì không thể đề nghị gửi email trả
+chúng lại cho bạn, không thể hiển thị chúng trong một công cụ hỗ trợ, và không thể
+khôi phục chúng khi bạn quên mật khẩu đang bảo vệ chúng. Nếu có bất kỳ điều nào trong
+số đó được chào mời, thì chiếc khóa đang nằm ở phía họ.
+
+Vẫn là cách lập luận chạy xuyên suốt
+[mô hình tự mang danh sách phát](/vi/blog/tu-mang-danh-sach-phat/): hãy xét xem nhà
+phát hành *có khả năng làm gì*, chứ không phải họ hứa gì. Và dù
+[nhà cung cấp đưa cho bạn định dạng nào](/vi/blog/xtream-codes-hay-m3u/), thông tin
+đăng nhập đứng sau nó đều xứng đáng được đối xử như nhau.

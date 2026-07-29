@@ -1,0 +1,98 @@
+---
+title: "M3U ou M3U8 : ce que signifient vraiment ces extensions"
+description: "Le 8 concerne l'encodage du texte, pas la qualité. Voici ce qui sépare réellement les deux formats, et lequel affiche correctement vos noms de chaînes."
+urlSlug: m3u-ou-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlists", "technique"]
+keywords: ["m3u ou m3u8", "difference m3u m3u8", "fichier m3u8 c'est quoi", "playlist utf-8"]
+heroImageAlt: "La même liste de chaînes affichée deux fois : une première avec des accents déformés, une seconde rendue correctement."
+---
+
+Les fournisseurs distribuent des liens qui se terminent en `.m3u` et d'autres en
+`.m3u8`, parfois les deux pour le même abonnement, et expliquent rarement la
+différence. Les suppositions habituelles — l'un serait plus récent, ou de
+meilleure qualité, ou « celui en HD » — sont toutes fausses.
+
+Le `8`, c'est **UTF-8**. C'est là toute la différence dans le format de fichier,
+et elle est plus petite et plus utile que ne le laisse croire la légende.
+
+## Deux fichiers de même nature
+
+Ouvrez l'un ou l'autre dans un éditeur de texte et vous voyez la même chose :
+une ligne d'en-tête, puis des paires de lignes, l'une décrivant une chaîne,
+l'autre donnant son adresse.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Voilà tout. Une playlist M3U est un index en texte brut — des noms et des
+adresses, rien d'autre. Elle ne transporte aucune vidéo, aucune authentification
+et aucune liaison en direct avec votre fournisseur. C'est un instantané de ce
+qui existait au moment où vous l'avez chargée, et c'est ce trait qui la
+distingue vraiment de [l'API Xtream Codes](/fr/blog/xtream-codes-ou-m3u/).
+
+## Ce que le 8 change
+
+La spécification M3U d'origine est antérieure à l'adoption d'UTF-8 par le web.
+Le texte était enregistré dans l'encodage local de la machine, ce qui
+fonctionnait parfaitement jusqu'au jour où un fichier franchissait une
+frontière.
+
+`.m3u8` déclare que le fichier est en UTF-8. Concrètement, chaque nom de chaîne
+survit au voyage : l'arabe, le persan, le grec, le thaï, le cyrillique, le
+japonais, et les caractères accentués du français, du turc, du polonais ou du
+vietnamien. Avec un `.m3u` ordinaire, dont le lecteur doit deviner l'encodage,
+ces noms arrivent sous forme de points d'interrogation, ou de cette suite de
+caractères parasites qu'on reconnaît au premier coup d'œil — `Ã©` là où il
+devrait y avoir un `é`.
+
+Donc si un fournisseur propose les deux, prenez le `.m3u8`. Rien d'autre ne
+change dans le flux, et votre liste de chaînes devient lisible.
+
+## L'autre `.m3u8` que vous croiserez
+
+Il existe une seconde raison, sans rapport avec la première, de voir cette
+extension, et elle sème une vraie confusion.
+
+**HLS** — le protocole de diffusion qu'emploient la plupart des serveurs IPTV —
+utilise lui aussi des fichiers M3U8. Quand vous lancez une chaîne, le lecteur
+récupère un petit manifeste `.m3u8` qui liste les quelques secondes de vidéo à
+venir sous forme de segments séparés, puis le recharge au fil de la lecture.
+C'est ce qui permet à un direct de démarrer en cours d'émission et de s'adapter
+à votre connexion.
+
+`.m3u8` peut donc désigner deux choses différentes :
+
+- **Votre playlist d'abonnement** — des centaines ou des milliers de chaînes,
+  une ligne chacune. C'est le lien que vous collez dans un lecteur.
+- **Un manifeste de flux** — une seule chaîne, avec la liste de ses segments. Le
+  lecteur va les chercher lui-même pendant que vous regardez ; vous n'en collez
+  jamais un.
+
+Les deux sont des fichiers texte au format M3U. Si vous collez un manifeste de
+flux là où on attend une playlist, vous obtenez une « playlist » réduite à une
+seule entrée sans nom — une confusion fréquente et facile à corriger.
+
+## Lequel donner à votre lecteur
+
+Tout lecteur digne de ce nom lit les deux, la décision est donc mineure :
+
+- **Préférez `.m3u8`** quand le choix existe. Des noms de chaînes corrects, et
+  aucun inconvénient.
+- **Utilisez `.m3u`** quand c'est ce qu'on vous a remis. Ça fonctionne ;
+  attendez-vous à un nom déformé de temps en temps dans les listes non latines.
+- **Ni l'un ni l'autre n'agit sur la qualité.** La résolution et le débit sont
+  décidés par le flux de votre fournisseur, pas par l'extension de l'index qui
+  pointe vers lui.
+
+Quel que soit le fichier entre vos mains, il n'est qu'une liste d'adresses, et
+le lecteur n'est là que pour la lire. Quand un flux saccade, l'index n'est
+presque jamais en cause : c'est
+[le chemin entre vous et le serveur](/fr/blog/regler-le-buffering-iptv/). Et si
+votre fournisseur propose aussi des identifiants Xtream, ceux-ci vous donnent
+des catégories, des séries et un guide des programmes qu'un fichier à plat ne
+peut pas offrir.
