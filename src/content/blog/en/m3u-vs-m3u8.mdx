@@ -38,11 +38,12 @@ The original M3U specification predates the web's settlement on UTF-8. Text was
 stored in whatever local encoding the machine happened to use, which worked
 perfectly until a file crossed a border.
 
-`.m3u8` declares the file to be UTF-8. Practically, that means every channel name
-survives the trip: Arabic, Persian, Greek, Thai, Cyrillic, Japanese, and the
-accented characters in French, Turkish, Polish or Vietnamese. With a plain `.m3u`
-whose encoding the player has to guess, those names arrive as question marks or
-that unmistakable run of mojibake — `Ã©` where an `é` should be.
+`.m3u8` declares the file to be UTF-8. Practically, that means
+[every channel name survives the trip](/blog/watch-in-your-language/): Arabic,
+Persian, Greek, Thai, Cyrillic, Japanese, and the accented characters in French,
+Turkish, Polish or Vietnamese. With a plain `.m3u` whose encoding the player has
+to guess, those names arrive as question marks or that unmistakable run of
+mojibake — `Ã©` where an `é` should be.
 
 So if a provider offers both, take the `.m3u8`. Nothing else about the stream
 changes, and your channel list becomes readable.
