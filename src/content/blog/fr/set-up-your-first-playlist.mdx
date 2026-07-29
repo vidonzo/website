@@ -1,0 +1,64 @@
+---
+title: "Configurer sa première playlist dans Vidonzo, pas à pas"
+description: "D'une installation neuve à une liste de chaînes fonctionnelle en une minute, avec les petits détails qui évitent les couacs du début."
+urlSlug: configurer-sa-premiere-playlist
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['configuration', 'playlists']
+keywords: ['ajouter playlist iptv', 'configurer lecteur iptv', 'premiere playlist', 'configurer xtream ou m3u']
+heroImageAlt: "Un téléphone affichant l'écran d'ajout de playlist, avec une liste de chaînes qui apparaît en arrière-plan."
+---
+
+Faire entrer ses chaînes dans un lecteur paraît compliqué et ne l'est presque
+jamais. Si vous avez les informations de votre abonnement sous la main, ajouter
+votre première playlist dans Vidonzo prend environ une minute. Voici le parcours
+complet, plus les deux ou trois détails qui, discrètement, causent la plupart des
+problèmes du début.
+
+Avant de commencer, déterminez le type de source dont vous disposez. Les
+fournisseurs distribuent soit des identifiants Xtream Codes, soit un lien M3U, et
+la configuration diffère légèrement. Si vous ne savez pas trop lequel vous avez —
+ou lequel vaut mieux —
+[ce court comparatif fait le tri](/fr/blog/xtream-codes-ou-m3u/).
+
+## Si vous avez des identifiants Xtream Codes
+
+1. Ouvrez Vidonzo et choisissez **Ajouter une playlist → Xtream Codes**.
+2. Saisissez l'**hôte** exactement comme votre fournisseur l'a écrit, avec
+   `http://` ou `https://` et le numéro de port s'il y en a un.
+3. Entrez votre **nom d'utilisateur** et votre **mot de passe**. Ils sont
+   sensibles à la casse.
+4. Donnez à la playlist un nom que vous reconnaîtrez, puis enregistrez.
+
+Vidonzo contacte le serveur une seule fois, récupère vos catégories, vos films et
+vos séries, et construit la liste. Votre mot de passe n'est jamais conservé dans
+une forme que l'application pourrait relire.
+
+## Si vous avez un lien M3U
+
+1. Choisissez **Ajouter une playlist → M3U**.
+2. Collez l'URL complète, se terminant par `.m3u` ou `.m3u8`.
+3. Nommez-la et enregistrez.
+
+Si votre fournisseur vous a remis un fichier plutôt qu'un lien, chargez-le depuis
+le stockage de votre appareil de la même manière.
+
+## Les détails qui font trébucher
+
+- **Copiez, ne tapez pas.** Un seul caractère erroné dans l'hôte ou le mot de
+  passe est la cause la plus fréquente d'une playlist qui refuse de charger.
+  Collez directement depuis le message de votre fournisseur.
+- **Attention au port.** `http://exemple.com` et `http://exemple.com:8080` sont
+  deux adresses différentes. Ajoutez le port si on vous en a donné un.
+- **Un « s » qui manque.** `http` et `https` ne sont pas interchangeables ;
+  utilisez celui que votre fournisseur a indiqué.
+
+## Une fois la liste chargée
+
+Dès que la liste apparaît, marquez quelques favoris pour que vos chaînes de tous
+les jours remontent en haut. À partir de là, vous pouvez piloter le grand écran
+depuis votre téléphone, et si une chaîne se met à saccader, c'est presque
+toujours [un souci de réseau réglable en une minute](/fr/blog/regler-le-buffering-iptv/)
+plutôt qu'un défaut de votre configuration. Pas encore installé sur tous vos
+appareils ? La page [téléchargement](/fr/download/) rassemble les versions
+disponibles.

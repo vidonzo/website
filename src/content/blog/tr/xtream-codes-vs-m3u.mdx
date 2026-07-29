@@ -1,0 +1,71 @@
+---
+title: 'Xtream Codes mı M3U mu: hangi oynatma listesi biçimini seçmeli?'
+description: "Sağlayıcınız size ya bir giriş bilgisi verdi ya da bir bağlantı. İkisinin ne yaptığını ve hangisine yönelmeniz gerektiğini anlatıyoruz."
+urlSlug: xtream-codes-mi-m3u-mu
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['kurulum', 'oynatma-listesi']
+keywords: ['xtream codes nedir', 'm3u nedir', 'xtream mı m3u mu', 'iptv oynatma listesi formatı']
+heroImageAlt: "Bir Xtream Codes giriş paneli ve bir M3U bağlantısı yan yana, ikisi de aynı kanal listesini besliyor."
+---
+
+Bir IPTV aboneliği aldığınızda sağlayıcı size iki şeyden birini verir: bir dizi
+**Xtream Codes** giriş bilgisi ya da bir **M3U** bağlantısı. İkisi de tıpatıp
+aynı kanalları taşıyabilir, ama oynatıcınıza ulaştıklarında bambaşka davranırlar.
+Hangisinin ne olduğunu bilmek başınızı hatırı sayılır bir dertten kurtarır.
+
+İkisi de aslında yalnızca *yayınlarınızın nerede durduğunu* tarif etmenin bir
+yolu. Ne içeriğin kendisi ne de uygulama onlar. Vidonzo gibi bir oynatıcı,
+elinizde hangisi varsa onu okur ve gerçekten izleyebileceğiniz bir kanal
+listesine dönüştürür.
+
+## M3U oynatma listesi nedir
+
+M3U dosyası düz metinden oluşan bir listedir. Açtığınızda satır çiftleri
+görürsünüz: bir ad ve bir yayın adresi, her kanal için tekrarlanmış. `.m3u8`
+türü de aynı mantığın UTF-8 olarak kaydedilmiş halidir; Türkçe kanal adlarındaki
+"ç", "ş", "ğ" gibi harfleri sorunsuz göstermesinin sebebi budur.
+
+Güçlü yanı evrensel olması: neredeyse her oynatıcı onu anlar. Zayıf yanı ise
+*düz ve donuk* olması. Liste yalnızca onu yüklediğiniz ana kadar günceldir.
+Sağlayıcınız kanal eklediğinde ya da kategorileri yeniden düzenlediğinde, siz
+listeyi yeniden çekmedikçe M3U bundan habersiz kalır.
+
+## Xtream Codes nedir
+
+Xtream Codes bir dosya değil, bir **API**'dir. Üç şey girersiniz — bir sunucu
+adresi (host), bir kullanıcı adı ve bir parola — ve oynatıcı sunucuya canlı
+olarak sorar: canlı kanallar, filmler, diziler ve yayın rehberi, hepsi baştan
+kategorilere ayrılmış halde gelir.
+
+İşte bu yapı onun üstünlüğüdür. Gerçek kategoriler, sezon ve bölümlere göre
+düzenlenmiş diziler, abonelik durumu ve hiç ek ayar yapmadan bir yayın rehberi
+(EPG) elinize geçer. Karşılığında hassas bir tarafı var: o üç bilgi *aslında
+aboneliğinizin ta kendisi*. Onları kopyalayan herkes sizin hesabınızdan
+izleyebilir; bu yüzden oynatıcının bunları nasıl sakladığı önemlidir. Vidonzo'nun
+Xtream bilgilerinizi cihazınızda güvenle tutmasının, yaptığınızı takip etmemesinin
+ve verilerinizi geri okunabilir bir biçimde saklamamasının nedeni de tam olarak
+budur.
+
+## Hangisini seçmeli
+
+- **Xtream'i seçin** eğer sağlayıcınız bunu sunuyorsa ve kategorilerin,
+  dizilerin ve yayın rehberinin kendiliğinden gelmesini istiyorsanız. Daha
+  dolu bir deneyim sunar ve çoğu kişinin tercih etmesi gereken seçenek budur.
+- **M3U'yu seçin** elinizde yalnızca bu varsa, birkaç kaynağı elle bir araya
+  getiriyorsanız ya da mümkün olan en yalın listeyi istiyorsanız. Her yerde,
+  sorunsuz çalışır.
+
+Sağlayıcınız ikisini birden verdiyse Xtream ile başlayın, M3U bağlantısını da
+yedek olarak saklayın. Hiçbir yönde size bağlayıcı bir kilit yok; iyi bir
+oynatıcı ikisine de aynı odaya açılan iki kapı gibi bakar.
+
+## Değişmeyen taraf
+
+Elinizde hangi biçim olursa olsun, asıl işi yapan oynatıcıdır. Listenizi
+reklamsız okumalı, ne izlediğinizi kaydetmemeli ve giriş bilgilerinizi geri
+okuyabileceği bir biçimde tutmamalıdır. Biçimi seçtikten sonra
+[ilk oynatma listenizi kurmak](/tr/blog/ilk-oynatma-listesi-kurulumu/) yaklaşık
+bir dakika sürer — ve bir yayın takılırsa, bu genellikle biçimin suçu değil,
+[hızlı çözümü olan bir ağ sorunudur](/tr/blog/iptv-donma-sorunu-cozumu/).
+Vidonzo'yu [buradan indirebilirsiniz](/tr/download/).
