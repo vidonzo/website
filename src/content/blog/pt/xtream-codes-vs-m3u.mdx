@@ -27,24 +27,26 @@ linhas: um nome e uma URL de stream, repetidos para cada canal. A variante
 nomes de canais com acento, cedilha ou qualquer alfabeto não latino.
 
 A força dela é ser universal: quase todo player entende. A fraqueza é ser *plana
-e congelada*. A lista só está tão atualizada quanto o momento em que você a
+e congelada*. A lista só reflete o que existia no momento em que você a
 carregou. Quando o provedor adiciona canais ou reorganiza categorias, o M3U não
 fica sabendo até você baixar tudo de novo.
 
 ## O que é o Xtream Codes
 
 O Xtream Codes não é um arquivo, e sim uma **API**. Você informa três dados — um
-host, um usuário e uma senha — e o player pergunta ao servidor, ao vivo, quais
-são os seus canais ao vivo, filmes, séries e a programação, já separados por
+host, um usuário e uma senha — e o player consulta o servidor em tempo real e
+recebe os seus canais ao vivo, filmes, séries e a programação, já separados por
 categoria.
 
 Essa estrutura é a vantagem. Você ganha categorias de verdade, séries agrupadas
 em temporadas e episódios, o status da conta e um guia de programação (EPG) sem
 nenhuma configuração extra. A contrapartida é a sensibilidade: esses três dados
 *são* a sua assinatura. Quem copiar consegue assistir na sua conta, então importa
-muito como o player guarda isso. É por esse motivo que o Vidonzo trata as
-credenciais do Xtream de um jeito que nem o próprio aplicativo consegue lê-las de
-volta — [privacidade é o ponto de partida](/pt/features/), não um item opcional.
+muito como o player guarda isso. Por esse motivo, o Vidonzo criptografa as
+credenciais do Xtream no próprio aparelho, antes de qualquer sincronização: o que
+fica no servidor é um bloco cifrado, e não existe lá chave para abrir esse bloco
+— nem o Vidonzo consegue ler os seus dados de acesso. A
+[página de recursos](/pt/features/) descreve como isso funciona.
 
 ## Qual escolher
 
