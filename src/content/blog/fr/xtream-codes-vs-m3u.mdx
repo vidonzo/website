@@ -1,0 +1,75 @@
+---
+title: 'Xtream Codes ou M3U : quel format de playlist choisir ?'
+description: "Votre fournisseur vous a remis soit un identifiant, soit un lien. Voici ce que fait chaque format et lequel privilégier au quotidien."
+urlSlug: xtream-codes-ou-m3u
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['configuration', 'playlists']
+keywords: ['xtream codes ou m3u', 'format playlist iptv', 'lecteur m3u', 'api xtream codes']
+heroImageAlt: "Un panneau de connexion Xtream Codes et un lien M3U côte à côte, alimentant la même liste de chaînes."
+---
+
+Quand vous souscrivez un abonnement IPTV, le fournisseur vous remet l'une de deux
+choses : un jeu d'identifiants **Xtream Codes**, ou un lien **M3U**. Les deux
+peuvent transporter exactement les mêmes chaînes, et pourtant ils se comportent
+très différemment une fois arrivés dans votre lecteur. Savoir lequel est lequel
+vous épargne un nombre étonnant de tracas.
+
+Dans les deux cas, il ne s'agit que d'une manière d'indiquer *où se trouvent vos
+flux*. Ni l'un ni l'autre n'est le contenu, et aucun n'est l'application. Un
+lecteur comme Vidonzo lit celui que vous possédez et le transforme en une liste
+de chaînes réellement regardable.
+
+## Ce qu'est une playlist M3U
+
+Un fichier M3U est une simple liste en texte brut. Ouvrez-en un et vous voyez des
+paires de lignes : un nom et une URL de flux, répétées pour chaque chaîne. La
+variante `.m3u8` reprend la même idée mais enregistrée en UTF-8, ce qui lui
+permet de gérer proprement les noms de chaînes accentués ou non latins.
+
+Sa force, c'est d'être universel : presque tous les lecteurs le comprennent. Sa
+faiblesse, c'est d'être *figé et à plat*. La liste n'est fraîche qu'à l'instant
+où vous l'avez chargée. Quand votre fournisseur ajoute des chaînes ou réorganise
+ses catégories, le M3U n'en sait rien tant que vous ne le rechargez pas.
+
+## Ce qu'est Xtream Codes
+
+Xtream Codes n'est pas un fichier mais une **API**. Vous saisissez trois éléments
+— un hôte, un nom d'utilisateur et un mot de passe — et le lecteur interroge le
+serveur, en direct, pour récupérer vos chaînes en direct, vos films, vos séries
+et le guide des programmes, déjà triés par catégories.
+
+C'est cette structure qui fait la différence. Vous obtenez de vraies catégories,
+des séries rangées en saisons et en épisodes, l'état de votre compte et un guide
+des programmes (EPG) sans aucun réglage supplémentaire. La contrepartie, c'est la
+sensibilité : ces trois identifiants *sont* votre abonnement. Quiconque les copie
+peut regarder sur votre compte, d'où l'importance de la façon dont un lecteur les
+conserve. C'est précisément pour cela que Vidonzo garde vos identifiants
+chiffrés localement, dans une forme qu'il ne peut pas relire lui-même. Vous
+pouvez vérifier ce point de conception sur la page
+[fonctionnalités](/fr/features/).
+
+## Lequel choisir
+
+- **Optez pour Xtream** si votre fournisseur le propose et que vous voulez voir
+  apparaître d'elles-mêmes les catégories, les séries et le guide des programmes.
+  C'est l'expérience la plus riche, et celle que la plupart des gens devraient
+  préférer.
+- **Optez pour M3U** quand c'est tout ce que votre fournisseur vous donne, quand
+  vous assemblez plusieurs sources à la main, ou quand vous voulez la liste la
+  plus simple possible. Ça marche partout.
+
+Si votre fournisseur vous donne les deux, commencez par Xtream et gardez le lien
+M3U comme solution de repli. Il n'y a aucun verrouillage dans un sens ni dans
+l'autre : un bon lecteur les traite comme deux portes ouvrant sur la même pièce.
+
+## Ce qui ne change pas
+
+Quel que soit le format entre vos mains, c'est le lecteur qui fait le travail. Il
+doit lire votre liste sans publicité, sans pister ce que vous regardez, et sans
+conserver vos identifiants dans une forme qu'il pourrait relire. Une fois le
+format choisi,
+[configurer votre première playlist](/fr/blog/configurer-sa-premiere-playlist/)
+prend environ une minute — et si un flux vient à saccader, c'est le plus souvent
+[un souci de réseau qui se règle vite](/fr/blog/regler-le-buffering-iptv/), pas la
+faute du format.

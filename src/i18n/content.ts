@@ -9,8 +9,8 @@ import { defaultLocale, isLocale, localeCodes, type Locale } from './config';
  * - **key** — the language-neutral identity of a document. It is the file name,
  *   so `blog/en/no-ads.mdx` and `blog/fa/no-ads.mdx` are the same article in two
  *   languages. Grouping, "related", and cross-language pairing all key off this.
- * - **slug** — the URL segment for one locale. It comes from the entry's `slug`
- *   frontmatter and may be written in that language's own script
+ * - **slug** — the URL segment for one locale. It comes from the entry's
+ *   `urlSlug` frontmatter and may be written in that language's own script
  *   (`/fa/بدون-تبلیغ/`). When a document has no `slug`, the URL falls back to the
  *   key, which is exactly today's behaviour — so adding the field to the schema
  *   changes no existing route until a slug is actually authored.
@@ -44,9 +44,9 @@ function splitId(id: string) {
       { locale: defaultLocale, key: id };
 }
 
-/** The URL slug an entry serves under: its own `slug`, or the key as a fallback. */
+/** The URL slug an entry serves under: its own `urlSlug`, or the key as a fallback. */
 function slugOf<C extends CollectionKey>(entry: CollectionEntry<C>, key: string): string {
-  const declared = (entry.data as { slug?: unknown }).slug;
+  const declared = (entry.data as { urlSlug?: unknown }).urlSlug;
   return typeof declared === 'string' && declared.length > 0 ? declared : key;
 }
 

@@ -1,0 +1,65 @@
+---
+title: 'Xtream Codes or M3U: which playlist format should you use?'
+description: Your provider gave you one of two things — a login or a link. Here is what each format does, and which one to reach for.
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['setup', 'playlists']
+keywords: ['xtream codes vs m3u', 'iptv playlist format', 'm3u player', 'xtream api']
+heroImageAlt: An Xtream Codes login panel and an M3U link side by side, feeding the same channel list.
+---
+
+When you pay for an IPTV subscription, the provider hands you one of two things:
+a set of **Xtream Codes** login details, or an **M3U** link. They can carry the
+exact same channels, yet they behave very differently once they reach your
+player. Knowing which is which saves you a surprising amount of trouble.
+
+Both are just ways of describing *where your streams live*. Neither is the
+content, and neither is the app. A player like Vidonzo reads whichever one you
+have and turns it into a channel list you can actually watch.
+
+## What an M3U playlist is
+
+An M3U file is a plain-text list. Open one and you see pairs of lines: a name and
+a stream URL, repeated for every channel. The `.m3u8` variant is the same idea
+saved as UTF-8, which is why it handles non-Latin channel names cleanly.
+
+Its strength is that it is universal — almost every player understands it. Its
+weakness is that it is *flat and frozen*. The list is only as fresh as the moment
+you loaded it. When your provider adds channels or reorganises categories, an M3U
+does not know until you fetch it again.
+
+## What Xtream Codes is
+
+Xtream Codes is not a file but an **API**. You enter three things — a host, a
+username, and a password — and the player asks the server, live, for your live
+channels, films, series, and the programme guide, already sorted into categories.
+
+That structure is the advantage. You get real categories, series grouped into
+seasons and episodes, account status, and an EPG without any extra setup. The
+trade-off is sensitivity: those three credentials *are* your subscription. Anyone
+who copies them can watch on your account, so how a player stores them matters.
+This is exactly why Vidonzo keeps Xtream credentials
+[encrypted so that even we cannot read them](/blog/how-vidonzo-encrypts-your-playlists/).
+
+## Which one to choose
+
+- **Choose Xtream** if your provider offers it and you want categories, series,
+  and a programme guide to appear on their own. It is the richer experience, and
+  the one most people should prefer.
+- **Choose M3U** when that is all your provider gives you, when you are combining
+  sources by hand, or when you want the simplest possible list. It just works,
+  everywhere.
+
+If your provider gives you both, start with Xtream and keep the M3U link as a
+fallback. There is no lock-in either way — a good player treats them as two doors
+into the same room.
+
+## The part that does not change
+
+Whichever format you hold, the thing doing the work is the player. It should read
+your list without ads, without tracking what you watch, and without holding your
+credentials in a form it can read back. Once you have picked a format,
+[setting up your first playlist](/blog/set-up-your-first-playlist/) takes about a
+minute — and if a stream ever stutters, that is usually
+[a network issue with a quick fix](/blog/fix-iptv-buffering/), not the format's
+fault.
