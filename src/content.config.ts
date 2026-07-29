@@ -22,6 +22,20 @@ const blog = defineCollection({
     ...common,
     tags: z.array(z.string()).default([]),
     author: z.string().default('Vidonzo'),
+    /**
+     * The URL segment for this locale, in its own language/script. Optional:
+     * when absent the route falls back to the file name (the key), which is the
+     * pre-migration behaviour. See docs/content-engine §4.3 for the slug policy.
+     */
+    slug: z.string().optional(),
+    /** The language this article was authored in first; others transcreate from it. */
+    sourceLocale: z.string().optional(),
+    /** Per-language research targets. Never emitted as a `<meta keywords>` tag. */
+    keywords: z.array(z.string()).default([]),
+    /** Featured image for cards, OG/Twitter, and the article header. */
+    heroImage: z.string().optional(),
+    /** Localized alt text for {@link heroImage}. */
+    heroImageAlt: z.string().optional(),
   }),
 });
 

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Append-only ledger of URL redirects. A slug change adds an entry here; tool/build-redirects.mjs compiles it into functions/_generated/redirects.js, which the Pages middleware evaluates. See docs/content-engine §5.2.",
+  "redirects": []
+}

@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import ArticleLayout from '../../../components/ArticleLayout.astro';
 import ArticleCard from '../../../components/ArticleCard.astro';
-import { getCollectionSlugs, getLocalizedCollection, getLocalizedEntry } from '../../../i18n/content';
+import { getLocaleHrefSlugs, getLocalizedCollection, getLocalizedEntry } from '../../../i18n/content';
 import {
   defaultLocale,
   localeCodes,
@@ -15,20 +15,27 @@ import { readingTime } from '../../../lib/reading-time';
 import { site } from '../../../config/site';
 
 export async function getStaticPaths() {
-  const slugs = await getCollectionSlugs('blog');
-  return localeCodes.flatMap((code) =>
-    slugs.map((slug) => ({
-      params: { locale: locales[code].path || undefined, slug },
-      props: { locale: code, slug },
-    })),
+  // One route per (locale, document), each under its own localized slug. A
+  // locale that lacks a translation still gets a route, rendering the source
+  // original under the source slug (see getLocalizedCollection).
+  const perLocale = await Promise.all(
+    localeCodes.map(async (code) => {
+      const items = await getLocalizedCollection('blog', code);
+      return items.map((item) => ({
+        params: { locale: locales[code].path || undefined, slug: item.slug },
+        props: { locale: code, key: item.key },
+      }));
+    }),
   );
+  return perLocale.flat();
 }
 
-const { locale, slug } = Astro.props as { locale: Locale; slug: string };
+const { locale, key } = Astro.props as { locale: Locale; key: string };
 const t = useTranslations(locale);
 
-const post = await getLocalizedEntry('blog', locale, slug);
-if (!post) throw new Error(`blog/[slug]: no entry for "${slug}"`);
+const post = await getLocalizedEntry('blog', locale, key);
+if (!post) throw new Error(`blog/[slug]: no entry for "${key}"`);
+const slug = post.slug;
 
 const { Content } = await render(post.entry);
 const { data } = post.entry;
@@ -39,13 +46,19 @@ const meta = [
   `${readingTime(post.entry.body ?? '')} ${t.common.minRead}`,
 ].join(' · ');
 
+// Each language points at its own localized slug. A language the article does
+// not exist in at all falls back to that language's blog index.
+const hrefSlugs = await getLocaleHrefSlugs('blog', key);
 const localeHrefs = Object.fromEntries(
-  localeCodes.map((code) => [code, localizedPath(code, 'blog', slug)]),
+  localeCodes.map((code) => {
+    const localeSlug = hrefSlugs[code];
+    return [code, localeSlug ? localizedPath(code, 'blog', localeSlug) : localizedPath(code, 'blog')];
+  }),
 ) as Record<Locale, string>;
 
 // Same-tag posts first, then anything else, capped at three.
 const related = (await getLocalizedCollection('blog', locale))
-  .filter((other) => other.slug !== slug)
+  .filter((other) => other.key !== key)
   .sort((a, b) => {
     const shared = (item: typeof a) => item.entry.data.tags.filter((tag) => data.tags.includes(tag)).length;
     return shared(b) - shared(a) || b.entry.data.publishedAt.getTime() - a.entry.data.publishedAt.getTime();
