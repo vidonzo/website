@@ -1,0 +1,107 @@
+---
+title: "EPG explicado: como funciona o guia de programação na tela"
+description: "A grade de programas é um arquivo separado da sua lista de canais, com agenda própria. Saber disso explica quase toda esquisitice que um guia faz."
+urlSlug: epg-guia-de-programacao
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televisão", "listas"]
+keywords: ["o que é epg", "guia de programação iptv", "xmltv epg", "epg não aparece no iptv"]
+heroImageAlt: "Uma fileira de canais e uma grade de programas desenhadas como duas folhas separadas, unidas por um único identificador em comum."
+---
+
+O guia — a grade que mostra o que está passando agora, o que vem depois e o que
+passou há uma hora — se chama **EPG**, sigla de *electronic programme guide*, o
+guia eletrônico de programação. Em um receptor de satélite ele chega dentro do
+próprio sinal. Em um player de IPTV não chega, e essa diferença explica quase
+toda esquisitice que um guia faz.
+
+## É um segundo arquivo, e não parte da lista de canais
+
+A sua lista de canais diz *onde os streams estão*. O EPG diz *o que está passando
+neles e quando*. São documentos separados, buscados separadamente, atualizados
+em agendas diferentes.
+
+O formato de sempre é o **XMLTV**: um arquivo XML que lista os canais e depois os
+programas, cada um com uma referência de canal, um horário de início, um horário
+de fim, um título e muitas vezes uma descrição. Um guia que cobre algumas
+centenas de canais por uma semana é um arquivo grande — dezenas de megabytes é o
+normal —, e é por isso que o player faz essa busca em segundo plano, e não no
+momento em que você aperta o botão do guia.
+
+Se você usa [Xtream Codes](/pt/blog/xtream-codes-ou-m3u/), o guia normalmente vem
+junto: a API o expõe, e o player o recolhe sem que você configure nada. Com um
+M3U simples, muitas vezes você mesmo informa a URL do EPG, porque um arquivo de
+lista não tem onde guardar uma.
+
+## Como um programa encontra o canal dele
+
+É aqui que os guias quebram, e o motivo é sem glamour nenhum: os dois arquivos
+precisam concordar sobre um nome.
+
+Cada entrada do guia leva um identificador de canal. Cada canal da sua lista pode
+levar um também, no atributo `tvg-id`. O player casa os dois. Quando casam, você
+tem uma grade de programação. Quando não casam, você tem um canal que reproduz
+perfeitamente e não mostra nada no guia.
+
+Essa é a reclamação mais comum sobre EPG, e quase nunca é do player. `Canal Um
+HD` na lista e `canal.um.hd` no guia são textos diferentes, e nada junta os dois
+além de uma correção do lado do provedor ou um mapeamento manual.
+
+## Fuso horário, o outro clássico
+
+Um horário do XMLTV carrega um deslocamento em relação ao UTC —
+`20260729180000 -0300`. Quando o arquivo do provedor omite esse deslocamento, ou
+declara um que não bate com a realidade, o guia inteiro desliza: está tudo certo,
+só que uma ou três horas longe da verdade.
+
+Se o seu guia está deslocado de forma uniforme por um número inteiro de horas,
+foi isso que aconteceu, e a correção é do provedor e não um ajuste do aparelho.
+Se só alguns canais estão deslocados, eles estão vindo de uma fonte de guia
+diferente da dos demais.
+
+## O que um bom guia entrega
+
+Assim que o casamento funciona, o EPG deixa de ser enfeite:
+
+- **Agora e a seguir**, para você ver o que está pegando pela metade.
+- **Uma grade que dá para rolar para a frente**, que é a única forma confortável
+  de planejar uma noite entre centenas de canais.
+- **Lembretes**, nos players que oferecem isso.
+- **Busca melhor**, porque dá para procurar por programa e não por canal.
+- **Catch-up**, quando o seu provedor oferece: é o guia que dá ao player algo
+  para pedir.
+
+## Quando o guia está vazio
+
+Na ordem:
+
+1. **Espere.** Depois de adicionar uma lista, a primeira busca do EPG demora um
+   pouco. Nada está errado nos primeiros minutos.
+2. **Veja se existe guia.** Com uma fonte M3U, se você nunca recebeu uma URL de
+   EPG, não há o que exibir. Peça uma ao seu provedor.
+3. **Compare um canal com todos os canais.** Alguns canais em branco é
+   identificador que não casa. Todos os canais em branco é falha na busca do
+   arquivo.
+4. **Atualize o guia**, se o player oferecer isso, o que baixa tudo de novo em
+   vez de reler o cache.
+5. **Considere o horário.** Alguns provedores publicam uma janela estreita — só
+   hoje e amanhã — e parece vazio se você rola muito para a frente.
+
+Nada disso tem a ver com reprodução, o que já é uma pista útil: um canal que
+reproduz mas não tem entrada no guia e um canal que tem entrada no guia mas não
+reproduz são problemas sem relação e com causas sem relação — o segundo
+normalmente é [o caminho de rede](/pt/blog/iptv-travando-como-resolver/).
+
+## Por que a parte do player importa aqui
+
+Um guia é muito dado para segurar com elegância. Interpretar dezenas de
+megabytes de XML, manter tudo atualizado e desenhar uma grade rolável para
+centenas de canais sem que a interface fique impraticável é trabalho de verdade
+— e é o tipo de trabalho pelo qual
+[um player é de fato responsável](/pt/blog/o-que-faz-um-player-iptv/), ao
+contrário do conteúdo do guia em si.
+
+É também um ponto em que a privacidade importa em silêncio. Buscar o guia é uma
+requisição para a URL do seu provedor e para nenhum outro lugar; um player que
+reportasse quais programas você passou rolando estaria juntando um retrato
+notavelmente detalhado da sua noite, sem nenhuma razão ligada a exibir uma grade.

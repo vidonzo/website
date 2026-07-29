@@ -1,0 +1,94 @@
+---
+title: "Faites de votre téléphone la télécommande de votre téléviseur"
+description: "L'appairage passe par votre réseau local, et le téléphone reçoit la bibliothèque plutôt qu'une croix directionnelle virtuelle. Voici pourquoi."
+urlSlug: telephone-comme-telecommande-tv
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["television", "technique"]
+keywords: ["téléphone en télécommande tv", "piloter sa tv depuis son téléphone", "application télécommande iptv", "appairer son téléphone à sa tv"]
+heroImageAlt: "Un téléphone tenu à la main affichant une liste de chaînes avec un champ de recherche, et derrière lui un téléviseur qui diffuse un seul flux."
+---
+
+Une croix directionnelle, c'est quatre directions et un bouton OK. Une playlist
+IPTV ordinaire compte vingt mille chaînes. Ces deux faits s'entendent mal.
+
+On peut masquer l'écart avec une meilleure gestion de la sélection et un
+défilement plus rapide — Vidonzo fait les deux — mais le problème de fond reste
+qu'on pilote une requête de base de données avec une flèche. Pendant ce temps,
+il y a sur l'accoudoir du canapé un appareil doté d'un écran tactile, d'un
+clavier et d'un champ de recherche. S'en servir comme télécommande n'est pas un
+confort ajouté sur le côté. C'est la seule entrée de la pièce qui soit à la
+mesure de la liste.
+
+## Ce que fait réellement cette télécommande
+
+La télécommande de Vidonzo n'est pas une croix directionnelle virtuelle dessinée
+sur un téléphone. Ces objets existent, et ils valent moins que la télécommande
+physique qu'ils imitent : on perd les reliefs qui permettent d'appuyer deux fois
+vers le haut sans regarder, et on ne gagne rien, puisque l'interface que l'on
+pilote reste celle du téléviseur.
+
+Le téléphone reçoit au contraire la **bibliothèque**. Vous parcourez sur le
+téléphone tout le catalogue du téléviseur, avec le défilement du téléphone et
+son clavier. Quand vous trouvez quelque chose, une pression le lance sur le
+téléviseur. L'écran n'affiche jamais un menu que vous êtes en train de
+parcourir : il affiche ce qui est en cours.
+
+Cela inverse la répartition habituelle. Le grand écran sert à regarder, le petit
+à décider. Cela signifie aussi que la pièce n'est plus prise en otage par la
+recherche d'une seule personne : ce qui passe à l'écran continue pendant que
+quelqu'un cherche la suite.
+
+Vous disposez également d'une file d'attente, qui permet de choisir la suite
+sans interrompre le programme en cours, de favoris que vous pouvez activer
+depuis l'un ou l'autre appareil, et d'un pavé tactile et d'un clavier pour les
+rares moments où une application TV a vraiment besoin d'une saisie de texte.
+
+La recherche depuis le téléphone est le changement le plus visible à l'usage,
+en particulier avec un fournisseur qui préfixe abondamment les noms de chaînes —
+[c'est même ce qui rend une longue liste atteignable](/fr/blog/organiser-une-grande-playlist/).
+
+## Par votre réseau, pas par le nôtre
+
+L'appairage se fait sur le réseau local. Le téléphone trouve le téléviseur par
+mDNS — Vidonzo s'annonce, il n'y a donc aucun code à saisir dans le cas normal —
+et les deux dialoguent par un WebSocket sur votre propre réseau.
+
+Rien dans cette liaison n'a besoin de nos serveurs, et cela entraîne deux
+conséquences qui méritent d'être énoncées séparément. Cela fonctionne quand
+votre connexion internet est coupée, parce que ni le canal de commande ni un
+flux issu d'une source locale n'ont de raison de sortir du logement. Et nous ne
+pouvons pas voir ce que vous parcourez, parce qu'il n'existe aucun point du
+trajet où nous apparaissons — le même raisonnement que celui qui traverse
+[le modèle « apportez votre playlist »](/fr/blog/apportez-votre-playlist/).
+
+Certaines box bloquent la découverte entre clients sans fil, ce qui empêche le
+mDNS d'atteindre quoi que ce soit. Pour ces cas, il existe un chemin explicite
+qui ne dépend pas du tout de la découverte : un QR code, accompagné d'un code
+court à saisir là où scanner est malcommode.
+
+## La montre
+
+Une montre connectée appairée dispose de la lecture, de la pause, du passage au
+suivant et du volume. C'est une surface volontairement réduite — de quoi arrêter
+l'épisode quand on sonne à la porte, sans prétendre qu'une montre soit un bon
+endroit pour parcourir un catalogue. Davantage en ferait une copie moins bonne
+du téléphone déjà présent dans la pièce.
+
+## Ce que cela coûte
+
+Une fonctionnalité qui vit sur le réseau local est plus difficile à accompagner
+qu'une fonctionnalité qui passe par le cloud. Les réseaux invités, l'isolation
+des clients et le mDNS bloqué produisent tous le même symptôme — le téléviseur
+n'apparaît pas — et aucun de ces cas n'est visible de notre côté. Nous
+l'apprenons quand quelqu'un nous écrit.
+
+Un relais par un serveur ferait de la découverte le problème de quelqu'un
+d'autre. Il signifierait aussi que chaque bouton que vous pressez transite par
+nous, ce qui est précisément la propriété dont nous ne voulions pas. Le marché
+tient donc : le trafic reste sur votre réseau, et la charge du support reste
+chez nous.
+
+C'est à cela que sert le chemin par QR code, et c'est pourquoi
+[les instructions d'appairage](/fr/help/) commencent par les questions de réseau
+plutôt que par celles de l'application.

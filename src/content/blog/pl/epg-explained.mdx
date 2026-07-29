@@ -1,0 +1,105 @@
+---
+title: "EPG: jak działa program telewizyjny na ekranie"
+description: "Siatka z programem to osobny plik, pobierany niezależnie od listy kanałów i w innym rytmie. To tłumaczy każde dziwne zachowanie przewodnika."
+urlSlug: epg-jak-dziala-program-telewizyjny
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["telewizja", "playlisty"]
+keywords: ["co to jest epg", "program telewizyjny iptv", "xmltv epg", "brak epg w iptv"]
+heroImageAlt: "Wiersz kanałów i siatka audycji narysowane jako dwie osobne kartki, połączone jednym pasującym identyfikatorem."
+---
+
+Siatka pokazująca, co leci teraz, co będzie dalej i co szło godzinę temu, nosi
+nazwę **EPG** — elektroniczny przewodnik po programach. W dekoderze satelitarnym
+przychodzi wewnątrz sygnału. W odtwarzaczu IPTV nie przychodzi, a ta różnica
+tłumaczy prawie każde dziwne zachowanie przewodnika.
+
+## To drugi plik, a nie część listy kanałów
+
+Lista kanałów mówi, *gdzie są strumienie*. EPG mówi, *co na nich leci i kiedy*.
+To osobne dokumenty, pobierane osobno i aktualizowane w innych rytmach.
+
+Zwykłym formatem jest **XMLTV**: plik XML wymieniający kanały, a potem audycje
+z odwołaniem do kanału, godziną początku, godziną końca, tytułem i często
+opisem. Program obejmujący kilkaset kanałów na tydzień to duży plik —
+kilkadziesiąt megabajtów to norma — i dlatego odtwarzacz pobiera go w tle, a nie
+w chwili, w której naciskasz przycisk programu.
+
+Przy [Xtream Codes](/pl/blog/xtream-codes-czy-m3u/) przewodnik zwykle przychodzi
+sam: API go udostępnia, a odtwarzacz zbiera go bez żadnej konfiguracji z Twojej
+strony. Przy zwykłym M3U często sam podajesz adres EPG, bo plik playlisty nie ma
+gdzie go zmieścić.
+
+## Jak audycja odnajduje swój kanał
+
+Tutaj przewodniki się psują, a powód jest mało efektowny: oba pliki muszą
+zgodzić się co do nazwy.
+
+Każdy wpis w programie jest oznaczony identyfikatorem kanału. Każdy kanał na
+Twojej playliście może nieść taki identyfikator w atrybucie `tvg-id`. Odtwarzacz
+je łączy. Gdy pasują, dostajesz siatkę audycji. Gdy nie pasują, dostajesz kanał,
+który gra bez zarzutu i nie pokazuje w programie nic.
+
+To najczęstsza skarga na EPG i prawie nigdy nie wynika z odtwarzacza.
+`Channel One HD` na playliście i `channel.one.hd` w programie to różne ciągi
+znaków i nic ich nie połączy poza poprawką po stronie dostawcy albo ręcznym
+przypisaniem.
+
+## Strefy czasowe, druga klasyczna usterka
+
+Znacznik czasu w XMLTV niesie przesunięcie względem UTC —
+`20260729180000 +0300`. Kiedy plik dostawcy pomija przesunięcie albo podaje
+takie, które nie odpowiada rzeczywistości, cały przewodnik jedzie w bok:
+wszystko jest poprawne, tylko o godzinę albo trzy obok prawdy.
+
+Jeśli Twój program jest przesunięty równo o pełne godziny, to właśnie się stało,
+i jest to poprawka po stronie dostawcy, a nie ustawienie urządzenia. Jeśli
+przesunięta jest tylko część kanałów, pochodzą one z innego źródła programu niż
+reszta.
+
+## Co daje dobrze dopasowany przewodnik
+
+Kiedy identyfikatory pasują, EPG przestaje być ozdobą:
+
+- **Teraz i za chwilę**, żeby było widać, do czego dołączasz w połowie.
+- **Siatka, po której przewijasz w przód**, czyli jedyny wygodny sposób na
+  zaplanowanie wieczoru w kilkuset kanałach.
+- **Przypomnienia**, w odtwarzaczach, które je oferują.
+- **Lepsze wyszukiwanie**, bo szukasz audycji, a nie kanału.
+- **Catch-up**, tam gdzie dostawca go obsługuje: to przewodnik daje odtwarzaczowi
+  coś, o co można poprosić.
+
+## Gdy przewodnik jest pusty
+
+Po kolei:
+
+1. **Poczekaj.** Po dodaniu playlisty pierwsze pobranie EPG trwa chwilę. Przez
+   pierwsze kilka minut nic złego się nie dzieje.
+2. **Sprawdź, czy program w ogóle jest.** Przy źródle M3U, jeśli nikt nie podał
+   Ci adresu EPG, nie ma czego wyświetlić. Poproś o niego dostawcę.
+3. **Porównaj jeden kanał ze wszystkimi.** Kilka pustych kanałów to niezgodność
+   identyfikatorów. Wszystkie puste to problem z pobraniem.
+4. **Odśwież przewodnik**, jeśli odtwarzacz to udostępnia — to pobiera plik na
+   nowo, zamiast czytać go z pamięci podręcznej.
+5. **Weź pod uwagę zakres.** Część dostawców publikuje wąskie okno — tylko dziś
+   i jutro — i przy przewijaniu daleko w przód wygląda ono na puste.
+
+Żaden z tych punktów nie dotyczy odtwarzania, co samo w sobie jest użyteczną
+wskazówką: kanał, który gra, ale nie ma wpisu w programie, oraz kanał, który ma
+wpis, ale nie chce zagrać, to niepowiązane problemy o niepowiązanych
+przyczynach — ten drugi wynika zwykle z
+[drogi sieciowej](/pl/blog/jak-naprawic-buforowanie-iptv/).
+
+## Dlaczego udział odtwarzacza ma tu znaczenie
+
+Przewodnik to sporo danych do utrzymania bez potknięć. Parsowanie kilkudziesięciu
+megabajtów XML, trzymanie ich w aktualności i rysowanie przewijalnej siatki dla
+kilkuset kanałów bez zamienienia interfejsu w coś nieużywalnego to prawdziwa
+robota — i akurat taka, [za jaką odtwarzacz naprawdę odpowiada](/pl/blog/co-robi-odtwarzacz-iptv/),
+w odróżnieniu od zawartości samego programu.
+
+To także miejsce, w którym po cichu liczy się prywatność. Pobranie programu to
+zapytanie pod adres Twojego dostawcy i pod żaden inny; odtwarzacz, który
+raportowałby, jakie audycje mijasz w przewijaniu, zbierałby wyjątkowo
+szczegółowy obraz Twojego wieczoru — bez żadnego powodu związanego
+z pokazaniem Ci siatki.

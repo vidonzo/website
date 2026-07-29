@@ -1,0 +1,107 @@
+---
+title: "EPG nedir: ekrandaki yayın rehberi nasıl çalışır"
+description: "Program ızgarası, kanal listenizden ayrı bir dosyadır ve kendi takvimiyle güncellenir. Bunu bilmek rehberin bütün tuhaflıklarını açıklar."
+urlSlug: epg-yayin-rehberi-nedir
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televizyon", "oynatma-listesi"]
+keywords: ["epg nedir", "iptv yayın rehberi", "xmltv epg", "iptv epg gelmiyor"]
+heroImageAlt: "İki ayrı sayfa olarak çizilmiş bir kanal satırı ve bir program ızgarası; tek bir eşleşen tanımlayıcıyla birbirine bağlanmış."
+---
+
+Şu an ne olduğunu, sırada ne olduğunu ve bir saat önce ne olduğunu gösteren
+ızgaranın adı **EPG**: elektronik yayın rehberi. Uydu alıcısında yayın sinyalinin
+içinde gelir. Bir IPTV oynatıcısında gelmez ve rehberin yaptığı tuhaf şeylerin
+neredeyse hepsini de bu fark açıklar.
+
+## Kanal listesinin parçası değil, ikinci bir dosya
+
+Kanal listeniz *yayınların nerede olduğunu* söyler. EPG *onlarda ne olduğunu ve
+ne zaman olduğunu* söyler. Bunlar ayrı belgelerdir; ayrı çekilir, farklı
+takvimlerle güncellenir.
+
+Alışılmış biçim **XMLTV**'dir: önce kanalları, sonra programları listeleyen bir
+XML dosyası; her programda bir kanal referansı, bir başlangıç, bir bitiş, bir
+başlık ve çoğu zaman bir açıklama bulunur. Birkaç yüz kanalı bir hafta boyunca
+kapsayan bir rehber büyük bir dosyadır — onlarca megabayt olağandır — ve
+oynatıcının onu rehber tuşuna bastığınız anda değil, arka planda çekmesinin
+sebebi budur.
+
+[Xtream Codes](/tr/blog/xtream-codes-mi-m3u-mu/) kullanıyorsanız rehber genelde
+kendiliğinden gelir: API onu sunar, oynatıcı da siz hiçbir ayar yapmadan toplar.
+Düz bir M3U'da ise EPG adresini çoğu zaman kendiniz verirsiniz, çünkü bir oynatma
+listesi dosyasında onu koyacak bir yer yoktur.
+
+## Bir program kanalını nasıl buluyor
+
+Rehberler burada bozulur ve sebebi hiç de gösterişli değil: iki dosyanın bir ad
+üzerinde anlaşması gerekir.
+
+Rehberdeki her kayıt bir kanal tanımlayıcısıyla etiketlenir. Oynatma listenizdeki
+her kanal da `tvg-id` özniteliğinde bir tane taşıyabilir. Oynatıcı bunları
+eşleştirir. Eşleştiklerinde bir program ızgarası elde edersiniz. Eşleşmediklerinde
+kusursuz oynayan ama rehberde hiçbir şey göstermeyen bir kanal elde edersiniz.
+
+EPG'yle ilgili en sık gelen şikâyet bu ve neredeyse hiçbir zaman oynatıcı
+kaynaklı değil. Listedeki `Channel One HD` ile rehberdeki `channel.one.hd` farklı
+dizelerdir; bunları sağlayıcı tarafında yapılacak bir düzeltmeden ya da elle
+kurulan bir eşlemeden başka hiçbir şey birleştiremez.
+
+## Saat dilimleri, diğer klasik arıza
+
+Bir XMLTV zaman damgası bir UTC farkı taşır — `20260729180000 +0300`.
+Sağlayıcının dosyası bu farkı atladığında ya da gerçeğe uymayan bir fark
+bildirdiğinde rehberin tamamı kayar: her şey yerli yerindedir, yalnızca
+doğrusundan bir ya da üç saat uzaktadır.
+
+Rehberiniz baştan sona tam saat katları kadar kaymışsa olan budur; bu da cihaz
+ayarı değil, sağlayıcı tarafında bir düzeltmedir. Yalnızca bazı kanallar
+kaymışsa, o kanallar geri kalanından farklı bir rehber kaynağından besleniyordur.
+
+## İyi bir rehber size ne verir
+
+Eşleşme oturduğunda EPG bir süs olmaktan çıkar:
+
+- **Şimdi ve sırada**, böylece ortasına katıldığınız şeyin ne olduğunu
+  görürsünüz.
+- **İleri kaydırabildiğiniz bir ızgara** — yüzlerce kanal arasında bir akşamı
+  planlamanın rahat tek yolu.
+- **Hatırlatmalar**, bunu sunan oynatıcılarda.
+- **Daha iyi arama**, çünkü kanal yerine program arayabilirsiniz.
+- **Geri izleme**, sağlayıcınız destekliyorsa: oynatıcının isteyeceği şeyi ona
+  rehber verir.
+
+## Rehber boş geldiğinde
+
+Sırasıyla ilerleyelim:
+
+1. **Bekleyin.** Bir oynatma listesi ekledikten sonra ilk EPG çekimi biraz sürer.
+   İlk birkaç dakikada yanlış giden bir şey yok.
+2. **Ortada bir rehber var mı bakın.** M3U kaynağında size hiç EPG adresi
+   verilmediyse gösterilecek bir şey yoktur. Sağlayıcınızdan isteyin.
+3. **Bir kanalla bütün kanalları karşılaştırın.** Birkaç boş kanal, tanımlayıcı
+   uyuşmazlığıdır. Hepsinin boş olması çekim sorunudur.
+4. **Rehberi yenileyin**, oynatıcı sunuyorsa; bu, önbelleği yeniden okumak yerine
+   yeniden indirir.
+5. **Saati hesaba katın.** Bazı sağlayıcılar dar bir pencere yayımlar — yalnızca
+   bugün ve yarın — ve çok ileri kaydırdığınızda boş görünür.
+
+Bunların hiçbiri oynatmayla ilgili değil; bu da başlı başına işe yarar bir ipucu:
+oynayan ama rehberde karşılığı olmayan bir kanalla, rehberde karşılığı olan ama
+oynamayan bir kanal, sebepleri birbirinden bağımsız iki ayrı sorundur —
+ikincisinin sebebi genellikle [ağ
+yoludur](/tr/blog/iptv-donma-sorunu-cozumu/).
+
+## Oynatıcının bu işteki payı neden önemli
+
+Bir rehber, zarifçe taşınması gereken hacimli bir veridir. Onlarca megabayt
+XML'i ayrıştırmak, güncel tutmak ve yüzlerce kanal için kaydırılabilir bir
+ızgarayı arayüzü kullanılamaz hale getirmeden çizmek gerçek bir iştir — ve
+rehberin içeriğinin aksine, [bir oynatıcının gerçekten sorumlu
+olduğu](/tr/blog/iptv-oynatici-ne-yapar/) türden bir iştir.
+
+Ayrıca gizliliğin sessizce önem kazandığı bir yer. Bir rehber çekimi,
+sağlayıcınızın adresine giden ve başka hiçbir yere gitmeyen bir istektir; hangi
+programların üzerinden kaydırdığınızı geri bildiren bir oynatıcı ise, size bir
+ızgara göstermekle hiçbir ilgisi olmayan bir sebeple akşamınızın şaşırtıcı
+ölçüde ayrıntılı bir tablosunu toplamış olurdu.

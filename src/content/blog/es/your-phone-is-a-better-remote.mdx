@@ -1,0 +1,86 @@
+---
+title: "Convierte tu móvil en el mando de tu televisor"
+description: "El emparejamiento va por tu propia red y el móvil recibe la biblioteca, no una cruceta virtual. Por qué el control del televisor está en la propia app."
+urlSlug: movil-como-mando-de-tv
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["televisión", "ingeniería"]
+keywords: ["móvil como mando de tv", "controlar la tele desde el móvil", "mando iptv desde el móvil", "emparejar móvil con android tv"]
+heroImageAlt: "Un móvil sostenido en una mano con una lista de canales y un buscador, y detrás un televisor reproduciendo un único stream."
+---
+
+Una cruceta tiene cuatro direcciones y un botón de OK. Una lista IPTV corriente tiene
+veinte mil canales. Estos dos hechos no se llevan bien.
+
+Puedes disimular la distancia con un mejor manejo del foco y un desplazamiento más
+rápido —Vidonzo hace las dos cosas—, pero el problema de fondo es que estás lanzando
+una consulta a una base de datos con una tecla de flecha. Mientras tanto, en el brazo
+del sofá hay un aparato con pantalla táctil, teclado y campo de búsqueda. Usarlo como
+mando no es una comodidad añadida por un lado. Es la única entrada de la habitación
+que está a la altura del tamaño de la lista.
+
+## Qué hace en realidad el mando
+
+El mando de Vidonzo no es una cruceta virtual dibujada en un móvil. Las hay, y son
+peores que el mando físico que imitan: pierdes los relieves que te dejan pulsar arriba
+dos veces sin mirar, y no ganas nada, porque la interfaz que estás manejando sigue
+siendo la del televisor.
+
+Lo que recibe el móvil es la **biblioteca**. Recorres el catálogo completo del
+televisor desde el móvil, con el desplazamiento del móvil y el teclado del móvil.
+Cuando encuentras algo, un toque lo arranca en el televisor. La pantalla no llega a
+mostrar un menú por el que estás navegando: muestra lo que se está viendo.
+
+Eso le da la vuelta al reparto habitual. La pantalla grande es para ver; la pequeña es
+para decidir. También significa que la habitación no queda secuestrada por la búsqueda
+de una sola persona: lo que hay puesto en el televisor sigue corriendo mientras
+alguien busca lo que viene después.
+
+Tienes además una cola, para que elegir lo siguiente no interrumpa lo que está puesto,
+favoritos que puedes marcar desde cualquiera de los dos aparatos, y un trackpad y un
+teclado para los momentos raros en que una app de tele sí necesita escribir texto.
+
+Buscar desde el móvil es el cambio que más se nota en el día a día, sobre todo con un
+proveedor que carga de prefijos los nombres de canal —
+[que es lo que vuelve alcanzable una lista larga](/es/blog/organizar-listas-grandes-iptv/).
+
+## Por tu red, no por la nuestra
+
+El emparejamiento va por la red local. El móvil encuentra el televisor por mDNS
+—Vidonzo se anuncia, así que en el caso normal no hay ningún código que escribir— y
+los dos hablan por un WebSocket dentro de tu propia LAN.
+
+Nada de esa conexión necesita nuestros servidores, y eso tiene dos consecuencias que
+conviene enunciar por separado. Funciona con la conexión a internet caída, porque ni
+el canal de control ni un stream de un origen local tienen ningún motivo para salir de
+casa. Y no podemos ver qué consultas, porque no hay ningún punto del camino en el que
+aparezcamos: el mismo razonamiento que recorre
+[el modelo de traer tu propia lista](/es/blog/trae-tu-propia-lista/).
+
+Algunos routers bloquean el descubrimiento entre clientes inalámbricos, lo que deja al
+mDNS sin llegar a ningún sitio. Para esos hay un camino explícito que no depende del
+descubrimiento en absoluto: un código QR, con un código corto que escribir donde
+escanear resulte incómodo.
+
+## El reloj
+
+Un reloj inteligente emparejado tiene reproducir, pausar, saltar y volumen. Es una
+superficie deliberadamente pequeña: lo justo para parar el episodio cuando suena el
+timbre, sin fingir que un reloj es un buen sitio para recorrer un catálogo. Cualquier
+cosa más lo convertiría en una copia peor del móvil que ya está en la habitación.
+
+## Lo que esto cuesta
+
+Una función de red local es más difícil de sostener con soporte que una en la nube.
+Las redes de invitados, el aislamiento de clientes y el mDNS bloqueado producen todos
+el mismo síntoma —el televisor no aparece— y ninguno se ve desde nuestro lado. Nos
+enteramos cuando alguien nos escribe.
+
+Un relé a través de un servidor convertiría el descubrimiento en problema de otro.
+También significaría que cada botón que pulsas pasa por nosotros, que es justo la
+propiedad que no queríamos. Así que el trato se mantiene: el tráfico se queda en tu
+red y la carga de soporte se queda con nosotros.
+
+Para eso está el camino del QR, y por eso
+[las instrucciones de emparejamiento](/es/help/) empiezan por las preguntas de red
+antes que por las de la app.

@@ -1,0 +1,112 @@
+---
+title: "EPG erklärt: wie der Programmführer auf dem Bildschirm funktioniert"
+description: "Das Raster mit den Sendungen ist eine eigene Datei mit eigenem Zeitplan. Wer das weiß, versteht jede Merkwürdigkeit, die ein Programmführer zeigt."
+urlSlug: epg-programmfuehrer-erklaert
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["fernsehen", "playlists"]
+keywords: ["was ist epg", "iptv programmführer", "xmltv epg url", "epg wird nicht angezeigt"]
+heroImageAlt: "Eine Senderzeile und ein Sendungsraster als zwei getrennte Blätter, verbunden durch eine einzige übereinstimmende Kennung."
+---
+
+Der Programmführer — das Raster, das zeigt, was jetzt läuft, was als Nächstes
+kommt und was vor einer Stunde lief — heißt **EPG**, für elektronischer
+Programmführer. Bei einem Satellitenreceiver kommt er im Sendesignal mit. In
+einem IPTV-Player nicht, und dieser Unterschied erklärt fast jede Merkwürdigkeit,
+die ein Programmführer je zeigt.
+
+## Er ist eine zweite Datei und kein Teil der Senderliste
+
+Ihre Senderliste sagt, *wo die Streams liegen*. Das EPG sagt, *was darauf läuft
+und wann*. Es sind getrennte Dokumente, getrennt abgerufen, nach
+unterschiedlichen Zeitplänen aktualisiert.
+
+Das übliche Format ist **XMLTV**: eine XML-Datei, die zuerst Sender auflistet und
+danach Sendungen mit einem Senderbezug, einer Anfangszeit, einer Endzeit, einem
+Titel und oft einer Beschreibung. Ein Programmführer, der ein paar hundert Sender
+eine Woche lang abdeckt, ist eine große Datei — einige zehn Megabyte sind
+gewöhnlich —, und deshalb holt ein Player sie im Hintergrund und nicht in dem
+Moment, in dem Sie die Taste für den Programmführer drücken.
+
+Nutzen Sie [Xtream Codes](/de/blog/xtream-codes-oder-m3u/), kommt der
+Programmführer meist von allein mit: Die API stellt ihn bereit, und der Player
+holt ihn ab, ohne dass Sie etwas einrichten. Bei einer schlichten M3U geben Sie
+die EPG-Adresse oft selbst an, weil eine Playlist-Datei keinen Platz dafür hat.
+
+## Wie eine Sendung ihren Sender findet
+
+Hier gehen Programmführer kaputt, und der Grund ist unspektakulär: Die beiden
+Dateien müssen sich auf einen Namen einigen.
+
+Jeder Eintrag im Programmführer trägt eine Senderkennung. Jeder Sender in Ihrer
+Playlist kann ebenfalls eine tragen, im Attribut `tvg-id`. Der Player führt die
+beiden zusammen. Passen sie zueinander, bekommen Sie ein Sendungsraster. Passen
+sie nicht, bekommen Sie einen Sender, der einwandfrei läuft und im
+Programmführer nichts anzeigt.
+
+Das ist die mit Abstand häufigste Beschwerde zum EPG, und es liegt fast nie am
+Player. `Channel One HD` in der Playlist und `channel.one.hd` im Programmführer
+sind verschiedene Zeichenketten, und zusammenführen kann sie nur eine Korrektur
+auf der Seite des Anbieters oder eine Zuordnung von Hand.
+
+## Zeitzonen, der andere Klassiker
+
+Ein XMLTV-Zeitstempel trägt einen UTC-Versatz — `20260729180000 +0300`. Lässt die
+Datei eines Anbieters den Versatz weg oder gibt einen an, der nicht der
+Wirklichkeit entspricht, verrutscht der ganze Programmführer: Alles stimmt, es
+liegt nur eine Stunde oder drei von der Wahrheit entfernt.
+
+Ist Ihr Programmführer gleichmäßig um eine ganze Stundenzahl verschoben, ist
+genau das passiert, und die Korrektur liegt beim Anbieter und nicht in einer
+Geräteeinstellung. Sind nur einzelne Sender verschoben, stammen sie aus einer
+anderen Programmquelle als der Rest.
+
+## Was ein guter Programmführer Ihnen gibt
+
+Sobald die Zuordnung stimmt, hört das EPG auf, Dekoration zu sein:
+
+- **Jetzt und gleich**, damit Sie sehen, wo Sie mitten hineingeraten.
+- **Ein Raster, in dem Sie vorausblättern können**, was die einzige bequeme Art
+  ist, einen Abend über hunderte Sender hinweg zu planen.
+- **Erinnerungen**, in Playern, die sie anbieten.
+- **Bessere Suche**, weil Sie nach einer Sendung suchen können statt nach einem
+  Sender.
+- **Sendungen nachträglich abrufen**, sofern Ihr Anbieter das unterstützt: Der
+  Programmführer gibt dem Player überhaupt erst etwas, wonach er fragen kann.
+
+## Wenn der Programmführer leer bleibt
+
+Der Reihe nach:
+
+1. **Abwarten.** Nach dem Hinzufügen einer Playlist dauert der erste EPG-Abruf
+   eine Weile. In den ersten Minuten ist nichts falsch.
+2. **Prüfen, ob es überhaupt einen Programmführer gibt.** Bei einer M3U-Quelle
+   gibt es nichts anzuzeigen, wenn Sie nie eine EPG-Adresse bekommen haben.
+   Fragen Sie Ihren Anbieter danach.
+3. **Einen Sender gegen alle Sender prüfen.** Ein paar leere Sender sind eine
+   nicht übereinstimmende Kennung. Alle Sender leer ist ein Problem beim Abruf.
+4. **Den Programmführer aktualisieren**, wenn der Player das anbietet — das lädt
+   ihn neu herunter, statt den Zwischenspeicher erneut zu lesen.
+5. **An die Uhrzeit denken.** Manche Anbieter veröffentlichen nur ein schmales
+   Fenster — heute und morgen — und weiter voraus wirkt es leer.
+
+Nichts davon betrifft die Wiedergabe, was für sich schon ein nützlicher Hinweis
+ist: Ein Sender, der läuft, aber keinen Eintrag im Programmführer hat, und ein
+Sender, der einen Eintrag hat, aber nicht startet, sind unabhängige Probleme mit
+unabhängigen Ursachen — beim zweiten ist es meist
+[der Netzwerkweg](/de/blog/iptv-ruckeln-beheben/).
+
+## Warum der Anteil des Players daran zählt
+
+Ein Programmführer ist eine Datenmenge, die sich nicht nebenbei bewältigen lässt.
+Einige zehn Megabyte XML zu verarbeiten, sie aktuell zu halten und für hunderte
+Sender ein scrollbares Raster zu zeichnen, ohne dass die Oberfläche unbenutzbar
+wird, ist echte Arbeit — und es ist die Art Arbeit,
+[für die ein Player tatsächlich zuständig ist](/de/blog/was-ein-iptv-player-tut/),
+anders als für den Inhalt des Programmführers selbst.
+
+Es ist außerdem eine Stelle, an der Privatsphäre still und leise eine Rolle
+spielt. Ein EPG-Abruf ist eine Anfrage an die Adresse Ihres Anbieters und an
+sonst keine; ein Player, der zurückmeldet, an welchen Sendungen Sie
+vorbeigescrollt sind, würde ein bemerkenswert genaues Bild Ihres Abends sammeln,
+ohne dass das irgendetwas damit zu tun hätte, Ihnen ein Raster anzuzeigen.

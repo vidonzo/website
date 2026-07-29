@@ -1,0 +1,113 @@
+---
+title: "Memahami EPG: cara kerja panduan acara di layar televisi"
+description: "Kisi acara itu berkas terpisah dari daftar kanal Anda, dengan jadwal pembaruannya sendiri. Memahaminya menjelaskan hampir setiap keanehan panduan acara."
+urlSlug: panduan-acara-epg-iptv
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televisi", "playlist"]
+keywords: ["apa itu epg", "epg iptv tidak muncul", "cara memasang epg xmltv", "panduan acara iptv"]
+heroImageAlt: "Satu baris kanal dan satu kisi acara digambar sebagai dua lembar terpisah, disatukan oleh sebuah penanda yang cocok."
+---
+
+Panduan itu — kisi yang menunjukkan apa yang sedang tayang, apa yang berikutnya,
+dan apa yang tayang sejam lalu — disebut **EPG**, singkatan dari *electronic
+programme guide*. Pada dekoder satelit, panduan tersebut datang di dalam sinyal
+siarannya. Pada pemutar IPTV, tidak — dan perbedaan itulah yang menjelaskan hampir
+setiap keanehan yang pernah dilakukan sebuah panduan acara.
+
+## Ia berkas kedua, bukan bagian dari daftar kanal
+
+Daftar kanal Anda menyatakan *di mana siarannya berada*. EPG menyatakan *apa yang
+ada di dalamnya dan kapan*. Keduanya dokumen terpisah, diambil terpisah, dan
+diperbarui dengan jadwal yang berbeda.
+
+Formatnya biasanya **XMLTV**: berkas XML yang mendaftar kanal, lalu acara-acara
+dengan rujukan kanal, waktu mulai, waktu selesai, judul, dan sering kali sebuah
+deskripsi. Panduan yang mencakup beberapa ratus kanal untuk satu pekan adalah
+berkas besar — puluhan megabyte itu biasa — dan karena itulah pemutar mengambilnya
+di latar belakang, bukan pada saat Anda menekan tombol panduan.
+
+Kalau Anda memakai [Xtream Codes](/id/blog/xtream-codes-atau-m3u/), panduannya
+biasanya ikut datang dengan sendirinya: API-nya menyediakannya, dan pemutar
+mengumpulkannya tanpa Anda mengatur apa pun. Dengan M3U biasa, Anda sering harus
+memasok sendiri URL EPG-nya, karena berkas playlist tidak punya tempat untuk
+menaruhnya.
+
+## Bagaimana sebuah acara menemukan kanalnya
+
+Di sinilah panduan acara rusak, dan sebabnya tidak mentereng: kedua berkas itu
+harus sepakat soal satu nama.
+
+Setiap entri di panduan diberi penanda kanal. Setiap kanal di playlist Anda juga
+bisa membawanya, pada atribut `tvg-id`. Pemutar mencocokkan keduanya. Kalau cocok,
+Anda mendapat kisi acara. Kalau tidak, Anda mendapat kanal yang berjalan mulus
+tetapi kosong sama sekali di panduannya.
+
+Itulah keluhan EPG yang paling sering muncul, dan hampir tidak pernah pemutarnya
+yang menjadi sebab. `Channel One HD` di playlist dan `channel.one.hd` di panduan
+adalah dua untai teks yang berbeda, dan tidak ada yang bisa menyatukannya selain
+perbaikan di sisi penyedia atau pemetaan manual.
+
+## Zona waktu, kegagalan klasik yang lain
+
+Stempel waktu XMLTV membawa selisih terhadap UTC — `20260729180000 +0700`. Ketika
+berkas dari penyedia menghilangkan selisih tersebut, atau menyebut selisih yang
+tidak sesuai kenyataan, seluruh panduannya bergeser: semuanya benar, hanya meleset
+satu sampai tiga jam dari yang sebenarnya.
+
+Kalau panduan Anda bergeser seragam sebesar bilangan bulat jam, itulah yang
+terjadi, dan perbaikannya ada di sisi penyedia, bukan pada pengaturan perangkat.
+Kalau hanya sebagian kanal yang bergeser, kanal-kanal itu bersumber dari umpan
+panduan yang berbeda dari kanal lainnya.
+
+## Yang diberikan panduan yang baik
+
+Begitu pencocokannya jalan, EPG berhenti menjadi hiasan:
+
+- **Sedang tayang dan berikutnya**, supaya Anda tahu apa yang Anda masuki di
+  tengah jalan.
+- **Kisi yang bisa digulir ke depan**, satu-satunya cara yang nyaman untuk
+  merencanakan satu malam di antara ratusan kanal.
+- **Pengingat**, pada pemutar yang menyediakannya.
+- **Pencarian yang lebih baik**, karena Anda bisa mencari acara, bukan kanal.
+- **Tayang ulang**, kalau penyedia Anda mendukungnya: panduanlah yang memberi
+  pemutar sesuatu untuk diminta.
+
+## Ketika panduannya kosong
+
+Ditelusuri berurutan:
+
+1. **Tunggu.** Setelah playlist ditambahkan, pengambilan EPG yang pertama memakan
+   waktu. Tidak ada yang salah pada beberapa menit pertama.
+2. **Periksa apakah panduannya memang ada.** Dengan sumber M3U, kalau Anda tidak
+   pernah diberi URL EPG, tidak ada yang bisa ditampilkan. Mintalah kepada
+   penyedia Anda.
+3. **Bandingkan satu kanal dengan semua kanal.** Beberapa kanal kosong berarti
+   penanda yang tidak cocok. Semua kanal kosong berarti masalah pengambilan
+   berkas.
+4. **Muat ulang panduannya** kalau pemutarnya menyediakan pilihan itu, yang
+   mengunduh ulang alih-alih membaca ulang salinan yang sudah tersimpan.
+5. **Pertimbangkan rentang waktunya.** Sebagian penyedia hanya menerbitkan jendela
+   yang sempit — hanya hari ini dan besok — dan panduannya terlihat kosong kalau
+   Anda menggulir jauh ke depan.
+
+Tidak satu pun dari itu berhubungan dengan pemutaran, dan itu sendiri sudah menjadi
+petunjuk yang berguna: kanal yang berjalan tetapi tanpa entri panduan, dan kanal
+yang punya entri panduan tetapi tidak mau berjalan, adalah dua masalah tak
+berhubungan dengan sebab yang juga tak berhubungan — yang kedua biasanya
+[soal jalur jaringan](/id/blog/mengatasi-buffering-iptv/).
+
+## Kenapa bagian pemutar dalam hal ini penting
+
+Panduan acara adalah data yang banyak untuk dipegang dengan rapi. Mengurai puluhan
+megabyte XML, menjaganya tetap mutakhir, dan menggambar kisi yang bisa digulir
+untuk ratusan kanal tanpa membuat antarmukanya tidak bisa dipakai adalah pekerjaan
+yang sungguhan — dan itu jenis pekerjaan yang
+[memang menjadi tanggung jawab sebuah pemutar](/id/blog/tugas-sebenarnya-pemutar-iptv/),
+tidak seperti isi panduannya sendiri.
+
+Ini juga tempat privasi diam-diam menjadi penting. Pengambilan panduan adalah
+permintaan ke URL penyedia Anda dan tidak ke mana-mana lagi; pemutar yang
+melaporkan balik acara apa saja yang Anda lewati saat menggulir berarti sedang
+menyusun gambaran yang luar biasa rinci tentang malam Anda, tanpa satu pun alasan
+yang berhubungan dengan menampilkan sebuah kisi.

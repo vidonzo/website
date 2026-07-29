@@ -1,0 +1,94 @@
+---
+title: "Je telefoon als afstandsbediening voor je tv"
+description: "Koppelen gaat over je eigen netwerk, en de telefoon krijgt de bibliotheek in plaats van een nagetekend navigatiekruis. Waarom tv-bediening in de app zelf zit."
+urlSlug: telefoon-als-afstandsbediening-tv
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["televisie", "techniek"]
+keywords: ["telefoon als afstandsbediening tv", "tv bedienen met je telefoon", "iptv afstandsbediening app", "telefoon koppelen met android tv"]
+heroImageAlt: "Een telefoon in één hand met een doorzoekbare zenderlijst, en daarachter een televisie waarop één stream speelt."
+---
+
+Een navigatiekruis heeft vier richtingen en een OK-knop. Een gangbare
+IPTV-afspeellijst heeft twintigduizend zenders. Die twee feiten gaan slecht
+samen.
+
+Je kunt het gat overbruggen met betere focusafhandeling en sneller scrollen —
+Vidonzo doet allebei — maar het onderliggende probleem is dat je een
+databasezoekopdracht bestuurt met een pijltjestoets. Ondertussen ligt er op de
+armleuning van de bank een apparaat met een aanraakscherm, een toetsenbord en een
+zoekveld. Dat als afstandsbediening gebruiken is geen gemak dat er aan de zijkant
+op geplakt is. Het is de enige invoer in de kamer die past bij de omvang van de
+lijst.
+
+## Wat de afstandsbediening werkelijk doet
+
+De afstandsbediening van Vidonzo is geen navigatiekruis dat op een telefoon is
+getekend. Die bestaan, en ze zijn slechter dan de fysieke afstandsbediening die
+ze nabootsen: je verliest de opstaande randen waarmee je twee keer omhoog kunt
+drukken zonder te kijken, en je wint er niets mee, want de interface die je
+bestuurt is nog steeds die op de televisie.
+
+In plaats daarvan krijgt de telefoon de **bibliotheek**. Je bladert op de
+telefoon door de volledige catalogus van de televisie, met het scrollen van de
+telefoon en het toetsenbord van de telefoon. Vind je iets, dan start één tik het
+op de televisie. Het scherm toont nooit een menu waar je doorheen navigeert — het
+toont wat er speelt.
+
+Dat draait de gebruikelijke verhouding om. Het grote scherm is om naar te kijken;
+het kleine scherm is om te beslissen. Het betekent ook dat de kamer niet gegijzeld
+wordt door de zoektocht van één persoon: wat er op de televisie staat loopt door
+terwijl iemand zoekt wat erna komt.
+
+Je krijgt ook een wachtrij, zodat kiezen wat er volgt niet onderbreekt wat er
+speelt, favorieten die je vanaf allebei de apparaten kunt aan- en uitzetten, en
+een trackpad en toetsenbord voor de zeldzame momenten waarop een tv-app echt
+tekstinvoer nodig heeft.
+
+Zoeken vanaf de telefoon is de verandering die in het dagelijks gebruik het meest
+opvalt, zeker bij een provider die zendernamen zwaar van voorvoegsels voorziet —
+[en dat is wat een lange lijst überhaupt bereikbaar maakt](/nl/blog/grote-afspeellijsten-ordenen/).
+
+## Over jouw netwerk, niet via het onze
+
+Koppelen gaat over het lokale netwerk. De telefoon vindt de televisie via mDNS —
+Vidonzo kondigt zichzelf aan, dus in het normale geval hoef je geen codes in te
+typen — en de twee praten met elkaar over een WebSocket op je eigen LAN.
+
+Aan de verbinding komt niets van onze servers te pas, en dat heeft twee gevolgen
+die het waard zijn om apart te benoemen. Het werkt als je internetverbinding
+eruit ligt, want noch het bedieningskanaal noch een stream uit een lokale bron
+heeft enige reden om het huis te verlaten. En wij kunnen niet zien waar je
+doorheen bladert, want er is nergens in het pad een punt waar wij voorkomen —
+dezelfde redenering die door
+[het model waarin je je eigen afspeellijst meeneemt](/nl/blog/neem-je-eigen-afspeellijst-mee/)
+heen loopt.
+
+Sommige routers blokkeren ontdekking tussen draadloze clients, waardoor mDNS
+nergens aankomt. Daarvoor is er een expliciete route die helemaal niet van
+ontdekking afhangt: een QR-code, met een korte code om in te typen waar scannen
+onhandig is.
+
+## Het horloge
+
+Een gekoppelde smartwatch krijgt afspelen, pauzeren, overslaan en volume. Het is
+een bewust klein oppervlak — genoeg om de aflevering stil te zetten als de
+deurbel gaat, zonder te doen alsof een horloge een goede plek is om door een
+catalogus te bladeren. Meer zou er een slechtere kopie van maken van de telefoon
+die toch al in de kamer ligt.
+
+## Wat dit kost
+
+Een functie die op het lokale netwerk draait is lastiger te ondersteunen dan een
+functie in de cloud. Gastnetwerken, clientisolatie en geblokkeerde mDNS geven
+allemaal hetzelfde verschijnsel — de tv verschijnt niet — en geen daarvan is aan
+onze kant zichtbaar. Wij komen erachter als iemand ons schrijft.
+
+Een doorgeefserver zou ontdekking het probleem van iemand anders maken. Het zou
+ook betekenen dat elke knop die je indrukt via ons reist, en dat is nu precies de
+eigenschap die we niet wilden. Dus de ruil blijft staan: het verkeer blijft op
+jouw netwerk, en de ondersteuningslast blijft bij ons.
+
+Daar is de QR-route voor, en daarom beginnen
+[de instructies om te koppelen](/nl/help/) met de vragen over het netwerk en niet
+met die over de app.

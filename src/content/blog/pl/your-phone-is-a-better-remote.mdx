@@ -1,0 +1,86 @@
+---
+title: "Zamień telefon w pilota do telewizora"
+description: "Parowanie działa w Twojej własnej sieci, a telefon dostaje bibliotekę zamiast wirtualnego krzyżaka. Dlaczego sterowanie telewizorem siedzi w samej aplikacji."
+urlSlug: telefon-jako-pilot-do-telewizora
+publishedAt: 2026-07-06
+sourceLocale: en
+tags: ["telewizja", "technikalia"]
+keywords: ["telefon jako pilot do tv", "sterowanie telewizorem z telefonu", "aplikacja pilot iptv", "parowanie telefonu z android tv"]
+heroImageAlt: "Telefon trzymany w jednej dłoni z listą kanałów i polem wyszukiwania, w tle telewizor odtwarzający jeden strumień."
+---
+
+Krzyżak ma cztery kierunki i przycisk OK. Typowa playlista IPTV liczy dwadzieścia
+tysięcy kanałów. Te dwa fakty nie idą ze sobą w parze.
+
+Tę przepaść można zamaskować lepszą obsługą fokusu i szybszym przewijaniem —
+Vidonzo robi jedno i drugie — ale pod spodem zostaje to, że sterujesz zapytaniem
+do bazy danych za pomocą strzałki. Tymczasem na oparciu kanapy leży urządzenie
+z ekranem dotykowym, klawiaturą i polem wyszukiwania. Użycie go jako pilota nie
+jest udogodnieniem doklejonym z boku. To jedyne urządzenie wejściowe w pokoju,
+które odpowiada rozmiarowi tej listy.
+
+## Co ten pilot naprawdę robi
+
+Pilot w Vidonzo to nie wirtualny krzyżak narysowany na telefonie. Takie istnieją
+i są gorsze od fizycznego pilota, który naśladują: tracisz wypukłe krawędzie
+pozwalające nacisnąć „w górę” dwa razy bez patrzenia, a nie zyskujesz nic, bo
+interfejs, którym sterujesz, wciąż jest tym na telewizorze.
+
+Zamiast tego telefon dostaje **bibliotekę**. Przeglądasz na nim pełny katalog
+telewizora, przewijaniem telefonu i klawiaturą telefonu. Gdy coś znajdziesz,
+jedno dotknięcie uruchamia to na telewizorze. Ekran nigdy nie pokazuje menu, po
+którym akurat wędrujesz — pokazuje to, co gra.
+
+To odwraca zwykły układ. Duży ekran jest od oglądania, mały od decydowania.
+Oznacza to też, że pokój nie jest zakładnikiem czyjegoś wyszukiwania: to, co leci
+na telewizorze, gra dalej, kiedy ktoś szuka tego, co ma być potem.
+
+Dostajesz też kolejkę, dzięki której wybór kolejnej pozycji nie przerywa
+bieżącej, ulubione przełączane z obu urządzeń oraz gładzik i klawiaturę na te
+rzadkie chwile, gdy aplikacja telewizyjna naprawdę potrzebuje wpisanego tekstu.
+
+Wyszukiwanie z telefonu to zmiana najbardziej widoczna w codziennym użyciu,
+zwłaszcza u dostawcy, który obficie poprzedza nazwy kanałów prefiksami — [i to
+właśnie sprawia, że długa lista w ogóle daje się obsłużyć](/pl/blog/jak-uporzadkowac-duza-playliste/).
+
+## Przez Twoją sieć, nie przez naszą
+
+Parowanie działa w sieci lokalnej. Telefon znajduje telewizor przez mDNS —
+Vidonzo sam się ogłasza, więc w normalnym przypadku nie ma żadnych kodów do
+wpisania — a oba urządzenia rozmawiają przez WebSocket w Twojej własnej sieci
+LAN.
+
+Nic w tym połączeniu nie potrzebuje naszych serwerów, a to ma dwie konsekwencje
+warte wymienienia osobno. Działa, kiedy Twoje łącze internetowe leży, bo ani
+kanał sterowania, ani strumień ze źródła lokalnego nie mają powodu opuszczać
+domu. I nie widzimy, co przeglądasz, bo nie ma na tej drodze punktu, w którym
+byśmy występowali — to ten sam tok rozumowania, który przechodzi przez
+[model własnej playlisty](/pl/blog/wlasna-playlista-i-prywatnosc/).
+
+Część routerów blokuje wykrywanie między klientami bezprzewodowymi, przez co
+mDNS nie dociera nigdzie. Dla nich jest jawna ścieżka, która w ogóle nie zależy
+od wykrywania: kod QR, a do tego krótki kod do wpisania tam, gdzie skanowanie
+jest niewygodne.
+
+## Zegarek
+
+Sparowany smartwatch dostaje odtwarzanie, pauzę, przewijanie i głośność. To
+celowo mała powierzchnia — tyle, żeby zatrzymać odcinek, kiedy ktoś dzwoni do
+drzwi, bez udawania, że zegarek jest dobrym miejscem na przeglądanie katalogu.
+Cokolwiek więcej byłoby gorszą kopią telefonu, który i tak leży w pokoju.
+
+## Ile to kosztuje
+
+Funkcja działająca w sieci lokalnej jest trudniejsza we wsparciu niż chmurowa.
+Sieci dla gości, izolacja klientów i zablokowany mDNS dają ten sam objaw —
+telewizor się nie pojawia — a żadnego z nich nie widać z naszej strony.
+Dowiadujemy się wtedy, gdy ktoś do nas napisze.
+
+Przekaźnik przez serwer uczyniłby wykrywanie cudzym problemem. Oznaczałby też,
+że każde naciśnięcie przycisku przechodzi przez nas, a to dokładnie ta
+właściwość, której nie chcieliśmy. Umowa zostaje więc taka: ruch zostaje
+w Twojej sieci, a ciężar wsparcia po naszej stronie.
+
+Po to jest ścieżka z kodem QR i dlatego
+[instrukcja parowania](/pl/help/) zaczyna się od pytań o sieć, a nie
+o aplikację.

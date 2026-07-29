@@ -6,8 +6,16 @@ export const redirects = {
     "to": "/ar/blog/لماذا-يشفر-المشغل-بيانات-دخولك/",
     "code": 301
   },
+  "/ar/blog/your-phone-is-a-better-remote/": {
+    "to": "/ar/blog/حول-هاتفك-إلى-جهاز-تحكم/",
+    "code": 301
+  },
   "/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/blog/why-a-player-should-encrypt-your-credentials/",
+    "code": 301
+  },
+  "/blog/your-phone-is-a-better-remote/": {
+    "to": "/blog/turn-your-phone-into-a-tv-remote/",
     "code": 301
   },
   "/bn/blog/fix-iptv-buffering/": {
@@ -26,6 +34,10 @@ export const redirects = {
     "to": "/bn/blog/xtream-codes-নাকি-m3u/",
     "code": 301
   },
+  "/bn/blog/your-phone-is-a-better-remote/": {
+    "to": "/bn/blog/ফোনকে-টিভির-রিমোট-বানান/",
+    "code": 301
+  },
   "/de/blog/fix-iptv-buffering/": {
     "to": "/de/blog/iptv-ruckeln-beheben/",
     "code": 301
@@ -42,16 +54,32 @@ export const redirects = {
     "to": "/de/blog/xtream-codes-oder-m3u/",
     "code": 301
   },
+  "/de/blog/your-phone-is-a-better-remote/": {
+    "to": "/de/blog/smartphone-als-fernbedienung/",
+    "code": 301
+  },
   "/es/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/es/blog/por-que-cifrar-tus-credenciales/",
+    "code": 301
+  },
+  "/es/blog/your-phone-is-a-better-remote/": {
+    "to": "/es/blog/movil-como-mando-de-tv/",
     "code": 301
   },
   "/fa/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/fa/blog/رمزنگاری-اطلاعات-ورود-پلی-لیست/",
     "code": 301
   },
+  "/fa/blog/your-phone-is-a-better-remote/": {
+    "to": "/fa/blog/تبدیل-گوشی-به-ریموت-تلویزیون/",
+    "code": 301
+  },
   "/fr/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/fr/blog/pourquoi-chiffrer-vos-identifiants/",
+    "code": 301
+  },
+  "/fr/blog/your-phone-is-a-better-remote/": {
+    "to": "/fr/blog/telephone-comme-telecommande-tv/",
     "code": 301
   },
   "/hi/blog/fix-iptv-buffering/": {
@@ -70,6 +98,10 @@ export const redirects = {
     "to": "/hi/blog/xtream-codes-या-m3u/",
     "code": 301
   },
+  "/hi/blog/your-phone-is-a-better-remote/": {
+    "to": "/hi/blog/फोन-को-टीवी-का-रिमोट-बनाइए/",
+    "code": 301
+  },
   "/id/blog/fix-iptv-buffering/": {
     "to": "/id/blog/mengatasi-buffering-iptv/",
     "code": 301
@@ -84,6 +116,10 @@ export const redirects = {
   },
   "/id/blog/xtream-codes-vs-m3u/": {
     "to": "/id/blog/xtream-codes-atau-m3u/",
+    "code": 301
+  },
+  "/id/blog/your-phone-is-a-better-remote/": {
+    "to": "/id/blog/ponsel-sebagai-remot-tv/",
     "code": 301
   },
   "/it/blog/fix-iptv-buffering/": {
@@ -102,6 +138,10 @@ export const redirects = {
     "to": "/it/blog/xtream-codes-o-m3u/",
     "code": 301
   },
+  "/it/blog/your-phone-is-a-better-remote/": {
+    "to": "/it/blog/telefono-come-telecomando-tv/",
+    "code": 301
+  },
   "/ja/blog/fix-iptv-buffering/": {
     "to": "/ja/blog/iptv-バッファリング-解消方法/",
     "code": 301
@@ -116,6 +156,10 @@ export const redirects = {
   },
   "/ja/blog/xtream-codes-vs-m3u/": {
     "to": "/ja/blog/xtream-codes-と-m3u-の違い/",
+    "code": 301
+  },
+  "/ja/blog/your-phone-is-a-better-remote/": {
+    "to": "/ja/blog/スマートフォン-を-リモコン-にする/",
     "code": 301
   },
   "/ko/blog/fix-iptv-buffering/": {
@@ -134,6 +178,10 @@ export const redirects = {
     "to": "/ko/blog/xtream-codes-와-m3u-비교/",
     "code": 301
   },
+  "/ko/blog/your-phone-is-a-better-remote/": {
+    "to": "/ko/blog/휴대폰을-tv-리모컨으로-쓰기/",
+    "code": 301
+  },
   "/nl/blog/fix-iptv-buffering/": {
     "to": "/nl/blog/iptv-buffering-oplossen/",
     "code": 301
@@ -148,6 +196,10 @@ export const redirects = {
   },
   "/nl/blog/xtream-codes-vs-m3u/": {
     "to": "/nl/blog/xtream-codes-of-m3u/",
+    "code": 301
+  },
+  "/nl/blog/your-phone-is-a-better-remote/": {
+    "to": "/nl/blog/telefoon-als-afstandsbediening-tv/",
     "code": 301
   },
   "/pl/blog/fix-iptv-buffering/": {
@@ -166,6 +218,10 @@ export const redirects = {
     "to": "/pl/blog/xtream-codes-czy-m3u/",
     "code": 301
   },
+  "/pl/blog/your-phone-is-a-better-remote/": {
+    "to": "/pl/blog/telefon-jako-pilot-do-telewizora/",
+    "code": 301
+  },
   "/pt/blog/fix-iptv-buffering/": {
     "to": "/pt/blog/iptv-travando-como-resolver/",
     "code": 301
@@ -180,6 +236,10 @@ export const redirects = {
   },
   "/pt/blog/xtream-codes-vs-m3u/": {
     "to": "/pt/blog/xtream-codes-ou-m3u/",
+    "code": 301
+  },
+  "/pt/blog/your-phone-is-a-better-remote/": {
+    "to": "/pt/blog/celular-como-controle-da-tv/",
     "code": 301
   },
   "/ru/blog/fix-iptv-buffering/": {
@@ -198,6 +258,10 @@ export const redirects = {
     "to": "/ru/blog/xtream-codes-или-m3u/",
     "code": 301
   },
+  "/ru/blog/your-phone-is-a-better-remote/": {
+    "to": "/ru/blog/телефон-как-пульт-для-телевизора/",
+    "code": 301
+  },
   "/th/blog/fix-iptv-buffering/": {
     "to": "/th/blog/แก้ปัญหา-iptv-กระตุก-บัฟเฟอร์/",
     "code": 301
@@ -214,8 +278,16 @@ export const redirects = {
     "to": "/th/blog/xtream-codes-หรือ-m3u/",
     "code": 301
   },
+  "/th/blog/your-phone-is-a-better-remote/": {
+    "to": "/th/blog/ใช้มือถือ-เป็นรีโมต-ทีวี/",
+    "code": 301
+  },
   "/tr/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/tr/blog/giris-bilgileri-neden-sifrelenmeli/",
+    "code": 301
+  },
+  "/tr/blog/your-phone-is-a-better-remote/": {
+    "to": "/tr/blog/telefonu-tv-kumandasina-donusturun/",
     "code": 301
   },
   "/ur/blog/fix-iptv-buffering/": {
@@ -234,6 +306,10 @@ export const redirects = {
     "to": "/ur/blog/xtream-codes-یا-m3u/",
     "code": 301
   },
+  "/ur/blog/your-phone-is-a-better-remote/": {
+    "to": "/ur/blog/فون-کو-ٹی-وی-کا-ریموٹ/",
+    "code": 301
+  },
   "/vi/blog/fix-iptv-buffering/": {
     "to": "/vi/blog/khac-phuc-iptv-giat-lag/",
     "code": 301
@@ -248,6 +324,10 @@ export const redirects = {
   },
   "/vi/blog/xtream-codes-vs-m3u/": {
     "to": "/vi/blog/xtream-codes-hay-m3u/",
+    "code": 301
+  },
+  "/vi/blog/your-phone-is-a-better-remote/": {
+    "to": "/vi/blog/dien-thoai-lam-dieu-khien-tv/",
     "code": 301
   }
 };

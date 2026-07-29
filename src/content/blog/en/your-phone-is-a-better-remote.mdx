@@ -1,8 +1,12 @@
 ---
-title: Your phone is a better remote than your remote
-description: Why we built TV control into the app itself instead of shipping a d-pad and hoping.
+title: "Turn your phone into a remote for your TV"
+description: "Pairing runs over your own network, and the phone gets the library rather than a virtual d-pad. Why TV control is built into the app itself."
+urlSlug: turn-your-phone-into-a-tv-remote
 publishedAt: 2026-07-06
-tags: ['television', 'engineering']
+sourceLocale: en
+tags: ["television", "engineering"]
+keywords: ["phone as tv remote", "control tv from phone", "iptv remote app", "pair phone with android tv"]
+heroImageAlt: "A phone held in one hand showing a searchable channel list, with a television playing a single stream behind it."
 ---
 
 A d-pad has four directions and an OK button. A typical IPTV playlist has twenty
@@ -11,12 +15,16 @@ thousand channels. These two facts do not get along.
 You can paper over the gap with better focus handling and faster scrolling — and
 Vidonzo does both — but the underlying problem is that you are driving a database
 query with an arrow key. Meanwhile there is a device on the sofa arm with a
-touchscreen, a keyboard, and a search field.
+touchscreen, a keyboard, and a search field. Using it as the remote is not a
+convenience bolted on the side. It is the only input in the room that matches the
+size of the list.
 
 ## What the remote actually does
 
 Vidonzo's remote is not a virtual d-pad drawn on a phone. Those exist, and they
-are worse than the physical remote they imitate.
+are worse than the physical remote they imitate: you lose the raised edges that
+let you press up twice without looking, and you gain nothing, because the
+interface you are driving is still the one on the television.
 
 Instead, the phone gets the **library**. You browse the television's full
 catalogue on the phone, with the phone's scrolling and the phone's keyboard.
@@ -24,11 +32,17 @@ When you find something, one tap starts it on the television. The screen never
 shows a menu you are navigating — it shows what is playing.
 
 That inverts the usual arrangement. The big screen is for watching; the small
-screen is for deciding.
+screen is for deciding. It also means the room is not held hostage by one
+person's search: what is on the television keeps running while somebody looks for
+what comes after it.
 
 You also get a queue, so choosing what is next does not interrupt what is on,
 favourites you can toggle from either device, and a trackpad and keyboard for
 the rare moments a TV app really does need text entry.
+
+Searching from the phone is the change most visible in daily use, particularly
+with a provider that prefixes channel names heavily —
+[which is what makes a long list reachable at all](/blog/organize-large-playlists/).
 
 ## Over your network, not through ours
 
@@ -36,23 +50,36 @@ Pairing runs over the local network. The phone finds the television by mDNS —
 Vidonzo announces itself, so there are no codes to type in the normal case — and
 the two talk over a WebSocket on your own LAN.
 
-Nothing about the connection needs our servers, which is why it works when your
-internet is down and why we cannot see what you browse. There is a QR code with
-a short code as the explicit path, for the routers that block discovery between
-wireless clients.
+Nothing about the connection needs our servers, and that has two consequences
+worth stating separately. It works when your internet connection is down, because
+neither the control channel nor a stream from a local source has any reason to
+leave the house. And we cannot see what you browse, because there is no point in
+the path where we appear — the same reasoning that runs through
+[the bring-your-own-playlist model](/blog/bring-your-own-playlist/).
+
+Some routers block discovery between wireless clients, which stops mDNS reaching
+anything. For those, there is an explicit path that does not depend on discovery
+at all: a QR code, with a short code to type where scanning is awkward.
 
 ## The watch
 
-A paired smartwatch gets play, pause, skip and volume. It is a deliberately
-small surface — enough to stop the episode when the doorbell goes, without
-pretending a watch is a good place to browse a catalogue.
+A paired smartwatch gets play, pause, skip and volume. It is a deliberately small
+surface — enough to stop the episode when the doorbell goes, without pretending a
+watch is a good place to browse a catalogue. Anything more would make it a worse
+copy of the phone that is already in the room.
 
 ## What this costs
 
 A local-network feature is harder to support than a cloud one. Guest networks,
 client isolation, and mDNS being blocked all produce the same symptom — the TV
-does not appear — and none of them are visible from our side.
+does not appear — and none of them are visible from our side. We find out when
+somebody writes to us.
+
+A relay through a server would make discovery someone else's problem. It would
+also mean every button you press travels through us, which is precisely the
+property we did not want. So the trade stands: the traffic stays on your network,
+and the support burden stays with us.
 
 That is what the QR path is for, and it is why
-[the pairing guide](/help/use-your-phone-as-a-remote/) leads with the network
-questions rather than the app ones.
+[the pairing instructions](/help/) lead with the network questions rather than
+the app ones.

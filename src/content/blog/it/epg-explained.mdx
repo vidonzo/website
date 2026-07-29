@@ -1,0 +1,110 @@
+---
+title: "EPG: come funziona la guida ai programmi che vedi sullo schermo"
+description: "La griglia dei programmi è un file separato dai canali, con tempi suoi. Saperlo spiega ogni stranezza che una guida ti abbia mai fatto vedere."
+urlSlug: come-funziona-la-guida-epg
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["televisione", "playlist"]
+keywords: ["che cos'è l'epg", "guida tv iptv", "epg xmltv", "epg non si vede"]
+heroImageAlt: "Una riga di canali e una griglia di programmi disegnate come due fogli distinti, uniti da un unico identificatore che coincide."
+---
+
+La guida — la griglia che mostra che cosa c'è adesso, che cosa viene dopo e che
+cosa c'era un'ora fa — si chiama **EPG**, cioè guida elettronica ai programmi. Su
+un decoder satellitare arriva dentro il segnale trasmesso. In un lettore IPTV no,
+e quella differenza spiega quasi ogni stranezza che una guida possa fare.
+
+## È un secondo file, non una parte della lista canali
+
+La tua lista canali dice *dove sono i flussi*. L'EPG dice *che cosa ci passa
+sopra e quando*. Sono due documenti distinti, recuperati separatamente e
+aggiornati con tempi diversi.
+
+Il formato consueto è **XMLTV**: un file XML che elenca i canali e poi i
+programmi, ciascuno con un riferimento al canale, un orario di inizio, uno di
+fine, un titolo e spesso una descrizione. Una guida che copre qualche centinaio
+di canali per una settimana è un file grosso — decine di megabyte è la norma — ed
+è per questo che un lettore lo scarica in sottofondo invece che nel momento in
+cui premi il tasto della guida.
+
+Se usi [Xtream Codes](/it/blog/xtream-codes-o-m3u/), la guida di solito arriva da
+sé: l'API la espone e il lettore la raccoglie senza che tu configuri niente. Con
+un M3U semplice l'URL dell'EPG spesso lo devi fornire tu, perché in un file di
+playlist non c'è un posto in cui metterlo.
+
+## Come fa un programma a trovare il suo canale
+
+È qui che le guide si rompono, e il motivo è poco affascinante: i due file devono
+mettersi d'accordo su un nome.
+
+Ogni voce della guida porta un identificatore di canale. Anche ogni canale della
+tua playlist può portarne uno, nell'attributo `tvg-id`. Il lettore li abbina.
+Quando coincidono, ottieni la griglia dei programmi. Quando non coincidono,
+ottieni un canale che si riproduce benissimo e nella guida non mostra niente.
+
+È il reclamo sull'EPG più frequente in assoluto, e non è quasi mai il lettore.
+`Channel One HD` nella playlist e `channel.one.hd` nella guida sono due stringhe
+diverse, e a unirle può essere solo una correzione dalla parte del fornitore o un
+abbinamento fatto a mano.
+
+## I fusi orari, l'altro classico
+
+Un orario XMLTV porta con sé uno scarto rispetto a UTC — `20260729180000 +0300`.
+Quando il file di un fornitore lo omette, o ne dichiara uno che non corrisponde
+alla realtà, la guida intera slitta: è tutto giusto, solo spostato di un'ora o di
+tre rispetto alla verità.
+
+Se la tua guida risulta spostata in modo uniforme di un numero intero di ore, è
+successo questo, ed è una correzione da fare al fornitore più che
+un'impostazione del dispositivo. Se a essere spostati sono solo alcuni canali,
+quei canali vengono presi da un flusso di guida diverso dagli altri.
+
+## Che cosa ti dà una buona guida
+
+Una volta che l'abbinamento regge, l'EPG smette di essere un ornamento:
+
+- **Adesso e dopo**, così vedi che cosa stai prendendo a metà.
+- **Una griglia in cui puoi scorrere in avanti**, che è l'unico modo comodo di
+  organizzare una serata su centinaia di canali.
+- **I promemoria**, sui lettori che li offrono.
+- **Una ricerca migliore**, perché puoi cercare un programma invece di un canale.
+- **La riproduzione differita**, dove il tuo fornitore la supporta: è la guida a
+  dare al lettore qualcosa da chiedere.
+
+## Quando la guida è vuota
+
+Procedendo con ordine:
+
+1. **Aspetta.** Dopo aver aggiunto una playlist, il primo recupero dell'EPG ci
+   mette un po'. Per i primi minuti non c'è niente di rotto.
+2. **Verifica che una guida esista.** Con una sorgente M3U, se un URL dell'EPG
+   non ti è mai stato dato, non c'è niente da mostrare. Chiedilo al tuo
+   fornitore.
+3. **Confronta un canale con tutti i canali.** Qualche canale vuoto è un
+   identificatore che non coincide. Tutti i canali vuoti sono un problema di
+   recupero.
+4. **Aggiorna la guida**, se il lettore lo permette: così la riscarica invece di
+   rileggere la copia in cache.
+5. **Guarda quanto avanti stai andando.** Alcuni fornitori pubblicano una
+   finestra stretta — solo oggi e domani — e sembra vuota se scorri lontano.
+
+Nessuna di queste cose riguarda la riproduzione, il che è già di per sé un indizio
+utile: un canale che si riproduce ma non ha una voce nella guida e un canale che
+ha la voce nella guida ma non parte sono problemi scollegati, con cause
+scollegate — il secondo di solito è
+[il percorso di rete](/it/blog/risolvere-buffering-iptv/).
+
+## Perché la parte che tocca al lettore conta
+
+Una guida è una gran quantità di dati da reggere con grazia. Analizzare decine di
+megabyte di XML, tenerli aggiornati e disegnare una griglia scorrevole per
+centinaia di canali senza che l'interfaccia diventi inutilizzabile è lavoro vero,
+ed è il tipo di lavoro
+[di cui un lettore risponde davvero](/it/blog/cosa-fa-un-lettore-iptv/), a
+differenza del contenuto della guida.
+
+È anche un punto in cui la privacy conta in silenzio. Il recupero della guida è
+una richiesta all'indirizzo del tuo fornitore e a nessun altro; un lettore che
+riferisse quali programmi hai scorso raccoglierebbe un ritratto notevolmente
+dettagliato delle tue serate, per nessun motivo che abbia a che fare con
+mostrarti una griglia.
