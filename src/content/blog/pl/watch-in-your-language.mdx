@@ -1,0 +1,115 @@
+---
+title: "Oglądanie we własnym języku: kierunek pisma, polskie znaki i ścieżki dźwiękowe"
+description: "Obsługa języka to nie tłumaczenie interfejsu. Od kierunku układu i kroju pisma po napisy i ścieżki dźwiękowe, które naprawdę są w strumieniu."
+urlSlug: ogladanie-we-wlasnym-jezyku
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["język", "produkt"]
+keywords: ["polskie napisy iptv", "zmiana ścieżki dźwiękowej iptv", "polskie znaki w playliście", "odtwarzacz iptv po polsku"]
+heroImageAlt: "Otwarte nad obrazem menu wyboru napisów i ścieżki dźwiękowej, z etykietami języków."
+---
+
+Większość z nas nauczyła się obniżać oczekiwania. Aplikacja jest przetłumaczona,
+więc uznajemy, że język jest obsłużony, i idziemy dalej. To jednak dwie różne
+rzeczy: język przetłumaczony i język obsłużony. Różnicę widać w kilka sekund,
+nawet jeśli trudno od razu nazwać, co dokładnie uwiera.
+
+W odtwarzaczu ta różnica ujawnia się zawsze w tych samych trzech miejscach:
+w układzie, w kroju pisma i w ścieżkach, które strumień przynosi ze sobą.
+
+## Kierunek pisma to układ, a nie odbicie kilku ikon
+
+Arabski, perski, hebrajski i urdu czyta się od prawej, a najtańszy sposób na
+ogłoszenie ich obsługi to odbicie kilku ikon. Wychodzi z tego aplikacja, w której
+strzałki pokazują w drugą stronę, ale która wciąż myśli od lewej.
+
+Prawdziwy układ zaczyna cały interfejs od prawej krawędzi:
+
+- **Kolejność czytania.** Nagłówki, tekst i przyciski zaczynają się przy prawej
+  krawędzi. Główna akcja siedzi tam, gdzie oko dociera najpierw, a nie tam,
+  gdzie zostawił ją projekt pisany od lewej.
+- **Kolejność fokusu.** Tu przestaje to być kosmetyką. Naciśnięcie „w prawo” na
+  pilocie powinno przenieść fokus na następny element w kolejności czytania —
+  a w układzie od prawej do lewej następny element leży po lewej. Aplikacja,
+  która to gubi, na telefonie jest znośna, a z krzyżakiem bliska nieużywalnej.
+- **Kierunek powrotu.** Strzałka wstecz powinna wskazywać tam, gdzie jest
+  „poprzednie”. W układzie od prawej do lewej poprzednie leży po prawej.
+
+Pasek postępu to trzecia decyzja i najczęściej podejmowana przypadkiem. Pasek
+ładowania w układzie od prawej do lewej wypełnia się od prawej, tak jak tekst. Oś
+czasu odtwarzania zwykle zostaje od lewej do prawej, bo odwzorowuje upływ czasu,
+a nie kolejność czytania, i tego właśnie spodziewa się ktoś przewijający
+pilotem. Nie chodzi o to, która odpowiedź jest poprawna. Chodzi o to, że
+odtwarzacz, który nigdy nie zadał tego pytania, odpowiedział na nie przypadkiem.
+
+## Krój musi pasować do pisma
+
+Kiedy aplikacja nie wskaże kroju dla danego pisma, system podstawia to, co uzna
+za najbliższe. Tekst wciąż się czyta, więc nic nie wygląda na zepsute — dopóki
+nie spojrzysz na litery.
+
+Po polsku widać to na ogonkach i kreskach. Jeśli wskazany krój nie ma `ą`, `ę`,
+`ł`, `ń`, `ś`, `ź` czy `ż`, system dobiera te znaki z innego kroju i w środku
+wyrazu pojawiają się litery o innej grubości i innej szerokości. Wyraz jest
+poprawny, a wygląda na sklejony z dwóch źródeł.
+
+W perskim ta sama usterka jest ostrzejsza. Podstawiany krój jest zwykle arabski,
+a dwie litery natychmiast to zdradzają: *je* i *kaf* rysuje się w obu tradycjach
+inaczej, więc wyraz dostaje dodatkową parę kropek albo dodatkową kreskę. Słowo
+zostaje to samo, tylko zapisane błędnie. Znaki diakrytyczne wypadają albo siadają
+w złym miejscu, co w większości nazw kanałów nie ma znaczenia, a w nazwach
+własnych ma bardzo duże. Cyfry są w dodatku dwoma osobnymi zestawami — perskie
+۱۲۳۴ i arabskie ١٢٣٤ — więc lista, która je miesza, od razu wygląda obco.
+
+Ta sama klasa usterek wychodzi też gdzie indziej: zderzające się piętrowe znaki
+diakrytyczne w wietnamskim, japoński tekst rysowany chińskimi formami znaków.
+Krój nie jest tu ozdobą. Rozstrzyga, czy słowo na ekranie jest tym właściwym
+słowem.
+
+## Nazwy kanałów: zwykle playlista, a nie interfejs
+
+To warto powiedzieć wprost, bo odtwarzacz obrywa za to bez przerwy. Kiedy polskie
+nazwy kanałów przychodzą jako znaki zapytania albo ciąg krzaczków, wina prawie
+zawsze leży po stronie kodowania samej playlisty, a nie interfejsu. To problem
+UTF-8, a ten sprowadza się do
+[rozszerzenia pliku i tego, co ono deklaruje](/pl/blog/m3u-czy-m3u8/).
+Odtwarzacz potrafi poprawnie pokazać bajty, które dostał; nie odtworzy nazwy,
+która nigdy nie dotarła do niego w całości.
+
+Ta sama zależność dotyczy programu telewizyjnego, bo tytuły audycji też są
+tekstem [pobieranym osobnym plikiem od dostawcy](/pl/blog/epg-jak-dziala-program-telewizyjny/)
+i przychodzą tak dobrze albo tak źle, jak zostały zapisane u źródła.
+
+Druga połowa sprawy zaczyna się wtedy, gdy nazwy docierają w całości.
+Wyszukiwanie musi przyjmować polskie znaki, a prefiksy, które dostawcy doklejają
+z przodu — `PL:`, `[HD]`, `FR|` — nie mogą przeszkadzać w znalezieniu kanału. To
+ta sama praca, która [w ogóle sprawia, że duża lista daje się obsłużyć](/pl/blog/jak-uporzadkowac-duza-playliste/).
+
+## Napisy i wiele ścieżek dźwiękowych
+
+Część kanałów i większość filmów niesie więcej niż jedną ścieżkę dźwiękową,
+a czasem jedną lub kilka ścieżek napisów. Cokolwiek tam jest, umieścił to
+w strumieniu dostawca; etykieta każdej ścieżki też pochodzi ze strumienia.
+
+Trzy rzeczy należą do odtwarzacza:
+
+- **Pokazać je tak, żeby dało się wybrać.** Czytelna lista w trakcie
+  odtwarzania, a nie coś zakopanego w ustawieniach, i z etykietami, które podał
+  strumień.
+- **Przełączyć bez przerywania.** Wybór języka dźwięku albo ścieżki napisów nie
+  powinien oznaczać powrotu na początek audycji.
+- **Zapamiętać wybór.** Jeśli za każdym razem trzeba wskazywać polski od nowa,
+  funkcja jest zrobiona w połowie.
+
+I jedno ograniczenie, którego nie obejdzie żadne ustawienie: odtwarzacz może
+zaproponować wyłącznie to, co jest w strumieniu. Jeśli dostawca wyśle film
+z jedną ścieżką dźwiękową i bez napisów, żadna opcja w żadnym odtwarzaczu nie
+stworzy napisów, których nikt nie wysłał. Jeśli konkretny język ma dla Ciebie
+znaczenie, to jest właśnie pytanie do dostawcy przed przedłużeniem abonamentu.
+
+## To nie uprzejmość, tylko zwykła inżynieria
+
+Nic z powyższego nie jest niezwykłą pracą. Układ idzie za kierunkiem pisma, krój
+pasuje do pisma, bajty są pokazywane tak, jak przyszły, a to, co jest
+w strumieniu, trafia do wyboru. Przy angielskim nikt nie nazywa tego „obsługą
+języka”. Mówi się po prostu, że aplikacja działa.

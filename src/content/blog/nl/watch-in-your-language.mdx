@@ -1,0 +1,125 @@
+---
+title: "Kijken in je eigen taal: rechts-naar-links, ondertiteling en meerdere audiosporen"
+description: "Rechts-naar-links is een indeling, geen paar gespiegelde iconen. Hoe echte taalondersteuning eruitziet, van het lettertype tot de sporen in de stream."
+urlSlug: kijken-in-je-eigen-taal
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["taal", "product"]
+keywords: ["iptv speler ondertiteling instellen", "audiospoor wisselen mediaspeler", "rechts naar links weergave app", "iptv speler meerdere talen"]
+heroImageAlt: "Een spelerinterface die vanaf de rechterrand is opgebouwd, met het keuzemenu voor ondertiteling en audio open over het beeld."
+---
+
+Er zit verschil tussen een app die naar je taal is vertaald en een app die je
+taal ondersteunt. Lees je Nederlands, dan kom je dat verschil zelden tegen:
+Latijns schrift, van links naar rechts, precies het geval waar elke speler
+standaard omheen is gebouwd. Wie Arabisch, Perzisch of Urdu leest, merkt het
+binnen een paar seconden, meestal zonder precies te kunnen benoemen wat er
+misgaat. In veel huishoudens hier staan die twee gevallen in dezelfde
+afspeellijst naast elkaar.
+
+Een speler die jouw taal als eersteklas geval behandelt, doet je geen plezier.
+Hij doet gewoon degelijk werk: de indeling volgt de richting van het schrift, het
+lettertype past bij het schriftsysteem, tekst wordt getoond zoals de bytes
+binnenkwamen, en wat de stream bij zich draagt wordt je aangeboden. Dat werk
+wordt altijd op dezelfde drie plekken overgeslagen: de indeling, het lettertype,
+en de sporen die met de stream meekomen.
+
+## Rechts-naar-links is het scherpste voorbeeld
+
+Arabisch, Perzisch, Hebreeuws en Urdu lezen van rechts naar links, en de
+goedkoopste manier om ondersteuning te claimen is een paar iconen spiegelen. Het
+resultaat is een app waarvan de pijlen de andere kant op wijzen maar die nog
+altijd vanaf links denkt.
+
+Een echte indeling begint de hele interface vanaf de rechterrand:
+
+- **Leesvolgorde.** Koppen, lopende tekst en knoppen beginnen rechts. De
+  primaire actie staat waar het oog als eerste komt, niet waar een ontwerp van
+  links naar rechts hem toevallig had achtergelaten.
+- **Focusvolgorde.** Hier houdt het op cosmetisch te zijn. Druk je rechts op een
+  afstandsbediening, dan hoort de focus naar het volgende item in leesvolgorde te
+  gaan — en in een rechts-naar-links-interface is dat het item links ervan. Een
+  app die dat mist, valt op een telefoon te verdragen en zorgt met een
+  navigatiekruis voor [het gevoel dat de afstandsbediening kapot
+  is](/nl/blog/iptv-speler-op-android-tv/).
+- **De richting van terug.** Een terugpijl hoort te wijzen naar waar *vorige*
+  is. In een rechts-naar-links-indeling ligt vorige rechts.
+
+De voortgangsbalk is de derde beslissing, en de beslissing die het vaakst per
+ongeluk valt. Een laadbalk vult zich in een rechts-naar-links-indeling vanaf
+rechts, net als de tekst. Een afspeeltijdlijn blijft meestal van links naar
+rechts lopen, omdat die het verstrijken van de tijd weergeeft en niet de
+leesvolgorde, en wie met een afstandsbediening vooruitspoelt verwacht dat ook.
+Het punt is niet welk antwoord juist is. Het punt is dat een speler die de vraag
+nooit heeft gesteld, hem per ongeluk heeft beantwoord.
+
+## Het lettertype moet bij het schrift passen
+
+Noemt een app geen lettertype voor een schrift, dan vervangt het systeem het door
+wat het zelf het dichtst in de buurt vindt. Voor Perzisch is dat meestal een
+Arabisch lettertype. De tekst blijft leesbaar, dus er lijkt niets kapot — tot je
+naar de letters kijkt.
+
+- **Ye en kaf.** Deze twee letters worden in de Arabische en de Perzische
+  traditie anders getekend. Een woord dat met een extra stel puntjes of een extra
+  haal verschijnt, is jouw woord, verkeerd gespeld.
+- **Diakritische tekens.** Vervangende lettertypen laten ze weg of plaatsen ze
+  verkeerd. In de meeste zendernamen maakt dat niets uit; in eigennamen en titels
+  een heleboel.
+- **Cijfers.** Het Perzische ۱۲۳۴ en het Arabische ١٢٣٤ zijn twee aparte sets.
+  Een lijst die ze door elkaar toont, leest meteen als vreemd.
+
+Dezelfde soort fout duikt elders op: Vietnamese diakritische tekens die op elkaar
+stapelen en gaan botsen, Japanse tekst die met Chinese lettervormen wordt
+getekend. Het lettertype is hier geen versiering. Het bepaalt of het woord op je
+scherm het juiste woord is.
+
+## Zendernamen: meestal de lijst, niet de interface
+
+Dit mag gewoon gezegd worden, want spelers krijgen er voortdurend de schuld van.
+Komen zendernamen in een niet-Latijns schrift binnen als vraagtekens of als een
+reeks onleesbare tekens, dan ligt dat vrijwel altijd aan de codering van de
+afspeellijst zelf en niet aan de interface. Dat is een UTF-8-kwestie, en die komt
+terug op [de bestandsextensie en wat die aangeeft](/nl/blog/m3u-of-m3u8-verschil/).
+Een speler kan de bytes die hij kreeg correct weergeven; hij kan geen naam
+reconstrueren die nooit heel bij hem is aangekomen.
+
+De andere helft is wat er gebeurt zodra de namen wél heel binnenkomen. Zoeken
+moet het schrift accepteren, en de voorvoegsels die providers voor een naam
+plakken — `NL:`, `[HD]`, `TR|` — mogen je niet beletten hem te vinden. Dat is
+hetzelfde werk dat [een grote lijst überhaupt bestuurbaar
+maakt](/nl/blog/grote-afspeellijsten-ordenen/).
+
+## Ondertiteling en meerdere audiosporen
+
+In Nederland en Vlaanderen is ondertiteling de norm en nasynchronisatie de
+uitzondering, dus dit is het onderdeel waar je het snelst iets van merkt.
+Sommige zenders en de meeste films dragen meer dan één audiospoor met zich mee,
+en soms een of meer ondertitelsporen. Wat er is, heeft je provider in de stream
+gezet; het label bij elk spoor komt ook uit de stream.
+
+Drie dingen zijn het werk van de speler:
+
+- **Ze zo tonen dat je kunt kiezen.** Een duidelijke lijst tijdens het afspelen,
+  niet iets weggestopt in de instellingen, met de labels die de stream heeft
+  meegegeven.
+- **Wisselen zonder onderbreking.** Een audiotaal of een ondertitelspoor kiezen
+  hoort niet te betekenen dat je terug bent bij het begin van de uitzending.
+- **De keuze onthouden.** Moet je elke keer opnieuw je taal aanwijzen, dan is de
+  functie half af.
+
+En één grens waar geen instelling omheen komt: een speler kan alleen aanbieden
+wat in de stream zit. Stuurt een provider een film met één audiospoor en zonder
+ondertiteling, dan maakt geen enkele instelling in welke speler dan ook een
+ondertitelspoor dat nooit is meegestuurd. Is een bepaalde taal belangrijk voor
+je, dan is dat de vraag die je aan je provider stelt vóór je verlengt.
+
+## Dit is geen gunst, dit is gewoon techniek
+
+Niets hierboven is bijzonder werk. De indeling volgt de richting van de taal, het
+lettertype past bij het schrift, bytes worden getoond zoals ze binnenkwamen, en
+wat in de stream zit wordt aangeboden. Voor het Engels noemt niemand dat
+‘taalondersteuning’; men zegt gewoon dat de app werkt.
+
+Een speler die met Arabisch of Perzisch precies hetzelfde doet, verdient daar
+geen pluim voor. Hij heeft alleen zijn werk afgemaakt.

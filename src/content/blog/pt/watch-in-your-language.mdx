@@ -1,0 +1,121 @@
+---
+title: "Assistir no seu idioma: escrita, legendas e várias faixas de áudio"
+description: "Suporte a idioma não é traduzir a interface. É a direção do texto, a fonte certa, o nome do canal que chega inteiro e a faixa de áudio que você queria."
+urlSlug: assistir-no-seu-idioma
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["reprodução", "produto"]
+keywords: ["legendas no player de iptv", "trocar o áudio no iptv", "player de iptv em português", "nomes de canais com acento errado"]
+heroImageAlt: "O menu de legendas e faixas de áudio aberto sobre um vídeo em reprodução, com as opções listadas por idioma."
+---
+
+Existe diferença entre um aplicativo que foi traduzido para o seu idioma e um
+que dá suporte a ele. Quem lê em inglês quase nunca encontra essa diferença,
+porque o inglês é o caso em torno do qual todo player foi construído por padrão.
+Todo o resto do mundo encontra em poucos segundos, normalmente sem conseguir dar
+nome ao que está errado.
+
+Um player que trata o seu idioma como caso de primeira classe não está fazendo
+um favor. Está fazendo engenharia comum: o layout segue a direção da escrita, a
+fonte combina com o sistema de escrita, o texto aparece como os bytes chegaram e
+o que o stream carrega é oferecido a você. Os lugares onde esse trabalho é
+pulado são sempre os mesmos três: o layout, a tipografia e as faixas que descem
+junto com o stream.
+
+## Da direita para a esquerda é o exemplo mais nítido
+
+O árabe, o persa, o hebraico e o urdu são lidos da direita para a esquerda, e o
+jeito mais barato de alegar suporte a eles é espelhar alguns ícones. O resultado
+é um aplicativo cujas setas apontam para o outro lado, mas que continua pensando
+a partir da esquerda.
+
+Um layout de verdade começa a interface inteira pela borda direita:
+
+- **Ordem de leitura.** Títulos, texto e botões começam à direita. A ação
+  principal fica onde o olho chega primeiro, e não onde um desenho feito da
+  esquerda para a direita a deixou por acaso.
+- **Ordem de foco.** É aqui que a coisa deixa de ser cosmética. Aperte para a
+  direita no controle da televisão e o foco deveria ir para o item seguinte na
+  ordem de leitura — que, em uma interface da direita para a esquerda, é o item
+  à esquerda. Um aplicativo que erra isso é tolerável no celular e fica perto de
+  inutilizável [com um direcional](/pt/blog/player-de-iptv-na-android-tv/).
+- **A direção do voltar.** A seta de voltar deveria apontar para onde está o
+  *anterior*. Em um layout da direita para a esquerda, o anterior está à direita.
+
+A barra de progresso é a terceira decisão, e a que mais costuma ser tomada por
+acidente. Uma barra de carregamento em um layout da direita para a esquerda
+enche a partir da direita, como o próprio texto. Já a linha do tempo da
+reprodução normalmente continua da esquerda para a direita, porque ela mapeia a
+passagem do tempo e não a ordem de leitura, e quem avança com o controle espera
+isso. O ponto não é qual das duas respostas está certa. É que um player que
+nunca fez a pergunta respondeu por acaso.
+
+O português não precisa de nada disso, e é exatamente por isso que vale olhar:
+um aplicativo que acertou a direita para a esquerda precisou tratar direção de
+layout como uma decisão, em vez de herdá-la. É a mesma disciplina que decide o
+que acontece com o resto.
+
+## A fonte precisa acompanhar a escrita
+
+Quando um aplicativo não indica uma fonte para uma escrita, o sistema substitui
+pelo que julga mais próximo. O texto continua legível, então nada parece
+quebrado — até você olhar as letras.
+
+Em português o sintoma é discreto. Uma fonte que não traz o conjunto completo de
+diacríticos posiciona mal o til de `ã` e `õ`, encosta a cedilha no traço da
+letra ou come o acento de uma maiúscula. Na maior parte dos nomes de canal isso
+não importa; em nome próprio e em título de programa importa bastante.
+
+Em outras escritas a mesma classe de falha fica gritante. Para o persa, o
+substituto costuma ser uma fonte árabe, e duas letras entregam a troca: o *ye* e
+o *kaf* são desenhados de outro jeito nas duas tradições, então a palavra
+aparece com um par de pontos a mais ou um traço a mais. É a sua palavra, escrita
+errado. E os algarismos são dois conjuntos separados — ۱۲۳۴ persa e ١٢٣٤ árabe
+—, então uma lista que mistura os dois soa estrangeira na hora. Diacríticos
+empilhados do vietnamita que colidem, texto japonês desenhado com formas
+chinesas: é sempre o mesmo problema.
+
+A fonte aqui não é enfeite. Ela decide se a palavra na tela é a palavra certa.
+
+## Nomes de canais: quase sempre a lista, não a interface
+
+Vale dizer isso com todas as letras, porque o player leva a culpa por isso o
+tempo todo. Quando `São Paulo` chega na tela como `SÃ£o Paulo`, ou quando um
+nome vira uma fileira de pontos de interrogação, o defeito quase sempre está na
+codificação da própria lista, e não na interface. É um problema de UTF-8, e ele
+volta para [a extensão do arquivo e o que ela declara](/pt/blog/m3u-ou-m3u8/).
+Um player consegue exibir corretamente os bytes que recebeu; não consegue
+reconstruir um nome que nunca chegou inteiro até ele.
+
+A outra metade é o que acontece depois que os nomes chegam inteiros. A busca
+precisa lidar com a acentuação em vez de tropeçar nela, e os prefixos que os
+provedores grudam na frente do nome — `BR:`, `[HD]`, `PT|` — não podem impedir
+você de achar o canal. É o mesmo trabalho que
+[torna uma lista grande navegável](/pt/blog/organizar-listas-grandes-de-canais/).
+
+## Legendas e faixas de áudio múltiplas
+
+Alguns canais e a maior parte dos filmes trazem mais de uma faixa de áudio, e às
+vezes uma ou mais faixas de legenda. Por aqui isso tem nome próprio: é a
+diferença entre dublado e legendado. O que existir, foi o provedor que colocou
+no stream, e o rótulo de cada faixa vem do stream também.
+
+Três coisas são trabalho do player:
+
+- **Apresentá-las de um jeito que dê para escolher.** Uma lista clara durante a
+  reprodução, e não algo enterrado nas configurações, com os mesmos rótulos que
+  o stream forneceu.
+- **Trocar sem interromper.** Escolher um idioma de áudio ou uma faixa de
+  legenda não deveria significar voltar ao começo do programa.
+- **Lembrar da escolha.** Se você precisa selecionar o seu idioma de novo toda
+  vez, o recurso está pela metade.
+
+E um limite que nenhuma configuração contorna: o player só consegue oferecer o
+que está no stream. Se um provedor manda um filme com uma única faixa de áudio e
+sem legenda, nenhuma opção em nenhum player vai criar uma legenda que nunca foi
+enviada. Se uma dublagem ou uma legenda em português importa para você, essa é a
+pergunta a fazer ao seu provedor antes de renovar.
+
+Nada acima é trabalho fora do comum. Ninguém chama nada disso de *suporte a
+idiomas* quando o idioma é o inglês. As pessoas só dizem que o aplicativo
+funciona.

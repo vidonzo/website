@@ -1,0 +1,99 @@
+---
+title: "Bir medya oynatıcısında ebeveyn denetimi ve güvenli izleme"
+description: "Bir PIN, gizlenmiş bir kategori ve yeniden başlatmadan sonra da geçerli kalan bir kilit. Bir oynatıcı, kendi hazırlamadığı bir listede neyi uygulayabilir."
+urlSlug: ebeveyn-denetimi-ve-guvenli-izleme
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["urun", "oynatma-listesi"]
+keywords: ["iptv ebeveyn denetimi", "kanalları pin ile kilitleme", "yetişkin kategorilerini gizleme", "çocuklar için iptv oynatıcı"]
+heroImageAlt: "Televizyon ekranındaki bir kategori satırı; kayıtlardan biri asma kilit simgesi ve dört haneli bir giriş alanıyla değiştirilmiş."
+---
+
+Bir medya oynatıcısındaki ebeveyn denetimleri dar bir araçtır ve onlar hakkında
+bilinmesi en işe yarar şey bu darlıktır. Sınırları içinde çalışırlar, dışında hiç
+çalışmazlar; bozuldukları yer de, hiçbir zaman yapabilecek durumda olmadıkları
+bir iş için onlara güvenilmesidir.
+
+Bu yüzden bir oynatıcının neyi uygulayabildiğini, neyi uygulayamadığını ve
+çizginin tam olarak nereye düştüğünü açıkça söylemekte fayda var.
+
+## Bir oynatıcının yapabildikleri
+
+Üç şey, güvenilir biçimde.
+
+**Kategorileri ya da tek tek kanalları bir PIN arkasına kilitlemek.** Denetimin
+birimi, listenizde zaten hangi birim varsa odur: bir kategorinin tamamı ya da
+elle seçilmiş tek bir kanal. Kilitli bir öğeye ulaşmak kodu gerektirir.
+
+**Sağlayıcının etiketlediği yetişkin kategorilerini gizlemek.** Sağlayıcınızdan
+gelen kategoriler işaretlenmişse, oynatıcı bu işarete göre davranıp o grupları
+arayüzün tamamen dışında tutabilir.
+
+**Yeniden başlatmadan sonra PIN'i yeniden istemek.** Bir kez açılıp birileri
+yeniden kilitlemeyi hatırlayana kadar açık kalan bir denetim, aslında denetim
+değildir. Uygulama yeniden başladığında yeniden sorması, dinlenme halinin kilitli
+olması demektir — en son kullanan kişinin nasıl bıraktıysa o hal değil.
+
+## Etiketler nereden geliyor
+
+Yukarıdakilerin ne kadarının elinizde olduğuna oynatıcı değil, sağlayıcınız karar
+veriyor.
+
+Xtream Codes kategorileri sunucudan gerçek kategoriler olarak verir; yani
+sağlayıcının tuttuğu gruplama ve etiketleme neyse, oynatıcının gördüğü de odur.
+Bir M3U oynatma listesi ise her satırda en fazla bir `group-title` taşır ve orayı
+dosyayı hazırlayan kişi ne kadar özenliyse o kadar doldurmuştur — [iki biçim
+arasındaki fark](/tr/blog/xtream-codes-mi-m3u-mu/) burada olduğu kadar net
+göründüğü az yer vardır.
+
+Bir sağlayıcı yetişkin kategorilerini düzgün etiketliyorsa, onları gizleyen bir
+kural işe yarar. Her şey `LIVE` adlı tek bir grup halinde geliyorsa, kuralın
+eşleşeceği bir şey yoktur ve tek tek kanalları elle kilitlemeye geri dönersiniz.
+
+## Yapamadıkları
+
+**Kimsenin etiketlemediğini sınıflandıramaz.** Bir oynatıcı kanal adlarını,
+kategori etiketlerini ve rehber verisini okur. Videoyu izlemez. İçinde kareleri
+inceleyip onlar hakkında bir yargıya varan hiçbir şey yoktur. Genel bir başlık
+altına konmuş, etiketsiz bir kanal, etiketlerden çalışan hiçbir kurala görünmez;
+bir kanalın adı da bir addır — bir yaş sınırı değil.
+
+**Kumandayı kimin tuttuğunu bilemez.** Bir PIN kimliği değil, bilgiyi sınar. Dört
+haneyi bilenlerle bilmeyenleri ayırır; dikkatli birinin önünde girilen bir PIN de
+uzun süre gizli kalmaz. Telefon kilit kodunuzla aynı olmayan bir tane seçin ve
+onu, bir noktada değiştirilmesi gerekecek bir şey olarak görün.
+
+**Sağlayıcının kendi denetimlerinin yerine geçmez.** Sağlayıcınızın sunduğu ne
+varsa onların tarafında, yayın evinize ulaşmadan önce iş görür. Bir oynatıcının
+sunduğu ne varsa sizin cihazınızda, yayın ulaştıktan sonra iş görür. Bunlar farklı
+katmanlar ve ikisini birden kullanmak makul.
+
+**Evdeki konuşmanın yerine geçmez.** Hiçbir ayar, kendi evinizde ne izlendiğini
+bilmenin yerini tutmaz; kimse de size tuttuğunu iddia eden bir şey satmamalı.
+
+## Gizlemek ile kilitlemek aynı şey değil
+
+Bu iki kelime gevşek kullanılıyor, o yüzden ayırmakta fayda var. Gizlemek bir şeyi
+görünürden çıkarır. Kilitlemek ona ulaşmak için bir sır ister. Yalnızca gizlenmiş
+ama aramayla hâlâ ulaşılabilen bir öğe kısıtlanmış değil, derli toplu olmuştur —
+istenmesi gayet doğru bir şey, ama yeri ebeveyn denetimleri değil, [büyük bir
+listeye biçim vermenin yolu olarak sık kullanılanlar ve
+kategorilerdir](/tr/blog/buyuk-oynatma-listesi-duzenleme/).
+
+Pratik bir nokta daha: bir denetimi, hangi uygulamada kurulduysa o uygulama
+uygular. Aynı oynatma listesini bir televizyonda ve iki telefonda çalıştıran bir
+ev, üç ayrı yüzeye sahiptir; birinin nasıl yapılandırıldığı diğer ikisi hakkında
+hiçbir şey söylemez. Hangi cihazlar önemliyse, her biri ayrı ayrı kurulmalı.
+
+## Toparlarsak
+
+Bir oynatıcı, kendisine getirdiğiniz listenin okuyucusudur ve [işin tamamı da
+budur](/tr/blog/iptv-oynatici-ne-yapar/). O listenin bazı parçalarına ulaşmayı
+zorlaştırabilir; bunu tutarlı biçimde, sessizce ve hiçbir yere hiçbir şey
+göndermeden yapabilir. Listeyi olmadığı bir şeye çeviremez ve bir odayı
+gözetleyemez.
+
+Bu beklentiyle tutulduğunda gerçek bir iş görür: biri listeye göz gezdirirken
+artık görünmeyen bir kategori, ve bir kanalla meraklı bir akşamın arasında duran
+bir kod. Daha büyük bir beklentiyle tutulduğunda hayal kırıklığı yaratır — ki bu,
+aracı anlamak için bir sebeptir, onu atlamak için değil.

@@ -1,0 +1,118 @@
+---
+title: "Guardare nella tua lingua: da destra a sinistra, sottotitoli e tracce audio"
+description: "Da destra a sinistra è un impaginato, non qualche icona specchiata. Come si riconosce il vero supporto di una lingua, dal carattere alle tracce nel flusso."
+urlSlug: guardare-nella-tua-lingua
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["riproduzione", "prodotto"]
+keywords: ["sottotitoli lettore iptv", "cambiare traccia audio iptv", "lettore iptv multilingua", "interfaccia da destra a sinistra"]
+heroImageAlt: "Un'interfaccia impaginata a partire dal bordo destro, con il menù dei sottotitoli e delle tracce audio aperto sopra il video."
+---
+
+Quasi tutti abbiamo imparato ad abbassare le pretese. Si apre un'app, si vede che
+il testo è nella lingua giusta ma che tutto il resto ragiona ancora altrove, si
+alza una spalla e si va avanti. Eppure sono due cose diverse: una lingua tradotta
+e una lingua supportata. Chi legge in inglese non incontra quasi mai lo scarto fra
+le due, perché l'inglese è il caso attorno a cui ogni lettore è stato costruito
+per impostazione predefinita. Tutti gli altri lo incontrano nei primi secondi, di
+solito senza riuscire a dare un nome a quello che non va.
+
+Un lettore che tratta la tua lingua come un caso di prima classe non ti sta
+facendo un favore. Sta facendo ingegneria ordinaria, e i punti in cui quel lavoro
+viene saltato sono sempre gli stessi tre: l'impaginazione, il carattere e le
+tracce che scendono insieme al flusso.
+
+## Da destra a sinistra è l'esempio più netto
+
+L'arabo, il persiano, l'ebraico e l'urdu si leggono da destra, e il modo più
+economico per dichiarare di supportarli è specchiare qualche icona. Il risultato
+è un'app con le frecce girate che però continua a pensare da sinistra.
+
+Un impaginato vero fa partire l'intera interfaccia dal bordo destro:
+
+- **Ordine di lettura.** Titoli, testo e pulsanti cominciano a destra. L'azione
+  principale sta dove l'occhio arriva per primo, non dove l'aveva lasciata un
+  progetto pensato da sinistra a destra.
+- **Ordine del fuoco.** È qui che la cosa smette di essere estetica. Se premi
+  destra sul telecomando del televisore, il fuoco deve spostarsi sull'elemento
+  successivo nell'ordine di lettura — che, in un'interfaccia da destra a sinistra,
+  è quello a sinistra. Un'app che se lo dimentica resta tollerabile sul telefono e
+  con un telecomando a frecce fa
+  [sembrare che il telecomando si sia rotto](/it/blog/lettore-iptv-su-android-tv/).
+- **La direzione di «indietro».** Una freccia indietro dovrebbe puntare verso dove
+  sta il *prima*. In un impaginato da destra a sinistra, prima è a destra.
+
+Le barre di avanzamento sono la terza decisione, e quella che più spesso viene
+presa per caso. Una barra di caricamento in un impaginato da destra a sinistra si
+riempie da destra, come il testo. Una linea temporale di riproduzione di solito
+resta da sinistra a destra, perché ricalca lo scorrere del tempo e non l'ordine di
+lettura, ed è quello che si aspetta chi manda avanti con il telecomando. Il punto
+non è quale delle due risposte sia corretta. È che un lettore che non si è mai
+posto la domanda ha risposto a caso.
+
+## Il carattere deve corrispondere alla scrittura
+
+Quando un'app non indica un carattere per una scrittura, il sistema sostituisce
+quello che giudica più vicino. Il testo resta leggibile, quindi non sembra rotto —
+finché non guardi le lettere.
+
+Per il persiano il sostituto è di solito un carattere arabo, e due lettere lo
+tradiscono: *ye* e *kaf* si disegnano in modo diverso nelle due tradizioni, così
+una parola compare con un paio di puntini in più o un tratto in più. È la tua
+parola, scritta sbagliata. I segni diacritici vengono lasciati cadere o
+posizionati male, cosa che in gran parte dei nomi di canale non conta e nei nomi
+propri conta molto. E le cifre sono due insiemi distinti — ۱۲۳۴ persiane e ١٢٣٤
+arabe — quindi una lista che le mescola si legge subito come estranea.
+
+La stessa classe di guasto si presenta altrove: diacritici vietnamiti impilati che
+si scontrano, testo giapponese reso con forme di glifi cinesi. Su un alfabeto
+latino si vede di rado, ed è esattamente per questo che passa inosservata la volta
+in cui capita. Il carattere qui non è decorazione: decide se la parola sullo
+schermo è la parola giusta.
+
+## I nomi dei canali: quasi sempre la lista, non l'interfaccia
+
+Vale la pena dirlo chiaramente, perché è una cosa di cui i lettori vengono
+incolpati di continuo. Quando i nomi dei canali in una scrittura non latina
+arrivano come punti interrogativi o come una sequenza illeggibile di caratteri, la
+colpa è quasi sempre della codifica della playlist stessa e non dell'interfaccia.
+È un problema di UTF-8, e riporta
+[all'estensione del file e a che cosa dichiara](/it/blog/m3u-o-m3u8/). Un lettore
+può mostrare correttamente i byte che gli sono stati dati; non può ricostruire un
+nome che non gli è mai arrivato intatto.
+
+L'altra metà è quello che succede una volta che i nomi arrivano intatti. La
+ricerca deve accettare la scrittura, e i prefissi che i fornitori attaccano davanti
+a un nome — `IT:`, `[HD]`, `FR|` — non devono impedirti di trovarlo. È lo stesso
+lavoro che
+[rende navigabile una lista grande](/it/blog/organizzare-playlist-grandi/).
+
+## Sottotitoli e tracce audio multiple
+
+Alcuni canali e gran parte dei film portano più di una traccia audio, e a volte una
+o più tracce di sottotitoli. Qualunque cosa ci sia, ce l'ha messa il fornitore
+dentro al flusso, e anche l'etichetta di ogni traccia viene dal flusso.
+
+Tre cose sono mestiere del lettore:
+
+- **Presentarle in modo che si possano scegliere.** Una lista chiara durante la
+  riproduzione, non qualcosa sepolto nelle impostazioni, e con le etichette che il
+  flusso ha fornito.
+- **Cambiare senza interrompere.** Scegliere una lingua dell'audio o una traccia di
+  sottotitoli non deve significare tornare all'inizio del programma.
+- **Ricordare la scelta.** Se ogni volta devi riselezionare la tua lingua, la
+  funzione è a metà.
+
+E un limite che nessuna impostazione aggira: un lettore può offrire soltanto quello
+che c'è nel flusso. Se un fornitore manda un film con una sola traccia audio e
+senza sottotitoli, nessuna opzione in nessun lettore creerà una traccia di
+sottotitoli che non è mai stata spedita. Se una lingua in particolare ti
+interessa, è quella la domanda da fare al tuo fornitore prima di rinnovare.
+
+## Non è un favore, è ingegneria ordinaria
+
+Niente di quanto sopra è lavoro straordinario. L'impaginazione segue la direzione
+della scrittura, il carattere è quello giusto per l'alfabeto, i byte vengono
+mostrati come sono arrivati, e quello che c'è nel flusso viene offerto a chi
+guarda. Quando la lingua è l'inglese, nessuno chiama tutto questo *supporto
+linguistico*: dice soltanto che l'app funziona.

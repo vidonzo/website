@@ -1,0 +1,99 @@
+---
+title: "Chuyển toàn bộ thiết lập sang điện thoại mới mà không mất gì"
+description: "Kênh yêu thích và tiến độ xem theo bạn ngay khi đăng nhập. Thông tin đăng nhập danh sách phát chỉ theo bạn nếu bạn còn giữ thứ mở khóa được chúng."
+urlSlug: chuyen-sang-dien-thoai-moi
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["quyền riêng tư", "sản phẩm"]
+keywords: ["chuyển ứng dụng iptv sang điện thoại mới", "đồng bộ danh sách phát iptv", "khôi phục danh sách phát khi đổi máy", "ghép thiết bị bằng mã qr"]
+heroImageAlt: "Hai chiếc điện thoại đặt cạnh nhau, một chiếc hiện mã QR, chiếc kia đang giữ mã đó trong khung máy ảnh."
+---
+
+Thay điện thoại là lúc một quyết định thiết kế mà bạn chưa từng phải nghĩ tới bỗng
+hiện ra. Phần lớn thiết lập của bạn theo bạn sang máy mới mà chẳng cần ai hỏi. Một
+phần trong đó — phần quan trọng nhất — chỉ theo bạn nếu bạn còn cầm trong tay thứ
+mở khóa được nó.
+
+Không có gì khó, nhưng thứ tự các bước quyết định kết quả. Làm việc chuyển máy
+trong lúc điện thoại cũ còn chạy và còn nằm trong tay bạn thì không mất gì. Để đến
+sau đó thì có một mảnh phải dựng lại.
+
+## Phần tự nó đi theo bạn
+
+Kênh yêu thích, tiến độ xem và thiết lập ứng dụng được đồng bộ ở dạng thường, bảo
+vệ bằng quy tắc truy cập theo từng người dùng thông thường. Đăng nhập trên máy mới
+là chúng có mặt: những kênh bạn đã đánh dấu, tập phim bạn đang xem dở, những tùy
+chọn bạn đặt từ mấy tháng trước và quên từ lâu.
+
+Chúng được lưu không mã hóa, và đó là chủ ý. Mã hóa chúng gần như không đem lại
+gì, vì không thứ nào là bí mật, mà lại khiến một thiết bị vừa thêm vào không hiển
+thị được gì có ích cho tới khi nó được mở khóa.
+
+## Phần đến nơi trong trạng thái đã khóa
+
+Thông tin đăng nhập của nhà cung cấp được đối xử như một loại dữ liệu khác hẳn, vì
+chúng *chính là* gói cước của bạn. Host, tên đăng nhập và mật khẩu Xtream, cùng
+mọi đường dẫn nguồn M3U, đều được mã hóa ngay trên thiết bị của bạn trước khi được
+lưu ở bất cứ đâu. Thứ nằm trên máy chủ là một cái nhãn, một loại nguồn, và một
+khối dữ liệu mà ở đó không ai giữ khóa để mở. Lý lẽ và phần cơ chế đã
+[được viết ra đầy đủ ở chỗ khác](/vi/blog/ma-hoa-thong-tin-dang-nhap/).
+
+Nên chiếc điện thoại mới đăng nhập và cho bạn thấy một cảnh hơi lạ: các danh sách
+phát được liệt kê ra và gắn nhãn **đã khóa**. Cái tên bạn đặt cho một danh sách
+phát là chữ của bạn chứ không phải bí mật, nên nó chưa từng được mã hóa và hiển
+thị được. Thông tin đăng nhập đứng sau nó thì không. Thiết bị biết danh sách phát
+ấy tồn tại. Nó chưa kết nối được bằng danh sách ấy.
+
+## Hai thứ mở khóa được nó
+
+Bạn cần một trong hai.
+
+**Một thiết bị đang ở trạng thái mở khóa.** Điện thoại mới sinh một cặp khóa tạm
+thời và hiện ra một mã QR. Điện thoại cũ, vẫn đang đăng nhập và vẫn đang mở khóa,
+quét mã đó và hỏi bạn xác nhận. Rồi nó dẫn xuất một bí mật chung với thiết bị mới,
+niêm phong khóa dữ liệu bằng bí mật ấy, và tải kết quả đã niêm phong lên. Điện
+thoại mới mở khối đó bằng khóa riêng của chính nó và cất thứ lấy ra được vào iOS
+Keychain hoặc Android Keystore. Chiếc khóa đi giữa hai thiết bị của bạn; máy chủ
+chỉ mang một gói mà nó không mở được.
+
+**Mật khẩu đồng bộ của bạn.** Khóa dữ liệu cũng được bọc bằng một khóa dẫn xuất từ
+mật khẩu ấy, và chỉ dạng đã bọc mới được tải lên — bản thân mật khẩu không bao giờ
+đi qua mạng.
+
+## Phần không thể nói nhẹ đi
+
+Nếu không còn thiết bị nào đang mở khóa và mật khẩu đồng bộ cũng mất, thì các danh
+sách phát mất theo. Không phải bị giữ lại — mà là không thể lấy được, về mặt toán
+học. Ở phía chúng tôi không có gì để đặt lại, và đó vừa là toàn bộ điểm của thiết
+kế này vừa là cái giá của nó.
+
+Cách phục hồi thì không có gì kịch tính. Bạn thêm lại danh sách phát: tìm lại thông
+tin đăng nhập mà nhà cung cấp đã cấp cho bạn và nhập lại, tức là
+[đúng mấy phút bạn đã bỏ ra lần đầu](/vi/blog/cai-dat-danh-sach-phat-dau-tien/).
+Kênh yêu thích, tiến độ xem và thiết lập không suy suyển, vì chúng vốn chưa từng
+được mã hóa. Thứ bạn dựng lại là một bộ thông tin đăng nhập, không phải cả một bộ
+thiết lập.
+
+## Nếu bạn chưa từng bật đồng bộ
+
+Vậy thì không có gì để chuyển và cũng chưa từng có gì bị lộ ra. Tài khoản chỉ tồn
+tại để chuyển dữ liệu của chính bạn giữa các thiết bị của chính bạn, và trình phát
+chạy được hoàn toàn khi không có tài khoản nào —
+[đó là mô hình đang hoạt động đúng như ý định](/vi/blog/tu-mang-danh-sach-phat/).
+Đổi lại, điện thoại mới bắt đầu từ con số không, và danh sách phát được thêm bằng
+tay y như đã làm trên máy cũ. Kênh yêu thích cũng phải dựng lại, vì chúng chỉ từng
+tồn tại trên chiếc máy đã ghi chúng.
+
+## Trình tự chạy đúng
+
+Trước khi chiếc điện thoại cũ rời khỏi tay bạn:
+
+1. Đăng nhập trên điện thoại mới bằng đúng tài khoản ấy.
+2. Ghép hai máy trong lúc máy cũ vẫn đang đăng nhập và vẫn đang mở khóa.
+3. Kiểm tra rằng một danh sách phát thật sự phát được trên máy mới — chứ không chỉ
+   là nó có hiện ra trong danh sách.
+
+Rồi hãy xóa sạch máy cũ. Nếu bạn đã xóa nó rồi mà vẫn nhớ mật khẩu đồng bộ thì vẫn
+ổn. Nếu cả hai đều không còn, hãy dành một phút nhập lại thông tin đăng nhập rồi
+đi tiếp; không phần nào khác trong bộ thiết lập của bạn bị ảnh hưởng, và bản thân
+gói cước của bạn thì chưa từng phải chuyển đi đâu cả.

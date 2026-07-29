@@ -1,0 +1,97 @@
+---
+title: "Move your whole setup to a new phone without losing anything"
+description: "Favourites and progress follow you on sign-in. Your playlist credentials follow you only if something that can unlock them is still in your hands."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacy", "product"]
+keywords: ["move iptv app to new phone", "transfer playlist to new device", "iptv sync new phone", "restore playlists after phone change"]
+heroImageAlt: "Two phones side by side, one showing a QR code and the other holding it in the camera frame."
+---
+
+Replacing a phone is the moment a design decision you never had to think about
+becomes visible. Most of your setup follows you without being asked. One part of
+it — the part that matters most — follows you only if you still hold something
+that can unlock it.
+
+None of this is difficult, but the order of operations decides the outcome. Do
+the migration while the old phone still works and is in your hands, and nothing
+is lost. Leave it until afterwards and one piece may have to be rebuilt.
+
+## What moves on its own
+
+Favourites, watch progress and app settings sync in plain form, protected by
+ordinary per-user access rules. Sign in on the new phone and they are simply
+there: the channels you marked, the episode you were part-way through, the
+preferences you set months ago and have long since forgotten.
+
+They are stored unencrypted on purpose. Encrypting them would buy almost nothing,
+because none of them are secrets, and it would leave a newly added device showing
+you nothing useful until it had been unlocked.
+
+## What arrives locked
+
+Your provider credentials are treated as a different class of data, because they
+*are* your subscription. The Xtream host, username and password, and any M3U
+source URL, are encrypted on your device before they are stored at all. What
+sits on a server is a label, a kind, and a block of ciphertext that nobody there
+holds a key for. The reasoning and the mechanics are
+[set out in full elsewhere](/blog/why-a-player-should-encrypt-your-credentials/).
+
+So the new phone signs in and shows you something slightly strange: your
+playlists are listed and marked **locked**. The name you gave a playlist is your
+own words rather than a secret, so it was never encrypted and can be displayed.
+The credential behind it cannot. The device knows the playlist exists. It cannot
+yet connect with it.
+
+## The two things that can unlock it
+
+You need one of them.
+
+**A device that is already unlocked.** The new phone generates an ephemeral key
+pair and shows a QR code. The old phone, still signed in and still unlocked,
+scans it and asks you to confirm. It then derives a shared secret with the new
+device, seals the data key with that, and uploads the sealed result. The new
+phone opens it with its own private key and stores what comes out in the iOS
+Keychain or the Android Keystore. The key travels between two devices you own;
+the server only ever carries a parcel it cannot open.
+
+**Your sync password.** The data key is also wrapped with a key derived from that
+password, and only the wrapped form is uploaded — the password itself never
+crosses the network.
+
+## The part that cannot be softened
+
+If no unlocked device remains and the sync password is gone, the playlists are
+gone with them. Not withheld — mathematically unavailable. There is nothing on
+our side to reset, which is the entire point of the design and also the price of
+it.
+
+The recovery is undramatic. You re-add the playlist: find the credentials your
+provider issued you and enter them again, which is
+[the same few minutes it took the first time](/blog/set-up-your-first-playlist/).
+Favourites, progress and settings are untouched, because they were never
+encrypted. What you rebuild is one credential, not a setup.
+
+## If sync was never turned on
+
+Then there is nothing to migrate and nothing was ever exposed. An account exists
+only to move your own data between your own devices, and the player works
+completely without one —
+[which is the model behaving as intended](/blog/bring-your-own-playlist/). It
+does mean the new phone starts empty, and the playlist is added by hand exactly
+as it was on the old one. Favourites are rebuilt too, since they only ever
+existed on the device that recorded them.
+
+## The order that works
+
+Before the old phone leaves your possession:
+
+1. Sign in on the new phone with the same account.
+2. Pair the two while the old one is still signed in and unlocked.
+3. Confirm that a playlist actually plays on the new phone — not merely that it
+   appears in the list.
+
+Then wipe the old one. If you have already wiped it and you still know your sync
+password, you are fine. If neither is true, allow a minute to re-enter the
+credentials and carry on; nothing else about your setup is affected, and your
+subscription itself never moved at all.

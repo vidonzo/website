@@ -6,6 +6,10 @@ export const redirects = {
     "to": "/ar/blog/لماذا-يشفر-المشغل-بيانات-دخولك/",
     "code": 301
   },
+  "/ar/blog/no-ads-no-trackers/": {
+    "to": "/ar/blog/مشغل-بلا-إعلانات-ولا-تتبع/",
+    "code": 301
+  },
   "/ar/blog/your-phone-is-a-better-remote/": {
     "to": "/ar/blog/حول-هاتفك-إلى-جهاز-تحكم/",
     "code": 301
@@ -24,6 +28,10 @@ export const redirects = {
   },
   "/bn/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/bn/blog/ক্রেডেনশিয়াল-এনক্রিপশন-কেন-জরুরি/",
+    "code": 301
+  },
+  "/bn/blog/no-ads-no-trackers/": {
+    "to": "/bn/blog/বিজ্ঞাপন-ও-ট্র্যাকার-ছাড়া-প্লেয়ার/",
     "code": 301
   },
   "/bn/blog/set-up-your-first-playlist/": {
@@ -46,6 +54,10 @@ export const redirects = {
     "to": "/de/blog/playlist-zugangsdaten-verschluesseln/",
     "code": 301
   },
+  "/de/blog/no-ads-no-trackers/": {
+    "to": "/de/blog/ohne-werbung-ohne-tracker/",
+    "code": 301
+  },
   "/de/blog/set-up-your-first-playlist/": {
     "to": "/de/blog/erste-playlist-einrichten/",
     "code": 301
@@ -62,6 +74,10 @@ export const redirects = {
     "to": "/es/blog/por-que-cifrar-tus-credenciales/",
     "code": 301
   },
+  "/es/blog/no-ads-no-trackers/": {
+    "to": "/es/blog/sin-anuncios-ni-rastreadores/",
+    "code": 301
+  },
   "/es/blog/your-phone-is-a-better-remote/": {
     "to": "/es/blog/movil-como-mando-de-tv/",
     "code": 301
@@ -70,12 +86,20 @@ export const redirects = {
     "to": "/fa/blog/رمزنگاری-اطلاعات-ورود-پلی-لیست/",
     "code": 301
   },
+  "/fa/blog/no-ads-no-trackers/": {
+    "to": "/fa/blog/پخش-کننده-بدون-تبلیغ-و-ردیاب/",
+    "code": 301
+  },
   "/fa/blog/your-phone-is-a-better-remote/": {
     "to": "/fa/blog/تبدیل-گوشی-به-ریموت-تلویزیون/",
     "code": 301
   },
   "/fr/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/fr/blog/pourquoi-chiffrer-vos-identifiants/",
+    "code": 301
+  },
+  "/fr/blog/no-ads-no-trackers/": {
+    "to": "/fr/blog/lecteur-sans-pub-ni-traceurs/",
     "code": 301
   },
   "/fr/blog/your-phone-is-a-better-remote/": {
@@ -88,6 +112,10 @@ export const redirects = {
   },
   "/hi/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/hi/blog/प्लेलिस्ट-लॉगिन-एन्क्रिप्शन/",
+    "code": 301
+  },
+  "/hi/blog/no-ads-no-trackers/": {
+    "to": "/hi/blog/बिना-विज्ञापन-बिना-ट्रैकिंग-वाला-प्लेयर/",
     "code": 301
   },
   "/hi/blog/set-up-your-first-playlist/": {
@@ -110,6 +138,10 @@ export const redirects = {
     "to": "/id/blog/mengenkripsi-data-login-playlist/",
     "code": 301
   },
+  "/id/blog/no-ads-no-trackers/": {
+    "to": "/id/blog/pemutar-tanpa-iklan-dan-pelacak/",
+    "code": 301
+  },
   "/id/blog/set-up-your-first-playlist/": {
     "to": "/id/blog/menyiapkan-playlist-pertama/",
     "code": 301
@@ -128,6 +160,10 @@ export const redirects = {
   },
   "/it/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/it/blog/perche-cifrare-le-credenziali/",
+    "code": 301
+  },
+  "/it/blog/no-ads-no-trackers/": {
+    "to": "/it/blog/senza-pubblicita-ne-tracciamento/",
     "code": 301
   },
   "/it/blog/set-up-your-first-playlist/": {
@@ -150,6 +186,10 @@ export const redirects = {
     "to": "/ja/blog/認証情報-を-暗号化-すべき-理由/",
     "code": 301
   },
+  "/ja/blog/no-ads-no-trackers/": {
+    "to": "/ja/blog/広告-と-追跡-のない-プレイヤー/",
+    "code": 301
+  },
   "/ja/blog/set-up-your-first-playlist/": {
     "to": "/ja/blog/初めての-プレイリスト-設定手順/",
     "code": 301
@@ -168,6 +208,10 @@ export const redirects = {
   },
   "/ko/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/ko/blog/인증-정보를-암호화해야-하는-이유/",
+    "code": 301
+  },
+  "/ko/blog/no-ads-no-trackers/": {
+    "to": "/ko/blog/광고와-추적이-없는-플레이어/",
     "code": 301
   },
   "/ko/blog/set-up-your-first-playlist/": {
@@ -190,6 +234,10 @@ export const redirects = {
     "to": "/nl/blog/waarom-een-speler-inloggegevens-versleutelt/",
     "code": 301
   },
+  "/nl/blog/no-ads-no-trackers/": {
+    "to": "/nl/blog/speler-zonder-advertenties-en-trackers/",
+    "code": 301
+  },
   "/nl/blog/set-up-your-first-playlist/": {
     "to": "/nl/blog/eerste-afspeellijst-instellen/",
     "code": 301
@@ -208,6 +256,10 @@ export const redirects = {
   },
   "/pl/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/pl/blog/dlaczego-szyfrowac-dane-logowania/",
+    "code": 301
+  },
+  "/pl/blog/no-ads-no-trackers/": {
+    "to": "/pl/blog/bez-reklam-i-bez-sledzenia/",
     "code": 301
   },
   "/pl/blog/set-up-your-first-playlist/": {
@@ -230,6 +282,10 @@ export const redirects = {
     "to": "/pt/blog/por-que-criptografar-suas-credenciais/",
     "code": 301
   },
+  "/pt/blog/no-ads-no-trackers/": {
+    "to": "/pt/blog/player-sem-anuncios-nem-rastreadores/",
+    "code": 301
+  },
   "/pt/blog/set-up-your-first-playlist/": {
     "to": "/pt/blog/configurar-sua-primeira-lista/",
     "code": 301
@@ -248,6 +304,10 @@ export const redirects = {
   },
   "/ru/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/ru/blog/шифрование-учетных-данных-плейлиста/",
+    "code": 301
+  },
+  "/ru/blog/no-ads-no-trackers/": {
+    "to": "/ru/blog/плеер-без-рекламы-и-трекеров/",
     "code": 301
   },
   "/ru/blog/set-up-your-first-playlist/": {
@@ -270,6 +330,10 @@ export const redirects = {
     "to": "/th/blog/ทำไมเครื่องเล่น-ควรเข้ารหัส-ข้อมูลล็อกอิน/",
     "code": 301
   },
+  "/th/blog/no-ads-no-trackers/": {
+    "to": "/th/blog/เครื่องเล่น-ไม่มีโฆษณา-ไม่มีตัวติดตาม/",
+    "code": 301
+  },
   "/th/blog/set-up-your-first-playlist/": {
     "to": "/th/blog/วิธี-ตั้งค่า-เพลย์ลิสต์-iptv/",
     "code": 301
@@ -286,6 +350,10 @@ export const redirects = {
     "to": "/tr/blog/giris-bilgileri-neden-sifrelenmeli/",
     "code": 301
   },
+  "/tr/blog/no-ads-no-trackers/": {
+    "to": "/tr/blog/reklamsiz-ve-takip-etmeyen-oynatici/",
+    "code": 301
+  },
   "/tr/blog/your-phone-is-a-better-remote/": {
     "to": "/tr/blog/telefonu-tv-kumandasina-donusturun/",
     "code": 301
@@ -296,6 +364,10 @@ export const redirects = {
   },
   "/ur/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/ur/blog/پلے-لسٹ-تفصیلات-کی-انکرپشن/",
+    "code": 301
+  },
+  "/ur/blog/no-ads-no-trackers/": {
+    "to": "/ur/blog/اشتہار-اور-ٹریکر-کے-بغیر-پلیئر/",
     "code": 301
   },
   "/ur/blog/set-up-your-first-playlist/": {
@@ -316,6 +388,10 @@ export const redirects = {
   },
   "/vi/blog/how-vidonzo-encrypts-your-playlists/": {
     "to": "/vi/blog/ma-hoa-thong-tin-dang-nhap/",
+    "code": 301
+  },
+  "/vi/blog/no-ads-no-trackers/": {
+    "to": "/vi/blog/khong-quang-cao-khong-theo-doi/",
     "code": 301
   },
   "/vi/blog/set-up-your-first-playlist/": {

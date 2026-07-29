@@ -1,0 +1,111 @@
+---
+title: "Kendi dilinizde izlemek: sağdan sola yazım, altyazı ve çoklu ses"
+description: "Sağdan sola, birkaç simgeyi aynalamak değil bir yerleşimdir. Bir oynatıcıda gerçek dil desteği yazı tipinden yayındaki ses parçalarına kadar neye benzer."
+urlSlug: kendi-dilinizde-izlemek
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["oynatma", "urun"]
+keywords: ["iptv altyazı seçme", "iptv ses parçası değiştirme", "iptv türkçe karakter sorunu", "sağdan sola arayüz desteği"]
+heroImageAlt: "Sağ kenardan başlayarak yerleştirilmiş bir oynatıcı arayüzü; videonun üzerinde altyazı ve ses parçası menüsü açık."
+---
+
+Bir uygulamanın dilinize çevrilmiş olmasıyla dilinizi desteklemesi aynı şey
+değil. İngilizce okuyorsanız aradaki farkla pek karşılaşmazsınız, çünkü her
+oynatıcı varsayılan olarak İngilizceye göre kurulmuştur. Geri kalan herkes bu
+farkı ilk birkaç saniyede görür, çoğu zaman rahatsız eden şeyin adını
+koyamadan.
+
+Dilinizi birinci sınıf bir durum olarak ele alan bir oynatıcı size bir jest
+yapmıyordur. Sıradan mühendislik yapıyordur: yerleşim yazının yönünü izler, yazı
+tipi yazı sistemine uyar, metin baytlar nasıl geldiyse öyle gösterilir ve yayın
+ne taşıyorsa size sunulur. Bu işin atlandığı yerler hep aynı üçüdür: yerleşim,
+yazı tipi ve yayınla birlikte inen parçalar.
+
+## Sağdan sola, en keskin örnek
+
+Arapça, Farsça, İbranice ve Urduca sağdan okunur; bu dilleri desteklediğini
+söylemenin en ucuz yolu da birkaç simgeyi aynalamaktır. Sonuç, okları ters
+çevrilmiş ama hâlâ soldan düşünen bir uygulamadır.
+
+Gerçek bir yerleşim, arayüzün tamamını sağ kenardan başlatır:
+
+- **Okuma sırası.** Başlıklar, gövde metni ve düğmeler sağdan başlar. Birincil
+  eylem, gözün ilk ulaştığı yere oturur; soldan sağa bir tasarımın onu bıraktığı
+  yere değil.
+- **Odak sırası.** İşin süs olmaktan çıktığı yer burası. Televizyon kumandasında
+  sağ tuşuna basıldığında odak, okuma sırasındaki bir sonraki öğeye gitmeli — ki
+  sağdan sola bir arayüzde bu, soldaki öğedir. Bunu atlayan bir uygulama
+  telefonda katlanılabilir, yön tuşlarıyla neredeyse kullanılamaz olur.
+- **Geri düğmesinin yönü.** Geri oku, *önceki*nin bulunduğu yöne bakmalıdır.
+  Sağdan sola bir yerleşimde önceki sağdadır.
+
+İlerleme çubuğu üçüncü karardır ve en çok kazara verilen karardır. Sağdan sola
+bir yerleşimde yükleme çubuğu, metnin kendisi gibi sağdan dolar. Oynatma zaman
+çizelgesi ise genellikle soldan sağa kalır, çünkü okuma sırasına değil zamanın
+akışına karşılık gelir ve kumandayla ileri saran biri bunu bekler. Mesele hangi
+yanıtın doğru olduğu değil. Mesele, bu soruyu hiç sormamış bir oynatıcının yanıtı
+tesadüfen vermiş olması.
+
+## Yazı tipi yazı sistemine uymak zorunda
+
+Bir uygulama bir yazı sistemi için yazı tipi belirtmediğinde, sistem en yakın
+gördüğünü yerine koyar. Metin okunur kaldığı için hiçbir şey bozuk görünmez —
+harflere bakana kadar.
+
+Türkçede bunu ele veren yerler bellidir. *ı* ile *i* ayrı iki harftir; noktasız
+*ı* karakterini taşımayan bir yazı tipinde bu harf ya boş bir kutu olarak ya da
+gövdenin geri kalanına uymayan başka bir kaynaktan gelmiş bir biçimle çıkar. *ş*
+ve *ç* altındaki kuyruk kimi yazı tipinde sedil, kimisinde virgül olarak çizilir
+— tek başına küçük bir ayrıntı, bir kanal listesinin tamamında göze batan bir
+tutarsızlık.
+
+Aynı sorunun bir de arama tarafı var ve daha sinsi. Türkçede *i* harfinin büyüğü
+*İ*, *I* harfinin küçüğü *ı*'dır — İngilizcede karşılığı olmayan bir
+ayrım. Büyük-küçük dönüşümünü Türkçe kurallarıyla yapmayan bir arama kutusu,
+*İstanbul* ile *istanbul*'u aynı kelime saymayabilir. Bu bir yazı tipi meselesi
+değil, dil ayarı meselesi; ama kullanıcıya aynı şey gibi görünür: adı doğru
+yazdınız, uygulama bulamadı.
+
+Aynı sınıftan hatalar başka yazı sistemlerinde de çıkar: üst üste binen
+Vietnamca işaretler, Çince harf biçimleriyle çizilen Japonca metin. Yazı tipi
+burada süs değil. Ekrandaki kelimenin doğru kelime olup olmadığına o karar
+veriyor.
+
+## Kanal adları: genellikle liste, arayüz değil
+
+Bunu açıkça söylemekte fayda var, çünkü bu yüzden sürekli oynatıcılar suçlanıyor.
+Türkçe kanal adları soru işareti ya da o tanıdık bozuk karakter dizisi olarak
+geldiğinde kusur neredeyse her zaman arayüzde değil, oynatma listesinin kendi
+kodlamasındadır. Bu bir UTF-8 meselesidir ve [dosya uzantısına ve onun neyi
+bildirdiğine](/tr/blog/m3u-ile-m3u8-farki/) geri gider. Bir oynatıcı, kendisine
+verilen baytları doğru gösterebilir; sağlam ulaşmamış bir adı yeniden kuramaz.
+
+İşin diğer yarısı, adlar sağlam ulaştıktan sonra olanlardır. Arama Türkçeyi kabul
+etmeli ve sağlayıcıların adın önüne eklediği ekler — `TR:`, `[HD]`, `DE|` — onu
+bulmanıza engel olmamalı. Bu da [büyük bir listeyi gezilebilir
+kılan](/tr/blog/buyuk-oynatma-listesi-duzenleme/) işin ta kendisi.
+
+## Altyazı ve çoklu ses parçaları
+
+Bazı kanallar ve çoğu film birden fazla ses parçası, kimi zaman da bir ya da
+birkaç altyazı parçası taşır. Ne varsa yayına sağlayıcı koymuştur; her parçanın
+etiketi de yayının kendisinden gelir. Bir filmi Türkçe dublajla mı yoksa orijinal
+sesiyle ve altyazıyla mı izleyeceğiniz, işte o listede seçilir.
+
+Oynatıcının işi üç şeydir:
+
+- **Seçilebilecek biçimde sunmak.** Oynatma sırasında açık bir liste — ayarların
+  içine gömülmüş bir şey değil — ve yayının verdiği etiketlerle.
+- **Kesintiye uğratmadan değiştirmek.** Ses dilini ya da altyazı parçasını seçmek,
+  programın başına dönmek anlamına gelmemeli.
+- **Seçimi hatırlamak.** Her seferinde dilinizi yeniden seçmeniz gerekiyorsa,
+  özellik yarım kalmıştır.
+
+Ve hiçbir ayarın dolanamadığı tek sınır: bir oynatıcı yalnızca yayında olanı
+sunabilir. Sağlayıcı bir filmi tek ses parçasıyla ve altyazısız gönderiyorsa,
+hiçbir oynatıcıdaki hiçbir seçenek gönderilmemiş bir altyazı parçasını yaratmaz.
+Belirli bir dil sizin için önemliyse, aboneliğinizi yenilemeden önce
+sağlayıcınıza soracağınız soru budur.
+
+Yukarıdakilerin hiçbiri olağandışı bir iş değil. Dil İngilizce olduğunda kimse
+bunlara *dil desteği* demiyor. Yalnızca uygulama çalışıyor diyorlar.

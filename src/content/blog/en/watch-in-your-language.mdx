@@ -1,0 +1,104 @@
+---
+title: "Watching in your own language: right-to-left, subtitles and multiple audio tracks"
+description: "Right-to-left is a layout, not a set of mirrored icons. What genuine language support looks like in a player, from the typeface to the tracks in the stream."
+publishedAt: 2026-07-29
+urlSlug: watch-in-your-language
+sourceLocale: fa
+tags: ["playback", "product"]
+keywords: ["right to left app layout", "iptv subtitles", "change audio track iptv player", "multi language iptv player"]
+heroImageAlt: "A player interface laid out from the right edge, with the subtitle and audio track menu open over the video."
+---
+
+There is a difference between an app that has been translated into your language
+and an app that supports it. If you read English, you will rarely meet the gap,
+because English is the case every player was built around by default. Everyone
+else meets it within seconds, usually without being able to name what is wrong.
+
+A player that treats your language as a first-class case is not doing you a
+favour. It is doing ordinary engineering: layout follows the direction of the
+script, the typeface matches the writing system, text is shown as the bytes
+arrived, and whatever the stream carries is offered to you. The places where
+that work gets skipped are always the same three: the layout, the type, and the
+tracks that come down with the stream.
+
+## Right-to-left is the sharpest example
+
+Arabic, Persian, Hebrew and Urdu read from the right, and the cheapest way to
+claim support for them is to mirror a few icons. The result is an app whose
+arrows point the other way but which still thinks from the left.
+
+A real layout starts the whole interface from the right edge:
+
+- **Reading order.** Headings, body text and buttons begin at the right. The
+  primary action sits where the eye reaches first, not where a left-to-right
+  design happened to leave it.
+- **Focus order.** This is where it stops being cosmetic. Press right on a
+  television remote and focus should move to the next item in reading order —
+  which, in a right-to-left interface, is the item to the left. An app that
+  misses this is tolerable on a phone and close to unusable with a d-pad.
+- **The direction of back.** A back arrow should point towards where *previous*
+  is. In a right-to-left layout, previous is to the right.
+
+Progress bars are the third decision, and the one most often made by accident. A
+loading bar in a right-to-left layout fills from the right, like the text. A
+playback timeline usually stays left-to-right, because it maps onto the passage
+of time rather than reading order, and someone scrubbing with a remote expects
+that. The point is not which answer is correct. It is that a player which never
+asked the question answered it by chance.
+
+## The typeface has to match the script
+
+When an app does not name a font for a script, the system substitutes whatever it
+judges closest. The text stays readable, so nothing looks broken — until you look
+at the letters.
+
+For Persian, the substitute is usually an Arabic font, and two letters give it
+away: *ye* and *kaf* are drawn differently in the two traditions, so a word
+appears with an extra pair of dots or an extra stroke. It is your word, spelled
+wrong. Diacritics are dropped or badly positioned, which does not matter in most
+channel names and matters a great deal in proper nouns. And the digits are two
+separate sets — Persian ۱۲۳۴ and Arabic ١٢٣٤ — so a list that mixes them reads as
+foreign immediately.
+
+The same class of failure shows up elsewhere: stacked Vietnamese diacritics that
+collide, Japanese text rendered with Chinese glyph forms. The font is not
+decoration here. It decides whether the word on screen is the right word.
+
+## Channel names: usually the playlist, not the interface
+
+This is worth saying plainly, because players get blamed for it constantly. When
+channel names in a non-Latin script arrive as question marks or a run of
+mojibake, the fault is almost always the encoding of the playlist itself rather
+than the interface. That is a UTF-8 problem, and it comes back to
+[the file extension and what it declares](/blog/m3u-vs-m3u8/). A player can
+display the bytes it was given correctly; it cannot reconstruct a name that never
+reached it intact.
+
+The other half is what happens once the names do arrive intact. Search has to
+accept the script, and the prefixes providers bolt onto the front of a name —
+`IR:`, `[HD]`, `FR|` — must not stop you finding it. That is the same work that
+[makes a large list navigable at all](/blog/organize-large-playlists/).
+
+## Subtitles and multiple audio tracks
+
+Some channels and most films carry more than one audio track, and sometimes one
+or more subtitle tracks. Whatever is there, the provider put it in the stream,
+and the label on each track comes from the stream too.
+
+Three things are the player's job:
+
+- **Present them so they can be chosen.** A clear list during playback, not
+  something buried in settings, and carrying the labels the stream supplied.
+- **Switch without interrupting.** Choosing an audio language or a subtitle track
+  should not mean returning to the start of the programme.
+- **Remember the choice.** If you have to select your language again every time,
+  the feature is half-built.
+
+And one limit that no setting gets around: a player can only offer what is in the
+stream. If a provider sends a film with a single audio track and no subtitles, no
+option in any player will create a subtitle track that was never sent. If a
+particular language matters to you, that is the question to put to your provider
+before you renew.
+
+Nothing above is unusual work. Nobody calls any of it *language support* when the
+language is English. They just say the app works.

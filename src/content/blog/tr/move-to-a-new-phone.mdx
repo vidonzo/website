@@ -1,0 +1,99 @@
+---
+title: "Bütün kurulumunuzu hiçbir şey kaybetmeden yeni telefona taşıyın"
+description: "Sık kullanılanlar ve izleme ilerlemesi oturum açtığınızda sizinle gelir. Giriş bilgileriniz ise yalnızca onları açabilecek bir şey hâlâ elinizdeyse."
+urlSlug: kurulumu-yeni-telefona-tasiyin
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["gizlilik", "urun"]
+keywords: ["iptv uygulamasını yeni telefona taşıma", "telefon değiştirince oynatma listesi", "iptv eşitleme yeni cihaz", "qr ile cihaz eşleştirme"]
+heroImageAlt: "Yan yana duran iki telefon; biri bir QR kod gösteriyor, diğeri onu kamera çerçevesinde tutuyor."
+---
+
+Telefon değiştirmek, hiç düşünmek zorunda kalmadığınız bir tasarım kararının
+görünür hale geldiği andır. Kurulumunuzun çoğu, siz istemeden sizinle gelir. Bir
+parçası — en çok önem taşıyan parçası — yalnızca onu açabilecek bir şeyi hâlâ
+elinizde tutuyorsanız gelir.
+
+Bunların hiçbiri zor değil, ama işlem sırası sonucu belirliyor. Taşımayı eski
+telefon hâlâ çalışırken ve elinizdeyken yapın, hiçbir şey kaybolmaz. Sonraya
+bırakın, bir parçanın yeniden kurulması gerekebilir.
+
+## Kendiliğinden gelenler
+
+Sık kullanılanlar, izleme ilerlemesi ve uygulama ayarları düz halde eşitlenir;
+kullanıcı başına sıradan erişim kurallarıyla korunurlar. Yeni telefonda oturum
+açın, hepsi öylece oradadır: işaretlediğiniz kanallar, yarısında kaldığınız
+bölüm, aylar önce yaptığınız ve çoktan unuttuğunuz tercihler.
+
+Bunlar bilerek şifrelenmeden saklanıyor. Şifrelemek neredeyse hiçbir şey
+kazandırmazdı, çünkü hiçbiri sır değil; üstelik yeni eklenen bir cihazın, kilidi
+açılana kadar işe yarar hiçbir şey göstermemesine yol açardı.
+
+## Kilitli gelenler
+
+Sağlayıcı giriş bilgileriniz başka sınıf bir veri sayılır, çünkü onlar
+*aboneliğinizin ta kendisi*. Xtream sunucu adresi, kullanıcı adı ve parola, bir
+de varsa M3U kaynak adresi, daha saklanmadan önce cihazınızda şifrelenir.
+Sunucuda duran şey bir etiket, bir tür ve orada hiç kimsenin anahtarını taşımadığı
+bir şifreli metin bloğudur. Gerekçesi ve mekaniği [başka bir yazıda ayrıntısıyla
+anlatıldı](/tr/blog/giris-bilgileri-neden-sifrelenmeli/).
+
+Bu yüzden yeni telefon oturum açtığında biraz tuhaf bir şey gösterir: oynatma
+listeleriniz listelenir ve **kilitli** olarak işaretlenir. Bir oynatma listesine
+verdiğiniz ad sizin kendi sözünüzdür, bir sır değil; o yüzden hiç şifrelenmemiştir
+ve gösterilebilir. Arkasındaki giriş bilgisi gösterilemez. Cihaz, oynatma
+listesinin var olduğunu biliyor. Onunla henüz bağlanamıyor.
+
+## Kilidi açabilecek iki şey
+
+Bunlardan birine ihtiyacınız var.
+
+**Kilidi hâlihazırda açık bir cihaz.** Yeni telefon geçici bir anahtar çifti
+üretir ve bir QR kod gösterir. Hâlâ oturumu açık ve kilidi açık olan eski telefon
+onu tarar ve sizden onay ister. Ardından yeni cihazla ortak bir sır türetir, veri
+anahtarını onunla mühürler ve mühürlenmiş sonucu yükler. Yeni telefon bunu kendi
+özel anahtarıyla açar ve çıkanı iOS Keychain ya da Android Keystore içinde saklar.
+Anahtar, sizin olan iki cihaz arasında yol alır; sunucu yalnızca açamadığı bir
+paket taşır.
+
+**Eşitleme parolanız.** Veri anahtarı bu paroladan türetilen bir anahtarla da
+sarmalanır ve yüklenen yalnızca sarmalanmış halidir — parolanın kendisi ağa hiç
+çıkmaz.
+
+## Yumuşatılamayacak kısım
+
+Kilidi açık bir cihaz kalmadıysa ve eşitleme parolası da gittiyse, oynatma
+listeleri onlarla birlikte gitmiştir. Sizden esirgenmiş değil — matematiksel
+olarak erişilemez. Bizim tarafımızda sıfırlanacak bir şey yok; tasarımın bütün
+amacı da bu, bedeli de.
+
+Kurtarma yolu dramatik değil. Oynatma listesini yeniden eklersiniz: sağlayıcınızın
+size verdiği giriş bilgilerini bulup yeniden girersiniz, ki bu [ilk seferinde de
+aynı birkaç dakikayı almıştı](/tr/blog/ilk-oynatma-listesi-kurulumu/). Sık
+kullanılanlar, ilerleme ve ayarlar el değmemiş durumda, çünkü hiçbir zaman
+şifrelenmemişlerdi. Yeniden kurduğunuz şey bir kurulum değil, tek bir giriş
+bilgisi.
+
+## Eşitleme hiç açılmadıysa
+
+O zaman taşınacak bir şey de yok, açığa çıkmış bir şey de olmadı. Hesap yalnızca
+kendi verinizi kendi cihazlarınız arasında taşımak için var ve oynatıcı hesapsız
+da eksiksiz çalışıyor — [modelin amaçlandığı gibi
+davranması](/tr/blog/kendi-listenizi-getirin/) bu. Bu, yeni telefonun boş
+başlaması demek; oynatma listesi de eskisinde olduğu gibi elle eklenir. Sık
+kullanılanlar da yeniden kurulur, çünkü onlar yalnızca kendilerini kaydeden
+cihazda vardı.
+
+## İşe yarayan sıra
+
+Eski telefon elinizden çıkmadan önce:
+
+1. Yeni telefonda aynı hesapla oturum açın.
+2. Eski telefon hâlâ oturumu açık ve kilidi açıkken ikisini eşleştirin.
+3. Yeni telefonda bir oynatma listesinin gerçekten oynadığını doğrulayın —
+   yalnızca listede göründüğünü değil.
+
+Sonra eskisini silin. Zaten sildiyseniz ve eşitleme parolanızı hâlâ
+biliyorsanız sorun yok. İkisi de geçerli değilse, giriş bilgilerini yeniden
+girmek için bir dakika ayırıp yolunuza devam edin; kurulumunuzun geri kalanı
+bundan etkilenmez ve aboneliğinizin kendisi zaten hiç yer değiştirmedi.

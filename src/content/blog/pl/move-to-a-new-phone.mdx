@@ -1,0 +1,100 @@
+---
+title: "Przenieś całą konfigurację na nowy telefon, nic nie tracąc"
+description: "Ulubione i postęp oglądania wracają po zalogowaniu. Dane playlisty tylko wtedy, gdy wciąż masz pod ręką coś, co potrafi je odblokować."
+urlSlug: przeniesienie-na-nowy-telefon
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["prywatność", "produkt"]
+keywords: ["przeniesienie iptv na nowy telefon", "jak przenieść playlistę na nowy telefon", "synchronizacja playlisty iptv", "playlista po zmianie telefonu"]
+heroImageAlt: "Dwa telefony obok siebie: na jednym kod QR, drugi trzyma go w kadrze aparatu."
+---
+
+Wymiana telefonu to moment, w którym decyzja projektowa, o której nigdy nie
+trzeba było myśleć, staje się widoczna. Większość konfiguracji przenosi się sama,
+bez pytania. Jedna jej część — akurat ta najważniejsza — przenosi się tylko
+wtedy, gdy wciąż trzymasz coś, co potrafi ją odblokować.
+
+Nic z tego nie jest trudne, ale o wyniku decyduje kolejność działań. Zrób to,
+póki stary telefon działa i jest w Twoich rękach, a nic nie przepadnie. Zostaw to
+na później, a jeden element może wymagać odbudowy.
+
+## Co przenosi się samo
+
+Ulubione, postęp oglądania i ustawienia aplikacji synchronizują się w zwykłej
+postaci, chronione standardowymi regułami dostępu przypisanymi do konta. Zaloguj
+się na nowym telefonie, a po prostu tam są: oznaczone kanały, odcinek przerwany
+w połowie, ustawienia sprzed miesięcy, o których dawno nie pamiętasz.
+
+Są przechowywane bez szyfrowania celowo. Szyfrowanie dałoby tu prawie nic, bo
+żadna z tych rzeczy nie jest sekretem, a nowo dodane urządzenie nie pokazywałoby
+niczego użytecznego, dopóki nie zostanie odblokowane.
+
+## Co przychodzi zablokowane
+
+Dane dostępowe do dostawcy są traktowane jako inna klasa danych, bo one *są*
+Twoim abonamentem. Host, nazwa użytkownika i hasło Xtream oraz każdy adres źródła
+M3U są szyfrowane na Twoim urządzeniu, zanim w ogóle zostaną gdziekolwiek
+zapisane. Na serwerze leży etykieta, rodzaj i blok szyfrogramu, do którego nikt
+tam nie ma klucza. Uzasadnienie i mechanika są
+[rozpisane osobno](/pl/blog/dlaczego-szyfrowac-dane-logowania/).
+
+Nowy telefon loguje się więc i pokazuje coś nieco dziwnego: playlisty są wypisane
+i oznaczone jako **zablokowane**. Nazwa, którą nadajesz playliście, to Twoje
+własne słowa, a nie sekret, więc nigdy nie była szyfrowana i da się ją wyświetlić.
+Danych dostępowych stojących za nią — nie. Urządzenie wie, że playlista istnieje.
+Nie potrafi jeszcze nawiązać przez nią połączenia.
+
+## Dwie rzeczy, które potrafią to odblokować
+
+Potrzebujesz jednej z nich.
+
+**Urządzenie, które jest już odblokowane.** Nowy telefon generuje efemeryczną
+parę kluczy i pokazuje kod QR. Stary telefon, wciąż zalogowany i wciąż
+odblokowany, skanuje go i prosi Cię o potwierdzenie. Następnie wyprowadza wspólny
+sekret z nowym urządzeniem, pieczętuje nim klucz danych i wysyła zapieczętowany
+wynik. Nowy telefon otwiera go swoim kluczem prywatnym i zapisuje zawartość
+w iOS Keychain albo Android Keystore. Klucz wędruje między dwoma urządzeniami,
+które należą do Ciebie; serwer przenosi wyłącznie paczkę, której nie potrafi
+otworzyć.
+
+**Twoje hasło synchronizacji.** Klucz danych jest opakowany także kluczem
+wyprowadzonym z tego hasła, a wysyłana jest wyłącznie opakowana postać — samo
+hasło nigdy nie przechodzi przez sieć.
+
+## Czego nie da się złagodzić
+
+Jeśli nie zostaje żadne odblokowane urządzenie, a hasło synchronizacji przepadło,
+playlisty przepadają razem z nim. Nie zostają zatrzymane — stają się
+matematycznie niedostępne. Po naszej stronie nie ma czego zresetować, co jest
+całym sensem tego rozwiązania i zarazem jego ceną.
+
+Odzyskiwanie jest mało dramatyczne. Dodajesz playlistę jeszcze raz: znajdujesz
+dane, które przekazał Ci dostawca, i wpisujesz je ponownie, czyli
+[dokładnie tyle samo, ile za pierwszym razem](/pl/blog/jak-dodac-pierwsza-playliste/).
+Ulubione, postęp i ustawienia zostają nietknięte, bo nigdy nie były szyfrowane.
+Odbudowujesz jedne dane dostępowe, a nie całą konfigurację.
+
+## Jeśli synchronizacja nigdy nie została włączona
+
+Wtedy nie ma czego przenosić i nic nigdy nie zostało nigdzie wystawione. Konto
+istnieje wyłącznie po to, żeby przenosić Twoje własne dane między Twoimi własnymi
+urządzeniami, a odtwarzacz działa całkowicie bez niego —
+[i tak właśnie ten model ma działać](/pl/blog/wlasna-playlista-i-prywatnosc/).
+Oznacza to jednak, że nowy telefon startuje pusty, a playlistę dodaje się
+ręcznie dokładnie tak jak na starym. Ulubione też trzeba zbudować od nowa, bo
+istniały tylko na urządzeniu, które je zapisało.
+
+## Kolejność, która działa
+
+Zanim stary telefon wyjdzie z Twoich rąk:
+
+1. Zaloguj się na nowym telefonie na to samo konto.
+2. Sparuj oba, póki stary jest jeszcze zalogowany i odblokowany.
+3. Sprawdź, czy playlista naprawdę gra na nowym telefonie — a nie tylko czy
+   pojawia się na liście.
+
+Dopiero potem wyczyść stary. Jeśli stary telefon jest już wyczyszczony, a Ty
+wciąż znasz hasło synchronizacji, wszystko jest w porządku. Jeśli nie zachodzi
+żadna z tych rzeczy, przewidź minutę na ponowne wpisanie danych dostępowych
+i tyle; nic innego w Twojej konfiguracji się nie zmienia, a sam abonament nigdzie
+się nie ruszał.

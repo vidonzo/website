@@ -1,0 +1,100 @@
+---
+title: "Parental controls and safe viewing in a media player"
+description: "A PIN, a hidden category and a lock that survives a restart. What a player can genuinely enforce on a playlist it did not create, and what it cannot."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["product", "playlists"]
+keywords: ["iptv parental controls", "lock channels with a pin", "hide adult categories iptv", "child friendly iptv player"]
+heroImageAlt: "A category row on a television with one entry replaced by a padlock and a four-digit entry field."
+---
+
+Parental controls in a media player are a narrow tool, and the narrowness is the
+most useful thing to know about them. They work within their limits and not at
+all outside them, and the way they fail is by being trusted for something they
+were never capable of.
+
+So it is worth setting out plainly what a player can enforce, what it cannot, and
+where exactly the line falls.
+
+## What a player can do
+
+Three things, dependably.
+
+**Lock categories or individual channels behind a PIN.** The unit of control is
+whatever unit your list already has: a whole category, or a single channel picked
+out by hand. Reaching a locked item requires the code.
+
+**Hide adult categories the provider has labelled.** If the categories arriving
+from your provider are marked, a player can act on the marking and keep those
+groups out of the interface entirely.
+
+**Ask for the PIN again after a restart.** A control that unlocks once and stays
+unlocked until somebody remembers to re-lock it is not really a control.
+Re-prompting when the app starts again means the resting state is locked, rather
+than whatever the last person to use it happened to leave behind.
+
+## Where the labels come from
+
+How much of the above is available to you is decided by your provider, not by the
+player.
+
+Xtream Codes delivers real categories from the server, so whatever grouping and
+labelling the provider maintains is what the player sees. An M3U playlist carries
+at most a `group-title` on each line, filled in as carefully or as carelessly as
+whoever built the file chose —
+[the difference between the two formats](/blog/xtream-codes-vs-m3u/) shows up
+here as clearly as anywhere.
+
+If a provider labels adult categories properly, a rule that hides them works. If
+everything arrives in one group called `LIVE`, there is nothing for a rule to
+match on, and you are back to locking individual channels by hand.
+
+## What it cannot do
+
+**It cannot classify what nobody has labelled.** A player reads channel names,
+category labels and guide data. It does not watch the video. Nothing in it is
+examining frames and forming a judgement about them. An unlabelled channel filed
+under a general heading is invisible to any rule that works from labels, and a
+channel's name is a name — not a rating.
+
+**It cannot know who is holding the remote.** A PIN tests knowledge, not
+identity. It separates people who know four digits from people who do not, and a
+PIN typed in front of an attentive person is not secret for long. Pick one that
+is not also your phone unlock code, and treat it as something that will need
+changing at some point.
+
+**It does not stand in for the provider's own controls.** Anything your provider
+offers acts on their side, before a stream reaches your household. Anything a
+player offers acts on your device, after it has arrived. They are different
+layers, and it is reasonable to use both.
+
+**It does not replace a conversation at home.** No setting substitutes for
+knowing what is being watched in your own house, and nobody should sell you one
+that claims to.
+
+## Hiding and locking are not the same thing
+
+The words get used loosely, so it is worth separating them. Hiding removes
+something from view. Locking requires a secret to reach it. An item that is
+merely hidden but still reachable through search is tidier rather than
+restricted — a perfectly good thing to want, but it belongs with
+[favourites and categories as a way of shaping a large list](/blog/organize-large-playlists/),
+not with parental controls.
+
+One more practical point: a control is enforced by the app it was set in. A
+household running the same playlist on a television and two phones has three
+separate surfaces, and how one of them is configured says nothing about the other
+two. Whichever devices matter, each needs setting up.
+
+## What it adds up to
+
+A player is a reader of the list you brought it, and
+[that is the whole job](/blog/what-an-iptv-player-does/). It can make parts of
+that list harder to reach, and it can do so consistently, quietly, and without
+sending anything anywhere. It cannot turn the list into something it is not, and
+it cannot supervise a room.
+
+Held to that expectation, it does real work: a category that no longer appears
+while someone is browsing, and a code standing between a channel and a curious
+evening. Held to a larger one, it will disappoint — which is a reason to
+understand the tool, not a reason to skip it.

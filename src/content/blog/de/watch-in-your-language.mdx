@@ -1,0 +1,121 @@
+---
+title: "In der eigenen Sprache schauen: Rechts-nach-links, Untertitel und Tonspuren"
+description: "Rechts-nach-links ist ein Layout, keine gespiegelten Symbole. Woran echte Sprachunterstützung in einem Player erkennbar ist — von der Schrift bis zum Stream."
+urlSlug: in-der-eigenen-sprache-schauen
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["wiedergabe", "produkt"]
+keywords: ["iptv player untertitel", "tonspur wechseln iptv", "mehrsprachiger iptv player", "iptv player sprache einstellen"]
+heroImageAlt: "Eine von der rechten Kante her aufgebaute Player-Oberfläche mit geöffnetem Menü für Untertitel und Tonspur."
+---
+
+Es gibt einen Unterschied zwischen einer App, die in Ihre Sprache übersetzt
+wurde, und einer App, die Ihre Sprache unterstützt. Wer Deutsch liest, merkt
+davon wenig: Die Schrift läuft von links nach rechts, das Alphabet ist
+lateinisch, und damit fällt Deutsch nah genug an den Fall, um den herum die
+meisten Player gebaut wurden. In vielen Haushalten hier läuft auf demselben
+Fernseher aber auch Türkisch, Arabisch, Persisch oder Russisch — und dort zeigt
+sich der Unterschied in den ersten Sekunden, meist ohne dass jemand benennen
+könnte, was genau stört.
+
+Ein Player, der eine Sprache als vollwertigen Fall behandelt, tut niemandem einen
+Gefallen. Er betreibt gewöhnliche Ingenieursarbeit: Das Layout folgt der Richtung
+der Schrift, die Schriftart passt zum Schriftsystem, Text wird so gezeigt, wie
+die Bytes angekommen sind, und was der Stream mitbringt, wird angeboten.
+Übersprungen wird diese Arbeit immer an denselben drei Stellen: beim Layout, bei
+der Schrift und bei den Spuren, die mit dem Stream herunterkommen.
+
+## Rechts-nach-links ist das schärfste Beispiel
+
+Arabisch, Persisch, Hebräisch und Urdu werden von rechts gelesen, und der
+billigste Weg, Unterstützung dafür zu behaupten, besteht darin, ein paar Symbole
+zu spiegeln. Heraus kommt eine App, deren Pfeile andersherum zeigen, die aber
+weiterhin von links her denkt.
+
+Ein echtes Layout baut die gesamte Oberfläche von der rechten Kante her auf:
+
+- **Lesereihenfolge.** Überschriften, Fließtext und Schaltflächen beginnen
+  rechts. Die wichtigste Aktion sitzt dort, wo das Auge zuerst ankommt, und nicht
+  dort, wo eine Gestaltung von links nach rechts sie zufällig liegen ließ.
+- **Fokusreihenfolge.** Hier hört es auf, kosmetisch zu sein. Drücken Sie auf
+  einer Fernbedienung nach rechts, soll der Fokus zum nächsten Element in der
+  Lesereihenfolge wandern — und das ist in einer Oberfläche von rechts nach links
+  das Element weiter links. Eine App, die das übersieht, ist auf dem Handy
+  erträglich und mit einem Steuerkreuz kaum noch zu bedienen.
+- **Die Richtung von Zurück.** Ein Zurück-Pfeil sollte dorthin zeigen, wo
+  *vorher* liegt. In einem Layout von rechts nach links liegt vorher rechts.
+
+Fortschrittsbalken sind die dritte Entscheidung und die, die am häufigsten
+nebenbei fällt. Ein Ladebalken füllt sich in einem Layout von rechts nach links
+von rechts, wie der Text selbst. Eine Wiedergabeleiste bleibt dagegen meist von
+links nach rechts, weil sie den Lauf der Zeit abbildet und nicht die
+Lesereihenfolge, und weil jemand, der mit der Fernbedienung vorspult, genau das
+erwartet. Der Punkt ist nicht, welche Antwort richtig ist. Der Punkt ist, dass
+ein Player, der die Frage nie gestellt hat, sie zufällig beantwortet hat.
+
+## Die Schrift muss zum Schriftsystem passen
+
+Benennt eine App für ein Schriftsystem keine Schriftart, setzt das System
+diejenige ein, die es für die nächstbeste hält. Der Text bleibt lesbar, es sieht
+also nichts kaputt aus — bis man auf die Buchstaben schaut.
+
+Für Persisch springt meist eine arabische Schrift ein, und zwei Buchstaben
+verraten es: *ye* und *kaf* werden in den beiden Traditionen unterschiedlich
+gezeichnet, ein Wort erscheint also mit einem Punktepaar oder einem Strich zu
+viel. Es ist Ihr Wort, falsch geschrieben. Diakritika fallen weg oder sitzen an
+der falschen Stelle, was bei den meisten Sendernamen egal ist und bei Eigennamen
+sehr wohl zählt. Und die Ziffern sind zwei getrennte Sätze — persische ۱۲۳۴ und
+arabische ١٢٣٤ —, sodass eine Liste, die beide mischt, sofort fremd wirkt.
+
+Dieselbe Klasse von Fehlern taucht anderswo wieder auf: vietnamesische
+Diakritika, die übereinander liegen und kollidieren, japanischer Text in
+chinesischen Glyphenformen. Die Schrift ist hier keine Verzierung. Sie
+entscheidet, ob das Wort auf dem Bildschirm das richtige Wort ist.
+
+## Sendernamen: meist die Playlist, nicht die Oberfläche
+
+Das sollte man klar sagen, weil Player ständig dafür verantwortlich gemacht
+werden: Kommen Sendernamen in einer nichtlateinischen Schrift als Fragezeichen
+oder als Zeichensalat an, liegt der Fehler fast immer an der Kodierung der
+Playlist selbst und nicht an der Oberfläche. Das ist ein UTF-8-Problem, und es
+führt zurück zu [der Dateiendung und dem, was sie
+ankündigt](/de/blog/m3u-oder-m3u8/). Ein Player kann die Bytes, die er bekommen
+hat, korrekt anzeigen; einen Namen, der ihn nie unversehrt erreicht hat, kann er
+nicht rekonstruieren.
+
+Im Kleinen kennt das jeder, der deutsche Sendernamen in einer Liste hatte: Aus
+dem ü wird ein Ã¼, weil die Datei als UTF-8 geschrieben und als Latin-1 gelesen
+wurde. In einem Schriftsystem ohne lateinische Buchstaben trifft derselbe Fehler
+nicht einzelne Zeichen, sondern den ganzen Namen.
+
+Die andere Hälfte ist das, was passiert, wenn die Namen unversehrt ankommen. Die
+Suche muss das Schriftsystem annehmen, und die Präfixe, die Anbieter den Namen
+voranstellen — `DE:`, `[HD]`, `TR|` —, dürfen dem Finden nicht im Weg stehen. Das
+ist dieselbe Arbeit, die [eine große Liste überhaupt erst bedienbar
+macht](/de/blog/grosse-playlists-ordnen/).
+
+## Untertitel und mehrere Tonspuren
+
+Manche Sender und die meisten Filme führen mehr als eine Tonspur mit, manchmal
+auch eine oder mehrere Untertitelspuren. Was da ist, hat der Anbieter in den
+Stream gelegt; die Beschriftung jeder Spur kommt ebenfalls aus dem Stream.
+
+Drei Dinge sind Sache des Players:
+
+- **Sie so zeigen, dass sich wählen lässt.** Eine klare Liste während der
+  Wiedergabe, nicht etwas in den Einstellungen Vergrabenes, und mit den
+  Beschriftungen, die der Stream geliefert hat.
+- **Wechseln, ohne zu unterbrechen.** Eine Tonsprache oder eine Untertitelspur zu
+  wählen sollte nicht bedeuten, an den Anfang der Sendung zurückzukehren.
+- **Sich die Wahl merken.** Wenn Sie jedes Mal aufs Neue Ihre Sprache auswählen
+  müssen, ist die Funktion halb gebaut.
+
+Und eine Grenze, um die keine Einstellung herumkommt: Ein Player kann nur
+anbieten, was im Stream steckt. Schickt ein Anbieter einen Film mit einer
+einzigen Tonspur und ohne Untertitel, dann bringt keine Einstellung eines Players
+eine Untertitelspur hervor, die nie gesendet wurde. Wenn Ihnen eine bestimmte
+Sprache wichtig ist, ist das die Frage, die Sie Ihrem Anbieter vor der
+Verlängerung stellen sollten.
+
+Nichts davon ist ungewöhnliche Arbeit. Sprachunterstützung nennt es niemand,
+solange die Sprache Englisch ist. Da sagt man einfach, die App funktioniert.
