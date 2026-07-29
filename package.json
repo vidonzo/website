@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run build:redirects && astro build",
     "preview": "astro preview",
     "sync:tokens": "node tool/sync-tokens.mjs",
     "check:tokens": "node tool/sync-tokens.mjs --check",
     "build:brand": "node tool/make-brand-assets.mjs",
+    "build:redirects": "node tool/build-redirects.mjs",
+    "check:redirects": "node tool/build-redirects.mjs --check",
     "check:links": "node tool/check-links.mjs"
   },
   "dependencies": {

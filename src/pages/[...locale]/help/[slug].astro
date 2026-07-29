@@ -1,25 +1,27 @@
 ---
 import { render } from 'astro:content';
 import ArticleLayout from '../../../components/ArticleLayout.astro';
-import { getCollectionSlugs, getLocalizedEntry } from '../../../i18n/content';
+import { getCollectionKeys, getLocalizedEntry } from '../../../i18n/content';
 import { localeCodes, locales, localizedPath, useTranslations, type Locale } from '../../../i18n';
 import { site } from '../../../config/site';
 
 export async function getStaticPaths() {
-  const slugs = await getCollectionSlugs('help');
+  // Help guides are addressed by their key. They carry no localized slug, so the
+  // key doubles as the URL segment — the routes are unchanged from before.
+  const keys = await getCollectionKeys('help');
   return localeCodes.flatMap((code) =>
-    slugs.map((slug) => ({
-      params: { locale: locales[code].path || undefined, slug },
-      props: { locale: code, slug },
+    keys.map((key) => ({
+      params: { locale: locales[code].path || undefined, slug: key },
+      props: { locale: code, key },
     })),
   );
 }
 
-const { locale, slug } = Astro.props as { locale: Locale; slug: string };
+const { locale, key } = Astro.props as { locale: Locale; key: string };
 const t = useTranslations(locale);
 
-const guide = await getLocalizedEntry('help', locale, slug);
-if (!guide) throw new Error(`help/[slug]: no entry for "${slug}"`);
+const guide = await getLocalizedEntry('help', locale, key);
+if (!guide) throw new Error(`help/[slug]: no entry for "${key}"`);
 
 const { Content } = await render(guide.entry);
 const { data } = guide.entry;
@@ -28,7 +30,7 @@ const updated = data.updatedAt ?? data.publishedAt;
 const dateLabel = new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(updated);
 
 const localeHrefs = Object.fromEntries(
-  localeCodes.map((code) => [code, localizedPath(code, 'help', slug)]),
+  localeCodes.map((code) => [code, localizedPath(code, 'help', key)]),
 ) as Record<Locale, string>;
 
 const schema = {

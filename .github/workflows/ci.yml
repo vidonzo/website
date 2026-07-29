@@ -19,5 +19,7 @@ jobs:
       # No-ops when the app repo is not checked out alongside; catches a stale
       # tokens.css when it is.
       - run: npm run check:tokens
+      # Fails if the compiled redirect module drifts from the JSON ledger.
+      - run: npm run check:redirects
       - run: npm run build
       - run: npm run check:links
