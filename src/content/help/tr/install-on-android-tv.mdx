@@ -1,0 +1,51 @@
+---
+title: "Vidonzo'yu Android TV'ye kurun"
+description: "Televizyon sürümünü bir televizyona ya da TV kutusuna sideload ile kurma."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo'nun, tam kumanda gezinmesi olan ayrı bir Android TV sürümü var. Bu sürüm
+doğrudan APK olarak dağıtılır, dolayısıyla sideload ile kurulur.
+
+## Bilinmeyen kaynaklardan kuruluma izin verin
+
+Televizyonunuzda **Ayarlar → Güvenlik ve kısıtlamalar → Bilinmeyen kaynaklar**
+bölümünü açın ve kullanacağınız dosya yöneticisini ya da tarayıcıyı
+etkinleştirin. Her üretici bunu farklı adlandırır; "bilinmeyen kaynaklar" ya da
+"bilinmeyen uygulamaları yükle" ifadelerini arayın.
+
+## Seçenek 1 — bir indirici uygulama
+
+1. Televizyonunuzdaki Play Store'dan bir indirici uygulama kurun.
+2. APK adresini [indirme sayfasından](/tr/download/) alıp girin.
+3. Sorulduğunda kurulumu onaylayın.
+
+## Seçenek 2 — bir USB bellek
+
+1. Android TV APK'sını bir bilgisayara indirin.
+2. Bir USB belleğe kopyalayın ve belleği televizyona takın.
+3. Dosya yöneticisiyle açıp kurulumu onaylayın.
+
+## Seçenek 3 — başka bir Android cihazdan
+
+Aynı ağdaki bir bilgisayardan, ağ üzerinden ADB ile:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Televizyonda oturum açma
+
+Kumandayla e-posta ve parola yazmak eziyettir; bu yüzden televizyonda oturum
+açma, e-posta adresinize gönderilen altı haneli bir kodla yapılır. Oynatma
+listeleriniz, televizyonu zaten oturum açmış bir telefondan onaylayana kadar
+kilitli görünür.
+
+## Güncelleme
+
+Sideload ile kurulan sürümler kendi kendini güncellemez. Yeni APK'yı eskisinin
+üzerine kurun — oynatma listeleriniz, sık kullanılanlarınız ve izleme
+ilerlemeniz korunur.

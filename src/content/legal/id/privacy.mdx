@@ -1,0 +1,79 @@
+---
+title: "Kebijakan Privasi"
+description: "Apa yang disimpan Vidonzo, apa yang tidak bisa dibacanya, dan cara menghapus semuanya."
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo adalah pemutar media. Ia tidak menjual kanal, tidak menampung konten, dan
+tidak perlu tahu apa yang Anda tonton untuk bekerja. Kebijakan ini menjelaskan
+data yang ditangani aplikasi dan layanan sinkronisasi opsional.
+
+## Menggunakan Vidonzo tanpa akun
+
+Anda bisa memakai Vidonzo tanpa masuk akun. Dalam mode itu semuanya — playlist,
+favorit, posisi tontonan, unduhan, dan pengaturan Anda — hanya disimpan di
+perangkat Anda. Tidak ada yang dikirim kepada kami.
+
+Aplikasi menghubungi penyedia IPTV Anda sendiri dan URL panduan acara apa pun
+yang Anda tetapkan. Permintaan itu berjalan langsung dari perangkat Anda ke
+penyedia tersebut, dan apa yang dicatatnya diatur oleh kebijakan mereka, bukan
+kebijakan kami.
+
+## Kalau Anda menyalakan sinkronisasi
+
+Masuk akun akan membuat sebuah akun agar playlist dan posisi tontonan Anda bisa
+mengikuti Anda antarperangkat. Kami lalu menyimpan:
+
+- **Akun**: alamat surel Anda, yang ditangani oleh penyedia autentikasi kami, dan
+  nama tampilan opsional.
+- **Sumber playlist**: host, nama pengguna, dan kata sandi Xtream Anda, serta URL
+  M3U apa pun, disimpan **terenkripsi ujung ke ujung**. Semuanya dienkripsi di
+  perangkat Anda dengan AES‑256‑GCM sebelum diunggah, dengan kunci yang
+  diturunkan dari kata sandi sinkronisasi Anda memakai Argon2id. Kami hanya
+  memegang teks tersandi dan tidak bisa membacanya. Label yang Anda berikan pada
+  sebuah playlist disimpan dalam teks biasa, karena itu nama tampilan Anda
+  sendiri untuknya.
+- **Favorit, posisi tontonan, dan pengaturan aplikasi**, supaya cocok di semua
+  perangkat. Semuanya disimpan dalam teks biasa dan dilindungi aturan akses per
+  pengguna.
+- **Perangkat**: nama yang Anda pilih, jenis perangkat, sebuah kunci publik, dan
+  kapan terakhir terlihat — cukup untuk menautkan perangkat baru dan mencabut
+  perangkat yang hilang.
+
+Kata sandi sinkronisasi Anda tidak pernah meninggalkan perangkat Anda. Karena
+itu, **kami tidak bisa memulihkannya**, dan kehilangannya berarti playlist
+terenkripsi Anda juga tidak bisa dipulihkan.
+
+## Apa yang tidak kami lakukan
+
+Aplikasi Vidonzo tidak memuat SDK iklan dan tidak memuat analitik dalam aplikasi
+maupun pelacakan perilaku. Kami tidak menyusun profil tentang Anda, tidak menjual
+data pribadi, dan tidak memproses pembayaran.
+
+## Analitik situs web
+
+Situs web publik Vidonzo memakai Google Tag Manager dan Microsoft Clarity untuk
+memahami trafik halaman, rekaman sesi, dan peta panas. Clarity menyamarkan konten
+sensitif secara bawaan. Perkakas ini membantu kami memperbaiki situs web dan alur
+pengunduhan; keduanya terpisah dari aplikasi Vidonzo dan tidak memberi kami akses
+ke playlist, data login penyedia, atau riwayat tontonan Anda.
+
+## Penyimpanan dan penghapusan
+
+Data sinkronisasi disimpan selama akun Anda ada. Anda bisa menghapus akun beserta
+semua yang melekat padanya kapan saja — lihat
+[Penghapusan akun dan data](/id/account-deletion/). Data yang hanya tersimpan di
+perangkat Anda dihapus dengan membuangnya di dalam aplikasi, membersihkan data
+aplikasi, atau mencopot pemasangan Vidonzo.
+
+## Anak-anak
+
+Vidonzo tidak ditujukan untuk anak di bawah 13 tahun, dan kami tidak secara sadar
+mengumpulkan data mereka.
+
+## Perubahan dan kontak
+
+Kalau kebijakan ini berubah secara material, kami akan memperbarui tanggal di
+atas dan mencatatnya di dalam aplikasi. Pertanyaan silakan ke
+[support@vidonzo.com](mailto:support@vidonzo.com).

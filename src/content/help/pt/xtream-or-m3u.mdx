@@ -1,0 +1,47 @@
+---
+title: "Xtream ou M3U — qual você deve usar?"
+description: "O que cada formato de lista oferece, e quando a diferença importa."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Se o seu provedor oferece os dois, use **Xtream**. O motivo curto são os
+metadados.
+
+## O que o Xtream oferece
+
+Uma conta Xtream Codes é uma API, não um arquivo. O Vidonzo consegue pedir a ela
+coisas que uma lista simples nem consegue expressar:
+
+- canais ao vivo, filmes e séries como **catálogos separados**
+- séries divididas em **temporadas e episódios**
+- capas, notas, sinopses e elenco
+- o guia de programação, sem uma segunda URL
+- a estrutura de categorias como o provedor definiu
+
+## O que o M3U oferece
+
+Um arquivo M3U é uma lista de URLs de stream com um nome e, às vezes, um logo. É
+tudo o que ele consegue carregar. O Vidonzo agrupa pelo atributo `group-title`
+onde existir um, mas filmes e episódios chegam como uma lista plana de nomes,
+porque é isso que o formato contém.
+
+Mesmo assim, o M3U é a escolha certa quando:
+
+- o seu provedor só oferece M3U
+- você mantém uma lista feita à mão com algumas dezenas de canais
+- você quer uma lista que funcione **sem servidor nenhum**, a partir de um
+  arquivo local
+
+## Adicionar um guia a uma lista M3U
+
+Se o seu provedor publica um guia XMLTV separadamente, adicione a URL dele em
+**Configurações → Guia de programação**. Os canais ao vivo passam a mostrar o que
+está passando agora e o que vem depois, com o fuso horário tratado corretamente.
+
+## Usar os dois
+
+Você pode manter várias fontes lado a lado — uma conta Xtream para o catálogo
+principal e uma M3U local para um punhado de canais que você mesmo adicionou — e
+alternar entre elas pelo seletor de fonte.

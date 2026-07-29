@@ -1,0 +1,47 @@
+---
+title: "Xtream hay M3U — nên dùng cái nào?"
+description: "Mỗi định dạng danh sách phát cho bạn những gì, và khi nào khác biệt ấy mới đáng kể."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Nếu nhà cung cấp của bạn có cả hai, hãy dùng **Xtream**. Lý do ngắn gọn là
+metadata.
+
+## Xtream cho bạn những gì
+
+Một tài khoản Xtream Codes là một API, không phải một tệp. Vidonzo hỏi được nó
+những thứ mà một danh sách phẳng không diễn đạt nổi:
+
+- kênh trực tiếp, phim lẻ và phim bộ thành **các danh mục riêng**
+- phim bộ tách theo **mùa và tập**
+- ảnh bìa, điểm đánh giá, tóm tắt nội dung và diễn viên
+- lịch phát sóng, không cần thêm một đường dẫn thứ hai
+- cấu trúc phân loại đúng như nhà cung cấp đã định nghĩa
+
+## M3U cho bạn những gì
+
+Một tệp M3U là một danh sách các đường dẫn luồng kèm một cái tên và đôi khi một
+cái logo. Nó chỉ chở được chừng ấy. Vidonzo sẽ gom nhóm theo thuộc tính
+`group-title` ở những chỗ có thuộc tính này, nhưng phim lẻ và các tập vẫn về dưới
+dạng một danh sách tên phẳng, vì đó là tất cả những gì định dạng ấy chứa.
+
+M3U vẫn là lựa chọn đúng khi:
+
+- nhà cung cấp của bạn chỉ có M3U
+- bạn tự giữ một danh sách làm tay gồm vài chục kênh
+- bạn muốn một danh sách phát chạy được **mà không cần máy chủ nào cả**, từ một
+  tệp trên máy
+
+## Thêm lịch phát sóng cho một danh sách phát M3U
+
+Nếu nhà cung cấp công bố lịch XMLTV riêng, hãy thêm đường dẫn của nó ở **Cài đặt
+→ Lịch phát sóng**. Các kênh trực tiếp khi đó sẽ hiện ra chương trình đang chiếu
+và chương trình kế tiếp, với múi giờ được xử lý đúng.
+
+## Dùng cả hai
+
+Bạn có thể giữ nhiều nguồn cạnh nhau — một tài khoản Xtream cho kho chính và một
+tệp M3U trên máy cho dăm ba kênh bạn tự thêm vào — rồi chuyển qua lại giữa chúng
+bằng bộ chọn nguồn.

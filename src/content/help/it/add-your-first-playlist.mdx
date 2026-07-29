@@ -1,0 +1,53 @@
+---
+title: "Aggiungere la prima playlist"
+description: "Come far entrare in Vidonzo un account Xtream, un link M3U o un file locale."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo viene distribuito senza canali. La prima cosa che ti chiede è una
+playlist che possiedi già. Ci sono tre modi per fornirla.
+
+## Xtream Codes
+
+Scegli **Xtream Codes** e inserisci i tre valori che ti ha dato il fornitore:
+
+- **Host** — l'indirizzo del server, per esempio `http://example.com:8080`.
+  Includi la porta, se c'è.
+- **Nome utente**
+- **Password**
+
+Xtream è l'opzione più ricca: canali live, film e serie arrivano tutti insieme,
+e con loro la guida ai programmi.
+
+## Un link M3U o M3U8
+
+Scegli **M3U URL** e incolla l'indirizzo. Vidonzo scarica la playlist, la tiene
+in cache e la rilegge quando cambia. Se il tuo fornitore ti dà anche un URL di
+guida XMLTV, aggiungilo in **Impostazioni → Guida ai programmi** così i canali
+live mostrano che cosa c'è adesso.
+
+## Un file M3U locale
+
+Scegli **File locale** e prendi un file `.m3u` o `.m3u8` dal dispositivo. In
+questa modalità dal tuo dispositivo non esce nulla, e per sfogliare la lista non
+serve una connessione a internet — serve solo per riprodurre un flusso che punta
+lì.
+
+## Dopo il caricamento
+
+Il primo caricamento legge l'intero catalogo e abbina le copertine, cosa che su
+una playlist grande può richiedere un minuto. Dopodiché è in cache, e riaprire
+l'app è immediato.
+
+Puoi tenere più playlist affiancate e passare dall'una all'altra dal selettore
+di sorgente in cima alla schermata iniziale.
+
+## Se non funziona
+
+- **Credenziali sbagliate** — la causa più comune. Ridigita la password invece
+  di incollarla; gli spazi finali si copiano per sbaglio con grande facilità.
+- **All'host manca la porta** — molti server Xtream non girano sulla porta 80.
+- **La tua rete blocca il fornitore** — riprova sotto rete mobile, oppure
+  imposta un proxy in **Impostazioni → Rete**.

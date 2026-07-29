@@ -1,0 +1,54 @@
+---
+title: "Quando un flusso non parte"
+description: "Come capire se il problema è del fornitore, della rete o dell'app."
+category: troubleshooting
+order: 10
+publishedAt: 2026-07-27
+---
+
+La maggior parte dei problemi di riproduzione non è del lettore. Questo è
+l'ordine in cui vale la pena controllare.
+
+## Funziona un altro canale?
+
+Prova due o tre altri canali della stessa playlist.
+
+- **Non funziona niente** — il problema è la playlist, l'account o la rete.
+- **Non funziona un solo canale** — quel flusso è spento o morto dalla parte del
+  fornitore. Nell'app non c'è niente che possa sistemarlo.
+
+## L'account è ancora valido?
+
+Gli account Xtream scadono, e molti fornitori limitano quanti dispositivi
+possono riprodurre contemporaneamente. Se stai guardando sul televisore e sul
+telefono nello stesso momento, potresti semplicemente essere oltre il limite.
+Esci su un dispositivo e riprova.
+
+## Va in buffering invece di fallire
+
+Alza la cache in **Impostazioni → Riproduzione**. Una cache più grande assorbe
+una connessione instabile al prezzo di un avvio più lento. Se il flusso è in 4K
+e il dispositivo è vecchio, prova una variante a qualità inferiore dello stesso
+canale, dove il tuo fornitore la offre.
+
+## Il flusso cade a metà riproduzione
+
+Vidonzo si riconnette da solo. Se continua a cadere, il fornitore sta limitando
+la banda oppure la rete è instabile — di solito un collegamento via cavo sul
+televisore sistema la cosa.
+
+## Non si carica proprio niente
+
+- Controlla che la playlist si carichi ancora: tira giù per aggiornare nella
+  schermata iniziale.
+- Se la tua rete blocca il fornitore, imposta un proxy in
+  **Impostazioni → Rete**.
+- Controlla l'orologio del dispositivo. Un orario di sistema sbagliato rompe il
+  TLS, e i flussi su HTTPS falliscono senza un motivo evidente.
+
+## Se sei ancora bloccato
+
+Scrivi a [support@vidonzo.com](mailto:support@vidonzo.com) indicando il
+dispositivo, la versione di Vidonzo, se la sorgente è Xtream o M3U e che cosa
+hai visto. Quelle quattro cose risolvono la maggior parte delle segnalazioni
+alla prima risposta.

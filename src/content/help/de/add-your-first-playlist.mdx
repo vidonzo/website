@@ -1,0 +1,56 @@
+---
+title: "Die erste Playlist hinzufügen"
+description: "Ein Xtream-Konto, einen M3U-Link oder eine lokale Datei in Vidonzo bekommen."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo wird ohne Sender ausgeliefert. Das Erste, wonach es fragt, ist eine
+Playlist, die Sie bereits haben. Es gibt drei Wege, eine anzugeben.
+
+## Xtream Codes
+
+Wählen Sie **Xtream Codes** und tragen Sie die drei Werte ein, die Ihr Anbieter
+Ihnen gegeben hat:
+
+- **Host** — die Serveradresse, zum Beispiel `http://example.com:8080`. Nehmen Sie
+  den Port mit, falls es einen gibt.
+- **Benutzername**
+- **Passwort**
+
+Xtream ist die reichhaltigste Option: Live-Sender, Filme und Serien kommen
+zusammen an, und der Programmführer gleich mit.
+
+## Ein M3U- oder M3U8-Link
+
+Wählen Sie **M3U URL** und fügen Sie die Adresse ein. Vidonzo holt die Playlist,
+legt sie im Cache ab und liest sie erneut, wenn sie sich ändert. Gibt Ihnen Ihr
+Anbieter außerdem eine XMLTV-Adresse für den Programmführer, tragen Sie sie unter
+**Einstellungen → Programmführer** ein, damit Live-Sender zeigen, was gerade
+läuft.
+
+## Eine lokale M3U-Datei
+
+Wählen Sie **Lokale Datei** und suchen Sie eine `.m3u`- oder `.m3u8`-Datei auf
+Ihrem Gerät aus. In diesem Modus verlässt nichts Ihr Gerät, und zum Durchsehen
+der Liste ist keine Internetverbindung nötig — nur zum Abspielen eines Streams,
+der ins Netz zeigt.
+
+## Nach dem Laden
+
+Der erste Ladevorgang liest den gesamten Katalog und ordnet das Artwork zu; bei
+einer großen Playlist kann das eine Minute dauern. Danach liegt alles im Cache,
+und das erneute Öffnen der App geht sofort.
+
+Sie können mehrere Playlists nebeneinander behalten und über den Quellenwähler
+oben auf dem Startbildschirm zwischen ihnen wechseln.
+
+## Wenn es nicht klappt
+
+- **Falsche Zugangsdaten** — die häufigste Ursache. Tippen Sie das Passwort lieber
+  ab, statt es einzufügen; ein Leerzeichen am Ende kopiert man leicht versehentlich
+  mit.
+- **Dem Host fehlt der Port** — viele Xtream-Server laufen nicht auf Port 80.
+- **Ihr Netzwerk blockiert den Anbieter** — versuchen Sie es über mobile Daten
+  erneut, oder richten Sie unter **Einstellungen → Netzwerk** einen Proxy ein.

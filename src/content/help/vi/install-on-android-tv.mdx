@@ -1,0 +1,49 @@
+---
+title: "Cài Vidonzo trên Android TV"
+description: "Cài bản dựng dành cho tivi bằng sideload, trên tivi hoặc đầu thu."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo có một bản dựng Android TV riêng, điều hướng được trọn vẹn bằng điều
+khiển. Bản này phát hành dưới dạng APK trực tiếp, nên cài bằng cách sideload.
+
+## Cho phép cài từ nguồn không xác định
+
+Trên tivi, mở **Cài đặt → Bảo mật & hạn chế → Nguồn không xác định** rồi bật cho
+trình quản lý tệp hay trình duyệt mà bạn sắp dùng. Mỗi hãng viết cụm này một
+kiểu; hãy tìm “nguồn không xác định” hoặc “cài ứng dụng không xác định”.
+
+## Cách 1 — một ứng dụng tải về
+
+1. Cài một ứng dụng tải về từ Play Store trên tivi.
+2. Nhập địa chỉ APK lấy ở [trang tải về](/vi/download/).
+3. Xác nhận cài đặt khi được hỏi.
+
+## Cách 2 — một USB
+
+1. Tải APK Android TV về máy tính.
+2. Chép nó vào một USB rồi cắm USB vào tivi.
+3. Mở nó bằng một trình quản lý tệp và xác nhận cài đặt.
+
+## Cách 3 — từ một thiết bị Android khác
+
+Dùng ADB qua mạng, từ một máy tính nằm trong cùng mạng:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Đăng nhập trên tivi
+
+Gõ email và mật khẩu bằng điều khiển thì khổ sở, nên việc đăng nhập trên tivi
+dùng một mã sáu chữ số gửi tới email của bạn. Các danh sách phát của bạn sau đó
+hiện ra ở trạng thái đã khóa, cho tới khi bạn phê duyệt chiếc tivi từ một điện
+thoại đã đăng nhập sẵn.
+
+## Cập nhật
+
+Bản dựng cài bằng sideload không tự cập nhật. Hãy cài APK mới hơn đè lên bản cũ —
+danh sách phát, kênh yêu thích và tiến độ xem của bạn vẫn được giữ.

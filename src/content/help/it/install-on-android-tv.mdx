@@ -1,0 +1,52 @@
+---
+title: "Installare Vidonzo su Android TV"
+description: "Come installare a mano la versione TV su un televisore o su una TV box."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo ha una versione dedicata ad Android TV con navigazione completa da
+telecomando. Viene distribuita come APK diretto, quindi si installa a mano.
+
+## Consentire le installazioni da origini sconosciute
+
+Sul televisore apri **Impostazioni → Sicurezza e restrizioni → Origini
+sconosciute** e abilita il gestore di file o il browser che stai per usare. Ogni
+produttore lo scrive in modo diverso; cerca «origini sconosciute» o «installa
+app sconosciute».
+
+## Prima strada — un'app di download
+
+1. Installa un'app di download dal Play Store sul televisore.
+2. Inserisci l'indirizzo dell'APK preso dalla
+   [pagina di download](/it/download/).
+3. Conferma l'installazione quando te la chiede.
+
+## Seconda strada — una chiavetta USB
+
+1. Scarica l'APK per Android TV su un computer.
+2. Copialo su una chiavetta USB e inserisci la chiavetta nel televisore.
+3. Aprilo con un gestore di file e conferma l'installazione.
+
+## Terza strada — da un altro dispositivo Android
+
+Con ADB in rete, da un computer sulla stessa rete:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Accedere su un televisore
+
+Digitare email e password con un telecomando è penoso, quindi l'accesso sul
+televisore usa un codice a sei cifre inviato alla tua email. Le tue playlist
+compaiono allora come bloccate finché non approvi il televisore da un telefono
+in cui hai già effettuato l'accesso.
+
+## Aggiornare
+
+Le versioni installate a mano non si aggiornano da sole. Installa l'APK più
+recente sopra quello vecchio — playlist, preferiti e punto di visione vengono
+mantenuti.

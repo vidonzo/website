@@ -1,0 +1,54 @@
+---
+title: "İlk oynatma listenizi ekleyin"
+description: "Bir Xtream hesabını, bir M3U bağlantısını ya da yerel bir dosyayı Vidonzo'ya aktarma."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo hiçbir kanal olmadan gelir. Sizden istediği ilk şey, halihazırda sahip
+olduğunuz bir oynatma listesidir. Bunu vermenin üç yolu var.
+
+## Xtream Codes
+
+**Xtream Codes** seçin ve sağlayıcınızın verdiği üç değeri girin:
+
+- **Host** — sunucu adresi, örneğin `http://example.com:8080`. Port varsa onu da
+  ekleyin.
+- **Kullanıcı adı**
+- **Parola**
+
+Xtream en zengin seçenektir: canlı kanallar, filmler ve diziler birlikte gelir,
+yayın rehberi de yanlarında.
+
+## M3U ya da M3U8 bağlantısı
+
+**M3U URL** seçin ve adresi yapıştırın. Vidonzo listeyi çeker, önbelleğe alır ve
+liste değiştiğinde yeniden okur. Sağlayıcınız ayrıca bir XMLTV rehber adresi de
+veriyorsa, canlı kanalların o an ne yayınlandığını göstermesi için bu adresi
+**Ayarlar → Yayın rehberi** bölümüne ekleyin.
+
+## Yerel bir M3U dosyası
+
+**Yerel dosya** seçin ve cihazınızdan bir `.m3u` ya da `.m3u8` dosyası seçin. Bu
+modda cihazınızdan hiçbir şey çıkmaz ve listeyi gezmek için internet bağlantısı
+gerekmez — bağlantı yalnızca internete işaret eden bir yayını oynatmak için
+gerekir.
+
+## Liste yüklendikten sonra
+
+İlk yükleme bütün kataloğu okur ve görselleri eşleştirir; büyük bir oynatma
+listesinde bu bir dakika sürebilir. Sonrasında liste önbellekte durur ve
+uygulamayı yeniden açmak anlık olur.
+
+Birden çok oynatma listesini yan yana tutabilir, ana ekranın üstündeki kaynak
+seçiciden aralarında geçiş yapabilirsiniz.
+
+## Başarısız olursa
+
+- **Yanlış giriş bilgileri** — en sık görülen neden. Parolayı yapıştırmak yerine
+  yeniden yazın; sondaki fazladan bir boşluk çok kolay kopyalanır.
+- **Adreste port eksik** — Xtream sunucularının çoğu 80 numaralı portta
+  çalışmaz.
+- **Ağınız sağlayıcıyı engelliyor** — mobil veriyle yeniden deneyin ya da
+  **Ayarlar → Ağ** bölümünde bir proxy tanımlayın.

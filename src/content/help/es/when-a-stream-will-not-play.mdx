@@ -1,0 +1,52 @@
+---
+title: "Cuando un stream no se reproduce"
+description: "Cómo averiguar si el problema es del proveedor, de la red o de la aplicación."
+category: troubleshooting
+order: 10
+publishedAt: 2026-07-27
+---
+
+La mayoría de los fallos de reproducción no son del reproductor. Este es el
+orden en que conviene mirar.
+
+## ¿Funciona otro canal?
+
+Prueba dos o tres canales más de la misma lista.
+
+- **Fallan todos** — el problema está en la lista, en la cuenta o en la red.
+- **Falla un solo canal** — ese stream está caído o muerto en el proveedor. No
+  hay nada en la aplicación que pueda arreglarlo.
+
+## ¿Sigue siendo válida la cuenta?
+
+Las cuentas Xtream caducan, y muchos proveedores limitan cuántos dispositivos
+pueden reproducir a la vez. Si estás viendo algo en la tele y en el móvil al
+mismo tiempo, puede que simplemente hayas pasado el límite. Cierra sesión en uno
+de los dos y vuelve a intentarlo.
+
+## Se entrecorta, pero no falla
+
+Sube la caché en **Ajustes → Reproducción**. Una caché mayor absorbe una
+conexión inestable a cambio de un arranque más lento. Si el stream es 4K y el
+dispositivo es antiguo, prueba una versión de menor calidad del mismo canal, si
+tu proveedor la ofrece.
+
+## Se corta a mitad de la reproducción
+
+Vidonzo se reconecta solo. Si se corta una y otra vez, o el proveedor está
+limitando el caudal o la red es inestable: en la tele, una conexión por cable
+suele zanjarlo.
+
+## No carga absolutamente nada
+
+- Comprueba que la lista todavía carga: desliza hacia abajo para actualizar en
+  la pantalla de inicio.
+- Si tu red bloquea al proveedor, configura un proxy en **Ajustes → Red**.
+- Mira el reloj del dispositivo. Una hora del sistema equivocada rompe TLS, y
+  los streams por HTTPS fallan sin razón aparente.
+
+## Si sigues atascado
+
+Escribe a [support@vidonzo.com](mailto:support@vidonzo.com) indicando el
+dispositivo, la versión de Vidonzo, si la fuente es Xtream o M3U, y qué viste.
+Esas cuatro cosas resuelven la mayoría de los avisos en la primera respuesta.

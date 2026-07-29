@@ -1,0 +1,55 @@
+---
+title: "Je eerste afspeellijst toevoegen"
+description: "Een Xtream-account, een M3U-link of een lokaal bestand in Vidonzo krijgen."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo wordt geleverd zonder zenders. Het eerste waar het om vraagt is een
+afspeellijst die je al hebt. Er zijn drie manieren om er een op te geven.
+
+## Xtream Codes
+
+Kies **Xtream Codes** en vul de drie waarden in die je provider je heeft gegeven:
+
+- **Host** — het serveradres, bijvoorbeeld `http://example.com:8080`. Neem de
+  poort mee als die erbij hoort.
+- **Gebruikersnaam**
+- **Wachtwoord**
+
+Xtream is de rijkste optie: live zenders, films en series komen samen binnen, en
+de programmagids komt er meteen bij.
+
+## Een M3U- of M3U8-link
+
+Kies **M3U URL** en plak het adres. Vidonzo haalt de afspeellijst op, bewaart hem
+in de cache en leest hem opnieuw zodra hij verandert. Geeft je provider ook een
+XMLTV-gids-URL, voeg die dan toe bij **Instellingen → Programmagids**, zodat live
+zenders laten zien wat er nu is.
+
+## Een lokaal M3U-bestand
+
+Kies **Lokaal bestand** en pak een `.m3u`- of `.m3u8`-bestand van je apparaat. In
+deze modus verlaat er niets je apparaat, en je hebt geen internetverbinding nodig
+om door de lijst te bladeren — alleen om een stream af te spelen die naar het net
+wijst.
+
+## Als de lijst geladen is
+
+De eerste keer laden leest de hele catalogus en zoekt het beeldmateriaal erbij;
+bij een grote afspeellijst kan dat een minuut duren. Daarna staat alles in de
+cache en gaat de app opnieuw openen meteen.
+
+Je kunt meerdere afspeellijsten naast elkaar houden en er met de bronkiezer boven
+aan het startscherm tussen wisselen.
+
+## Als het misgaat
+
+- **Verkeerde inloggegevens** — veruit de meest voorkomende oorzaak. Typ het
+  wachtwoord over in plaats van het te plakken; een spatie aan het eind kopieer je
+  zo per ongeluk mee.
+- **De poort ontbreekt in de host** — veel Xtream-servers draaien niet op poort
+  80.
+- **Je netwerk blokkeert de provider** — probeer het opnieuw via mobiele data, of
+  stel een proxy in bij **Instellingen → Netwerk**.

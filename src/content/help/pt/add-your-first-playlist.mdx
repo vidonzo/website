@@ -1,0 +1,52 @@
+---
+title: "Adicione a sua primeira lista"
+description: "Como colocar uma conta Xtream, um link M3U ou um arquivo local dentro do Vidonzo."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+O Vidonzo vem sem canal nenhum. A primeira coisa que ele pede é uma lista que
+você já tem. Há três jeitos de fornecer uma.
+
+## Xtream Codes
+
+Escolha **Xtream Codes** e informe os três valores que o seu provedor entregou:
+
+- **Host** — o endereço do servidor, por exemplo `http://example.com:8080`.
+  Inclua a porta, se houver uma.
+- **Usuário**
+- **Senha**
+
+O Xtream é a opção mais completa: canais ao vivo, filmes e séries chegam juntos,
+e o guia de programação vem junto também.
+
+## Um link M3U ou M3U8
+
+Escolha **M3U URL** e cole o endereço. O Vidonzo busca a lista, guarda em cache e
+lê de novo quando ela muda. Se o seu provedor também entregar uma URL de guia
+XMLTV, adicione em **Configurações → Guia de programação** para que os canais ao
+vivo mostrem o que está passando agora.
+
+## Um arquivo M3U local
+
+Escolha **Arquivo local** e pegue um arquivo `.m3u` ou `.m3u8` do seu aparelho.
+Nesse modo nada sai do seu aparelho, e não é preciso conexão com a internet para
+navegar pela lista — só para reproduzir um stream que aponta para a rede.
+
+## Depois que a lista carrega
+
+A primeira carga lê o catálogo inteiro e associa as capas, o que pode levar um
+minuto em uma lista grande. Depois disso fica em cache, e reabrir o aplicativo é
+imediato.
+
+Você pode manter várias listas lado a lado e alternar entre elas pelo seletor de
+fonte no topo da tela inicial.
+
+## Se der errado
+
+- **Credenciais erradas** — a causa mais comum. Digite a senha em vez de colar;
+  um espaço sobrando no fim é fácil de copiar sem querer.
+- **Falta a porta no host** — muitos servidores Xtream não rodam na porta 80.
+- **A sua rede bloqueia o provedor** — tente de novo pelos dados móveis, ou
+  configure um proxy em **Configurações → Rede**.

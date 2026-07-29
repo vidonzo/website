@@ -1,0 +1,50 @@
+---
+title: "Khi một luồng không chịu phát"
+description: "Xác định xem trục trặc nằm ở nhà cung cấp, ở đường truyền, hay ở ứng dụng."
+category: troubleshooting
+order: 10
+publishedAt: 2026-07-27
+---
+
+Phần lớn các lần phát hỏng không phải lỗi của trình phát. Đây là thứ tự đáng kiểm
+tra.
+
+## Kênh khác có chạy không?
+
+Thử hai ba kênh khác trong cùng danh sách phát.
+
+- **Kênh nào cũng hỏng** — vấn đề nằm ở danh sách phát, ở tài khoản, hoặc ở đường
+  truyền.
+- **Chỉ một kênh hỏng** — luồng đó đã tắt hoặc đã chết ở phía nhà cung cấp. Không
+  thiết lập nào trong ứng dụng sửa được.
+
+## Tài khoản còn hiệu lực không?
+
+Tài khoản Xtream có hạn dùng, và nhiều nhà cung cấp giới hạn số thiết bị được xem
+cùng lúc. Nếu bạn đang xem trên tivi và trên điện thoại cùng một lúc, có thể đơn
+giản là bạn đã vượt giới hạn. Hãy đăng xuất ở một thiết bị rồi thử lại.
+
+## Khựng chứ không hỏng hẳn
+
+Tăng bộ đệm ở **Cài đặt → Phát lại**. Bộ đệm lớn hơn hấp thụ được một đường
+truyền chập chờn, đổi lại khởi động chậm hơn. Nếu luồng là 4K mà thiết bị đã cũ,
+hãy thử một biến thể chất lượng thấp hơn của cùng kênh đó, nếu nhà cung cấp có.
+
+## Luồng rớt giữa chừng
+
+Vidonzo tự kết nối lại. Nếu nó cứ rớt hoài, thì hoặc nhà cung cấp đang bóp băng
+thông, hoặc đường truyền không ổn định — nối dây cho tivi thường là dứt điểm.
+
+## Chẳng có gì tải lên được
+
+- Kiểm tra xem danh sách phát còn tải được không: kéo xuống để làm mới ở màn hình
+  chính.
+- Nếu mạng của bạn chặn nhà cung cấp, hãy đặt một proxy ở **Cài đặt → Mạng**.
+- Kiểm tra đồng hồ của thiết bị. Giờ hệ thống sai làm hỏng TLS, và các luồng chạy
+  qua HTTPS sẽ hỏng mà không có lý do gì rõ ràng.
+
+## Vẫn bí
+
+Hãy viết tới [support@vidonzo.com](mailto:support@vidonzo.com), cho biết thiết
+bị, phiên bản Vidonzo, nguồn là Xtream hay M3U, và bạn đã thấy gì. Bốn điều đó
+giải quyết được phần lớn báo lỗi ngay ở lần trả lời đầu tiên.

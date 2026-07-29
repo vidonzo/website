@@ -1,0 +1,79 @@
+---
+title: "Datenschutzerklärung"
+description: "Was Vidonzo speichert, was es nicht lesen kann und wie Sie alles davon wieder loswerden."
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo ist ein Medienplayer. Es verkauft keine Sender, hostet keine Inhalte und
+muss nicht wissen, was Sie schauen, um zu funktionieren. Diese Erklärung
+beschreibt die Daten, mit denen die App und der optionale Sync-Dienst umgehen.
+
+## Vidonzo ohne Konto nutzen
+
+Sie können Vidonzo nutzen, ohne sich anzumelden. In diesem Modus wird alles —
+Ihre Playlists, Favoriten, der Wiedergabestand, Downloads und Einstellungen — nur
+auf Ihrem Gerät gespeichert. Nichts wird an uns gesendet.
+
+Die App kontaktiert Ihren eigenen IPTV-Anbieter und jede Programmführer-URL, die
+Sie einrichten. Diese Anfragen gehen direkt von Ihrem Gerät an diesen Anbieter,
+und was dort protokolliert wird, richtet sich nach dessen Erklärung, nicht nach
+unserer.
+
+## Wenn Sie die Synchronisierung einschalten
+
+Mit der Anmeldung entsteht ein Konto, damit Ihre Playlists und Ihr
+Wiedergabestand Ihnen zwischen Geräten folgen können. Wir speichern dann:
+
+- **Konto**: Ihre E-Mail-Adresse, verarbeitet von unserem
+  Authentifizierungsdienst, und ein optionaler Anzeigename.
+- **Playlist-Quellen**: Ihr Xtream-Host, Benutzername und Passwort sowie jede
+  M3U-URL, gespeichert **Ende-zu-Ende-verschlüsselt**. Sie werden vor dem
+  Hochladen auf Ihrem Gerät mit AES‑256‑GCM verschlüsselt, unter einem Schlüssel,
+  der mit Argon2id aus Ihrem Sync-Passwort abgeleitet wird. Wir halten nur
+  Chiffretext und können sie nicht lesen. Die Bezeichnung, die Sie einer Playlist
+  geben, wird im Klartext gespeichert, weil es Ihr eigener Anzeigename dafür ist.
+- **Favoriten, Wiedergabestand und App-Einstellungen**, damit sie auf allen
+  Geräten übereinstimmen. Diese werden im Klartext gespeichert und durch
+  Zugriffsregeln pro Benutzer geschützt.
+- **Geräte**: ein Name, den Sie wählen, der Gerätetyp, ein öffentlicher Schlüssel
+  und wann das Gerät zuletzt gesehen wurde — genug, um ein neues Gerät zu
+  verbinden und ein verlorenes zu sperren.
+
+Ihr Sync-Passwort verlässt nie Ihr Gerät. Deshalb **können wir es nicht
+wiederherstellen**, und es zu verlieren heißt, dass auch Ihre verschlüsselten
+Playlists nicht wiederhergestellt werden können.
+
+## Was wir nicht tun
+
+Die Vidonzo-App enthält keine Werbe-SDKs und keine In-App-Analyse oder
+Verhaltensverfolgung. Wir erstellen kein Profil von Ihnen, verkaufen keine
+personenbezogenen Daten und wickeln keine Zahlungen ab.
+
+## Analyse der Website
+
+Die öffentliche Vidonzo-Website nutzt Google Tag Manager und Microsoft Clarity,
+um Seitenaufrufe, Sitzungsaufzeichnungen und Heatmaps zu verstehen. Clarity
+maskiert sensible Inhalte standardmäßig. Diese Werkzeuge helfen uns, die Website
+und den Weg zum Download zu verbessern; sie sind von der Vidonzo-App getrennt und
+geben uns keinen Zugriff auf Ihre Playlists, Ihre Anbieter-Zugangsdaten oder Ihren
+Wiedergabeverlauf.
+
+## Aufbewahrung und Löschung
+
+Synchronisierte Daten werden aufbewahrt, solange Ihr Konto besteht. Sie können
+Ihr Konto und alles, was daran hängt, jederzeit löschen — siehe
+[Konto- und Datenlöschung](/de/account-deletion/). Daten, die nur auf Ihrem Gerät
+liegen, entfernen Sie, indem Sie sie in der App löschen, die App-Daten leeren oder
+Vidonzo deinstallieren.
+
+## Kinder
+
+Vidonzo richtet sich nicht an Kinder unter 13 Jahren, und wir erheben ihre Daten
+nicht wissentlich.
+
+## Änderungen und Kontakt
+
+Ändert sich diese Erklärung wesentlich, aktualisieren wir das Datum oben und
+weisen in der App darauf hin. Fragen an
+[support@vidonzo.com](mailto:support@vidonzo.com).

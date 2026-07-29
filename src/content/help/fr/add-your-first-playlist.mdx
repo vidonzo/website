@@ -1,0 +1,56 @@
+---
+title: "Ajouter votre première playlist"
+description: "Faire entrer dans Vidonzo un compte Xtream, un lien M3U ou un fichier local."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo est livré sans aucune chaîne. La première chose qu'il vous demande est
+une playlist que vous possédez déjà. Il existe trois façons de la lui fournir.
+
+## Xtream Codes
+
+Choisissez **Xtream Codes** et saisissez les trois valeurs que votre fournisseur
+vous a données :
+
+- **Host** — l'adresse du serveur, par exemple `http://example.com:8080`.
+  Indiquez le port s'il y en a un.
+- **Nom d'utilisateur**
+- **Mot de passe**
+
+Xtream est l'option la plus riche : les chaînes en direct, les films et les
+séries arrivent ensemble, et le guide des programmes avec eux.
+
+## Un lien M3U ou M3U8
+
+Choisissez **M3U URL** et collez l'adresse. Vidonzo récupère la playlist, la met
+en cache et la relit lorsqu'elle change. Si votre fournisseur vous donne aussi
+une URL de guide XMLTV, ajoutez-la dans **Réglages → Guide des programmes** pour
+que les chaînes en direct affichent ce qui passe en ce moment.
+
+## Un fichier M3U local
+
+Choisissez **Fichier local** et sélectionnez un fichier `.m3u` ou `.m3u8` sur
+votre appareil. Dans ce mode, rien ne quitte votre appareil, et aucune connexion
+internet n'est nécessaire pour parcourir la liste — seulement pour lire un flux
+qui pointe vers internet.
+
+## Une fois la playlist chargée
+
+Le premier chargement lit le catalogue entier et associe les visuels, ce qui
+peut prendre une minute sur une grande playlist. Ensuite tout est en cache, et
+rouvrir l'application est immédiat.
+
+Vous pouvez conserver plusieurs playlists côte à côte et passer de l'une à
+l'autre depuis le sélecteur de source, en haut de l'écran d'accueil.
+
+## En cas d'échec
+
+- **Identifiants erronés** — la cause la plus fréquente. Retapez le mot de passe
+  plutôt que de le coller : un espace de trop à la fin se copie très facilement
+  sans qu'on s'en aperçoive.
+- **Le port manque dans l'hôte** — beaucoup de serveurs Xtream ne tournent pas
+  sur le port 80.
+- **Votre réseau bloque le fournisseur** — réessayez en données mobiles, ou
+  définissez un proxy dans **Réglages → Réseau**.
