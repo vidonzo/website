@@ -15,6 +15,13 @@ interface Props {
   description: string;
   /** Rendered under the title. Blog posts use it for the date and reading time. */
   meta?: string;
+  /**
+   * Featured image for this document, in this language. Doubles as the Open
+   * Graph card, so it is passed down whether or not the header shows it.
+   */
+  image?: { social: string; cover: string };
+  /** Localized description of the social card, emitted as og:image:alt. */
+  imageAlt?: string;
   isFallback?: boolean;
   localeHrefs?: Partial<Record<Locale, string>>;
   availableLocales?: Locale[];
@@ -31,6 +38,8 @@ const {
   title,
   description,
   meta,
+  image,
+  imageAlt,
   isFallback = false,
   localeHrefs,
   availableLocales,
@@ -57,6 +66,8 @@ const contentDir = locales[contentLocale].dir;
   localeHrefs={localeHrefs}
   availableLocales={availableLocales}
   canonicalPath={canonicalPath}
+  ogImage={image?.social}
+  ogImageAlt={imageAlt}
   ogType={ogType}
   noindex={noindex}
 >
@@ -76,6 +87,16 @@ const contentDir = locales[contentLocale].dir;
         />
         <h1 lang={contentLocale} dir={contentDir}>{title}</h1>
         {meta && <p class="meta">{meta}</p>}
+        {
+          /* Decorative: the headline it would otherwise repeat is the h1 right
+             above it, so it takes an empty alt rather than a second reading of
+             the same sentence. */
+          image && (
+            <span class="hero">
+              <img src={image.cover} alt="" width="1200" height="630" decoding="async" />
+            </span>
+          )
+        }
       </div>
     </header>
 
@@ -113,6 +134,24 @@ const contentDir = locales[contentLocale].dir;
     margin-block-start: var(--space-sm);
     color: var(--color-text-subtle);
     font-size: var(--text-sm);
+  }
+
+  /* A banner, not a hero image: the picture is brand colour rather than
+     information, so it earns a strip under the title and not a screenful. */
+  .hero {
+    display: block;
+    margin-block-start: var(--space-lg);
+    inline-size: min(100%, 44rem);
+    aspect-ratio: 1200 / 240;
+    overflow: hidden;
+    border: 1px solid var(--color-stroke);
+    border-radius: var(--radius-lg);
+  }
+
+  .hero img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
   }
 
   .body {

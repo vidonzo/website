@@ -12,6 +12,7 @@ import {
   type Locale,
 } from '../../../i18n';
 import { readingTime } from '../../../lib/reading-time';
+import { featuredImage } from '../../../lib/featured-image';
 import { site } from '../../../config/site';
 
 export async function getStaticPaths() {
@@ -39,6 +40,12 @@ const slug = post.slug;
 
 const { Content } = await render(post.entry);
 const { data } = post.entry;
+
+// A fallback page renders the source-language document, so it also carries the
+// source language's card — the reader should not be shown a headline image in a
+// script the page itself is not written in.
+const imageLocale = post.isFallback ? defaultLocale : locale;
+const image = featuredImage(imageLocale, key, data.heroImage);
 
 const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: 'long' });
 const meta = [
@@ -85,6 +92,8 @@ const articleSchema = {
   title={data.title}
   description={data.description}
   meta={meta}
+  image={image}
+  imageAlt={data.heroImageAlt}
   isFallback={post.isFallback}
   localeHrefs={localeHrefs}
   availableLocales={post.availableLocales}
@@ -106,6 +115,7 @@ const articleSchema = {
                 title={other.entry.data.title}
                 description={other.entry.data.description}
                 tags={other.entry.data.tags}
+                image={featuredImage(other.isFallback ? defaultLocale : locale, other.key, other.entry.data.heroImage)}
                 delay={index}
                 contentLang={other.isFallback ? defaultLocale : undefined}
                 contentDir={other.isFallback ? locales[defaultLocale].dir : undefined}

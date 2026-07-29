@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run build:redirects && astro build",
+    "build": "npm run build:redirects && npm run build:images && astro build",
     "preview": "astro preview",
     "sync:tokens": "node tool/sync-tokens.mjs",
     "check:tokens": "node tool/sync-tokens.mjs --check",
     "build:brand": "node tool/make-brand-assets.mjs",
     "build:redirects": "node tool/build-redirects.mjs",
     "check:redirects": "node tool/build-redirects.mjs --check",
+    "build:images": "node tool/build-featured-images.mjs",
     "check:links": "node tool/check-links.mjs",
     "coverage": "node tool/coverage.mjs"
   },
@@ -28,6 +29,7 @@
     "@fontsource-variable/noto-sans-thai": "^5.3.0",
     "@fontsource-variable/vazirmatn": "^5.3.0",
     "@fontsource/noto-nastaliq-urdu": "^5.3.0",
-    "astro": "^5.14.6"
+    "astro": "^5.14.6",
+    "wawoff2": "^2.0.1"
   }
 }
