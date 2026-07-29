@@ -222,7 +222,10 @@ async function titleLayer(title, locale, rtl, { files, stack }) {
         font: `${stack} ${size}`,
         width: BOX,
         align: rtl ? 'high' : 'low',
-        wrap: 'word',
+        // Word breaking first, character breaking as the fallback: an Urdu or
+        // Thai headline can contain a single run longer than the text box, and
+        // Pango will happily let it overhang rather than break it.
+        wrap: 'word-char',
         rgba: true,
         // Nastaliq is written on a steep diagonal baseline, so its ascenders and
         // descenders reach much further than a Latin line box suggests. It needs
@@ -235,10 +238,14 @@ async function titleLayer(title, locale, rtl, { files, stack }) {
     last = rendered;
     if (rendered.info.height <= TITLE_MAX && rendered.info.width <= BOX) break;
   }
-  // The smallest size on the ladder is the floor; a title that still does not
-  // fit is an authoring problem, not something to silently clip.
-  if (last.info.height > TITLE_MAX) {
-    throw new Error(`title does not fit at the smallest size (${locale}): ${title}`);
+  // The smallest size on the ladder is the floor. A title that still does not fit
+  // is an authoring problem, and saying so with the measurements beats silently
+  // clipping it or failing later with a composite error that names no article.
+  if (last.info.height > TITLE_MAX || last.info.width > BOX) {
+    throw new Error(
+      `title does not fit at the smallest size: ${last.info.width}×${last.info.height} exceeds ` +
+        `${BOX}×${TITLE_MAX} — ${locale} "${title}"`,
+    );
   }
   // A font that failed to load does not raise — Pango substitutes and carries on,
   // and the result is a card that looks fine in a log and is empty on a phone. So
@@ -280,7 +287,12 @@ async function articles() {
 
 async function render(item, fonts) {
   const rtl = localeDir[item.locale] === 'rtl';
-  const canvas = background(item.key, rtl);
+  // Rasterize the background to exact pixels rather than trusting every platform's
+  // SVG renderer to read the width and height attributes the same way.
+  const canvas = await sharp(background(item.key, rtl))
+    .resize(WIDTH, HEIGHT, { fit: 'cover' })
+    .png()
+    .toBuffer();
   const title = await titleLayer(item.title, item.locale, rtl, fonts);
 
   const left = rtl ? WIDTH - MARGIN - title.info.width : MARGIN;
