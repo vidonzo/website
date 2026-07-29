@@ -21,5 +21,8 @@ jobs:
       - run: npm run check:tokens
       # Fails if the compiled redirect module drifts from the JSON ledger.
       - run: npm run check:redirects
+      # Fails on a stale slug registry, a frontmatter `slug` field, or two
+      # articles resolving to the same URL in one locale.
+      - run: npm run check:slugs
       - run: npm run build
       - run: npm run check:links
