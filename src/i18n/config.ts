@@ -7,6 +7,20 @@ export const locales = {
   es: { label: 'Spanish', endonym: 'Español', dir: 'ltr', path: 'es', htmlLang: 'es' },
   tr: { label: 'Turkish', endonym: 'Türkçe', dir: 'ltr', path: 'tr', htmlLang: 'tr' },
   fr: { label: 'French', endonym: 'Français', dir: 'ltr', path: 'fr', htmlLang: 'fr' },
+  de: { label: 'German', endonym: 'Deutsch', dir: 'ltr', path: 'de', htmlLang: 'de' },
+  pt: { label: 'Portuguese', endonym: 'Português', dir: 'ltr', path: 'pt', htmlLang: 'pt-BR' },
+  ru: { label: 'Russian', endonym: 'Русский', dir: 'ltr', path: 'ru', htmlLang: 'ru' },
+  id: { label: 'Indonesian', endonym: 'Bahasa Indonesia', dir: 'ltr', path: 'id', htmlLang: 'id' },
+  it: { label: 'Italian', endonym: 'Italiano', dir: 'ltr', path: 'it', htmlLang: 'it' },
+  vi: { label: 'Vietnamese', endonym: 'Tiếng Việt', dir: 'ltr', path: 'vi', htmlLang: 'vi' },
+  pl: { label: 'Polish', endonym: 'Polski', dir: 'ltr', path: 'pl', htmlLang: 'pl' },
+  nl: { label: 'Dutch', endonym: 'Nederlands', dir: 'ltr', path: 'nl', htmlLang: 'nl' },
+  hi: { label: 'Hindi', endonym: 'हिन्दी', dir: 'ltr', path: 'hi', htmlLang: 'hi' },
+  bn: { label: 'Bengali', endonym: 'বাংলা', dir: 'ltr', path: 'bn', htmlLang: 'bn' },
+  th: { label: 'Thai', endonym: 'ไทย', dir: 'ltr', path: 'th', htmlLang: 'th' },
+  ur: { label: 'Urdu', endonym: 'اردو', dir: 'rtl', path: 'ur', htmlLang: 'ur' },
+  ja: { label: 'Japanese', endonym: '日本語', dir: 'ltr', path: 'ja', htmlLang: 'ja' },
+  ko: { label: 'Korean', endonym: '한국어', dir: 'ltr', path: 'ko', htmlLang: 'ko' },
 } as const satisfies Record<string, { label: string; endonym: string; dir: 'ltr' | 'rtl'; path: string; htmlLang: string }>;
 
 export type Locale = keyof typeof locales;
