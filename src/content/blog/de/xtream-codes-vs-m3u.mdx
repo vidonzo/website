@@ -1,0 +1,74 @@
+---
+title: "Xtream Codes oder M3U: Welches Playlist-Format brauchen Sie?"
+description: "Ihr Anbieter gibt Ihnen entweder Zugangsdaten oder einen Link. Was die beiden Formate unterscheidet und wofür Sie sich entscheiden sollten."
+urlSlug: xtream-codes-oder-m3u
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["einrichtung", "playlists"]
+keywords: ["xtream codes oder m3u", "iptv playlist format", "m3u player", "xtream codes api"]
+heroImageAlt: "Ein Xtream-Codes-Anmeldefenster und ein M3U-Link nebeneinander, die dieselbe Senderliste speisen."
+---
+
+Wer ein IPTV-Abo abschließt, bekommt vom Anbieter eines von zwei Dingen: einen
+Satz **Xtream-Codes**-Zugangsdaten oder einen **M3U**-Link. Beide können exakt
+dieselben Sender transportieren und verhalten sich im Player trotzdem sehr
+unterschiedlich. Zu wissen, was Sie vor sich haben, erspart erstaunlich viel
+Ärger.
+
+In beiden Fällen geht es nur darum, *wo Ihre Streams liegen*. Keines von beiden
+ist der Inhalt, und keines ist die App. Ein Player wie Vidonzo liest das Format,
+das Sie haben, und macht daraus eine Senderliste, mit der sich arbeiten lässt.
+
+## Was eine M3U-Playlist ist
+
+Eine M3U-Datei ist eine reine Textliste. Öffnen Sie eine, sehen Sie Zeilenpaare:
+ein Name und eine Stream-URL, für jeden Sender wiederholt. Die Variante `.m3u8`
+ist dieselbe Idee, nur als UTF-8 gespeichert — deshalb kommt sie mit Umlauten und
+nicht-lateinischen Sendernamen sauber zurecht.
+
+Ihre Stärke ist die Verbreitung: Praktisch jeder Player versteht sie. Ihre
+Schwäche ist, dass sie *flach und eingefroren* ist. Die Liste ist nur so aktuell
+wie der Moment, in dem Sie sie geladen haben. Wenn Ihr Anbieter Sender ergänzt
+oder Kategorien umsortiert, merkt die M3U davon nichts, bis Sie sie erneut
+abrufen.
+
+## Was Xtream Codes ist
+
+Xtream Codes ist keine Datei, sondern eine **API**. Sie tragen drei Dinge ein —
+Host, Benutzername und Passwort — und der Player fragt den Server live nach Ihren
+Livesendern, Filmen, Serien und dem Programmführer, bereits nach Kategorien
+sortiert.
+
+Genau diese Struktur ist der Vorteil. Sie bekommen echte Kategorien, Serien nach
+Staffeln und Episoden gegliedert, den Kontostatus und ein EPG, ohne etwas
+zusätzlich einzurichten. Der Preis dafür ist die Empfindlichkeit: Diese drei
+Angaben *sind* Ihr Abo. Wer sie kopiert, schaut auf Ihrem Konto mit. Deshalb ist
+entscheidend, wie ein Player sie ablegt. Vidonzo bewahrt Xtream-Zugangsdaten
+Ende-zu-Ende-verschlüsselt auf: Verschlüsselt wird auf Ihrem Gerät, und der
+Schlüssel verlässt es nie — auf unseren Servern liegen sie damit in einer Form,
+die auch wir nicht lesen können. Die Details dazu stehen auf der
+[Funktionsseite](/de/features/).
+
+## Welches Format Sie nehmen sollten
+
+- **Nehmen Sie Xtream**, wenn Ihr Anbieter es anbietet und Sie möchten, dass
+  Kategorien, Serien und Programmführer von allein erscheinen. Das ist die
+  reichhaltigere Variante und für die meisten die passende.
+- **Nehmen Sie M3U**, wenn Ihr Anbieter nur das herausgibt, wenn Sie mehrere
+  Quellen von Hand kombinieren oder wenn Sie die denkbar einfachste Liste
+  wollen. Sie funktioniert überall.
+
+Bekommen Sie beides, beginnen Sie mit Xtream und behalten Sie den M3U-Link als
+Rückfallebene. Eine Bindung entsteht in keiner Richtung: Ein guter Player
+behandelt die beiden Formate als zwei Türen in denselben Raum.
+
+## Was sich nicht ändert
+
+Welches Format Sie auch in der Hand halten — die eigentliche Arbeit macht der
+Player. Er sollte Ihre Liste ohne Werbung lesen, ohne mitzuschreiben, was Sie
+schauen, und ohne Ihre Zugangsdaten in einer Form vorzuhalten, die er selbst
+wieder auslesen kann. Ist das Format geklärt, dauert
+[das Einrichten der ersten Playlist](/de/blog/erste-playlist-einrichten/) etwa
+eine Minute — und wenn ein Stream doch einmal stockt, steckt meist
+[ein Netzwerkproblem mit schneller Lösung](/de/blog/iptv-ruckeln-beheben/)
+dahinter, nicht das Format.
