@@ -42,10 +42,11 @@ Le texte était enregistré dans l'encodage local de la machine, ce qui
 fonctionnait parfaitement jusqu'au jour où un fichier franchissait une
 frontière.
 
-`.m3u8` déclare que le fichier est en UTF-8. Concrètement, chaque nom de chaîne
-survit au voyage : l'arabe, le persan, le grec, le thaï, le cyrillique, le
-japonais, et les caractères accentués du français, du turc, du polonais ou du
-vietnamien. Avec un `.m3u` ordinaire, dont le lecteur doit deviner l'encodage,
+`.m3u8` déclare que le fichier est en UTF-8. Concrètement,
+[chaque nom de chaîne survit au voyage](/fr/blog/regarder-dans-votre-langue/) :
+l'arabe, le persan, le grec, le thaï, le cyrillique, le japonais, et les
+caractères accentués du français, du turc, du polonais ou du vietnamien. Avec un
+`.m3u` ordinaire, dont le lecteur doit deviner l'encodage,
 ces noms arrivent sous forme de points d'interrogation, ou de cette suite de
 caractères parasites qu'on reconnaît au premier coup d'œil — `Ã©` là où il
 devrait y avoir un `é`.
