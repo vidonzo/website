@@ -1,0 +1,61 @@
+---
+title: "Pierwsza playlista w Vidonzo, krok po kroku"
+description: "Od świeżej instalacji do działającej listy kanałów w około minutę, razem z drobiazgami, które zapobiegają typowym potknięciom na starcie."
+urlSlug: jak-dodac-pierwsza-playliste
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["konfiguracja", "playlisty"]
+keywords: ["jak dodać playlistę iptv", "konfiguracja odtwarzacza iptv", "pierwsza playlista m3u", "dane xtream codes"]
+heroImageAlt: "Telefon z otwartym ekranem dodawania playlisty, a za nim pojawiająca się lista kanałów."
+---
+
+Wgranie kanałów do odtwarzacza brzmi na żmudne i prawie nigdy takie nie jest.
+Jeśli masz pod ręką dane abonamentu, dodanie pierwszej playlisty w Vidonzo
+zajmuje około minuty. Poniżej cała droga oraz kilka szczegółów, które po cichu
+odpowiadają za większość problemów przy pierwszym podejściu.
+
+Zanim zaczniesz, ustal, jakie źródło masz. Dostawcy wydają albo dane logowania
+Xtream Codes, albo link M3U, a konfiguracja różni się w drobiazgach. Jeśli nie
+wiadomo, który format masz — ani który jest lepszy —
+[to krótkie porównanie rozwiewa wątpliwości](/pl/blog/xtream-codes-czy-m3u/).
+
+## Jeśli masz Xtream Codes
+
+1. Otwórz Vidonzo i wybierz **Dodaj playlistę → Xtream Codes**.
+2. Wpisz **host** dokładnie tak, jak podał go dostawca, razem z `http://` lub
+   `https://` oraz numerem portu, jeśli jakiś występuje.
+3. Podaj **nazwę użytkownika** i **hasło**. Wielkość liter ma znaczenie.
+4. Nadaj playliście nazwę, którą rozpoznasz, i zapisz.
+
+Vidonzo łączy się z serwerem raz, pobiera kategorie, filmy i seriale, po czym
+buduje listę. Hasło nigdy nie zostaje zapisane w postaci, którą aplikacja
+mogłaby odczytać z powrotem.
+
+## Jeśli masz link M3U
+
+1. Wybierz **Dodaj playlistę → M3U**.
+2. Wklej pełny adres, kończący się na `.m3u` lub `.m3u8`.
+3. Nadaj nazwę i zapisz.
+
+Jeśli dostawca przekazał plik zamiast linku, wczytaj go z pamięci urządzenia w
+ten sam sposób.
+
+## Szczegóły, na których najczęściej się potyka
+
+- **Kopiuj, nie przepisuj.** Jeden błędny znak w hoście albo w haśle to
+  najczęstsza przyczyna playlisty, która się nie ładuje. Wklej wprost
+  z wiadomości od dostawcy.
+- **Uważaj na port.** `http://przyklad.pl` i `http://przyklad.pl:8080` to dwa
+  różne adresy. Dopisz port, jeśli został podany.
+- **Jedno `s` robi różnicę.** `http` i `https` nie są wymienne; użyj tego,
+  który wskazał dostawca.
+
+## Gdy lista się wczyta
+
+Kiedy kanały się pojawią, oznacz kilka ulubionych, żeby te oglądane codziennie
+trafiły na górę. Dalej pozostaje już tylko oglądanie — a jeśli któryś kanał
+zacznie się zacinać, to prawie zawsze
+[problem sieciowy do usunięcia w minutę](/pl/blog/jak-naprawic-buforowanie-iptv/),
+a nie błąd w Twojej konfiguracji. Gdyby wciąż nie było jasne, który format
+wybrać, [porównanie Xtream i M3U](/pl/blog/xtream-codes-czy-m3u/) zamyka temat.
+Samą aplikację pobierzesz ze [strony pobierania](/pl/download/).

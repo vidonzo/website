@@ -1,0 +1,68 @@
+---
+title: "Xtream Codes hay M3U: nên dùng định dạng danh sách phát nào?"
+description: "Nhà cung cấp đưa bạn một trong hai thứ: một bộ thông tin đăng nhập, hoặc một đường dẫn. Đây là khác biệt giữa chúng và khi nào nên chọn cái nào."
+urlSlug: xtream-codes-hay-m3u
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["cài đặt", "danh sách phát"]
+keywords: ["xtream codes là gì", "m3u là gì", "xtream codes hay m3u", "định dạng danh sách phát iptv"]
+heroImageAlt: "Bảng đăng nhập Xtream Codes và một đường dẫn M3U đặt cạnh nhau, cùng dẫn về một danh sách kênh."
+---
+
+Khi bạn trả tiền cho một gói IPTV, nhà cung cấp sẽ đưa bạn một trong hai thứ: một
+bộ thông tin đăng nhập **Xtream Codes**, hoặc một đường dẫn **M3U**. Cả hai có thể
+mang đúng cùng những kênh đó, nhưng khi đến tay trình phát thì chúng hành xử rất
+khác nhau. Biết mình đang cầm cái gì sẽ tiết kiệm cho bạn kha khá rắc rối.
+
+Cả hai chỉ là cách mô tả *luồng phát của bạn nằm ở đâu*. Chúng không phải nội dung,
+cũng không phải ứng dụng. Một trình phát như Vidonzo đọc thứ bạn đang có và biến nó
+thành danh sách kênh xem được.
+
+## Danh sách phát M3U là gì
+
+Tệp M3U là một danh sách văn bản thuần. Mở ra, bạn thấy từng cặp dòng: một tên kênh
+và một địa chỉ luồng, lặp lại như vậy cho mọi kênh. Biến thể `.m3u8` vẫn là ý tưởng
+đó nhưng lưu ở dạng UTF-8 — nhờ vậy tên kênh tiếng Việt có dấu hiển thị đúng thay vì
+biến thành một mớ ký tự lỗi.
+
+Điểm mạnh của nó là tính phổ quát: gần như trình phát nào cũng đọc được. Điểm yếu là
+nó *phẳng và đứng yên*. Danh sách chỉ mới tới thời điểm bạn tải nó về. Khi nhà cung
+cấp thêm kênh hoặc sắp xếp lại các nhóm, tệp M3U trong máy bạn không hề hay biết cho
+đến khi bạn tải lại.
+
+## Xtream Codes là gì
+
+Xtream Codes không phải một tệp mà là một **API**. Bạn nhập ba thứ — địa chỉ máy chủ
+(host), tên đăng nhập và mật khẩu — rồi trình phát hỏi thẳng máy chủ theo thời gian
+thực để lấy kênh trực tiếp, phim lẻ, phim bộ và lịch phát sóng, tất cả đã được chia
+sẵn theo danh mục.
+
+Chính cấu trúc đó là ưu thế. Bạn có danh mục thật, phim bộ gom theo mùa và theo tập,
+tình trạng tài khoản, và có EPG mà không phải thiết lập thêm gì. Đổi lại là độ nhạy
+cảm: ba thông tin ấy *chính là* gói cước của bạn. Ai sao chép được chúng đều có thể
+xem bằng tài khoản của bạn, nên cách trình phát cất giữ chúng là chuyện đáng quan
+tâm. Vidonzo giữ thông tin Xtream ở dạng mã hóa mà chính ứng dụng cũng không đọc
+ngược lại được — [xem cách ứng dụng làm việc với dữ liệu của bạn](/vi/features/).
+
+## Nên chọn cái nào
+
+- **Chọn Xtream** nếu nhà cung cấp có hỗ trợ và bạn muốn danh mục, phim bộ và lịch
+  phát sóng tự hiện ra. Đây là trải nghiệm đầy đủ hơn, và cũng là lựa chọn hợp lý
+  với phần lớn người dùng.
+- **Chọn M3U** khi nhà cung cấp chỉ đưa bạn có thế, khi bạn tự ghép nhiều nguồn lại
+  với nhau, hoặc khi bạn muốn một danh sách gọn nhẹ nhất có thể. Nó chạy được ở
+  khắp nơi.
+
+Nếu nhà cung cấp đưa bạn cả hai, hãy bắt đầu với Xtream và giữ đường dẫn M3U làm
+phương án dự phòng. Không có ràng buộc nào theo hướng nào cả: một trình phát tốt xem
+chúng như hai cánh cửa mở vào cùng một căn phòng.
+
+## Phần không thay đổi
+
+Dù bạn cầm định dạng nào, thứ làm việc thật sự vẫn là trình phát. Nó phải đọc danh
+sách của bạn mà không chèn quảng cáo, không ghi lại bạn xem gì, và không giữ thông
+tin đăng nhập ở dạng có thể đọc ngược. Khi đã chọn xong định dạng,
+[thiết lập danh sách phát đầu tiên](/vi/blog/cai-dat-danh-sach-phat-dau-tien/) chỉ
+mất khoảng một phút — và nếu có lúc luồng phát khựng lại, thường đó
+[là chuyện của đường truyền, sửa rất nhanh](/vi/blog/khac-phuc-iptv-giat-lag/), chứ
+không phải lỗi của định dạng. Bạn có thể [tải Vidonzo tại đây](/vi/download/).
