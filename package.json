@@ -12,7 +12,8 @@
     "build:brand": "node tool/make-brand-assets.mjs",
     "build:redirects": "node tool/build-redirects.mjs",
     "check:redirects": "node tool/build-redirects.mjs --check",
-    "check:links": "node tool/check-links.mjs"
+    "check:links": "node tool/check-links.mjs",
+    "coverage": "node tool/coverage.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
