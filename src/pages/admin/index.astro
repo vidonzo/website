@@ -1,0 +1,36 @@
+---
+// Internal translation-coverage dashboard. Built from the same engine as the
+// local `npm run coverage` report, so the two never disagree.
+//
+// This route is NOT public. It is a static page like any other, so it must be
+// gated at the edge — put /admin/* behind Cloudflare Access (Zero Trust). The
+// noindex header and the sitemap exclusion keep it out of search, but Access is
+// what actually keeps people out. See docs/content-engine/ADMIN-DASHBOARD.md.
+import '@fontsource-variable/vazirmatn';
+import { computeCoverage } from '../../../tool/lib/coverage.mjs';
+import { renderCoverage } from '../../../tool/lib/render-coverage.mjs';
+
+// cwd is the repo root during `astro build`; pass it explicitly rather than
+// relying on the module's bundled location.
+const data = computeCoverage(process.cwd());
+const { html } = renderCoverage(data);
+---
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>پوشش ترجمه — داشبورد داخلی ویدونزو</title>
+    <style>
+      body { margin: 0; background: #eef1f3; }
+      @media (prefers-color-scheme: dark) { body { background: #0e1214; } }
+      :root[data-theme='dark'] body { background: #0e1214; }
+      :root[data-theme='light'] body { background: #eef1f3; }
+    </style>
+  </head>
+  <body>
+    <Fragment set:html={html} />
+  </body>
+</html>

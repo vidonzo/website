@@ -8,7 +8,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     // Pages served in a language they were not written in mark themselves
-    // noindex; the 404 is the only route with nothing to say to a crawler.
-    sitemap({ filter: (page) => !page.includes('/404') }),
+    // noindex; the 404 has nothing to say to a crawler, and /admin is the
+    // Access-gated internal dashboard, kept out of the sitemap entirely.
+    sitemap({ filter: (page) => !page.includes('/404') && !page.includes('/admin') }),
   ],
 });
