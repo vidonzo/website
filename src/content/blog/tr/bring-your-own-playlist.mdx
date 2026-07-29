@@ -1,0 +1,91 @@
+---
+title: "“Listeyi siz getirin”: gizliliğinize saygı duyan oynatıcı modeli"
+description: "İçerik sunmayan bir oynatıcının sizin hakkınızda öğrenecek bir şeyi yoktur. Bir medya uygulamasının ne bildiğini asıl bu mimari seçim belirler."
+urlSlug: kendi-listenizi-getirin
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["gizlilik", "urun"]
+keywords: ["reklamsız iptv oynatıcı", "gizlilik odaklı iptv uygulaması", "takip etmeyen medya oynatıcı", "kendi oynatma listeni ekle"]
+heroImageAlt: "Bir oynatma listesi dosyası sağlayıcıdan doğruca ekrana geçiyor; uygulama, içinden geçtiği boş bir çerçeve olarak çizilmiş."
+---
+
+Ekranınıza video koyan uygulamaların çoğu, altta yatan haliyle, bir oynatıcı
+eklenmiş bir katalogdur. Asıl iş katalogdur: neyi izleyebileceğinize o karar
+verir, kim olduğunuzu bilmek için bir hesaba ihtiyaç duyar ve ne izlediğinizi
+öğrenir — çünkü katalog ancak bunu öğrenerek gelişir, reklam da ancak böyle
+satılır.
+
+Listeyi kendinizin getirdiği bir oynatıcı bunu tersine çevirir. Elinde hiçbir
+şeyle gelir. Listeyi siz verirsiniz — zaten parasını ödediğiniz bir sağlayıcıdan
+aldığınız [Xtream giriş bilgileri ya da bir M3U
+bağlantısı](/tr/blog/xtream-codes-mi-m3u-mu/) — ve uygulamanın işinin tamamı onu
+iyi okumaktır. Katalog yoktur, çünkü kataloglanacak bir şey yoktur.
+
+Bu bir pazarlama duruşu değil. Bir mimari; mimarilerin ise kontrol
+edebileceğiniz sonuçları olur.
+
+## Ortadan kalkanlar
+
+**İzlemek için hesap gerekmez.** Oturum açma yalnızca kendi verinizi kendi
+cihazlarınız arasında eşitlemek için vardır. Hiç açmayın, uygulama yine eksiksiz
+çalışır; çünkü neyi görebileceğinize karar veren bir sunucu yoktur.
+
+**Sunucuda izleme geçmişi tutulmaz.** Yayın, sağlayıcınızdan doğruca cihazınıza
+gider. Gece on birde hangi kanalı açtığınıza dair hiçbir şey aradaki kimsenin
+üzerinden geçmez — bir politika öyle dediği için değil, geçeceği bir yol olmadığı
+için.
+
+**Öneri motoru yoktur.** Öneri, sizin davranış modelinizin kibar adıdır.
+İçeriğinizi seçmeyen bir oynatıcının böyle bir model kurmak için sebebi yoktur.
+
+**Sizi izleyerek para kazanılacak bir taraf yoktur.** Reklam SDK'sı yok, analitik
+kütüphanesi yok. Bunların olağan gerekçesi ürünü finanse etmeleridir; oysa içerik
+sunmayan bir oynatıcının finanse edecek çok daha azı vardır — bu tablodaki para,
+zaten kendi sağlayıcınıza ödediğiniz paradır ve uygulamayla hiçbir ilgisi yoktur.
+
+## Kalanlar ve nerede durdukları
+
+Listeyi kendiniz getirmek, kolaylıklardan vazgeçmek anlamına gelmez. Onların
+nerede duracağı konusunda net olmak anlamına gelir.
+
+Sık kullanılanlar, izleme ilerlemesi ve ayarlar sizindir ve cihazlar arasında işe
+yarar; bu yüzden düz halde eşitlenir, kullanıcı başına sıradan erişim
+kurallarıyla korunur. Sağlayıcı giriş bilgileriniz ise başka sınıf bir sırdır —
+onlar *aboneliğinizin ta kendisi* — bu yüzden [daha saklanmadan önce cihazınızda
+şifrelenir](/tr/blog/giris-bilgileri-neden-sifrelenmeli/) ve sunucuya ulaşan şey,
+oradaki hiç kimsenin anahtarını taşımadığı bir bloktur.
+
+İki tür veri, iki ayrı muamele — ayrımı da verinin gerçekte ne olduğu belirliyor.
+
+## Yaptığınız takas
+
+Bu modelin bir bedeli var ve bedeli açıkça söylemekte fayda var.
+
+Bir sağlayıcıyı kendiniz bulup parasını ödemeniz gerekir; paket halinde hiçbir
+şey gelmez. Bir kanal eksikse ya da bir yayın güvenilmezse uygulama bunu
+düzeltemez — o, sağlayıcınızla yapacağınız bir konuşmadır. Ve analitik
+olmadığında, uygulamayı yapanlar bir şeyin bozulduğunu bir gösterge kırmızıya
+döndüğünde değil, biri onlara yazdığında öğrenir.
+
+Karşılığında uygulamanın akşamınız hakkında bir şey bilmek için ticari bir sebebi
+kalmaz; istenmesi halinde de verecek verisi olmaz.
+
+## Bir uygulamanın gerçekten böyle çalıştığı nasıl anlaşılır
+
+İddiayı dile getirmek kolay. Taklit etmesi zor olan birkaç şey var:
+
+- **Oturum açmadan çalışıyor mu?** Oynatmak için hesap gerekiyorsa, hesabı
+  isteyen şey oynatmaktan başka bir şeydir.
+- **Neyle konuşuyor?** Listeyi sizin getirdiğiniz bir oynatıcı sağlayıcınıza,
+  rehber adresinize ve — yalnızca siz açtıysanız — kendi eşitleme hizmetine
+  ulaşmalı. Başka hiçbir yere.
+- **Gizlilik politikası bir liste mi, bir duruş mu?** “Deneyiminizi iyileştirmek
+  için bazı bilgileri toplayabiliriz” bir duruştur. Toplanan alanların eksiksiz
+  dökümü ise bir taahhüttür.
+- **Giriş bilgilerinizi nasıl tutuyor?** Bir sağlayıcı parolasını, uygulamayı
+  sunan tarafın geri okuyabileceği bir biçimde saklamak, geri kalanın çoğunu boşa
+  çıkarır.
+
+Bunlar sağlanıyorsa uygulama, izlediğinizi gözleyen bir taraf değil, listenizin
+okuyucusudur — [zaten bir oynatıcının olması gereken de tam olarak
+budur](/tr/blog/iptv-oynatici-ne-yapar/).

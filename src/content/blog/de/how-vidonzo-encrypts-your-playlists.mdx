@@ -1,0 +1,106 @@
+---
+title: "Warum ein Player Ihre Playlist-Zugangsdaten verschlüsseln sollte"
+description: "Ihr Anbieter-Login ist Ihr Abo. Das ist der Maßstab, den ein Player beim Aufbewahren erfüllen sollte — und so erfüllt Vidonzo ihn."
+urlSlug: playlist-zugangsdaten-verschluesseln
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privatsphäre", "technik"]
+keywords: ["iptv zugangsdaten sicher speichern", "xtream codes passwort sicherheit", "playlist verschlüsselt speichern", "ende zu ende verschlüsselung iptv"]
+heroImageAlt: "Ein gespeicherter Playlist-Eintrag als Zeile: ein Name, eine Art und ein unlesbarer Block Chiffretext."
+---
+
+Ihre Xtream-Zugangsdaten sind praktisch Ihr bezahltes Abo. Wer sie hat, kann auf
+Ihrem Konto mitschauen, Sie in eine Drosselung laufen lassen oder dafür sorgen,
+dass Ihr Zugang gesperrt wird. Damit sind sie das Empfindlichste, womit ein
+Player überhaupt umgeht — und dasjenige, bei dem seine Hersteller am wenigsten
+Interesse daran haben sollten, es lesen zu können.
+
+Der Maßstab, auf dem sich zu bestehen lohnt, ist leicht formuliert und unbequem zu
+erfüllen: Die Zugangsdaten sollten für die Leute, die den Dienst betreiben,
+unlesbar sein und nicht bloß durch deren guten Willen geschützt. Kann ein
+Hersteller Ihr Anbieterpasswort lesen, dann kann es auch jeder, der diesen
+Hersteller kompromittiert, und ebenso jeder, der ihn dazu zwingen kann.
+
+So erfüllt Vidonzo diesen Maßstab, ausführlich genug zum Nachprüfen.
+
+## Die Aufteilung
+
+Nicht alles braucht dieselbe Behandlung. Favoriten über Geräte hinweg
+abzugleichen ist nützlich und unspektakulär; ein Anbieterpasswort abzugleichen
+ist weder das eine noch das andere. Entsprechend teilen wir die Daten auf:
+
+**Ende-zu-Ende-verschlüsselt**: Ihr Xtream-Host, Benutzername und Passwort sowie
+jede M3U-Quell-URL.
+
+**Im Klartext gespeichert, geschützt durch Zugriffsregeln pro Benutzer**:
+Favoriten, Wiedergabestand, App-Einstellungen und der Name, den Sie einer
+Playlist gegeben haben — das sind Ihre eigenen Worte und kein Geheimnis.
+
+Diese Aufteilung ist Absicht. Favoriten zu verschlüsseln brächte fast nichts und
+würde dazu führen, dass ein neu hinzugefügtes Gerät nichts Brauchbares anzeigt,
+solange es nicht entsperrt ist.
+
+## Wie die Verschlüsselung funktioniert
+
+Ein zufälliger 256-Bit-**Datenschlüssel** entsteht auf Ihrem Gerät — nie auf
+einem Server. Jeder Quelleneintrag wird mit AES-256-GCM unter diesem Schlüssel
+verschlüsselt, mit einer eigenen Nonce je Eintrag.
+
+Der Datenschlüssel selbst wird anschließend eingepackt: Ihr Sync-Passwort läuft
+durch **Argon2id**, daraus entsteht ein Schlüssel zum Verschlüsseln von
+Schlüsseln, und mit dem wird der Datenschlüssel verschlüsselt. Hochgeladen wird
+nur das eingepackte Ergebnis. Das Sync-Passwort selbst geht nie über das Netz.
+
+Was unsere Datenbank zu einer Playlist hält, ist ein Name, eine Art und ein Block
+Chiffretext. Auf dem Server liegt kein Schlüssel, mit dem sich das entschlüsseln
+ließe.
+
+## Ein zweites Gerät hinzufügen
+
+Das interessante Problem ist nicht die Verschlüsselung. Es ist die Frage, wie der
+Datenschlüssel auf Ihr nächstes Gerät kommt, ohne je im Klartext verschickt zu
+werden.
+
+1. Das neue Gerät meldet sich an. Favoriten und Wiedergabestand erscheinen sofort
+   — sie waren nie verschlüsselt.
+2. Playlists erscheinen als **gesperrt**.
+3. Das neue Gerät erzeugt ein flüchtiges X25519-Schlüsselpaar und zeigt einen
+   QR-Code.
+4. Ein bereits entsperrtes Gerät scannt ihn und bittet Sie um Bestätigung.
+5. Das entsperrte Gerät leitet über ECDH ein gemeinsames Geheimnis ab,
+   verschlüsselt damit den Datenschlüssel und lädt diesen versiegelten Block hoch.
+6. Das neue Gerät entschlüsselt ihn mit seinem privaten Schlüssel und legt das
+   Ergebnis in der iOS-Keychain oder im Android-Keystore ab.
+
+Zu keinem Zeitpunkt hält der Server etwas, das er öffnen könnte.
+
+## Der Teil, den wir nicht abmildern können
+
+**Verlieren Sie Ihr Sync-Passwort und ist kein entsperrtes Gerät mehr übrig, sind
+Ihre Playlists weg.** Nicht vorenthalten — mathematisch nicht verfügbar. Wir
+können es nicht zurücksetzen, weil es auf unserer Seite nichts zurückzusetzen
+gibt.
+
+Das ist der ehrliche Handel echter Ende-zu-Ende-Verschlüsselung, und jedes
+Produkt, das sie behauptet, geht diesen Handel entweder ein oder betreibt sie
+nicht. Die App sagt das unmissverständlich in dem Moment, in dem Sie das Passwort
+festlegen, statt es auf einer Richtlinienseite zu vergraben.
+
+Eine Playlist neu hinzuzufügen dauert eine Minute. Das ist der Weg zurück, und
+wir bieten lieber diesen an, als einen Schlüssel zu halten, zu dessen Gebrauch man
+uns zwingen könnte.
+
+## Wie sich das von außen prüfen lässt
+
+Sie müssen die Kryptografie nicht auf Treu und Glauben hinnehmen, um die
+Behauptung auf Plausibilität abzuklopfen. Ein Player, der Ihre Zugangsdaten
+tatsächlich nicht lesen kann, kann sie Ihnen nicht per E-Mail zurückschicken,
+kann sie in keinem Support-Werkzeug anzeigen und kann sie nicht
+wiederherstellen, wenn Sie das Passwort vergessen, das sie schützt. Wird eines
+davon angeboten, liegt der Schlüssel auf deren Seite.
+
+Es ist dieselbe Überlegung, die sich durch
+[das Modell der mitgebrachten Playlist](/de/blog/eigene-playlist-mitbringen/)
+zieht: Entscheidend ist, wozu ein Hersteller fähig ist, nicht was er verspricht.
+Und welches [Format Ihr Anbieter Ihnen gegeben hat](/de/blog/xtream-codes-oder-m3u/)
+— die Zugangsdaten dahinter verdienen dieselbe Behandlung.

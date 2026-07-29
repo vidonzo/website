@@ -1,0 +1,86 @@
+---
+title: "M3U vs M3U8: what the file extensions actually mean"
+description: "The extra 8 is about text encoding, not quality. Here is what really separates the two, and why one of them shows your channel names correctly."
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ['playlists', 'engineering']
+keywords: ['m3u vs m3u8', 'm3u8 file', 'difference m3u m3u8', 'utf-8 playlist']
+heroImageAlt: "The same channel list shown twice, once with mangled accented characters and once rendered correctly."
+---
+
+Providers hand out links ending in `.m3u` and links ending in `.m3u8`, sometimes
+both for the same subscription, and rarely explain the difference. The common
+guesses — that one is newer, or higher quality, or "the HD one" — are all wrong.
+
+The `8` stands for **UTF-8**. That is the entire difference in the file format,
+and it is smaller and more useful than the folklore suggests.
+
+## Both are the same kind of file
+
+Open either one in a text editor and you see the same thing: a header line, then
+pairs of lines, one describing a channel and one giving its address.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+That is it. An M3U playlist is a plain-text index — names and addresses, nothing
+more. It carries no video, no login, and no live connection to your provider. It
+is a snapshot of what existed the moment you fetched it, which is the trait that
+really distinguishes it from
+[the Xtream Codes API](/blog/xtream-codes-vs-m3u/).
+
+## What the 8 changes
+
+The original M3U specification predates the web's settlement on UTF-8. Text was
+stored in whatever local encoding the machine happened to use, which worked
+perfectly until a file crossed a border.
+
+`.m3u8` declares the file to be UTF-8. Practically, that means every channel name
+survives the trip: Arabic, Persian, Greek, Thai, Cyrillic, Japanese, and the
+accented characters in French, Turkish, Polish or Vietnamese. With a plain `.m3u`
+whose encoding the player has to guess, those names arrive as question marks or
+that unmistakable run of mojibake — `Ã©` where an `é` should be.
+
+So if a provider offers both, take the `.m3u8`. Nothing else about the stream
+changes, and your channel list becomes readable.
+
+## The other `.m3u8` you will meet
+
+There is a second, unrelated reason to see the extension, and it causes real
+confusion.
+
+**HLS** — the streaming protocol most IPTV servers use — also uses M3U8 files.
+When you play a channel, the player fetches a small `.m3u8` manifest listing the
+next few seconds of video as separate segments, and re-fetches it as playback
+continues. This is why a live stream can start mid-broadcast and adapt to your
+connection.
+
+So `.m3u8` can mean two different things:
+
+- **Your subscription playlist** — hundreds or thousands of channels, one line
+  each. This is the link you paste into a player.
+- **A stream manifest** — one channel, listing its segments. The player fetches
+  these itself while you watch; you never paste one.
+
+Both are M3U-format text files. If you paste a stream manifest where a playlist
+belongs, you get a "playlist" with a single unnamed entry — a common and easily
+fixed mix-up.
+
+## Which one to give your player
+
+Any competent player reads both, so this is a small decision:
+
+- **Prefer `.m3u8`** when the choice exists. Correct channel names, no downside.
+- **Use `.m3u`** when it is what you were given. It works; expect the occasional
+  mangled name in non-Latin channel lists.
+- **Neither affects quality.** Resolution and bitrate are decided by your
+  provider's stream, not by the extension on the index that points at it.
+
+Whichever you hold, the file is a list of addresses and the player is a reader of
+that list. When a stream stutters, the index is almost never the culprit — it is
+[the path between you and the server](/blog/fix-iptv-buffering/). And if your
+provider offers Xtream credentials as well, those give you categories, series,
+and a programme guide that a flat file cannot.

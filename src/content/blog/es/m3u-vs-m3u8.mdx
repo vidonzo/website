@@ -1,0 +1,90 @@
+---
+title: "M3U o M3U8: qué significan en realidad esas extensiones"
+description: "El 8 va de codificación de texto, no de calidad. Esto es lo que de verdad separa a los dos y por qué uno muestra bien los nombres de tus canales."
+urlSlug: diferencia-m3u-y-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["listas", "ingeniería"]
+keywords: ["diferencia entre m3u y m3u8", "qué es un archivo m3u8", "m3u o m3u8", "lista m3u8 utf-8"]
+heroImageAlt: "La misma lista de canales mostrada dos veces: en una las tildes salen rotas y en la otra se leen bien."
+---
+
+Los proveedores reparten enlaces que acaban en `.m3u` y enlaces que acaban en
+`.m3u8`, a veces los dos para la misma suscripción, y casi nunca explican la
+diferencia. Las suposiciones habituales —que uno es más nuevo, o de más calidad, o
+«el de HD»— son todas falsas.
+
+El `8` viene de **UTF-8**. Esa es toda la diferencia en el formato de archivo, y es
+más pequeña y más útil de lo que sugiere la leyenda.
+
+## Los dos son el mismo tipo de archivo
+
+Abre cualquiera de los dos en un editor de texto y verás lo mismo: una línea de
+cabecera y después pares de líneas, una que describe un canal y otra que da su
+dirección.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Ya está. Una lista M3U es un índice de texto plano: nombres y direcciones, nada
+más. No lleva vídeo, ni acceso, ni conexión en vivo con tu proveedor. Es una foto
+fija de lo que existía en el momento en que la descargaste, y ese es el rasgo que
+de verdad la separa de [la API de Xtream Codes](/es/blog/xtream-codes-o-m3u/).
+
+## Qué cambia el 8
+
+La especificación original de M3U es anterior a que la web se asentara en UTF-8. El
+texto se guardaba en la codificación local que usara cada máquina, algo que
+funcionaba de maravilla hasta que un archivo cruzaba una frontera.
+
+`.m3u8` declara que el archivo es UTF-8. En la práctica, eso significa que todos los
+nombres de canal sobreviven al viaje: árabe, persa, griego, tailandés, cirílico,
+japonés, las tildes y la eñe del español y los caracteres acentuados del francés,
+el turco, el polaco o el vietnamita. Con un `.m3u` a secas, cuya codificación el
+reproductor tiene que adivinar, esos nombres llegan como interrogantes o como esa
+ristra inconfundible de caracteres rotos: `Ã©` donde debería haber una `é`.
+
+Así que, si tu proveedor ofrece los dos, coge el `.m3u8`. No cambia nada más del
+stream y tu lista de canales pasa a ser legible.
+
+## El otro `.m3u8` con el que te vas a topar
+
+Hay una segunda razón, sin relación con la anterior, para encontrarte esa
+extensión, y provoca confusiones reales.
+
+**HLS** —el protocolo de streaming que usan la mayoría de servidores IPTV— también
+usa archivos M3U8. Cuando pones un canal, el reproductor descarga un pequeño
+manifiesto `.m3u8` que enumera los siguientes segundos de vídeo repartidos en
+segmentos, y lo vuelve a pedir a medida que avanza la reproducción. Por eso un
+directo puede empezar a mitad de emisión y adaptarse a tu conexión.
+
+Entonces `.m3u8` puede significar dos cosas distintas:
+
+- **Tu lista de suscripción**: cientos o miles de canales, uno por línea. Es el
+  enlace que pegas en el reproductor.
+- **Un manifiesto de stream**: un solo canal, con sus segmentos. Estos los pide el
+  reproductor por su cuenta mientras ves la tele; tú nunca pegas uno.
+
+Los dos son archivos de texto en formato M3U. Si pegas un manifiesto de stream
+donde va una lista, te queda una «lista» con una sola entrada sin nombre: una
+confusión frecuente y de arreglo fácil.
+
+## Cuál darle a tu reproductor
+
+Cualquier reproductor competente lee los dos, así que es una decisión menor:
+
+- **Prefiere `.m3u8`** cuando puedas elegir. Nombres de canal correctos y ninguna
+  pega.
+- **Usa `.m3u`** cuando sea lo que te han dado. Funciona; cuenta con algún nombre
+  roto de vez en cuando en listas con alfabetos no latinos.
+- **Ninguno de los dos afecta a la calidad.** La resolución y el bitrate los decide
+  el stream de tu proveedor, no la extensión del índice que apunta hacia él.
+
+Tengas el que tengas, el archivo es una lista de direcciones y el reproductor es
+quien la lee. Cuando un stream se entrecorta, el índice casi nunca es el culpable;
+lo es [el camino entre tú y el servidor](/es/blog/solucionar-cortes-iptv/). Y si tu
+proveedor también te da accesos de Xtream, esos te dan categorías, series y una
+guía de programación que un archivo plano no puede ofrecer.

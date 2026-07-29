@@ -1,0 +1,106 @@
+---
+title: "Pourquoi un lecteur devrait chiffrer vos identifiants de playlist"
+description: "Vos identifiants de fournisseur sont votre abonnement. Voici l'exigence qu'un lecteur devrait tenir pour les conserver, et comment Vidonzo s'y tient."
+urlSlug: pourquoi-chiffrer-vos-identifiants
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["confidentialite", "technique"]
+keywords: ["sécuriser identifiants iptv", "chiffrement playlist iptv", "mot de passe xtream sécurité", "playlist chiffrée de bout en bout"]
+heroImageAlt: "Une fiche de playlist enregistrée, réduite à un libellé, un type et un bloc de texte chiffré illisible."
+---
+
+Vos identifiants Xtream sont, de fait, votre abonnement payant. Quiconque les
+détient peut regarder sur votre compte, vous faire brider, ou vous faire couper
+l'accès. C'est donc l'élément le plus sensible qu'un lecteur manipule — et celui
+que ses concepteurs devraient le moins vouloir être en mesure de lire.
+
+L'exigence sur laquelle il vaut la peine d'insister est simple à énoncer et
+malaisée à atteindre : l'identifiant doit être illisible pour les personnes qui
+exploitent le service, et pas seulement protégé par leurs bonnes intentions. Si
+un éditeur peut lire le mot de passe de votre fournisseur, alors quiconque
+compromet cet éditeur le peut aussi, tout comme quiconque est en mesure de l'y
+contraindre.
+
+Voici comment Vidonzo tient cette exigence, avec assez de détails pour être
+vérifié.
+
+## La séparation
+
+Tout n'appelle pas le même traitement. Synchroniser ses favoris entre plusieurs
+appareils est utile et sans enjeu ; synchroniser le mot de passe d'un fournisseur
+n'est ni l'un ni l'autre. Nous séparons donc les données en conséquence :
+
+**Chiffré de bout en bout** : votre hôte Xtream, votre nom d'utilisateur et votre
+mot de passe, ainsi que toute URL de source M3U.
+
+**Stocké en clair, protégé par des règles d'accès par utilisateur** : les favoris,
+la progression de lecture, les réglages de l'application, et le nom que vous avez
+donné à une playlist — qui est fait de vos propres mots, et n'est pas un secret.
+
+Cette séparation est délibérée. Chiffrer les favoris n'apporterait presque rien
+et empêcherait un appareil nouvellement ajouté d'afficher quoi que ce soit
+d'utile tant qu'il n'est pas déverrouillé.
+
+## Comment fonctionne le chiffrement
+
+Une **clé de données** aléatoire de 256 bits est générée sur votre appareil —
+jamais sur un serveur. Chaque fiche de source est chiffrée en AES‑256‑GCM sous
+cette clé, avec un nonce unique par fiche.
+
+La clé de données est ensuite elle-même enveloppée : votre mot de passe de
+synchronisation passe par **Argon2id** pour en dériver une clé de chiffrement de
+clé, et la clé de données est chiffrée avec celle-ci. Seul le résultat enveloppé
+est envoyé. Le mot de passe de synchronisation ne traverse jamais le réseau.
+
+Ce que notre base de données conserve pour une playlist, c'est un libellé, un
+type et un bloc de texte chiffré. Il n'existe sur le serveur aucune clé
+permettant de le déchiffrer.
+
+## Ajouter un deuxième appareil
+
+Le problème intéressant n'est pas le chiffrement ; c'est de faire parvenir la clé
+de données à votre appareil suivant sans jamais l'envoyer en clair.
+
+1. Le nouvel appareil se connecte. Les favoris et la progression apparaissent
+   immédiatement — ils n'ont jamais été chiffrés.
+2. Les playlists s'affichent comme **verrouillées**.
+3. Le nouvel appareil génère une paire de clés X25519 éphémère et affiche un
+   QR code.
+4. Un appareil déjà déverrouillé le scanne et vous demande de confirmer.
+5. L'appareil déverrouillé dérive un secret partagé par ECDH, chiffre la clé de
+   données avec, et envoie ce bloc scellé.
+6. Le nouvel appareil le déchiffre avec sa clé privée et range le résultat dans
+   le Trousseau iOS ou le Keystore Android.
+
+À aucun moment le serveur ne détient quelque chose qu'il puisse ouvrir.
+
+## Le point que nous ne pouvons pas adoucir
+
+**Si vous perdez votre mot de passe de synchronisation et qu'il ne vous reste
+aucun appareil déverrouillé, vos playlists sont perdues.** Pas retenues :
+mathématiquement inaccessibles. Nous ne pouvons pas le réinitialiser, parce qu'il
+n'y a rien à réinitialiser de notre côté.
+
+C'est le compromis honnête d'un véritable chiffrement de bout en bout, et tout
+produit qui s'en réclame soit accepte ce compromis, soit ne le pratique pas
+vraiment. L'application le dit sans détour au moment où vous définissez ce mot de
+passe, plutôt que de l'enfouir dans une page de conditions.
+
+Ré-ajouter une playlist prend une minute. C'est cela, le chemin de récupération,
+et nous préférons l'offrir plutôt que de détenir une clé qu'on pourrait nous
+contraindre à utiliser.
+
+## À quoi cela ressemble vu de l'extérieur
+
+Vous n'avez pas à croire la cryptographie sur parole pour éprouver
+l'affirmation. Un lecteur réellement incapable de lire vos identifiants ne peut
+pas proposer de vous les renvoyer par e-mail, ne peut pas les afficher dans un
+outil de support, et ne peut pas les récupérer quand vous oubliez le mot de passe
+qui les protège. Si l'un de ces services est proposé, c'est que la clé est de
+leur côté.
+
+C'est le même raisonnement qui traverse
+[le modèle « apportez votre playlist »](/fr/blog/apportez-votre-playlist/) :
+juger ce dont un éditeur est capable, pas ce qu'il promet. Et quel que soit
+[le format que votre fournisseur vous a remis](/fr/blog/xtream-codes-ou-m3u/),
+l'identifiant qui se trouve derrière mérite le même traitement.

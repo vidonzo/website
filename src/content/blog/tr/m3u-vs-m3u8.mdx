@@ -1,0 +1,89 @@
+---
+title: "M3U ile M3U8 arasındaki fark: uzantı aslında ne anlatır"
+description: "Sondaki 8 kaliteyle değil, metin kodlamasıyla ilgili. İkisini gerçekte ne ayırıyor ve neden biri kanal adlarınızı doğru gösteriyor?"
+urlSlug: m3u-ile-m3u8-farki
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["oynatma-listesi", "teknik"]
+keywords: ["m3u m3u8 farkı", "m3u8 nedir", "m3u dosyası nedir", "iptv m3u8 bağlantısı"]
+heroImageAlt: "Aynı kanal listesi iki kez gösteriliyor: birinde Türkçe harfler bozuk çıkmış, diğerinde düzgün görünüyor."
+---
+
+Sağlayıcılar bazen aynı abonelik için hem `.m3u` hem `.m3u8` ile biten
+bağlantılar verir ve aradaki farkı pek açıklamaz. Yaygın tahminler — birinin daha
+yeni, daha kaliteli ya da “HD olanı” olduğu — hepsi yanlış.
+
+`8`, **UTF-8** demek. Dosya biçimindeki farkın tamamı bu; ortalıkta dolaşan
+söylentilerin ima ettiğinden hem daha küçük hem daha işe yarar bir fark.
+
+## İkisi de aynı türden dosya
+
+Hangisini bir metin düzenleyicide açarsanız açın aynı şeyi görürsünüz: bir başlık
+satırı, ardından ikişerli satırlar — biri kanalı tarif eder, diğeri adresini
+verir.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Hepsi bu. Bir M3U oynatma listesi düz metinden oluşan bir dizindir — adlar ve
+adresler, fazlası değil. İçinde video yoktur, giriş yoktur, sağlayıcınızla canlı
+bir bağlantı yoktur. Onu çektiğiniz andaki durumun fotoğrafıdır ve
+[Xtream Codes API'sinden](/tr/blog/xtream-codes-mi-m3u-mu/) asıl bu özelliğiyle
+ayrılır.
+
+## 8 neyi değiştirir
+
+Özgün M3U tanımı, web'in UTF-8'de karar kılmasından öncesine dayanır. Metin,
+makinenin o an kullandığı yerel kodlamayla saklanırdı; bu da dosya bir sınırı
+geçene kadar kusursuz çalışırdı.
+
+`.m3u8` dosyanın UTF-8 olduğunu bildirir. Pratikte bu, her kanal adının yolculuğu
+sağ salim tamamlaması demek: Arapça, Farsça, Yunanca, Tayca, Kiril, Japonca ve
+Türkçe, Fransızca, Lehçe ya da Vietnamcadaki işaretli harfler. Kodlamasını
+oynatıcının tahmin etmek zorunda kaldığı düz bir `.m3u` dosyasında ise bu adlar
+soru işareti olarak ya da o tanıdık bozuk karakter dizisi halinde gelir — `ş`
+görmeniz gerekirken `ÅŸ` görürsünüz.
+
+Yani sağlayıcınız ikisini birden sunuyorsa `.m3u8` olanı alın. Yayınla ilgili
+başka hiçbir şey değişmez, kanal listeniz de okunur hale gelir.
+
+## Karşınıza çıkacak diğer `.m3u8`
+
+Bu uzantıyı görmenizin ikinci ve bununla ilgisi olmayan bir sebebi daha var;
+gerçekten kafa karıştırıyor.
+
+**HLS** — çoğu IPTV sunucusunun kullandığı yayın protokolü — de M3U8 dosyaları
+kullanır. Bir kanalı oynattığınızda oynatıcı, videonun sonraki birkaç saniyesini
+ayrı parçalar halinde listeleyen küçük bir `.m3u8` manifesti çeker ve izleme
+sürdükçe onu yeniden çeker. Canlı bir yayının, yayın çoktan başlamışken araya
+girebilmesinin ve bağlantınıza uyum sağlayabilmesinin sebebi budur.
+
+Yani `.m3u8` iki ayrı şey anlamına gelebilir:
+
+- **Abonelik listeniz** — yüzlerce ya da binlerce kanal, her biri tek satır.
+  Oynatıcıya yapıştırdığınız bağlantı budur.
+- **Bir yayın manifesti** — tek bir kanal, kendi parçalarını listeler. Siz
+  izlerken oynatıcı bunları kendisi çeker; hiçbir zaman elle yapıştırmazsınız.
+
+İkisi de M3U biçiminde metin dosyasıdır. Oynatma listesinin yerine bir yayın
+manifesti yapıştırırsanız, tek ve adsız bir kayıttan oluşan bir “liste” elde
+edersiniz — sık yaşanan ve kolayca düzeltilen bir karışıklık.
+
+## Oynatıcınıza hangisini vermeli
+
+Yetkin her oynatıcı ikisini de okur, yani bu küçük bir karar:
+
+- **Seçme şansınız varsa `.m3u8`.** Kanal adları doğru gelir, kötü tarafı yok.
+- **Elinize `.m3u` verildiyse onu kullanın.** Çalışır; Latin dışı kanal
+  listelerinde ara sıra bozuk bir ad görmeyi bekleyin.
+- **Hiçbiri kaliteyi etkilemez.** Çözünürlüğe ve bit hızına, yayına işaret eden
+  dizinin uzantısı değil, sağlayıcınızın yayını karar verir.
+
+Elinizde hangisi olursa olsun, dosya bir adres listesidir ve oynatıcı o listenin
+okuyucusudur. Bir yayın takıldığında suçlu neredeyse hiçbir zaman dizin değildir;
+[sizinle sunucu arasındaki yoldur](/tr/blog/iptv-donma-sorunu-cozumu/). Sağlayıcınız
+ayrıca Xtream giriş bilgisi de veriyorsa, düz bir dosyanın veremeyeceği
+kategorileri, dizileri ve bir yayın rehberini de elde edersiniz.

@@ -1,0 +1,92 @@
+---
+title: "«Porta la tua playlist»: il modello di lettore che rispetta la privacy"
+description: "Un lettore che non fornisce contenuti non ha nulla da imparare su di te. È questa singola scelta architetturale a decidere quasi tutto ciò che un'app sa."
+urlSlug: porta-la-tua-playlist
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacy", "prodotto"]
+keywords: ["lettore iptv privacy", "app iptv senza tracciamento", "lettore m3u senza account", "app iptv che non registra cosa guardi"]
+heroImageAlt: "Un file di playlist che passa dritto dal fornitore allo schermo, con l'app disegnata come una cornice vuota che attraversa."
+---
+
+La maggior parte delle app che mettono video sul tuo schermo è, sotto sotto, un
+catalogo con un lettore attaccato. Il catalogo è il vero mestiere: decide che
+cosa puoi guardare, ha bisogno di un account per sapere chi sei e impara che cosa
+guardi, perché impararlo è il modo in cui il catalogo migliora e in cui si vende
+la pubblicità.
+
+Un lettore in cui la playlist la porti tu ribalta lo schema. Si installa senza
+niente. La lista la fornisci tu —
+[credenziali Xtream o un link M3U](/it/blog/xtream-codes-o-m3u/) di un fornitore
+che già paghi — e tutto il lavoro dell'app è leggerla bene. Non c'è un catalogo,
+perché non c'è niente da catalogare.
+
+Non è una posizione di marketing. È un'architettura, e le architetture hanno
+conseguenze che puoi verificare.
+
+## Che cosa viene a mancare
+
+**Non serve un account per guardare.** L'accesso esiste solo per sincronizzare i
+tuoi dati tra i tuoi dispositivi. Saltalo e l'app funziona lo stesso in tutto,
+perché non c'è nessun server che decide che cosa ti è permesso vedere.
+
+**Non esiste una cronologia di visione su un server.** Il flusso va dal tuo
+fornitore direttamente al tuo dispositivo. Il fatto che alle undici di sera tu
+abbia aperto un certo canale non passa da nessuno nel mezzo: non per una scelta
+di regolamento, ma perché non c'è una strada su cui possa viaggiare.
+
+**Non c'è un motore di raccomandazioni.** «Raccomandazioni» è il nome gentile di
+un modello del tuo comportamento. Un lettore che non sceglie i tuoi contenuti non
+ha motivo di costruirlo.
+
+**Non c'è niente da monetizzare guardandoti.** Nessun SDK pubblicitario, nessuna
+libreria di analytics. L'argomento abituale a loro favore è che finanziano il
+prodotto, e un lettore che non fornisce contenuti ha molto meno da finanziare: i
+soldi in questa storia sono quelli che già versi al tuo fornitore, e con l'app
+non c'entrano nulla.
+
+## Che cosa resta, e dove sta
+
+Portarsi la propria playlist non significa rinunciare alle comodità. Significa
+essere precisi su dove stanno.
+
+Preferiti, punto di visione e impostazioni sono tuoi e servono su più
+dispositivi, quindi si sincronizzano in chiaro, protetti dalle normali regole di
+accesso per utente. Le credenziali del fornitore sono un'altra classe di segreto
+— *sono* il tuo abbonamento — quindi vengono
+[cifrate sul dispositivo prima ancora di essere salvate](/it/blog/perche-cifrare-le-credenziali/),
+e quello che arriva a un server è un blocco di cui lì nessuno ha la chiave.
+
+Due tipi di dati, due trattamenti, decisi da che cosa sono davvero quei dati.
+
+## Lo scambio che stai accettando
+
+Questo modello non è privo di costi, e vale la pena dirli con chiarezza.
+
+Il fornitore devi trovartelo e pagartelo da solo: non è incluso niente. Se manca
+un canale, o se un flusso è inaffidabile, l'app non può rimediare: è una
+conversazione da fare con il tuo fornitore. E senza analytics, chi sviluppa l'app
+scopre che qualcosa è rotto quando una persona glielo scrive, non quando una
+dashboard diventa rossa.
+
+In cambio, l'app non ha nessun motivo commerciale per sapere qualcosa delle tue
+serate, e non avrebbe dati da consegnare se mai le venissero chiesti.
+
+## Come capire se un'app funziona davvero così
+
+Dichiararlo è facile. Alcune cose sono più difficili da fingere:
+
+- **Funziona senza aver fatto l'accesso?** Se la riproduzione richiede un
+  account, l'account serve a qualcosa che non è la riproduzione.
+- **Con chi parla?** Un lettore di questo tipo dovrebbe contattare il tuo
+  fornitore, l'indirizzo della tua guida ai programmi e — solo se attivi la
+  sincronizzazione — il proprio servizio di sincronizzazione. Nient'altro.
+- **L'informativa sulla privacy è un elenco o una posa?** «Potremmo raccogliere
+  alcune informazioni per migliorare la tua esperienza» è una posa. Un elenco
+  esaustivo di campi è un impegno.
+- **Come conserva le tue credenziali?** Tenere la password di un fornitore in una
+  forma che chi sviluppa l'app può rileggere annulla buona parte del resto.
+
+Se queste condizioni reggono, l'app legge la tua lista invece di osservare quello
+che guardi, che poi è
+[tutto ciò che un lettore deve essere](/it/blog/cosa-fa-un-lettore-iptv/).

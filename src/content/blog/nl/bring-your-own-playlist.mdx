@@ -1,0 +1,95 @@
+---
+title: "‘Neem je eigen afspeellijst mee’: het spelermodel dat je privacy respecteert"
+description: "Een speler die zelf geen content levert, heeft niets over je te leren. Die ene architectuurkeuze bepaalt bijna alles wat een media-app van je weet."
+urlSlug: neem-je-eigen-afspeellijst-mee
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacy", "product"]
+keywords: ["privacyvriendelijke mediaspeler", "iptv speler zonder tracking", "eigen afspeellijst gebruiken", "iptv speler zonder reclame"]
+heroImageAlt: "Een afspeellijstbestand dat rechtstreeks van een provider naar een scherm gaat, met de app getekend als een leeg kader waar het doorheen loopt."
+---
+
+De meeste apps die video op je scherm zetten, zijn onder de motorkap een
+catalogus met een speler eraan vast. Die catalogus is het verdienmodel: hij
+bepaalt waar je naar kunt kijken, hij heeft een account nodig om te weten wie je
+bent, en hij leert waar je naar kijkt omdat dat leren nu juist is hoe de
+catalogus beter wordt en hoe de advertenties verkocht worden.
+
+Een speler waar jij je eigen afspeellijst in meeneemt, draait dat om. Hij wordt
+leeg geleverd. Jij levert de lijst —
+[Xtream-inloggegevens of een M3U-link](/nl/blog/xtream-codes-of-m3u/) van een
+provider die je toch al betaalt — en het hele werk van de app is die lijst goed
+lezen. Er is geen catalogus, want er valt niets te catalogiseren.
+
+Dat is geen marketingstandpunt. Het is een architectuur, en architecturen hebben
+gevolgen die je kunt controleren.
+
+## Wat er wegvalt
+
+**Je hebt geen account nodig om te kijken.** Inloggen bestaat alleen om je eigen
+gegevens tussen je eigen apparaten te synchroniseren. Sla je het over, dan werkt
+de app nog volledig, want er is geen server die bepaalt wat je te zien krijgt.
+
+**Er staat geen kijkgeschiedenis op een server.** De stream gaat van je provider
+rechtstreeks naar je apparaat. Welke zender je om elf uur 's avonds opende, komt
+bij niemand onderweg langs — niet vanwege een beleidsregel, maar omdat er geen
+route is waarlangs dat zou kunnen.
+
+**Er is geen aanbevelingsmachine.** Aanbevelingen zijn de beleefde naam voor een
+gedragsmodel van jou. Een speler die je content niet kiest, heeft geen reden om
+er een te bouwen.
+
+**Er valt niets te verdienen aan meekijken.** Geen advertentie-SDK, geen
+analyticsbibliotheek. Het gebruikelijke argument daarvoor is dat ze het product
+financieren, en een speler die zelf geen content levert heeft veel minder te
+financieren — het geld in dit plaatje is wat je je eigen provider al betaalt, en
+dat staat los van de app.
+
+## Wat je wel houdt, en waar het staat
+
+Je eigen afspeellijst meenemen betekent niet dat je zonder gemak moet leven. Het
+betekent precies zijn over waar dat gemak staat.
+
+Favorieten, kijkvoortgang en instellingen zijn van jou en zijn handig op
+meerdere apparaten, dus die synchroniseren in gewone vorm, beschermd door normale
+toegangsregels per gebruiker. Je inloggegevens bij de provider zijn een ander
+soort geheim — die *zijn* je abonnement — en worden daarom
+[op je eigen apparaat versleuteld voordat ze überhaupt worden opgeslagen](/nl/blog/waarom-een-speler-inloggegevens-versleutelt/);
+wat er op een server terechtkomt is een blok waar niemand daar een sleutel voor
+heeft.
+
+Twee soorten gegevens, twee behandelingen, bepaald door wat de gegevens werkelijk
+zijn.
+
+## De ruil die je aangaat
+
+Dit model is niet gratis, en het is goed om de kosten gewoon te benoemen.
+
+Je moet zelf een provider vinden en betalen; er zit niets bij inbegrepen.
+Ontbreekt een zender, of is een stream onbetrouwbaar, dan kan de app dat niet
+oplossen — dat is een gesprek met je provider. En zonder analytics komen de
+mensen die de app bouwen erachter dat er iets stuk is als iemand ze schrijft,
+niet als een dashboard rood kleurt.
+
+Daar staat tegenover dat de app geen enkel commercieel belang heeft bij het
+kennen van jouw avond, en geen gegevens heeft om af te staan als daar ooit om
+gevraagd zou worden.
+
+## Hoe je merkt of een app echt zo werkt
+
+De bewering is makkelijk gedaan. Een paar dingen zijn lastiger te veinzen:
+
+- **Werkt hij uitgelogd?** Heeft afspelen een account nodig, dan heeft iets
+  anders dan afspelen dat account nodig.
+- **Waar praat hij mee?** Een speler waar je je eigen lijst in meeneemt, hoort je
+  provider te bereiken, je gids-URL, en — alleen als je synchronisatie aanzet —
+  zijn eigen synchronisatiedienst. Verder niets.
+- **Is het privacybeleid een lijst of een houding?** ‘Wij kunnen bepaalde
+  gegevens verzamelen om je ervaring te verbeteren’ is een houding. Een
+  uitputtende opsomming van velden is een toezegging.
+- **Hoe bewaart hij je inloggegevens?** Een providerwachtwoord opslaan in een
+  vorm die de leverancier kan teruglezen, haalt een streep door de rest.
+
+Kloppen die punten, dan is de app een lezer van je lijst in plaats van een
+waarnemer van je kijkgedrag —
+[en meer hoeft een speler eigenlijk niet te zijn](/nl/blog/wat-een-iptv-speler-doet/).

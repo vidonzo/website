@@ -1,0 +1,103 @@
+---
+title: "Waarom een mediaspeler je inloggegevens hoort te versleutelen"
+description: "Je providerlogin is je abonnement. Dit is de norm waar een speler aan hoort te voldoen om hem te bewaren — en zo voldoet Vidonzo eraan."
+urlSlug: waarom-een-speler-inloggegevens-versleutelt
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privacy", "techniek"]
+keywords: ["iptv inloggegevens beveiligen", "versleutelde afspeellijst", "xtream wachtwoord veilig", "end-to-end versleutelde afspeellijst"]
+heroImageAlt: "Een opgeslagen afspeellijstrecord als een label, een soort en een onleesbaar blok versleutelde tekst."
+---
+
+Je Xtream-inloggegevens zijn in feite je betaalde abonnement. Wie ze heeft, kan
+op jouw account kijken, jou tegen een limiet aan laten lopen of je laten
+afsluiten. Daarmee zijn ze het gevoeligste wat een speler in handen krijgt — en
+juist het ding dat de makers ervan het minst zouden moeten kunnen lezen.
+
+De lat waar je op moet staan is simpel te formuleren en lastig te halen: de
+inloggegevens horen onleesbaar te zijn voor de mensen die de dienst draaien, en
+niet slechts beschermd door hun goede bedoelingen. Kan een leverancier je
+providerwachtwoord lezen, dan kan iedereen die die leverancier kraakt dat ook, en
+iedereen die hem daartoe kan dwingen.
+
+Zo voldoet Vidonzo aan die lat, met genoeg detail om het na te lopen.
+
+## De scheiding
+
+Niet alles heeft dezelfde behandeling nodig. Favorieten synchroniseren tussen
+apparaten is handig en verder onopvallend; een providerwachtwoord synchroniseren
+is geen van beide. We splitsen de gegevens daarnaar:
+
+**End-to-end versleuteld**: je Xtream-host, gebruikersnaam en wachtwoord, en elke
+M3U-bron-URL.
+
+**In platte tekst opgeslagen, beschermd door toegangsregels per gebruiker**:
+favorieten, kijkvoortgang, app-instellingen en het label dat je een afspeellijst
+gaf — dat zijn je eigen woorden, geen geheim.
+
+Die scheiding is bewust. Favorieten versleutelen zou vrijwel niets opleveren en
+zou een nieuw toegevoegd apparaat beletten iets nuttigs te tonen tot het is
+ontgrendeld.
+
+## Hoe de versleuteling werkt
+
+Op je apparaat wordt een willekeurige **datasleutel** van 256 bit gegenereerd —
+nooit op een server. Elk bronrecord wordt met AES‑256‑GCM onder die sleutel
+versleuteld, met een unieke nonce per record.
+
+De datasleutel zelf wordt daarna ingepakt: je synchronisatiewachtwoord gaat door
+**Argon2id** om er een sleutelversleutelende sleutel uit af te leiden, en daarmee
+wordt de datasleutel versleuteld. Alleen het ingepakte resultaat wordt geüpload.
+Het synchronisatiewachtwoord gaat nooit over het netwerk.
+
+Wat onze database van een afspeellijst bewaart, is een label, een soort en een
+blok versleutelde tekst. Er staat op de server geen sleutel om dat mee te
+ontsleutelen.
+
+## Een tweede apparaat toevoegen
+
+Het interessante probleem is niet de versleuteling; het is de datasleutel op je
+volgende apparaat krijgen zonder hem ooit onversleuteld te versturen.
+
+1. Het nieuwe apparaat logt in. Favorieten en voortgang staan er meteen — die
+   waren nooit versleuteld.
+2. Afspeellijsten worden als **vergrendeld** getoond.
+3. Het nieuwe apparaat genereert een tijdelijk X25519-sleutelpaar en toont een
+   QR-code.
+4. Een apparaat dat al ontgrendeld is, scant die en vraagt je om te bevestigen.
+5. Het ontgrendelde apparaat leidt via ECDH een gedeeld geheim af, versleutelt de
+   datasleutel daarmee en uploadt dat verzegelde blok.
+6. Het nieuwe apparaat ontsleutelt het met zijn privésleutel en bewaart het
+   resultaat in de iOS Keychain of de Android Keystore.
+
+Op geen enkel moment heeft de server iets in handen wat hij kan openen.
+
+## Het deel dat we niet mooier kunnen maken
+
+**Raak je je synchronisatiewachtwoord kwijt en heb je geen ontgrendeld apparaat
+meer over, dan zijn je afspeellijsten weg.** Niet achtergehouden — wiskundig
+onbereikbaar. Wij kunnen het niet resetten, want er valt aan onze kant niets te
+resetten.
+
+Dit is de eerlijke ruil van echte end-to-end-versleuteling, en elk product dat
+die claimt, gaat die ruil aan of doet het niet. De app zegt dat gewoon op het
+moment dat je het wachtwoord instelt, in plaats van het weg te stoppen in een
+beleidspagina.
+
+Een afspeellijst opnieuw toevoegen kost een minuut. Dat is het herstelpad, en dat
+bieden we liever aan dan een sleutel te bewaren die we gedwongen zouden kunnen
+worden te gebruiken.
+
+## Hoe dat er van buitenaf uitziet
+
+Je hoeft de cryptografie niet op goed vertrouwen aan te nemen om de bewering te
+toetsen. Een speler die je inloggegevens echt niet kan lezen, kan niet aanbieden
+ze je te mailen, kan ze niet tonen in een supporttool, en kan ze niet herstellen
+als je het wachtwoord vergeet dat ze beschermt. Wordt een van die drie wel
+aangeboden, dan ligt de sleutel aan hun kant.
+
+Het is dezelfde redenering die loopt door
+[het model waarin je je eigen afspeellijst meeneemt](/nl/blog/neem-je-eigen-afspeellijst-mee/):
+bepaal wat de leverancier kán, niet wat hij belooft. En welk
+[formaat je provider je ook gaf](/nl/blog/xtream-codes-of-m3u/), de
+inloggegevens erachter verdienen dezelfde behandeling.

@@ -1,0 +1,104 @@
+---
+title: "Perché un lettore multimediale dovrebbe cifrare le credenziali della playlist"
+description: "Le credenziali del tuo fornitore sono il tuo abbonamento. Ecco lo standard che un lettore dovrebbe rispettare per conservarle, e come lo rispetta Vidonzo."
+urlSlug: perche-cifrare-le-credenziali
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["privacy", "tecnica"]
+keywords: ["sicurezza credenziali iptv", "playlist cifrata", "password xtream sicura", "crittografia end-to-end playlist"]
+heroImageAlt: "Un record di playlist salvato, mostrato come un'etichetta, un tipo e un blocco illeggibile di testo cifrato."
+---
+
+Le tue credenziali Xtream sono, di fatto, l'abbonamento che paghi. Chi le ha in
+mano può guardare con il tuo account, farti limitare la banda o farti sospendere
+il servizio. Questo le rende la cosa più delicata che un lettore tocchi, e quella
+che chi lo sviluppa dovrebbe desiderare meno di tutte di poter leggere.
+
+L'asticella su cui vale la pena insistere si enuncia in fretta ed è scomoda da
+raggiungere: le credenziali devono risultare illeggibili a chi gestisce il
+servizio, non semplicemente protette dalle sue buone intenzioni. Se chi sviluppa
+l'app può leggere la password del tuo abbonamento, allora può farlo anche chi ne
+viola i sistemi, e anche chiunque abbia il potere di costringerla a consegnarla.
+
+Ecco come Vidonzo raggiunge quell'asticella, con abbastanza dettagli da poter
+verificare.
+
+## La divisione
+
+Non tutto ha bisogno dello stesso trattamento. Sincronizzare i preferiti tra
+dispositivi è utile e non ha niente di delicato; sincronizzare la password di un
+abbonamento non è né l'uno né l'altro. I dati li dividiamo di conseguenza:
+
+**Cifrati end-to-end**: host, nome utente e password Xtream, e l'eventuale URL di
+una sorgente M3U.
+
+**Salvati in chiaro, protetti da regole di accesso per utente**: preferiti, punto
+di visione, impostazioni dell'app e il nome che hai dato a una playlist, che sono
+parole tue e non un segreto.
+
+Questa divisione è voluta. Cifrare i preferiti non porterebbe quasi nulla e
+impedirebbe a un dispositivo appena aggiunto di mostrare qualcosa di utile finché
+non viene sbloccato.
+
+## Come funziona la cifratura
+
+Sul tuo dispositivo — mai su un server — viene generata una **chiave dati**
+casuale da 256 bit. Ogni record di sorgente viene cifrato con AES‑256‑GCM sotto
+quella chiave, con un nonce diverso per ciascun record.
+
+La chiave dati viene poi a sua volta avvolta: la tua password di sincronizzazione
+passa per **Argon2id**, che ne deriva una chiave di cifratura della chiave, e con
+quella la chiave dati viene cifrata. Viene caricato solo il risultato avvolto. La
+password di sincronizzazione non attraversa mai la rete.
+
+Di una playlist il nostro database conserva un'etichetta, un tipo e un blocco di
+testo cifrato. Sul server non c'è nessuna chiave con cui decifrarlo.
+
+## Aggiungere un secondo dispositivo
+
+Il problema interessante non è la cifratura: è portare la chiave dati sul
+dispositivo successivo senza mai spedirla in chiaro.
+
+1. Il nuovo dispositivo esegue l'accesso. Preferiti e avanzamento compaiono
+   subito: non erano cifrati.
+2. Le playlist appaiono **bloccate**.
+3. Il nuovo dispositivo genera una coppia di chiavi X25519 effimere e mostra un
+   codice QR.
+4. Un dispositivo già sbloccato lo inquadra e ti chiede conferma.
+5. Il dispositivo sbloccato deriva un segreto condiviso tramite ECDH, ci cifra la
+   chiave dati e carica quel blocco sigillato.
+6. Il nuovo dispositivo lo decifra con la propria chiave privata e ne conserva il
+   risultato nel Keychain di iOS o nel Keystore di Android.
+
+In nessun momento il server ha in mano qualcosa che possa aprire.
+
+## La parte che non possiamo addolcire
+
+**Se perdi la password di sincronizzazione e non ti resta nessun dispositivo
+sbloccato, le tue playlist sono perse.** Non trattenute: matematicamente
+irraggiungibili. Non possiamo reimpostarla, perché dalla nostra parte non c'è
+niente da reimpostare.
+
+È lo scambio onesto della vera cifratura end-to-end, e ogni prodotto che dichiara
+di farla o accetta questo scambio o non la sta facendo. L'app lo dice chiaramente
+nel momento in cui imposti la password, invece di seppellirlo in una pagina di
+condizioni.
+
+Riaggiungere una playlist richiede un minuto. È quello il percorso di recupero, e
+preferiamo offrire questo piuttosto che tenere una chiave che potremmo essere
+costretti a usare.
+
+## Come si verifica da fuori
+
+Non serve prendere per buona la crittografia per fare una verifica di buon senso.
+Un lettore che davvero non può leggere le tue credenziali non può offrirsi di
+rimandartele via email, non può mostrarle in uno strumento di assistenza e non
+può recuperarle quando dimentichi la password che le protegge. Se una di queste
+cose ti viene offerta, la chiave è dalla loro parte.
+
+È lo stesso ragionamento che attraversa
+[il modello in cui la playlist la porti tu](/it/blog/porta-la-tua-playlist/):
+guardare che cosa un'azienda è in grado di fare, non che cosa promette. E
+qualunque sia
+[il formato che ti ha dato il fornitore](/it/blog/xtream-codes-o-m3u/), la
+credenziale che ci sta dietro merita lo stesso trattamento.

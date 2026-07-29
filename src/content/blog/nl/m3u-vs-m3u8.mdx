@@ -1,0 +1,92 @@
+---
+title: "M3U of M3U8: wat die bestandsextensies echt betekenen"
+description: "De extra 8 gaat over tekstcodering, niet over kwaliteit. Dit is het echte verschil, en waarom er één je zendernamen goed weergeeft."
+urlSlug: m3u-of-m3u8-verschil
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["afspeellijsten", "techniek"]
+keywords: ["m3u of m3u8", "verschil m3u en m3u8", "m3u8 bestand", "utf-8 afspeellijst"]
+heroImageAlt: "Dezelfde zenderlijst twee keer naast elkaar, links met verhaspelde accenttekens en rechts correct weergegeven."
+---
+
+Providers delen links uit die eindigen op `.m3u` en links die eindigen op
+`.m3u8`, soms allebei voor hetzelfde abonnement, en leggen zelden uit wat het
+verschil is. De gebruikelijke gissingen — dat de een nieuwer is, of van betere
+kwaliteit, of ‘die met HD’ — kloppen geen van alle.
+
+De `8` staat voor **UTF-8**. Dat is het hele verschil in het bestandsformaat, en
+het is kleiner en nuttiger dan de verhalen doen vermoeden.
+
+## Het is twee keer hetzelfde soort bestand
+
+Open ze allebei in een teksteditor en je ziet hetzelfde: een kopregel, en daarna
+telkens twee regels — een die een zender beschrijft en een die het adres geeft.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Meer is het niet. Een M3U-afspeellijst is een index in platte tekst: namen en
+adressen, verder niets. Er zit geen video in, geen login en geen live verbinding
+met je provider. Het is een momentopname van wat er bestond toen je hem ophaalde,
+en juist die eigenschap onderscheidt hem van
+[de Xtream Codes-API](/nl/blog/xtream-codes-of-m3u/).
+
+## Wat die 8 verandert
+
+De oorspronkelijke M3U-specificatie is ouder dan de afspraak op het web om overal
+UTF-8 te gebruiken. Tekst werd opgeslagen in de lokale codering die de machine
+toevallig gebruikte, en dat werkte prima tot een bestand een grens overging.
+
+`.m3u8` verklaart het bestand tot UTF-8. In de praktijk betekent dat dat elke
+zendernaam de reis overleeft: Arabisch, Perzisch, Grieks, Thai, Cyrillisch,
+Japans, en de accenttekens in het Frans, Turks, Pools of Vietnamees. Bij een
+gewone `.m3u`, waarvan de speler de codering moet raden, komen die namen aan als
+vraagtekens of als die onmiskenbare reeks vervormde tekens — `Ã©` waar een `é`
+hoort te staan.
+
+Biedt je provider allebei aan, neem dan de `.m3u8`. Aan de stream verandert
+verder niets, en je zenderlijst wordt leesbaar.
+
+## De andere `.m3u8` die je tegenkomt
+
+Er is een tweede, losstaande reden om die extensie tegen te komen, en die zorgt
+voor echte verwarring.
+
+**HLS** — het streamingprotocol waar de meeste IPTV-servers mee werken — gebruikt
+ook M3U8-bestanden. Speel je een zender af, dan haalt de speler een klein
+`.m3u8`-manifest op met daarin de komende paar seconden video, opgedeeld in losse
+segmenten, en haalt hij dat manifest tijdens het kijken telkens opnieuw op.
+Daardoor kan een livestream midden in een uitzending starten en zich aanpassen
+aan je verbinding.
+
+`.m3u8` kan dus twee verschillende dingen betekenen:
+
+- **Je abonnementsafspeellijst** — honderden of duizenden zenders, één regel per
+  zender. Dit is de link die je in een speler plakt.
+- **Een streammanifest** — één zender, met daarin zijn segmenten. Die haalt de
+  speler zelf op terwijl je kijkt; zo'n link plak je nooit ergens in.
+
+Allebei zijn het tekstbestanden in M3U-formaat. Plak je een streammanifest waar
+een afspeellijst hoort, dan krijg je een ‘afspeellijst’ met één naamloos item —
+een veelvoorkomende vergissing die je zo rechtzet.
+
+## Wat je je speler het beste geeft
+
+Elke fatsoenlijke speler leest allebei, dus het is een kleine beslissing:
+
+- **Kies `.m3u8`** als je de keuze hebt. Correcte zendernamen, geen nadelen.
+- **Gebruik `.m3u`** als dat is wat je gekregen hebt. Het werkt; reken op een
+  enkele verhaspelde naam in niet-Latijnse zenderlijsten.
+- **Geen van beide beïnvloedt de kwaliteit.** Resolutie en bitrate worden bepaald
+  door de stream van je provider, niet door de extensie van de index die ernaar
+  wijst.
+
+Wat je ook in handen hebt, het bestand is een lijst met adressen en de speler is
+een lezer van die lijst. Hapert een stream, dan is de index vrijwel nooit de
+boosdoener — dat is
+[het pad tussen jou en de server](/nl/blog/iptv-buffering-oplossen/). En biedt je
+provider ook Xtream-inloggegevens aan, dan krijg je daarmee categorieën, series
+en een programmagids die een plat bestand niet kan leveren.

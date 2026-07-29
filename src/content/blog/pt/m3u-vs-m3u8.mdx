@@ -1,0 +1,94 @@
+---
+title: "M3U ou M3U8: o que a extensão do arquivo realmente significa"
+description: "O 8 a mais é sobre codificação de texto, não sobre qualidade. Veja o que de fato separa os dois e por que um deles exibe os nomes certos."
+urlSlug: m3u-ou-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["listas", "engenharia"]
+keywords: ["m3u ou m3u8", "diferença entre m3u e m3u8", "arquivo m3u8 o que é", "lista m3u8 utf-8"]
+heroImageAlt: "A mesma lista de canais mostrada duas vezes: uma com os acentos embaralhados e outra com os nomes exibidos corretamente."
+---
+
+Os provedores entregam links terminados em `.m3u` e links terminados em
+`.m3u8`, às vezes os dois para a mesma assinatura, e quase nunca explicam a
+diferença. Os palpites de sempre — que um é mais novo, ou de melhor qualidade,
+ou “o de HD” — estão todos errados.
+
+O `8` vem de **UTF-8**. Essa é a diferença inteira no formato do arquivo, e ela
+é menor e mais útil do que o folclore sugere.
+
+## Os dois são o mesmo tipo de arquivo
+
+Abra qualquer um dos dois em um editor de texto e você vê a mesma coisa: uma
+linha de cabeçalho e, depois, pares de linhas — uma descrevendo um canal e outra
+dando o endereço dele.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+É isso. Uma lista M3U é um índice de texto puro — nomes e endereços, nada além.
+Ela não carrega vídeo, não carrega login e não mantém conexão viva com o seu
+provedor. É uma fotografia do que existia no momento em que você a baixou, e é
+esse traço que de fato a separa da
+[API do Xtream Codes](/pt/blog/xtream-codes-ou-m3u/).
+
+## O que o 8 muda
+
+A especificação original do M3U é anterior ao momento em que a web se acomodou
+no UTF-8. O texto era gravado na codificação local que a máquina usasse, o que
+funcionava perfeitamente até o arquivo cruzar uma fronteira.
+
+O `.m3u8` declara que o arquivo é UTF-8. Na prática, isso significa que todo
+nome de canal sobrevive à viagem: árabe, persa, grego, tailandês, cirílico,
+japonês e os caracteres acentuados do português, do francês, do turco ou do
+vietnamita. Com um `.m3u` simples, cuja codificação o player precisa adivinhar,
+esses nomes chegam como pontos de interrogação ou naquela sequência
+inconfundível de caracteres embaralhados — `Ã§` onde deveria haver um `ç`.
+
+Então, se o provedor oferecer os dois, pegue o `.m3u8`. Nada mais no stream
+muda, e a sua lista de canais fica legível.
+
+## O outro `.m3u8` que você vai encontrar
+
+Existe um segundo motivo, sem relação nenhuma com o primeiro, para essa extensão
+aparecer — e ele causa confusão de verdade.
+
+**HLS** — o protocolo de streaming que a maioria dos servidores de IPTV usa —
+também usa arquivos M3U8. Quando você abre um canal, o player busca um pequeno
+manifesto `.m3u8` que lista os próximos segundos de vídeo em segmentos
+separados, e busca esse manifesto de novo conforme a reprodução avança. É por
+isso que um stream ao vivo consegue começar no meio da transmissão e se adaptar
+à sua conexão.
+
+Ou seja, `.m3u8` pode significar duas coisas diferentes:
+
+- **A lista da sua assinatura** — centenas ou milhares de canais, uma linha
+  cada. É esse o link que você cola no player.
+- **Um manifesto de stream** — um único canal, listando os segmentos dele. O
+  player busca esses arquivos sozinho enquanto você assiste; você nunca cola um
+  deles.
+
+Os dois são arquivos de texto no formato M3U. Se você colar um manifesto de
+stream onde deveria ir a lista, o resultado é uma “lista” com uma única entrada
+sem nome — uma confusão comum e fácil de corrigir.
+
+## Qual entregar ao seu player
+
+Qualquer player competente lê os dois, então a decisão é pequena:
+
+- **Prefira o `.m3u8`** quando houver escolha. Nomes de canais corretos, sem
+  contrapartida.
+- **Use o `.m3u`** quando for isso que você recebeu. Funciona; espere um nome
+  embaralhado de vez em quando em listas com alfabetos não latinos.
+- **Nenhum dos dois afeta a qualidade.** Resolução e bitrate são decididos pelo
+  stream do seu provedor, e não pela extensão do índice que aponta para ele.
+
+Seja qual for o que você tem em mãos, o arquivo é uma lista de endereços e o
+player é um leitor dessa lista. Quando um stream engasga, o índice quase nunca é
+o culpado — é
+[o caminho entre você e o servidor](/pt/blog/iptv-travando-como-resolver/). E se
+o seu provedor também oferecer credenciais do Xtream, elas trazem categorias,
+séries e um guia de programação que um arquivo plano não dá.

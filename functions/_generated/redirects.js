@@ -2,8 +2,20 @@
 // Do not edit by hand — edit the ledger and run `npm run build:redirects`.
 export const version = 1;
 export const redirects = {
+  "/ar/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/ar/blog/لماذا-يشفر-المشغل-بيانات-دخولك/",
+    "code": 301
+  },
+  "/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/blog/why-a-player-should-encrypt-your-credentials/",
+    "code": 301
+  },
   "/bn/blog/fix-iptv-buffering/": {
     "to": "/bn/blog/iptv-বাফারিং-সমাধান/",
+    "code": 301
+  },
+  "/bn/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/bn/blog/ক্রেডেনশিয়াল-এনক্রিপশন-কেন-জরুরি/",
     "code": 301
   },
   "/bn/blog/set-up-your-first-playlist/": {
@@ -18,6 +30,10 @@ export const redirects = {
     "to": "/de/blog/iptv-ruckeln-beheben/",
     "code": 301
   },
+  "/de/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/de/blog/playlist-zugangsdaten-verschluesseln/",
+    "code": 301
+  },
   "/de/blog/set-up-your-first-playlist/": {
     "to": "/de/blog/erste-playlist-einrichten/",
     "code": 301
@@ -26,8 +42,24 @@ export const redirects = {
     "to": "/de/blog/xtream-codes-oder-m3u/",
     "code": 301
   },
+  "/es/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/es/blog/por-que-cifrar-tus-credenciales/",
+    "code": 301
+  },
+  "/fa/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/fa/blog/رمزنگاری-اطلاعات-ورود-پلی-لیست/",
+    "code": 301
+  },
+  "/fr/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/fr/blog/pourquoi-chiffrer-vos-identifiants/",
+    "code": 301
+  },
   "/hi/blog/fix-iptv-buffering/": {
     "to": "/hi/blog/iptv-बफरिंग-कैसे-ठीक-करें/",
+    "code": 301
+  },
+  "/hi/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/hi/blog/प्लेलिस्ट-लॉगिन-एन्क्रिप्शन/",
     "code": 301
   },
   "/hi/blog/set-up-your-first-playlist/": {
@@ -42,6 +74,10 @@ export const redirects = {
     "to": "/id/blog/mengatasi-buffering-iptv/",
     "code": 301
   },
+  "/id/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/id/blog/mengenkripsi-data-login-playlist/",
+    "code": 301
+  },
   "/id/blog/set-up-your-first-playlist/": {
     "to": "/id/blog/menyiapkan-playlist-pertama/",
     "code": 301
@@ -52,6 +88,10 @@ export const redirects = {
   },
   "/it/blog/fix-iptv-buffering/": {
     "to": "/it/blog/risolvere-buffering-iptv/",
+    "code": 301
+  },
+  "/it/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/it/blog/perche-cifrare-le-credenziali/",
     "code": 301
   },
   "/it/blog/set-up-your-first-playlist/": {
@@ -66,6 +106,10 @@ export const redirects = {
     "to": "/ja/blog/iptv-バッファリング-解消方法/",
     "code": 301
   },
+  "/ja/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/ja/blog/認証情報-を-暗号化-すべき-理由/",
+    "code": 301
+  },
   "/ja/blog/set-up-your-first-playlist/": {
     "to": "/ja/blog/初めての-プレイリスト-設定手順/",
     "code": 301
@@ -76,6 +120,10 @@ export const redirects = {
   },
   "/ko/blog/fix-iptv-buffering/": {
     "to": "/ko/blog/iptv-버퍼링-해결하기/",
+    "code": 301
+  },
+  "/ko/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/ko/blog/인증-정보를-암호화해야-하는-이유/",
     "code": 301
   },
   "/ko/blog/set-up-your-first-playlist/": {
@@ -90,6 +138,10 @@ export const redirects = {
     "to": "/nl/blog/iptv-buffering-oplossen/",
     "code": 301
   },
+  "/nl/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/nl/blog/waarom-een-speler-inloggegevens-versleutelt/",
+    "code": 301
+  },
   "/nl/blog/set-up-your-first-playlist/": {
     "to": "/nl/blog/eerste-afspeellijst-instellen/",
     "code": 301
@@ -100,6 +152,10 @@ export const redirects = {
   },
   "/pl/blog/fix-iptv-buffering/": {
     "to": "/pl/blog/jak-naprawic-buforowanie-iptv/",
+    "code": 301
+  },
+  "/pl/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/pl/blog/dlaczego-szyfrowac-dane-logowania/",
     "code": 301
   },
   "/pl/blog/set-up-your-first-playlist/": {
@@ -114,6 +170,10 @@ export const redirects = {
     "to": "/pt/blog/iptv-travando-como-resolver/",
     "code": 301
   },
+  "/pt/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/pt/blog/por-que-criptografar-suas-credenciais/",
+    "code": 301
+  },
   "/pt/blog/set-up-your-first-playlist/": {
     "to": "/pt/blog/configurar-sua-primeira-lista/",
     "code": 301
@@ -124,6 +184,10 @@ export const redirects = {
   },
   "/ru/blog/fix-iptv-buffering/": {
     "to": "/ru/blog/устранение-буферизации-iptv/",
+    "code": 301
+  },
+  "/ru/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/ru/blog/шифрование-учетных-данных-плейлиста/",
     "code": 301
   },
   "/ru/blog/set-up-your-first-playlist/": {
@@ -138,6 +202,10 @@ export const redirects = {
     "to": "/th/blog/แก้ปัญหา-iptv-กระตุก-บัฟเฟอร์/",
     "code": 301
   },
+  "/th/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/th/blog/ทำไมเครื่องเล่น-ควรเข้ารหัส-ข้อมูลล็อกอิน/",
+    "code": 301
+  },
   "/th/blog/set-up-your-first-playlist/": {
     "to": "/th/blog/วิธี-ตั้งค่า-เพลย์ลิสต์-iptv/",
     "code": 301
@@ -146,8 +214,16 @@ export const redirects = {
     "to": "/th/blog/xtream-codes-หรือ-m3u/",
     "code": 301
   },
+  "/tr/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/tr/blog/giris-bilgileri-neden-sifrelenmeli/",
+    "code": 301
+  },
   "/ur/blog/fix-iptv-buffering/": {
     "to": "/ur/blog/iptv-بفرنگ-کا-حل/",
+    "code": 301
+  },
+  "/ur/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/ur/blog/پلے-لسٹ-تفصیلات-کی-انکرپشن/",
     "code": 301
   },
   "/ur/blog/set-up-your-first-playlist/": {
@@ -160,6 +236,10 @@ export const redirects = {
   },
   "/vi/blog/fix-iptv-buffering/": {
     "to": "/vi/blog/khac-phuc-iptv-giat-lag/",
+    "code": 301
+  },
+  "/vi/blog/how-vidonzo-encrypts-your-playlists/": {
+    "to": "/vi/blog/ma-hoa-thong-tin-dang-nhap/",
     "code": 301
   },
   "/vi/blog/set-up-your-first-playlist/": {

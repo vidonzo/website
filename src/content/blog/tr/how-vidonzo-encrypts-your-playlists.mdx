@@ -1,0 +1,100 @@
+---
+title: "Bir medya oynatıcısı giriş bilgilerinizi neden şifrelemeli"
+description: "Sağlayıcı girişiniz aslında aboneliğinizin kendisidir. Bir oynatıcının onu saklarken karşılaması gereken ölçüt ve Vidonzo'nun bunu nasıl karşıladığı."
+urlSlug: giris-bilgileri-neden-sifrelenmeli
+publishedAt: 2026-07-20
+sourceLocale: en
+tags: ["gizlilik", "teknik"]
+keywords: ["iptv giriş bilgileri güvenliği", "xtream parola güvenliği", "şifreli oynatma listesi", "uçtan uca şifreleme iptv"]
+heroImageAlt: "Saklanan bir oynatma listesi kaydı: bir etiket, bir tür ve okunamayan bir şifreli metin bloğu."
+---
+
+Xtream giriş bilgileriniz, işin özünde, parasını ödediğiniz aboneliğin
+kendisidir. Onları eline geçiren herkes sizin hesabınızdan izleyebilir, hız
+sınırına takılmanıza ya da hattınızın kesilmesine yol açabilir. Bu da onları bir
+oynatıcının dokunduğu en hassas şey yapar — ve oynatıcıyı yapanların
+okuyabilmeyi en az istemesi gereken şey.
+
+Israr etmeye değer ölçütü söylemek kolay, karşılamak zahmetli: giriş bilgisi,
+hizmeti işletenlerin iyi niyetiyle korunuyor olmakla kalmamalı, onlar için de
+okunamaz olmalı. Bir şirket sağlayıcı parolanızı okuyabiliyorsa, o şirkete sızan
+herkes de okuyabilir, onu buna zorlayabilen herkes de.
+
+Vidonzo bu ölçütü şöyle karşılıyor — kontrol edebileceğiniz kadar ayrıntısıyla.
+
+## Ayrım
+
+Her şeyin aynı muameleye ihtiyacı yok. Sık kullanılanları cihazlar arasında
+eşitlemek yararlı ve sıradan bir iş; bir sağlayıcı parolasını eşitlemek ikisi de
+değil. Veriyi buna göre ayırıyoruz:
+
+**Uçtan uca şifrelenen**: Xtream sunucu adresiniz, kullanıcı adınız ve parolanız,
+bir de varsa M3U kaynak adresiniz.
+
+**Düz metin olarak saklanan, kullanıcı başına erişim kurallarıyla korunan**: sık
+kullanılanlar, izleme ilerlemesi, uygulama ayarları ve bir oynatma listesine
+verdiğiniz ad — ki o sizin kendi sözünüz, bir sır değil.
+
+Bu ayrım bilinçli. Sık kullanılanları şifrelemek neredeyse hiçbir şey kazandırmaz
+ve yeni eklenen bir cihazın, kilidi açılana kadar işe yarar hiçbir şey
+göstermemesine yol açardı.
+
+## Şifreleme nasıl çalışıyor
+
+Rastgele 256 bitlik bir **veri anahtarı** cihazınızda üretilir — hiçbir zaman
+sunucuda değil. Her kaynak kaydı, bu anahtar altında ve kayıt başına benzersiz
+bir nonce ile AES‑256‑GCM kullanılarak şifrelenir.
+
+Veri anahtarının kendisi de sarmalanır: eşitleme parolanız **Argon2id**'den
+geçirilerek bir anahtar şifreleme anahtarı türetilir ve veri anahtarı onunla
+şifrelenir. Yüklenen yalnızca sarmalanmış sonuçtur. Eşitleme parolası ağa hiç
+çıkmaz.
+
+Bir oynatma listesi için veritabanımızda duran şey bir etiket, bir tür ve bir
+şifreli metin bloğudur. Sunucuda onu çözecek bir anahtar yoktur.
+
+## İkinci bir cihaz eklemek
+
+İlginç olan sorun şifreleme değil; veri anahtarını, hiçbir zaman açık halde
+göndermeden bir sonraki cihazınıza ulaştırmak.
+
+1. Yeni cihaz oturum açar. Sık kullanılanlar ve ilerleme hemen görünür — zaten
+   hiç şifrelenmemişlerdi.
+2. Oynatma listeleri **kilitli** görünür.
+3. Yeni cihaz geçici bir X25519 anahtar çifti üretir ve bir QR kod gösterir.
+4. Kilidi hâlihazırda açık olan bir cihaz onu tarar ve sizden onay ister.
+5. Kilidi açık cihaz, ECDH üzerinden ortak bir sır türetir, veri anahtarını
+   onunla şifreler ve mühürlenmiş bu bloğu yükler.
+6. Yeni cihaz onu kendi özel anahtarıyla çözer ve sonucu iOS Keychain ya da
+   Android Keystore içinde saklar.
+
+Sunucu hiçbir aşamada açabileceği bir şey tutmaz.
+
+## Yumuşatamayacağımız kısım
+
+**Eşitleme parolanızı kaybederseniz ve kilidi açık tek bir cihazınız da
+kalmadıysa, oynatma listeleriniz gitmiş demektir.** Sizden esirgenmiş değil —
+matematiksel olarak erişilemez. Sıfırlayamayız, çünkü bizim tarafımızda
+sıfırlanacak bir şey yok.
+
+Gerçek uçtan uca şifrelemenin dürüst takası budur; bunu iddia eden her ürün ya
+bu takası yapar ya da aslında yapmadığı bir şeyi söylüyordur. Uygulama bunu bir
+politika sayfasına gömmek yerine, parolayı belirlediğiniz anda açıkça söyler.
+
+Bir oynatma listesini yeniden eklemek bir dakika sürer. Kurtarma yolu budur ve
+kullanmaya zorlanabileceğimiz bir anahtarı elimizde tutmaktansa bunu sunmayı
+tercih ederiz.
+
+## Dışarıdan bakınca bu nasıl görünür
+
+İddiayı sınamak için kriptografiye inanmanız gerekmiyor. Giriş bilgilerinizi
+gerçekten okuyamayan bir oynatıcı, onları size e-postayla geri gönderemez, bir
+destek aracında gösteremez ve onları koruyan parolayı unuttuğunuzda geri
+getiremez. Bunlardan biri size sunuluyorsa, anahtar karşı taraftadır.
+
+Aynı akıl yürütme
+[listeyi kendinizin getirdiği modelin](/tr/blog/kendi-listenizi-getirin/) içinden
+de geçer: bir şirketin ne vaat ettiğine değil, neyi yapabilecek durumda olduğuna
+bakın. Ve [sağlayıcınız hangi biçimi
+vermiş olursa olsun](/tr/blog/xtream-codes-mi-m3u-mu/), arkasındaki giriş bilgisi
+aynı muameleyi hak ediyor.

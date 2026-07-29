@@ -1,0 +1,95 @@
+---
+title: "M3U dan M3U8: apa sebenarnya arti kedua ekstensi berkas itu"
+description: "Angka 8 itu soal pengodean teks, bukan kualitas. Ini beda sesungguhnya antara keduanya, dan kenapa salah satunya menampilkan nama kanal dengan benar."
+urlSlug: perbedaan-m3u-dan-m3u8
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["playlist", "teknis"]
+keywords: ["perbedaan m3u dan m3u8", "apa itu file m3u8", "link m3u8 iptv", "cara membuka file m3u"]
+heroImageAlt: "Daftar kanal yang sama ditampilkan dua kali: sekali dengan huruf beraksen yang rusak, sekali lagi dengan tampilan yang benar."
+---
+
+Penyedia membagikan tautan yang berakhiran `.m3u` dan tautan yang berakhiran
+`.m3u8`, kadang keduanya untuk langganan yang sama, dan jarang menjelaskan
+bedanya. Tebakan yang umum beredar — bahwa yang satu lebih baru, atau lebih
+tinggi kualitasnya, atau “yang versi HD” — semuanya keliru.
+
+Angka `8` itu singkatan dari **UTF-8**. Hanya itu seluruh perbedaannya pada
+format berkasnya, dan perbedaan itu lebih kecil sekaligus lebih berguna daripada
+yang diceritakan orang.
+
+## Keduanya jenis berkas yang sama
+
+Buka salah satunya di editor teks dan Anda melihat hal yang sama: satu baris
+kepala, lalu pasangan-pasangan baris, satu menerangkan kanal dan satu memberi
+alamatnya.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Channel One",Channel One
+http://example.com/live/one.ts
+```
+
+Sekian saja. Playlist M3U adalah indeks teks biasa — nama dan alamat, tidak
+lebih. Ia tidak membawa video, tidak membawa data login, dan tidak memegang
+koneksi hidup ke penyedia Anda. Ia hanyalah potret keadaan pada detik Anda
+mengambilnya, dan justru sifat itulah yang benar-benar membedakannya dari
+[API Xtream Codes](/id/blog/xtream-codes-atau-m3u/).
+
+## Apa yang diubah oleh angka 8
+
+Spesifikasi M3U yang asli lahir sebelum web sepakat memakai UTF-8. Teks disimpan
+dalam pengodean lokal apa pun yang kebetulan dipakai mesin bersangkutan, dan cara
+itu bekerja sempurna sampai berkasnya menyeberangi perbatasan.
+
+`.m3u8` menyatakan bahwa berkas itu UTF-8. Praktisnya, setiap nama kanal selamat
+sampai tujuan: Arab, Persia, Yunani, Thai, Sirilik, Jepang, juga huruf beraksen
+dalam bahasa Prancis, Turki, Polandia, atau Vietnam. Dengan `.m3u` biasa yang
+pengodeannya harus ditebak sendiri oleh pemutar, nama-nama itu datang sebagai
+tanda tanya atau deretan mojibake yang khas — `Ã©` di tempat yang seharusnya `é`.
+
+Jadi kalau penyedia menawarkan keduanya, ambil `.m3u8`. Tidak ada hal lain pada
+siarannya yang berubah, dan daftar kanal Anda menjadi terbaca.
+
+## `.m3u8` yang lain, yang juga akan Anda temui
+
+Ada alasan kedua yang sama sekali tidak berhubungan untuk menjumpai ekstensi itu,
+dan alasan inilah yang benar-benar membingungkan orang.
+
+**HLS** — protokol siaran yang dipakai sebagian besar server IPTV — juga memakai
+berkas M3U8. Ketika Anda memutar sebuah kanal, pemutar mengambil manifes `.m3u8`
+kecil yang mendaftar beberapa detik video berikutnya sebagai segmen-segmen
+terpisah, lalu mengambilnya ulang selama pemutaran berlanjut. Karena itulah
+siaran langsung bisa dimulai di tengah acara dan menyesuaikan diri dengan koneksi
+Anda.
+
+Jadi `.m3u8` bisa berarti dua hal yang berbeda:
+
+- **Playlist langganan Anda** — ratusan atau ribuan kanal, satu baris untuk
+  masing-masing. Inilah tautan yang Anda tempelkan ke pemutar.
+- **Manifes siaran** — satu kanal saja, berisi daftar segmennya. Pemutar
+  mengambilnya sendiri selagi Anda menonton; yang ini tidak pernah Anda
+  tempelkan.
+
+Keduanya berkas teks berformat M3U. Kalau Anda menempelkan manifes siaran di
+tempat yang seharusnya diisi playlist, hasilnya adalah “playlist” berisi satu
+entri tanpa nama — kekeliruan yang umum dan mudah diperbaiki.
+
+## Mana yang sebaiknya diberikan ke pemutar Anda
+
+Pemutar mana pun yang layak akan membaca keduanya, jadi ini keputusan kecil:
+
+- **Utamakan `.m3u8`** kalau pilihannya memang ada. Nama kanal benar, tanpa
+  kerugian.
+- **Gunakan `.m3u`** kalau hanya itu yang Anda terima. Ia berjalan; siapkan diri
+  untuk sesekali menemui nama yang rusak pada daftar kanal beraksara non-Latin.
+- **Keduanya tidak memengaruhi kualitas.** Resolusi dan bitrate ditentukan oleh
+  siaran penyedia Anda, bukan oleh ekstensi pada indeks yang menunjuk ke siaran
+  itu.
+
+Mana pun yang Anda pegang, berkasnya adalah daftar alamat dan pemutarnya adalah
+pembaca daftar itu. Ketika siaran tersendat, indeksnya hampir tidak pernah
+menjadi biang keladi — penyebabnya ada di
+[jalur antara Anda dan server](/id/blog/mengatasi-buffering-iptv/). Dan kalau
+penyedia Anda juga menyediakan data login Xtream, data itu memberi Anda kategori,
+serial, serta panduan acara yang tidak bisa diberikan sebuah berkas datar.
