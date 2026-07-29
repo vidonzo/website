@@ -53,7 +53,7 @@ import { dirname, join, resolve } from 'node:path';
 
 import { parseFrontmatter } from './lib/frontmatter.mjs';
 import { readLocales } from './lib/locales.mjs';
-import { fontsForText } from './lib/fonts.mjs';
+import { fontCacheDir, fontsForText } from './lib/fonts.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const blogDir = resolve(root, 'src/content/blog');
@@ -77,20 +77,29 @@ const SIZES = [66, 60, 54, 48, 43, 38, 34];
 
 const INK = '#F3F5FF';
 
-// Pango is initialised by libvips on first use, and fontconfig reads its
-// configuration from the environment at that moment — so this has to be set
-// before sharp is imported, not after.
-process.env.FONTCONFIG_FILE ??= await writeFontConfig();
-const sharp = (await import('sharp')).default;
-sharp.cache(false);
+// libvips initialises Pango on first use, and fontconfig reads both its
+// configuration and its font directories at that moment. So the faces have to be
+// on disk and the config written *before* sharp is imported — not after, and not
+// lazily as each image needs one.
+let sharp;
+async function startRenderer() {
+  process.env.FONTCONFIG_FILE = await writeFontConfig();
+  sharp = (await import('sharp')).default;
+  sharp.cache(false);
+}
 
+/**
+ * Point fontconfig at the decompressed faces and nothing else. On a CI runner
+ * there are no system fonts to find; on a developer machine there are hundreds,
+ * and letting one of those satisfy a family name is how a card ends up looking
+ * different in the two places.
+ */
 async function writeFontConfig() {
-  const dir = resolve(root, 'node_modules/.cache/vidonzo-fonts');
-  await mkdir(dir, { recursive: true });
+  const dir = fontCacheDir(root);
   const path = join(dir, 'fonts.conf');
   await writeFile(
     path,
-    `<?xml version="1.0"?>\n<!DOCTYPE fontconfig SYSTEM "fonts.dtd">\n<fontconfig>\n  <cachedir>${dir}</cachedir>\n</fontconfig>\n`,
+    `<?xml version="1.0"?>\n<!DOCTYPE fontconfig SYSTEM "fonts.dtd">\n<fontconfig>\n  <dir>${dir}</dir>\n  <cachedir>${dir}</cachedir>\n</fontconfig>\n`,
   );
   return path;
 }
@@ -201,8 +210,7 @@ async function registerFont(file) {
  * the text box. Returns the raster plus its measured size, so the caller can
  * place it exactly rather than trusting a gravity.
  */
-async function titleLayer(title, locale, rtl) {
-  const { files, stack } = fontsForText(root, locale, title);
+async function titleLayer(title, locale, rtl, { files, stack }) {
   for (const file of files) await registerFont(file);
 
   const markup = `<span foreground="${INK}">${escapeXml(title)}</span>`;
@@ -270,10 +278,10 @@ async function articles() {
 
 // ----------------------------------------------------------------- rendering ---
 
-async function render(item) {
+async function render(item, fonts) {
   const rtl = localeDir[item.locale] === 'rtl';
   const canvas = background(item.key, rtl);
-  const title = await titleLayer(item.title, item.locale, rtl);
+  const title = await titleLayer(item.title, item.locale, rtl, fonts);
 
   const left = rtl ? WIDTH - MARGIN - title.info.width : MARGIN;
   const top = TITLE_BOTTOM - title.info.height;
@@ -302,24 +310,44 @@ if (existsSync(manifestPath)) {
 }
 
 const next = {};
-let rendered = 0;
+const stale = [];
 for (const item of items) {
   const id = `${item.locale}/${item.key}`;
-  const stamp = createHash('sha256').update(`${LAYOUT_VERSION} ${item.locale} ${item.key} ${item.title}`).digest('hex').slice(0, 16);
+  const stamp = createHash('sha256')
+    .update(`${LAYOUT_VERSION} ${item.locale} ${item.key} ${item.title}`)
+    .digest('hex')
+    .slice(0, 16);
   next[id] = stamp;
   const png = join(outDir, item.locale, `${item.key}.png`);
   const cover = join(outDir, item.locale, `${item.key}-cover.webp`);
   if (manifest[id] === stamp && existsSync(png) && existsSync(cover)) continue;
-  await render(item);
-  rendered += 1;
+  stale.push(item);
+}
+
+// Decompress every face this run needs before the renderer starts: fontconfig
+// indexes the directory once, at initialisation, and will not notice a file that
+// appears afterwards.
+const fonts = new Map();
+for (const item of stale) {
+  fonts.set(`${item.locale}/${item.key}`, await fontsForText(root, item.locale, item.title));
+}
+
+if (stale.length > 0) {
+  await startRenderer();
+  for (const item of stale) await render(item, fonts.get(`${item.locale}/${item.key}`));
 }
 
 await mkdir(outDir, { recursive: true });
 await writeFile(
   manifestPath,
-  `${JSON.stringify({ version: LAYOUT_VERSION, images: Object.fromEntries(Object.entries(next).sort(([a], [b]) => (a < b ? -1 : 1))) }, null, 2)}\n`,
+  `${JSON.stringify(
+    { version: LAYOUT_VERSION, images: Object.fromEntries(Object.entries(next).sort(([a], [b]) => (a < b ? -1 : 1))) },
+    null,
+    2,
+  )}\n`,
 );
 
 console.log(
-  `build-featured-images: ${items.length} image(s) for ${new Set(items.map((i) => i.key)).size} article(s) — ${rendered} rendered, ${items.length - rendered} reused`,
+  `build-featured-images: ${items.length} image(s) for ${new Set(items.map((i) => i.key)).size} article(s) — ` +
+    `${stale.length} rendered, ${items.length - stale.length} reused`,
 );

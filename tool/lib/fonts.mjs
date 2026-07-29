@@ -13,9 +13,17 @@
 //
 // Every locale also gets Inter, because every title contains Latin: `Vidonzo`,
 // `M3U`, `IPTV`, `EPG`, digits.
+//
+// Fontsource ships WOFF2. FreeType will not open those on the Linux builders, so
+// each needed subset is decompressed to a plain TTF in a build cache first —
+// which is also the form fontconfig can index from a directory, and therefore
+// what makes family matching work identically on a CI runner with no system
+// fonts and on a developer machine covered in them.
 
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import woff2 from 'wawoff2';
 
 /** Locales whose script Inter does not cover. Latin and Cyrillic locales use Inter alone. */
 const SCRIPT_FONTS = {
@@ -30,6 +38,25 @@ const SCRIPT_FONTS = {
 };
 
 const LATIN = { pkg: '@fontsource-variable/inter', family: 'Inter', axis: 'wght' };
+
+/** Where decompressed faces live. Derived, disposable, and outside the source tree. */
+export function fontCacheDir(root) {
+  const dir = resolve(root, 'node_modules/.cache/vidonzo-fonts');
+  mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
+/**
+ * WOFF2 in, TTF out, cached by content hash so a rebuild pays for this once per
+ * font rather than once per image.
+ */
+async function asTtf(root, woff2Path) {
+  const source = readFileSync(woff2Path);
+  const name = `${createHash('sha256').update(source).digest('hex').slice(0, 16)}.ttf`;
+  const out = join(fontCacheDir(root), name);
+  if (!existsSync(out)) writeFileSync(out, Buffer.from(await woff2.decompress(source)));
+  return out;
+}
 
 /** `U+0041,U+0100-017f` → a predicate over codepoints. */
 function coversAny(ranges, codepoints) {
@@ -63,7 +90,7 @@ function filesFor(root, spec, codepoints) {
  * @returns {{ files: string[], stack: string }} the font files to register and
  *   the Pango family list to set the text in, most specific family first.
  */
-export function fontsForText(root, locale, text) {
+export async function fontsForText(root, locale, text) {
   const codepoints = [...text].map((ch) => ch.codePointAt(0));
   const script = SCRIPT_FONTS[locale];
 
@@ -81,5 +108,5 @@ export function fontsForText(root, locale, text) {
   files.push(...filesFor(root, LATIN, codepoints));
 
   if (files.length === 0) throw new Error(`no font file covers the ${locale} text: ${text}`);
-  return { files, stack };
+  return { files: await Promise.all(files.map((file) => asTtf(root, file))), stack };
 }
