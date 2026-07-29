@@ -1,0 +1,127 @@
+---
+title: "Regarder dans votre langue : droite à gauche, sous-titres et pistes audio multiples"
+description: "Le droite à gauche est une mise en page, pas quelques icônes retournées. À quoi ressemble un vrai support de votre langue, de la police aux pistes du flux."
+urlSlug: regarder-dans-votre-langue
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["lecture", "produit"]
+keywords: ["sous-titres iptv", "changer la piste audio iptv", "accents mal affichés playlist m3u", "lecteur iptv multilingue"]
+heroImageAlt: "Une interface disposée depuis le bord droit de l'écran, le menu des sous-titres et des pistes audio ouvert par-dessus la vidéo."
+---
+
+Il y a une différence entre une application traduite dans votre langue et une
+application qui la prend réellement en charge. Si vous lisez l'anglais, vous
+croiserez rarement cet écart, parce que l'anglais est le cas autour duquel tous
+les lecteurs ont été bâtis par défaut. Tous les autres le rencontrent dans les
+premières secondes, en général sans parvenir à nommer ce qui cloche.
+
+Dans un lecteur, cet écart se manifeste à trois endroits précis : la mise en
+page, la typographie, et les pistes audio et de sous-titres que le flux apporte
+avec lui.
+
+## Le droite à gauche est l'exemple le plus net
+
+L'arabe, le persan, l'hébreu et l'ourdou se lisent depuis la droite, et la façon
+la moins coûteuse de prétendre les prendre en charge consiste à retourner
+quelques icônes. Le résultat est une application dont les flèches pointent dans
+l'autre sens mais qui continue de penser depuis la gauche.
+
+Une vraie mise en page fait partir toute l'interface du bord droit :
+
+- **L'ordre de lecture.** Titres, corps de texte et boutons commencent à droite.
+  L'action principale se place là où l'œil arrive d'abord, et non là où une
+  maquette de gauche à droite l'avait laissée.
+- **L'ordre de focus.** C'est là que la question cesse d'être cosmétique. Sur
+  une télécommande de téléviseur, une pression vers la droite doit déplacer le
+  focus sur l'élément suivant dans l'ordre de lecture — c'est-à-dire, dans une
+  interface de droite à gauche, sur l'élément situé à gauche. Une application
+  qui passe à côté reste supportable sur un téléphone et devient presque
+  inutilisable à la croix directionnelle.
+- **Le sens du retour.** Une flèche de retour doit pointer vers l'endroit où se
+  trouve le *précédent*. Dans une mise en page de droite à gauche, le précédent
+  est à droite.
+
+Les barres de progression forment la troisième décision, et celle que l'on prend
+le plus souvent par accident. Une barre de chargement dans une mise en page de
+droite à gauche se remplit depuis la droite, comme le texte. Une frise de
+lecture reste en général de gauche à droite, parce qu'elle représente
+l'écoulement du temps plutôt qu'un ordre de lecture, et que la personne qui
+avance avec sa télécommande s'y attend. La question n'est pas de savoir quelle
+réponse est la bonne. C'est qu'un lecteur qui ne se l'est jamais posée y a
+répondu par hasard.
+
+## La police doit correspondre à l'écriture
+
+Quand une application ne désigne aucune police pour une écriture, le système
+substitue celle qu'il juge la plus proche. Le texte reste lisible, donc rien n'a
+l'air cassé — jusqu'à ce que l'on regarde les lettres.
+
+Pour le persan, le substitut est en général une police arabe, et deux lettres
+trahissent la chose : le *ye* et le *kaf* ne se dessinent pas de la même manière
+dans les deux traditions, si bien qu'un mot apparaît avec une paire de points en
+trop ou un trait supplémentaire. C'est votre mot, mal orthographié. Les signes
+diacritiques sautent ou se placent mal, ce qui importe peu dans la plupart des
+noms de chaînes et beaucoup dans les noms propres. Et les chiffres forment deux
+jeux distincts — ۱۲۳۴ en persan, ١٢٣٤ en arabe — de sorte qu'une liste qui les
+mélange paraît étrangère au premier coup d'œil.
+
+La même classe de défaut se retrouve ailleurs : des diacritiques vietnamiens
+empilés qui se percutent, du texte japonais rendu avec des formes de glyphes
+chinoises. Le français en connaît une version plus discrète : un « œ » ou une
+majuscule accentuée remplacés par une approximation venue d'une autre police
+passent inaperçus jusqu'au moment où ils ne passent plus. La police n'est pas
+une décoration. Elle décide si le mot affiché est le bon mot.
+
+## Les noms de chaînes : c'est la liste, pas l'interface
+
+Cela vaut la peine d'être dit franchement, parce que les lecteurs se le font
+reprocher en permanence. Quand des noms de chaînes arrivent sous forme de points
+d'interrogation ou d'une suite de caractères incohérents — le classique
+`CinÃ©+` à la place de `Ciné+` — la faute revient presque toujours à l'encodage
+de la playlist elle-même plutôt qu'à l'interface. C'est un problème d'UTF-8, et
+cela renvoie à [l'extension du fichier et à ce qu'elle
+déclare](/fr/blog/m3u-ou-m3u8/). Un lecteur peut afficher correctement les
+octets qu'on lui a donnés ; il ne peut pas reconstituer un nom qui ne lui est
+jamais parvenu intact.
+
+L'autre moitié, c'est ce qui se passe une fois que les noms arrivent intacts. La
+recherche doit accepter l'écriture, et les préfixes que les fournisseurs collent
+devant un nom — `FR:`, `[HD]`, `BE|` — ne doivent pas vous empêcher de le
+trouver. C'est le même travail que celui qui [rend une grande liste navigable
+tout court](/fr/blog/organiser-une-grande-playlist/).
+
+## Sous-titres et pistes audio multiples
+
+Certaines chaînes et la plupart des films transportent plus d'une piste audio,
+et parfois une ou plusieurs pistes de sous-titres. Quoi qu'il y ait, c'est le
+fournisseur qui l'a mis dans le flux, et l'étiquette de chaque piste vient du
+flux elle aussi.
+
+Trois choses relèvent du lecteur :
+
+- **Les présenter de façon à pouvoir choisir.** Une liste claire pendant la
+  lecture, pas quelque chose d'enfoui dans les réglages, et portant les
+  étiquettes fournies par le flux.
+- **Changer sans interrompre.** Choisir une langue audio ou une piste de
+  sous-titres ne devrait pas signifier revenir au début du programme.
+- **Se souvenir du choix.** S'il faut resélectionner votre langue à chaque fois,
+  la fonction est à moitié faite.
+
+Et une limite qu'aucun réglage ne contourne : un lecteur ne peut proposer que ce
+qui se trouve dans le flux. Si un fournisseur envoie un film avec une seule
+piste audio et sans sous-titres, aucune option d'aucun lecteur ne créera une
+piste de sous-titres qui n'a jamais été envoyée. Si une version française ou des
+sous-titres comptent pour vous, c'est la question à poser à votre fournisseur
+avant de renouveler.
+
+## Ce n'est pas une faveur, c'est de l'ingénierie ordinaire
+
+Rien de ce qui précède n'est un travail extraordinaire. La mise en page suit le
+sens de l'écriture, la police correspond au système d'écriture, les octets
+s'affichent tels qu'ils sont arrivés, et ce qui se trouve dans le flux est
+proposé à la personne qui regarde. Quand la langue est l'anglais, personne
+n'appelle cela du *support linguistique* ; on dit simplement que l'application
+fonctionne.
+
+Un lecteur qui traite votre langue de la même manière ne vous accorde rien. Il a
+seulement fait son travail jusqu'au bout.

@@ -1,0 +1,106 @@
+---
+title: "Die ganze Einrichtung auf ein neues Handy umziehen, ohne etwas zu verlieren"
+description: "Favoriten und Wiedergabestand folgen Ihnen nach der Anmeldung. Ihre Playlist-Zugangsdaten nur dann, wenn Sie noch etwas haben, das sie entsperren kann."
+urlSlug: umzug-auf-neues-handy
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privatsphäre", "produkt"]
+keywords: ["iptv app auf neues handy übertragen", "playlist auf neues gerät übertragen", "iptv sync nach handywechsel", "playlists wiederherstellen neues handy"]
+heroImageAlt: "Zwei Handys nebeneinander: eines zeigt einen QR-Code, das andere hat ihn im Kamerabild."
+---
+
+Ein Handywechsel ist der Moment, in dem eine Entwurfsentscheidung sichtbar wird,
+über die Sie nie nachdenken mussten. Der größte Teil Ihrer Einrichtung folgt
+Ihnen ungefragt. Ein Teil davon — der wichtigste — folgt Ihnen nur, wenn Sie noch
+etwas in der Hand halten, das ihn entsperren kann.
+
+Schwierig ist daran nichts, aber die Reihenfolge entscheidet über das Ergebnis.
+Ziehen Sie um, solange das alte Handy noch funktioniert und in Ihrer Hand liegt,
+geht nichts verloren. Schieben Sie es auf, muss ein Stück womöglich neu aufgebaut
+werden.
+
+## Was von allein mitkommt
+
+Favoriten, Wiedergabestand und App-Einstellungen werden im Klartext
+synchronisiert, geschützt durch gewöhnliche Zugriffsregeln pro Benutzer. Melden
+Sie sich auf dem neuen Handy an, sind sie einfach da: die Sender, die Sie
+markiert haben, die Folge, in der Sie mittendrin waren, die Einstellungen, die
+Sie vor Monaten gesetzt und längst vergessen haben.
+
+Sie liegen mit Absicht unverschlüsselt dort. Sie zu verschlüsseln brächte fast
+nichts, weil keines davon ein Geheimnis ist, und es hätte zur Folge, dass ein neu
+hinzugefügtes Gerät Ihnen nichts Brauchbares zeigt, solange es nicht entsperrt
+ist.
+
+## Was gesperrt ankommt
+
+Ihre Anbieter-Zugangsdaten gelten als eine andere Klasse von Daten, weil sie Ihr
+Abo *sind*. Der Xtream-Host, Benutzername und Passwort sowie jede M3U-Quell-URL
+werden auf Ihrem Gerät verschlüsselt, bevor sie überhaupt gespeichert werden. Auf
+einem Server liegt dann ein Name, eine Art und ein Block Chiffretext, für den
+dort niemand einen Schlüssel hält. Die Begründung und die Mechanik stehen [an
+anderer Stelle ausführlich](/de/blog/playlist-zugangsdaten-verschluesseln/).
+
+Das neue Handy meldet sich also an und zeigt etwas leicht Merkwürdiges: Ihre
+Playlists sind aufgeführt und als **gesperrt** markiert. Der Name, den Sie einer
+Playlist gegeben haben, sind Ihre eigenen Worte und kein Geheimnis; er wurde nie
+verschlüsselt und lässt sich anzeigen. Die Zugangsdaten dahinter nicht. Das Gerät
+weiß, dass die Playlist existiert. Verbinden kann es sich damit noch nicht.
+
+## Die zwei Dinge, die das entsperren können
+
+Eines davon brauchen Sie.
+
+**Ein Gerät, das bereits entsperrt ist.** Das neue Handy erzeugt ein flüchtiges
+Schlüsselpaar und zeigt einen QR-Code. Das alte Handy, noch angemeldet und noch
+entsperrt, scannt ihn und bittet Sie um Bestätigung. Es leitet daraufhin ein
+gemeinsames Geheimnis mit dem neuen Gerät ab, versiegelt den Datenschlüssel damit
+und lädt das versiegelte Ergebnis hoch. Das neue Handy öffnet es mit seinem
+eigenen privaten Schlüssel und legt, was herauskommt, in der iOS-Keychain oder im
+Android-Keystore ab. Der Schlüssel wandert zwischen zwei Geräten, die Ihnen
+gehören; der Server trägt zu keinem Zeitpunkt mehr als ein Paket, das er nicht
+öffnen kann.
+
+**Ihr Sync-Passwort.** Der Datenschlüssel wird zusätzlich mit einem Schlüssel
+eingepackt, der aus diesem Passwort abgeleitet ist, und hochgeladen wird nur die
+eingepackte Form — das Passwort selbst geht nie über das Netz.
+
+## Der Teil, der sich nicht abmildern lässt
+
+Ist kein entsperrtes Gerät mehr übrig und das Sync-Passwort verloren, sind die
+Playlists mit ihm verloren. Nicht vorenthalten — mathematisch nicht verfügbar.
+Auf unserer Seite gibt es nichts zurückzusetzen, was genau der Sinn dieses
+Entwurfs ist und zugleich sein Preis.
+
+Der Weg zurück ist unspektakulär. Sie fügen die Playlist neu hinzu: die
+Zugangsdaten heraussuchen, die Ihr Anbieter Ihnen ausgestellt hat, und sie erneut
+eintragen — [dieselben paar Minuten wie beim ersten
+Mal](/de/blog/erste-playlist-einrichten/). Favoriten, Wiedergabestand und
+Einstellungen bleiben unberührt, weil sie nie verschlüsselt waren. Was Sie neu
+aufbauen, ist eine Zugangsangabe, keine Einrichtung.
+
+## Wenn die Synchronisierung nie eingeschaltet war
+
+Dann gibt es nichts umzuziehen, und es ist auch nie etwas vom alten Gerät
+weggegangen. Ein Konto existiert nur dazu, Ihre eigenen Daten zwischen Ihren
+eigenen Geräten zu bewegen, und der Player funktioniert vollständig ohne eines —
+[womit sich das Modell genau so verhält, wie es
+soll](/de/blog/eigene-playlist-mitbringen/). Es bedeutet allerdings, dass das
+neue Handy leer startet und die Playlist von Hand hinzugefügt wird, genau wie auf
+dem alten. Auch die Favoriten entstehen neu, denn sie haben immer nur auf dem
+Gerät existiert, das sie erfasst hat.
+
+## Die Reihenfolge, die funktioniert
+
+Bevor das alte Handy Ihre Hände verlässt:
+
+1. Melden Sie sich auf dem neuen Handy mit demselben Konto an.
+2. Koppeln Sie die beiden, solange das alte noch angemeldet und entsperrt ist.
+3. Prüfen Sie, dass auf dem neuen Handy eine Playlist tatsächlich läuft — nicht
+   bloß, dass sie in der Liste auftaucht.
+
+Danach löschen Sie das alte. Haben Sie es bereits gelöscht und kennen noch Ihr
+Sync-Passwort, ist alles in Ordnung. Trifft beides nicht zu, rechnen Sie eine
+Minute für das erneute Eintragen der Zugangsdaten ein und machen weiter; am Rest
+Ihrer Einrichtung ändert das nichts, und Ihr Abo selbst ist überhaupt nie
+umgezogen.

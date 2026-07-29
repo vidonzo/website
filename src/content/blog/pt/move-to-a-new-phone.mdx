@@ -1,0 +1,101 @@
+---
+title: "Leve toda a sua configuração para um celular novo sem perder nada"
+description: "Favoritos e progresso voltam sozinhos no login. As credenciais da sua lista só acompanham você se ainda existir algo capaz de destravá-las."
+urlSlug: mudar-para-um-celular-novo
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacidade", "produto"]
+keywords: ["mudar iptv para celular novo", "transferir lista iptv para outro aparelho", "sincronizar lista iptv entre aparelhos", "recuperar listas ao trocar de celular"]
+heroImageAlt: "Dois celulares lado a lado, um exibindo um QR code e o outro enquadrando esse código na câmera."
+---
+
+Trocar de celular é o momento em que uma decisão de projeto que você nunca
+precisou considerar fica visível. A maior parte da sua configuração acompanha
+você sem pedir nada. Uma parte dela — justamente a que mais importa — só
+acompanha se você ainda tiver em mãos algo capaz de destravá-la.
+
+Nada disso é difícil, mas a ordem das operações decide o resultado. Faça a
+migração enquanto o celular antigo ainda funciona e está com você, e nada se
+perde. Deixe para depois e uma peça talvez precise ser refeita.
+
+## O que se move sozinho
+
+Favoritos, progresso de reprodução e configurações do aplicativo sincronizam em
+texto claro, protegidos por regras comuns de acesso por usuário. Faça login no
+celular novo e eles simplesmente estão lá: os canais que você marcou, o episódio
+que estava pela metade, as preferências que você definiu meses atrás e já
+esqueceu.
+
+Eles ficam sem criptografia de propósito. Criptografá-los não compraria quase
+nada, porque nenhum deles é segredo, e faria um aparelho recém-adicionado não
+mostrar nada de útil até ser destravado.
+
+## O que chega bloqueado
+
+As credenciais do seu provedor são tratadas como outra classe de dado, porque
+elas *são* a sua assinatura. O host, o usuário e a senha do Xtream, além de
+qualquer URL de fonte M3U, são criptografados no seu aparelho antes de serem
+guardados. O que fica no servidor é um rótulo, um tipo e um bloco de texto
+cifrado para o qual ninguém lá tem chave. O raciocínio e a mecânica estão
+[descritos por inteiro em outro lugar](/pt/blog/por-que-criptografar-suas-credenciais/).
+
+Então o celular novo faz login e mostra algo um pouco estranho: as suas listas
+aparecem e estão marcadas como **bloqueadas**. O nome que você deu a uma lista é
+feito das suas próprias palavras, e não um segredo, então nunca foi
+criptografado e pode ser exibido. A credencial por trás dele não. O aparelho
+sabe que a lista existe. Ainda não consegue se conectar com ela.
+
+## As duas coisas que destravam
+
+Você precisa de uma das duas.
+
+**Um aparelho que já esteja destravado.** O celular novo gera um par de chaves
+efêmero e exibe um QR code. O celular antigo, ainda logado e ainda destravado,
+lê o código e pede a sua confirmação. Em seguida ele deriva um segredo
+compartilhado com o aparelho novo, sela a chave de dados com esse segredo e
+envia o resultado selado. O celular novo abre o bloco com a chave privada dele e
+guarda o que sai disso no Keychain do iOS ou no Keystore do Android. A chave
+viaja entre dois aparelhos seus; o servidor só carrega um pacote que ele não
+consegue abrir.
+
+**A sua senha de sincronização.** A chave de dados também é embrulhada com uma
+chave derivada dessa senha, e só a forma embrulhada é enviada — a senha em si
+nunca atravessa a rede.
+
+## A parte que não dá para suavizar
+
+Se não sobrar nenhum aparelho destravado e a senha de sincronização tiver se
+perdido, as listas se foram junto. Não é que fiquem retidas — elas ficam
+matematicamente indisponíveis. Não há nada do nosso lado para redefinir, o que é
+o ponto inteiro do desenho e também o preço dele.
+
+A recuperação não tem drama nenhum. Você adiciona a lista de novo: procure as
+credenciais que o seu provedor te entregou e digite outra vez, que leva
+[o mesmo tanto que levou da primeira vez](/pt/blog/configurar-sua-primeira-lista/).
+Favoritos, progresso e configurações continuam intactos, porque nunca foram
+criptografados. O que você refaz é uma credencial, e não uma configuração
+inteira.
+
+## Se a sincronização nunca foi ligada
+
+Aí não há o que migrar e nada nunca ficou exposto. A conta existe só para mover
+os seus próprios dados entre os seus próprios aparelhos, e o player funciona
+completamente sem uma —
+[que é o modelo se comportando como previsto](/pt/blog/traga-sua-propria-lista/).
+Isso significa, sim, que o celular novo começa vazio, e a lista é adicionada à
+mão exatamente como foi no antigo. Os favoritos também são refeitos, já que eles
+só existiram no aparelho que os registrou.
+
+## A ordem que funciona
+
+Antes de o celular antigo sair das suas mãos:
+
+1. Faça login no celular novo com a mesma conta.
+2. Pareie os dois enquanto o antigo ainda está logado e destravado.
+3. Confirme que uma lista realmente reproduz no celular novo — e não apenas que
+   ela aparece na relação.
+
+Depois disso, apague o antigo. Se você já apagou e ainda sabe a sua senha de
+sincronização, está tudo bem. Se nenhuma das duas coisas for verdade, reserve um
+minuto para digitar as credenciais de novo e siga em frente; nada mais na sua
+configuração é afetado, e a sua assinatura em si nunca saiu do lugar.

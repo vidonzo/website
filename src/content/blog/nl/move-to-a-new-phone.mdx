@@ -1,0 +1,103 @@
+---
+title: "Je hele setup meenemen naar een nieuwe telefoon, zonder iets kwijt te raken"
+description: "Favorieten en voortgang volgen je zodra je inlogt. Je inloggegevens volgen je alleen als je nog iets in handen hebt dat ze kan ontgrendelen."
+urlSlug: overzetten-naar-nieuwe-telefoon
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacy", "product"]
+keywords: ["iptv app overzetten nieuwe telefoon", "afspeellijst overzetten ander apparaat", "iptv synchroniseren tussen apparaten", "afspeellijsten terug na telefoonwissel"]
+heroImageAlt: "Twee telefoons naast elkaar, waarvan de ene een QR-code toont en de andere die in beeld heeft."
+---
+
+Een telefoon vervangen is het moment waarop een ontwerpbeslissing zichtbaar wordt
+waar je nooit over hoefde na te denken. Het grootste deel van je setup volgt je
+zonder dat je erom vraagt. Eén deel — het deel dat er het meest toe doet — volgt
+je alleen als je nog iets in handen hebt dat het kan ontgrendelen.
+
+Niets hiervan is ingewikkeld, maar de volgorde van handelen bepaalt de uitkomst.
+Doe de overstap terwijl de oude telefoon nog werkt en nog van jou is, en je raakt
+niets kwijt. Stel je het uit tot daarna, dan moet er mogelijk één onderdeel
+opnieuw worden opgebouwd.
+
+## Wat vanzelf meegaat
+
+Favorieten, kijkvoortgang en app-instellingen synchroniseren in gewone vorm,
+beschermd door normale toegangsregels per gebruiker. Log in op de nieuwe telefoon
+en ze staan er gewoon: de zenders die je markeerde, de aflevering waar je
+halverwege was, de voorkeuren die je maanden geleden instelde en allang bent
+vergeten.
+
+Ze worden met opzet onversleuteld bewaard. Ze versleutelen zou vrijwel niets
+opleveren, want geen ervan is een geheim, en het zou een nieuw toegevoegd
+apparaat niets nuttigs laten tonen tot het was ontgrendeld.
+
+## Wat vergrendeld aankomt
+
+Je inloggegevens bij de provider vallen in een andere klasse, want ze *zijn* je
+abonnement. De Xtream-host, gebruikersnaam en wachtwoord, en elke M3U-bron-URL,
+worden op je apparaat versleuteld voordat ze überhaupt worden opgeslagen. Wat er
+op een server staat is een label, een soort en een blok versleutelde tekst waar
+niemand daar een sleutel voor heeft. De redenering en de techniek staan
+[elders volledig uitgeschreven](/nl/blog/waarom-een-speler-inloggegevens-versleutelt/).
+
+De nieuwe telefoon logt dus in en laat je iets licht verwarrends zien: je
+afspeellijsten staan in de lijst, met de aanduiding **vergrendeld**. De naam die
+je een afspeellijst gaf bestaat uit je eigen woorden en is geen geheim, dus die
+is nooit versleuteld en kan gewoon worden getoond. De inloggegevens erachter
+niet. Het apparaat weet dat de afspeellijst bestaat. Het kan er nog niet mee
+verbinden.
+
+## De twee dingen die hem kunnen ontgrendelen
+
+Je hebt er één van nodig.
+
+**Een apparaat dat al ontgrendeld is.** De nieuwe telefoon genereert een tijdelijk
+sleutelpaar en toont een QR-code. De oude telefoon, nog ingelogd en nog
+ontgrendeld, scant die en vraagt je om te bevestigen. Vervolgens leidt hij een
+gedeeld geheim met het nieuwe apparaat af, verzegelt de datasleutel daarmee en
+uploadt het verzegelde resultaat. De nieuwe telefoon opent dat met zijn eigen
+privésleutel en bewaart wat eruit komt in de iOS Keychain of de Android Keystore.
+De sleutel reist tussen twee apparaten die van jou zijn; de server draagt alleen
+een pakketje dat hij niet kan openen.
+
+**Je synchronisatiewachtwoord.** De datasleutel wordt ook ingepakt met een
+sleutel die uit dat wachtwoord wordt afgeleid, en alleen die ingepakte vorm wordt
+geüpload — het wachtwoord zelf gaat nooit over het netwerk.
+
+## Het deel dat we niet mooier kunnen maken
+
+Is er geen ontgrendeld apparaat meer over en is het synchronisatiewachtwoord weg,
+dan zijn de afspeellijsten dat ook. Niet achtergehouden — wiskundig onbereikbaar.
+Er valt aan onze kant niets te resetten, en dat is precies het punt van het
+ontwerp en tegelijk de prijs ervan.
+
+Het herstel is weinig dramatisch. Je voegt de afspeellijst opnieuw toe: zoek de
+inloggegevens op die je provider je gaf en vul ze nog een keer in, wat
+[dezelfde paar minuten kost als de eerste keer](/nl/blog/eerste-afspeellijst-instellen/).
+Favorieten, voortgang en instellingen blijven onaangeroerd, want die waren nooit
+versleuteld. Wat je opnieuw opbouwt is één set inloggegevens, niet je hele setup.
+
+## Als synchronisatie nooit aan heeft gestaan
+
+Dan valt er niets over te zetten en is er ook nooit iets naar buiten gegaan. Een
+account bestaat alleen om je eigen gegevens tussen je eigen apparaten te
+verplaatsen, en de speler werkt volledig zonder —
+[wat het model is dat doet wat het hoort te doen](/nl/blog/neem-je-eigen-afspeellijst-mee/).
+Het betekent wel dat de nieuwe telefoon leeg begint en dat de afspeellijst met de
+hand wordt toegevoegd, precies zoals dat op de oude ging. Favorieten bouw je ook
+opnieuw op, want die hebben alleen ooit bestaan op het apparaat dat ze had
+vastgelegd.
+
+## De volgorde die werkt
+
+Voordat de oude telefoon uit je handen gaat:
+
+1. Log op de nieuwe telefoon in met hetzelfde account.
+2. Koppel de twee terwijl de oude nog is ingelogd en ontgrendeld.
+3. Controleer dat een afspeellijst op de nieuwe telefoon ook echt speelt — niet
+   alleen dat hij in de lijst staat.
+
+Wis daarna pas de oude. Heb je hem al gewist en ken je je
+synchronisatiewachtwoord nog, dan zit je goed. Is geen van beide waar, reken dan
+op een minuut om de inloggegevens opnieuw in te voeren en ga verder; aan de rest
+van je setup verandert niets, en je abonnement zelf is nooit verhuisd.

@@ -1,0 +1,98 @@
+---
+title: "Cambia de móvil sin perder nada de tu configuración"
+description: "Los favoritos y el progreso te siguen al iniciar sesión. Tus datos de acceso solo te siguen si conservas algo capaz de desbloquearlos."
+urlSlug: cambiar-de-movil-sin-perder-nada
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacidad", "producto"]
+keywords: ["cambiar de móvil sin perder las listas", "pasar una lista iptv a otro móvil", "recuperar listas iptv en un móvil nuevo", "sincronizar iptv entre dispositivos"]
+heroImageAlt: "Dos móviles juntos: uno muestra un código QR y el otro lo tiene encuadrado en la cámara."
+---
+
+Cambiar de móvil es el momento en que se vuelve visible una decisión de diseño en la
+que nunca has tenido que pensar. Casi toda tu configuración te sigue sin que se lo
+pidas. Una parte —justo la que más importa— te sigue solo si conservas algo capaz de
+desbloquearla.
+
+Nada de esto es difícil, pero el orden de las operaciones decide el resultado. Haz
+la mudanza mientras el móvil viejo aún funciona y lo tienes en la mano, y no se
+pierde nada. Déjalo para después y puede que haya una pieza que reconstruir.
+
+## Lo que se mueve solo
+
+Los favoritos, el punto de reproducción y los ajustes de la app se sincronizan en
+claro, protegidos por reglas normales de acceso por usuario. Inicia sesión en el
+móvil nuevo y están ahí sin más: los canales que marcaste, el episodio que dejaste a
+medias, las preferencias que fijaste hace meses y hace mucho que olvidaste.
+
+Están guardados sin cifrar a propósito. Cifrarlos no aportaría casi nada, porque
+ninguno de ellos es un secreto, y haría que un dispositivo recién añadido no te
+mostrara nada útil hasta desbloquearlo.
+
+## Lo que llega bloqueado
+
+Los datos de acceso de tu proveedor son otra clase de dato, porque *son* tu
+suscripción. El host, el usuario y la contraseña de Xtream, y cualquier URL de
+origen M3U, se cifran en tu dispositivo antes de guardarse en ningún sitio. Lo que
+hay en un servidor es una etiqueta, un tipo y un bloque de texto cifrado del que
+allí nadie tiene la clave. El razonamiento y la mecánica están
+[explicados aparte, con detalle](/es/blog/por-que-cifrar-tus-credenciales/).
+
+Así que el móvil nuevo inicia sesión y te enseña algo un poco extraño: tus listas
+aparecen enumeradas y marcadas como **bloqueadas**. El nombre que le pusiste a una
+lista son tus propias palabras y no un secreto, así que nunca se cifró y se puede
+mostrar. La credencial que hay detrás, no. El dispositivo sabe que la lista existe.
+Todavía no puede conectarse con ella.
+
+## Las dos cosas que pueden desbloquearla
+
+Necesitas una de las dos.
+
+**Un dispositivo que ya esté desbloqueado.** El móvil nuevo genera un par de claves
+efímero y muestra un código QR. El viejo, con la sesión iniciada y desbloqueado, lo
+escanea y te pide que confirmes. Después deriva un secreto compartido con el
+dispositivo nuevo, sella con él la clave de datos y sube el resultado sellado. El
+móvil nuevo lo abre con su propia clave privada y guarda lo que sale en el Keychain
+de iOS o en el Keystore de Android. La clave viaja entre dos dispositivos tuyos; el
+servidor solo llega a transportar un paquete que no puede abrir.
+
+**Tu contraseña de sincronización.** La clave de datos se envuelve también con una
+clave derivada de esa contraseña, y solo se sube la forma envuelta: la contraseña en
+sí no cruza nunca la red.
+
+## La parte que no se puede suavizar
+
+Si no queda ningún dispositivo desbloqueado y la contraseña de sincronización se ha
+perdido, las listas se pierden con ella. No retenidas: matemáticamente inaccesibles.
+De nuestro lado no hay nada que restablecer, que es justo el sentido del diseño y
+también su precio.
+
+La recuperación no tiene dramatismo. Vuelves a añadir la lista: buscas los datos de
+acceso que te dio tu proveedor y los escribes otra vez, que son
+[los mismos minutos que te llevó la primera vez](/es/blog/configurar-primera-lista-iptv/).
+Los favoritos, el progreso y los ajustes siguen intactos, porque nunca estuvieron
+cifrados. Lo que reconstruyes es una credencial, no una configuración.
+
+## Si nunca activaste la sincronización
+
+Entonces no hay nada que migrar, y tampoco salió nunca nada del móvil viejo. La
+cuenta existe solo para mover tus propios datos entre tus propios dispositivos, y el
+reproductor funciona entero sin ella, que es
+[el modelo comportándose como debe](/es/blog/trae-tu-propia-lista/). Eso sí, el
+móvil nuevo empieza vacío y la lista se añade a mano exactamente igual que en el
+viejo. También hay que rehacer los favoritos, porque solo existieron en el
+dispositivo que los anotó.
+
+## El orden que funciona
+
+Antes de que el móvil viejo salga de tus manos:
+
+1. Inicia sesión en el móvil nuevo con la misma cuenta.
+2. Empareja los dos mientras el viejo sigue con la sesión iniciada y desbloqueado.
+3. Comprueba que en el móvil nuevo hay una lista que reproduce de verdad, no solo
+   que aparece en pantalla.
+
+Después borra el viejo. Si ya lo has borrado y sigues sabiendo tu contraseña de
+sincronización, no hay problema. Si no se cumple ninguna de las dos cosas, cuenta
+con un minuto para volver a escribir los datos de acceso y seguir; nada más de tu
+configuración se ve afectado, y tu suscripción en sí no se movió en ningún momento.

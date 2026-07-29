@@ -1,0 +1,107 @@
+---
+title: "Transférer toute votre installation sur un nouveau téléphone sans rien perdre"
+description: "Les favoris et la progression vous suivent dès la connexion. Vos identifiants de playlist ne suivent que s'il vous reste de quoi les déverrouiller."
+urlSlug: changer-de-telephone
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["confidentialite", "produit"]
+keywords: ["changer de téléphone application iptv", "transférer sa playlist iptv", "synchroniser iptv nouveau téléphone", "restaurer ses playlists iptv"]
+heroImageAlt: "Deux téléphones côte à côte, l'un affichant un QR code et l'autre le cadrant avec son appareil photo."
+---
+
+Changer de téléphone est le moment où une décision de conception à laquelle vous
+n'aviez jamais eu à penser devient visible. L'essentiel de votre installation
+vous suit sans qu'on vous demande quoi que ce soit. Une partie — celle qui compte
+le plus — ne vous suit que s'il vous reste en main de quoi la déverrouiller.
+
+Rien de tout cela n'est difficile, mais l'ordre des opérations décide du
+résultat. Faites la migration pendant que l'ancien téléphone fonctionne encore
+et se trouve entre vos mains, et rien n'est perdu. Ne vous en occupez qu'après
+coup, et un élément devra peut-être être reconstruit.
+
+## Ce qui se déplace tout seul
+
+Les favoris, la progression de lecture et les réglages de l'application se
+synchronisent en clair, protégés par de simples règles d'accès par utilisateur.
+Connectez-vous sur le nouveau téléphone et ils sont simplement là : les chaînes
+que vous aviez marquées, l'épisode que vous aviez laissé en cours, les
+préférences réglées il y a des mois et oubliées depuis longtemps.
+
+Ils sont stockés non chiffrés à dessein. Les chiffrer n'apporterait presque
+rien, puisqu'aucun d'eux n'est un secret, et cela laisserait un appareil
+nouvellement ajouté sans rien d'utile à afficher tant qu'il n'aurait pas été
+déverrouillé.
+
+## Ce qui arrive verrouillé
+
+Vos identifiants de fournisseur relèvent d'une autre catégorie de données, parce
+qu'ils *sont* votre abonnement. L'hôte Xtream, le nom d'utilisateur et le mot de
+passe, ainsi que toute URL de source M3U, sont chiffrés sur votre appareil avant
+même d'être stockés. Ce qui se trouve sur un serveur, c'est un libellé, un type
+et un bloc de texte chiffré dont personne là-bas ne détient la clé. Le
+raisonnement et la mécanique sont [exposés en
+détail ailleurs](/fr/blog/pourquoi-chiffrer-vos-identifiants/).
+
+Le nouveau téléphone se connecte donc et vous montre quelque chose d'un peu
+étrange : vos playlists sont listées et marquées **verrouillées**. Le nom que
+vous avez donné à une playlist est fait de vos propres mots plutôt que d'un
+secret ; il n'a donc jamais été chiffré et peut être affiché. L'identifiant qui
+se trouve derrière, non. L'appareil sait que la playlist existe. Il ne peut pas
+encore s'y connecter.
+
+## Les deux choses qui peuvent la déverrouiller
+
+Il vous en faut une.
+
+**Un appareil déjà déverrouillé.** Le nouveau téléphone génère une paire de clés
+éphémère et affiche un QR code. L'ancien téléphone, toujours connecté et toujours
+déverrouillé, le scanne et vous demande de confirmer. Il dérive alors un secret
+partagé avec le nouvel appareil, scelle la clé de données avec, et envoie le
+résultat scellé. Le nouveau téléphone l'ouvre avec sa propre clé privée et range
+ce qui en sort dans le Trousseau iOS ou le Keystore Android. La clé circule entre
+deux appareils qui vous appartiennent ; le serveur ne transporte jamais qu'un
+colis qu'il ne peut pas ouvrir.
+
+**Votre mot de passe de synchronisation.** La clé de données est également
+enveloppée par une clé dérivée de ce mot de passe, et seule la forme enveloppée
+est envoyée — le mot de passe lui-même ne traverse jamais le réseau.
+
+## Le point que l'on ne peut pas adoucir
+
+S'il ne reste aucun appareil déverrouillé et que le mot de passe de
+synchronisation est perdu, les playlists le sont avec lui. Pas retenues :
+mathématiquement inaccessibles. Il n'y a rien à réinitialiser de notre côté, ce
+qui est tout l'objet de cette conception et en est aussi le prix.
+
+La récupération n'a rien de dramatique. Vous ré-ajoutez la playlist : vous
+retrouvez les identifiants que votre fournisseur vous a remis et vous les
+saisissez à nouveau, ce qui prend [les mêmes quelques minutes que la première
+fois](/fr/blog/configurer-sa-premiere-playlist/). Les favoris, la progression et
+les réglages sont intacts, parce qu'ils n'ont jamais été chiffrés. Ce que vous
+reconstruisez, c'est un identifiant, pas une installation.
+
+## Si la synchronisation n'a jamais été activée
+
+Alors il n'y a rien à migrer, et rien n'est jamais sorti de l'ancien téléphone.
+Un compte n'existe que pour déplacer vos propres données entre vos propres
+appareils, et le lecteur fonctionne parfaitement sans — [c'est le modèle qui se
+comporte comme prévu](/fr/blog/apportez-votre-playlist/). Cela signifie en
+revanche que le nouveau téléphone démarre vide, et que la playlist s'ajoute à la
+main exactement comme sur l'ancien. Les favoris se reconstruisent aussi,
+puisqu'ils n'ont jamais existé ailleurs que sur l'appareil qui les avait
+enregistrés.
+
+## L'ordre qui fonctionne
+
+Avant que l'ancien téléphone ne quitte votre possession :
+
+1. Connectez-vous sur le nouveau téléphone avec le même compte.
+2. Appairez les deux pendant que l'ancien est encore connecté et déverrouillé.
+3. Vérifiez qu'une playlist se lit réellement sur le nouveau téléphone — pas
+   seulement qu'elle apparaît dans la liste.
+
+Effacez ensuite l'ancien. Si vous l'avez déjà effacé et que vous connaissez
+encore votre mot de passe de synchronisation, tout va bien. Si ni l'un ni l'autre
+n'est vrai, comptez une minute pour resaisir les identifiants et poursuivez ;
+rien d'autre dans votre installation n'est affecté, et votre abonnement lui-même
+n'a jamais bougé.

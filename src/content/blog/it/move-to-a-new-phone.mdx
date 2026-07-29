@@ -1,0 +1,99 @@
+---
+title: "Cambiare telefono senza perdere niente della tua configurazione"
+description: "Preferiti e punto di visione ti seguono con l'accesso. Le credenziali della playlist ti seguono solo se hai ancora in mano qualcosa che possa sbloccarle."
+urlSlug: cambiare-telefono-senza-perdere-nulla
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privacy", "prodotto"]
+keywords: ["trasferire iptv su un nuovo telefono", "spostare playlist su un altro dispositivo", "sincronizzare playlist iptv", "recuperare playlist dopo cambio telefono"]
+heroImageAlt: "Due telefoni affiancati: uno mostra un codice QR, l'altro lo tiene nell'inquadratura della fotocamera."
+---
+
+Sostituire un telefono è il momento in cui una decisione di progetto a cui non hai
+mai dovuto pensare diventa visibile. Gran parte della tua configurazione ti segue
+senza che tu debba chiedere niente. Una parte — quella che conta di più — ti segue
+soltanto se hai ancora in mano qualcosa capace di sbloccarla.
+
+Non c'è niente di difficile, ma l'ordine delle operazioni decide il risultato. Fai
+la migrazione mentre il vecchio telefono funziona ancora ed è ancora tuo, e non
+perdi nulla. Lasciala a dopo, e un pezzo potresti doverlo ricostruire.
+
+## Che cosa si sposta da sé
+
+Preferiti, punto di visione e impostazioni dell'app si sincronizzano in chiaro,
+protetti dalle normali regole di accesso per utente. Fai l'accesso sul telefono
+nuovo e sono semplicemente lì: i canali che avevi segnato, l'episodio a cui eri
+arrivato a metà, le preferenze che hai scelto mesi fa e da tempo dimenticato.
+
+Sono salvati non cifrati di proposito. Cifrarli non porterebbe quasi nulla, perché
+nessuno di questi è un segreto, e lascerebbe un dispositivo appena aggiunto senza
+niente di utile da mostrarti finché non fosse sbloccato.
+
+## Che cosa arriva bloccato
+
+Le credenziali del tuo fornitore sono trattate come una classe di dati diversa,
+perché *sono* il tuo abbonamento. L'host, il nome utente e la password Xtream, e
+l'eventuale URL di una sorgente M3U, vengono cifrati sul tuo dispositivo prima
+ancora di essere salvati. Quello che sta su un server è un'etichetta, un tipo e un
+blocco di testo cifrato di cui lì nessuno ha la chiave. Il ragionamento e la
+meccanica sono
+[esposti per intero altrove](/it/blog/perche-cifrare-le-credenziali/).
+
+Così il telefono nuovo fa l'accesso e ti mostra qualcosa di leggermente strano: le
+tue playlist sono elencate e contrassegnate come **bloccate**. Il nome che hai dato
+a una playlist sono parole tue e non un segreto, quindi non è mai stato cifrato e
+si può mostrare. La credenziale che ci sta dietro no. Il dispositivo sa che la
+playlist esiste. Non riesce ancora a collegarcisi.
+
+## Le due cose che possono sbloccarla
+
+Te ne serve una.
+
+**Un dispositivo già sbloccato.** Il telefono nuovo genera una coppia di chiavi
+effimere e mostra un codice QR. Il vecchio, ancora connesso e ancora sbloccato, lo
+inquadra e ti chiede conferma. Deriva poi un segreto condiviso con il nuovo
+dispositivo, ci sigilla dentro la chiave dati e carica il risultato sigillato. Il
+telefono nuovo lo apre con la propria chiave privata e conserva quello che ne esce
+nel Keychain di iOS o nel Keystore di Android. La chiave viaggia fra due
+dispositivi che sono tuoi; il server porta soltanto un pacco che non può aprire.
+
+**La tua password di sincronizzazione.** La chiave dati viene avvolta anche con una
+chiave derivata da quella password, e viene caricata solo la forma avvolta: la
+password in sé non attraversa mai la rete.
+
+## La parte che non si può addolcire
+
+Se non ti resta nessun dispositivo sbloccato e la password di sincronizzazione è
+persa, le playlist sono perse con lei. Non trattenute: matematicamente
+irraggiungibili. Dalla nostra parte non c'è niente da reimpostare, che è tutto il
+senso di questo progetto oltre che il suo prezzo.
+
+Il recupero non ha niente di drammatico. Riaggiungi la playlist: recuperi le
+credenziali che ti ha rilasciato il fornitore e le reinserisci, che sono
+[gli stessi pochi minuti che ci sono voluti la prima volta](/it/blog/configurare-la-prima-playlist/).
+Preferiti, punto di visione e impostazioni restano intatti, perché non erano mai
+stati cifrati. Quello che ricostruisci è una credenziale, non una configurazione.
+
+## Se la sincronizzazione non è mai stata attivata
+
+Allora non c'è niente da migrare e non è mai uscito niente. Un account esiste
+soltanto per spostare i tuoi dati fra i tuoi dispositivi, e il lettore funziona
+benissimo senza —
+[che è il modello che si comporta come previsto](/it/blog/porta-la-tua-playlist/).
+Vuol dire però che il telefono nuovo parte vuoto, e la playlist si aggiunge a mano
+esattamente come si era fatto sul vecchio. Anche i preferiti si ricostruiscono,
+perché erano sempre esistiti soltanto sul dispositivo che li aveva registrati.
+
+## L'ordine che funziona
+
+Prima che il vecchio telefono esca dalle tue mani:
+
+1. Fai l'accesso sul telefono nuovo con lo stesso account.
+2. Accoppia i due mentre il vecchio è ancora connesso e sbloccato.
+3. Verifica che una playlist si riproduca davvero sul telefono nuovo, non soltanto
+   che compaia nella lista.
+
+Poi cancella il vecchio. Se lo hai già cancellato e conosci ancora la tua password
+di sincronizzazione, sei a posto. Se non vale nessuna delle due, metti in conto un
+minuto per reinserire le credenziali e vai avanti: niente altro della tua
+configurazione ne risente, e il tuo abbonamento in sé non si è mai spostato.

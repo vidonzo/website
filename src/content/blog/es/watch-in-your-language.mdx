@@ -1,0 +1,125 @@
+---
+title: "Ver en tu idioma: subtítulos, pistas de audio y escrituras de derecha a izquierda"
+description: "Traducir una app no es lo mismo que admitir un idioma. Qué hace un reproductor con la codificación, la tipografía y las pistas que trae el stream."
+urlSlug: ver-en-tu-idioma
+publishedAt: 2026-07-29
+sourceLocale: fa
+tags: ["reproducción", "producto"]
+keywords: ["cambiar el idioma del audio", "subtítulos en iptv", "nombres de canales con caracteres raros", "reproductor iptv multiidioma"]
+heroImageAlt: "El menú de pistas de audio y subtítulos abierto sobre un vídeo en reproducción."
+---
+
+Hay una diferencia entre una app traducida a tu idioma y una app que admite tu
+idioma. Con el español la traducción casi siempre existe, así que la diferencia no
+aparece en los textos de la interfaz: aparece en el nombre de un canal con la tilde
+rota, en una tipografía que no dibuja la ñ como toca, o en una pista de audio que
+viene en el stream y a la que no hay forma de llegar.
+
+Un reproductor que trata tu idioma como un caso de primera no te está haciendo un
+favor. Está haciendo ingeniería corriente: la disposición sigue la dirección de la
+escritura, la letra corresponde al sistema de escritura, el texto se muestra tal y
+como llegaron los bytes, y lo que el stream trae se te ofrece. Los sitios donde ese
+trabajo se salta son siempre los mismos tres: la disposición, la letra y las pistas
+que bajan con el stream.
+
+## Los nombres de canal: casi siempre la lista, no la interfaz
+
+Conviene decirlo con claridad, porque se culpa al reproductor constantemente.
+Cuando un nombre de canal llega como `TelevisiÃ³n` o como una ristra de signos de
+interrogación, el fallo suele estar en la codificación de la propia lista y no en
+la interfaz. Es un problema de UTF-8, y remite
+[al archivo y a lo que declara](/es/blog/diferencia-m3u-y-m3u8/). Un reproductor
+puede mostrar bien los bytes que le han dado; no puede reconstruir un nombre que
+nunca le llegó entero.
+
+La otra mitad es qué pasa cuando los nombres sí llegan intactos. La búsqueda tiene
+que aceptar el idioma —escribir «peliculas» sin tilde debería encontrar
+«Películas»— y los prefijos que los proveedores encajan delante del nombre (`ES:`,
+`[HD]`, `FR|`) no deberían impedirte dar con él. Es el mismo trabajo que
+[hace navegable una lista grande](/es/blog/organizar-listas-grandes-iptv/).
+
+Lo mismo vale para los títulos de la guía: son texto que publica tu proveedor en
+[un archivo aparte, con su propio origen](/es/blog/que-es-la-epg-iptv/). Llegan en
+el idioma en que él los escriba, y un reproductor los muestra tal cual.
+
+## De derecha a izquierda: el ejemplo más nítido
+
+El árabe, el persa, el hebreo y el urdu se leen desde la derecha, y la forma más
+barata de decir que se admiten es reflejar unos cuantos iconos. El resultado es una
+app con las flechas al revés que sigue pensando desde la izquierda.
+
+Una disposición de verdad arranca toda la interfaz en el borde derecho:
+
+- **Orden de lectura.** Títulos, texto y botones empiezan a la derecha. La acción
+  principal se coloca donde el ojo llega primero, no donde la dejó un diseño
+  pensado de izquierda a derecha.
+- **Orden del foco.** Aquí deja de ser cosmético. Pulsa la derecha en el mando del
+  televisor y el foco debería ir al siguiente elemento del orden de lectura, que en
+  una interfaz de derecha a izquierda es el de la izquierda. Una app que se salta
+  esto es tolerable en el móvil y hace que
+  [con una cruceta parezca que el mando se ha estropeado](/es/blog/reproductor-iptv-en-android-tv/).
+- **Hacia dónde apunta «atrás».** Una flecha de volver debería señalar hacia donde
+  está lo *anterior*. En una disposición de derecha a izquierda, lo anterior está a
+  la derecha.
+
+Las barras de progreso son la tercera decisión, y la que más veces se toma por
+accidente. Una barra de carga en una disposición de derecha a izquierda se llena
+desde la derecha, igual que el texto. Una línea de tiempo de reproducción suele
+quedarse de izquierda a derecha, porque se corresponde con el paso del tiempo y no
+con el orden de lectura, y quien avanza con el mando espera eso. La cuestión no es
+cuál de las dos respuestas es la correcta. Es que un reproductor que nunca se hizo
+la pregunta la respondió por casualidad.
+
+## La letra tiene que corresponder a la escritura
+
+Cuando una app no indica una tipografía para una escritura, el sistema sustituye
+por lo que le parece más cercano. El texto se sigue leyendo, así que nada parece
+roto, hasta que te fijas en las letras.
+
+En español el daño es discreto y real: una fuente sin ñ ni vocales acentuadas
+obliga al sistema a traer esos caracteres de otra, y la palabra sale con una letra
+de otro grosor o de otra anchura en medio. Se entiende, pero no es la palabra que
+alguien escribió.
+
+En otras escrituras la sustitución cambia lo que pone. En persa, el reemplazo suele
+ser una fuente árabe, y dos letras lo delatan: *ye* y *kaf* se dibujan distinto en
+las dos tradiciones, así que la palabra aparece con un par de puntos o un trazo de
+más. Es tu palabra, mal escrita. Los signos diacríticos se caen o se colocan mal,
+lo que da igual en la mayoría de los nombres de canal e importa mucho en los
+nombres propios. Y las cifras son dos juegos distintos —las persas ۱۲۳۴ y las
+árabes ١٢٣٤—, de modo que una lista que los mezcle se lee como ajena al instante.
+El mismo tipo de fallo aparece en otros sitios: diacríticos apilados del vietnamita
+que chocan entre sí, texto japonés dibujado con formas chinas.
+
+La tipografía no es decoración aquí. Decide si la palabra que hay en la pantalla es
+la palabra correcta.
+
+## Subtítulos y varias pistas de audio
+
+Algunos canales y la mayoría de las películas llevan más de una pista de audio, y a
+veces una o varias de subtítulos. Lo que haya, lo puso el proveedor en el stream, y
+la etiqueta de cada pista viene también del stream. Para quien prefiere la versión
+original, ahí es donde se decide si esa preferencia es practicable.
+
+Del reproductor dependen tres cosas:
+
+- **Presentarlas de forma que se puedan elegir.** Una lista clara durante la
+  reproducción, no algo enterrado en los ajustes, y con las etiquetas que haya dado
+  el stream.
+- **Cambiar sin interrumpir.** Elegir un idioma de audio o una pista de subtítulos
+  no debería significar volver al principio del programa.
+- **Recordar la elección.** Si tienes que volver a seleccionar tu idioma cada vez,
+  la función está a medio hacer.
+
+Y un límite que no esquiva ningún ajuste: un reproductor solo puede ofrecer lo que
+hay en el stream. Si un proveedor envía una película con una sola pista de audio y
+sin subtítulos, ninguna opción de ningún reproductor va a crear unos subtítulos que
+nunca se enviaron. Si un idioma concreto te importa, esa es la pregunta que hay que
+hacerle a tu proveedor antes de renovar.
+
+## Ni es un favor ni es exótico
+
+Nada de lo anterior es un trabajo raro. Cuando el idioma es el inglés, a nada de
+esto lo llama nadie «compatibilidad con el idioma»; se dice simplemente que la app
+funciona. Un reproductor que trata igual a los demás idiomas no está concediendo
+nada. Solo ha terminado su trabajo.

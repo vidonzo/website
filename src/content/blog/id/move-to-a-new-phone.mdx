@@ -1,0 +1,106 @@
+---
+title: "Memindahkan seluruh rangkaian Anda ke ponsel baru tanpa kehilangan apa pun"
+description: "Favorit dan posisi tontonan ikut pindah begitu Anda masuk akun. Data login playlist Anda ikut hanya kalau sesuatu yang bisa membukanya masih di tangan Anda."
+urlSlug: pindah-ke-ponsel-baru
+publishedAt: 2026-07-29
+sourceLocale: en
+tags: ["privasi", "produk"]
+keywords: ["pindah aplikasi iptv ke ponsel baru", "memindahkan playlist iptv ke hp baru", "sinkronisasi playlist iptv", "playlist hilang setelah ganti hp"]
+heroImageAlt: "Dua ponsel berdampingan, satu menampilkan kode QR dan satunya menahan kode itu di dalam bingkai kamera."
+---
+
+Mengganti ponsel adalah saat sebuah keputusan rancangan yang tidak pernah perlu
+Anda pikirkan tiba-tiba menjadi terlihat. Sebagian besar rangkaian Anda ikut
+pindah tanpa diminta. Satu bagiannya — bagian yang paling penting — hanya ikut
+kalau Anda masih memegang sesuatu yang bisa membukanya.
+
+Tidak ada yang sulit di sini, tetapi urutan pengerjaannya menentukan hasilnya.
+Lakukan perpindahannya selagi ponsel lama masih hidup dan masih di tangan Anda,
+dan tidak ada yang hilang. Tunda sampai sesudahnya, dan satu bagian mungkin harus
+disusun ulang.
+
+## Yang pindah dengan sendirinya
+
+Favorit, posisi tontonan, dan pengaturan aplikasi disinkronkan dalam bentuk
+biasa, dilindungi aturan akses per pengguna. Masuk akun di ponsel baru dan
+semuanya sudah begitu saja ada di sana: kanal yang Anda tandai, episode yang
+tadinya Anda tinggalkan di tengah, preferensi yang Anda tetapkan berbulan-bulan
+lalu dan sudah lama Anda lupakan.
+
+Semuanya disimpan tanpa enkripsi dengan sengaja. Mengenkripsinya hampir tidak
+memberi keuntungan apa pun, karena tidak satu pun dari itu berupa rahasia, dan
+justru akan membuat perangkat yang baru ditambahkan tidak menampilkan apa-apa
+yang berguna sampai ia dibuka kuncinya.
+
+## Yang datang dalam keadaan terkunci
+
+Data login penyedia Anda diperlakukan sebagai kelas data yang berbeda, karena
+data itu *adalah* langganan Anda. Host, nama pengguna, dan kata sandi Xtream,
+serta URL sumber M3U mana pun, dienkripsi di perangkat Anda sebelum disimpan sama
+sekali. Yang duduk di server hanyalah sebuah label, sebuah jenis, dan segumpal
+teks tersandi yang kuncinya tidak dipegang siapa pun di sana. Penalaran dan
+mekanismenya
+[diuraikan selengkapnya di tempat lain](/id/blog/mengenkripsi-data-login-playlist/).
+
+Jadi ponsel baru itu masuk akun lalu menunjukkan sesuatu yang agak ganjil:
+playlist Anda terdaftar dan ditandai **terkunci**. Nama yang Anda berikan pada
+sebuah playlist adalah kata-kata Anda sendiri dan bukan rahasia, jadi ia memang
+tidak pernah dienkripsi dan bisa ditampilkan. Data login di baliknya tidak bisa.
+Perangkatnya tahu playlist itu ada. Ia belum bisa menyambung dengannya.
+
+## Dua hal yang bisa membukanya
+
+Anda memerlukan salah satunya.
+
+**Sebuah perangkat yang sudah terbuka kuncinya.** Ponsel baru membuat sepasang
+kunci sementara lalu menampilkan kode QR. Ponsel lama, yang masih masuk akun dan
+masih terbuka kuncinya, memindai kode itu dan meminta Anda mengonfirmasi. Ia lalu
+menurunkan rahasia bersama dengan perangkat baru tersebut, menyegel kunci data
+dengan rahasia itu, lalu mengunggah hasil segelannya. Ponsel baru membukanya
+dengan kunci privatnya sendiri lalu menyimpan isinya di iOS Keychain atau Android
+Keystore. Kuncinya berjalan di antara dua perangkat milik Anda; servernya tidak
+pernah membawa apa pun selain bungkusan yang tidak bisa ia buka.
+
+**Kata sandi sinkronisasi Anda.** Kunci data itu juga dibungkus dengan kunci yang
+diturunkan dari kata sandi tersebut, dan hanya bentuk terbungkusnya yang diunggah
+— kata sandinya sendiri tidak pernah melintasi jaringan.
+
+## Bagian yang tidak bisa diperhalus
+
+Kalau tidak ada lagi perangkat yang terbuka kuncinya dan kata sandi sinkronisasi
+sudah hilang, playlist Anda hilang bersamanya. Bukan ditahan — secara matematis
+tidak tersedia. Tidak ada apa pun di sisi kami yang bisa disetel ulang, dan itu
+justru seluruh maksud rancangannya sekaligus harga yang harus dibayarnya.
+
+Pemulihannya sendiri tidak dramatis. Anda menambahkan ulang playlistnya: cari
+data login yang diterbitkan penyedia Anda lalu masukkan lagi, yang memakan
+[waktu semenit yang sama dengan waktu pertama kali](/id/blog/menyiapkan-playlist-pertama/).
+Favorit, posisi tontonan, dan pengaturan sama sekali tidak tersentuh, karena
+semuanya memang tidak pernah dienkripsi. Yang Anda susun ulang adalah satu data
+login, bukan sebuah rangkaian.
+
+## Kalau sinkronisasi tidak pernah dinyalakan
+
+Berarti tidak ada yang perlu dipindahkan dan tidak pernah ada yang terekspos.
+Akun hanya ada untuk memindahkan data Anda sendiri antarperangkat Anda sendiri,
+dan pemutarnya bekerja sepenuhnya tanpa akun —
+[dan itu memang modelnya berjalan sebagaimana mestinya](/id/blog/bawa-playlist-anda-sendiri/).
+Konsekuensinya, ponsel baru memang mulai dalam keadaan kosong, dan playlistnya
+ditambahkan dengan tangan persis seperti dulu di ponsel lama. Favorit pun disusun
+ulang, karena favorit itu hanya pernah ada di perangkat yang mencatatnya.
+
+## Urutan yang berhasil
+
+Sebelum ponsel lama lepas dari tangan Anda:
+
+1. Masuk akun di ponsel baru dengan akun yang sama.
+2. Pasangkan keduanya selagi ponsel lama masih masuk akun dan masih terbuka
+   kuncinya.
+3. Pastikan sebuah playlist benar-benar bisa diputar di ponsel baru — bukan
+   sekadar muncul di daftarnya.
+
+Setelah itu barulah hapus isi ponsel lama. Kalau Anda sudah terlanjur
+menghapusnya tetapi masih mengetahui kata sandi sinkronisasi Anda, keadaan Anda
+aman. Kalau keduanya tidak terpenuhi, sediakan satu menit untuk memasukkan ulang
+data loginnya lalu lanjutkan; tidak ada bagian lain dari rangkaian Anda yang
+terpengaruh, dan langganannya sendiri memang tidak pernah ikut berpindah.
