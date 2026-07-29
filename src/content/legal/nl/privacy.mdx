@@ -1,0 +1,77 @@
+---
+title: "Privacybeleid"
+description: "Wat Vidonzo bewaart, wat het niet kan lezen, en hoe je er alles van kwijtraakt."
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo is een mediaspeler. Het verkoopt geen zenders, host geen inhoud en hoeft
+niet te weten wat je kijkt om te werken. Dit beleid beschrijft de gegevens die de
+app en de optionele synchronisatiedienst verwerken.
+
+## Vidonzo gebruiken zonder account
+
+Je kunt Vidonzo gebruiken zonder in te loggen. In die modus wordt alles — je
+afspeellijsten, favorieten, kijkvoortgang, downloads en instellingen — alleen op
+je apparaat bewaard. Er wordt niets naar ons verstuurd.
+
+De app neemt contact op met je eigen IPTV-provider en met elke programmagids-URL
+die je instelt. Die verzoeken gaan rechtstreeks van je apparaat naar die
+provider, en wat daar wordt gelogd valt onder hun beleid, niet onder het onze.
+
+## Als je synchronisatie aanzet
+
+Inloggen maakt een account aan, zodat je afspeellijsten en je voortgang met je
+meegaan tussen apparaten. Wij bewaren dan:
+
+- **Account**: je e-mailadres, verwerkt door onze authenticatiedienst, en een
+  optionele weergavenaam.
+- **Afspeellijstbronnen**: je Xtream-host, gebruikersnaam en wachtwoord, en elke
+  M3U-URL, opgeslagen **end-to-end versleuteld**. Ze worden vóór het uploaden op
+  je apparaat versleuteld met AES‑256‑GCM, onder een sleutel die met Argon2id uit
+  je synchronisatiewachtwoord wordt afgeleid. Wij hebben alleen versleutelde
+  tekst en kunnen ze niet lezen. Het label dat je een afspeellijst geeft, wordt
+  in platte tekst bewaard, want dat is je eigen weergavenaam ervoor.
+- **Favorieten, kijkvoortgang en app-instellingen**, zodat ze op al je apparaten
+  overeenkomen. Die worden in platte tekst bewaard en beschermd door
+  toegangsregels per gebruiker.
+- **Apparaten**: een naam die je zelf kiest, het apparaattype, een publieke
+  sleutel en wanneer het apparaat voor het laatst is gezien — genoeg om een nieuw
+  apparaat te koppelen en een apparaat dat je kwijt bent in te trekken.
+
+Je synchronisatiewachtwoord verlaat nooit je apparaat. Daarom **kunnen wij het
+niet herstellen**, en het kwijtraken betekent dat ook je versleutelde
+afspeellijsten niet hersteld kunnen worden.
+
+## Wat we niet doen
+
+De Vidonzo-app bevat geen advertentie-SDK's en geen analytics in de app of
+gedragstracking. We bouwen geen profiel van je op, verkopen geen persoonsgegevens
+en verwerken geen betalingen.
+
+## Analyse van de website
+
+De openbare Vidonzo-website gebruikt Google Tag Manager en Microsoft Clarity om
+paginaverkeer, sessieopnames en heatmaps te begrijpen. Clarity maskeert gevoelige
+inhoud standaard. Deze hulpmiddelen helpen ons de website en het downloadtraject
+te verbeteren; ze staan los van de Vidonzo-app en geven ons geen toegang tot je
+afspeellijsten, providergegevens of kijkgeschiedenis.
+
+## Bewaren en verwijderen
+
+Synchronisatiegegevens blijven bewaard zolang je account bestaat. Je kunt je
+account en alles wat eraan hangt op elk moment verwijderen — zie
+[Account- en gegevensverwijdering](/nl/account-deletion/). Gegevens die alleen op
+je apparaat staan, verwijder je door ze in de app te wissen, de gegevens van de
+app te wissen, of Vidonzo te deïnstalleren.
+
+## Kinderen
+
+Vidonzo richt zich niet op kinderen onder de 13, en wij verzamelen hun gegevens
+niet bewust.
+
+## Wijzigingen en contact
+
+Verandert dit beleid wezenlijk, dan werken we de datum hierboven bij en melden we
+het in de app. Vragen gaan naar
+[support@vidonzo.com](mailto:support@vidonzo.com).

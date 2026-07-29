@@ -1,0 +1,49 @@
+---
+title: "Instale o Vidonzo na Android TV"
+description: "Como instalar a versão para TV por APK em uma televisão ou TV Box."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+O Vidonzo tem uma versão dedicada para Android TV, com navegação completa pelo
+controle. Ela é distribuída como APK direto, então a instalação é por sideload.
+
+## Permitir instalação de fontes desconhecidas
+
+Na sua TV, abra **Configurações → Segurança e restrições → Fontes desconhecidas**
+e habilite o gerenciador de arquivos ou o navegador que você vai usar. Cada
+fabricante escreve isso de um jeito; procure por “fontes desconhecidas” ou
+“instalar apps desconhecidos”.
+
+## Opção 1 — um aplicativo de download
+
+1. Instale um aplicativo de download pela Play Store na sua TV.
+2. Informe o endereço do APK que está na [página de download](/pt/download/).
+3. Confirme a instalação quando for pedido.
+
+## Opção 2 — um pen drive
+
+1. Baixe o APK de Android TV em um computador.
+2. Copie para um pen drive e conecte o pen drive na TV.
+3. Abra com um gerenciador de arquivos e confirme a instalação.
+
+## Opção 3 — de outro aparelho Android
+
+Com ADB pela rede, de um computador na mesma rede:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Fazer login na televisão
+
+Digitar e-mail e senha com um controle é sofrido, então o login na TV usa um
+código de seis dígitos enviado para o seu e-mail. As suas listas aparecem
+bloqueadas até você aprovar a TV a partir de um celular que já está logado.
+
+## Atualizar
+
+Versões instaladas por sideload não se atualizam sozinhas. Instale o APK mais
+novo por cima do antigo — as suas listas, favoritos e progresso são mantidos.

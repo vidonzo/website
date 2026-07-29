@@ -1,0 +1,50 @@
+---
+title: "Zainstaluj Vidonzo na Android TV"
+description: "Ręczna instalacja wersji telewizyjnej na telewizorze lub przystawce telewizyjnej."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo ma osobną wersję dla Android TV, z pełną nawigacją pilotem. Jest
+rozpowszechniana jako bezpośredni plik APK, więc instaluje się ją ręcznie.
+
+## Zezwolenie na instalację z nieznanych źródeł
+
+Na telewizorze otwórz **Ustawienia → Bezpieczeństwo i ograniczenia → Nieznane
+źródła** i włącz tam menedżer plików albo przeglądarkę, z której zaraz
+skorzystasz. Każdy producent nazywa to inaczej; szukaj „nieznanych źródeł” albo
+„instalowania nieznanych aplikacji”.
+
+## Sposób pierwszy — aplikacja pobierająca
+
+1. Zainstaluj na telewizorze aplikację pobierającą ze sklepu Play.
+2. Wpisz adres pliku APK ze [strony pobierania](/pl/download/).
+3. Potwierdź instalację, gdy pojawi się pytanie.
+
+## Sposób drugi — pamięć USB
+
+1. Pobierz plik APK dla Android TV na komputerze.
+2. Skopiuj go na pamięć USB i podłącz ją do telewizora.
+3. Otwórz go menedżerem plików i potwierdź instalację.
+
+## Sposób trzeci — z innego urządzenia z Androidem
+
+Przez ADB po sieci, z komputera w tej samej sieci:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Logowanie na telewizorze
+
+Wpisywanie adresu e-mail i hasła pilotem jest udręką, więc logowanie na
+telewizorze odbywa się sześciocyfrowym kodem wysyłanym na Twój adres e-mail.
+Playlisty pokazują się wtedy jako zablokowane, dopóki nie zatwierdzisz
+telewizora z telefonu, który jest już zalogowany.
+
+## Aktualizacja
+
+Wersje instalowane ręcznie same się nie aktualizują. Zainstaluj nowszy plik APK
+na starym — playlisty, ulubione i postęp oglądania zostają zachowane.

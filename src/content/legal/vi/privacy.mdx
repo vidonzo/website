@@ -1,0 +1,78 @@
+---
+title: "Chính sách quyền riêng tư"
+description: "Vidonzo lưu gì, đọc không được gì, và làm sao để xóa sạch tất cả."
+page: privacy
+publishedAt: 2026-07-27
+---
+
+Vidonzo là một trình phát đa phương tiện. Ứng dụng không bán kênh, không lưu trữ
+nội dung, và không cần biết bạn xem gì thì mới chạy được. Chính sách này mô tả dữ
+liệu mà ứng dụng và dịch vụ đồng bộ tùy chọn xử lý.
+
+## Dùng Vidonzo mà không có tài khoản
+
+Bạn có thể dùng Vidonzo mà không đăng nhập. Ở chế độ đó, mọi thứ — danh sách
+phát, kênh yêu thích, tiến độ xem, các mục đã tải về và thiết lập của bạn — chỉ
+được lưu trên thiết bị của bạn. Không có gì được gửi cho chúng tôi.
+
+Ứng dụng liên hệ với chính nhà cung cấp IPTV của bạn và mọi đường dẫn lịch phát
+sóng mà bạn thiết lập. Những yêu cầu đó đi thẳng từ thiết bị của bạn tới nhà cung
+cấp ấy, và những gì họ ghi lại là chuyện thuộc chính sách của họ, không phải của
+chúng tôi.
+
+## Nếu bạn bật đồng bộ
+
+Đăng nhập sẽ tạo một tài khoản để danh sách phát và tiến độ xem của bạn theo bạn
+đi giữa các thiết bị. Khi đó chúng tôi lưu:
+
+- **Tài khoản**: địa chỉ email của bạn, do nhà cung cấp dịch vụ xác thực của
+  chúng tôi quản lý, và một tên hiển thị tùy chọn.
+- **Nguồn danh sách phát**: host, tên đăng nhập và mật khẩu Xtream của bạn, cùng
+  mọi đường dẫn M3U, được lưu ở dạng **mã hóa đầu cuối**. Chúng được mã hóa ngay
+  trên thiết bị của bạn bằng AES‑256‑GCM trước khi tải lên, dưới một khóa dẫn
+  xuất từ mật khẩu đồng bộ của bạn bằng Argon2id. Chúng tôi chỉ giữ phần dữ liệu
+  đã mã hóa và không đọc được chúng. Cái nhãn bạn đặt cho một danh sách phát thì
+  được lưu ở dạng thường, vì đó là tên hiển thị do chính bạn đặt ra cho nó.
+- **Kênh yêu thích, tiến độ xem và thiết lập ứng dụng**, để chúng khớp nhau giữa
+  các thiết bị. Những thứ này được lưu ở dạng thường và được bảo vệ bằng quy tắc
+  truy cập theo từng người dùng.
+- **Thiết bị**: một cái tên do bạn chọn, loại thiết bị, một khóa công khai, và
+  thời điểm nhìn thấy lần cuối — vừa đủ để liên kết một thiết bị mới và thu hồi
+  một thiết bị bạn đã mất.
+
+Mật khẩu đồng bộ của bạn không bao giờ rời khỏi thiết bị. Chính vì thế **chúng
+tôi không thể khôi phục nó**, và mất nó nghĩa là các danh sách phát đã mã hóa của
+bạn cũng không khôi phục được.
+
+## Những gì chúng tôi không làm
+
+Ứng dụng Vidonzo không chứa SDK quảng cáo, không có phân tích trong ứng dụng và
+không có theo dõi hành vi. Chúng tôi không dựng hồ sơ về bạn, không bán dữ liệu
+cá nhân, và không xử lý thanh toán.
+
+## Phân tích trên trang web
+
+Trang web công khai của Vidonzo dùng Google Tag Manager và Microsoft Clarity để
+hiểu lưu lượng truy cập trang, bản ghi phiên và bản đồ nhiệt. Clarity mặc định
+che các nội dung nhạy cảm. Những công cụ này giúp chúng tôi cải thiện trang web
+và luồng tải về; chúng tách biệt với ứng dụng Vidonzo và không cho chúng tôi truy
+cập vào danh sách phát, thông tin đăng nhập nhà cung cấp hay lịch sử xem của bạn.
+
+## Lưu giữ và xóa
+
+Dữ liệu đồng bộ được giữ chừng nào tài khoản của bạn còn tồn tại. Bạn có thể xóa
+tài khoản và mọi thứ gắn với nó bất cứ lúc nào — xem
+[Xóa tài khoản và dữ liệu](/vi/account-deletion/). Dữ liệu chỉ nằm trên thiết bị
+của bạn thì được gỡ bằng cách xóa nó trong ứng dụng, xóa dữ liệu của ứng dụng,
+hoặc gỡ cài đặt Vidonzo.
+
+## Trẻ em
+
+Vidonzo không hướng tới trẻ em dưới 13 tuổi, và chúng tôi không cố ý thu thập dữ
+liệu của các em.
+
+## Thay đổi và liên hệ
+
+Nếu chính sách này thay đổi đáng kể, chúng tôi sẽ cập nhật ngày ở trên và ghi chú
+điều đó trong ứng dụng. Mọi câu hỏi xin gửi tới
+[support@vidonzo.com](mailto:support@vidonzo.com).

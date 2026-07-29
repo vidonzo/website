@@ -1,0 +1,46 @@
+---
+title: "Xtream of M3U — wat kun je het beste nemen?"
+description: "Wat elk afspeellijstformaat je geeft, en wanneer het verschil ertoe doet."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Biedt je provider allebei aan, neem dan **Xtream**. De korte reden is metadata.
+
+## Wat Xtream je geeft
+
+Een Xtream Codes-account is een API, geen bestand. Vidonzo kan er dingen aan
+vragen die een platte afspeellijst helemaal niet kan uitdrukken:
+
+- live zenders, films en series als **aparte catalogi**
+- series opgesplitst in **seizoenen en afleveringen**
+- posters, beoordelingen, samenvattingen en cast
+- de programmagids, zonder een tweede URL
+- de categoriestructuur zoals de provider die heeft vastgelegd
+
+## Wat M3U je geeft
+
+Een M3U-bestand is een lijst met stream-URL's met een naam en soms een logo. Meer
+kan het niet dragen. Vidonzo groepeert op het attribuut `group-title` waar dat
+bestaat, maar films en afleveringen komen binnen als een platte lijst met namen,
+want dat is wat het formaat bevat.
+
+M3U is toch de juiste keuze als:
+
+- je provider alleen M3U aanbiedt
+- je een handgemaakte lijst van een paar dozijn zenders bijhoudt
+- je een afspeellijst wilt die **zonder enige server** werkt, vanaf een lokaal
+  bestand
+
+## Een gids toevoegen aan een M3U-afspeellijst
+
+Publiceert je provider een XMLTV-gids apart, voeg de URL daarvan dan toe bij
+**Instellingen → Programmagids**. Live zenders laten dan zien wat er nu en straks
+is, met de tijdzone correct verwerkt.
+
+## Allebei gebruiken
+
+Je kunt meerdere bronnen naast elkaar houden — een Xtream-account voor de
+hoofdcatalogus en een lokale M3U voor een handvol zenders die je zelf hebt
+toegevoegd — en er met de bronkiezer tussen wisselen.

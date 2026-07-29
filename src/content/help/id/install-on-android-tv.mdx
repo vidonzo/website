@@ -1,0 +1,50 @@
+---
+title: "Memasang Vidonzo di Android TV"
+description: "Memasang versi TV lewat sideload di televisi atau TV box."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo punya versi Android TV tersendiri dengan navigasi remot yang lengkap.
+Versi itu dibagikan sebagai APK langsung, jadi pemasangannya lewat sideload.
+
+## Mengizinkan pemasangan dari sumber tidak dikenal
+
+Di televisi Anda, buka **Pengaturan → Keamanan & pembatasan → Sumber tidak
+dikenal** lalu aktifkan aplikasi pengelola berkas atau peramban yang hendak Anda
+pakai. Tiap produsen menuliskannya dengan kata yang berbeda; cari “sumber tidak
+dikenal” atau “pasang aplikasi tidak dikenal”.
+
+## Cara 1 — aplikasi downloader
+
+1. Pasang aplikasi downloader dari Play Store di televisi Anda.
+2. Masukkan alamat APK dari [halaman unduhan](/id/download/).
+3. Konfirmasi pemasangan saat diminta.
+
+## Cara 2 — flashdisk USB
+
+1. Unduh APK Android TV di komputer.
+2. Salin ke flashdisk USB lalu tancapkan flashdisk itu ke televisi.
+3. Buka dengan pengelola berkas dan konfirmasi pemasangan.
+
+## Cara 3 — dari perangkat Android lain
+
+Dengan ADB lewat jaringan, dari komputer yang berada di jaringan yang sama:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Masuk akun di televisi
+
+Mengetik surel dan kata sandi dengan remot itu menyiksa, jadi masuk akun di TV
+memakai kode enam digit yang dikirim ke surel Anda. Playlist Anda lalu tampil
+terkunci sampai Anda menyetujui TV itu dari ponsel yang sudah masuk akun.
+
+## Memperbarui
+
+Versi hasil sideload tidak memperbarui dirinya sendiri. Pasang APK yang lebih
+baru di atas yang lama — playlist, favorit, dan posisi tontonan Anda tetap
+tersimpan.

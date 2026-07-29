@@ -1,0 +1,46 @@
+---
+title: "Xtream mi, M3U mu — hangisini kullanmalısınız?"
+description: "Her oynatma listesi biçimi size ne verir ve aradaki fark ne zaman önem kazanır."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Sağlayıcınız ikisini de sunuyorsa **Xtream** kullanın. Kısa gerekçe: meta veri.
+
+## Xtream size ne verir
+
+Xtream Codes hesabı bir dosya değil, bir API'dir. Vidonzo ona, düz bir listenin
+ifade edemeyeceği şeyleri sorabilir:
+
+- canlı kanallar, filmler ve diziler **ayrı kataloglar** hâlinde
+- **sezon ve bölümlere** ayrılmış diziler
+- afişler, puanlar, özetler ve oyuncu kadrosu
+- ikinci bir adrese gerek kalmadan yayın rehberi
+- sağlayıcının tanımladığı hâliyle kategori yapısı
+
+## M3U size ne verir
+
+M3U dosyası, bir ad ve bazen bir logoyla birlikte yayın adreslerinden oluşan bir
+listedir. Taşıyabildiği tek şey budur. Vidonzo, `group-title` özniteliğinin
+bulunduğu yerlerde ona göre gruplar; ama filmler ve bölümler düz bir ad listesi
+olarak gelir, çünkü biçimin içinde bundan fazlası yoktur.
+
+Yine de M3U şu durumlarda doğru seçimdir:
+
+- sağlayıcınız yalnızca M3U veriyorsa
+- elle hazırladığınız birkaç düzine kanallık bir listeniz varsa
+- yerel bir dosyadan, **hiçbir sunucu olmadan** çalışan bir oynatma listesi
+  istiyorsanız
+
+## M3U listesine rehber ekleme
+
+Sağlayıcınız XMLTV rehberini ayrıca yayımlıyorsa, adresini
+**Ayarlar → Yayın rehberi** bölümüne ekleyin. Canlı kanallar o zaman şimdi ve
+sırada ne olduğunu gösterir, saat dilimi de doğru işlenir.
+
+## İkisini birlikte kullanma
+
+Birden çok kaynağı yan yana tutabilirsiniz — ana katalog için bir Xtream hesabı,
+kendi eklediğiniz birkaç kanal için yerel bir M3U — ve kaynak seçiciden
+aralarında geçiş yapabilirsiniz.

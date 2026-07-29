@@ -1,0 +1,53 @@
+---
+title: "Añade tu primera lista"
+description: "Cómo meter en Vidonzo una cuenta Xtream, un enlace M3U o un archivo local."
+category: setup
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo llega sin ningún canal. Lo primero que te pide es una lista que ya
+tengas. Hay tres formas de dársela.
+
+## Xtream Codes
+
+Elige **Xtream Codes** e introduce los tres datos que te dio tu proveedor:
+
+- **Host** — la dirección del servidor, por ejemplo `http://example.com:8080`.
+  Incluye el puerto si lo hay.
+- **Usuario**
+- **Contraseña**
+
+Xtream es la opción más completa: los canales en directo, las películas y las
+series llegan juntos, y con ellos la guía de programación.
+
+## Un enlace M3U o M3U8
+
+Elige **M3U URL** y pega la dirección. Vidonzo recupera la lista, la guarda en
+caché y vuelve a leerla cuando cambia. Si tu proveedor te da además una URL de
+guía XMLTV, añádela en **Ajustes → Guía de programación** para que los canales
+en directo muestren qué se está emitiendo.
+
+## Un archivo M3U local
+
+Elige **Archivo local** y escoge un archivo `.m3u` o `.m3u8` de tu dispositivo.
+En este modo no sale nada de tu dispositivo, y no hace falta conexión a internet
+para recorrer la lista: solo para reproducir un stream que apunte a internet.
+
+## Cuando termina de cargar
+
+La primera carga lee el catálogo entero y empareja las carátulas, y en una lista
+grande puede tardar un minuto. Después queda en caché, y volver a abrir la
+aplicación es inmediato.
+
+Puedes tener varias listas a la vez y cambiar entre ellas desde el selector de
+fuente, en la parte de arriba de la pantalla de inicio.
+
+## Si falla
+
+- **Credenciales incorrectas** — la causa más común. Escribe la contraseña a
+  mano en vez de pegarla; es facilísimo copiar sin querer un espacio final.
+- **Al host le falta el puerto** — muchos servidores Xtream no están en el
+  puerto 80.
+- **Tu red bloquea al proveedor** — prueba con datos móviles, o configura un
+  proxy en **Ajustes → Red**.

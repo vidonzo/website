@@ -1,0 +1,47 @@
+---
+title: "Xtream atau M3U — mana yang sebaiknya dipakai?"
+description: "Apa yang diberikan masing-masing format playlist, dan kapan perbedaannya terasa."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Kalau penyedia Anda menawarkan keduanya, pakai **Xtream**. Alasan singkatnya
+adalah metadata.
+
+## Apa yang diberikan Xtream
+
+Akun Xtream Codes adalah sebuah API, bukan sebuah berkas. Vidonzo bisa meminta
+darinya hal-hal yang tidak mampu diungkapkan oleh playlist datar:
+
+- kanal live, film, dan serial sebagai **katalog terpisah**
+- serial yang terpecah menjadi **musim dan episode**
+- poster, rating, sinopsis, dan pemeran
+- panduan acara, tanpa URL kedua
+- struktur kategori persis seperti yang ditetapkan penyedia
+
+## Apa yang diberikan M3U
+
+Berkas M3U adalah daftar URL siaran dengan sebuah nama dan kadang sebuah logo.
+Hanya itu yang bisa dibawanya. Vidonzo akan mengelompokkan berdasarkan atribut
+`group-title` di mana atribut itu ada, tetapi film dan episode datang sebagai
+daftar nama yang datar, karena memang hanya itu isi formatnya.
+
+M3U tetap pilihan yang tepat ketika:
+
+- penyedia Anda hanya menawarkan M3U
+- Anda memelihara daftar buatan tangan berisi beberapa lusin kanal
+- Anda ingin playlist yang bekerja **tanpa server sama sekali**, dari berkas
+  lokal
+
+## Menambahkan panduan ke playlist M3U
+
+Kalau penyedia Anda menerbitkan panduan XMLTV secara terpisah, tambahkan URL-nya
+di **Pengaturan → Panduan acara**. Kanal live lalu menampilkan apa yang sedang
+dan akan tayang, dengan zona waktu yang ditangani dengan benar.
+
+## Memakai keduanya
+
+Anda bisa menyimpan beberapa sumber berdampingan — akun Xtream untuk katalog
+utama dan M3U lokal untuk segelintir kanal yang Anda tambahkan sendiri — lalu
+berpindah di antaranya lewat pemilih sumber.

@@ -1,0 +1,46 @@
+---
+title: "Xtream czy M3U — co wybrać?"
+description: "Co daje każdy z formatów playlisty i kiedy ta różnica ma znaczenie."
+category: playlists
+order: 10
+publishedAt: 2026-07-27
+---
+
+Jeśli dostawca oferuje oba, wybierz **Xtream**. Krótkie uzasadnienie to
+metadane.
+
+## Co daje Xtream
+
+Konto Xtream Codes to API, a nie plik. Vidonzo może zapytać je o rzeczy, których
+płaska playlista nie potrafi wyrazić:
+
+- kanały na żywo, filmy i seriale jako **osobne katalogi**
+- seriale podzielone na **sezony i odcinki**
+- plakaty, oceny, opisy i obsadę
+- przewodnik po programach, bez drugiego adresu
+- strukturę kategorii w takiej postaci, w jakiej zdefiniował ją dostawca
+
+## Co daje M3U
+
+Plik M3U to lista adresów strumieni z nazwą i czasem logo. Więcej unieść nie
+potrafi. Vidonzo grupuje według atrybutu `group-title` tam, gdzie taki istnieje,
+ale filmy i odcinki przychodzą jako płaska lista nazw, bo tyle właśnie zawiera
+ten format.
+
+M3U wciąż jest właściwym wyborem, kiedy:
+
+- dostawca oferuje wyłącznie M3U
+- masz ręcznie ułożoną listę kilkudziesięciu kanałów
+- chcesz playlistę, która działa **bez żadnego serwera**, z pliku lokalnego
+
+## Dodanie przewodnika do playlisty M3U
+
+Jeśli dostawca publikuje przewodnik XMLTV osobno, dodaj jego adres
+w **Ustawienia → Przewodnik po programach**. Kanały na żywo pokazują wtedy, co
+leci teraz i co będzie dalej, z poprawnie obsłużoną strefą czasową.
+
+## Korzystanie z obu naraz
+
+Możesz trzymać kilka źródeł obok siebie — konto Xtream na główny katalog
+i lokalny M3U na garstkę kanałów dodanych samodzielnie — i przełączać się między
+nimi w przełączniku źródeł.

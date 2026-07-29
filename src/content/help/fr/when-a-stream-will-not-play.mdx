@@ -1,0 +1,54 @@
+---
+title: "Quand un flux refuse de se lancer"
+description: "Déterminer si le problème vient du fournisseur, du réseau ou de l'application."
+category: troubleshooting
+order: 10
+publishedAt: 2026-07-27
+---
+
+La plupart des échecs de lecture ne viennent pas du lecteur. Voici l'ordre dans
+lequel il vaut la peine de vérifier.
+
+## Une autre chaîne fonctionne-t-elle ?
+
+Essayez deux ou trois autres chaînes de la même playlist.
+
+- **Tout échoue** — le problème vient de la playlist, du compte ou du réseau.
+- **Une seule chaîne échoue** — ce flux est hors service ou mort chez le
+  fournisseur. Rien dans l'application ne peut y remédier.
+
+## Le compte est-il toujours valide ?
+
+Les comptes Xtream expirent, et beaucoup de fournisseurs limitent le nombre
+d'appareils autorisés à lire en même temps. Si vous regardez sur le téléviseur
+et sur le téléphone en même temps, vous avez peut-être simplement dépassé la
+limite. Déconnectez-vous sur l'un des deux et réessayez.
+
+## Du buffering plutôt qu'un échec
+
+Augmentez le cache dans **Réglages → Lecture**. Un cache plus grand absorbe une
+connexion instable, au prix d'un démarrage plus lent. Si le flux est en 4K et
+l'appareil ancien, essayez une variante de moindre qualité de la même chaîne,
+lorsque votre fournisseur en propose une.
+
+## Le flux se coupe en cours de lecture
+
+Vidonzo se reconnecte automatiquement. Si les coupures se répètent, c'est que le
+fournisseur bride le débit ou que le réseau est instable — sur le téléviseur, une
+connexion filaire règle généralement la question.
+
+## Rien ne se charge du tout
+
+- Vérifiez que la playlist se charge toujours : tirez pour actualiser sur
+  l'écran d'accueil.
+- Si votre réseau bloque le fournisseur, définissez un proxy dans
+  **Réglages → Réseau**.
+- Vérifiez l'horloge de l'appareil. Une heure système erronée casse TLS, et les
+  flux en HTTPS échouent sans raison apparente.
+
+## Toujours bloqué
+
+Écrivez à [support@vidonzo.com](mailto:support@vidonzo.com) en précisant
+l'appareil, la version de Vidonzo, si la source est Xtream ou M3U, et ce que
+vous avez vu. Ces quatre éléments résolvent la plupart des signalements dès la
+première réponse.

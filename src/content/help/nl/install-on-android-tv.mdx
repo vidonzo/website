@@ -1,0 +1,51 @@
+---
+title: "Vidonzo installeren op Android TV"
+description: "De tv-versie sideloaden op een televisie of tv-box."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo heeft een eigen Android TV-versie met volledige bediening via de
+afstandsbediening. Die wordt verspreid als los APK-bestand, dus je installeert
+hem door te sideloaden.
+
+## Installeren uit onbekende bronnen toestaan
+
+Open op je tv **Instellingen → Beveiliging en beperkingen → Onbekende bronnen**
+en zet de bestandsbeheerder of browser aan die je zo gaat gebruiken. Elke
+fabrikant verwoordt dit anders; zoek naar ‘onbekende bronnen’ of ‘onbekende apps
+installeren’.
+
+## Manier 1 — een downloader-app
+
+1. Installeer een downloader-app uit de Play Store op je tv.
+2. Voer het APK-adres in van de [downloadpagina](/nl/download/).
+3. Bevestig de installatie als daarom wordt gevraagd.
+
+## Manier 2 — een usb-stick
+
+1. Download het Android TV-APK op een computer.
+2. Kopieer het naar een usb-stick en steek die in de tv.
+3. Open het met een bestandsbeheerder en bevestig de installatie.
+
+## Manier 3 — vanaf een ander Android-apparaat
+
+Met ADB over het netwerk, vanaf een computer op hetzelfde netwerk:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Inloggen op een televisie
+
+Een e-mailadres en wachtwoord intypen met een afstandsbediening is beroerd, dus
+inloggen op de tv gaat in plaats daarvan met een zescijferige code die naar je
+e-mail wordt gestuurd. Je afspeellijsten staan daarna als vergrendeld tot je de
+tv goedkeurt vanaf een telefoon die al is ingelogd.
+
+## Bijwerken
+
+Gesideloade versies werken zichzelf niet bij. Installeer het nieuwere APK over
+het oude heen — je afspeellijsten, favorieten en voortgang blijven bewaard.

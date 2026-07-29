@@ -1,0 +1,54 @@
+---
+title: "Installer Vidonzo sur Android TV"
+description: "Installer la version TV en sideload sur un téléviseur ou un boîtier TV."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo dispose d'une version Android TV dédiée, avec une navigation complète à
+la télécommande. Elle est distribuée sous forme d'APK direct : elle s'installe
+donc en sideload.
+
+## Autoriser les installations depuis des sources inconnues
+
+Sur le téléviseur, ouvrez **Paramètres → Sécurité et restrictions → Sources
+inconnues** et activez le gestionnaire de fichiers ou le navigateur que vous
+allez utiliser. Chaque fabricant formule cela différemment ; cherchez « sources
+inconnues » ou « installer des applications inconnues ».
+
+## Option 1 — une application de téléchargement
+
+1. Installez une application de téléchargement depuis le Play Store de votre
+   téléviseur.
+2. Saisissez l'adresse de l'APK indiquée sur la
+   [page de téléchargement](/fr/download/).
+3. Confirmez l'installation lorsqu'elle vous est proposée.
+
+## Option 2 — une clé USB
+
+1. Téléchargez l'APK Android TV sur un ordinateur.
+2. Copiez-le sur une clé USB et branchez la clé sur le téléviseur.
+3. Ouvrez-le avec un gestionnaire de fichiers et confirmez l'installation.
+
+## Option 3 — depuis un autre appareil Android
+
+Avec ADB par le réseau, depuis un ordinateur connecté au même réseau :
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Se connecter sur un téléviseur
+
+Taper une adresse e-mail et un mot de passe à la télécommande est pénible : la
+connexion sur le téléviseur passe donc par un code à six chiffres envoyé à votre
+adresse e-mail. Vos playlists apparaissent alors verrouillées jusqu'à ce que
+vous approuviez le téléviseur depuis un téléphone déjà connecté.
+
+## Mettre à jour
+
+Les versions installées en sideload ne se mettent pas à jour toutes seules.
+Installez le nouvel APK par-dessus l'ancien — vos playlists, vos favoris et
+votre progression sont conservés.

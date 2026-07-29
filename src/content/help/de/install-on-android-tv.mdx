@@ -1,0 +1,53 @@
+---
+title: "Vidonzo auf Android TV installieren"
+description: "Die TV-Version per Sideload auf einen Fernseher oder eine TV-Box bringen."
+category: television
+order: 10
+publishedAt: 2026-07-27
+---
+
+Vidonzo hat eine eigene Android-TV-Version mit vollständiger Bedienung über die
+Fernbedienung. Sie wird als direktes APK verteilt und deshalb per Sideload
+installiert.
+
+## Installation aus unbekannten Quellen erlauben
+
+Öffnen Sie auf dem Fernseher **Einstellungen → Sicherheit & Einschränkungen →
+Unbekannte Quellen** und schalten Sie den Dateimanager oder Browser frei, den Sie
+gleich verwenden. Die Gerätehersteller formulieren das unterschiedlich; suchen
+Sie nach „unbekannte Quellen" oder „unbekannte Apps installieren".
+
+## Weg 1 — eine Downloader-App
+
+1. Installieren Sie auf dem Fernseher eine Downloader-App aus dem Play Store.
+2. Geben Sie die APK-Adresse von der [Download-Seite](/de/download/) ein.
+3. Bestätigen Sie die Installation, wenn Sie gefragt werden.
+
+## Weg 2 — ein USB-Stick
+
+1. Laden Sie das Android-TV-APK auf einem Computer herunter.
+2. Kopieren Sie es auf einen USB-Stick und stecken Sie den Stick in den
+   Fernseher.
+3. Öffnen Sie es mit einem Dateimanager und bestätigen Sie die Installation.
+
+## Weg 3 — von einem anderen Android-Gerät
+
+Über ADB im Netzwerk, von einem Computer im selben Netzwerk aus:
+
+```
+adb connect <tv-ip>:5555
+adb install vidonzo-android-tv-universal-latest.apk
+```
+
+## Anmelden auf einem Fernseher
+
+E-Mail und Passwort mit einer Fernbedienung einzutippen ist eine Qual, deshalb
+läuft die Anmeldung am Fernseher stattdessen über einen sechsstelligen Code, der
+an Ihre E-Mail-Adresse geht. Ihre Playlists erscheinen danach als gesperrt, bis
+Sie den Fernseher von einem Handy aus freigeben, das bereits angemeldet ist.
+
+## Aktualisieren
+
+Per Sideload installierte Versionen aktualisieren sich nicht selbst. Installieren
+Sie das neuere APK über das alte — Ihre Playlists, Favoriten und der
+Wiedergabestand bleiben erhalten.

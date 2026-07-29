@@ -1,0 +1,78 @@
+---
+title: "Política de privacidade"
+description: "O que o Vidonzo guarda, o que ele não consegue ler e como apagar tudo isso."
+page: privacy
+publishedAt: 2026-07-27
+---
+
+O Vidonzo é um player de mídia. Ele não vende canais, não hospeda conteúdo e não
+precisa saber o que você assiste para funcionar. Esta política descreve os dados
+que o aplicativo e o serviço opcional de sincronização tratam.
+
+## Usar o Vidonzo sem conta
+
+Você pode usar o Vidonzo sem fazer login. Nesse modo, tudo — as suas listas,
+favoritos, progresso de reprodução, downloads e configurações — fica guardado só
+no seu aparelho. Nada é enviado para nós.
+
+O aplicativo se conecta ao seu próprio provedor de IPTV e a qualquer URL de guia
+de programação que você configurar. Essas requisições vão direto do seu aparelho
+para esse provedor, e o que ele registra é regido pela política dele, não pela
+nossa.
+
+## Se você ativar a sincronização
+
+Fazer login cria uma conta para que as suas listas e o seu progresso acompanhem
+você entre os aparelhos. Nesse caso, guardamos:
+
+- **Conta**: o seu endereço de e-mail, tratado pelo nosso serviço de
+  autenticação, e um nome de exibição opcional.
+- **Fontes de listas**: o seu host, usuário e senha do Xtream e qualquer URL M3U,
+  guardados **criptografados de ponta a ponta**. Eles são criptografados no seu
+  aparelho com AES‑256‑GCM antes do envio, sob uma chave derivada da sua senha de
+  sincronização com Argon2id. Só temos o texto cifrado e não conseguimos lê-los.
+  O rótulo que você dá a uma lista fica guardado em texto claro, porque é o seu
+  próprio nome de exibição para ela.
+- **Favoritos, progresso de reprodução e configurações do aplicativo**, para que
+  fiquem iguais entre os aparelhos. Ficam guardados em texto claro e são
+  protegidos por regras de acesso por usuário.
+- **Aparelhos**: um nome que você escolhe, o tipo de aparelho, uma chave pública
+  e quando ele foi visto pela última vez — o suficiente para vincular um aparelho
+  novo e revogar um que você perdeu.
+
+A sua senha de sincronização nunca sai do seu aparelho. Por isso, **não temos
+como recuperá-la**, e perdê-la significa que as suas listas criptografadas
+também não poderão ser recuperadas.
+
+## O que não fazemos
+
+O aplicativo Vidonzo não contém SDKs de publicidade nem analytics dentro do
+aplicativo ou rastreamento de comportamento. Não montamos um perfil seu, não
+vendemos dados pessoais e não processamos pagamentos.
+
+## Análise do site
+
+O site público do Vidonzo usa Google Tag Manager e Microsoft Clarity para
+entender o tráfego das páginas, gravações de sessão e mapas de calor. O Clarity
+mascara conteúdo sensível por padrão. Essas ferramentas nos ajudam a melhorar o
+site e o fluxo de download; elas são separadas do aplicativo Vidonzo e não nos
+dão acesso às suas listas, credenciais de provedor ou histórico de exibição.
+
+## Retenção e exclusão
+
+Os dados de sincronização são mantidos enquanto a sua conta existir. Você pode
+excluir a sua conta e tudo o que está ligado a ela quando quiser — veja
+[Exclusão de conta e dados](/pt/account-deletion/). O que fica guardado só no seu
+aparelho é removido apagando dentro do aplicativo, limpando os dados do
+aplicativo ou desinstalando o Vidonzo.
+
+## Crianças
+
+O Vidonzo não é dirigido a crianças menores de 13 anos, e não coletamos
+cientemente os dados delas.
+
+## Alterações e contato
+
+Se esta política mudar de forma relevante, atualizaremos a data acima e
+avisaremos no aplicativo. Dúvidas:
+[support@vidonzo.com](mailto:support@vidonzo.com).
