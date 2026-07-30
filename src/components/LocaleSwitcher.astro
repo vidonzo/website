@@ -116,6 +116,29 @@ const current = locales[locale];
     font-weight: 700;
     background: color-mix(in srgb, var(--color-primary) 30%, transparent);
   }
+
+  /* On a phone the header is logo + language + download + menu, and the
+     endonym is the one part that can be dropped without losing a control:
+     "Bahasa Indonesia" next to "Télécharger" pushes the menu button off the
+     edge of the screen. The globe stays, and summary keeps its aria-label. */
+  @media (max-width: 48rem) {
+    .current {
+      display: none;
+    }
+
+    summary {
+      /* Square, so it pairs with the menu button beside it. */
+      justify-content: center;
+      inline-size: 2.5rem;
+      block-size: 2.5rem;
+      padding-inline: 0;
+    }
+
+    summary svg {
+      inline-size: 1.25rem;
+      block-size: 1.25rem;
+    }
+  }
 </style>
 
 <script>
