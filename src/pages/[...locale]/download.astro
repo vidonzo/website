@@ -15,6 +15,10 @@ export const getStaticPaths = localeRoutes;
 const { locale } = Astro.props as LocaleRouteProps;
 const t = useTranslations(locale);
 const d = t.download;
+
+// Temporary, while the builds are tester-only — see config/apk-gate.ts.
+const sealedMobileApk = await sealApkUrl(storeLinks.androidMobileApk);
+const sealedTvApk = await sealApkUrl(storeLinks.androidTvApk);
 ---
 
 <Base
@@ -53,7 +57,7 @@ const d = t.download;
             tone="android"
             links={[
               { label: d.googlePlay, href: storeLinks.googlePlay, external: true },
-              { label: d.directApk, sealed: sealApkUrl(storeLinks.androidMobileApk) },
+              { label: d.directApk, sealed: sealedMobileApk },
             ]}
           />
         </Reveal>
@@ -76,7 +80,7 @@ const d = t.download;
             note={d.androidTvNote}
             icon="tv"
             tone="tv"
-            links={[{ label: d.directApk, sealed: sealApkUrl(storeLinks.androidTvApk) }]}
+            links={[{ label: d.directApk, sealed: sealedTvApk }]}
           />
         </Reveal>
 
