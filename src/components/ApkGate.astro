@@ -1,0 +1,265 @@
+---
+// TEMPORARY — see src/config/apk-gate.ts for what this is and how to remove it.
+// One dialog per page serves every gated link on it; a link opts in by carrying
+// its sealed URL in `data-apk` (see DownloadCard's `sealed` link field).
+import Icon from './Icon.astro';
+import { apkSealMarker } from '../config/apk-gate';
+
+interface Props {
+  title: string;
+  body: string;
+  label: string;
+  submit: string;
+  error: string;
+  close: string;
+}
+
+const { title, body, label, submit, error, close } = Astro.props;
+---
+
+<dialog class="gate" data-apk-gate data-apk-marker={apkSealMarker} aria-labelledby="apk-gate-title">
+  <form class="panel" data-apk-form novalidate>
+    <span class="glyph" aria-hidden="true">
+      <Icon name="lock" />
+    </span>
+
+    <h2 id="apk-gate-title">{title}</h2>
+    <p class="body">{body}</p>
+
+    <label for="apk-gate-code">{label}</label>
+    <input
+      id="apk-gate-code"
+      name="code"
+      type="text"
+      inputmode="numeric"
+      autocomplete="off"
+      autocapitalize="off"
+      autocorrect="off"
+      spellcheck="false"
+      aria-describedby="apk-gate-error"
+    />
+    <p class="error" id="apk-gate-error" data-apk-error hidden>{error}</p>
+
+    <div class="actions">
+      <button type="submit" class="primary">{submit}</button>
+      <button type="button" class="ghost" data-apk-cancel>{close}</button>
+    </div>
+  </form>
+</dialog>
+
+<style>
+  .gate {
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--color-stroke-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-high);
+    color: var(--color-text-high);
+    box-shadow: var(--shadow-lift);
+    inline-size: min(26rem, calc(100vw - 2rem));
+  }
+
+  .gate::backdrop {
+    background: rgb(0 0 0 / 0.6);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .panel {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-lg);
+  }
+
+  .glyph {
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    margin-block-end: var(--space-2xs);
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #fff;
+  }
+
+  .glyph :global(svg) {
+    inline-size: 1.3rem;
+    block-size: 1.3rem;
+  }
+
+  h2 {
+    font-size: var(--text-md);
+  }
+
+  .body {
+    color: var(--color-text-mid);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  label {
+    margin-block-start: var(--space-sm);
+    color: var(--color-text-mid);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  input {
+    min-block-size: 2.75rem;
+    padding-inline: var(--space-sm);
+    border: 1px solid var(--color-stroke-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    /* A code is digits, so keep it LTR even on the RTL locales. */
+    direction: ltr;
+    letter-spacing: 0.35em;
+    text-align: center;
+  }
+
+  input[aria-invalid='true'] {
+    border-color: var(--color-accent-pink);
+  }
+
+  .error {
+    margin-block-start: var(--space-2xs);
+    color: var(--color-accent-pink);
+    font-size: var(--text-sm);
+  }
+
+  .error[hidden] {
+    display: none;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-block-start: var(--space-md);
+  }
+
+  .actions button {
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-md);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease);
+  }
+
+  .primary {
+    background: var(--gradient-aurora-button);
+    color: #fff;
+  }
+
+  .ghost {
+    border-color: var(--color-stroke-strong);
+    color: var(--color-text-mid);
+  }
+
+  .ghost:is(:hover, :focus-visible) {
+    border-color: var(--color-secondary);
+    color: var(--color-text-high);
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-apk-gate]');
+  const form = dialog?.querySelector<HTMLFormElement>('[data-apk-form]');
+  const input = dialog?.querySelector<HTMLInputElement>('input[name="code"]');
+  const errorNote = dialog?.querySelector<HTMLElement>('[data-apk-error]');
+  const marker = dialog?.dataset.apkMarker ?? '';
+
+  if (dialog && form && input && errorNote) {
+    /**
+     * The mirror of sealApkUrl() in src/config/apk-gate.ts. Returns the URL for
+     * a right code and an empty string for a wrong one: nothing compares the
+     * code itself, it either rebuilds the marker or it does not.
+     */
+    const unseal = (sealed: string, code: string) => {
+      if (!sealed || !code) return '';
+      let raw = '';
+      try {
+        raw = atob(sealed);
+      } catch {
+        return '';
+      }
+      let payload = '';
+      for (let i = 0; i < raw.length; i += 1) {
+        payload += String.fromCharCode(raw.charCodeAt(i) ^ code.charCodeAt(i % code.length));
+      }
+      return payload.startsWith(marker) ? payload.slice(marker.length) : '';
+    };
+
+    // Private-mode Safari throws on storage; the gate just asks again there.
+    const remembered = () => {
+      try {
+        return sessionStorage.getItem('apk-code') ?? '';
+      } catch {
+        return '';
+      }
+    };
+    const remember = (code: string) => {
+      try {
+        sessionStorage.setItem('apk-code', code);
+      } catch {
+        /* not worth failing a download over */
+      }
+    };
+
+    /** Sealed URL of the link waiting on a code. */
+    let pending = '';
+
+    document.addEventListener('click', (event) => {
+      const trigger = (event.target as HTMLElement | null)?.closest<HTMLElement>('[data-apk]');
+      if (!trigger) return;
+      event.preventDefault();
+
+      pending = trigger.dataset.apk ?? '';
+
+      // A code that already worked this session opens the next link straight
+      // away — one prompt per visit, not one per file.
+      const url = unseal(pending, remembered());
+      if (url) {
+        window.location.href = url;
+        return;
+      }
+
+      input.value = '';
+      input.removeAttribute('aria-invalid');
+      errorNote.hidden = true;
+      dialog.showModal();
+      input.focus();
+    });
+
+    // Implicit submission is unreliable for a one-input form inside a modal
+    // dialog, and Enter is the natural way to send a four-digit code.
+    input.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      form.requestSubmit();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const code = input.value.trim();
+      const url = unseal(pending, code);
+
+      if (!url) {
+        errorNote.hidden = false;
+        input.setAttribute('aria-invalid', 'true');
+        input.select();
+        return;
+      }
+
+      remember(code);
+      dialog.close();
+      window.location.href = url;
+    });
+
+    dialog.querySelector('[data-apk-cancel]')?.addEventListener('click', () => dialog.close());
+  }
+</script>

@@ -4,9 +4,11 @@ import AuroraBackground from '../../components/AuroraBackground.astro';
 import Reveal from '../../components/Reveal.astro';
 import DownloadCard from '../../components/DownloadCard.astro';
 import Button from '../../components/Button.astro';
+import ApkGate from '../../components/ApkGate.astro';
 import { localeRoutes, type LocaleRouteProps } from '../../i18n/routing';
 import { localizedPath, useTranslations } from '../../i18n';
 import { site, storeLinks } from '../../config/site';
+import { sealApkUrl } from '../../config/apk-gate';
 
 export const getStaticPaths = localeRoutes;
 
@@ -51,7 +53,7 @@ const d = t.download;
             tone="android"
             links={[
               { label: d.googlePlay, href: storeLinks.googlePlay, external: true },
-              { label: d.directApk, href: storeLinks.androidMobileApk },
+              { label: d.directApk, sealed: sealApkUrl(storeLinks.androidMobileApk) },
             ]}
           />
         </Reveal>
@@ -74,7 +76,7 @@ const d = t.download;
             note={d.androidTvNote}
             icon="tv"
             tone="tv"
-            links={[{ label: d.directApk, href: storeLinks.androidTvApk }]}
+            links={[{ label: d.directApk, sealed: sealApkUrl(storeLinks.androidTvApk) }]}
           />
         </Reveal>
 
@@ -112,6 +114,16 @@ const d = t.download;
       </Reveal>
     </div>
   </section>
+
+  {/* Temporary, while the builds are tester-only — see config/apk-gate.ts. */}
+  <ApkGate
+    title={d.apkGateTitle}
+    body={d.apkGateBody}
+    label={d.apkGateLabel}
+    submit={d.apkGateSubmit}
+    error={d.apkGateError}
+    close={t.common.close}
+  />
 </Base>
 
 <style>

@@ -251,6 +251,11 @@ export const pt = {
     comingSoon: 'Em breve',
     helpTitle: 'Travou na instalação?',
     helpLead: 'O sideload no Android TV e a adição da sua primeira playlist têm, cada um, um guia passo a passo.',
+    apkGateTitle: 'Por agora, apenas para testadores',
+    apkGateBody: 'Os APK diretos ficam reservados aos testadores enquanto terminamos a próxima versão. Introduza o código de acesso para continuar.',
+    apkGateLabel: 'Código de acesso',
+    apkGateSubmit: 'Continuar',
+    apkGateError: 'Esse código não está certo. Verifique-o e tente de novo.',
   },
 
   blog: {

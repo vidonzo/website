@@ -251,6 +251,11 @@ export const pl = {
     comingSoon: "Wkrótce",
     helpTitle: "Utknąłeś przy instalacji?",
     helpLead: "Instalacja ręczna na Android TV i dodawanie pierwszej playlisty mają osobne przewodniki krok po kroku.",
+    apkGateTitle: 'Na razie tylko dla testerów',
+    apkGateBody: 'Bezpośrednie pliki APK są dostępne tylko dla testerów, dopóki nie skończymy kolejnego wydania. Wpisz kod dostępu, aby kontynuować.',
+    apkGateLabel: 'Kod dostępu',
+    apkGateSubmit: 'Kontynuuj',
+    apkGateError: 'Ten kod jest nieprawidłowy. Sprawdź go i spróbuj ponownie.',
   },
 
   blog: {
