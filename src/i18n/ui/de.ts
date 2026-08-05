@@ -253,6 +253,11 @@ export const de: UiStrings = {
     comingSoon: 'Demnächst',
     helpTitle: 'Bei der Installation hängen geblieben?',
     helpLead: 'Für das Sideloading auf Android TV und das Hinzufügen deiner ersten Playlist gibt es jeweils eine Schritt-für-Schritt-Anleitung.',
+    apkGateTitle: 'Vorerst nur für Tester',
+    apkGateBody: 'Die direkten APK-Builds sind Testern vorbehalten, solange wir die nächste Version fertigstellen. Gib den Zugangscode ein, um fortzufahren.',
+    apkGateLabel: 'Zugangscode',
+    apkGateSubmit: 'Weiter',
+    apkGateError: 'Dieser Code stimmt nicht. Bitte prüfen und erneut versuchen.',
   },
 
   blog: {

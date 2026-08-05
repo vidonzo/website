@@ -251,6 +251,11 @@ export const nl = {
     comingSoon: "Binnenkort",
     helpTitle: "Vastgelopen bij het installeren?",
     helpLead: "Zowel het zijladen op Android TV als het toevoegen van je eerste afspeellijst heeft een stapsgewijze handleiding.",
+    apkGateTitle: 'Voorlopig alleen voor testers',
+    apkGateBody: 'De directe APK-builds zijn alleen voor testers zolang we de volgende versie afmaken. Voer de toegangscode in om verder te gaan.',
+    apkGateLabel: 'Toegangscode',
+    apkGateSubmit: 'Doorgaan',
+    apkGateError: 'Die code klopt niet. Controleer hem en probeer het opnieuw.',
   },
 
   blog: {

@@ -251,6 +251,11 @@ export const ja = {
     comingSoon: '近日公開',
     helpTitle: 'インストールで困っていますか？',
     helpLead: 'Android TVへのサイドロードと、最初のプレイリストの追加には、どちらもステップごとのガイドがあります。',
+    apkGateTitle: '現在はテスター限定です',
+    apkGateBody: '次のリリースを仕上げている間、APKの直接配布はテスターのみです。続けるにはアクセスコードを入力してください。',
+    apkGateLabel: 'アクセスコード',
+    apkGateSubmit: '続ける',
+    apkGateError: 'そのコードは正しくありません。確認してもう一度お試しください。',
   },
 
   blog: {

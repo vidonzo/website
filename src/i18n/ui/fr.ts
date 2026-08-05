@@ -252,6 +252,11 @@ export const fr: UiStrings = {
     comingSoon: 'Bientôt',
     helpTitle: 'Bloqué à l’installation ?',
     helpLead: 'L’installation manuelle sur Android TV et l’ajout de votre première playlist ont chacun un guide pas à pas.',
+    apkGateTitle: 'Réservé aux testeurs, pour l’instant',
+    apkGateBody: 'Les APK directs sont réservés aux testeurs le temps de finaliser la prochaine version. Saisissez le code d’accès pour continuer.',
+    apkGateLabel: 'Code d’accès',
+    apkGateSubmit: 'Continuer',
+    apkGateError: 'Ce code n’est pas le bon. Vérifiez-le et réessayez.',
   },
 
   blog: {

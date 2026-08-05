@@ -252,6 +252,11 @@ export const ar: UiStrings = {
     comingSoon: 'قريبا',
     helpTitle: 'تعثرت في التثبيت؟',
     helpLead: 'للتثبيت الجانبي على Android TV ولإضافة أول قائمة لديك أدلة خطوة بخطوة.',
+    apkGateTitle: 'للمختبرين فقط في الوقت الحالي',
+    apkGateBody: 'ملفات APK المباشرة متاحة للمختبرين فقط ريثما ننتهي من الإصدار التالي. أدخل رمز الدخول للمتابعة.',
+    apkGateLabel: 'رمز الدخول',
+    apkGateSubmit: 'متابعة',
+    apkGateError: 'هذا الرمز غير صحيح. تحقّق منه وحاول مرة أخرى.',
   },
 
   blog: {

@@ -251,6 +251,11 @@ export const ko = {
     comingSoon: '곧 출시',
     helpTitle: '설치가 막히셨나요?',
     helpLead: 'Android TV에서 사이드로드하기와 첫 재생목록 추가하기 모두 단계별 가이드가 있습니다.',
+    apkGateTitle: '지금은 테스터 전용입니다',
+    apkGateBody: '다음 릴리스를 마무리하는 동안 APK 직접 설치는 테스터에게만 열려 있습니다. 계속하려면 액세스 코드를 입력하세요.',
+    apkGateLabel: '액세스 코드',
+    apkGateSubmit: '계속',
+    apkGateError: '코드가 올바르지 않습니다. 확인 후 다시 시도해 주세요.',
   },
 
   blog: {

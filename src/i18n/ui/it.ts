@@ -251,6 +251,11 @@ export const it = {
     comingSoon: 'In arrivo',
     helpTitle: "Bloccato durante l'installazione?",
     helpLead: "L'installazione manuale su Android TV e l'aggiunta della tua prima playlist hanno entrambe una guida passo passo.",
+    apkGateTitle: 'Per ora solo per i tester',
+    apkGateBody: 'Gli APK diretti sono riservati ai tester mentre completiamo la prossima versione. Inserisci il codice di accesso per continuare.',
+    apkGateLabel: 'Codice di accesso',
+    apkGateSubmit: 'Continua',
+    apkGateError: 'Questo codice non è corretto. Controllalo e riprova.',
   },
 
   blog: {

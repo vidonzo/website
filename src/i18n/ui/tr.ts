@@ -252,6 +252,11 @@ export const tr: UiStrings = {
     comingSoon: 'Yakında',
     helpTitle: 'Kurulumda takıldınız mı?',
     helpLead: 'Android TV’ye yandan yükleme ve ilk listenizi ekleme için adım adım rehberler var.',
+    apkGateTitle: 'Şimdilik yalnızca test edenler için',
+    apkGateBody: 'Bir sonraki sürümü tamamlayana kadar doğrudan APK dosyaları yalnızca test edenlere açık. Devam etmek için erişim kodunu girin.',
+    apkGateLabel: 'Erişim kodu',
+    apkGateSubmit: 'Devam',
+    apkGateError: 'Bu kod doğru değil. Kontrol edip tekrar deneyin.',
   },
 
   blog: {

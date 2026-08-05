@@ -253,6 +253,11 @@ export const id: UiStrings = {
     comingSoon: 'Segera hadir',
     helpTitle: 'Terkendala saat memasang?',
     helpLead: 'Sideloading di Android TV dan menambahkan playlist pertama Anda sama-sama punya panduan langkah demi langkah.',
+    apkGateTitle: 'Untuk sementara hanya untuk penguji',
+    apkGateBody: 'Berkas APK langsung hanya untuk penguji selama kami menyelesaikan rilis berikutnya. Masukkan kode akses untuk melanjutkan.',
+    apkGateLabel: 'Kode akses',
+    apkGateSubmit: 'Lanjutkan',
+    apkGateError: 'Kode itu tidak benar. Periksa lagi lalu coba kembali.',
   },
 
   blog: {

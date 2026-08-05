@@ -251,6 +251,11 @@ export const vi = {
     comingSoon: "Sắp ra mắt",
     helpTitle: "Mắc kẹt khi cài đặt?",
     helpLead: "Cả việc cài thủ công trên Android TV lẫn việc thêm playlist đầu tiên đều có hướng dẫn từng bước.",
+    apkGateTitle: 'Hiện chỉ dành cho người thử nghiệm',
+    apkGateBody: 'Các tệp APK trực tiếp chỉ dành cho người thử nghiệm trong lúc chúng tôi hoàn thiện bản phát hành tiếp theo. Nhập mã truy cập để tiếp tục.',
+    apkGateLabel: 'Mã truy cập',
+    apkGateSubmit: 'Tiếp tục',
+    apkGateError: 'Mã này không đúng. Hãy kiểm tra rồi thử lại.',
   },
 
   blog: {

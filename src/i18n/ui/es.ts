@@ -252,6 +252,11 @@ export const es: UiStrings = {
     comingSoon: 'Próximamente',
     helpTitle: '¿Atascado en la instalación?',
     helpLead: 'Tanto la instalación lateral en Android TV como añadir tu primera lista tienen guías paso a paso.',
+    apkGateTitle: 'Por ahora, solo para probadores',
+    apkGateBody: 'Los APK directos están reservados a los probadores mientras terminamos la próxima versión. Introduce el código de acceso para continuar.',
+    apkGateLabel: 'Código de acceso',
+    apkGateSubmit: 'Continuar',
+    apkGateError: 'Ese código no es correcto. Revísalo e inténtalo de nuevo.',
   },
 
   blog: {

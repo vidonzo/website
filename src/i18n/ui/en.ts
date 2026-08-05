@@ -251,6 +251,11 @@ export const en = {
     comingSoon: 'Coming soon',
     helpTitle: 'Stuck installing?',
     helpLead: 'Sideloading on Android TV and adding your first playlist both have step-by-step guides.',
+    apkGateTitle: 'Testers only, for now',
+    apkGateBody: 'Direct APK builds are limited to testers while the next release is being finished. Enter the access code to continue.',
+    apkGateLabel: 'Access code',
+    apkGateSubmit: 'Continue',
+    apkGateError: 'That code is not right. Check it and try again.',
   },
 
   blog: {
