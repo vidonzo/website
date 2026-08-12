@@ -1,0 +1,115 @@
+---
+title: "HLS, DASH và RTSP: các giao thức đứng sau luồng phát của bạn"
+description: "Mấy chữ cái cuối đường dẫn luồng phát quyết định độ trễ so với trực tiếp, tốc độ chuyển kênh, và chuyện gì xảy ra khi mạng chập chờn."
+urlSlug: giao-thuc-streaming-la-gi
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["kỹ thuật", "phát lại"]
+keywords: ["hls là gì", "so sánh hls và dash", "rtsp là gì", "các giao thức streaming iptv"]
+heroImageAlt: "Ba đường ống vẽ cạnh nhau: một chở dãy bưu kiện nhỏ, một chở các hộp dán nhãn, và một là dòng chảy liền mạch không đứt đoạn."
+---
+
+Mỗi luồng phát trong danh sách của bạn đến nơi bằng một trong vài phương thức
+vận chuyển, và phương thức nào đang được dùng sẽ định hình những thứ bạn cảm
+nhận được ngay từ ghế sofa: bạn chậm hơn sóng trực tiếp bao xa, một kênh khởi
+động nhanh hay chậm, và một cú chập chờn của mạng thành ra vấp nhẹ hay đứng hình
+hẳn. Bạn không bao giờ phải chọn giao thức — nhà cung cấp đã chọn thay bạn —
+nhưng biết đang chơi với giao thức nào là biến hàng loạt điều bí ẩn thành cơ chế
+máy móc dễ hiểu.
+
+## Ý tưởng lớn: bưu kiện, không phải đường ống
+
+Streaming kiểu cũ vận hành như một cuộc gọi điện thoại: máy chủ và trình phát
+giữ một kết nối mở, video chảy liên tục qua đó. Streaming hiện đại phần lớn vận
+hành như một dịch vụ chuyển phát. Video được cắt thành các đoạn nhỏ — mỗi đoạn
+vài giây — đặt lên một máy chủ web bình thường, và trình phát lần lượt lấy về
+từng đoạn, đúng như cách trình duyệt lấy hình ảnh.
+
+Chỉ một lựa chọn thiết kế đó thôi đã giải thích được rất nhiều. Bưu kiện lấy
+trước được, nên trình phát giữ được một lớp đệm phòng khi
+[mạng chập chờn](/vi/blog/iptv-dung-hinh-tren-wifi/). Bưu kiện tồn tại được ở
+nhiều mức chất lượng, nên trình phát hạ bậc êm ái khi băng thông tụt. Và bưu
+kiện đi qua tường lửa lẫn Wi-Fi khách sạn mà không bị đụng đến, vì với mạng lưới
+chúng chỉ là lưu lượng web bình thường.
+
+Cái giá phải trả là độ trễ. Nếu mỗi đoạn dài sáu giây và trình phát giữ ba đoạn,
+bạn đang xem chậm ít nhất mười tám giây so với khoảnh khắc trực tiếp — đó là lý
+do nhà bên có thể reo lên vì bàn thắng trong khi bình luận viên của bạn còn chưa
+kịp thấy cú dứt điểm.
+
+## HLS: một danh sách các mảnh ghép
+
+HLS — HTTP Live Streaming — là hệ bưu kiện phổ biến nhất, và bạn đã gặp giấy tờ
+của nó rồi:
+[tệp `.m3u8` chính là m3u8 trong bài "M3U và M3U8"](/vi/blog/m3u-va-m3u8-khac-gi/).
+Đó là một tệp văn bản nhỏ liệt kê các đoạn hiện đang có; trình phát lấy lại tệp
+đó vài giây một lần, nhận ra đoạn mới ở cuối, và đi thu về.
+
+Với kênh trực tiếp, danh sách ấy lăn về phía trước mãi mãi. Với xem lại và phim,
+đó là một danh sách trọn vẹn có đầu có cuối — vì thế mà tua được ở phim nhưng
+không tua được trên truyền hình trực tiếp. HLS lớn lên trên điện thoại và giờ có
+mặt khắp nơi; nếu đường dẫn luồng phát của bạn kết thúc bằng `.m3u8`, đây chính
+là thứ bạn đang có.
+
+## DASH: cùng ý tưởng, khác giấy tờ
+
+MPEG-DASH là người anh em chuẩn quốc tế của HLS. Các đoạn video hoạt động y hệt;
+khác biệt nằm ở bản kê khai — một tài liệu XML thay vì một danh sách văn bản —
+và một sự trung lập không kén codec đã khiến nó được các đài lớn ưa chuộng. Từ
+ghế sofa, DASH và HLS không phân biệt nổi, và chính điều đó là bài học: chúng là
+hai phương ngữ của cùng một thứ tiếng bưu kiện, và một trình phát tốt nói được
+cả hai mà không cần khoe với bạn.
+
+## RTSP: cuộc gọi điện thoại kiểu cũ, vẫn chưa cúp máy
+
+RTSP là thành viên còn sống của họ đường ống. Trình phát đề nghị máy chủ bắt đầu
+gửi, và video chảy qua một kết nối giữ mở với độ trễ gần như bằng không. Sự tức
+thời ấy là lý do camera an ninh vẫn nói thứ tiếng này, và một số nguồn IPTV cũng
+vậy.
+
+Điểm yếu của nó là mặt gương của điểm mạnh. Không có lớp đệm bưu kiện lấy sẵn,
+nên mạng vừa chớp một cái là cảm nhận được ngay; không có thang chất lượng để hạ
+bậc; và các kiểu kết nối nó dùng lại đúng là loại mà tường lửa nghiêm ngặt và
+mạng dùng chung ghét bỏ. Khi một luồng RTSP chạy, nó trực tiếp đến ấn tượng. Khi
+nó không chạy, trình phát chẳng làm được bao nhiêu để đỡ đòn.
+
+## MPEG-TS qua HTTP: dòng chảy liên tục
+
+Một phần lớn IPTV trực tiếp dùng thứ gì đó mộc mạc hơn tất cả những cái trên:
+một kết nối HTTP duy nhất mà qua đó máy chủ rót xuống một dòng MPEG transport
+stream không đứt đoạn. Không bản kê khai, không chia đoạn — vẫn cái vỏ chứa mà
+truyền hình vệ tinh và truyền hình cáp dùng, chỉ là rót qua internet. Nếu một
+đường dẫn kênh trực tiếp kết thúc bằng `.ts` hoặc chẳng có đuôi nào gợi ý gì,
+thì thường là thứ này.
+
+Nó đơn giản và khởi động nhanh, nhưng mọi thứ hệ bưu kiện mang lại đều vắng mặt:
+không thang chất lượng, không lấy lại được mảnh đã lỡ, không tua ngược. Bộ đệm
+của trình phát là lớp đệm duy nhất còn lại, và đó là lý do
+[hành vi đệm quan trọng trên IPTV trực tiếp](/vi/blog/khac-phuc-iptv-giat-lag/)
+hơn bất cứ đâu khác trong thế giới streaming.
+
+## Những gì điều này giải thích trong thực tế
+
+- **Luồng phát của bạn chậm hơn đầu thu vệ tinh nhà hàng xóm.** Truyền theo đoạn
+  đánh đổi vài giây trễ lấy sự mượt mà, đúng theo thiết kế.
+- **Kênh mất một nhịp mới bắt đầu chạy.** Trình phát phải lấy bản kê khai và một
+  hai bưu kiện đầu tiên trước khi vẽ được khung hình nào.
+- **Bạn không tua ngược được truyền hình trực tiếp, nhưng xem lại thì được.**
+  Một danh sách trực tiếp lăn về phía trước không có quá khứ để tua vào; một
+  danh sách trọn vẹn thì có — và xem lại chính là
+  [thứ mà lịch phát sóng cho trình phát biết phải hỏi xin cái gì](/vi/blog/epg-la-gi-lich-phat-song/).
+- **Một kênh đứng hình cứng đơ trong khi kênh khác chỉ mờ đi.** Kênh xuống dịu
+  dàng có thang chất lượng để leo xuống; kênh đông cứng nhiều khả năng là một
+  dòng chảy thô, không còn đường lui.
+
+## Vì sao một trình phát phải nói được tất cả các thứ tiếng ấy
+
+Một dịch vụ streaming tối ưu một đường truyền duy nhất và kiểm thử nó từ đầu đến
+cuối. Một trình phát IPTV
+[thừa hưởng bất cứ thứ gì nhà cung cấp của bạn đã chọn](/vi/blog/trinh-phat-iptv-lam-gi/)
+— HLS chia đoạn ở kênh này, một transport stream thô ở kênh kế, rồi một luồng
+camera RTSP ngay sau đó — và được kỳ vọng làm cho tất cả đều có cảm giác như
+truyền hình. Xử lý êm thấm các kiểu hỏng hóc của từng giao thức, không phô
+trương và không bắt bạn phải bận tâm đến bất cứ điều gì trong bài này, là một
+phép thử sòng phẳng xem một trình phát có xứng với cái màn hình nó đang chiếm
+hay không.

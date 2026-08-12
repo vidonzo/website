@@ -1,0 +1,106 @@
+---
+title: "IPTV che si blocca sul Wi-Fi? Trovare l'anello debole della radio"
+description: "Se il flusso si inceppa in una stanza e va in un'altra, il problema è il collegamento radio. Ecco come cede il Wi-Fi e i rimedi in ordine."
+urlSlug: iptv-si-blocca-su-wifi
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["risoluzione problemi", "riproduzione"]
+keywords: ["iptv si blocca con il wifi", "iptv si blocca continuamente", "streaming a scatti wifi", "iptv si congela ogni pochi minuti"]
+heroImageAlt: "Un segnale Wi-Fi disegnato come archi concentrici che attraversano dei muri, sempre più deboli a ogni muro superato."
+---
+
+C'è uno schema preciso che vale la pena riconoscere: il flusso va perfettamente
+sulla TV collegata via cavo al router, si inceppa sul tablet in camera da letto
+e si congela del tutto in cucina. Quando il problema segue la *stanza* invece
+del canale, non stai guardando un problema di server né di playlist. Stai
+guardando la radio.
+
+[La catena di diagnosi generale](/it/blog/risolvere-buffering-iptv/) — server,
+linea, rete di casa, dispositivo — vale ancora, e merita un primo passaggio.
+Questo articolo riguarda l'anello di quella catena che cede più spesso e nel
+modo più confondente: il tratto d'aria tra il router e il tuo schermo.
+
+## Prima di tutto, dimostra che è il Wi-Fi
+
+Due minuti di prove risparmiano una serata di tentativi:
+
+1. **Riproduci lo stesso canale accanto al router.** Se lì è fluido e nella
+   stanza lontana si blocca, il flusso è a posto e la radio no.
+2. **Fai uno speed test nella stanza in cui si blocca.** Alla televisione in
+   diretta serve sorprendentemente poca banda — ma le serve *costante*. Una
+   connessione che oscilla tra veloce e niente congela un flusso che una linea
+   più lenta ma stabile porterebbe senza lamentele.
+
+Se il flusso si blocca ovunque, anche di fianco al router, torna alla catena
+generale: il problema è a monte di casa tua.
+
+## Le due bande fanno mestieri diversi
+
+Quasi tutti i router trasmettono su due frequenze, e cedono in modi opposti.
+
+**I 2,4 GHz arrivano lontano e attraversano i muri**, ed è per questo che il tuo
+dispositivo ci si aggrappa nella stanza in fondo — ma sono lenti, e sono una
+corsia condivisa e affollata: le reti dei vicini, il Bluetooth e il microonde
+abitano tutti lì. **I 5 GHz sono veloci e puliti ma di corto raggio**; un paio
+di muri solidi possono metterci fine.
+
+Lo schema di blocchi che ne nasce è caratteristico: il dispositivo sta al bordo
+della copertura a 5 GHz, scende ai 2,4 GHz, li trova congestionati, risale, e
+il tuo flusso si inceppa a ogni passaggio di mano. Se il router ti permette di
+dare nomi separati alle due bande, agganciare stabilmente il dispositivo di
+streaming a una delle due — quella davvero usabile in quella stanza — spesso
+mette fine allo sfarfallio una volta per tutte.
+
+## Perché la sera è peggio
+
+Il Wi-Fi è un mezzo condiviso in un modo in cui un cavo non lo è mai. Il tuo
+canale a 2,4 GHz è lo stesso canale dei tuoi vicini, e alle nove di sera ogni
+famiglia della via sta guardando qualcosa in streaming. Le radio fanno a turni;
+il rivolo costante del tuo flusso viene interrotto; il buffer si prosciuga;
+l'immagine si congela.
+
+Ecco perché un flusso può essere impeccabile a mezzogiorno e inguardabile di
+notte sullo stesso impianto. Non è il fornitore con troppi abbonati — quello
+[ha una firma tutta sua](/it/blog/risolvere-buffering-iptv/) — è l'aria ad
+avere troppi abbonati. Una connessione a 5 GHz, che porta molto meno traffico
+del vicinato, è la via d'uscita abituale.
+
+## La posizione, e le cose in mezzo
+
+A queste frequenze la radio va quasi in linea di vista, e le case sono piene di
+cose che la assorbono. Ogni muro interno costa segnale; cemento e mattoni ne
+costano di più; specchi ed elettrodomestici in metallo lo riflettono; un
+acquario o uno scaldabagno lo assorbono del tutto — l'acqua è notevolmente
+opaca a 2,4 GHz.
+
+Le vittorie a buon mercato, in ordine: solleva il router da terra, tiralo fuori
+dal mobile e mettilo verso il *centro* della casa invece che dove entra la
+linea. Un router spostato di tre metri ha sistemato più flussi congelati di
+quasi ogni schermata di impostazioni.
+
+## Quando smettere di combattere la radio
+
+Alcune stanze sono semplicemente oltre la portata di un router solo, e i rimedi
+onesti sono:
+
+- **Un cavo, ovunque sia possibile.** [Per una TV box](/it/blog/lettore-iptv-su-android-tv/),
+  una tratta Ethernet chiude la discussione per sempre.
+- **Gli adattatori powerline**, che fanno passare la rete dall'impianto
+  elettrico — imperfetti, ma spesso molto meglio del bordo estremo del Wi-Fi.
+- **Un sistema mesh o un access point cablato** nella stanza difficile, se lo
+  schermo che si congela deve restare senza fili.
+
+## Che cosa può e non può farci il lettore
+
+Un lettore non può levigare un'aria che tace per interi secondi, ma determina
+come il guasto si fa sentire: quanto precarica in anticipo, quanto in fretta si
+riprende quando la radio torna, se si riaggancia alla diretta o resta
+inchiodato per sempre su un segmento vecchio. Anche quanto *preavviso* ha
+dipende da [come viene consegnato il flusso](/it/blog/protocolli-di-streaming-spiegati/):
+i formati a segmenti danno al lettore un margine di lettura in anticipo che un
+flusso continuo non concede.
+
+Quello che un lettore non dovrebbe mai fare è peggiorare il problema spendendo
+la tua banda in [traffico di pubblicità e analytics](/it/blog/senza-pubblicita-ne-tracciamento/)
+accanto al video. Su un collegamento in affanno, ogni richiesta che non è video
+è video che non hai ricevuto.

@@ -1,0 +1,109 @@
+---
+title: "¿El IPTV se congela con el wifi? Encuentra el eslabón débil de la radio"
+description: "Si el stream se para en una habitación y va bien en otra, el problema es el enlace de radio. Así falla el wifi, y los arreglos en el orden correcto."
+urlSlug: iptv-se-congela-por-wifi
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["solución de problemas", "reproducción"]
+keywords: ["iptv se congela wifi", "iptv se congela a cada rato", "streaming se corta por wifi", "iptv se para cada pocos minutos"]
+heroImageAlt: "Una señal wifi dibujada como arcos concéntricos que atraviesan paredes y se van desvaneciendo con cada pared que cruzan."
+---
+
+Hay un patrón que conviene reconocer: el stream va perfecto en el televisor
+conectado por cable al router, se atasca en la tablet del dormitorio y se
+congela del todo en la cocina. Cuando el problema sigue a la *habitación* y no
+al canal, no estás ante un problema de servidor ni de lista. Estás ante la
+radio.
+
+[La cadena de diagnóstico general](/es/blog/solucionar-cortes-iptv/) —servidor,
+línea, red doméstica, dispositivo— sigue valiendo, y merece una pasada antes.
+Este artículo va del eslabón de esa cadena que falla más a menudo y de la forma
+más confusa: el tramo de aire entre tu router y tu pantalla.
+
+## Primero, demuestra que es el wifi
+
+Dos minutos de pruebas ahorran una noche de conjeturas:
+
+1. **Pon el mismo canal al lado del router.** Si ahí va fluido y en la
+   habitación lejana se congela, el stream está bien y la radio no.
+2. **Haz un test de velocidad en la habitación donde se congela.** La
+   televisión en directo necesita sorprendentemente poco ancho de banda, pero
+   lo necesita *de forma constante*. Una conexión que oscila entre rápida y
+   nada congelará un stream que una línea más lenta pero estable llevaría sin
+   quejarse.
+
+Si el stream se congela en todas partes, incluso pegado al router, vuelve a la
+cadena general: el problema está aguas arriba de tu casa.
+
+## Las dos bandas hacen trabajos distintos
+
+La mayoría de los routers emiten en dos frecuencias, y fallan de maneras
+opuestas.
+
+**Los 2,4 GHz llegan lejos y atraviesan paredes**, y por eso tu dispositivo se
+aferra a esa banda en la habitación del fondo — pero es lenta, y es un carril
+compartido y abarrotado: ahí viven las redes de tus vecinos, el Bluetooth y el
+microondas. **Los 5 GHz son rápidos y limpios pero de corto alcance**; un par
+de paredes sólidas pueden acabar con ellos.
+
+El patrón de congelación que esto produce es característico: el dispositivo se
+queda en el borde de la cobertura de 5 GHz, cae a 2,4 GHz, la encuentra
+congestionada, vuelve a subir, y tu stream se atasca en cada cambio. Si tu
+router permite dar nombres separados a las dos bandas, conectar el dispositivo
+de streaming firmemente a una de ellas —la que de verdad sea utilizable en esa
+habitación— suele acabar con el vaivén de raíz.
+
+## Por qué las noches son peores
+
+El wifi es un medio compartido de una forma en que un cable nunca lo es. Tu
+canal de 2,4 GHz es el mismo canal que usan tus vecinos, y a las nueve de la
+noche toda la calle está viendo streaming a la vez. Las radios se turnan; el
+goteo constante de tu stream se interrumpe; el búfer se vacía; la imagen se
+congela.
+
+Por eso un stream puede ser impecable a mediodía e insufrible por la noche con
+el mismo equipo. No es que el proveedor esté sobrevendido —eso
+[tiene su propia firma](/es/blog/solucionar-cortes-iptv/)—: es el aire el que
+está sobrevendido. Una conexión de 5 GHz, que carga con mucho menos tráfico del
+vecindario, es la salida habitual.
+
+## La colocación, y lo que hay en medio
+
+La radio a estas frecuencias funciona casi en línea recta, y las casas están
+llenas de cosas que la absorben. Cada pared interior cuesta señal; el hormigón
+y el ladrillo cuestan más; los espejos y los electrodomésticos metálicos la
+reflejan; un acuario o un termo la absorben por completo — el agua es
+notablemente opaca a 2,4 GHz.
+
+Las victorias baratas, por orden: levanta el router del suelo, sácalo del
+mueble y ponlo cerca del *centro* de la casa en lugar de donde entra la línea.
+Un router movido tres metros ha arreglado más streams congelados que la mayoría
+de las pantallas de ajustes.
+
+## Cuándo dejar de pelearse con la radio
+
+Algunas habitaciones sencillamente quedan fuera del alcance de un solo router,
+y los arreglos honestos son:
+
+- **Un cable, siempre que se pueda.** [En un TV Box](/es/blog/reproductor-iptv-en-android-tv/),
+  una tirada de Ethernet zanja la conversación para siempre.
+- **Adaptadores PLC**, que llevan la red por el cableado eléctrico de la casa —
+  imperfectos, pero a menudo mucho mejores que el borde lejano del wifi.
+- **Un sistema mesh o un punto de acceso cableado** en la habitación difícil,
+  si la pantalla que se congela tiene que seguir siendo inalámbrica.
+
+## Qué puede y qué no puede hacer el reproductor
+
+Un reproductor no puede alisar un aire que se queda mudo durante segundos, pero
+sí determina cómo se siente el fallo: cuánto búfer llena por delante, con qué
+rapidez se recupera cuando la radio vuelve, si se reengancha al directo o se
+queda atascado para siempre en un segmento viejo. Cuánto *margen de aviso*
+tiene depende también de
+[cómo se entrega el stream](/es/blog/protocolos-de-streaming-hls-dash-rtsp/):
+los formatos segmentados le dan al reproductor un colchón de lectura por
+delante que un caudal continuo no ofrece.
+
+Lo que un reproductor no debería hacer nunca es empeorar el problema gastando
+tu ancho de banda en [tráfico de publicidad y analítica](/es/blog/sin-anuncios-ni-rastreadores/)
+junto al vídeo. En un enlace que va justo, cada petición que no es vídeo es
+vídeo que no te llegó.

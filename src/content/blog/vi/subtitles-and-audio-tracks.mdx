@@ -1,0 +1,94 @@
+---
+title: "Phụ đề và luồng âm thanh trong IPTV: cách chúng vận hành, và vì sao biến mất"
+description: "Một luồng phát là bó tết của nhiều sợi — hình, tiếng, đôi khi cả chữ. Hiểu cách chúng di chuyển là giải thích được mọi ca mất phụ đề, sai nhãn ngôn ngữ."
+urlSlug: phu-de-va-luong-am-thanh
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["phát lại", "truyền hình"]
+keywords: ["iptv không có phụ đề", "đổi luồng âm thanh iptv", "iptv hai luồng tiếng", "cài đặt phụ đề trình phát iptv"]
+heroImageAlt: "Luồng phát vẽ thành ba sợi tết vào nhau — dải hình ảnh, sóng âm thanh và dòng chữ — cùng chạy vào một chiếc phích cắm."
+---
+
+Thứ bạn xem dưới cái tên “một kênh” thực ra là nhiều luồng tết vào nhau: một
+luồng hình, một hoặc nhiều luồng tiếng, và — đôi khi — một hoặc nhiều luồng chữ.
+Bó tết ấy được nhà cung cấp bện lại từ trước khi nó đến tay bạn, và chỉ một sự
+thật đó thôi giải thích gần hết những gì gây bối rối về phụ đề và ngôn ngữ trong
+IPTV: một trình phát gỡ được bó tết ra và cho bạn chọn giữa các sợi, nhưng không
+thể thêm vào một sợi chưa bao giờ được bện.
+
+## Các luồng đi chung bên trong luồng phát
+
+Khi một đài phát một bộ phim với hai thứ tiếng kèm phụ đề, tất cả cùng ngồi
+trong một transport stream: hình, mỗi ngôn ngữ một luồng tiếng, và dữ liệu phụ
+đề, mỗi thứ gắn một mã ngôn ngữ. Việc của trình phát là đọc các nhãn đó, bày ra
+lựa chọn, và chuyển qua lại giữa chúng —
+[giải mã và dựng hình, nói cách khác](/vi/blog/trinh-phat-iptv-lam-gi/), áp dụng
+cho nhiều thứ hơn là chỉ hình ảnh.
+
+Vậy nên câu hỏi chẩn đoán đầu tiên luôn là một: *sợi đó có nằm trong luồng phát
+hay không?* Nếu menu âm thanh của trình phát liệt kê đúng một luồng tiếng và
+không có phụ đề nào, thì đó không phải trình phát đang làm cao. Bó tết của nhà
+cung cấp chỉ chứa một sợi tiếng và không gì khác, và không thiết lập nào ở bất
+cứ đâu triệu hồi được phần còn thiếu.
+
+## Vì sao phụ đề hay biến mất hơn tiếng
+
+Phụ đề là sợi bị đánh rơi thường xuyên nhất, vì những lý do kỹ thuật chẳng có gì
+hào nhoáng. Phụ đề truyền hình đến theo những hình thù trái khoáy — có loại được
+truyền đi dưới dạng *hình chụp* của chữ thay vì chữ thật — và khi nhà cung cấp
+nén lại một kênh
+[sang một định dạng truyền gọn nhẹ hơn](/vi/blog/giao-thuc-streaming-la-gi/),
+việc mang những thứ ấy theo cùng là phần việc phụ rất dễ bị bỏ qua. Kênh bạn
+đang xem có thể từng có phụ đề lúc rời khỏi đài, rồi rơi mất dọc đường.
+
+Phép thử thực tế: nếu cùng một chương trình hiện phụ đề ở nguồn này mà mất tăm ở
+nguồn kia, thì sợi ấy đã bị đánh rơi ở thượng nguồn. Hãy nói với nhà cung cấp —
+chuyện này sửa được thật, và chỉ sửa được ở phía họ.
+
+## Các luồng tiếng, và bí ẩn mang tên “und”
+
+Ở nơi một luồng phát chở theo nhiều luồng tiếng — bản gốc cộng bản lồng tiếng,
+hay bình luận bằng hai ngôn ngữ — việc chuyển qua lại chỉ cách một menu của trình
+phát. Điều gây bực phổ biến là chuyện dán nhãn: mã ngôn ngữ do người mã hóa
+luồng đặt, và một người mã hóa lười để nguyên chúng là `und` — chưa xác định.
+Trình phát chỉ hiện được cái nhãn nó được đưa, nên “Track 1 (und)” và “Track 2
+(und)” nghĩa là thử mỗi cái một lần, rồi nhớ cái nào là cái nào.
+
+Nếu bạn xem bằng nhiều hơn một ngôn ngữ, đây là một nửa của bộ thiết lập song
+ngữ — [nửa kia là chính ứng dụng nói tiếng của bạn](/vi/blog/xem-bang-ngon-ngu-cua-ban/),
+vì ngôn ngữ giao diện và ngôn ngữ nội dung là hai lựa chọn tách biệt.
+
+## Tự mang tệp phụ đề của mình đến
+
+Với phim lẻ và phim bộ, có cả một thế giới lành mạnh những tệp phụ đề tồn tại
+độc lập với mọi luồng phát. Một trình phát có nghề sẽ cho bạn gắn một tệp như
+thế — trỏ nó vào tệp phụ đề và dòng chữ được vẽ đè lên video như thể đã nằm
+trong bó tết từ đầu. Đây là trường hợp duy nhất mà một sợi bị thiếu có thể được
+bù từ phía bạn, và riêng với phim cũ, đó thường là cách duy nhất để xem có chữ.
+
+## Làm cho chữ đọc được ở đúng chỗ bạn ngồi
+
+Vẽ phụ đề là phần tay nghề của trình phát, và không có cỡ nào vừa cho tất cả.
+Dòng chữ dễ đọc từ khoảng cách ba mét trước TV là một tấm biển quảng cáo
+[trên máy tính bảng cầm cách một sải tay](/vi/blog/xem-iptv-tren-may-tinh-bang/);
+chữ trắng mảnh thì vô hình trên nền cỏ sân bóng lóa nắng. Một trình phát đáng
+giữ lại phải cho bạn chỉnh cỡ chữ, màu chữ, và độ mờ của dải nền sau chữ — ba
+nút điều khiển giản dị mà gộp lại giải quyết gần như mọi lời phàn nàn về độ dễ
+đọc, từ khoảng cách sofa cho đến phòng sáng chói.
+
+## Bài chẩn đoán ngắn, theo thứ tự
+
+1. **Mở các menu chọn luồng của trình phát.** Menu liệt kê gì thì bó tết chứa
+   nấy. Sợi nào vắng mặt thì dừng lại — chỗ sửa nằm ở thượng nguồn.
+2. **Có liệt kê nhưng mặc định sai?** Chọn cái bạn muốn; một trình phát tốt sẽ
+   nhớ lựa chọn của bạn.
+3. **Nhãn ghi `und`?** Thử từng luồng một lần; nhãn đã bị bỏ trống từ khâu mã
+   hóa.
+4. **Phụ đề có nhưng khó đọc?** Cỡ chữ, màu, nền — chỉnh theo đúng chỗ bạn ngồi.
+5. **Một bộ phim không có luồng chữ nào?** Một tệp phụ đề riêng, gắn vào trong
+   trình phát, lấp được khoảng trống.
+
+Không bước nào ở trên đòi hỏi phải hiểu gì về bó tết. Nhưng biết rằng nó *là*
+một bó tết — bện ở thượng nguồn, gỡ ra ở phía bạn — là khác biệt giữa loay hoay
+với những thiết lập không thể giúp gì, và hỏi đúng một câu có thể giúp: sợi ấy
+rốt cuộc có từng ở đó hay không?

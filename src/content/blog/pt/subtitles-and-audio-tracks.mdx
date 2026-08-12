@@ -1,0 +1,98 @@
+---
+title: "Legendas e faixas de áudio no IPTV: como funcionam e por que somem"
+description: "Um stream é uma trança de faixas — vídeo, áudio, às vezes texto. Saber como elas viajam explica cada legenda sumida e idioma mal rotulado."
+urlSlug: legendas-e-faixas-de-audio
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["reprodução", "televisão"]
+keywords: ["legenda não aparece no iptv", "trocar faixa de áudio iptv", "iptv áudio dublado ou original", "configurar legenda no player de iptv"]
+heroImageAlt: "Um stream desenhado como três fios trançados — uma tira de imagem, uma onda de áudio e uma linha de texto — entrando num único plugue."
+---
+
+Aquilo que você assiste como "um canal" é, na verdade, vários streams trançados:
+uma faixa de vídeo, uma ou mais faixas de áudio e — às vezes — uma ou mais
+faixas de texto. A trança é montada pelo seu provedor antes de chegar até você,
+e esse único fato explica quase tudo o que confunde sobre legendas e idiomas no
+IPTV: um player consegue destrançar e deixar você escolher entre os fios, mas
+não consegue acrescentar um fio que nunca foi trançado.
+
+## As faixas viajam dentro do stream
+
+Quando uma emissora transmite um filme com dois idiomas e legendas, tudo viaja
+no mesmo transport stream: o vídeo, uma faixa de áudio por idioma e os dados de
+legenda, cada um etiquetado com um código de idioma. O trabalho do player é ler
+essas etiquetas, apresentar as opções e alternar entre elas —
+[decodificar e desenhar, em outras palavras](/pt/blog/o-que-faz-um-player-iptv/),
+aplicado a mais do que só a imagem.
+
+Então a primeira pergunta de diagnóstico é sempre a mesma: *a faixa está no
+stream, para começo de conversa?* Se o menu de áudio do player lista uma faixa e
+nenhuma legenda, não é o player se fazendo de difícil. A trança do provedor
+contém um fio de áudio e nada mais, e nenhum ajuste em lugar nenhum vai conjurar
+o resto.
+
+## Por que legenda some mais do que áudio
+
+A legenda é o fio que mais se perde, por razões técnicas sem glamour nenhum.
+Legendas de radiodifusão vêm em formatos incômodos — algumas são transmitidas
+como *imagens* do texto, e não como texto em si —, e quando um provedor
+recodifica um canal
+[para um formato de entrega mais enxuto](/pt/blog/protocolos-de-streaming-explicados/),
+carregá-las junto é trabalho extra fácil de pular. O canal que você assiste pode
+ter saído da emissora com legendas e tê-las perdido no caminho.
+
+O teste prático: se o mesmo programa mostra legendas numa fonte e nenhuma em
+outra, o fio foi derrubado lá em cima. Mencione ao seu provedor — é algo
+genuinamente consertável do lado dele, e só do lado dele.
+
+## Faixas de áudio, e o mistério do "und"
+
+Quando um stream carrega mesmo várias faixas de áudio — idioma original mais
+dublagem, ou narração em duas línguas —, alternar entre elas está a um menu de
+distância no player. A irritação comum é a rotulagem: as etiquetas de idioma são
+definidas por quem codificou o stream, e um codificador preguiçoso as deixa como
+`und` — indeterminado. O player só pode mostrar a etiqueta que recebeu, então
+"Faixa 1 (und)" e "Faixa 2 (und)" significa testar as duas, uma vez, e lembrar
+qual era qual.
+
+Se você assiste em mais de um idioma, essa é metade de uma configuração
+bilíngue —
+[a outra metade é o próprio app falar a sua língua](/pt/blog/assistir-no-seu-idioma/),
+já que interface e conteúdo são escolhas separadas.
+
+## Trazendo o seu próprio arquivo de legenda
+
+Para filmes e séries, existe um mundo saudável de arquivos de legenda que vivem
+separados de qualquer stream. Um player capaz deixa você anexar um — aponte-o
+para um arquivo de legenda e ele é desenhado sobre o vídeo como se estivesse na
+trança desde sempre. É o único caso em que um fio ausente pode ser suprido do
+seu lado, e para filmes antigos em particular costuma ser o único jeito de
+assistir com texto.
+
+## Deixando tudo legível de onde você está
+
+Desenhar legendas é o ofício do player, e não existe tamanho único. Um texto
+confortável a três metros de distância na televisão é um outdoor
+[num tablet à distância do braço](/pt/blog/iptv-no-tablet/); um texto branco e
+fino some sobre a areia clara de um jogo de vôlei de praia. Um player que mereça
+ficar deixa você ajustar o tamanho, a cor do texto e a opacidade da tarja atrás
+dele — três controles simples que, juntos, resolvem quase toda queixa de
+legibilidade, da distância do sofá ao reflexo da sala clara.
+
+## O diagnóstico curto, na ordem
+
+1. **Abra os menus de faixas do player.** O que os menus listam é o que a trança
+   contém. Se o fio está ausente, pare — o conserto é lá em cima.
+2. **Faixas listadas, mas a errada por padrão?** Escolha a que você quer; um bom
+   player guarda a sua preferência.
+3. **Rotulada como `und`?** Teste cada faixa uma vez; as etiquetas ficaram em
+   branco no codificador.
+4. **Legenda presente, mas ilegível?** Tamanho, cor, fundo — ajuste para onde
+   você realmente está sentado.
+5. **Filme sem faixa de texto nenhuma?** Um arquivo de legenda separado, anexado
+   no player, preenche a lacuna.
+
+Nada disso exige saber qualquer coisa sobre a trança. Mas saber que ela é uma
+trança — montada lá em cima, desfeita do seu lado — é a diferença entre mexer em
+ajustes que não podem ajudar e fazer a única pergunta que pode: o fio esteve ali
+algum dia?

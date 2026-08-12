@@ -1,0 +1,114 @@
+---
+title: "HLS, DASH i RTSP: protokoły stojące za Twoim strumieniem, po ludzku"
+description: "Litery na końcu adresu strumienia decydują, jak blisko „na żywo” jesteś, jak szybko rusza kanał i co się dzieje, gdy sieć czknie."
+urlSlug: protokoly-streamingu-hls-dash-rtsp
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["technikalia", "odtwarzanie"]
+keywords: ["hls czy dash", "co to jest hls", "rtsp czy hls", "protokoły streamingu iptv"]
+heroImageAlt: "Trzy rurociągi narysowane obok siebie: jeden niesie rządek małych paczek, drugi podpisane pudełka, trzeci nieprzerwaną, płynącą linię."
+---
+
+Każdy strumień na Twojej playliście przyjeżdża jedną z kilku metod dostawy —
+i to, którą, kształtuje rzeczy wyczuwalne z kanapy: jak daleko jesteś za
+transmisją na żywo, jak szybko startuje kanał i czy czknięcie sieci oznacza
+przycięcie, czy zawieszenie. Protokołu nigdy nie wybierasz — zrobił to Twój
+dostawca — ale wiedza, który akurat gra, zamienia kilka zagadek w zwykłą
+mechanikę.
+
+## Główny pomysł: paczki zamiast rury
+
+Staroświecki streaming działał jak rozmowa telefoniczna: serwer i odtwarzacz
+trzymały otwarte połączenie, a wideo płynęło nim nieprzerwanie. Nowoczesny
+streaming działa raczej jak firma kurierska. Wideo jest cięte na małe
+segmenty — po kilka sekund każdy — odkładane na zwykłym serwerze WWW,
+a odtwarzacz ściąga je jeden po drugim, tak samo jak przeglądarka ściąga
+obrazki.
+
+Ta jedna decyzja projektowa tłumaczy bardzo wiele. Paczki można ściągać
+z wyprzedzeniem, więc odtwarzacz utrzymuje poduszkę na wypadek
+[chwiejnej sieci](/pl/blog/iptv-zacina-sie-na-wifi/). Paczki mogą istnieć
+w kilku poziomach jakości, więc gdy pasmo spada, odtwarzacz schodzi stopień
+niżej bez dramatu. A przez zapory sieciowe i hotelowe Wi-Fi paczki przechodzą
+nietknięte, bo dla sieci są po prostu ruchem WWW.
+
+Ceną jest opóźnienie. Jeśli segmenty mają po sześć sekund, a odtwarzacz trzyma
+trzy z nich, oglądasz co najmniej osiemnaście sekund za żywą chwilą — dlatego
+za ścianą potrafią cieszyć się z gola, zanim Twój komentator zobaczy strzał.
+
+## HLS: playlista z kawałków
+
+HLS — HTTP Live Streaming — to najpopularniejszy system paczkowy, a jego
+papierologię już znasz:
+[plik `.m3u8` to dokładnie to m3u8 z artykułu „M3U czy M3U8”](/pl/blog/m3u-czy-m3u8/).
+To mały plik tekstowy wymieniający segmenty dostępne w tej chwili; odtwarzacz
+odczytuje go na nowo co kilka sekund, zauważa świeży segment na końcu
+i go zbiera.
+
+Dla kanałów na żywo playlista roluje się w przód bez końca. Dla catch-upu
+i filmów jest to kompletna lista z początkiem i końcem — dlatego przewijanie
+działa tam, a nie działa w telewizji na żywo. HLS wyrósł na telefonach i dziś
+jest wszędzie; jeśli adres Twojego strumienia kończy się na `.m3u8`, to właśnie
+masz.
+
+## DASH: ten sam pomysł, inna papierologia
+
+MPEG-DASH to rodzeństwo HLS ze świata norm międzynarodowych. Segmenty działają
+tak samo; różnicą jest manifest — dokument XML zamiast tekstowej playlisty —
+oraz pewna kodekowa bezstronność, dzięki której polubili go wielcy nadawcy.
+Z kanapy DASH i HLS są nie do odróżnienia, co samo w sobie jest tu lekcją: to
+dwa dialekty tego samego paczkowego języka, a dobry odtwarzacz mówi oboma, nie
+zawracając Ci tym głowy.
+
+## RTSP: stara rozmowa telefoniczna, wciąż na linii
+
+RTSP to żyjący jeszcze przedstawiciel rodziny rurowej. Odtwarzacz prosi serwer
+o rozpoczęcie nadawania, a wideo płynie trzymanym otwarcie połączeniem niemal
+bez opóźnienia. Ta natychmiastowość to powód, dla którego wciąż mówią nim
+kamery monitoringu — i niektóre źródła IPTV też.
+
+Jego słabości są lustrem jego siły. Nie ma poduszki ze ściągniętych paczek,
+więc czknięcie sieci czuć od razu; nie ma drabinki jakości, po której można
+zejść; a typy połączeń, których używa, to dokładnie te, których nie lubią
+restrykcyjne zapory i sieci współdzielone. Kiedy strumień RTSP działa, jest
+imponująco żywy. Kiedy nie działa, odtwarzacz niewiele może zrobić, żeby to
+złagodzić.
+
+## MPEG-TS po HTTP: strumień ciągły
+
+Spora część IPTV na żywo używa czegoś prostszego niż wszystko powyżej:
+jednego połączenia HTTP, którym serwer leje nieprzerwany strumień transportowy
+MPEG. Bez manifestu, bez segmentów — ten sam kontener, którego używa telewizja
+satelitarna i kablowa, przelany przez internet. Jeśli adres na żywo kończy się
+na `.ts` albo nie ma żadnego wymownego rozszerzenia, często chodzi właśnie
+o to.
+
+Jest to proste i szybko startuje, ale wszystkiego, co dają systemy paczkowe,
+tu brakuje: żadnej drabinki jakości, żadnego dosłania zgubionego kawałka,
+żadnego cofania. Jedyną poduszką jest bufor odtwarzacza — i dlatego
+[zachowanie bufora znaczy w IPTV na żywo więcej](/pl/blog/jak-naprawic-buforowanie-iptv/)
+niż gdziekolwiek indziej w streamingu.
+
+## Co to tłumaczy w praktyce
+
+- **Twój strumień jest za dekoderem satelitarnym sąsiada.** Dostawa segmentowa
+  wymienia sekundy opóźnienia na płynność — celowo.
+- **Kanały potrzebują chwili, żeby ruszyć.** Odtwarzacz musi najpierw sięgnąć
+  po manifest i pierwszą paczkę czy dwie, zanim narysuje klatkę.
+- **Telewizji na żywo nie cofniesz, a catch-up działa.** Rolująca playlista na
+  żywo nie ma przeszłości, w którą można by się cofnąć; kompletna ma —
+  a catch-up to [to, dzięki czemu przewodnik daje odtwarzaczowi coś, o co można poprosić](/pl/blog/epg-jak-dziala-program-telewizyjny/).
+- **Jeden kanał zawiesza się twardo, a inne degradują łagodnie.** Ten łagodny
+  ma drabinkę jakości do zejścia; ten zamrożony to pewnie surowy strumień,
+  który nie ma dokąd pójść.
+
+## Dlaczego odtwarzacz musi mówić nimi wszystkimi
+
+Serwis streamingowy optymalizuje jedną ścieżkę dostawy i testuje ją od końca
+do końca. Odtwarzacz IPTV
+[dziedziczy to, co wybrał Twój dostawca](/pl/blog/co-robi-odtwarzacz-iptv/) —
+segmentowy HLS na jednym kanale, surowy strumień transportowy na następnym,
+zaraz potem kamerę po RTSP — i oczekuje się od niego, że wszystko to będzie
+czuło się jak telewizja. Znoszenie awarii każdego z tych protokołów z wdziękiem,
+bez celebry i bez wymagania, żebyś się tym wszystkim przejmował, to uczciwy
+sprawdzian tego, czy odtwarzacz zasługuje na ekran, na którym stoi.

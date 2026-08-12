@@ -1,0 +1,99 @@
+---
+title: "IPTV freezing on Wi-Fi? Finding the weak link in the radio"
+description: "When streams stall in one room and play in another, the problem is the radio link. Here is how Wi-Fi fails, and the fixes in the order to try them."
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['troubleshooting', 'playback']
+keywords: ['iptv freezing on wifi', 'iptv keeps freezing', 'wifi streaming stutter', 'iptv freezes every few minutes']
+heroImageAlt: "A Wi-Fi signal drawn as concentric arcs passing through walls, growing fainter with each wall it crosses."
+---
+
+There is a particular pattern worth recognising: the stream plays perfectly on
+the TV wired to the router, stalls on the tablet in the bedroom, and freezes
+outright in the kitchen. When trouble follows the *room* rather than the
+channel, you are not looking at a server problem or a playlist problem. You are
+looking at the radio.
+
+[The general diagnosis chain](/blog/fix-iptv-buffering/) — server, line, home
+network, device — still applies, and it is worth a pass first. This article is
+about the link in that chain that fails most often and most confusingly: the
+stretch of air between your router and your screen.
+
+## First, prove it is the Wi-Fi
+
+Two minutes of evidence saves an evening of guessing:
+
+1. **Play the same channel next to the router.** If it is smooth there and
+   freezes in the far room, the stream is fine and the radio is not.
+2. **Run a speed test in the room where it freezes.** Live television needs
+   surprisingly little bandwidth — but it needs it *steadily*. A connection that
+   swings between fast and nothing will freeze a stream that a slower, steadier
+   line would carry without complaint.
+
+If the stream freezes everywhere, including beside the router, go back to the
+general chain: the problem is upstream of your home.
+
+## The two bands do different jobs
+
+Most routers broadcast on two frequencies, and they fail in opposite ways.
+
+**2.4 GHz travels far and penetrates walls**, which is why your device clings to
+it in the far room — but it is slow, and it is a shared, crowded lane: your
+neighbours' networks, Bluetooth, and the microwave all live there. **5 GHz is
+fast and clean but short-ranged**; a couple of solid walls can end it.
+
+The freeze pattern this produces is distinctive: the device sits at the edge of
+5 GHz coverage, drops to 2.4 GHz, finds it congested, climbs back, and your
+stream stalls at each handover. If your router lets you name the two bands
+separately, connecting the streaming device firmly to one of them — whichever
+is actually usable in that room — often ends the flapping outright.
+
+## Why evenings are worse
+
+Wi-Fi is a shared medium in a way a cable never is. Your 2.4 GHz channel is the
+same channel your neighbours use, and at 9pm every household on the street is
+streaming at once. The radios take turns; your stream's steady trickle gets
+interrupted; the buffer runs dry; the picture freezes.
+
+This is why a stream can be flawless at noon and unwatchable at night on the
+same equipment. It is not the provider being oversubscribed — that
+[has its own signature](/blog/fix-iptv-buffering/) — it is the air being
+oversubscribed. A 5 GHz connection, which carries much less of the
+neighbourhood's traffic, is the usual escape.
+
+## Placement, and the things between
+
+Radio at these frequencies is nearly line-of-sight, and homes are full of
+things that absorb it. Each interior wall costs signal; concrete and brick cost
+more; mirrors and metal appliances reflect it; an aquarium or a water heater
+absorbs it outright — water is remarkably opaque at 2.4 GHz.
+
+The cheap wins, in order: raise the router off the floor, move it out of the
+cabinet, and put it near the *middle* of the home rather than wherever the line
+enters. A router relocated three metres has fixed more freezing streams than
+most settings screens.
+
+## When to stop fighting the radio
+
+Some rooms are simply beyond a single router, and the honest fixes are:
+
+- **A cable, wherever possible.** [For a TV box](/blog/iptv-player-on-android-tv/),
+  one Ethernet run ends the conversation permanently.
+- **Powerline adapters**, which send the network over your electrical wiring —
+  imperfect, but often far better than the far edge of Wi-Fi.
+- **A mesh system or a wired access point** in the difficult room, if the
+  freezing screen must stay wireless.
+
+## What the player can and cannot do about it
+
+A player cannot smooth over air that goes silent for seconds at a time, but it
+determines how the failure feels: how much it buffers ahead, how quickly it
+recovers when the radio comes back, whether it rejoins the live stream or
+stalls forever on a stale segment. How much *warning* it has also depends on
+[how the stream is delivered](/blog/streaming-protocols-explained/) — segmented
+formats give a player room to read ahead that a continuous feed does not.
+
+What a player should never do is make the problem worse by spending your
+bandwidth on [advertising and analytics traffic](/blog/no-ads-no-trackers/)
+alongside the video. On a struggling link, every request that is not video is
+video you did not get.

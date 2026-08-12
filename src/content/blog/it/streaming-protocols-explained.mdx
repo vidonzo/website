@@ -1,0 +1,117 @@
+---
+title: "HLS, DASH e RTSP: i protocolli dietro il tuo flusso, spiegati"
+description: "Le lettere in fondo all'URL di un flusso decidono quanto sei vicino alla diretta, quanto in fretta parte un canale e cosa succede se la rete inciampa."
+urlSlug: protocolli-di-streaming-spiegati
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["ingegneria", "riproduzione"]
+keywords: ["hls o dash differenze", "cos'è lo streaming hls", "rtsp o hls", "protocolli streaming iptv"]
+heroImageAlt: "Tre condutture disegnate fianco a fianco: una porta una fila di piccoli pacchi, una scatole etichettate, una una linea che scorre senza interruzioni."
+---
+
+Ogni flusso della tua playlist arriva con uno tra una manciata di metodi di
+consegna, e quale sia plasma cose che senti dal divano: quanto sei indietro
+rispetto alla diretta, quanto in fretta parte un canale, e se un inciampo della
+rete significa uno scatto o un blocco. Il protocollo non devi sceglierlo tu —
+l'ha già fatto il tuo fornitore — ma sapere quale è in gioco trasforma parecchi
+misteri in meccanica.
+
+## L'idea di fondo: pacchi, non tubi
+
+Lo streaming di una volta funzionava come una telefonata: server e player
+tenevano aperta una connessione e il video ci scorreva dentro in continuo. Lo
+streaming moderno funziona per lo più come un corriere. Il video viene tagliato
+in piccoli segmenti — pochi secondi ciascuno — messi su un normale server web,
+e il player li recupera uno dopo l'altro, come un browser recupera le immagini.
+
+Quella singola scelta di progetto spiega molto. I pacchi si possono prelevare
+in anticipo, così un player si tiene un cuscinetto contro
+[una rete ballerina](/it/blog/iptv-si-blocca-su-wifi/). I pacchi possono
+esistere in più livelli di qualità, così il player può scendere di gradino con
+grazia quando la banda cala. E i pacchi attraversano firewall e Wi-Fi d'albergo
+senza un graffio, perché per la rete sono semplice traffico web.
+
+Il prezzo è il ritardo. Se i segmenti durano sei secondi e il player ne tiene
+tre, stai guardando almeno diciotto secondi dietro il momento in diretta — ed è
+per questo che un gol può essere festeggiato nell'appartamento accanto quando
+il tuo telecronista non ha ancora visto il tiro.
+
+## HLS: una playlist di pezzi
+
+HLS — HTTP Live Streaming — è il sistema a pacchi più diffuso, e la sua
+modulistica l'hai già incontrata:
+[il file `.m3u8` è esattamente l'm3u8 di «M3U o M3U8»](/it/blog/m3u-o-m3u8/). È
+un piccolo file di testo che elenca i segmenti disponibili in questo momento;
+il player lo rilegge ogni pochi secondi, nota il segmento nuovo in fondo e lo
+va a prendere.
+
+Per i canali in diretta la playlist rotola in avanti per sempre. Per il
+recupero dei programmi e per i film è una lista completa con un inizio e una
+fine, ed è per questo che lì la ricerca nel tempo funziona e sulla diretta no.
+HLS è cresciuto sui telefoni e ormai è dappertutto; se l'URL del tuo flusso
+finisce in `.m3u8`, hai in mano questo.
+
+## DASH: la stessa idea con un'altra modulistica
+
+MPEG-DASH è il fratello di HLS diventato standard internazionale. I segmenti
+funzionano allo stesso modo; la differenza è il manifest — un documento XML
+invece di una playlist di testo — e una certa neutralità rispetto ai codec che
+l'ha reso popolare tra i grandi broadcaster. Dal divano, DASH e HLS sono
+indistinguibili, e la lezione è proprio questa: sono due dialetti della stessa
+lingua a pacchi, e un buon player li parla entrambi senza dirtelo.
+
+## RTSP: la vecchia telefonata, ancora in linea
+
+RTSP è il membro superstite della famiglia dei tubi. Il player chiede al server
+di iniziare a trasmettere, e il video scorre su una connessione tenuta aperta
+con un ritardo quasi nullo. Quell'immediatezza è il motivo per cui le
+telecamere di sicurezza lo parlano ancora, e per cui lo fa anche qualche
+sorgente IPTV.
+
+Le sue debolezze sono lo specchio della sua forza. Non c'è un cuscinetto di
+pacchi già prelevati, quindi un inciampo della rete si sente all'istante; non
+ci sono scale di qualità da scendere; e i tipi di connessione che usa sono
+esattamente quelli che i firewall severi e le reti condivise detestano. Quando
+un flusso RTSP funziona, è di una immediatezza notevole. Quando non funziona,
+c'è poco che un player possa fare per attutirlo.
+
+## MPEG-TS su HTTP: il flusso continuo
+
+Una buona fetta dell'IPTV in diretta usa qualcosa di più spartano di tutti i
+precedenti: una singola connessione HTTP in cui il server versa un transport
+stream MPEG ininterrotto. Niente manifest, niente segmenti — lo stesso
+contenitore della televisione satellitare e via cavo, versato su internet. Se
+un URL in diretta finisce in `.ts` o non ha nessuna estensione rivelatrice,
+spesso è questo.
+
+È semplice e parte in fretta, ma tutto ciò che i sistemi a pacchi offrono qui
+manca: nessuna scala di qualità, nessun modo di riprendere un pezzo perso,
+nessun salto all'indietro. Il buffer del player è l'unico cuscinetto che
+esista, ed è per questo che
+[il comportamento del buffer conta sull'IPTV in diretta](/it/blog/risolvere-buffering-iptv/)
+più che in qualunque altro angolo dello streaming.
+
+## Che cosa spiega tutto questo, in pratica
+
+- **Il tuo flusso è indietro rispetto al decoder satellitare del vicino.** La
+  consegna a segmenti scambia secondi di ritardo con la fluidità, per progetto.
+- **I canali ci mettono un attimo a partire.** Il player deve recuperare un
+  manifest e un pacco o due prima di poter disegnare un fotogramma.
+- **La diretta non si riavvolge, ma il recupero dei programmi sì.** Una
+  playlist live che rotola non ha un passato in cui cercare; una completa sì —
+  e il recupero è
+  [ciò che la guida dà al player da chiedere](/it/blog/come-funziona-la-guida-epg/).
+- **Un canale si congela di colpo mentre altri degradano piano.** Quello
+  gentile ha una scala di qualità da scendere; quello congelato è probabilmente
+  un flusso grezzo senza vie d'uscita.
+
+## Perché un player deve parlarli tutti
+
+Una piattaforma di streaming ottimizza un solo percorso di consegna e lo
+collauda da un capo all'altro. Un lettore IPTV
+[eredita qualunque cosa abbia scelto il tuo fornitore](/it/blog/cosa-fa-un-lettore-iptv/)
+— HLS a segmenti su un canale, un transport stream grezzo sul successivo, il
+flusso RTSP di una telecamera subito dopo — e ci si aspetta che li faccia
+sembrare tutti televisione. Gestire con grazia i guasti di ciascun protocollo,
+senza cerimonie e senza chiederti di occuparti di niente di tutto questo, è un
+buon banco di prova per capire se un player merita lo schermo su cui sta.

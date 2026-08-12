@@ -1,0 +1,119 @@
+---
+title: "HLS, DASH et RTSP : les protocoles derrière votre flux, expliqués"
+description: "Les lettres à la fin d'une URL de flux décident du différé, de la vitesse de zapping, et de ce qui se passe quand le réseau tousse."
+urlSlug: protocoles-de-streaming-expliques
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['technique', 'lecture']
+keywords: ['hls ou dash', "c'est quoi le hls", 'rtsp ou hls', 'protocoles streaming iptv']
+heroImageAlt: "Trois conduites dessinées côte à côte : l'une transportant une file de petits colis, l'autre des caisses étiquetées, la troisième une ligne fluide ininterrompue."
+---
+
+Chaque flux de votre playlist arrive par l'une d'une poignée de méthodes de
+livraison, et laquelle c'est façonne des choses que vous sentez depuis le
+canapé : votre retard sur le direct, la vitesse à laquelle une chaîne démarre,
+et si un hoquet du réseau se traduit par un accroc ou par un gel. Vous n'avez
+jamais à choisir un protocole — votre fournisseur l'a fait pour vous — mais
+savoir lequel est en jeu transforme plusieurs mystères en mécanique.
+
+## La grande idée : des colis, pas des tuyaux
+
+Le streaming à l'ancienne fonctionnait comme un appel téléphonique : un serveur
+et un lecteur maintenaient une connexion ouverte et la vidéo y coulait en
+continu. Le streaming moderne fonctionne plutôt comme un service de messagerie.
+La vidéo est découpée en petits segments — quelques secondes chacun — déposés
+sur un serveur web ordinaire, et le lecteur va les chercher l'un après l'autre,
+comme un navigateur va chercher des images.
+
+Ce seul choix de conception explique beaucoup. Des colis peuvent être récupérés
+à l'avance, donc un lecteur peut se garder un coussin contre
+[un réseau capricieux](/fr/blog/iptv-qui-fige-en-wifi/). Des colis peuvent
+exister en plusieurs niveaux de qualité, donc le lecteur peut descendre d'un
+cran en douceur quand le débit chute. Et des colis traversent les pare-feu et
+le Wi-Fi d'hôtel sans encombre, parce qu'aux yeux du réseau ce n'est que du
+trafic web.
+
+Le prix, c'est le différé. Si les segments durent six secondes et que le
+lecteur en garde trois, vous regardez avec au moins dix-huit secondes de retard
+sur l'instant du direct — c'est pourquoi un but peut être célébré chez le
+voisin avant que votre commentateur n'ait vu la frappe.
+
+## HLS : une playlist de morceaux
+
+HLS — HTTP Live Streaming — est le système de colis le plus répandu, et vous
+avez déjà croisé sa paperasse :
+[le fichier `.m3u8` est exactement le m3u8 de « M3U ou M3U8 »](/fr/blog/m3u-ou-m3u8/).
+C'est un petit fichier texte qui liste les segments disponibles à l'instant
+même ; le lecteur le récupère à nouveau toutes les quelques secondes, remarque
+le nouveau segment à la fin, et va le chercher.
+
+Pour les chaînes en direct, la playlist avance indéfiniment. Pour le replay et
+les films, c'est une liste complète, avec un début et une fin — ce qui explique
+que l'avance et le retour fonctionnent là, et pas sur la télévision en direct.
+HLS a grandi sur les téléphones et est partout aujourd'hui ; si l'URL de votre
+flux se termine par `.m3u8`, c'est ce que vous avez.
+
+## DASH : la même idée avec une autre paperasse
+
+MPEG-DASH est le frère de HLS version norme internationale. Les segments
+fonctionnent pareil ; la différence tient au manifeste — un document XML plutôt
+qu'une playlist texte — et à une certaine neutralité vis-à-vis des codecs qui
+l'a rendu populaire chez les grands diffuseurs. Depuis le canapé, DASH et HLS
+sont indiscernables, et c'est la leçon même : ce sont deux dialectes de la même
+langue à colis, et un bon lecteur parle les deux sans vous le dire.
+
+## RTSP : le vieil appel téléphonique, toujours en ligne
+
+RTSP est le survivant de la famille des tuyaux. Un lecteur demande au serveur
+de commencer à émettre, et la vidéo coule sur une connexion maintenue ouverte,
+avec presque aucun différé. Cette immédiateté explique que les caméras de
+surveillance le parlent encore, et que quelques sources IPTV aussi.
+
+Ses faiblesses sont le miroir de sa force. Pas de coussin de colis récupérés,
+donc un hoquet du réseau se sent immédiatement ; pas d'échelle de qualités où
+descendre ; et les types de connexion qu'il emploie sont précisément ceux que
+les pare-feu stricts et les réseaux partagés n'aiment pas. Quand un flux RTSP
+fonctionne, il est d'une immédiateté impressionnante. Quand il ne fonctionne
+pas, un lecteur ne peut pas grand-chose pour l'adoucir.
+
+## MPEG-TS sur HTTP : le flux continu
+
+Une grande part de l'IPTV en direct utilise quelque chose de plus fruste que
+tout ce qui précède : une seule connexion HTTP dans laquelle le serveur déverse
+un flux de transport MPEG ininterrompu. Pas de manifeste, pas de segments — le
+même conteneur que la télévision par satellite et par câble, versé sur
+internet. Si une URL de direct se termine par `.ts` ou n'a aucune extension
+parlante, c'est souvent cela.
+
+C'est simple et ça démarre vite, mais tout ce qu'offrent les systèmes à colis
+est absent : pas d'échelle de qualités, pas de seconde chance pour un morceau
+manqué, pas de retour en arrière. Le tampon du lecteur est le seul coussin qui
+existe — c'est pourquoi
+[le comportement du tampon compte plus en IPTV en direct](/fr/blog/regler-le-buffering-iptv/)
+que partout ailleurs dans le streaming.
+
+## Ce que cela explique en pratique
+
+- **Votre flux est en retard sur le décodeur satellite du voisin.** La
+  livraison segmentée échange des secondes de différé contre de la fluidité,
+  par conception.
+- **Les chaînes mettent un instant à démarrer.** Le lecteur doit récupérer un
+  manifeste et un ou deux premiers colis avant de pouvoir dessiner une image.
+- **Impossible de revenir en arrière sur le direct, mais le replay marche.**
+  Une playlist de direct qui défile n'a pas de passé où chercher ; une playlist
+  complète, si — et le replay,
+  [c'est le guide qui donne au lecteur quelque chose à demander](/fr/blog/epg-guide-des-programmes/).
+- **Une chaîne se fige net pendant que les autres se dégradent en douceur.**
+  Celle qui se dégrade a une échelle de qualités à descendre ; celle qui se
+  fige est probablement un flux brut sans issue de secours.
+
+## Pourquoi un lecteur doit les parler tous
+
+Un service de streaming optimise un seul chemin de livraison et le teste de
+bout en bout. Un lecteur IPTV
+[hérite de ce que votre fournisseur a choisi](/fr/blog/ce-que-fait-un-lecteur-iptv/)
+— du HLS segmenté sur une chaîne, un flux de transport brut sur la suivante, un
+flux de caméra RTSP juste après — et on attend de lui qu'il donne à tout cela
+la sensation de la télévision. Encaisser les pannes propres à chaque protocole
+avec élégance, sans cérémonie et sans vous demander de vous soucier de tout
+ceci, est un juste test pour savoir si un lecteur mérite l'écran qu'il occupe.
