@@ -1,0 +1,111 @@
+---
+title: "L'IPTV se fige en Wi-Fi ? Trouver le maillon faible de la radio"
+description: "Quand le flux cale dans une pièce et passe dans l'autre, c'est la liaison radio. Voici comment le Wi-Fi flanche, et les remèdes dans l'ordre."
+urlSlug: iptv-qui-fige-en-wifi
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['depannage', 'lecture']
+keywords: ['iptv qui fige en wifi', 'iptv qui se fige souvent', 'streaming qui coupe en wifi', 'iptv qui saccade le soir']
+heroImageAlt: "Un signal Wi-Fi dessiné en arcs concentriques qui traversent des murs, s'affaiblissant à chaque mur franchi."
+---
+
+Il y a un motif qui mérite d'être reconnu : le flux passe parfaitement sur le
+téléviseur câblé à la box, cale sur la tablette dans la chambre, et se fige
+complètement dans la cuisine. Quand le problème suit la *pièce* plutôt que la
+chaîne, vous n'avez pas affaire à un problème de serveur ni de playlist. Vous
+avez affaire à la radio.
+
+[La chaîne de diagnostic générale](/fr/blog/regler-le-buffering-iptv/) —
+serveur, ligne, réseau domestique, appareil — reste valable, et mérite un
+premier passage. Cet article porte sur le maillon de cette chaîne qui lâche le
+plus souvent et de la façon la plus déroutante : le trajet d'air entre votre
+box et votre écran.
+
+## D'abord, prouvez que c'est le Wi-Fi
+
+Deux minutes de preuves épargnent une soirée de conjectures :
+
+1. **Lisez la même chaîne juste à côté de la box.** Si c'est fluide là et que
+   ça se fige dans la pièce éloignée, le flux va bien et la radio, non.
+2. **Faites un test de débit dans la pièce où ça se fige.** La télévision en
+   direct demande étonnamment peu de bande passante — mais elle la demande
+   *régulièrement*. Une connexion qui oscille entre rapide et rien figera un
+   flux qu'une ligne plus lente mais plus stable porterait sans broncher.
+
+Si le flux se fige partout, y compris à côté de la box, revenez à la chaîne
+générale : le problème est en amont de chez vous.
+
+## Les deux bandes ne font pas le même métier
+
+La plupart des box émettent sur deux fréquences, et elles échouent de façons
+opposées.
+
+**Le 2,4 GHz porte loin et traverse les murs**, ce qui explique que votre
+appareil s'y accroche dans la pièce éloignée — mais il est lent, et c'est une
+voie partagée et encombrée : les réseaux de vos voisins, le Bluetooth et le
+micro-ondes y vivent tous. **Le 5 GHz est rapide et propre mais de courte
+portée** ; deux murs épais peuvent en venir à bout.
+
+Le motif de gel que cela produit est reconnaissable : l'appareil se tient à la
+lisière de la couverture 5 GHz, bascule en 2,4 GHz, le trouve saturé, remonte,
+et votre flux cale à chaque passage de relais. Si votre box permet de nommer
+les deux bandes séparément, rattacher fermement l'appareil de lecture à l'une
+d'elles — celle qui est réellement utilisable dans cette pièce — met souvent
+fin au va-et-vient d'un coup.
+
+## Pourquoi les soirées sont pires
+
+Le Wi-Fi est un support partagé comme un câble ne l'est jamais. Votre canal
+2,4 GHz est le même que celui de vos voisins, et à 21 h chaque foyer de la rue
+streame en même temps. Les radios se passent le tour ; le filet régulier de
+votre flux est interrompu ; le tampon se vide ; l'image se fige.
+
+C'est pourquoi un flux peut être impeccable à midi et inregardable le soir sur
+le même matériel. Ce n'est pas le fournisseur qui est sursouscrit — cela
+[a sa propre signature](/fr/blog/regler-le-buffering-iptv/) — c'est l'air qui
+est sursouscrit. Une connexion en 5 GHz, qui porte bien moins du trafic du
+voisinage, est l'échappatoire habituelle.
+
+## L'emplacement, et ce qu'il y a entre
+
+À ces fréquences, la radio se propage presque en ligne droite, et les logements
+sont pleins de choses qui l'absorbent. Chaque cloison coûte du signal ; le
+béton et la brique coûtent davantage ; les miroirs et l'électroménager en métal
+le réfléchissent ; un aquarium ou un chauffe-eau l'absorbe carrément — l'eau
+est remarquablement opaque à 2,4 GHz.
+
+Les victoires bon marché, dans l'ordre : surélever la box, la sortir du meuble,
+et la placer vers le *milieu* du logement plutôt qu'à l'endroit où la ligne
+entre. Une box déplacée de trois mètres a réparé plus de flux figés que la
+plupart des écrans de réglages.
+
+## Quand cesser de se battre avec la radio
+
+Certaines pièces sont simplement hors de portée d'une box seule, et les
+remèdes honnêtes sont :
+
+- **Un câble, partout où c'est possible.**
+  [Pour un boîtier TV](/fr/blog/lecteur-iptv-sur-android-tv/), un seul tirage
+  Ethernet clôt la conversation définitivement.
+- **Des adaptateurs CPL**, qui font passer le réseau par votre installation
+  électrique — imparfaits, mais souvent bien meilleurs que la lisière lointaine
+  du Wi-Fi.
+- **Un système mesh ou un point d'accès filaire** dans la pièce difficile, si
+  l'écran qui se fige doit rester sans fil.
+
+## Ce que le lecteur peut y faire, et ce qu'il ne peut pas
+
+Un lecteur ne peut pas lisser un air qui se tait plusieurs secondes d'affilée,
+mais il détermine la sensation de la panne : combien il met en tampon à
+l'avance, à quelle vitesse il se rétablit quand la radio revient, s'il rejoint
+le direct ou reste bloqué à jamais sur un segment périmé. La marge de
+*préavis* dont il dispose dépend aussi de
+[la façon dont le flux est livré](/fr/blog/protocoles-de-streaming-expliques/) —
+les formats segmentés laissent au lecteur une avance de lecture qu'un flux
+continu ne permet pas.
+
+Ce qu'un lecteur ne devrait jamais faire, c'est aggraver le problème en
+dépensant votre bande passante en
+[trafic publicitaire et de mesure d'audience](/fr/blog/lecteur-sans-pub-ni-traceurs/)
+à côté de la vidéo. Sur une liaison qui souffre, chaque requête qui n'est pas
+de la vidéo est de la vidéo que vous n'avez pas reçue.

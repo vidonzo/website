@@ -1,0 +1,100 @@
+---
+title: "Subtítulos y pistas de audio en IPTV: cómo funcionan y por qué desaparecen"
+description: "Un stream es una trenza de pistas: vídeo, audio y a veces texto. Saber cómo viajan explica cada subtítulo perdido y cada idioma mal etiquetado."
+urlSlug: subtitulos-y-pistas-de-audio-iptv
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["reproducción", "televisión"]
+keywords: ["subtítulos iptv no funcionan", "cambiar pista de audio iptv", "iptv audio dual", "ajustes de subtítulos iptv"]
+heroImageAlt: "Un stream dibujado como tres hebras trenzadas —una tira de imagen, una onda de audio y una línea de texto— que desembocan en un solo conector."
+---
+
+Eso que ves como «un canal» son en realidad varios flujos trenzados: una pista
+de vídeo, una o más pistas de audio y —a veces— una o más pistas de texto. La
+trenza la monta tu proveedor antes de que te llegue, y ese único hecho explica
+casi todo lo confuso de los subtítulos y los idiomas en IPTV: un reproductor
+puede deshacer la trenza y dejarte elegir entre hebras, pero no puede añadir
+una hebra que nunca se tejió.
+
+## Las pistas viajan dentro del stream
+
+Cuando un emisor envía una película con dos idiomas y subtítulos, todo viaja en
+el mismo flujo de transporte: el vídeo, una pista de audio por idioma y los
+datos de subtítulos, cada uno etiquetado con un código de idioma. El trabajo
+del reproductor es leer esas etiquetas, presentarte las opciones y cambiar
+entre ellas —
+[descodificar y dibujar, en otras palabras](/es/blog/que-hace-un-reproductor-iptv/),
+aplicado a algo más que la imagen.
+
+Así que la primera pregunta de diagnóstico es siempre la misma: *¿está la pista
+en el stream siquiera?* Si el menú de audio del reproductor lista una pista y
+ningún subtítulo, no es el reproductor haciéndose de rogar. La trenza de tu
+proveedor contiene una hebra de audio y nada más, y ningún ajuste en ningún
+sitio va a conjurar el resto.
+
+## Por qué los subtítulos se pierden más que el audio
+
+Los subtítulos son la hebra que más se cae, por razones técnicas poco
+vistosas. Los subtítulos de emisión vienen en formas incómodas —algunos se
+transmiten como *imágenes* del texto y no como texto— y cuando un proveedor
+recodifica un canal
+[a un formato de entrega más ligero](/es/blog/protocolos-de-streaming-hls-dash-rtsp/),
+arrastrarlos consigo es trabajo extra fácil de saltarse. El canal que ves puede
+haber tenido subtítulos al salir del emisor y haberlos perdido por el camino.
+
+La prueba práctica: si el mismo programa muestra subtítulos en una fuente y
+ninguno en otra, la hebra se cayó aguas arriba. Coméntaselo a tu proveedor — es
+genuinamente arreglable de su lado, y solo del suyo.
+
+## Las pistas de audio y el misterio de «und»
+
+Cuando un stream sí lleva varias pistas de audio —idioma original más doblaje,
+o comentarios en dos idiomas—, cambiar entre ellas está a un menú de distancia.
+La irritación habitual es el etiquetado: las etiquetas de idioma las pone quien
+codificó el stream, y un codificador perezoso las deja en `und` —
+indeterminado. El reproductor solo puede mostrar la etiqueta que le dieron, así
+que «Pista 1 (und)» y «Pista 2 (und)» significa probar las dos, una vez, y
+acordarse de cuál era cuál.
+
+Si ves en más de un idioma, esta es la mitad de una configuración bilingüe —
+[la otra mitad es que la propia app hable tu idioma](/es/blog/ver-en-tu-idioma/):
+interfaz y contenido son elecciones separadas.
+
+## Traer tu propio archivo de subtítulos
+
+Para películas y series existe un mundo sano de archivos de subtítulos que
+viven al margen de cualquier stream. Un reproductor capaz te dejará adjuntar
+uno: le señalas un archivo de subtítulos y lo pinta sobre el vídeo como si
+hubiera estado en la trenza desde el principio. Es el único caso en que una
+hebra ausente puede suplirse desde tu lado, y para las películas antiguas en
+particular suele ser la única manera de verlas con texto.
+
+## Que se lean desde donde te sientas
+
+Pintar subtítulos es el oficio del reproductor, y no vale una talla única. Un
+texto cómodo a tres metros en un televisor es una valla publicitaria
+[en una tablet a la distancia del brazo](/es/blog/iptv-en-tablet/); un texto
+blanco y fino es invisible sobre un césped nevado en pleno partido. Un
+reproductor que merezca quedarse te deja ajustar el tamaño, el color del texto
+y la opacidad de la franja que lo respalda — tres controles llanos que entre
+los tres resuelven casi cualquier queja de legibilidad, de la distancia del
+sofá al reflejo de una habitación luminosa.
+
+## El diagnóstico corto, por orden
+
+1. **Abre los menús de pistas del reproductor.** Lo que los menús listan es lo
+   que la trenza contiene. Si la hebra no está, para — el arreglo está aguas
+   arriba.
+2. **¿Las pistas están pero la elegida por defecto no es la tuya?** Escoge la
+   que quieres; un buen reproductor recuerda tu preferencia.
+3. **¿Etiquetadas como `und`?** Prueba cada pista una vez; las etiquetas se
+   quedaron en blanco en el codificador.
+4. **¿Subtítulos presentes pero ilegibles?** Tamaño, color, fondo — ajústalos
+   desde donde de verdad te sientas.
+5. **¿Una película sin ninguna pista de texto?** Un archivo de subtítulos
+   aparte, adjuntado en el reproductor, llena el hueco.
+
+Nada de esto exige saber nada de la trenza. Pero saber que *es* una trenza —
+montada aguas arriba, deshecha en tu extremo— es la diferencia entre trastear
+con ajustes que no pueden ayudar y hacer la única pregunta que sí puede:
+¿estuvo la hebra ahí alguna vez?

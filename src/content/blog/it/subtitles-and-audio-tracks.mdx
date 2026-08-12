@@ -1,0 +1,101 @@
+---
+title: "Sottotitoli e tracce audio nell'IPTV: come funzionano e perché spariscono"
+description: "Un flusso è una treccia di tracce: video, audio, a volte testo. Sapere come viaggiano spiega ogni sottotitolo mancante e ogni lingua etichettata male."
+urlSlug: sottotitoli-e-tracce-audio
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["riproduzione", "televisione"]
+keywords: ["sottotitoli iptv non funzionano", "cambiare traccia audio iptv", "iptv doppio audio", "impostazioni sottotitoli lettore iptv"]
+heroImageAlt: "Un flusso disegnato come tre fili intrecciati — una striscia di immagini, un'onda audio e una riga di testo — che corrono verso un'unica spina."
+---
+
+Quello che guardi come «un canale» è in realtà una treccia di più flussi: una
+traccia video, una o più tracce audio e — a volte — una o più tracce di testo.
+La treccia viene assemblata dal tuo fornitore prima ancora di arrivarti, e
+quell'unico fatto spiega quasi tutto ciò che c'è di confondente in sottotitoli
+e lingue nell'IPTV: un lettore può disfare la treccia e lasciarti scegliere tra
+i fili, ma non può aggiungere un filo che non è mai stato intrecciato.
+
+## Le tracce viaggiano dentro il flusso
+
+Quando un'emittente trasmette un film con due lingue e i sottotitoli, tutto
+viaggia nello stesso transport stream: il video, una traccia audio per lingua e
+i dati dei sottotitoli, ciascuno etichettato con un codice di lingua. Il
+mestiere del lettore è leggere quelle etichette, presentarti le scelte e
+passare dall'una all'altra —
+[decodificare e disegnare, in altre parole](/it/blog/cosa-fa-un-lettore-iptv/),
+applicato a più della sola immagine.
+
+Perciò la prima domanda diagnostica è sempre la stessa: *la traccia è nel
+flusso, per cominciare?* Se il menu audio del lettore elenca una traccia sola e
+nessun sottotitolo, non è il lettore che fa il prezioso. La treccia del
+fornitore contiene un filo di audio e nient'altro, e nessuna impostazione al
+mondo evocherà il resto.
+
+## Perché i sottotitoli spariscono più spesso dell'audio
+
+I sottotitoli sono il filo che cade più di frequente, per ragioni tecniche poco
+affascinanti. I sottotitoli broadcast arrivano in forme scomode — alcuni
+vengono trasmessi come *immagini* del testo, non come testo — e quando un
+fornitore ricodifica un canale
+[in un formato di consegna più snello](/it/blog/protocolli-di-streaming-spiegati/),
+portarseli dietro è lavoro extra facile da saltare. Il canale che guardi può
+aver avuto i sottotitoli quando ha lasciato l'emittente e averli persi per
+strada.
+
+La prova pratica: se lo stesso programma mostra i sottotitoli su una sorgente e
+su un'altra no, il filo è stato lasciato cadere a monte. Segnalalo al tuo
+fornitore — è davvero sistemabile dalla loro parte, e solo dalla loro.
+
+## Le tracce audio e il mistero di «und»
+
+Dove un flusso porta davvero più tracce audio — lingua originale più doppiaggio,
+o telecronaca in due lingue — passare dall'una all'altra è a un menu di
+distanza. L'irritazione più comune è l'etichettatura: i tag di lingua li
+imposta chi ha codificato il flusso, e un codificatore pigro li lascia a `und`
+— indeterminato. Il lettore può mostrare solo il tag che ha ricevuto, quindi
+«Traccia 1 (und)» e «Traccia 2 (und)» significa provarle entrambe, una volta, e
+ricordarsi qual era quale.
+
+Se guardi in più di una lingua, questa è una metà di una configurazione
+bilingue —
+[l'altra metà è l'app stessa che parla la tua lingua](/it/blog/guardare-nella-tua-lingua/):
+interfaccia e contenuto sono scelte separate.
+
+## Portare il tuo file di sottotitoli
+
+Per film e serie esiste un mondo florido di file di sottotitoli che vivono
+separati da qualunque flusso. Un lettore capace ti lascia agganciarne uno:
+gli indichi un file di sottotitoli e viene reso sopra il video come se fosse
+stato nella treccia da sempre. È l'unico caso in cui un filo mancante può
+essere fornito dalla tua parte, e per i film più vecchi in particolare è spesso
+l'unico modo di guardare con il testo.
+
+## Renderli leggibili da dove ti siedi
+
+Il rendering dei sottotitoli è artigianato del lettore, e non è taglia unica.
+Un testo comodo da tre metri su un televisore è un cartellone
+[su un tablet a un braccio di distanza](/it/blog/iptv-su-tablet/); un testo
+bianco e sottile è invisibile sopra un campo da calcio innevato. Un lettore che
+merita di restare ti lascia regolare la dimensione, il colore del testo e
+l'opacità della striscia dietro di esso — tre comandi semplici che, messi
+insieme, risolvono quasi ogni lamentela di leggibilità, dalla distanza del
+divano al riflesso di una stanza luminosa.
+
+## La breve diagnosi, in ordine
+
+1. **Apri i menu delle tracce del lettore.** Ciò che i menu elencano è ciò che
+   la treccia contiene. Se il filo non c'è, fermati: la soluzione è a monte.
+2. **Tracce elencate ma sbagliate di default?** Scegli quella che vuoi; un buon
+   lettore si ricorda la tua preferenza.
+3. **Etichettate `und`?** Prova ogni traccia una volta; le etichette sono state
+   lasciate in bianco al momento della codifica.
+4. **Sottotitoli presenti ma illeggibili?** Dimensione, colore, sfondo — regola
+   per il posto in cui ti siedi davvero.
+5. **Un film senza nessuna traccia di testo?** Un file di sottotitoli separato,
+   agganciato nel lettore, colma il vuoto.
+
+Niente di tutto questo richiede di sapere qualcosa della treccia. Ma sapere che
+*è* una treccia — assemblata a monte, disfatta a casa tua — è la differenza tra
+armeggiare con impostazioni che non possono aiutare e porre l'unica domanda che
+può: il filo c'è mai stato, per cominciare?

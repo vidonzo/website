@@ -1,0 +1,106 @@
+---
+title: "Wi-Fi'de IPTV donuyor mu? Kablosuz bağlantının zayıf halkasını bulmak"
+description: "Yayın bir odada takılıp diğerinde akıyorsa sorun kablosuz bağlantıdadır. Wi-Fi nasıl bozulur, çözümler hangi sırayla denenir, anlatıyoruz."
+urlSlug: iptv-wifi-donma-sorunu
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["sorun-giderme", "oynatma"]
+keywords: ["iptv wifi donma", "iptv sürekli donuyor", "wifi yayın takılması", "iptv birkaç dakikada bir donuyor"]
+heroImageAlt: "Duvarların içinden geçen eş merkezli yaylar olarak çizilmiş bir Wi-Fi sinyali; aştığı her duvarda biraz daha soluklaşıyor."
+---
+
+Tanımaya değer belirgin bir örüntü var: yayın, modeme kabloyla bağlı
+televizyonda kusursuz oynar, yatak odasındaki tablette takılır, mutfakta ise
+düpedüz donar. Sorun kanalı değil de *odayı* takip ediyorsa, karşınızdaki bir
+sunucu ya da oynatma listesi sorunu değildir. Karşınızdaki, havadaki sinyalin
+kendisidir.
+
+[Genel tanı zinciri](/tr/blog/iptv-donma-sorunu-cozumu/) — sunucu, hat, ev ağı,
+cihaz — hâlâ geçerlidir ve önce bir tur atmaya değer. Bu yazı, o zincirde en
+sık ve en kafa karıştırıcı biçimde kopan halkayı anlatıyor: modeminizle
+ekranınız arasındaki hava boşluğunu.
+
+## Önce suçlunun Wi-Fi olduğunu kanıtlayın
+
+İki dakikalık kanıt, bir akşamlık tahmini kurtarır:
+
+1. **Aynı kanalı modemin hemen yanında oynatın.** Orada akıcıysa ve uzak odada
+   donuyorsa, yayın sağlamdır; sinyal sağlam değildir.
+2. **Donmanın yaşandığı odada bir hız testi yapın.** Canlı televizyon şaşırtıcı
+   ölçüde az bant genişliği ister — ama bunu *istikrarlı* biçimde ister. Hızlı
+   ile hiç arasında salınan bir bağlantı, daha yavaş ama daha dengeli bir hattın
+   sorunsuz taşıyacağı bir yayını dondurur.
+
+Yayın modemin dibi dahil her yerde donuyorsa genel zincire dönün: sorun evin
+dışında, hattın yukarısındadır.
+
+## İki bant farklı işler yapar
+
+Modemlerin çoğu iki frekanstan yayın yapar ve bu ikisi birbirinin zıddı
+biçimlerde bozulur.
+
+**2,4 GHz uzağa gider ve duvarları aşar** — cihazınızın uzak odada ona
+yapışmasının sebebi budur — ama yavaştır ve paylaşılan, kalabalık bir şerittir:
+komşuların ağları, Bluetooth ve mikrodalga fırın hep orada yaşar. **5 GHz hızlı
+ve temizdir ama kısa menzillidir**; birkaç sağlam duvar onu bitirebilir.
+
+Bunun ürettiği donma örüntüsü kendine hastır: cihaz 5 GHz kapsamasının
+kıyısında oturur, 2,4 GHz'e düşer, orayı tıkalı bulur, geri tırmanır ve her
+geçişte yayınınız takılır. Modeminiz iki banda ayrı ad vermenize izin
+veriyorsa, yayın cihazını ikisinden birine — o odada gerçekten işe yarayan
+hangisiyse ona — sıkıca bağlamak bu gelgiti çoğu zaman kökünden bitirir.
+
+## Akşamlar neden daha kötü
+
+Wi-Fi, bir kablonun hiçbir zaman olmadığı biçimde paylaşılan bir ortamdır.
+Sizin 2,4 GHz kanalınız komşularınızın kullandığı kanalın ta kendisidir ve
+akşam dokuzda sokaktaki her ev aynı anda yayın izler. Telsizler sırayla
+konuşur; yayınınızın düzenli damlaması kesintiye uğrar; tampon boşalır; görüntü
+donar.
+
+Aynı donanımda bir yayının öğlen kusursuz, gece izlenmez olmasının sebebi
+budur. Bu, sağlayıcının kapasitesini aşması değildir — onun
+[kendine ait bir imzası vardır](/tr/blog/iptv-donma-sorunu-cozumu/) — havanın
+kapasitesini aşmasıdır. Mahallenin trafiğinden çok daha azını taşıyan bir
+5 GHz bağlantısı, alışıldık kaçış yoludur.
+
+## Yerleşim ve aradaki şeyler
+
+Bu frekanslarda sinyal neredeyse görüş hattıyla ilerler ve evler onu emen
+şeylerle doludur. Her iç duvar sinyalden bir pay alır; beton ve tuğla daha
+fazlasını alır; aynalar ve metal beyaz eşyalar onu yansıtır; bir akvaryum ya da
+termosifon onu düpedüz yutar — su, 2,4 GHz'de dikkat çekici ölçüde geçirimsizdir.
+
+Ucuz kazanımlar, sırasıyla: modemi yerden yükseltin, dolabın içinden çıkarın ve
+hattın eve girdiği köşeye değil, evin *ortasına* yakın bir yere koyun. Üç metre
+yer değiştiren bir modem, çoğu ayar ekranından daha fazla donan yayını
+düzeltmiştir.
+
+## Sinyalle savaşmayı ne zaman bırakmalı
+
+Bazı odalar tek bir modemin erişemeyeceği kadar uzaktır ve dürüst çözümler
+şunlardır:
+
+- **Mümkün olan her yerde kablo.**
+  [Bir TV kutusu için](/tr/blog/android-tv-iptv-oynatici/) tek bir Ethernet
+  hattı konuyu kalıcı olarak kapatır.
+- **Powerline adaptörleri** — ağı evin elektrik tesisatı üzerinden taşırlar;
+  kusursuz değildir ama Wi-Fi'nin en uç kıyısından çoğu zaman çok daha iyidir.
+- **Bir mesh sistemi ya da kablolu erişim noktası**, donan ekran ille de
+  kablosuz kalacaksa, zor odanın kendisine kurulur.
+
+## Oynatıcı bu konuda ne yapabilir, ne yapamaz
+
+Bir oynatıcı, saniyeler boyunca susan havayı pürüzsüz gösteremez; ama arızanın
+nasıl *hissettirdiğini* o belirler: ne kadar önden yüklediğini, sinyal geri
+geldiğinde ne hızla toparlandığını, canlı yayına yeniden mi katıldığını yoksa
+bayat bir parçanın üzerinde sonsuza dek mi asılı kaldığını. Ne kadar *önceden
+haber* alabildiği ise
+[yayının nasıl iletildiğine](/tr/blog/hls-dash-rtsp-yayin-protokolleri/)
+bağlıdır — parçalara bölünmüş biçimler oynatıcıya, kesintisiz bir akışın
+vermediği bir önden okuma payı verir.
+
+Bir oynatıcının asla yapmaması gereken şeyse, videonun yanında
+[reklam ve analitik trafiğine](/tr/blog/reklamsiz-ve-takip-etmeyen-oynatici/)
+bant genişliği harcayarak sorunu büyütmektir. Zorlanan bir hatta, video olmayan
+her istek, alamadığınız videodur.

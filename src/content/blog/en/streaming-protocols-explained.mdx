@@ -1,0 +1,110 @@
+---
+title: "HLS, DASH and RTSP: the protocols behind your stream, explained"
+description: "The letters at the end of a stream URL decide how live it feels, how fast channels change, and what happens when your network hiccups."
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['engineering', 'playback']
+keywords: ['hls vs dash', 'what is hls streaming', 'rtsp vs hls', 'iptv streaming protocols explained']
+heroImageAlt: "Three pipelines drawn side by side: one carrying a row of small parcels, one carrying labelled boxes, and one an unbroken flowing line."
+---
+
+Every stream in your playlist arrives by one of a handful of delivery methods,
+and which one it is shapes things you can feel from the sofa: how far behind
+live broadcast you are, how quickly a channel starts, and whether a network
+hiccup means a stutter or a freeze. You never have to choose a protocol — your
+provider did that — but knowing which one is in play turns several mysteries
+into mechanics.
+
+## The big idea: parcels, not pipes
+
+Old-fashioned streaming worked like a telephone call: a server and a player
+held a connection open and video flowed down it continuously. Modern streaming
+mostly works like a courier service instead. The video is chopped into small
+segments — a few seconds each — placed on an ordinary web server, and the
+player fetches them one after another, the same way a browser fetches images.
+
+That single design choice explains a lot. Parcels can be fetched ahead of time,
+so a player can keep a cushion against
+[a wobbly network](/blog/fix-iptv-freezing-on-wifi/). Parcels can exist in
+several quality levels, so the player can step down gracefully when bandwidth
+drops. And parcels pass through firewalls and hotel Wi-Fi untouched, because to
+the network they are just web traffic.
+
+The price is delay. If segments are six seconds long and the player holds three
+of them, you are watching at least eighteen seconds behind the live moment —
+which is why a goal can be celebrated next door before your commentator has
+seen the shot.
+
+## HLS: a playlist of pieces
+
+HLS — HTTP Live Streaming — is the most common parcel system, and you have
+already met its paperwork:
+[the `.m3u8` file is exactly the m3u8 in "M3U vs M3U8"](/blog/m3u-vs-m3u8/). It
+is a small text file listing the segments available right now; the player
+re-fetches it every few seconds, notices the new segment at the end, and
+collects it.
+
+For live channels the playlist rolls forward forever. For catch-up and films it
+is a complete list with a beginning and an end, which is why seeking works
+there and not on live television. HLS grew up on phones and is everywhere now;
+if your stream URL ends in `.m3u8`, this is what you have.
+
+## DASH: the same idea with different paperwork
+
+MPEG-DASH is HLS's international-standard sibling. The segments work the same
+way; the difference is the manifest — an XML document rather than a text
+playlist — and a certain codec-agnostic neutrality that made it popular with
+big broadcasters. From the sofa, DASH and HLS are indistinguishable, which is
+itself the lesson: they are two dialects of the same parcel language, and a
+good player speaks both without telling you.
+
+## RTSP: the old telephone call, still on the line
+
+RTSP is the surviving member of the pipe family. A player asks the server to
+start sending, and video flows over a held-open connection with almost no
+delay. That immediacy is why security cameras still speak it, and why a few
+IPTV sources do too.
+
+Its weaknesses are the mirror of its strength. There is no cushion of fetched
+parcels, so a network hiccup is felt immediately; there are no quality ladders
+to step down; and the connection types it uses are exactly the kind that
+strict firewalls and shared networks dislike. When an RTSP stream works, it is
+impressively live. When it doesn't, there is little a player can do to soften
+it.
+
+## MPEG-TS over HTTP: the continuous feed
+
+A large share of live IPTV uses something plainer than any of the above: a
+single HTTP connection down which the server pours an unbroken MPEG transport
+stream. No manifest, no segments — the same container satellite and cable
+television use, poured over the internet. If a live URL ends in `.ts` or has no
+telling extension at all, it is often this.
+
+It is simple and it starts fast, but everything the parcel systems offer is
+absent: no quality ladder, no re-fetching a missed piece, no seeking backwards.
+The player's buffer is the only cushion there is, which is why
+[buffer behaviour matters more on live IPTV](/blog/fix-iptv-buffering/) than
+anywhere else in streaming.
+
+## What this explains in practice
+
+- **Your stream is behind your neighbour's satellite box.** Segmented delivery
+  trades seconds of delay for smoothness, by design.
+- **Channels take a moment to start.** The player must fetch a manifest and a
+  first parcel or two before it can draw a frame.
+- **You cannot rewind live television, but catch-up works.** A rolling live
+  playlist has no past to seek into; a complete one does — and catch-up is
+  [what the guide gives the player something to ask for](/blog/epg-explained/).
+- **One channel freezes hard while others degrade gently.** The gentle one has
+  a quality ladder to climb down; the frozen one is probably a raw feed with
+  nowhere to go.
+
+## Why a player must speak all of them
+
+A streaming service optimises one delivery path and tests it end to end. An
+IPTV player [inherits whatever your provider chose](/blog/what-an-iptv-player-does/)
+— segmented HLS on one channel, a raw transport stream on the next, an RTSP
+camera feed after that — and is expected to make them all feel like
+television. Handling each protocol's failures gracefully, without ceremony and
+without asking you to care about any of this, is a fair test of whether a
+player deserves the screen it is on.

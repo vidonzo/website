@@ -1,0 +1,96 @@
+---
+title: "Napisy i ścieżki audio w IPTV: jak działają i czemu znikają"
+description: "Strumień to warkocz ścieżek — obraz, dźwięk, czasem tekst. Wiedza, jak podróżują, tłumaczy każde brakujące napisy i źle opisany język."
+urlSlug: napisy-i-sciezki-audio
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["odtwarzanie", "telewizja"]
+keywords: ["napisy w iptv nie działają", "zmiana ścieżki audio iptv", "iptv dwie ścieżki dźwięku", "ustawienia napisów w odtwarzaczu iptv"]
+heroImageAlt: "Strumień narysowany jako trzy splecione pasma — pasek obrazu, fala dźwięku i linia tekstu — wpadające do jednej wtyczki."
+---
+
+To, co oglądasz jako „kanał”, jest tak naprawdę kilkoma strumieniami
+zaplecionymi razem: jedna ścieżka wideo, jedna lub więcej ścieżek audio
+i — czasami — jedna lub więcej ścieżek tekstowych. Warkocz jest spleciony przez
+Twojego dostawcę, zanim w ogóle do Ciebie dotrze, i ten jeden fakt tłumaczy
+prawie wszystko, co w napisach i językach IPTV bywa mylące: odtwarzacz umie
+warkocz rozpleść i dać Ci wybór między pasmami, ale nie doda pasma, którego
+nikt nie wplótł.
+
+## Ścieżki podróżują wewnątrz strumienia
+
+Kiedy nadawca wysyła film z dwoma językami i napisami, wszystko jedzie w tym
+samym strumieniu transportowym: wideo, po jednej ścieżce audio na język i dane
+napisów, każde opatrzone kodem języka. Zadaniem odtwarzacza jest odczytać te
+znaczniki, pokazać możliwości i przełączać między nimi —
+[czyli dekodować i rysować](/pl/blog/co-robi-odtwarzacz-iptv/), tyle że
+w odniesieniu do czegoś więcej niż sam obraz.
+
+Pierwsze pytanie diagnostyczne jest więc zawsze to samo: *czy ta ścieżka
+w ogóle jest w strumieniu?* Jeśli menu audio odtwarzacza wymienia jedną ścieżkę
+i żadnych napisów, to nie odtwarzacz robi uniki. Warkocz dostawcy zawiera jedno
+pasmo dźwięku i nic poza tym — i żadne ustawienie nigdzie nie wyczaruje reszty.
+
+## Dlaczego napisy giną częściej niż dźwięk
+
+Napisy to najczęściej upuszczane pasmo, z mało efektownych przyczyn
+technicznych. Napisy nadawcze przychodzą w niewygodnych kształtach — część jest
+transmitowana jako *obrazki* tekstu, a nie jako tekst — i kiedy dostawca
+przekodowuje kanał [na lżejszy format dostawy](/pl/blog/protokoly-streamingu-hls-dash-rtsp/),
+przeniesienie ich dalej to dodatkowa praca, którą łatwo pominąć. Kanał, który
+oglądasz, mógł mieć napisy, gdy opuszczał nadawcę, i zgubić je po drodze.
+
+Praktyczny test: jeśli ten sam program pokazuje napisy z jednego źródła,
+a z innego żadnych, pasmo zostało upuszczone wyżej. Zgłoś to dostawcy — to
+rzecz naprawdę naprawialna po jego stronie, i wyłącznie po jego stronie.
+
+## Ścieżki audio i zagadka „und”
+
+Tam, gdzie strumień niesie kilka ścieżek audio — język oryginału plus dubbing
+albo komentarz w dwóch językach — przełączanie jest o jedno menu odtwarzacza
+stąd. Typową irytacją są etykiety: kody języka ustawia ten, kto strumień
+kodował, a leniwy koder zostawia je jako `und` — nieokreślone. Odtwarzacz może
+pokazać tylko znacznik, który dostał, więc „Ścieżka 1 (und)” i „Ścieżka 2
+(und)” oznacza spróbowanie obu, raz, i zapamiętanie, która była którą.
+
+Jeśli oglądasz w więcej niż jednym języku, to jest połowa dwujęzycznej
+konfiguracji —
+[drugą połową jest aplikacja mówiąca Twoim językiem](/pl/blog/ogladanie-we-wlasnym-jezyku/):
+interfejs i treść to osobne wybory.
+
+## Własny plik z napisami
+
+Dla filmów i seriali istnieje zdrowy świat plików z napisami, żyjących osobno
+od jakiegokolwiek strumienia. Porządny odtwarzacz pozwoli taki plik dołączyć —
+wskazujesz mu plik z napisami, a on renderuje je na wideo tak, jakby od zawsze
+były w warkoczu. To jedyny przypadek, w którym brakujące pasmo można uzupełnić
+po swojej stronie — a przy starszych filmach to często w ogóle jedyny sposób,
+żeby oglądać z tekstem.
+
+## Żeby dały się czytać tam, gdzie siedzisz
+
+Renderowanie napisów to rzemiosło odtwarzacza i nie ma tu jednego rozmiaru dla
+wszystkich. Tekst wygodny z trzech metrów na telewizorze jest billboardem
+[na tablecie trzymanym na wyciągnięcie ręki](/pl/blog/iptv-na-tablecie/);
+cienki biały tekst znika na tle zaśnieżonego boiska. Odtwarzacz wart
+zatrzymania pozwala ustawić rozmiar, kolor tekstu i krycie paska podkładu za
+tekstem — trzy zwyczajne suwaki, które razem rozwiązują niemal każdą skargę na
+czytelność, od dystansu kanapy po odblaski w jasnym pokoju.
+
+## Krótka diagnoza, po kolei
+
+1. **Otwórz menu ścieżek w odtwarzaczu.** To, co wymieniają menu, to zawartość
+   warkocza. Jeśli pasma nie ma, zatrzymaj się — poprawka leży wyżej.
+2. **Ścieżki są, ale domyślnie gra zła?** Wybierz tę właściwą; dobry odtwarzacz
+   zapamięta Twój wybór.
+3. **Etykieta `und`?** Spróbuj każdej ścieżki raz; etykiety zostały puste już
+   przy kodowaniu.
+4. **Napisy są, ale nie da się ich czytać?** Rozmiar, kolor, tło — dopasuj do
+   miejsca, w którym faktycznie siedzisz.
+5. **Film w ogóle bez ścieżki tekstowej?** Lukę wypełnia osobny plik z
+   napisami, dołączony w odtwarzaczu.
+
+Nic z tego nie wymaga wiedzy o warkoczu. Ale świadomość, że to *jest*
+warkocz — spleciony wyżej, rozplatany u Ciebie — to różnica między grzebaniem
+w ustawieniach, które nie mogą pomóc, a zadaniem jedynego pytania, które może:
+czy to pasmo w ogóle kiedykolwiek tam było?

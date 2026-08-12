@@ -1,0 +1,105 @@
+---
+title: "IPTV zacina się na Wi-Fi? Znajdź słabe ogniwo w łączu radiowym"
+description: "Gdy strumień staje w jednym pokoju, a w drugim gra, winne jest radio. Pokazujemy, jak zawodzi Wi-Fi i w jakiej kolejności próbować poprawek."
+urlSlug: iptv-zacina-sie-na-wifi
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["diagnostyka", "odtwarzanie"]
+keywords: ["iptv zacina się na wifi", "iptv się zawiesza", "przerywanie obrazu przez wifi", "iptv zacina się co kilka minut"]
+heroImageAlt: "Sygnał Wi-Fi narysowany jako współśrodkowe łuki przechodzące przez ściany i słabnące z każdą kolejną ścianą."
+---
+
+Jest pewien wzorzec, który warto umieć rozpoznać: strumień gra idealnie na
+telewizorze podłączonym kablem do routera, przycina na tablecie w sypialni,
+a w kuchni zawiesza się na dobre. Kiedy kłopot podąża za *pokojem*, a nie za
+kanałem, to nie jest problem serwera ani playlisty. To problem radia.
+
+[Ogólny łańcuch diagnozy](/pl/blog/jak-naprawic-buforowanie-iptv/) — serwer,
+łącze, sieć domowa, urządzenie — nadal obowiązuje i warto przejść go najpierw.
+Ten artykuł jest o tym ogniwie łańcucha, które zawodzi najczęściej i najbardziej
+myląco: o odcinku powietrza między routerem a Twoim ekranem.
+
+## Najpierw udowodnij, że to Wi-Fi
+
+Dwie minuty zbierania dowodów oszczędzają wieczór zgadywania:
+
+1. **Włącz ten sam kanał tuż obok routera.** Jeśli tam idzie gładko, a w dalszym
+   pokoju się zawiesza, strumień jest w porządku — radio nie jest.
+2. **Zrób test prędkości w pokoju, w którym się zacina.** Telewizja na żywo
+   potrzebuje zaskakująco mało pasma — ale potrzebuje go *równo*. Połączenie,
+   które skacze między szybkim a żadnym, zawiesi strumień, który wolniejsze,
+   ale stabilniejsze łącze poniosłoby bez słowa skargi.
+
+Jeśli strumień zawiesza się wszędzie, także przy samym routerze, wróć do
+ogólnego łańcucha: problem leży powyżej Twojego domu.
+
+## Dwa pasma robią różne rzeczy
+
+Większość routerów nadaje na dwóch częstotliwościach — i zawodzą one
+w przeciwnych kierunkach.
+
+**2,4 GHz niesie daleko i przenika ściany**, dlatego urządzenie trzyma się go
+kurczowo w dalszym pokoju — ale jest wolne i stanowi wspólny, zatłoczony pas
+ruchu: mieszkają na nim sieci sąsiadów, Bluetooth i kuchenka mikrofalowa.
+**5 GHz jest szybkie i czyste, ale ma krótki zasięg**; parę solidnych ścian
+potrafi je uciąć.
+
+Wzorzec zacięć, jaki z tego wynika, jest charakterystyczny: urządzenie siedzi
+na skraju zasięgu 5 GHz, spada na 2,4 GHz, zastaje tam tłok, wspina się
+z powrotem — a Twój strumień staje przy każdej takiej przesiadce. Jeśli router
+pozwala nazwać oba pasma osobno, przypięcie urządzenia do jednego z nich — tego,
+które w danym pokoju faktycznie działa — często kończy to miotanie raz na
+zawsze.
+
+## Dlaczego wieczory są gorsze
+
+Wi-Fi jest medium współdzielonym w sposób, w jaki kabel nigdy nie jest. Twój
+kanał 2,4 GHz to ten sam kanał, którego używają sąsiedzi, a o dwudziestej
+pierwszej cała ulica streamuje naraz. Radia czekają na swoją kolej; równy,
+cienki strumyk Twojego przekazu jest przerywany; bufor wysycha; obraz staje.
+
+Dlatego ten sam sprzęt potrafi grać bez zarzutu w południe i być nie do
+oglądania wieczorem. To nie dostawca sprzedał za dużo abonamentów — to
+[ma swój własny podpis](/pl/blog/jak-naprawic-buforowanie-iptv/) — to powietrze
+jest przeciążone. Zwykłą drogą ucieczki jest połączenie 5 GHz, które niesie
+znacznie mniej ruchu całej okolicy.
+
+## Ustawienie routera i to, co stoi pomiędzy
+
+Fale o tych częstotliwościach biegną niemal po linii wzroku, a domy są pełne
+rzeczy, które je pochłaniają. Każda ściana działowa kosztuje trochę sygnału;
+beton i cegła kosztują więcej; lustra i metalowe sprzęty go odbijają; akwarium
+albo bojler pochłaniają go w całości — woda jest przy 2,4 GHz zdumiewająco
+nieprzezroczysta.
+
+Tanie wygrane, po kolei: podnieś router z podłogi, wyjmij go z szafki i postaw
+bliżej *środka* mieszkania, a nie tam, gdzie akurat wchodzi kabel od operatora.
+Router przesunięty o trzy metry naprawił więcej zacinających się strumieni niż
+większość ekranów ustawień.
+
+## Kiedy przestać walczyć z radiem
+
+Niektóre pokoje są po prostu poza zasięgiem pojedynczego routera i uczciwe
+rozwiązania wyglądają tak:
+
+- **Kabel, wszędzie gdzie się da.** [Dla przystawki telewizyjnej](/pl/blog/odtwarzacz-iptv-na-android-tv/)
+  jeden przewód Ethernet kończy tę rozmowę na zawsze.
+- **Adaptery Powerline**, które przenoszą sieć po instalacji elektrycznej —
+  niedoskonałe, ale często o niebo lepsze niż daleki skraj Wi-Fi.
+- **System mesh albo kablowy punkt dostępowy** w trudnym pokoju, jeśli
+  zacinający się ekran musi pozostać bezprzewodowy.
+
+## Co odtwarzacz może na to poradzić, a czego nie
+
+Odtwarzacz nie zamaskuje powietrza, które milknie na całe sekundy, ale
+decyduje o tym, jak ta awaria *się czuje*: ile buforuje do przodu, jak szybko
+podnosi się, gdy radio wraca, czy dołącza z powrotem do transmisji na żywo, czy
+wisi w nieskończoność na nieświeżym fragmencie. Ile ma *ostrzeżenia*, zależy też
+od tego, [jak strumień jest dostarczany](/pl/blog/protokoly-streamingu-hls-dash-rtsp/) —
+formaty segmentowe dają odtwarzaczowi przestrzeń na czytanie w przód, której
+ciągły strumień nie daje.
+
+Czego odtwarzacz nie powinien robić nigdy, to pogarszać sprawy, wydając Twoje
+pasmo na [ruch reklamowy i analityczny](/pl/blog/bez-reklam-i-bez-sledzenia/)
+obok wideo. Na łączu, które ledwo zipie, każde zapytanie niebędące wideo to
+wideo, którego nie dostajesz.

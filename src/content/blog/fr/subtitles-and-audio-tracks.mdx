@@ -1,0 +1,104 @@
+---
+title: "Sous-titres et pistes audio en IPTV : comment ils voyagent, pourquoi ils disparaissent"
+description: "Un flux est une tresse de pistes — vidéo, audio, parfois texte. Savoir comment elles voyagent explique chaque sous-titre manquant et chaque langue mal étiquetée."
+urlSlug: sous-titres-et-pistes-audio
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['lecture', 'television']
+keywords: ["sous-titres iptv qui ne s'affichent pas", 'changer de piste audio iptv', 'double audio iptv', 'réglages sous-titres lecteur iptv']
+heroImageAlt: "Un flux dessiné comme trois brins tressés — une bande d'images, une onde audio et une ligne de texte — qui convergent vers une seule prise."
+---
+
+Ce que vous regardez comme « une chaîne » est en réalité plusieurs flux tressés
+ensemble : une piste vidéo, une ou plusieurs pistes audio, et — parfois — une
+ou plusieurs pistes de texte. La tresse est assemblée par votre fournisseur
+avant même de vous parvenir, et ce seul fait explique presque tout ce qui rend
+sous-titres et langues déroutants en IPTV : un lecteur peut défaire la tresse
+et vous laisser choisir entre les brins, mais il ne peut pas ajouter un brin
+qui n'y a jamais été tissé.
+
+## Les pistes voyagent à l'intérieur du flux
+
+Quand un diffuseur envoie un film en deux langues avec des sous-titres, tout
+voyage dans le même flux de transport : la vidéo, une piste audio par langue,
+et les données de sous-titres, chacune étiquetée d'un code de langue. Le
+travail du lecteur est de lire ces étiquettes, de présenter les choix, et de
+basculer de l'un à l'autre —
+[décoder et afficher, autrement dit](/fr/blog/ce-que-fait-un-lecteur-iptv/),
+appliqué à davantage que la seule image.
+
+La première question de diagnostic est donc toujours la même : *la piste
+est-elle seulement dans le flux ?* Si le menu audio du lecteur liste une piste
+et aucun sous-titre, ce n'est pas le lecteur qui fait des mystères. La tresse
+du fournisseur contient un brin d'audio et rien d'autre, et aucun réglage nulle
+part ne fera apparaître le reste.
+
+## Pourquoi les sous-titres disparaissent plus souvent que l'audio
+
+Les sous-titres sont le brin le plus souvent lâché en route, pour des raisons
+techniques sans gloire. Les sous-titres de diffusion arrivent sous des formes
+ingrates — certains sont transmis comme des *images* de texte plutôt que comme
+du texte — et quand un fournisseur ré-encode une chaîne
+[vers un format de livraison plus léger](/fr/blog/protocoles-de-streaming-expliques/),
+les transporter jusqu'au bout est un travail en plus, facile à sauter. La
+chaîne que vous regardez avait peut-être des sous-titres en quittant le
+diffuseur, et les a perdus en chemin.
+
+Le test pratique : si le même programme montre des sous-titres sur une source
+et aucun sur une autre, le brin a été lâché en amont. Signalez-le à votre
+fournisseur — c'est réellement réparable de son côté, et seulement du sien.
+
+## Les pistes audio, et le mystère du « und »
+
+Quand un flux transporte bien plusieurs pistes audio — version originale plus
+doublage, ou commentaires en deux langues — passer de l'une à l'autre tient à
+un menu du lecteur. L'irritation courante, c'est l'étiquetage : les codes de
+langue sont posés par celui qui a encodé le flux, et un encodeur négligent les
+laisse à `und` — indéterminé. Le lecteur ne peut afficher que l'étiquette qu'on
+lui a donnée, donc « Piste 1 (und) » et « Piste 2 (und) » signifie essayer les
+deux, une fois, et retenir laquelle était laquelle.
+
+Si vous regardez dans plus d'une langue, c'est une moitié d'une installation
+bilingue —
+[l'autre moitié, c'est l'application elle-même qui parle votre langue](/fr/blog/regarder-dans-votre-langue/),
+l'interface et le contenu étant deux choix distincts.
+
+## Apporter votre propre fichier de sous-titres
+
+Pour les films et les séries, il existe tout un monde bien vivant de fichiers
+de sous-titres indépendants de tout flux. Un lecteur digne de ce nom vous
+laissera en attacher un — désignez-lui un fichier de sous-titres et il est
+rendu par-dessus la vidéo comme s'il avait toujours fait partie de la tresse.
+C'est le seul cas où un brin manquant peut être fourni de votre côté, et pour
+les vieux films en particulier, c'est souvent la seule façon de regarder avec
+du texte.
+
+## Les rendre lisibles là où vous êtes assis
+
+Le rendu des sous-titres est l'artisanat du lecteur, et il n'est pas à taille
+unique. Un texte confortable à trois mètres sur un téléviseur est un panneau
+d'affichage [sur une tablette à bout de bras](/fr/blog/iptv-sur-tablette/) ; un
+texte blanc fin est invisible sur une pelouse enneigée. Un lecteur qui mérite
+d'être gardé vous laisse régler la taille, la couleur du texte et l'opacité du
+bandeau derrière le texte — trois commandes toutes simples qui, à elles trois,
+résolvent presque toutes les plaintes de lisibilité, de la distance du canapé
+aux reflets d'une pièce lumineuse.
+
+## Le diagnostic court, dans l'ordre
+
+1. **Ouvrez les menus de pistes du lecteur.** Ce que les menus listent est ce
+   que la tresse contient. Si le brin est absent, arrêtez-vous — la réparation
+   est en amont.
+2. **Des pistes listées, mais la mauvaise par défaut ?** Choisissez celle que
+   vous voulez ; un bon lecteur retient votre préférence.
+3. **Étiquetées `und` ?** Essayez chaque piste une fois ; les étiquettes ont
+   été laissées vides à l'encodage.
+4. **Des sous-titres présents mais illisibles ?** Taille, couleur, fond —
+   réglez pour l'endroit où vous êtes réellement assis.
+5. **Un film sans aucune piste de texte ?** Un fichier de sous-titres séparé,
+   attaché dans le lecteur, comble le manque.
+
+Rien de tout cela n'exige de rien savoir de la tresse. Mais savoir que c'est
+une tresse — assemblée en amont, détressée chez vous — fait la différence entre
+tripoter des réglages qui ne peuvent pas aider et poser la seule question qui
+le peut : le brin a-t-il seulement existé ?

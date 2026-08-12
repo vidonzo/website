@@ -1,0 +1,115 @@
+---
+title: "HLS, DASH en RTSP: de protocollen achter je stream, uitgelegd"
+description: "De letters aan het eind van een stream-URL bepalen hoe live het voelt, hoe snel een zender start en wat er gebeurt als je netwerk even hapert."
+urlSlug: streamingprotocollen-uitgelegd
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["techniek", "afspelen"]
+keywords: ["hls of dash", "wat is hls streaming", "rtsp of hls", "iptv streamingprotocollen uitgelegd"]
+heroImageAlt: "Drie leidingen naast elkaar getekend: één met een rij kleine pakketjes, één met gelabelde dozen en één als een ononderbroken stromende lijn."
+---
+
+Elke stream in je afspeellijst komt binnen via een van een handvol
+leveringsmethoden, en welke dat is bepaalt dingen die je vanaf de bank kunt
+voelen: hoe ver je achterloopt op de live-uitzending, hoe snel een zender
+start, en of een netwerkhapering een hikje wordt of een bevroren beeld. Je
+hoeft nooit een protocol te kiezen — dat deed je provider al — maar weten welk
+protocol er speelt, verandert een reeks mysteries in mechanica.
+
+## Het grote idee: pakketjes, geen pijp
+
+Ouderwets streamen werkte als een telefoongesprek: server en speler hielden een
+verbinding open en de video stroomde er ononderbroken doorheen. Modern streamen
+werkt vooral als een koeriersdienst. De video wordt in kleine segmenten geknipt
+— elk een paar seconden — op een gewone webserver gezet, en de speler haalt ze
+een voor een op, zoals een browser afbeeldingen ophaalt.
+
+Die ene ontwerpkeuze verklaart veel. Pakketjes kun je vooruit ophalen, dus een
+speler kan een buffer aanhouden tegen
+[een wiebelig netwerk](/nl/blog/iptv-bevriest-op-wifi/). Pakketjes kunnen in
+meerdere kwaliteitsniveaus bestaan, zodat de speler netjes een stap terug kan
+doen als de bandbreedte zakt. En pakketjes glippen ongeschonden door firewalls
+en hotelwifi, want voor het netwerk is het gewoon webverkeer.
+
+De prijs is vertraging. Zijn segmenten zes seconden lang en houdt de speler er
+drie vast, dan kijk je minstens achttien seconden achter het live moment — en
+daarom kan bij de buren al gejuicht worden om een doelpunt terwijl jouw
+commentator het schot nog moet zien.
+
+## HLS: een afspeellijst van stukjes
+
+HLS — HTTP Live Streaming — is het meest voorkomende pakketjessysteem, en zijn
+papierwerk ken je al:
+[het `.m3u8`-bestand is precies de m3u8 uit "M3U of M3U8"](/nl/blog/m3u-of-m3u8-verschil/).
+Het is een klein tekstbestand dat opsomt welke segmenten er nú beschikbaar
+zijn; de speler haalt het om de paar seconden opnieuw op, ziet het nieuwe
+segment aan het eind en haalt het binnen.
+
+Bij live zenders rolt de afspeellijst eeuwig door. Bij terugkijken en films is
+het een complete lijst met een begin en een eind — en daarom werkt spoelen daar
+wel en op live televisie niet. HLS is groot geworden op telefoons en is
+inmiddels overal; eindigt je stream-URL op `.m3u8`, dan is dit wat je hebt.
+
+## DASH: hetzelfde idee met ander papierwerk
+
+MPEG-DASH is de internationale-standaardbroer van HLS. De segmenten werken
+hetzelfde; het verschil zit in het manifest — een XML-document in plaats van
+een tekstafspeellijst — en in een zekere codec-neutraliteit die het populair
+maakte bij grote omroepen. Vanaf de bank zijn DASH en HLS niet uit elkaar te
+houden, en dat is precies de les: het zijn twee dialecten van dezelfde
+pakketjestaal, en een goede speler spreekt ze allebei zonder het je te
+vertellen.
+
+## RTSP: het oude telefoongesprek, nog steeds aan de lijn
+
+RTSP is het overgebleven lid van de pijpfamilie. Een speler vraagt de server om
+te beginnen met zenden, en de video stroomt over een opengehouden verbinding
+met vrijwel geen vertraging. Die directheid is waarom beveiligingscamera's het
+nog steeds spreken, en waarom een enkele IPTV-bron dat ook doet.
+
+De zwaktes zijn het spiegelbeeld van de kracht. Er is geen buffer van
+opgehaalde pakketjes, dus een netwerkhapering voel je meteen; er zijn geen
+kwaliteitsladders om langs af te dalen; en de verbindingstypen die het gebruikt
+zijn precies het soort waar strenge firewalls en gedeelde netwerken moeite mee
+hebben. Als een RTSP-stream werkt, is hij indrukwekkend live. Werkt hij niet,
+dan kan een speler weinig doen om het te verzachten.
+
+## MPEG-TS over HTTP: de continue feed
+
+Een groot deel van live IPTV gebruikt iets kalers dan al het bovenstaande: één
+HTTP-verbinding waar de server een ononderbroken MPEG-transportstream doorheen
+giet. Geen manifest, geen segmenten — dezelfde container die satelliet- en
+kabeltelevisie gebruiken, uitgegoten over het internet. Eindigt een live-URL op
+`.ts` of heeft hij helemaal geen sprekende extensie, dan is het vaak dit.
+
+Het is simpel en het start snel, maar alles wat de pakketjessystemen bieden
+ontbreekt: geen kwaliteitsladder, geen gemist stukje opnieuw ophalen, geen
+terugspoelen. De buffer van de speler is de enige reserve die er is, en daarom
+[doet buffergedrag er bij live IPTV meer toe](/nl/blog/iptv-buffering-oplossen/)
+dan waar dan ook in streaming.
+
+## Wat dit in de praktijk verklaart
+
+- **Jouw stream loopt achter op de satellietontvanger van de buren.**
+  Gesegmenteerde levering ruilt seconden vertraging in voor vloeiendheid, met
+  opzet.
+- **Zenders hebben even nodig om te starten.** De speler moet eerst een
+  manifest en een pakketje of twee ophalen voordat hij een beeld kan tekenen.
+- **Live televisie terugspoelen kan niet, maar terugkijken werkt wel.** Een
+  doorrollende live-afspeellijst heeft geen verleden om in te zoeken; een
+  complete lijst wel — en terugkijken is
+  [waar de gids de speler iets voor te vragen geeft](/nl/blog/epg-uitgelegd-programmagids/).
+- **De ene zender bevriest keihard terwijl de andere zachtjes inlevert.** De
+  zachte heeft een kwaliteitsladder om langs af te dalen; de bevroren is
+  waarschijnlijk een kale feed die nergens heen kan.
+
+## Waarom een speler ze allemaal moet spreken
+
+Een streamingdienst optimaliseert één leveringspad en test het van begin tot
+eind. Een IPTV-speler
+[erft wat jouw provider koos](/nl/blog/wat-een-iptv-speler-doet/) —
+gesegmenteerde HLS op de ene zender, een kale transportstream op de volgende,
+daarna een RTSP-camerafeed — en wordt geacht ze allemaal als televisie te laten
+voelen. Elk protocol zijn eigen manier van falen netjes opvangen, zonder
+poespas en zonder jou te vragen je hier iets van aan te trekken, is een
+eerlijke test of een speler het scherm verdient waarop hij staat.

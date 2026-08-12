@@ -1,0 +1,117 @@
+---
+title: "HLS, DASH y RTSP: los protocolos detrás de tu stream, explicados"
+description: "Las letras al final de la URL de un stream deciden cuán en directo se siente, cuánto tarda un canal en cambiar y qué pasa cuando la red tose."
+urlSlug: protocolos-de-streaming-hls-dash-rtsp
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["ingeniería", "reproducción"]
+keywords: ["hls vs dash", "qué es hls streaming", "rtsp o hls", "protocolos de streaming iptv"]
+heroImageAlt: "Tres tuberías dibujadas en paralelo: una lleva una fila de paquetes pequeños, otra cajas etiquetadas y la tercera una línea continua que fluye sin cortes."
+---
+
+Cada stream de tu lista llega por uno de un puñado de métodos de entrega, y
+cuál sea moldea cosas que se notan desde el sofá: cuánto vas por detrás de la
+emisión en directo, cuánto tarda un canal en arrancar y si un tropiezo de la
+red se traduce en un tirón o en una congelación. Nunca tienes que elegir un
+protocolo —eso ya lo hizo tu proveedor—, pero saber cuál está en juego
+convierte varios misterios en mecánica.
+
+## La gran idea: paquetes, no tuberías
+
+El streaming a la antigua funcionaba como una llamada de teléfono: un servidor
+y un reproductor mantenían abierta una conexión y el vídeo fluía por ella de
+forma continua. El streaming moderno funciona sobre todo como un servicio de
+mensajería. El vídeo se trocea en segmentos pequeños —de unos segundos cada
+uno—, se colocan en un servidor web corriente y el reproductor los va a buscar
+uno tras otro, igual que un navegador va a buscar imágenes.
+
+Esa única decisión de diseño explica mucho. Los paquetes pueden recogerse por
+adelantado, así que el reproductor puede guardarse un colchón contra
+[una red que titubea](/es/blog/iptv-se-congela-por-wifi/). Los paquetes pueden
+existir en varios niveles de calidad, así que el reproductor puede bajar un
+escalón con elegancia cuando cae el ancho de banda. Y los paquetes atraviesan
+cortafuegos y wifis de hotel sin despeinarse, porque para la red son simple
+tráfico web.
+
+El precio es el retardo. Si los segmentos duran seis segundos y el reproductor
+guarda tres, estás viendo al menos dieciocho segundos por detrás del momento en
+directo — que es por lo que un gol puede celebrarse en el piso de al lado antes
+de que tu comentarista haya visto el disparo.
+
+## HLS: una lista de piezas
+
+HLS —HTTP Live Streaming— es el sistema de paquetes más común, y su papeleo ya
+te suena:
+[el archivo `.m3u8` es exactamente el m3u8 de «M3U frente a M3U8»](/es/blog/diferencia-m3u-y-m3u8/).
+Es un archivo de texto pequeño que enumera los segmentos disponibles ahora
+mismo; el reproductor lo vuelve a pedir cada pocos segundos, ve el segmento
+nuevo al final y lo recoge.
+
+En los canales en directo la lista avanza rodando para siempre. En el catch-up
+y las películas es una lista completa con principio y fin, y por eso ahí
+funciona el avance y retroceso y en la televisión en directo no. HLS creció en
+los móviles y hoy está en todas partes; si la URL de tu stream termina en
+`.m3u8`, esto es lo que tienes.
+
+## DASH: la misma idea con otro papeleo
+
+MPEG-DASH es el hermano de HLS con sello de estándar internacional. Los
+segmentos funcionan igual; la diferencia es el manifiesto —un documento XML en
+lugar de una lista de texto— y una cierta neutralidad respecto al códec que lo
+hizo popular entre los grandes emisores. Desde el sofá, DASH y HLS son
+indistinguibles, y esa es justo la lección: son dos dialectos del mismo idioma
+de paquetes, y un buen reproductor habla los dos sin contártelo.
+
+## RTSP: la vieja llamada de teléfono, todavía en línea
+
+RTSP es el superviviente de la familia de las tuberías. El reproductor le pide
+al servidor que empiece a enviar, y el vídeo fluye por una conexión mantenida
+abierta casi sin retardo. Esa inmediatez es la razón de que las cámaras de
+seguridad sigan hablándolo, y de que algunas fuentes de IPTV también.
+
+Sus debilidades son el espejo de su fuerza. No hay colchón de paquetes
+recogidos, así que un tropiezo de la red se siente al instante; no hay escalera
+de calidades por la que bajar; y los tipos de conexión que usa son exactamente
+los que no gustan a los cortafuegos estrictos y a las redes compartidas. Cuando
+un stream RTSP funciona, es asombrosamente en directo. Cuando no, hay poco que
+un reproductor pueda hacer para suavizarlo.
+
+## MPEG-TS sobre HTTP: el caudal continuo
+
+Una buena parte del IPTV en directo usa algo más llano que todo lo anterior:
+una sola conexión HTTP por la que el servidor vierte un flujo de transporte
+MPEG sin cortes. Sin manifiesto, sin segmentos — el mismo contenedor que usan
+la televisión por satélite y por cable, vertido por internet. Si una URL en
+directo termina en `.ts` o no tiene ninguna extensión reveladora, a menudo es
+esto.
+
+Es simple y arranca rápido, pero todo lo que ofrecen los sistemas de paquetes
+está ausente: sin escalera de calidades, sin volver a pedir una pieza perdida,
+sin retroceder. El búfer del reproductor es el único colchón que hay, y por eso
+[el comportamiento del búfer importa más en el IPTV en directo](/es/blog/solucionar-cortes-iptv/)
+que en ningún otro rincón del streaming.
+
+## Qué explica esto en la práctica
+
+- **Tu stream va por detrás del descodificador de satélite del vecino.** La
+  entrega segmentada cambia segundos de retardo por fluidez, por diseño.
+- **Los canales tardan un momento en arrancar.** El reproductor tiene que traer
+  un manifiesto y un par de paquetes antes de poder dibujar un fotograma.
+- **No puedes rebobinar la televisión en directo, pero el catch-up sí
+  funciona.** Una lista en directo que rueda no tiene pasado al que volver; una
+  completa sí — y el catch-up es
+  [lo que la guía le da al reproductor para poder pedir](/es/blog/que-es-la-epg-iptv/).
+- **Un canal se congela en seco mientras otros se degradan con suavidad.** El
+  suave tiene una escalera de calidades por la que bajar; el congelado
+  probablemente es un caudal en bruto sin adónde ir.
+
+## Por qué un reproductor debe hablarlos todos
+
+Un servicio de streaming optimiza una única ruta de entrega y la prueba de
+punta a punta. Un reproductor IPTV
+[hereda lo que tu proveedor haya elegido](/es/blog/que-hace-un-reproductor-iptv/)
+—HLS segmentado en un canal, un flujo de transporte en bruto en el siguiente,
+una cámara por RTSP después— y se espera de él que todos se sientan como
+televisión. Manejar los fallos de cada protocolo con elegancia, sin ceremonias
+y sin pedirte que nada de esto te importe, es una prueba justa de si un
+reproductor merece la pantalla en la que está.

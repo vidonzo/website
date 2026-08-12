@@ -77,6 +77,31 @@
         "ko": "iptv-버퍼링-해결하기"
       }
     },
+    "fix-iptv-freezing-on-wifi": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "fix-iptv-freezing-on-wifi",
+        "fa": "رفع-قطعی-iptv-روی-وای-فای",
+        "ar": "حل-تجمد-iptv-على-الواي-فاي",
+        "es": "iptv-se-congela-por-wifi",
+        "tr": "iptv-wifi-donma-sorunu",
+        "fr": "iptv-qui-fige-en-wifi",
+        "de": "iptv-friert-im-wlan-ein",
+        "pt": "iptv-travando-no-wifi",
+        "ru": "iptv-зависает-на-wi-fi",
+        "id": "iptv-macet-di-wifi",
+        "it": "iptv-si-blocca-su-wifi",
+        "vi": "iptv-dung-hinh-tren-wifi",
+        "pl": "iptv-zacina-sie-na-wifi",
+        "nl": "iptv-bevriest-op-wifi",
+        "hi": "वाई-फाई-पर-स्ट्रीम-अटकना",
+        "bn": "ওয়াই-ফাইয়ে-iptv-আটকে-গেলে",
+        "th": "แก้-iptv-ค้าง-บน-wifi",
+        "ur": "وائی-فائی-پر-iptv-رکنے-کا-حل",
+        "ja": "wifi-で-iptv-が-固まる-原因",
+        "ko": "와이파이에서-iptv-끊길-때"
+      }
+    },
     "how-vidonzo-encrypts-your-playlists": {
       "sourceLocale": "en",
       "locales": {
@@ -102,6 +127,31 @@
         "ko": "인증-정보를-암호화해야-하는-이유"
       }
     },
+    "iptv-on-a-tablet": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "iptv-on-a-tablet",
+        "fa": "iptv-روی-تبلت",
+        "ar": "iptv-على-الجهاز-اللوحي",
+        "es": "iptv-en-tablet",
+        "tr": "tablette-iptv-izlemek",
+        "fr": "iptv-sur-tablette",
+        "de": "iptv-auf-dem-tablet",
+        "pt": "iptv-no-tablet",
+        "ru": "iptv-на-планшете",
+        "id": "iptv-di-tablet",
+        "it": "iptv-su-tablet",
+        "vi": "xem-iptv-tren-may-tinh-bang",
+        "pl": "iptv-na-tablecie",
+        "nl": "iptv-op-een-tablet",
+        "hi": "टैबलेट-पर-iptv",
+        "bn": "ট্যাবলেটে-iptv-দেখা",
+        "th": "ดู-iptv-บนแท็บเล็ต",
+        "ur": "ٹیبلٹ-پر-iptv-دیکھنا",
+        "ja": "タブレット-で-iptv-を-見る",
+        "ko": "태블릿으로-iptv-보기"
+      }
+    },
     "iptv-player-on-android-tv": {
       "sourceLocale": "en",
       "locales": {
@@ -125,6 +175,31 @@
         "ur": "android-tv-پر-iptv-پلیئر",
         "ja": "android-tv-の-iptv-プレイヤー",
         "ko": "android-tv-에서-iptv-보기"
+      }
+    },
+    "iptv-player-vs-streaming-apps": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "iptv-player-vs-streaming-apps",
+        "fa": "تفاوت-پخش-کننده-iptv-و-اپ-استریم",
+        "ar": "مشغل-iptv-أم-تطبيقات-البث",
+        "es": "reproductor-iptv-o-apps-de-streaming",
+        "tr": "iptv-oynatici-ile-yayin-platformu-farki",
+        "fr": "lecteur-iptv-ou-application-streaming",
+        "de": "iptv-player-oder-streaming-app",
+        "pt": "player-iptv-ou-app-de-streaming",
+        "ru": "iptv-плеер-или-стриминговый-сервис",
+        "id": "beda-pemutar-iptv-dan-aplikasi-streaming",
+        "it": "lettore-iptv-o-app-di-streaming",
+        "vi": "trinh-phat-iptv-va-ung-dung-streaming",
+        "pl": "odtwarzacz-iptv-czy-aplikacja-streamingowa",
+        "nl": "iptv-speler-of-streaming-app",
+        "hi": "iptv-प्लेयर-बनाम-स्ट्रीमिंग-ऐप",
+        "bn": "iptv-প্লেয়ার-বনাম-স্ট্রিমিং-অ্যাপ",
+        "th": "เครื่องเล่น-iptv-กับ-แอปสตรีมมิง",
+        "ur": "iptv-پلیئر-اور-اسٹریمنگ-ایپ-میں-فرق",
+        "ja": "iptv-プレイヤー-と-配信アプリ-の違い",
+        "ko": "iptv-플레이어와-스트리밍-앱의-차이"
       }
     },
     "m3u-vs-m3u8": {
@@ -275,6 +350,56 @@
         "ur": "پہلی-پلے-لسٹ-شامل-کریں",
         "ja": "初めての-プレイリスト-設定手順",
         "ko": "첫-재생목록-설정하기"
+      }
+    },
+    "streaming-protocols-explained": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "streaming-protocols-explained",
+        "fa": "پروتکل-های-استریم-به-زبان-ساده",
+        "ar": "بروتوكولات-البث-hls-dash-rtsp",
+        "es": "protocolos-de-streaming-hls-dash-rtsp",
+        "tr": "hls-dash-rtsp-yayin-protokolleri",
+        "fr": "protocoles-de-streaming-expliques",
+        "de": "streaming-protokolle-erklaert",
+        "pt": "protocolos-de-streaming-explicados",
+        "ru": "протоколы-hls-dash-rtsp",
+        "id": "protokol-streaming-hls-dash-rtsp",
+        "it": "protocolli-di-streaming-spiegati",
+        "vi": "giao-thuc-streaming-la-gi",
+        "pl": "protokoly-streamingu-hls-dash-rtsp",
+        "nl": "streamingprotocollen-uitgelegd",
+        "hi": "hls-dash-rtsp-प्रोटोकॉल-क्या-हैं",
+        "bn": "স্ট্রিমিং-প্রোটোকল-সহজভাবে",
+        "th": "hls-dash-rtsp-โปรโตคอลสตรีมมิง",
+        "ur": "اسٹریمنگ-پروٹوکول-کی-وضاحت",
+        "ja": "hls-dash-rtsp-の-違い",
+        "ko": "스트리밍-프로토콜-이해하기"
+      }
+    },
+    "subtitles-and-audio-tracks": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "subtitles-and-audio-tracks",
+        "fa": "زیرنویس-و-صدا-در-iptv",
+        "ar": "الترجمات-ومسارات-الصوت-في-iptv",
+        "es": "subtitulos-y-pistas-de-audio-iptv",
+        "tr": "iptv-altyazi-ve-ses-secenekleri",
+        "fr": "sous-titres-et-pistes-audio",
+        "de": "untertitel-und-tonspuren",
+        "pt": "legendas-e-faixas-de-audio",
+        "ru": "субтитры-и-звуковые-дорожки",
+        "id": "takarir-dan-trek-audio-iptv",
+        "it": "sottotitoli-e-tracce-audio",
+        "vi": "phu-de-va-luong-am-thanh",
+        "pl": "napisy-i-sciezki-audio",
+        "nl": "ondertiteling-en-audiosporen",
+        "hi": "सबटाइटल-और-ऑडियो-ट्रैक",
+        "bn": "সাবটাইটেল-আর-অডিও-ট্র্যাক",
+        "th": "ซับไตเติล-กับ-แทร็กเสียง-iptv",
+        "ur": "سب-ٹائٹل-اور-آڈیو-ٹریک",
+        "ja": "字幕-と-音声トラック-の-仕組み",
+        "ko": "자막과-오디오-트랙-이해하기"
       }
     },
     "watch-in-your-language": {

@@ -1,0 +1,114 @@
+---
+title: "HLS, DASH ve RTSP: yayınınızın arkasındaki protokoller"
+description: "Yayın adresinin sonundaki harfler; canlıya ne kadar yakın olduğunuzu, kanalın ne hızda açıldığını ve ağ sendelediğinde ne olacağını belirler."
+urlSlug: hls-dash-rtsp-yayin-protokolleri
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ["teknik", "oynatma"]
+keywords: ["hls nedir", "hls dash farkı", "rtsp nedir", "iptv yayın protokolleri"]
+heroImageAlt: "Yan yana çizilmiş üç boru hattı: biri küçük koliler, biri etiketli kutular, biri de kesintisiz akan tek bir çizgi taşıyor."
+---
+
+Oynatma listenizdeki her yayın, bir avuç iletim yönteminden biriyle gelir ve
+hangisiyle geldiği, kanepeden hissedebildiğiniz şeyleri biçimlendirir: canlı
+yayının ne kadar gerisinde olduğunuzu, bir kanalın ne hızda açıldığını ve bir
+ağ sendelemesinin küçük bir takılma mı yoksa donma mı demek olduğunu. Protokol
+seçmek zorunda hiç kalmazsınız — onu sağlayıcınız seçti — ama hangisinin
+sahnede olduğunu bilmek, birkaç gizemi düpedüz mekaniğe çevirir.
+
+## Büyük fikir: borular değil, koliler
+
+Eski usul yayıncılık bir telefon görüşmesi gibi çalışırdı: sunucuyla oynatıcı
+açık bir bağlantı tutar, video oradan kesintisiz akardı. Modern yayıncılık ise
+çoğunlukla bir kargo servisi gibi çalışır. Video, her biri birkaç saniyelik
+küçük parçalara bölünür, sıradan bir web sunucusuna konur ve oynatıcı bunları
+— bir tarayıcının görselleri çektiği gibi — birbiri ardına çeker.
+
+Bu tek tasarım kararı çok şeyi açıklar. Koliler önceden çekilebilir; böylece
+oynatıcı [sallantılı bir ağa](/tr/blog/iptv-wifi-donma-sorunu/) karşı bir
+yastık tutabilir. Koliler birden çok kalite düzeyinde var olabilir; böylece
+bant genişliği düştüğünde oynatıcı zarifçe bir basamak iner. Ve koliler güvenlik
+duvarlarından ve otel Wi-Fi'sinden hiç takılmadan geçer, çünkü ağın gözünde
+bunlar sıradan web trafiğidir.
+
+Bedeli gecikmedir. Parçalar altışar saniyeyse ve oynatıcı üç tanesini elinde
+tutuyorsa, canlı anın en az on sekiz saniye gerisinden izliyorsunuz demektir —
+komşuda gol sevinci koparken sizin spikerinizin daha şutu görmemiş olmasının
+sebebi budur.
+
+## HLS: parçalardan oluşan bir liste
+
+HLS — HTTP Live Streaming — kolili sistemlerin en yaygını ve siz onun
+evrakıyla zaten tanıştınız:
+[`.m3u8` dosyası, "M3U ile M3U8" yazısındaki m3u8'in ta kendisidir](/tr/blog/m3u-ile-m3u8-farki/).
+Şu anda hazır olan parçaları sıralayan küçük bir metin dosyasıdır; oynatıcı
+onu birkaç saniyede bir yeniden çeker, sonuna eklenen yeni parçayı fark eder ve
+alır.
+
+Canlı kanallarda liste sonsuza dek ileri doğru yuvarlanır. Geri izlemede ve
+filmlerde ise başı ve sonu belli, eksiksiz bir listedir — ileri geri sarmanın
+orada çalışıp canlı televizyonda çalışmamasının sebebi budur. HLS telefonlarda
+büyüdü ve bugün her yerde; yayın adresiniz `.m3u8` ile bitiyorsa elinizdeki
+budur.
+
+## DASH: aynı fikir, farklı evrak
+
+MPEG-DASH, HLS'in uluslararası standart kardeşidir. Parçalar aynı biçimde
+çalışır; fark manifestte — metin listesi yerine bir XML belgesi — ve büyük
+yayıncıların gözüne giren belli bir codec tarafsızlığındadır. Kanepeden
+bakıldığında DASH ile HLS ayırt edilemez, ki ders de zaten budur: ikisi aynı
+koli dilinin iki lehçesidir ve iyi bir oynatıcı, size hiç söylemeden ikisini de
+konuşur.
+
+## RTSP: hâlâ hatta olan eski telefon görüşmesi
+
+RTSP, boru ailesinin hayatta kalan üyesidir. Oynatıcı sunucudan göndermeye
+başlamasını ister ve video, açık tutulan bir bağlantı üzerinden neredeyse
+gecikmesiz akar. Güvenlik kameralarının onu hâlâ konuşmasının, birkaç IPTV
+kaynağının da hâlâ kullanmasının sebebi bu dolaysızlıktır.
+
+Zayıflıkları, gücünün aynadaki yansımasıdır. Önceden çekilmiş koli yastığı
+yoktur, bu yüzden bir ağ sendelemesi anında hissedilir; inilecek kalite
+basamakları yoktur; kullandığı bağlantı türleri de tam olarak katı güvenlik
+duvarlarının ve ortak ağların sevmediği türdendir. Bir RTSP yayını çalıştığında
+etkileyici ölçüde canlıdır. Çalışmadığında ise oynatıcının onu yumuşatmak için
+yapabileceği pek bir şey yoktur.
+
+## HTTP üzerinden MPEG-TS: kesintisiz akış
+
+Canlı IPTV'nin büyük bir bölümü, yukarıdakilerin hepsinden daha yalın bir şey
+kullanır: sunucunun kesintisiz bir MPEG aktarım akışını boca ettiği tek bir
+HTTP bağlantısı. Manifest yok, parça yok — uydu ve kablolu televizyonun
+kullandığı kabın aynısı, internetin üzerine dökülmüş hali. Canlı bir adres
+`.ts` ile bitiyorsa ya da hiçbir ipucu uzantısı taşımıyorsa, çoğu zaman budur.
+
+Yalındır ve hızlı başlar, ama kolili sistemlerin sunduğu her şey yoktur: kalite
+basamağı yok, kaçan parçayı yeniden çekmek yok, geriye sarmak yok. Elde tek
+yastık oynatıcının tamponudur —
+[tampon davranışının canlı IPTV'de](/tr/blog/iptv-donma-sorunu-cozumu/)
+yayıncılığın başka her yerinden daha çok önem taşımasının sebebi de budur.
+
+## Bunun pratikte açıkladıkları
+
+- **Yayınınız komşunun uydu alıcısının gerisinde.** Parçalı iletim, tasarım
+  gereği birkaç saniyelik gecikmeyi akıcılıkla takas eder.
+- **Kanallar açılmadan önce bir an duruyor.** Oynatıcının kare çizebilmek için
+  önce bir manifest ve bir iki koli çekmesi gerekir.
+- **Canlı televizyonu geri saramıyorsunuz ama geri izleme çalışıyor.** İleri
+  yuvarlanan bir canlı listenin sarılacak geçmişi yoktur; eksiksiz olanın
+  vardır — geri izleme de
+  [rehberin oynatıcıya isteyecek bir şey vermesidir](/tr/blog/epg-yayin-rehberi-nedir/).
+- **Bir kanal sert donarken diğerleri yumuşakça bozuluyor.** Yumuşak bozulanın
+  inecek kalite basamağı vardır; donan, büyük olasılıkla gidecek yeri olmayan
+  işlenmemiş bir akıştır.
+
+## Oynatıcı neden hepsini konuşmak zorunda
+
+Bir yayın platformu tek bir iletim yolunu en iyi hale getirir ve onu uçtan uca
+test eder. Bir IPTV oynatıcısı ise
+[sağlayıcınız ne seçtiyse onu devralır](/tr/blog/iptv-oynatici-ne-yapar/) —
+bir kanalda parçalı HLS, sıradakinde işlenmemiş bir aktarım akışı, ondan sonra
+bir RTSP kamera yayını — ve hepsini televizyon gibi hissettirmesi beklenir.
+Her protokolün arızasını gösterişsizce, size bunların hiçbirini dert
+ettirmeden zarifçe karşılamak, bir oynatıcının üzerinde durduğu ekranı hak
+edip etmediğinin hakkaniyetli bir sınavıdır.

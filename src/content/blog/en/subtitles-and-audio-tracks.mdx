@@ -1,0 +1,94 @@
+---
+title: "Subtitles and audio tracks in IPTV: how they work, and why they vanish"
+description: "A stream is a braid of tracks — video, audio, sometimes text. Knowing how they travel explains every missing subtitle and mislabelled language."
+publishedAt: 2026-08-12
+sourceLocale: en
+tags: ['playback', 'television']
+keywords: ['iptv subtitles not working', 'change audio track iptv', 'iptv dual audio', 'subtitle settings iptv player']
+heroImageAlt: "A stream drawn as three braided strands — a picture strip, an audio wave, and a line of text — running into one plug."
+---
+
+The thing you watch as "a channel" is really several streams braided together:
+one video track, one or more audio tracks, and — sometimes — one or more text
+tracks. The braid is assembled by your provider before it ever reaches you, and
+that one fact explains nearly everything confusing about subtitles and
+languages in IPTV: a player can pick apart the braid and let you choose between
+strands, but it cannot add a strand that was never woven in.
+
+## Tracks travel inside the stream
+
+When a broadcaster sends a film with two languages and subtitles, all of it
+rides in the same transport stream: the video, an audio track per language,
+and the subtitle data, each tagged with a language code. A player's job is to
+read those tags, present the choices, and switch between them —
+[decode and draw, in other words](/blog/what-an-iptv-player-does/), applied to
+more than just the picture.
+
+So the first diagnostic question is always the same: *is the track in the
+stream at all?* If the player's audio menu lists one track and no subtitles,
+that is not the player being coy. The provider's braid contains one strand of
+audio and nothing else, and no setting anywhere will conjure the rest.
+
+## Why subtitles go missing more than audio does
+
+Subtitles are the most frequently dropped strand, for unglamorous technical
+reasons. Broadcast subtitles come in awkward shapes — some are transmitted as
+*pictures* of text rather than text itself — and when a provider re-encodes a
+channel [into a leaner delivery format](/blog/streaming-protocols-explained/),
+carrying those along is extra work that is easy to skip. The channel you watch
+may have had subtitles when it left the broadcaster and lost them in
+transit.
+
+The practical test: if the same programme shows subtitles on one source and
+none on another, the strand was dropped upstream. Mention it to your provider —
+it is genuinely fixable at their end, and only at their end.
+
+## Audio tracks, and the mystery of "und"
+
+Where a stream does carry several audio tracks — original language plus a dub,
+or commentary in two languages — switching between them is a player menu away.
+The common irritation is labelling: language tags are set by whoever encoded
+the stream, and a lazy encoder leaves them as `und` — undetermined. The player
+can only show the tag it was given, so "Track 1 (und)" and "Track 2 (und)"
+means trying both, once, and remembering which was which.
+
+If you watch in more than one language, this is one half of a bilingual setup —
+[the other half is the app itself speaking your language](/blog/watch-in-your-language/),
+interface and content being separate choices.
+
+## Bringing your own subtitle file
+
+For films and series, there is a healthy world of subtitle files that exist
+separately from any stream. A capable player will let you attach one — point it
+at a subtitle file and it is rendered over the video as if it had been in the
+braid all along. It is the one case where a missing strand can be supplied
+from your side, and for older films in particular it is often the only way to
+watch with text at all.
+
+## Making them readable where you sit
+
+Rendering subtitles is the player's craft, and it is not one-size-fits-all.
+Text comfortable from three metres away on a television is a billboard
+[on a tablet at arm's length](/blog/iptv-on-a-tablet/); thin white text is
+invisible over a snowy football pitch. A player worth keeping lets you set the
+size, the text colour, and the opacity of the backing strip behind the text —
+three plain controls that between them solve almost every legibility
+complaint, from sofa distance to bright-room glare.
+
+## The short diagnostic, in order
+
+1. **Open the player's track menus.** What the menus list is what the braid
+   contains. If the strand is absent, stop — the fix is upstream.
+2. **Tracks listed but wrong by default?** Choose the one you want; a good
+   player keeps your preference.
+3. **Labelled `und`?** Try each track once; the labels were left blank at the
+   encoder.
+4. **Subtitles present but unreadable?** Size, colour, background — adjust
+   where you actually sit.
+5. **A film with no text track at all?** A separate subtitle file, attached in
+   the player, fills the gap.
+
+None of this requires knowing anything about the braid. But knowing it is a
+braid — assembled upstream, unpicked at your end — is the difference between
+fiddling with settings that cannot help and asking the one question that can:
+was the strand ever there at all?
