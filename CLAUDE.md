@@ -28,9 +28,14 @@ npm run coverage         # local translation-coverage dashboard, opens in the br
 
 `.github/workflows/ci.yml` runs the four `check:*` scripts plus the build on
 every PR. Generated files — `src/styles/tokens.css`,
-`functions/_generated/redirects.js`, `src/content/_data/slug-registry.json`,
-the featured images — are **committed**. Never hand-edit one: change the source
-and re-run its `build:`/`sync:` script, or CI fails on the drift.
+`functions/_generated/redirects.js`, `src/content/_data/slug-registry.json` —
+are **committed**. Never hand-edit one: change the source and re-run its
+`build:`/`sync:` script, or CI fails on the drift.
+
+The featured images are the exception: `public/og/blog/` is git-ignored and
+rebuilt from scratch by `npm run build`, so nothing to commit and no drift
+check. Their inputs — the article title and `heroImageAlt` — are what live in
+git.
 
 ## Architecture
 
@@ -123,7 +128,14 @@ What Vidonzo *says it is* matters more than what it does:
    screenshots, mockups, or video — use public-domain/mockup footage.
 3. **"IPTV" stays out of the brand name** (keep "Vidonzo" clean); it may appear
    in body copy for discoverability.
-4. **Sell playback, not access.** No copy hinting that users can *get* content —
-   no channel counts, no "thousands of channels", no playlist sourcing tips.
+4. **Sell playback, not access.** Never imply Vidonzo supplies content: no
+   catalogue promises, no "thousands of channels" as an offer, no playlist
+   sourcing tips (where to buy, find, or generate a list). Describing the size
+   of a list the reader already brought is *not* this — "twenty thousand
+   channels is a database, not a menu" states the interface's problem, and
+   `m3u-vs-m3u8` counts channels to explain that a playlist file holds one per
+   line. The test is who owns the channels in the sentence: if it is the
+   reader's own list, the number is a fact about their file; if it is ours, it
+   is an offer and it is out.
 5. An EULA or "the user is responsible" disclaimer is **not** a shield — don't
    lean on one in copy.
