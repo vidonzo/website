@@ -1,0 +1,126 @@
+---
+title: "How much data an hour of live television actually uses"
+description: "Bitrate is the only number that matters, and the arithmetic fits on one line. Here is what an hour costs at each quality, and why live streams cannot economise."
+publishedAt: 2026-08-14
+sourceLocale: en
+tags: ['playback', 'engineering']
+keywords: ['iptv data usage', 'how much data does live tv use', 'streaming data per hour', 'iptv on mobile data']
+heroImageAlt: "A data meter drawn as a filling bar beside a playing stream, with the bar rising steadily as the picture runs."
+---
+
+Resolution is the number everyone quotes and the wrong one to reason about. A
+1080p stream can be 4 Mbps or 9 Mbps depending on how it was encoded, and those
+two cost you very different amounts of data for an identical-looking picture.
+
+The number that actually determines your bill is **bitrate** — how many bits per
+second the stream carries. Everything else is downstream of it.
+
+## The arithmetic, in one line
+
+Multiply the bitrate in Mbps by **450** to get megabytes per hour.
+
+That is the whole calculation. A 6 Mbps stream is 2,700 MB — about 2.7 GB — for
+every hour it plays. (Using the decimal gigabyte your network operator counts
+with, not the binary one your file browser shows.)
+
+| Typical stream | Bitrate | Per hour | Two hours |
+|---|---|---|---|
+| SD, around 480p | ~1.5 Mbps | ~0.7 GB | ~1.4 GB |
+| 720p | ~3 Mbps | ~1.4 GB | ~2.7 GB |
+| 1080p, ordinary | ~6 Mbps | ~2.7 GB | ~5.4 GB |
+| 1080p, high bitrate | ~8 Mbps | ~3.6 GB | ~7.2 GB |
+| 4K | ~20 Mbps | ~9 GB | ~18 GB |
+
+Live channels vary more than this table suggests, particularly upward on sport,
+where fast motion forces the encoder to spend more bits. Treat the figures as
+the right order of magnitude rather than a quote.
+
+Three hours of 1080p a day is about 8 GB, or roughly **240 GB a month** — which
+is why this stops being an abstract question the moment the connection is
+metered.
+
+## Why a live stream cannot economise
+
+An on-demand service ships several encodes of the same film and steps down to a
+smaller one when your line struggles. That is why streaming apps survive bad
+Wi-Fi by going blurry instead of stopping.
+
+A live channel usually has no such ladder. It is one encode, produced once, sent
+to everyone. There is nothing smaller to fall back to, so when the line cannot
+carry the bitrate the stream does not soften — it
+[stalls](/blog/fix-iptv-buffering/). This is the most consequential difference
+between [a player and a streaming service](/blog/iptv-player-vs-streaming-apps/)
+for anyone on a constrained connection, and it is not something the player can
+fix. It has only what the feed offers.
+
+Where a provider *does* offer the same channel at more than one quality, that
+choice is worth finding. It is the only lever that changes the number
+substantially.
+
+## Where the rest of the data goes
+
+Video is over 95% of it. The other components are worth knowing only so you can
+stop suspecting them:
+
+- **The programme guide** is a text file, typically a few megabytes compressed,
+  fetched once or twice a day. [Its size](/blog/epg-explained/) is irrelevant next
+  to twenty minutes of video.
+- **Channel logos and artwork** arrive in a burst the first time you browse a
+  large list, then sit in the cache. Noticeable once, never again.
+- **Advertising and analytics traffic**, in players that carry them, is small in
+  absolute terms and worse than its size suggests, because it competes with video
+  for a link that is already struggling. [A player with neither](/blog/no-ads-no-trackers/)
+  spends every byte on the picture.
+
+## The buffer does not cost you data — but channel-hopping does
+
+A common worry is that a large cache setting consumes more data. It does not. A
+buffer reads *ahead* of where you are watching; the same bytes arrive either way,
+just earlier. Trading latency for stability is free in data terms, and on an
+unstable line it is the single most useful setting there is.
+
+Channel surfing is the expensive habit, and nobody counts it. Every channel
+change fetches several seconds of video before the first frame appears, and if
+you move on, those seconds are still paid for. Thirty channel changes on a 6 Mbps
+stream, at five seconds of pre-buffer each, is a little over 100 MB spent on
+video you never saw.
+
+The genuinely large waste, though, is the stream nobody is watching. A player
+left running in another room costs 2.7 GB an hour exactly as if you were sitting
+in front of it — more data than an evening's deliberate viewing, spent on an
+empty room.
+
+## On mobile data
+
+The arithmetic turns brutal quickly. A 20 GB monthly plan holds roughly:
+
+- **7 hours** of 1080p at 6 Mbps
+- **14 hours** of 720p
+- **just over 2 hours** of 4K
+
+Tethering to a laptop or a television changes nothing about this; the bytes are
+the same bytes. And 4K on a phone is the clearest waste in the whole table — a
+handset panel cannot resolve the extra detail at arm's length, so you are paying
+four times the data for a picture your eyes discard.
+
+Two things genuinely help. Choose the SD or 720p variant where the provider
+offers one. And prefer a
+[modern codec where you have the choice](/blog/why-some-channels-dont-play/):
+HEVC carries roughly the same picture as H.264 at about half the bitrate, which
+halves the number in every row above.
+
+## Bandwidth is not the same as data
+
+One last distinction, because conflating the two causes a lot of pointless
+worry. **Bandwidth** is how fast your line is — whether the 6 Mbps can arrive at
+all, steadily, without interruption. **Data** is the total that accumulates over
+the month.
+
+A fibre line has plenty of the first and, usually, no limit on the second. A
+mobile connection often has ample speed and a hard ceiling on the total. And a
+[weak Wi-Fi link](/blog/fix-iptv-freezing-on-wifi/) can fail on the first while
+using no more of the second than a perfect one — the stream freezing does not
+mean it stopped costing you.
+
+Knowing which of the two is scarce tells you which fix to reach for: a better
+radio path, or a smaller number in the table.

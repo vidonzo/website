@@ -1,0 +1,142 @@
+---
+title: "The playlist saved, but nothing plays: a diagnosis in order"
+description: "An empty channel list and a channel that refuses to start are different faults with different causes. Here is how to tell them apart before you change anything."
+publishedAt: 2026-08-14
+sourceLocale: en
+tags: ['troubleshooting', 'playlists']
+keywords: ['iptv playlist not loading', 'no channels showing iptv', 'xtream login failed', 'iptv list loads but wont play']
+heroImageAlt: "A playlist arriving as a stack of pages, with one page in the middle drawn blank where the others carry rows."
+---
+
+The frustrating version of this problem is the one with no error message. The
+source saves. The app looks satisfied. And then either the list is empty, or the
+list is perfect and every channel you touch does nothing.
+
+Those are not the same fault, and the fastest way to waste an evening is to
+treat them as one. Adding a playlist involves four separate steps, each of which
+fails in its own recognisable way:
+
+1. **The fetch** — the app asks a server for the playlist.
+2. **The parse** — the app reads what came back.
+3. **The stream request** — the app asks for one channel's video.
+4. **The decode** — the device turns that video into a picture.
+
+Work out which step you are stuck on first. Every fix below only makes sense
+once you know.
+
+## Step 1: the fetch — nothing arrives
+
+The signature is an immediate failure when you save the source: a connection
+error, a timeout, or a refusal that appears before you have had time to blink.
+
+**The link expired or rotated.** Providers change host names and re-issue links,
+sometimes on a schedule and sometimes without warning. A URL that worked last
+month and fails today, with no other change on your side, is the ordinary case
+rather than the exotic one.
+
+**The host is written slightly wrong.** For Xtream, the host field wants exactly
+what your provider gave you — scheme and port included, nothing else. The two
+common mistakes are pasting an address copied out of a browser after it has
+picked up a path, and adding or removing a trailing slash. `http://` and
+`https://` are not interchangeable here either; a server listening on one will
+simply not answer on the other.
+
+**The name does not resolve, or the host is unreachable from this network.** Try
+the same source on a different connection — mobile data instead of home Wi-Fi is
+the quickest test. If it works on one network and not the other, nothing about
+your playlist is wrong, and a proxy is the sort of tool that exists for exactly
+this.
+
+## Step 2: the parse — something arrives, but it is not a playlist
+
+The signature here is the quiet one: the source saves apparently fine and the
+channel list is empty, or almost.
+
+This is usually a server answering with an *error page* rather than a playlist.
+An expired subscription, an exceeded limit or a mistyped username often produces
+a perfectly valid HTTP response containing HTML that says so. The app fetched
+something, so the fetch succeeded; there were no channels in it, so the list is
+empty. That combination — successful save, zero channels — points here almost
+every time.
+
+The other parse-stage symptom is cosmetic and unmistakable: the channels are all
+there, but the names are mangled into question marks and accented rubbish. That
+is a text-encoding mismatch, and it is
+[the entire difference between M3U and M3U8](/blog/m3u-vs-m3u8/).
+
+## Step 3: the stream request — the list is perfect, nothing starts
+
+This is the category people find hardest, because everything *looks* right. The
+list is complete, the categories are populated, the logos loaded. You press a
+channel and get a spinner, then nothing — and crucially, **every** channel
+behaves identically.
+
+That uniformity is the diagnostic. When all channels fail the same way at the
+same speed, the problem is your account rather than any stream.
+
+**Someone else is watching.** Subscriptions carry a limit on simultaneous
+connections, often one or two. If another device in the house — or one you
+forgot you left playing in another room — holds the connection, your channel is
+refused. This is the single most common cause of "the list is there and nothing
+plays", and it is invisible because nothing tells you.
+
+**The subscription lapsed.** Some servers keep serving the channel list after
+the account expires and refuse only the streams. The list you are looking at may
+be a memory.
+
+**The account is locked to somewhere you are not.** Some providers bind access
+to an address or region, so a stream that plays at home refuses on a different
+connection while the list still loads normally.
+
+**Everything is up but the server is overloaded.** Distinguishable by timing: it
+tends to be evenings, it tends to affect popular channels first, and it looks
+like [buffering rather than refusal](/blog/fix-iptv-buffering/).
+
+## Step 4: the decode — most channels work, a few do not
+
+If the list plays and specific channels do not, you have left this article's
+territory. A fault that hits *some* channels and not others is almost never the
+account and almost never the network — it is
+[what your device can and cannot decode](/blog/why-some-channels-dont-play/).
+
+## The symptom table
+
+| What you see | The step that failed |
+|---|---|
+| Error the moment you save the source | Fetch |
+| Source saves, list is empty | Parse — usually an error page |
+| Channel names are garbled | Parse — text encoding |
+| Full list, every channel fails instantly | Stream request — usually a connection limit |
+| Full list, everything stalls in the evening | Stream request — server load |
+| Most channels play, a few refuse | Decode |
+
+## What to change, and in what order
+
+Change one thing at a time, and re-test after each. In rough order of how often
+it is the answer:
+
+1. **Stop playback everywhere else**, then try again. Free the connection before
+   you touch anything else.
+2. **Re-enter the source by hand** rather than pasting, watching for the trailing
+   slash and the scheme.
+3. **Test on a different network.** This separates you-and-your-ISP from
+   your-provider in one step.
+4. **Ask your provider whether the link has changed.** Not a defeat — link
+   rotation is routine, and no amount of local troubleshooting will fix it.
+
+## What the player controls, and what it does not
+
+A player cannot invent access it was refused, and it should not pretend
+otherwise: the honest behaviour is a clear failure rather than a spinner that
+never resolves.
+
+What it can do is make the diagnosis possible. Keeping several sources side by
+side lets you test one against another instead of guessing. A tunable cache
+lets you trade latency for stability on a line that is merely weak rather than
+broken. Proxy support gets you past a network that blocks the host rather than a
+provider that refuses you. And automatic recovery means a connection that drops
+for three seconds rejoins the stream instead of dropping you back to a list.
+
+None of that is a fix for an expired subscription. It is the difference between
+knowing which of the four steps failed and changing settings at random until
+something happens.

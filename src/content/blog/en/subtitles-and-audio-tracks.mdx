@@ -52,6 +52,11 @@ the stream, and a lazy encoder leaves them as `und` — undetermined. The player
 can only show the tag it was given, so "Track 1 (und)" and "Track 2 (und)"
 means trying both, once, and remembering which was which.
 
+Switching tracks also rescues a stranger case: a channel that plays a perfect
+picture in complete silence. That is usually not a missing track but
+[an audio codec the device cannot decode](/blog/why-some-channels-dont-play/),
+and an alternative track is often the one that plays.
+
 If you watch in more than one language, this is one half of a bilingual setup —
 [the other half is the app itself speaking your language](/blog/watch-in-your-language/),
 interface and content being separate choices.
