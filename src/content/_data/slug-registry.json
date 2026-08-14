@@ -102,6 +102,12 @@
         "ko": "와이파이에서-iptv-끊길-때"
       }
     },
+    "how-much-data-live-tv-uses": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "how-much-data-live-tv-uses"
+      }
+    },
     "how-vidonzo-encrypts-your-playlists": {
       "sourceLocale": "en",
       "locales": {
@@ -150,6 +156,12 @@
         "ur": "ٹیبلٹ-پر-iptv-دیکھنا",
         "ja": "タブレット-で-iptv-を-見る",
         "ko": "태블릿으로-iptv-보기"
+      }
+    },
+    "iptv-on-iphone-and-ipad": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "iptv-on-iphone-and-ipad"
       }
     },
     "iptv-player-on-android-tv": {
@@ -327,6 +339,12 @@
         "ko": "자녀-보호-기능과-안전한-시청"
       }
     },
+    "playlist-saved-but-nothing-plays": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "playlist-saved-but-nothing-plays"
+      }
+    },
     "set-up-your-first-playlist": {
       "sourceLocale": "en",
       "locales": {
@@ -450,6 +468,12 @@
         "ur": "iptv-پلیئر-کیا-کرتا-ہے",
         "ja": "iptv-プレイヤー-の-役割",
         "ko": "iptv-플레이어가-하는-일"
+      }
+    },
+    "why-some-channels-dont-play": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "why-some-channels-dont-play"
       }
     },
     "xtream-codes-vs-m3u": {

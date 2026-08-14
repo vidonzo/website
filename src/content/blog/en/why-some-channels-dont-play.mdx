@@ -1,0 +1,131 @@
+---
+title: "Codecs, not connections: why one channel plays and the next one does not"
+description: "When most of the list works and a handful of channels refuse, the network is rarely to blame. The fault is usually in what your particular device can decode."
+publishedAt: 2026-08-14
+sourceLocale: en
+tags: ['troubleshooting', 'engineering']
+keywords: ['iptv channel not playing', 'hevc iptv not working', 'iptv sound but no picture', 'iptv codec not supported']
+heroImageAlt: "A row of channel tiles with two greyed out, and a decoder chip drawn beneath them missing two of its blocks."
+---
+
+There is a fault pattern that sends people to their router for no reason:
+ninety-odd channels play beautifully, and four or five refuse — the same four or
+five, every time, at every hour of the day, on Wi-Fi and on mobile data alike.
+
+That consistency is the whole diagnosis. A network problem is a *timing*
+problem: it wanders, it is worse in the evening, it affects whatever you happen
+to be watching. A fault that follows the same specific channels around, and
+disappears when you open them on a different device, is not about the network at
+all. It is about decoding.
+
+## The file extension tells you nothing about the video
+
+A stream arrives in a *container* — `.ts`, or an `.m3u8` segment list, or
+something a
+[protocol wraps around it](/blog/streaming-protocols-explained/). The container
+is a box. It says how the pieces are arranged and nothing whatsoever about what
+is inside them.
+
+Inside are at least two separately-encoded things: a video track and one or more
+audio tracks, each in its own *codec*. Your device needs to understand both. It
+frequently understands one and not the other, which is why the failures are
+weirder than a simple refusal.
+
+## Video codecs, in the order you will meet them
+
+**H.264 (AVC)** is the universal floor. Every phone, tablet and TV box made in
+the last fifteen years decodes it in hardware. A channel in H.264 that does not
+play has a different problem.
+
+**HEVC (H.265)** is where the trouble starts. It halves the bandwidth for the
+same picture, so providers use it for HD and 4K feeds, and support for it is
+genuinely uneven. Recent phones handle it in hardware without noticing. Cheap
+television boxes often support it at some resolutions and profiles but not
+others — a distinction no interface ever explains, which is why a box can play
+one HEVC channel and choke on the next.
+
+**MPEG-2** is the legacy case, still carried by feeds that originate from
+older broadcast infrastructure. It is ancient and undemanding, and modern mobile
+chips have quietly dropped hardware support for it because nothing else needs it
+any more.
+
+**AV1** is efficient, newer, and rare in live television. If you meet it, it is
+on a very new device or not at all.
+
+## Audio is where the classic failure lives
+
+**AAC** is safe everywhere. **AC-3 and E-AC-3** — Dolby Digital and Digital Plus
+— are extremely common on television feeds, because that is what broadcast
+carries, and they are the usual explanation for the most confusing symptom of
+all: a perfect picture with complete silence.
+
+If a channel plays video with no sound while other channels are fine, do not
+look at your volume. Look at whether the stream offers a second audio track;
+[switching tracks](/blog/subtitles-and-audio-tracks/) frequently lands on an AAC
+alternative that plays immediately.
+
+## Reading the symptoms
+
+| What happens | Where it broke |
+|---|---|
+| Sound plays, picture is black | Video codec unsupported, or the decoder refused it |
+| Picture plays, no sound at all | Audio codec — usually AC-3 or E-AC-3 |
+| Green, pink or smeared blocks | Hardware decoder given something it half-supports |
+| Combed horizontal lines on movement | Interlaced source, not deinterlaced |
+| Plays but stutters constantly, device gets hot | Falling back to software decoding |
+| Works on the phone, fails on the TV box | The box has the older, narrower decoder set |
+| Black screen, then a clean error | Decoder initialisation failed outright |
+
+That last row deserves emphasis, because it is the test that ends most
+arguments. **Open the failing channel on a different device.** If it plays there,
+nothing is wrong with your playlist, your account or your connection, and no
+setting on the first device is going to conjure a decoder its chip does not
+have.
+
+## Hardware and software decoding, and the trade
+
+Every device has a fixed-function block that decodes a specific list of formats
+at specific resolutions. It is fast, it barely warms the device, and its list is
+frozen at manufacture. Anything outside it must be decoded in software on the
+CPU — which can handle almost any format ever devised, at a cost in heat, battery
+and, past a certain resolution, sheer feasibility. A phone that software-decodes
+1080p may be fine. The same phone will not software-decode 4K, and it will make
+that clear within seconds.
+
+This is the real explanation behind two things that otherwise look like magic:
+why a five-year-old TV box fails on channels a two-year-old phone plays without
+comment, and why one player succeeds where another gives up. A player built on a
+broad software decoder has somewhere to fall back to. Vidonzo is built on libmpv
+for this reason — hardware decoding where the chip can take it, and an engine
+behind it that plays what narrower players refuse.
+
+## Interlacing, the artefact nobody names
+
+Some feeds are still 1080**i** rather than 1080p: each frame arrives as two
+half-frames from slightly different moments. On anything with movement — a
+camera pan, a ball, a crowd — undeinterlaced 1080i shows fine horizontal combing
+along the edges of moving objects.
+
+It is not damage, it is not your connection, and it is not the codec. It is a
+sixty-year-old broadcast technique meeting a progressive-scan display, and the
+fix belongs to the player's deinterlacer rather than to anything you can change
+about the stream.
+
+## What no player can fix
+
+Three things are simply outside the app's reach, and it is worth knowing them so
+you stop looking:
+
+- **A decoder your chip does not have**, at the resolution the channel needs.
+  Software fallback stretches this, but it does not repeal physics.
+- **A feed encoded badly at source.** If the provider's encoder is producing a
+  broken stream, every player on every device will show the same artefacts.
+- **A channel that is simply dead.** A stream that returns nothing is not a
+  codec problem; that belongs to
+  [the playlist and account diagnosis](/blog/playlist-saved-but-nothing-plays/)
+  instead.
+
+The useful boundary is this: **all** channels failing is an account or network
+question. **Some** channels failing, consistently, on one device, is a decoding
+question — and once you know which of the two you have, the fix stops being a
+guess.
