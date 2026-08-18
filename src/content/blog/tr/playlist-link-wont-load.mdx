@@ -1,0 +1,114 @@
+---
+title: "Oynatma listeniz açılmıyor: beş hata ve her birinin anlamı"
+description: "Listeyi ekliyorsunuz, uygulama bir hata veriyor ve hata mesajı hiçbir şey anlatmıyor. Oysa beş farklı arıza var ve hepsinin ayrı bir imzası bulunuyor."
+urlSlug: oynatma-listesi-baglantisi-acilmiyor
+publishedAt: 2026-08-19
+sourceLocale: tr
+tags: ["sorun-giderme", "oynatma-listesi"]
+keywords: ["iptv listesi açılmıyor", "m3u linki çalışmıyor", "xtream giriş hatası", "iptv oynatma listesi yüklenmiyor"]
+heroImageAlt: "Bir oynatma listesi ekleme ekranı ve altında yüklemenin neden durduğunu gösteren bir uyarı."
+---
+
+Sağlayıcının verdiği bağlantıyı yapıştırıyorsunuz, uygulama bir süre düşünüyor
+ve sonunda kısa bir hata veriyor. Mesajda ne yazdığının pek önemi yok; asıl soru
+şu: arıza sizde mi, ağda mı, yoksa sağlayıcıda mı?
+
+Beş ayrı arıza var. Beşi de birbirine benziyor, ama her birinin kendine özgü bir
+davranışı var — ve doğru olanı ilk denemede bulmak, listeyi baştan yeniden
+kurmaktan çok daha hızlı.
+
+## 1. Kimlik bilgileri kabul edilmiyor
+
+**İmzası:** yükleme hemen, neredeyse anında başarısız oluyor. Bekleme yok.
+
+Sunucuya ulaşıldı, sunucu da "hayır" dedi. Yani ağınız çalışıyor; sorun hesapta.
+En yaygın üç nedeni sırasıyla:
+
+- **Şifre yanlış girildi.** Şifreyi yapıştırmak yerine elle yazın. Kopyalarken
+  sona takılan bir boşluk gözle görülmez ama sunucu için başka bir şifredir.
+- **Abonelik süresi doldu.** Xtream hesapları bir tarihte sona erer ve o günden
+  sonra tek bir kanal bile açılmaz.
+- **Eşzamanlı cihaz sınırı aşıldı.** Çoğu sağlayıcı aynı anda kaç cihazın
+  bağlanabileceğini sınırlar. Televizyonda açık bırakılmış bir yayın, telefonda
+  gördüğünüz "geçersiz kullanıcı" hatasının gerçek sebebi olabilir. Diğer
+  cihazda çıkış yapıp tekrar deneyin.
+
+Sunucu adresini de bir kez daha okuyun: `http` mı `https` mi olduğu ve
+[hangi bağlantı biçimini kullandığınız](/tr/blog/xtream-codes-mi-m3u-mu/) burada
+fark yaratır.
+
+## 2. Sunucuya hiç ulaşılamıyor
+
+**İmzası:** uzun bir bekleme, ardından zaman aşımı. Hata gecikmeli gelir.
+
+Bu sefer "hayır" diyen kimse yok — kimse cevap vermiyor. Sırayla bakılacaklar:
+
+- **Port eksik.** Xtream panellerinin çoğu 80 numaralı portta çalışmaz. Adres
+  `http://ornek.com` değil, `http://ornek.com:8080` biçiminde olmalıdır ve
+  sağlayıcı size portu vermişse onu yazmanız gerekir.
+- **Ağınız sağlayıcıyı engelliyor.** Wi-Fi'de olmuyorsa mobil veriye geçip aynı
+  listeyi deneyin. İkisi arasında sonuç değişiyorsa arıza bağlantıda, listede
+  değil. Kalıcı çözüm için **Ayarlar → Proxy** ekranından bir vekil sunucu
+  tanımlayabilirsiniz.
+- **Adres artık yayında değil.** Sağlayıcılar alan adı değiştirir ve eski
+  bağlantıyı kapatır. Bu durumda yapılacak tek şey güncel adresi istemektir.
+
+## 3. Liste yükleniyor ama boş geliyor
+
+**İmzası:** hata yok, ilerleme çubuğu tamamlanıyor, sonra hiç kanal görünmüyor.
+
+Uygulama bir şey aldı — ama aldığı şey bir oynatma listesi değildi. En sık
+karşılaşılan iki hâli var:
+
+- **Sunucu, liste yerine bir hata sayfası döndürdü.** Bağlantı çalışıyor gibi
+  görünür çünkü teknik olarak bir cevap geldi; içindeki metin ise bir uyarı
+  sayfasıdır. Bağlantıyı tarayıcıda açıp ilk satırında `#EXTM3U` yazıp yazmadığına
+  bakmak bunu saniyeler içinde ayırt eder.
+- **Abonelik bitmiş ve panel boş liste veriyor.** Bazı paneller süresi dolmuş
+  hesaplara hata değil, sıfır kanallı geçerli bir liste gönderir. Görüntü aynı
+  olduğu için ilk maddeyle karıştırılır.
+
+## 4. Güvenli bağlantı kurulamıyor
+
+**İmzası:** yalnızca `https` adreslerde olur; `http` olanlar sorunsuz çalışır.
+
+Bu ihtimal akla en son gelir ama düzeltmesi en kolay olanıdır: **cihazın saati
+yanlış.** Şifreli bir bağlantı kurulurken sertifikanın geçerlilik aralığı
+kontrol edilir ve bu kontrol cihazın kendi saatine güvenir. Saat günlerce ileri
+ya da geri kaymışsa, sertifika geçersiz sayılır ve bağlantı hiçbir açıklama
+olmadan reddedilir.
+
+Tarih ve saati otomatik ayara alın, sonra listeyi tekrar deneyin.
+
+## 5. Liste açılıyor, kanallar açılmıyor
+
+**İmzası:** kanal adları, kategoriler, logolar — hepsi yerinde. Ama hiçbiri
+oynamıyor.
+
+Bu artık bir liste sorunu değil. Oynatma listesi yalnızca adlardan ve
+adreslerden oluşan bir metindir;
+[oynatıcının görevi](/tr/blog/iptv-oynatici-ne-yapar/) o adrese bağlanmaktır.
+Adları okuyabiliyorsanız liste doğru gelmiş demektir — çalışmayan şey
+adreslerin karşı ucudur.
+
+İki üç farklı kanal deneyin. **Hepsi** başarısız oluyorsa hesap ya da ağ
+düzeyinde bir engel vardır. **Tek bir kanal** açılmıyorsa o yayın sağlayıcıda
+kapalıdır ve uygulamanın yapabileceği bir şey yoktur. Açılıyor ama sürekli
+kesiliyorsa sorun bambaşkadır ve
+[yolun kendisiyle ilgilidir](/tr/blog/iptv-donma-sorunu-cozumu/).
+
+## Hangisi olduğunu ayırt etmenin kısa yolu
+
+Sırayla üç soru, üç dakikada sonuç:
+
+1. **Hata hemen mi geldi, beklettikten sonra mı?** Hemen geldiyse 1'inci madde,
+   beklettiyse 2'nci madde.
+2. **Mobil veride de aynı mı oluyor?** Değişiyorsa arıza ağda.
+3. **Ana ekranda aşağı çekip yenilediğinizde ne oluyor?** Uygulama listeyi
+   önbellekten değil kaynağından yeniden okur; sağlayıcı tarafında bir şey
+   düzeldiyse ilk burada görürsünüz.
+
+Bunlardan sonra hâlâ takılıysanız, listeyi silip
+[baştan kurmadan](/tr/blog/ilk-oynatma-listesi-kurulumu/) önce sağlayıcınıza
+yazın. Yukarıdaki beş arızanın dördü sizin tarafınızda çözülemez ve doğru
+soruyu sormak, tüm kurulumu tekrarlamaktan hızlıdır.

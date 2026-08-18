@@ -1,0 +1,109 @@
+---
+title: "Why your channel names arrive as strange symbols"
+description: "The video plays fine and only the list is unreadable. That is not a quality problem — it is a plain-text file whose character encoding nobody declared."
+urlSlug: why-channel-names-look-garbled
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ["playlists", "troubleshooting"]
+keywords: ["iptv channel names garbled", "m3u file encoding", "playlist shows question marks", "m3u8 utf-8 encoding"]
+heroImageAlt: "The same channel list twice, once with names collapsed into meaningless symbols and once rendered correctly."
+---
+
+The playlist loads. The channels play. And yet the list itself reads like
+`Ã‡Ã¶zÃ¼m` or `譁ｹ豕輔ユ` or a long run of question marks, and you cannot tell
+which line is which station.
+
+Nothing is wrong with the streams. What is broken is the **text**, and text is
+much easier to fix than video.
+
+## A playlist is only text
+
+An M3U playlist is a plain-text index of names and addresses. Everything
+[a player does with it](/blog/what-an-iptv-player-does/) is read those lines,
+build a list, and connect to the address on the line you picked.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kanal Bir",Kanal Bir
+http://example.com/live/one.ts
+```
+
+Here is the part that catches everybody out: **a text file does not, by itself,
+say which character encoding it was written in.** What the file contains is a
+sequence of bytes. Which table of characters those bytes should be read back
+through is a decision the reader has to make. Pick the wrong table and the same
+bytes turn into different letters. That is the whole of it.
+
+## Which table the player uses
+
+Vidonzo reads playlists as **UTF-8** — today's default for text in every
+language, and precisely what the `.m3u8` extension
+[exists to declare](/blog/m3u-vs-m3u8/).
+
+How that plays out depends on how you handed the list over:
+
+- **A playlist URL.** The server declares the encoding of the body it sends
+  back. When the declaration is right, nothing goes wrong. Mangled names mean
+  the declaration was missing, or disagreed with the actual bytes.
+- **A file on the device.** There is nobody to declare anything, so it is read
+  as UTF-8. A file saved in an older regional encoding may not just look wrong —
+  it may refuse to load at all.
+
+Vidonzo does not try to guess the encoding, and that is deliberate. Detection is
+guesswork; it fails most often on exactly the non-Latin alphabets that need it
+most, and it fails in the worst possible way — **correct for part of the list
+and wrong for the rest**. A half-right channel list is more confusing than an
+obviously broken one.
+
+## Reading the symptom
+
+The way text breaks is characteristic, so the symptom names the cause.
+
+- **`Ã©`, `Ã¼`, `Ã§` where accents belong** — UTF-8 bytes read through a
+  Western-European table. The classic, and the most common in Turkish, French,
+  Polish and Vietnamese lists.
+- **Long runs of unrelated symbols** — UTF-8 bytes read through a regional
+  table that has nothing to do with the text: Japanese, Cyrillic and Greek names
+  collapse this way.
+- **`????` or `___`** — the characters were thrown away during a conversion
+  somewhere upstream. Nothing downstream can bring them back; the list has to be
+  fetched again.
+- **Rows of empty boxes** — this is **not** an encoding problem.
+
+That last one is worth separating out. Empty boxes mean the characters decoded
+perfectly and the device simply has no font that can draw them. Different cause,
+different fix — that one belongs to
+[the display side](/blog/watch-in-your-language/).
+
+## The order worth trying
+
+1. **Ask for the `.m3u8` link.** If your provider publishes both, take that one.
+   The channels behind it are identical; only the handling of text changes. It
+   is the cheapest fix and it works most of the time.
+2. **Re-read the playlist.** Pull down to refresh on the home screen so the app
+   fetches the source again instead of showing the cached catalogue. After
+   swapping a link, skipping this step leaves the old list in place.
+3. **Re-save a local file as UTF-8.** Open it in a text editor, set the encoding
+   to UTF-8, save, and
+   [add it again](/blog/set-up-your-first-playlist/). If the names come back,
+   the diagnosis is confirmed.
+4. **Switch to the Xtream connection.** Where a provider issues a username and
+   password as well,
+   [that route](/blog/xtream-codes-vs-m3u/) delivers the catalogue through an
+   API rather than a text file, so the question of file encoding never comes up.
+
+## When only some names are broken
+
+If a handful of channels stay mangled after all of that, the encoding is no
+longer the problem — the provider typed those entries that way at the source.
+No player can recover text that was already wrong when it was written.
+
+In that case, stop trying to read them and
+[put the ones you watch into favourites](/blog/organize-large-playlists/)
+instead. You do not need a name to be legible to remember where it lives.
+
+---
+
+Garbled names are not a player fault. They are an old, ordinary hazard of moving
+plain text between systems that disagree about alphabets. Choose `.m3u8`, keep
+files in UTF-8, and your channel list stays readable in any language.

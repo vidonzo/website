@@ -1,0 +1,102 @@
+---
+title: "A playlist at a URL versus a file on your device: which one stays current"
+description: "They look identical once loaded, and they are not the same thing at all. One asks again every time; the other is frozen at the moment you received it."
+urlSlug: playlist-url-vs-local-file
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ["playlists", "setup"]
+keywords: ["m3u url auto update", "iptv playlist not updating", "m3u link vs m3u file", "keep iptv playlist current"]
+heroImageAlt: "Two playlist entry fields side by side, one holding a web address and one holding the name of a file on the device."
+---
+
+There are three ways to give Vidonzo a playlist: Xtream Codes credentials, an
+M3U link, or an M3U file already on your device.
+
+The last two look almost the same once they have loaded. Same channels, same
+categories, same playback. But they differ on one point that decides a great
+deal afterwards: **whether the list can ever change on its own.**
+
+## A file is a snapshot
+
+When you pick a file from the device, what Vidonzo reads is that one piece of
+text. [The contents of a playlist](/blog/inside-an-m3u-file/) are names and
+addresses and nothing else — there is no live connection to your provider
+anywhere in it.
+
+So a file is frozen at the moment you received it:
+
+- Channels the provider adds later are not in it.
+- Channels whose addresses the provider changes simply stop opening.
+- Categories reorganised at the source stay in their old shape on your device.
+
+There is exactly one way to move it forward: obtain a newer file and replace the
+old one yourself.
+
+## A URL is a question, asked again each time
+
+Register an M3U link and what Vidonzo stores is not the channel list — it is the
+**address**. Each fetch returns whatever is there at that moment.
+
+- The first load reads the whole catalogue and assembles logos and categories.
+  This is the slow part, once.
+- Every load after that opens instantly from the saved catalogue while a refresh
+  runs behind it.
+- Pulling down on the home screen re-reads the source instead of the cache. Any
+  change made at the provider's end shows up there first.
+
+Xtream panels sometimes hand out a `get.php` link in a reduced form that carries
+no logos or groups. Vidonzo quietly reads the fuller variant instead, so you do
+not have to edit the link yourself to get artwork.
+
+## Do not confuse the URL with the freshness
+
+This is the part people get wrong. Registering a URL does not guarantee that
+anything updates. **The freshness comes from the far end of the link.**
+
+A URL pointing at a file that nobody maintains is exactly as stale as a file
+sitting on your device. What the URL buys you is the *possibility* of change
+arriving — it does not produce the change.
+
+If you want a source that genuinely keeps moving, the
+[Xtream connection](/blog/xtream-codes-vs-m3u/) is the better fit. It delivers
+the catalogue through an API rather than as a flat file, so categories, series
+and the programme guide arrive already structured.
+
+## Choosing between them
+
+**A URL suits you when:**
+
+- Your provider adds and removes channels and you want to follow along.
+- The header carries a `url-tvg` address, so
+  [the programme guide travels with the list](/blog/epg-explained/).
+- You use the same list on several devices. Change it in one place and they all
+  agree.
+
+**A file suits you when:**
+
+- You want to edit the list. It is text on your device — delete rows, reorder
+  them, rename things.
+- You want nothing sent to the network. In this mode the list never leaves the
+  device.
+- Your provider only ever gave you a file. Then just use it.
+- You are [repairing mangled channel
+  names](/blog/why-channel-names-look-garbled/). Being able to open it and save
+  it back as UTF-8 is something only a local file allows.
+
+## Treat the URL as a password
+
+One last thing. An M3U link usually has the credentials baked into the address
+itself. **Anyone holding that link holds your subscription.**
+
+That is why it is not something to share, and why there is
+[a standard for how it should be
+stored](/blog/why-a-player-should-encrypt-your-credentials/). Pasting it into a
+chat, posting it on a forum, leaving it visible in a screenshot — each of those
+is handing over a password.
+
+---
+
+So the choice is not about which option is more capable. **Take the URL if you
+want changes to reach you; take the file if you want the list to stay entirely
+in your hands.** [Setup](/blog/set-up-your-first-playlist/) offers both, and
+nothing stops you keeping one of each side by side.

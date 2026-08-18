@@ -1,0 +1,124 @@
+---
+title: "Inside an M3U file: what every line actually says"
+description: "Open one in a text editor and it stops being mysterious. Four kinds of line, a handful of attributes, and every one of them explains something you have seen in a player."
+urlSlug: inside-an-m3u-file
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["playlists", "engineering"]
+keywords: ["what is an m3u file", "m3u file format", "extinf explained", "m3u tvg-id group-title"]
+heroImageAlt: "A few lines of M3U playlist text with the header, the description line and the stream address picked out."
+---
+
+An M3U file has a reputation for being technical, which it does not deserve. It
+is one of the simplest formats still in daily use: a list of names, a list of
+addresses, and a few optional notes. You can read one in a text editor, and once
+you have, a lot of player behaviour stops looking arbitrary.
+
+Here is a complete, working playlist. Two channels, nothing omitted.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="News",Channel One
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Sport",Channel Two
+http://example.com/live/two.ts
+```
+
+That is the entire format. Everything below is a tour of those five lines.
+
+## The header
+
+```
+#EXTM3U
+```
+
+The first line must be exactly this, and its only job is to say "what follows is
+an extended M3U". A file missing it may still load, but a player has no reason to
+expect the description lines that come next.
+
+The header is also where a playlist can point at its own programme guide:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (or `x-tvg-url`, which means the same thing) names an XMLTV file —
+[a separate document on its own schedule](/blog/epg-explained/) that supplies
+what is on now and next. When a playlist carries this and the guide still does
+not appear, you at least know which of the two files to blame.
+
+## The description line
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="News",Channel One
+```
+
+`#EXTINF` introduces one entry. Read it in three pieces.
+
+**The number.** Straight after the colon comes a duration in seconds. For live
+television it is `-1`, meaning "no fixed length" — the stream simply continues.
+For a film you may see a real number instead.
+
+**The attributes.** Optional `key="value"` pairs. The ones that matter:
+
+- **`tvg-id`** — the identifier that joins this channel to a programme in the
+  XMLTV guide. This is the single most common reason a guide loads but shows
+  nothing: the playlist and the guide disagree about the id, so nothing matches.
+- **`tvg-name`** — the channel's name for guide-matching purposes, which is not
+  always the name shown on screen.
+- **`tvg-logo`** — a URL to the channel's logo. Those are pictures fetched over
+  the network, one per channel, which is why a large list takes a moment to look
+  finished the first time.
+- **`group-title`** — the category the channel is filed under. Every category
+  heading you scroll past in a player was typed here, by your provider, one
+  channel at a time. It is also why
+  [categories are worth taming yourself](/blog/organize-large-playlists/).
+
+**The display name.** After the comma, everything to the end of the line is the
+name you actually see. It is plain text with no quotes, so a comma inside a
+channel name is a genuine hazard of the format.
+
+## The address
+
+```
+http://example.com/live/one.ts
+```
+
+The line straight after `#EXTINF` is where the video lives. It is the only line
+in the file that touches a network at playback time, and it decides
+[how the stream behaves](/blog/streaming-protocols-explained/) — a `.m3u8`
+address is an HLS stream delivered in segments, a `.ts` address is a continuous
+transport stream.
+
+Two useful consequences. First, an entry with a description line and no address
+is invisible, because there is nothing to play. Second, a playlist that loads
+perfectly while every channel fails is a playlist whose names are fine and whose
+addresses are dead — a problem
+[at the provider, not the player](/blog/what-an-iptv-player-does/).
+
+## What is not in there
+
+Just as instructive is what the format cannot hold:
+
+- **No video.** A playlist of forty thousand channels is a few megabytes of
+  text. Not one frame of it is picture.
+- **No login.** Where credentials are needed they are usually baked into the
+  addresses themselves, which is why a playlist link should be treated as a
+  password.
+- **No live connection.** The file is a snapshot of what existed when you fetched
+  it. Channels added afterwards are not in it, which is the real difference from
+  [the Xtream Codes API](/blog/xtream-codes-vs-m3u/) and the reason
+  [where the list lives matters](/blog/playlist-url-vs-local-file/).
+- **No declared alphabet.** Nothing in the format states its own character
+  encoding, which is exactly why
+  [channel names sometimes arrive as symbols](/blog/why-channel-names-look-garbled/).
+
+## Reading your own
+
+If a list is behaving strangely, open it and look. A missing `#EXTM3U`, an empty
+`group-title` on every line, `tvg-id` absent throughout, a name with a stray
+comma in it — each has a distinct signature in the player, and each is visible in
+about ten seconds of reading.
+
+The format is small enough to hold in your head. That is unusual, and worth
+taking advantage of.
