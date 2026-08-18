@@ -102,6 +102,20 @@
         "ko": "와이파이에서-iptv-끊길-때"
       }
     },
+    "garbled-channel-names": {
+      "sourceLocale": "ja",
+      "locales": {
+        "en": "why-channel-names-look-garbled",
+        "ja": "チャンネル名-が-文字化け-する-理由"
+      }
+    },
+    "hosted-playlist-vs-local-file": {
+      "sourceLocale": "ja",
+      "locales": {
+        "en": "playlist-url-vs-local-file",
+        "ja": "url-の-プレイリスト-と-端末内-の-ファイル"
+      }
+    },
     "how-vidonzo-encrypts-your-playlists": {
       "sourceLocale": "en",
       "locales": {
@@ -125,6 +139,12 @@
         "ur": "پلے-لسٹ-تفصیلات-کی-انکرپشن",
         "ja": "認証情報-を-暗号化-すべき-理由",
         "ko": "인증-정보를-암호화해야-하는-이유"
+      }
+    },
+    "inside-an-m3u-file": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "inside-an-m3u-file"
       }
     },
     "iptv-on-a-tablet": {
@@ -327,6 +347,13 @@
         "ko": "자녀-보호-기능과-안전한-시청"
       }
     },
+    "playlist-link-wont-load": {
+      "sourceLocale": "tr",
+      "locales": {
+        "en": "playlist-link-wont-load",
+        "tr": "oynatma-listesi-baglantisi-acilmiyor"
+      }
+    },
     "set-up-your-first-playlist": {
       "sourceLocale": "en",
       "locales": {
@@ -425,6 +452,13 @@
         "ur": "اپنی-زبان-میں-دیکھنا",
         "ja": "自分の言語-で-見る-ための-条件",
         "ko": "내-언어로-제대로-보기"
+      }
+    },
+    "watching-on-mobile-data": {
+      "sourceLocale": "id",
+      "locales": {
+        "en": "watching-on-mobile-data",
+        "id": "nonton-iptv-pakai-kuota"
       }
     },
     "what-an-iptv-player-does": {
