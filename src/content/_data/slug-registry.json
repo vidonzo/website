@@ -377,6 +377,31 @@
         "ko": "android-tv-에서-iptv-보기"
       }
     },
+    "iptv-player-on-fire-tv-stick": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "iptv-player-on-fire-tv-stick",
+        "fa": "iptv-روی-fire-tv-stick",
+        "ar": "مشغل-iptv-على-fire-tv-stick",
+        "es": "reproductor-iptv-en-fire-tv-stick",
+        "tr": "fire-tv-stick-iptv-oynatici",
+        "fr": "lecteur-iptv-sur-fire-tv-stick",
+        "de": "iptv-player-auf-dem-fire-tv-stick",
+        "pt": "player-de-iptv-no-fire-tv-stick",
+        "ru": "iptv-плеер-на-fire-tv-stick",
+        "id": "pemutar-iptv-di-fire-tv-stick",
+        "it": "lettore-iptv-su-fire-tv-stick",
+        "vi": "trinh-phat-iptv-tren-fire-tv-stick",
+        "pl": "odtwarzacz-iptv-na-fire-tv-stick",
+        "nl": "iptv-speler-op-een-fire-tv-stick",
+        "hi": "fire-tv-stick-पर-iptv-प्लेयर",
+        "bn": "fire-tv-stick-এ-iptv-প্লেয়ার",
+        "th": "เครื่องเล่น-iptv-บน-fire-tv-stick",
+        "ur": "fire-tv-stick-پر-iptv-پلیئر",
+        "ja": "fire-tv-stick-の-iptv-プレイヤー",
+        "ko": "fire-tv-stick-에서-iptv-보기"
+      }
+    },
     "iptv-player-vs-streaming-apps": {
       "sourceLocale": "en",
       "locales": {

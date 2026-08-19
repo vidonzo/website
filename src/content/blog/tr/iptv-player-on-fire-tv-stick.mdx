@@ -1,0 +1,101 @@
+---
+title: "Fire TV Stick'e gerçek bir IPTV oynatıcı kurmak"
+description: "Fire TV Stick, önüne başka bir mağaza konmuş bir Android cihazdır. Düzgün bir IPTV oynatıcının orada çalışmasının da, kurulumun bir adım fazla olmasının da sebebi tam olarak budur."
+urlSlug: fire-tv-stick-iptv-oynatici
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televizyon', 'kurulum']
+keywords: ['fire tv stick iptv oynatıcı', 'firestick iptv', 'fire tv iptv uygulaması', 'fire tv apk yükleme']
+heroImageAlt: "Televizyonun arkasına takılmış bir yayın çubuğu; kısa HDMI kablosu bir kavis çizerek porta giriyor."
+---
+
+Fire TV Stick, bir televizyonun arkasındaki en yaygın donanım parçası olsa
+gerek ve kendi uygulama mağazası iyi IPTV oynatıcıların yaşadığı yer değil. Bu
+donanımın bir kısıtı değil. Arayüzün altında Fire TV Stick bir Android cihaz —
+Amazon'un kendi sürümü, Google Play'in olacağı yerde Amazon'un mağazasıyla.
+Android uygulamaları orada çalışır; gerçek bir televizyon arayüzü olan gerçek
+bir IPTV oynatıcı da dahil. Bunun pratikte ne anlama geldiği ve karşılığında
+ödenen o tek fazladan adım şöyle.
+
+## Stick'in rafı neden bu kadar kısa
+
+Amazon kendi mağazasındaki uygulamaları inceliyor ve yanında hiçbir içerik
+getirmeyen bir oynatıcı orada tuhaf bir kategoriye düşüyor: siz bir oynatma
+listesi vermeden hiçbir şey yapmıyor ve inceleyen kişi sizin ne vereceğinizi
+göremiyor. Raf da kısa kalıyor. Rafta *duranlar* ise çoğunlukla ya platformun
+hazır oynatıcısının menüye sarılmış hali ya da sessizce bir katalog taşıyan
+uygulamalar — yani tam da
+[bir oynatıcının yapmaması gereken şey](/tr/blog/kendi-listenizi-getirin/).
+
+Bunların hiçbiri Stick'in neyi çalıştırabildiğini değiştirmez. Yalnızca
+uygulamanın oraya nasıl gittiğini değiştirir.
+
+## Sideload, bir kez ve doğru dürüst
+
+"Sideload", bir Android uygulamasını mağaza yerine paket dosyasından — bir
+APK'den — kurmanın sıradan adıdır. Fire TV Stick'te üç adımdır ve bir kez
+yapılır:
+
+1. **İzin verin.** Stick'in ayarlarında *Fire TV'm → Geliştirici seçenekleri*
+   altından bilinmeyen kaynaklardan uygulama yüklemeyi açın. Yeni
+   yazılımlarda Amazon, *Hakkında* bölümünde cihaz adına birkaç kez
+   dokunulana dek *Geliştirici seçenekleri*'ni gizler; bu kasıtlı bir
+   sürtünmedir, arıza değil.
+2. **Dosyayı Stick'e getirin.** Stick'te yazı yazmaktan keyif alacağınız bir
+   tarayıcı yok, o yüzden insanlar Amazon'un kendi mağazasındaki, tek işi
+   yazdığınız adresten bir dosya çekmek olan küçük bir araç kullanıyor.
+   [İndirme sayfasındaki](/tr/download/) Android TV APK adresini yazın; dosya
+   Stick'e iner.
+3. **Kurun.** Araç paketi açmayı önerir; kurulumu onaylayın. Fire OS bu yolla
+   kurulan uygulamayı ana satır yerine uygulama listesinin sonuna koyar; yani
+   Vidonzo beklediğiniz yerde değilse bakılacak yer orasıdır ve oradan öne
+   taşıyabilirsiniz.
+
+Aynı üç adım, genel Android TV durumu için daha ayrıntılı biçimde
+[TV kurulum kılavuzunda](/tr/help/) anlatılıyor; Fire TV farkı yalnızca ayarın
+nerede durduğunda.
+
+İki dürüst uyarı. APK çalıştırılabilir koddur ve platform onu sizin adınıza
+denetlemiyor; dolayısıyla dosyayı yalnızca
+[indirme sayfasının](/tr/download/) verdiği adresten alın — asla bir forumdan,
+bir mesajdan ya da bir "depo"dan değil. Ve bu yolla kurulan bir uygulama
+kendini güncellemez; yeni bir sürüm çıktığında onu eskisinin üzerine kurarsınız
+ve her şey korunur.
+
+## Elinize geçen şey: bir televizyon sürümü, telefon uygulaması değil
+
+Vidonzo'nun Android TV sürümü
+[üç metre uzaklığa göre tasarlandı](/tr/blog/android-tv-iptv-oynatici/):
+alttaki çubuk yerine yan bir ray, her denetimde görünür bir odak ve yön halkası
+ile orta düğme üzerinden baştan sona ulaşılabilen bir arayüz. Bunun hiçbir
+yanı Fire'a özgü değil. Fire kumandası, herhangi bir Android TV kumandasıyla
+aynı yön kodlarını gönderir; uygulama da sistemden bir leanback başlatıcı
+kaydı ister ve aynı anda dokunmatik ekrana ihtiyacı olmadığını bildirir — ne
+dokunmatik yüzeyi ne de imleci olan bir cihazda hem kurulabilir hem
+gezilebilir olmasını sağlayan tam olarak budur.
+
+Altındaki oynatıcı diğer bütün platformlardakiyle aynı: mpv motoru, donanım
+çözme ve
+[dalgalanan bir bağlantı](/tr/blog/iptv-donma-sorunu-cozumu/) için ayarlanabilir
+bir tampon. Stick'te bunun ağırlığı daha fazladır, çünkü televizyonun arkasında
+Wi-Fi'a bağlı küçük bir cihazdır ve orası
+[telsiz bağlantıların tam da huysuzlaştığı konumdur](/tr/blog/iptv-wifi-donma-sorunu/).
+
+## Zor kısımlarda kumandayı bırakın
+
+Fire kumandası kanal değiştirmek için iyidir, bir Xtream parolası yazmak
+içinse umutsuzdur. Yazmayın. Aynı Wi-Fi'daki herhangi bir telefon veya tablet
+[Stick'in kumandası olabilir](/tr/blog/telefonu-tv-kumandasina-donusturun/):
+telefon televizyonu kendiliğinden bulur, siz televizyonun kitaplığında
+gezinir, gerçek bir klavyeyle arar ve tek dokunuşla büyük ekranda oynatmayı
+başlatırsınız. Oynatma listesini telefonda kurar, görüntüyü Stick'ten
+izlersiniz. Çoğu ev ilk akşamdan sonra bu düzene yerleşiyor.
+
+## İşlerin sırası
+
+Önce uygulamayı Stick'e kurun ki ağda görünür olsun. Sonra
+[oynatma listenizi ekleyin](/tr/blog/ilk-oynatma-listesi-kurulumu/) — yakında
+bir telefon varsa telefondan, mecbursanız kumandadan. Rehberi açın, bir kanal
+seçin ve görüntü takılıyorsa tamponu ayarlayın. Bu noktadan sonra Stick,
+üzerinde iyi bir oynatıcı bulunan bir ekrandan ibarettir; zaten olması gereken
+de hep buydu.

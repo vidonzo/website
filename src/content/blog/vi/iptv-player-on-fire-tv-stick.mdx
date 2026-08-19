@@ -1,0 +1,99 @@
+---
+title: "Đưa một trình phát IPTV thực thụ lên Fire TV Stick"
+description: "Fire TV Stick là một thiết bị Android với cửa hàng khác đặt phía trước. Chính vì thế một trình phát IPTV tử tế chạy được trên đó, và cũng chính vì thế việc cài đặt có thêm một bước."
+urlSlug: trinh-phat-iptv-tren-fire-tv-stick
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['truyền hình', 'cài đặt']
+keywords: ['trình phát iptv fire tv stick', 'iptv trên firestick', 'ứng dụng iptv cho fire tv', 'cài apk trên fire tv']
+heroImageAlt: "Một chiếc stick phát trực tuyến cắm phía sau tivi, sợi cáp HDMI ngắn uốn cong vào cổng."
+---
+
+Fire TV Stick có lẽ là món phần cứng phổ biến nhất nằm sau một chiếc tivi, và
+cửa hàng ứng dụng của chính nó không phải nơi các trình phát IPTV tốt sinh
+sống. Đó không phải giới hạn của phần cứng. Bên dưới lớp giao diện, Fire TV
+Stick là một thiết bị Android — bản dựng riêng của Amazon, với cửa hàng của
+Amazon ở chỗ đáng lẽ là Google Play. Ứng dụng Android chạy được trên đó, kể cả
+một trình phát IPTV thực thụ với giao diện truyền hình thực thụ. Đây là ý nghĩa
+thực tế của điều đó, và một bước phụ mà nó đòi hỏi.
+
+## Vì sao kệ hàng của Stick lại mỏng đến vậy
+
+Amazon duyệt ứng dụng trong cửa hàng của mình, và một trình phát không mang
+theo nội dung nào rơi vào một hạng mục khó xử ở đó: nó chẳng làm gì cho tới khi
+bạn đưa cho nó một danh sách phát, còn người duyệt thì không thể thấy sau này
+bạn sẽ đưa gì. Thế nên kệ hàng cứ ngắn. Còn những thứ *có* trên kệ thường hoặc
+là trình phát mặc định của nền tảng khoác thêm cái menu, hoặc là ứng dụng lặng
+lẽ đóng gói sẵn một kho nội dung — đúng
+[điều mà một trình phát không nên làm](/vi/blog/tu-mang-danh-sach-phat/).
+
+Không điều nào trong số đó thay đổi thứ mà Stick chạy được. Nó chỉ thay đổi
+cách ứng dụng đến được với Stick.
+
+## Sideload, giải thích một lần cho xong
+
+"Sideload" là chữ bình thường để chỉ việc cài một ứng dụng Android từ tệp gói
+của nó — một APK — thay vì từ cửa hàng. Trên Fire TV Stick, việc đó gồm ba
+bước, và bạn chỉ làm một lần:
+
+1. **Cho phép.** Trong phần cài đặt của Stick, ở *Fire TV của tôi → Tùy chọn
+   nhà phát triển*, bật cài ứng dụng từ nguồn không xác định. Trên các bản phần
+   mềm mới hơn, Amazon giấu *Tùy chọn nhà phát triển* cho đến khi bạn bấm liên
+   tiếp vào tên thiết bị trong mục *Giới thiệu*; đó là ma sát cố ý, không phải
+   lỗi.
+2. **Đưa tệp lên Stick.** Stick không có trình duyệt nào dễ chịu để gõ, nên
+   người ta dùng một tiện ích nhỏ từ chính cửa hàng của Amazon, việc duy nhất
+   của nó là lấy một tệp từ địa chỉ bạn gõ vào. Hãy gõ địa chỉ tệp APK cho
+   Android TV ghi trên [trang tải về](/vi/download/); tệp sẽ nằm trên Stick.
+3. **Cài đặt.** Tiện ích sẽ đề nghị mở gói cài; hãy xác nhận. Fire OS xếp một
+   ứng dụng cài theo kiểu này ở cuối danh sách ứng dụng chứ không phải hàng
+   ngoài màn hình chính — nên nếu Vidonzo không nằm ở chỗ bạn tưởng, hãy tìm ở
+   đó, và từ đó bạn có thể kéo nó lên đầu.
+
+Ba bước ấy được mô tả kỹ hơn, cho trường hợp Android TV nói chung, trong
+[hướng dẫn cài đặt trên tivi](/vi/help/); biến thể Fire TV chỉ khác ở chỗ đặt
+tùy chọn.
+
+Hai lời nhắc thẳng thắn. APK là mã có thể chạy được và nền tảng không kiểm tra
+giúp bạn, vậy nên chỉ lấy tệp từ địa chỉ mà [trang tải về](/vi/download/) đưa
+ra — đừng bao giờ lấy từ một diễn đàn, một tin nhắn hay một "kho". Và ứng dụng
+cài theo kiểu này không tự cập nhật; khi có bản mới, bạn cài đè lên bản cũ và
+mọi thứ được giữ nguyên.
+
+## Thứ bạn nhận được: một bản dựng cho tivi, không phải ứng dụng điện thoại
+
+Bản Android TV của Vidonzo
+[được thiết kế cho khoảng cách ba mét](/vi/blog/trinh-phat-iptv-tren-android-tv/):
+một thanh dọc bên cạnh thay cho thanh dưới đáy, tiêu điểm hiện rõ trên mọi nút,
+và toàn bộ giao diện đều với tới được bằng vòng điều hướng và nút giữa. Chẳng
+có gì trong đó là riêng của Fire. Điều khiển Fire gửi đúng những mã hướng mà
+mọi điều khiển Android TV khác vẫn gửi, còn ứng dụng thì xin hệ thống một mục
+khởi chạy leanback đồng thời khai báo rằng nó không cần màn hình cảm ứng — đó
+chính là thứ khiến nó vừa cài được vừa dùng được trên một thiết bị không có cảm
+ứng lẫn con trỏ.
+
+Trình phát bên dưới vẫn là trình phát trên mọi nền tảng khác — lõi mpv, giải mã
+bằng phần cứng, một bộ đệm điều chỉnh được cho
+[đường truyền chập chờn](/vi/blog/khac-phuc-iptv-giat-lag/). Trên một chiếc
+Stick, điều đó càng đáng kể, vì nó là thiết bị nhỏ chạy Wi-Fi nằm sau lưng
+tivi, và đó
+[đúng là vị trí mà sóng vô tuyến hay giở chứng](/vi/blog/iptv-dung-hinh-tren-wifi/).
+
+## Bỏ điều khiển xuống ở những đoạn khó
+
+Điều khiển Fire ổn cho việc chuyển kênh và vô vọng cho việc gõ mật khẩu Xtream.
+Đừng gõ. Bất kỳ điện thoại hay máy tính bảng nào trong cùng Wi-Fi đều có thể
+[làm điều khiển cho Stick](/vi/blog/dien-thoai-lam-dieu-khien-tv/): điện
+thoại tự tìm ra tivi, bạn duyệt thư viện của tivi, tìm kiếm bằng bàn phím thật
+và chạm một cái là phát trên màn hình lớn. Danh sách phát thì bạn thiết lập
+trên điện thoại; Stick lo phần hình ảnh. Đó là cách bố trí mà phần lớn gia đình
+tự khắc chọn sau buổi tối đầu tiên.
+
+## Thứ tự các việc
+
+Cài ứng dụng lên Stick trước, để nó hiện diện trên mạng. Sau đó
+[thêm danh sách phát](/vi/blog/cai-dat-danh-sach-phat-dau-tien/) — từ điện thoại
+nếu có sẵn một chiếc gần đó, từ điều khiển nếu buộc phải thế. Mở lịch phát,
+chọn một kênh, và chỉnh bộ đệm nếu hình bị khựng. Từ lúc đó trở đi, Stick chỉ
+còn là một màn hình có sẵn trình phát tốt, mà nó thì chưa bao giờ cần là gì hơn
+thế.
