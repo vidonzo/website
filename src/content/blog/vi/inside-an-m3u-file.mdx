@@ -1,0 +1,125 @@
+---
+title: "Bên trong một tệp M3U: mỗi dòng thực sự nói gì"
+description: "Mở nó một lần bằng trình soạn thảo văn bản là hết bí ẩn. Bốn loại dòng, dăm ba thuộc tính, và mỗi cái đều giải thích một điều bạn từng thấy trong trình phát."
+urlSlug: ben-trong-tep-m3u
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['danh sách phát', 'kỹ thuật']
+keywords: ['tệp m3u là gì', 'định dạng tệp m3u', 'extinf nghĩa là gì', 'm3u tvg-id group-title']
+heroImageAlt: "Vài dòng văn bản của một danh sách phát M3U, với dòng tiêu đề, dòng mô tả và địa chỉ luồng được đánh dấu."
+---
+
+Tệp M3U mang tiếng là thứ kỹ thuật, và nó không đáng bị vậy. Đây là một trong
+những định dạng đơn giản nhất vẫn còn dùng hằng ngày: một danh sách tên, một
+danh sách địa chỉ, và vài ghi chú tùy chọn. Bạn đọc được nó bằng trình soạn thảo
+văn bản, và ngay khi đọc xong, phần lớn hành vi của trình phát thôi có vẻ tùy
+tiện.
+
+Dưới đây là một danh sách phát hoàn chỉnh và chạy được. Hai kênh, không lược bỏ
+gì.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Thời sự",Kênh Một
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Thể thao",Kênh Hai
+http://example.com/live/two.ts
+```
+
+Toàn bộ định dạng chỉ có vậy. Phần còn lại là một vòng dạo qua năm dòng ấy.
+
+## Dòng tiêu đề
+
+```
+#EXTM3U
+```
+
+Dòng đầu tiên phải đúng y như thế, và nhiệm vụ duy nhất của nó là tuyên bố "sau
+đây là một M3U mở rộng". Tệp thiếu dòng này vẫn có thể nạp được, nhưng trình
+phát chẳng có lý do gì để trông đợi những dòng mô tả đến sau đó.
+
+Dòng tiêu đề cũng là nơi một danh sách phát có thể trỏ tới lịch phát sóng của
+chính nó:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (hoặc `x-tvg-url`, cùng nghĩa) gọi tên một tệp XMLTV —
+[một tài liệu riêng, có lịch riêng](/vi/blog/epg-la-gi-lich-phat-song/) — cung cấp thông tin đang
+phát gì và tiếp theo là gì. Khi danh sách phát mang sẵn thứ này mà lịch vẫn
+không hiện ra, ít nhất bạn biết nên trách tệp nào trong hai tệp.
+
+## Dòng mô tả
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Thời sự",Kênh Một
+```
+
+`#EXTINF` mở đầu một mục. Hãy đọc nó theo ba phần.
+
+**Con số.** Ngay sau dấu hai chấm là thời lượng tính bằng giây. Với truyền hình
+trực tiếp, nó là `-1`, nghĩa là "không có độ dài cố định" — luồng cứ tiếp diễn.
+Với một bộ phim, bạn có thể thấy một con số thật.
+
+**Các thuộc tính.** Những cặp `khóa="giá trị"` tùy chọn. Những cái đáng kể:
+
+- **`tvg-id`** — mã định danh nối kênh này với một chương trình trong lịch
+  XMLTV. Đây là nguyên nhân phổ biến nhất khiến lịch nạp được mà chẳng hiện gì:
+  danh sách phát và lịch bất đồng về mã định danh, nên không có gì khớp cả.
+- **`tvg-name`** — tên kênh dùng cho việc ghép với lịch, không phải lúc nào cũng
+  là tên hiển thị trên màn hình.
+- **`tvg-logo`** — địa chỉ logo của kênh. Đó là những tấm ảnh tải qua mạng, mỗi
+  kênh một tấm, và đấy là lý do một danh sách lớn cần một lúc mới trông hoàn
+  chỉnh trong lần đầu.
+- **`group-title`** — nhóm mà kênh được xếp vào. Mọi tiêu đề nhóm bạn lướt qua
+  trong trình phát đều được gõ ở đây, bởi nhà cung cấp của bạn, từng kênh một.
+  Đó cũng là lý do
+  [tự tay thu xếp các nhóm là việc đáng làm](/vi/blog/sap-xep-danh-sach-phat-lon/).
+
+**Tên hiển thị.** Sau dấu phẩy, tất cả những gì kéo tới hết dòng chính là cái
+tên bạn thực sự nhìn thấy. Đó là văn bản thuần không dấu ngoặc kép, nên một dấu
+phẩy nằm trong tên kênh là cạm bẫy có thật của định dạng này.
+
+## Địa chỉ
+
+```
+http://example.com/live/one.ts
+```
+
+Dòng ngay sau `#EXTINF` là nơi video trú ngụ. Đó là dòng duy nhất trong tệp chạm
+tới mạng vào lúc phát, và nó quyết định
+[luồng sẽ cư xử ra sao](/vi/blog/giao-thuc-streaming-la-gi/): địa chỉ `.m3u8` là
+luồng HLS được giao theo từng đoạn, còn địa chỉ `.ts` là luồng truyền tải liên
+tục.
+
+Hai hệ quả hữu ích. Thứ nhất, một mục có dòng mô tả mà không có địa chỉ thì vô
+hình, vì chẳng có gì để phát. Thứ hai, một danh sách nạp hoàn hảo trong khi mọi
+kênh đều hỏng là danh sách có tên còn nguyên và địa chỉ đã chết — vấn đề
+[nằm ở nhà cung cấp chứ không phải trình phát](/vi/blog/trinh-phat-iptv-lam-gi/).
+
+## Những gì không có trong đó
+
+Điều định dạng này không chứa nổi cũng đáng học không kém:
+
+- **Không có video.** Một danh sách bốn vạn kênh chỉ là vài megabyte văn bản.
+  Không một khung hình nào trong đó là hình ảnh.
+- **Không có đăng nhập.** Ở đâu cần thông tin xác thực, chúng thường được nhúng
+  ngay trong chính các địa chỉ — vì thế một đường dẫn danh sách phát nên được
+  đối xử như một mật khẩu.
+- **Không có kết nối sống.** Tệp là ảnh chụp những gì tồn tại vào lúc bạn lấy
+  nó. Kênh thêm vào sau đó không có trong đấy; đó là khác biệt thật sự so với
+  [API Xtream Codes](/vi/blog/xtream-codes-hay-m3u/) và là lý do
+  [danh sách nằm ở đâu lại quan trọng](/vi/blog/lien-ket-danh-sach-phat-hay-tep-tren-may/).
+- **Không khai báo bảng chữ.** Không có gì trong định dạng nêu bảng mã của chính
+  nó, và chính vì thế đôi khi
+  [tên kênh hiện lên thành ký hiệu](/vi/blog/ten-kenh-bi-loi-font/).
+
+## Đọc danh sách của chính bạn
+
+Nếu một danh sách cư xử lạ, hãy mở ra và nhìn. Thiếu `#EXTM3U`, `group-title`
+rỗng ở mọi dòng, `tvg-id` vắng mặt khắp tệp, một cái tên lạc mất dấu phẩy — mỗi
+thứ để lại một dấu vết riêng trong trình phát, và mỗi thứ đều lộ ra sau chừng
+mười giây đọc.
+
+Định dạng này đủ nhỏ để giữ trọn trong đầu. Đó là chuyện hiếm, và đáng tận dụng.

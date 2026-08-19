@@ -1,0 +1,108 @@
+---
+title: "Por que os nomes dos seus canais chegam como símbolos estranhos"
+description: "O vídeo roda perfeitamente e só a lista está ilegível. Não é problema de qualidade: é um arquivo de texto cuja codificação ninguém declarou."
+urlSlug: nomes-de-canais-ilegiveis
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['listas', 'problemas']
+keywords: ['nomes de canais iptv ilegiveis', 'codificacao arquivo m3u', 'lista iptv com caracteres estranhos', 'm3u8 utf-8 acentos']
+heroImageAlt: "A mesma lista de canais duas vezes, uma com os nomes reduzidos a símbolos sem sentido e outra exibida corretamente."
+---
+
+A lista carrega. Os canais tocam. E mesmo assim o que aparece é
+`CanalÃ£o Um` ou uma longa fileira de pontos de interrogação, e não há como
+saber qual linha corresponde a qual emissora.
+
+Não há nada de errado com as transmissões. O que está quebrado é o **texto** —
+e texto é bem mais fácil de consertar do que vídeo.
+
+## Uma lista é só texto
+
+Uma lista M3U é um índice em texto puro: nomes e endereços. Tudo o que
+[um player faz com ela](/pt/blog/o-que-faz-um-player-iptv/) é ler essas linhas, montar
+a lista e se conectar ao endereço da linha que você escolheu.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Canal Um",Canal Um
+http://example.com/live/one.ts
+```
+
+E aqui está a parte que pega todo mundo: **um arquivo de texto não declara
+sozinho em que codificação foi escrito.** O que ele contém é uma sequência de
+bytes. Por qual tabela de caracteres esses bytes devem ser relidos é uma decisão
+de quem lê. Escolha a tabela errada e os mesmos bytes viram outras letras. É só
+isso.
+
+## Qual tabela o player usa
+
+O Vidonzo lê listas como **UTF-8** — o padrão atual para texto em qualquer
+idioma, e exatamente o que a extensão `.m3u8`
+[existe para declarar](/pt/blog/m3u-ou-m3u8/).
+
+O desfecho depende de como você entregou a lista:
+
+- **Um link de lista.** O servidor declara junto com a resposta a codificação
+  do conteúdo que envia. Quando a declaração está certa, nada dá errado. Nomes
+  estragados significam que ela faltava ou discordava dos bytes reais.
+- **Um arquivo no aparelho.** Aqui não há ninguém para declarar nada, então ele
+  é lido como UTF-8. Um arquivo salvo em uma codificação regional antiga pode
+  não apenas aparecer errado — pode se recusar a carregar.
+
+O Vidonzo não tenta adivinhar a codificação, e isso é proposital. Detecção
+automática é palpite; ela erra justamente nos alfabetos não latinos que mais
+precisariam dela, e erra da pior maneira possível: **certa em parte da lista e
+errada no resto.** Uma lista meio certa confunde mais do que uma claramente
+quebrada.
+
+## Ler o sintoma
+
+O texto quebra de formas características, então o sintoma dá o nome da causa.
+
+- **`Ã§`, `Ã£`, `Ã©` no lugar dos acentos** — bytes UTF-8 lidos por uma tabela
+  da Europa ocidental. O clássico, e o mais comum em listas em português,
+  espanhol, francês e polonês.
+- **Fileiras de símbolos sem relação** — bytes UTF-8 lidos por uma tabela
+  regional que nada tem a ver com aquele texto.
+- **`????` ou `___`** — os caracteres foram descartados em alguma conversão
+  anterior. Nada depois disso os traz de volta; é preciso buscar a lista de
+  novo.
+- **Fileiras de quadradinhos vazios** — isso **não** é problema de codificação.
+
+Esse último merece ser separado. Quadrados vazios significam que os caracteres
+foram decodificados perfeitamente e que o aparelho simplesmente não tem uma
+fonte capaz de desenhá-los. Outra causa, outra solução — essa é assunto
+[do lado da exibição](/pt/blog/assistir-no-seu-idioma/).
+
+## A ordem que vale a pena tentar
+
+1. **Peça o link `.m3u8`.** Se o seu provedor publica os dois, fique com esse.
+   Os canais por trás são idênticos; só muda o tratamento do texto. É a solução
+   mais barata e costuma bastar.
+2. **Releia a lista.** Puxe para baixo na tela inicial para o app buscar a
+   fonte de novo em vez de mostrar o catálogo em cache. Depois de trocar um
+   link, pular esse passo deixa a lista antiga no lugar.
+3. **Salve o arquivo local de novo como UTF-8.** Abra num editor de texto,
+   ajuste a codificação para UTF-8, salve e
+   [adicione outra vez](/pt/blog/configurar-sua-primeira-lista/). Se os nomes voltarem, o
+   diagnóstico está confirmado.
+4. **Mude para a conexão Xtream.** Quando o provedor também fornece usuário e
+   senha, [esse caminho](/pt/blog/xtream-codes-ou-m3u/) entrega o catálogo por uma API
+   em vez de um arquivo de texto, e a questão da codificação nem chega a
+   aparecer.
+
+## Quando só alguns nomes estão quebrados
+
+Se depois de tudo isso um punhado de canais continuar ilegível, a codificação
+já não é o problema: o provedor digitou aquilo assim na origem. Nenhum player
+recupera um texto que já estava errado quando foi escrito.
+
+Nesse caso, pare de tentar lê-los e
+[coloque nos favoritos os que você assiste](/pt/blog/organizar-listas-grandes-de-canais/). Um
+nome não precisa ser legível para você lembrar onde ele mora.
+
+---
+
+Nomes ilegíveis não são defeito do player. São uma armadilha antiga e comum de
+mover texto entre sistemas que discordam sobre alfabetos. Escolha `.m3u8`,
+mantenha os arquivos em UTF-8, e sua lista continua legível em qualquer idioma.

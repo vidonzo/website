@@ -1,0 +1,128 @@
+---
+title: "In een M3U-bestand: wat elke regel eigenlijk zegt"
+description: "Open het één keer in een teksteditor en het houdt op mysterieus te zijn. Vier soorten regels, een handvol attributen, en elk daarvan verklaart iets dat je in de speler hebt gezien."
+urlSlug: in-een-m3u-bestand
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['afspeellijsten', 'techniek']
+keywords: ['wat is een m3u bestand', 'm3u bestandsformaat', 'extinf uitgelegd', 'm3u tvg-id group-title']
+heroImageAlt: "Enkele regels tekst uit een M3U-afspeellijst met de kopregel, de beschrijvingsregel en het streamadres uitgelicht."
+---
+
+Het M3U-bestand heeft de naam technisch te zijn, en die verdient het niet. Het is
+een van de eenvoudigste formaten die nog dagelijks in gebruik zijn: een lijst
+namen, een lijst adressen en een paar optionele aantekeningen. Je kunt het in een
+teksteditor lezen, en zodra je dat hebt gedaan, oogt veel spelersgedrag niet
+langer willekeurig.
+
+Hier is een volledige, werkende afspeellijst. Twee kanalen, niets weggelaten.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Nieuws",Kanaal Een
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Sport",Kanaal Twee
+http://example.com/live/two.ts
+```
+
+Dat is het hele formaat. Wat volgt is een rondleiding langs die vijf regels.
+
+## De kopregel
+
+```
+#EXTM3U
+```
+
+De eerste regel moet precies dit zijn, en zijn enige taak is te melden: "wat nu
+volgt is een uitgebreide M3U". Een bestand zonder die regel laadt misschien
+alsnog, maar de speler heeft geen reden de beschrijvingsregels te verwachten die
+erna komen.
+
+De kopregel is ook de plek waar een afspeellijst naar zijn eigen programmagids
+kan wijzen:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (of `x-tvg-url`, wat hetzelfde betekent) noemt een XMLTV-bestand —
+[een apart document met een eigen schema](/nl/blog/epg-uitgelegd-programmagids/) — dat levert wat er
+nu en straks te zien is. Draagt een afspeellijst dit en verschijnt de gids toch
+niet, dan weet je tenminste welk van de twee bestanden je moet aanwijzen.
+
+## De beschrijvingsregel
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Nieuws",Kanaal Een
+```
+
+`#EXTINF` introduceert één item. Lees het in drie stukken.
+
+**Het getal.** Meteen na de dubbele punt komt een duur in seconden. Bij live
+televisie is dat `-1`, oftewel "geen vaste lengte": de stream loopt gewoon door.
+Bij een film kun je er een echt getal aantreffen.
+
+**De attributen.** Optionele `sleutel="waarde"`-paren. De relevante:
+
+- **`tvg-id`** — de aanduiding die dit kanaal koppelt aan een programma in de
+  XMLTV-gids. Dit is verreweg de meest voorkomende reden dat een gids laadt en
+  niets toont: afspeellijst en gids zijn het oneens over de aanduiding, dus er
+  komt niets overeen.
+- **`tvg-name`** — de kanaalnaam voor het koppelen aan de gids, en niet altijd
+  de naam die op het scherm staat.
+- **`tvg-logo`** — het adres van het kanaallogo. Dat zijn afbeeldingen die over
+  het netwerk worden opgehaald, één per kanaal, en daarom heeft een grote lijst
+  de eerste keer even nodig om af te ogen.
+- **`group-title`** — de categorie waaronder het kanaal is opgeborgen. Elke
+  categoriekop waar je in een speler langs scrolt is hier ingetikt, door jouw
+  aanbieder, kanaal voor kanaal. Het is ook waarom
+  [het loont de categorieën zelf te temmen](/nl/blog/grote-afspeellijsten-ordenen/).
+
+**De weergavenaam.** Na de komma is alles tot het einde van de regel de naam die
+je werkelijk ziet. Het is platte tekst zonder aanhalingstekens, dus een komma
+binnen een kanaalnaam is een echt gevaar van dit formaat.
+
+## Het adres
+
+```
+http://example.com/live/one.ts
+```
+
+De regel direct na `#EXTINF` is waar de video woont. Het is de enige regel in het
+bestand die bij afspelen een netwerk aanraakt, en die bepaalt
+[hoe de stream zich gedraagt](/nl/blog/streamingprotocollen-uitgelegd/): een
+`.m3u8`-adres is een HLS-stream die in segmenten wordt geleverd, een `.ts`-adres
+een doorlopende transportstroom.
+
+Twee nuttige gevolgen. Ten eerste is een item met beschrijvingsregel en zonder
+adres onzichtbaar, want er valt niets af te spelen. Ten tweede is een
+afspeellijst die perfect laadt terwijl elk kanaal faalt een afspeellijst met
+gave namen en dode adressen — een probleem
+[bij de aanbieder, niet bij de speler](/nl/blog/wat-een-iptv-speler-doet/).
+
+## Wat er niet in staat
+
+Even leerzaam is wat het formaat niet kan bevatten:
+
+- **Geen video.** Een afspeellijst van veertigduizend kanalen is een paar
+  megabyte tekst. Geen enkel beeldje daarvan is beeld.
+- **Geen inloggegevens als apart veld.** Waar gegevens nodig zijn, zitten ze
+  meestal ingebakken in de adressen zelf — daarom hoort een afspeellijstlink als
+  een wachtwoord te worden behandeld.
+- **Geen levende verbinding.** Het bestand is een momentopname van wat er was
+  toen je het ophaalde. Later toegevoegde kanalen staan er niet in, en dat is het
+  echte verschil met [de Xtream Codes-API](/nl/blog/xtream-codes-of-m3u/) en de reden
+  dat [het uitmaakt waar de lijst woont](/nl/blog/afspeellijst-url-of-bestand-op-je-toestel/).
+- **Geen opgegeven alfabet.** Niets in het formaat vermeldt de eigen codering,
+  en precies daarom komen
+  [kanaalnamen soms als symbolen binnen](/nl/blog/kanaalnamen-vol-vreemde-tekens/).
+
+## Je eigen lijst lezen
+
+Gedraagt een lijst zich vreemd, open hem dan en kijk. Een ontbrekende `#EXTM3U`,
+een lege `group-title` op elke regel, `tvg-id` die overal ontbreekt, een naam met
+een verdwaalde komma — elk daarvan heeft een eigen signatuur in de speler, en elk
+is binnen een seconde of tien lezen te zien.
+
+Het formaat is klein genoeg om het volledig in je hoofd te houden. Dat is
+ongebruikelijk, en het is de moeite waard daar gebruik van te maken.

@@ -1,0 +1,126 @@
+---
+title: "Wewnątrz pliku M3U: co naprawdę mówi każdy wiersz"
+description: "Otwórz go raz w edytorze tekstu i przestaje być zagadką. Cztery rodzaje wierszy, garść atrybutów — i każdy z nich tłumaczy coś, co już widziałeś w odtwarzaczu."
+urlSlug: co-jest-w-pliku-m3u
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlisty', 'technikalia']
+keywords: ['co to jest plik m3u', 'format pliku m3u', 'extinf wyjaśnienie', 'm3u tvg-id group-title']
+heroImageAlt: "Kilka wierszy tekstu playlisty M3U z wyróżnionym nagłówkiem, wierszem opisu i adresem strumienia."
+---
+
+Plik M3U ma opinię technicznego, na którą zupełnie nie zasługuje. To jeden z
+najprostszych formatów wciąż używanych codziennie: lista nazw, lista adresów i
+kilka opcjonalnych adnotacji. Można go przeczytać w edytorze tekstu, a gdy się
+to zrobi, wiele zachowań odtwarzacza przestaje wyglądać na przypadkowe.
+
+Oto kompletna, działająca playlista. Dwa kanały, nic nie pominięto.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Wiadomości",Kanał Pierwszy
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Sport",Kanał Drugi
+http://example.com/live/two.ts
+```
+
+To cały format. Dalej idzie spacer po tych pięciu wierszach.
+
+## Nagłówek
+
+```
+#EXTM3U
+```
+
+Pierwszy wiersz musi wyglądać dokładnie tak, a jego jedynym zadaniem jest
+oznajmić: „to, co następuje, jest rozszerzonym M3U”. Plik bez niego może się i
+wczytać, ale odtwarzacz nie ma powodu, by spodziewać się wierszy opisu, które
+przychodzą później.
+
+Nagłówek jest też miejscem, w którym playlista może wskazać własny program
+telewizyjny:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (albo `x-tvg-url`, co znaczy to samo) nazywa plik XMLTV —
+[osobny dokument z własnym harmonogramem](/pl/blog/epg-jak-dziala-program-telewizyjny/) — dostarczający
+informacji, co leci teraz i co będzie dalej. Gdy playlista to niesie, a program
+i tak się nie pojawia, wiadomo przynajmniej, który z dwóch plików obwiniać.
+
+## Wiersz opisu
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Wiadomości",Kanał Pierwszy
+```
+
+`#EXTINF` wprowadza jedną pozycję. Czytaj go w trzech kawałkach.
+
+**Liczba.** Tuż po dwukropku idzie czas trwania w sekundach. W telewizji na żywo
+jest to `-1`, czyli „bez ustalonej długości” — transmisja po prostu trwa. Przy
+filmie można zobaczyć prawdziwą liczbę.
+
+**Atrybuty.** Opcjonalne pary `klucz="wartość"`. Te, które mają znaczenie:
+
+- **`tvg-id`** — identyfikator łączący ten kanał z audycją w programie XMLTV. To
+  zdecydowanie najczęstszy powód, dla którego program się wczytuje i niczego nie
+  pokazuje: playlista i program nie zgadzają się co do identyfikatora, więc nic
+  się nie dopasowuje.
+- **`tvg-name`** — nazwa kanału na potrzeby dopasowania do programu, nie zawsze
+  ta sama, którą widać na ekranie.
+- **`tvg-logo`** — adres logotypu kanału. To obrazy pobierane przez sieć, jeden
+  na kanał, i dlatego duża lista potrzebuje chwili, by za pierwszym razem
+  wyglądać na skończoną.
+- **`group-title`** — kategoria, pod którą kanał jest zaszufladkowany. Każdy
+  nagłówek kategorii, który przewijasz w odtwarzaczu, został wpisany tutaj przez
+  twojego dostawcę, kanał po kanale. To także powód, dla którego
+  [warto oswoić kategorie samodzielnie](/pl/blog/jak-uporzadkowac-duza-playliste/).
+
+**Nazwa wyświetlana.** Po przecinku wszystko aż do końca wiersza jest nazwą,
+którą naprawdę widzisz. To zwykły tekst bez cudzysłowów, więc przecinek wewnątrz
+nazwy kanału jest realną pułapką tego formatu.
+
+## Adres
+
+```
+http://example.com/live/one.ts
+```
+
+Wiersz zaraz po `#EXTINF` to miejsce, w którym mieszka wideo. Jest jedynym
+wierszem pliku, który przy odtwarzaniu dotyka sieci, i to on decyduje,
+[jak zachowa się strumień](/pl/blog/protokoly-streamingu-hls-dash-rtsp/): adres `.m3u8` to
+strumień HLS dostarczany w segmentach, adres `.ts` to ciągły strumień
+transportowy.
+
+Dwa użyteczne wnioski. Po pierwsze, pozycja z wierszem opisu i bez adresu jest
+niewidoczna, bo nie ma czego odtworzyć. Po drugie, playlista, która wczytuje się
+bez zarzutu, podczas gdy każdy kanał zawodzi, to playlista o zdrowych nazwach i
+martwych adresach — a to problem
+[u dostawcy, nie w odtwarzaczu](/pl/blog/co-robi-odtwarzacz-iptv/).
+
+## Czego tam nie ma
+
+Równie pouczające jest to, czego format nie potrafi pomieścić:
+
+- **Żadnego wideo.** Playlista czterdziestu tysięcy kanałów to kilka megabajtów
+  tekstu. Ani jedna klatka z tego nie jest obrazem.
+- **Żadnego logowania.** Tam, gdzie dane dostępu są potrzebne, zwykle wpisano je
+  wprost w adresy — i dlatego odnośnik do playlisty należy traktować jak hasło.
+- **Żadnego żywego połączenia.** Plik jest migawką tego, co istniało w chwili
+  pobrania. Kanałów dodanych później w nim nie ma, i to jest prawdziwa różnica
+  wobec [interfejsu Xtream Codes](/pl/blog/xtream-codes-czy-m3u/) oraz powód, dla
+  którego [liczy się, gdzie mieszka lista](/pl/blog/link-do-playlisty-czy-plik-na-urzadzeniu/).
+- **Żadnej deklaracji alfabetu.** Nic w formacie nie podaje własnego kodowania i
+  właśnie dlatego czasem
+  [nazwy kanałów docierają jako symbole](/pl/blog/nazwy-kanalow-w-krzakach/).
+
+## Przeczytać własną
+
+Jeśli lista zachowuje się dziwnie, otwórz ją i popatrz. Brakujący `#EXTM3U`,
+puste `group-title` w każdym wierszu, nieobecny w całym pliku `tvg-id`, nazwa z
+zabłąkanym przecinkiem — każde z tego ma w odtwarzaczu odrębny podpis i każde
+widać po jakichś dziesięciu sekundach czytania.
+
+Format jest dość mały, by zmieścić go w głowie w całości. To rzadkość i warto z
+niej skorzystać.

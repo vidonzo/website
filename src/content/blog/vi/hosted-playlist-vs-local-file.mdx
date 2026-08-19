@@ -1,0 +1,99 @@
+---
+title: "Danh sách phát ở một địa chỉ hay tệp trên máy: cái nào luôn mới"
+description: "Nạp xong rồi thì trông y hệt nhau, mà thật ra chẳng phải một thứ. Một bên hỏi lại mỗi lần; bên kia đóng băng ngay khoảnh khắc bạn nhận được nó."
+urlSlug: lien-ket-danh-sach-phat-hay-tep-tren-may
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['danh sách phát', 'cài đặt']
+keywords: ['danh sách m3u tự cập nhật', 'danh sách iptv không cập nhật', 'link m3u hay tệp m3u', 'giữ danh sách kênh luôn mới']
+heroImageAlt: "Hai ô nhập danh sách phát đặt cạnh nhau, một ô chứa địa chỉ web và ô kia chứa tên một tệp trên máy."
+---
+
+Có ba cách đưa danh sách phát cho Vidonzo: thông tin Xtream Codes, một đường dẫn
+M3U, hoặc một tệp M3U đã có sẵn trên máy bạn.
+
+Hai cách sau nhìn gần như giống hệt nhau khi đã nạp xong. Cùng kênh, cùng nhóm,
+cùng cách phát. Nhưng chúng khác nhau ở một điểm về sau quyết định rất nhiều:
+**liệu danh sách có bao giờ tự thay đổi được hay không.**
+
+## Tệp là một ảnh chụp
+
+Khi bạn chọn một tệp trên máy, thứ Vidonzo đọc chính là mẩu văn bản ấy.
+[Nội dung một danh sách phát](/vi/blog/ben-trong-tep-m3u/) là tên và địa chỉ, không gì
+khác — chẳng chỗ nào trong đó có một kết nối sống với nhà cung cấp.
+
+Vậy nên tệp đóng băng ngay tại thời điểm bạn nhận nó:
+
+- Những kênh nhà cung cấp thêm về sau không nằm trong đó.
+- Những kênh bị nhà cung cấp đổi địa chỉ đơn giản là thôi mở được.
+- Những nhóm được sắp xếp lại ở nguồn vẫn giữ hình hài cũ trên máy bạn.
+
+Chỉ có đúng một cách để đẩy nó tiến lên: xin một tệp mới hơn rồi tự tay thay tệp
+cũ.
+
+## Đường dẫn là một câu hỏi, hỏi lại mỗi lần
+
+Đăng ký một đường dẫn M3U, và thứ Vidonzo lưu không phải danh sách kênh mà là
+**địa chỉ**. Mỗi lần lấy về sẽ trả lại đúng những gì đang có ở đó vào lúc ấy.
+
+- Lần nạp đầu tiên đọc trọn danh mục và dựng logo cùng các nhóm. Đây là phần
+  chậm, và chỉ một lần.
+- Mọi lần nạp sau đó mở tức thì từ danh mục đã lưu, trong khi việc làm mới chạy
+  phía sau.
+- Kéo xuống ở màn hình chính sẽ đọc lại nguồn thay vì bộ nhớ đệm. Bất cứ thay
+  đổi nào phía nhà cung cấp cũng lộ ra ở đó trước tiên.
+
+Bảng điều khiển Xtream đôi khi đưa đường dẫn `get.php` ở dạng rút gọn, không mang
+logo lẫn nhóm. Vidonzo lặng lẽ đọc bản đầy đủ hơn, nên bạn không phải tự sửa
+đường dẫn để có hình ảnh.
+
+## Đừng nhầm đường dẫn với sự mới mẻ
+
+Đây là chỗ người ta hay hiểu sai. Đăng ký một đường dẫn không bảo đảm có gì được
+cập nhật. **Sự mới mẻ đến từ đầu bên kia của đường dẫn.**
+
+Một đường dẫn trỏ tới tệp chẳng ai chăm sóc thì cũ đúng bằng một tệp nằm im trên
+máy bạn. Thứ đường dẫn mua cho bạn là *khả năng* thay đổi có thể đến — nó không
+tạo ra thay đổi.
+
+Nếu bạn muốn một nguồn thật sự luôn chuyển động thì
+[kết nối Xtream](/vi/blog/xtream-codes-hay-m3u/) hợp hơn. Nó gửi danh mục qua API chứ
+không phải một tệp phẳng, nên nhóm, phim bộ và lịch phát sóng đến nơi đã có cấu
+trúc sẵn.
+
+## Chọn giữa hai bên
+
+**Đường dẫn hợp với bạn khi:**
+
+- Nhà cung cấp thêm bớt kênh và bạn muốn bám theo.
+- Dòng tiêu đề mang địa chỉ `url-tvg`, nhờ đó
+  [lịch phát sóng đi cùng danh sách](/vi/blog/epg-la-gi-lich-phat-song/).
+- Bạn dùng cùng một danh sách trên nhiều máy. Đổi ở một chỗ là tất cả khớp nhau.
+
+**Tệp hợp với bạn khi:**
+
+- Bạn muốn sửa danh sách. Đó là văn bản trên máy bạn — xóa dòng, đảo thứ tự, đổi
+  tên.
+- Bạn không muốn gửi bất cứ thứ gì ra mạng. Ở chế độ này danh sách không bao giờ
+  rời khỏi máy.
+- Nhà cung cấp vốn chỉ đưa cho bạn một tệp. Vậy thì cứ dùng.
+- Bạn đang [sửa những tên kênh bị vỡ](/vi/blog/ten-kenh-bi-loi-font/). Mở ra rồi lưu
+  lại bằng UTF-8 là việc chỉ tệp trên máy mới cho phép.
+
+## Hãy coi đường dẫn như một mật khẩu
+
+Một điều cuối. Đường dẫn M3U thường nhúng sẵn thông tin xác thực ngay trong địa
+chỉ. **Ai giữ đường dẫn ấy là giữ luôn gói cước của bạn.**
+
+Vì thế nó không phải thứ để chia sẻ, và vì thế mới có
+[chuẩn mực về cách nó phải được cất
+giữ](/vi/blog/ma-hoa-thong-tin-dang-nhap/). Dán vào một cuộc trò chuyện, đăng
+lên diễn đàn, để lộ trong ảnh chụp màn hình — mỗi việc ấy đều là trao đi một mật
+khẩu.
+
+---
+
+Vậy lựa chọn không nằm ở chỗ bên nào mạnh hơn. **Lấy đường dẫn nếu bạn muốn các
+thay đổi tìm đến mình; lấy tệp nếu bạn muốn danh sách nằm trọn trong tay
+mình.** [Phần thiết lập](/vi/blog/cai-dat-danh-sach-phat-dau-tien/) cho cả hai, và chẳng gì
+ngăn bạn giữ mỗi loại một cái cạnh nhau.

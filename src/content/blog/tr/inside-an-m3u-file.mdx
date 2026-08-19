@@ -1,0 +1,127 @@
+---
+title: "Bir M3U dosyasının içinde: her satır aslında ne diyor"
+description: "Bir kez metin düzenleyicide açın, gizemi biter. Dört tür satır, birkaç öznitelik — ve her biri oynatıcıda gördüğünüz bir şeyi açıklıyor."
+urlSlug: m3u-dosyasinin-icinde-ne-var
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['oynatma-listesi', 'teknik']
+keywords: ['m3u dosyası nedir', 'm3u dosya biçimi', 'extinf ne demek', 'm3u tvg-id group-title']
+heroImageAlt: "Bir M3U oynatma listesinden birkaç satır metin; başlık satırı, açıklama satırı ve yayın adresi ayrı ayrı işaretlenmiş."
+---
+
+M3U dosyasının teknik olduğu yolunda bir ünü var ve bunu hak etmiyor. Hâlâ her
+gün kullanılan biçimlerin en yalınlarından biri: bir adlar listesi, bir adresler
+listesi ve birkaç isteğe bağlı not. Metin düzenleyicide okuyabilirsiniz; okuduğunuz
+anda oynatıcı davranışlarının çoğu keyfî görünmekten çıkar.
+
+Aşağıda eksiksiz, çalışan bir oynatma listesi var. İki kanal, hiçbir şey
+atlanmadan.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Haber",Kanal Bir
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Spor",Kanal İki
+http://example.com/live/two.ts
+```
+
+Biçimin tamamı bu. Aşağıdakiler o beş satırda bir gezinti.
+
+## Başlık satırı
+
+```
+#EXTM3U
+```
+
+İlk satır tam olarak böyle olmalı ve tek görevi «bundan sonrası genişletilmiş
+bir M3U'dur» demek. Bu satırı olmayan bir dosya yine de yüklenebilir, ama
+oynatıcının ardından gelen açıklama satırlarını beklemek için bir nedeni kalmaz.
+
+Başlık aynı zamanda bir listenin kendi yayın rehberini gösterebildiği yerdir:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (ya da aynı anlama gelen `x-tvg-url`) bir XMLTV dosyasını adlandırır —
+[kendi takvimi olan ayrı bir belge](/tr/blog/epg-yayin-rehberi-nedir/) — ve şimdi ne olduğunu,
+sırada ne olduğunu sağlar. Bir liste bunu taşıdığı hâlde rehber yine de
+görünmüyorsa, en azından iki dosyadan hangisini suçlayacağınızı bilirsiniz.
+
+## Açıklama satırı
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Haber",Kanal Bir
+```
+
+`#EXTINF` tek bir kaydı tanıtır. Üç parça hâlinde okuyun.
+
+**Sayı.** İki noktanın hemen ardından saniye cinsinden bir süre gelir. Canlı
+televizyonda bu `-1`'dir, yani «sabit uzunluk yok» — yayın öylece sürer. Bir
+filmde bunun yerine gerçek bir sayı görebilirsiniz.
+
+**Öznitelikler.** İsteğe bağlı `anahtar="değer"` çiftleri. Önemli olanlar:
+
+- **`tvg-id`** — bu kanalı XMLTV rehberindeki bir programa bağlayan kimlik.
+  Rehberin yüklenip hiçbir şey göstermemesinin en yaygın nedeni budur: liste ile
+  rehber kimlik konusunda anlaşamaz, dolayısıyla hiçbir şey eşleşmez.
+- **`tvg-name`** — rehberle eşleştirme amaçlı kanal adı; ekranda görünen adla
+  her zaman aynı değildir.
+- **`tvg-logo`** — kanal logosunun adresi. Bunlar ağ üzerinden çekilen
+  görsellerdir, kanal başına bir tane; büyük bir listenin ilk seferde tamamlanmış
+  görünmesinin biraz zaman almasının nedeni budur.
+- **`group-title`** — kanalın altında dosyalandığı kategori. Oynatıcıda
+  kaydırarak geçtiğiniz her kategori başlığı buraya yazılmıştır — sağlayıcınız
+  tarafından, kanal kanal. Ayrıca
+  [kategorileri kendiniz ehlileştirmenizin](/tr/blog/buyuk-oynatma-listesi-duzenleme/)
+  gerekçesi de budur.
+
+**Görünen ad.** Virgülden sonra satır sonuna kadar uzanan her şey, gerçekten
+gördüğünüz addır. Tırnaksız düz metindir, dolayısıyla kanal adının içindeki bir
+virgül bu biçimin gerçek bir tuzağıdır.
+
+## Adres
+
+```
+http://example.com/live/one.ts
+```
+
+`#EXTINF`'ten hemen sonraki satır, videonun yaşadığı yerdir. Dosyada oynatma
+anında ağa dokunan tek satırdır ve
+[yayının nasıl davranacağını](/tr/blog/hls-dash-rtsp-yayin-protokolleri/) o belirler:
+`.m3u8` uzantılı bir adres parçalar hâlinde gelen bir HLS yayınıdır, `.ts`
+uzantılı bir adres ise kesintisiz bir taşıma akışıdır.
+
+Buradan iki yararlı sonuç çıkar. Birincisi, açıklama satırı olup adresi olmayan
+bir kayıt görünmezdir, çünkü oynatılacak bir şey yoktur. İkincisi, kusursuz
+yüklenirken tüm kanalları başarısız olan bir liste, adları sağlam ve adresleri
+ölü bir listedir — bu da
+[sağlayıcıdaki bir sorundur, oynatıcıdaki değil](/tr/blog/iptv-oynatici-ne-yapar/).
+
+## İçinde olmayanlar
+
+Biçimin taşıyamadıkları da en az o kadar öğreticidir:
+
+- **Video yok.** Kırk bin kanallık bir liste birkaç megabaytlık metindir. Onun
+  tek bir karesi bile görüntü değildir.
+- **Oturum bilgisi yok.** Kimlik bilgileri gerektiğinde genellikle adreslerin
+  içine gömülüdür; bir liste bağlantısına parola gibi davranılması gerekmesinin
+  nedeni budur.
+- **Canlı bağlantı yok.** Dosya, onu aldığınız anda var olanın anlık
+  görüntüsüdür. Sonradan eklenen kanallar onun içinde değildir; bu da
+  [Xtream Codes API'sinden](/tr/blog/xtream-codes-mi-m3u-mu/) gerçek farkı ve
+  [listenin nerede durduğunun neden önemli
+  olduğudur](/tr/blog/liste-baglantisi-mi-cihazdaki-dosya-mi/).
+- **Bildirilmiş alfabe yok.** Biçimde hiçbir şey kendi karakter kodlamasını
+  belirtmez; tam da bu yüzden bazen
+  [kanal adları simge olarak gelir](/tr/blog/kanal-adlari-bozuk-gorunuyor/).
+
+## Kendi listenizi okuyun
+
+Bir liste tuhaf davranıyorsa açın ve bakın. Eksik bir `#EXTM3U`, her satırda boş
+bir `group-title`, dosya boyunca hiç bulunmayan `tvg-id`, içine virgül kaçmış bir
+ad — her birinin oynatıcıda kendine özgü bir imzası vardır ve her biri on
+saniyelik bir okumada görünür.
+
+Biçim, tamamını kafanızda tutabileceğiniz kadar küçük. Bu alışılmadık bir şey ve
+değerlendirmeye değer.

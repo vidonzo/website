@@ -1,0 +1,112 @@
+---
+title: "A lista não carrega: cinco falhas e o que cada uma significa"
+description: "Você cola o link, o aplicativo pensa um pouco e aparece um erro que não diz nada. Por trás dessa mensagem há cinco defeitos diferentes, cada um com sua assinatura."
+urlSlug: a-lista-nao-carrega
+publishedAt: 2026-08-19
+sourceLocale: tr
+tags: ['problemas', 'listas']
+keywords: ['lista iptv nao carrega', 'link m3u nao funciona', 'erro de login xtream', 'iptv nao carrega a lista']
+heroImageAlt: "Tela de cadastro de lista com um aviso abaixo explicando por que o carregamento parou."
+---
+
+Você cola o link que o provedor forneceu, o aplicativo pensa um pouco e surge um
+erro curto. O que a mensagem diz raramente ajuda. A pergunta que importa é: a
+falha é sua, da sua rede ou do seu provedor?
+
+São cinco defeitos. De fora, todos se parecem, e cada um tem um sinal. Acertar o
+certo de primeira é bem mais rápido do que desmontar a configuração e começar
+tudo de novo.
+
+## 1. As credenciais são recusadas
+
+**O sinal:** falha na hora. Sem espera.
+
+O servidor foi alcançado e o servidor disse não. Sua rede está bem; o problema é
+a conta. Por ordem de frequência:
+
+- **A senha foi digitada errado.** Digite em vez de colar. Um espaço arrastado
+  na cópia é invisível para você e uma senha diferente para o servidor.
+- **A assinatura expirou.** Contas Xtream terminam numa data e, depois disso,
+  nenhum canal abre.
+- **Você passou do limite de dispositivos.** A maioria dos provedores limita
+  quantos aparelhos podem transmitir ao mesmo tempo. Uma transmissão esquecida
+  rodando na televisão é uma causa surpreendentemente comum do erro "usuário
+  inválido" no celular. Saia no outro aparelho e tente de novo.
+
+Releia também o endereço do servidor:
+[qual formato de conexão te deram](/pt/blog/xtream-codes-ou-m3u/) muda a cara de um
+endereço correto.
+
+## 2. O servidor nunca é alcançado
+
+**O sinal:** uma espera longa e depois tempo esgotado. O erro chega atrasado.
+
+Desta vez ninguém disse não — ninguém respondeu.
+
+- **Falta a porta.** A maioria dos painéis Xtream não roda na porta 80. O
+  endereço é `http://example.com:8080`, não `http://example.com`, e se o
+  provedor deu uma porta, ela precisa entrar.
+- **Sua rede bloqueia o provedor.** Se falha no Wi-Fi, teste a mesma lista nos
+  dados móveis. Um resultado diferente joga a falha para a conexão, não para a
+  lista. Para resolver de vez, configure um proxy em **Configurações → Proxy**.
+- **O endereço não existe mais.** Provedores trocam de domínio e desligam o
+  antigo. Nada do seu lado conserta isso: peça o endereço atual.
+
+## 3. Carrega e chega vazia
+
+**O sinal:** nenhum erro, a barra de progresso completa e depois não há canais.
+
+O aplicativo recebeu algo — só que o que recebeu não era uma lista. Duas
+versões:
+
+- **O servidor devolveu uma página de erro no lugar da lista.** Parece que o
+  link funcionou, porque tecnicamente chegou uma resposta; o texto dentro é uma
+  página de aviso. Abrir o link no navegador e conferir se a primeira linha traz
+  `#EXTM3U` resolve em segundos —
+  [o que essa primeira linha significa](/pt/blog/dentro-de-um-arquivo-m3u/) serve
+  exatamente aqui.
+- **A assinatura venceu e o painel serve uma lista vazia.** Alguns painéis
+  respondem a contas expiradas com uma lista válida de zero canais em vez de um
+  erro. Fica idêntico ao caso anterior.
+
+## 4. A conexão segura falha
+
+**O sinal:** só acontece em endereços `https`. Tudo em `http` funciona.
+
+Essa é a que ninguém desconfia e a mais fácil de resolver: **o relógio do
+aparelho está errado.** Estabelecer uma conexão criptografada envolve verificar
+se o certificado do servidor ainda é válido, e essa verificação confia no
+relógio do seu aparelho. Se a data desandou alguns dias, todo certificado parece
+inválido e a conexão é recusada sem explicação útil.
+
+Coloque data e hora no automático e tente a lista de novo.
+
+## 5. A lista abre, os canais não
+
+**O sinal:** nomes, categorias e logos estão todos lá. Nada toca.
+
+Isso já não é problema de lista. Uma lista é texto com nomes e endereços, e
+[o trabalho do player](/pt/blog/o-que-faz-um-player-iptv/) é conectar ao endereço. Se
+você consegue ler os nomes, a lista chegou certa — o que está falhando é a outra
+ponta dos endereços.
+
+Teste dois ou três canais diferentes. Se **tudo** falha, o bloqueio está na
+conta ou na rede. Se **um** falha, aquele stream está morto no provedor e nada
+no aplicativo o revive. Se toca mas fica cortando, isso é outro assunto e mora
+[no caminho entre você e o servidor](/pt/blog/iptv-travando-como-resolver/).
+
+## Separar rápido
+
+Três perguntas, três minutos:
+
+1. **O erro veio na hora ou depois de esperar?** Na hora aponta para a falha um;
+   depois de esperar, para a dois.
+2. **Os dados móveis se comportam diferente?** Se sim, a falha é a rede.
+3. **O que acontece ao puxar para atualizar na tela inicial?** Isso relê a
+   origem em vez do catálogo em cache, então qualquer conserto feito pelo
+   provedor aparece ali primeiro.
+
+Se depois disso você continuar travado, escreva ao provedor antes de
+[refazer a configuração](/pt/blog/configurar-sua-primeira-lista/). Quatro das cinco
+falhas acima não se resolvem do seu lado, e fazer a pergunta certa é mais rápido
+do que repetir a instalação inteira.

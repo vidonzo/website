@@ -1,0 +1,109 @@
+---
+title: "Dlaczego nazwy kanałów docierają jako dziwne znaki"
+description: "Obraz działa bez zarzutu, a nieczytelna jest wyłącznie lista. To nie kwestia jakości, tylko plik tekstowy, którego kodowania nikt nie zadeklarował."
+urlSlug: nazwy-kanalow-w-krzakach
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlisty', 'diagnostyka']
+keywords: ['krzaki w nazwach kanałów iptv', 'kodowanie pliku m3u', 'playlista iptv znaki zapytania', 'm3u8 utf-8 polskie znaki']
+heroImageAlt: "Ta sama lista kanałów pokazana dwukrotnie: raz z nazwami rozsypanymi w bezsensowne znaki, raz poprawnie."
+---
+
+Playlista się wczytuje. Kanały działają. A mimo to na liście widnieje coś w
+rodzaju `PolskÄ… Jedynkę` albo długi ciąg znaków zapytania i nie sposób
+rozpoznać, który wiersz odpowiada której stacji.
+
+Ze strumieniami wszystko jest w porządku. Zepsuty jest **tekst** — a tekst
+naprawia się znacznie łatwiej niż obraz.
+
+## Playlista to tylko tekst
+
+Playlista M3U to tekstowy spis nazw i adresów. Wszystko, co
+[odtwarzacz z nią robi](/pl/blog/co-robi-odtwarzacz-iptv/), sprowadza się do
+odczytania tych wierszy, zbudowania listy i połączenia się z adresem z wiersza,
+który wybrałeś.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kanał Pierwszy",Kanał Pierwszy
+http://example.com/live/one.ts
+```
+
+I tu jest miejsce, w którym potyka się każdy: **plik tekstowy sam z siebie nie
+mówi, w jakim kodowaniu został zapisany.** W środku znajduje się wyłącznie ciąg
+bajtów. To, przez którą tablicę znaków te bajty odczytać z powrotem, jest
+decyzją czytającego. Wybierz złą tablicę, a te same bajty zmienią się w inne
+litery. To cała tajemnica.
+
+## Z której tablicy korzysta odtwarzacz
+
+Vidonzo czyta playlisty jako **UTF-8** — dzisiejszy standard tekstu w każdym
+języku i dokładnie to, co rozszerzenie `.m3u8`
+[istnieje po to, by zadeklarować](/pl/blog/m3u-czy-m3u8/).
+
+Jak się to skończy, zależy od tego, jak przekazałeś listę:
+
+- **Adres playlisty.** Serwer wraz z odpowiedzią deklaruje kodowanie treści,
+  którą wysyła. Gdy deklaracja jest poprawna, nic się nie psuje. Zniekształcone
+  nazwy oznaczają, że jej zabrakło albo że kłóciła się z rzeczywistymi bajtami.
+- **Plik na urządzeniu.** Tu nie ma nikogo, kto cokolwiek zadeklaruje, więc
+  plik czytany jest jako UTF-8. Plik zapisany w starym kodowaniu regionalnym
+  może nie tylko wyglądać źle — może w ogóle odmówić wczytania.
+
+Vidonzo nie próbuje zgadywać kodowania i jest to celowe. Automatyczne
+wykrywanie pozostaje zgadywaniem; myli się najczęściej właśnie przy alfabetach
+niełacińskich, które potrzebowałyby go najbardziej, i myli się w najgorszy
+możliwy sposób: **poprawnie dla części listy i błędnie dla reszty.** Lista
+poprawna w połowie myli bardziej niż lista wyraźnie zepsuta.
+
+## Czytanie objawu
+
+Tekst psuje się w charakterystyczny sposób, więc objaw sam nazywa przyczynę.
+
+- **`Ä…`, `Å‚`, `Å¼` w miejscu polskich znaków** — bajty UTF-8 odczytane przez
+  tablicę zachodnioeuropejską. Klasyka i najczęstszy przypadek na listach
+  polskich, czeskich czy węgierskich.
+- **Ciągi zupełnie niezwiązanych symboli** — bajty UTF-8 odczytane przez
+  tablicę regionalną, która nie ma z tym tekstem nic wspólnego.
+- **`????` albo `___`** — znaki zostały odrzucone podczas konwersji gdzieś
+  wyżej. Nic poniżej ich nie przywróci; listę trzeba pobrać ponownie.
+- **Rzędy pustych kwadracików** — to **nie** jest problem kodowania.
+
+Ten ostatni wypada wydzielić. Puste kwadraty znaczą, że znaki odkodowały się
+bez zarzutu, a urządzenie po prostu nie ma kroju pisma, który potrafiłby je
+narysować. Inna przyczyna, inne rozwiązanie — to już
+[strona wyświetlania](/pl/blog/ogladanie-we-wlasnym-jezyku/).
+
+## Kolejność, którą warto przejść
+
+1. **Poproś o odnośnik `.m3u8`.** Jeśli dostawca publikuje oba, weź ten.
+   Kanały za nim są identyczne; zmienia się wyłącznie obchodzenie się z
+   tekstem. Najtańsze rozwiązanie i najczęściej wystarcza.
+2. **Wczytaj playlistę ponownie.** Pociągnij w dół na ekranie głównym, żeby
+   aplikacja sięgnęła do źródła zamiast pokazywać katalog z pamięci podręcznej.
+   Po podmianie odnośnika pominięcie tego kroku zostawia starą listę na
+   miejscu.
+3. **Zapisz plik lokalny ponownie w UTF-8.** Otwórz go w edytorze tekstu,
+   ustaw kodowanie na UTF-8, zapisz i
+   [dodaj jeszcze raz](/pl/blog/jak-dodac-pierwsza-playliste/). Jeśli nazwy wrócą,
+   diagnoza jest potwierdzona.
+4. **Przejdź na połączenie Xtream.** Tam, gdzie dostawca wydaje także login i
+   hasło, [ta droga](/pl/blog/xtream-codes-czy-m3u/) dostarcza katalog przez API, a nie
+   plikiem tekstowym — kwestia kodowania pliku w ogóle nie powstaje.
+
+## Gdy zepsute są tylko niektóre nazwy
+
+Jeśli po tym wszystkim garstka kanałów wciąż jest nieczytelna, kodowanie
+przestaje być winowajcą — dostawca wpisał te pozycje tak u źródła. Żaden
+odtwarzacz nie odzyska tekstu, który był już błędny w chwili zapisania.
+
+W takim razie przestań próbować je odczytać i
+[wrzuć te oglądane do ulubionych](/pl/blog/jak-uporzadkowac-duza-playliste/). Nazwa nie musi
+być czytelna, żeby zapamiętać, gdzie mieszka.
+
+---
+
+Krzaki w nazwach nie są usterką odtwarzacza. To stara, całkiem zwyczajna pułapka
+przenoszenia tekstu między systemami, które nie zgadzają się co do alfabetu.
+Wybierz `.m3u8`, trzymaj pliki w UTF-8, a lista kanałów pozostanie czytelna w
+każdym języku.

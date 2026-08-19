@@ -1,0 +1,117 @@
+---
+title: "La playlist non si carica: cinque guasti e cosa significa ciascuno"
+description: "Incolli il link, l’app ci pensa un po’ e compare un errore che non dice nulla. Dietro quel messaggio ci sono cinque guasti distinti, e ognuno lascia la sua firma."
+urlSlug: la-playlist-non-si-carica
+publishedAt: 2026-08-19
+sourceLocale: tr
+tags: ['risoluzione problemi', 'playlist']
+keywords: ['playlist iptv non si carica', 'link m3u non funziona', 'errore accesso xtream', 'iptv lista non carica']
+heroImageAlt: "Schermata di aggiunta di una playlist con sotto un avviso che spiega perché il caricamento si è fermato."
+---
+
+Incolli il link che ti ha dato il fornitore, l’app ci ragiona un momento e poi
+compare un breve errore. Quello che c’è scritto raramente aiuta. La domanda che
+conta è un’altra: il guasto è tuo, della tua rete o del tuo fornitore?
+
+I guasti sono cinque. Da fuori si somigliano tutti, e ognuno ha un indizio.
+Azzeccare subito quello giusto è molto più rapido che smontare la
+configurazione e ricominciare.
+
+## 1. Le credenziali vengono rifiutate
+
+**L’indizio:** fallisce all’istante. Nessuna attesa.
+
+Il server è stato raggiunto e il server ha detto no. Quindi la rete va bene; il
+problema è l’account. In ordine di frequenza:
+
+- **La password è stata digitata male.** Digitala invece di incollarla. Uno
+  spazio raccolto durante la copia è invisibile per te ed è una password diversa
+  per il server.
+- **L’abbonamento è scaduto.** Gli account Xtream finiscono a una data, e da lì
+  in poi non si apre un solo canale.
+- **Hai superato il limite di dispositivi.** Quasi tutti i fornitori limitano
+  quanti apparecchi possono trasmettere insieme. Un flusso dimenticato acceso
+  sulla televisione è una causa sorprendentemente comune dell’errore «utente non
+  valido» sul telefono. Esci dall’altro dispositivo e riprova.
+
+Rileggi anche l’indirizzo del server:
+[quale formato di connessione ti hanno dato](/it/blog/xtream-codes-o-m3u/) cambia
+persino l’aspetto di un indirizzo corretto.
+
+## 2. Il server non viene mai raggiunto
+
+**L’indizio:** una lunga attesa, poi tempo scaduto. L’errore arriva in ritardo.
+
+Stavolta nessuno ha detto no: non ha risposto proprio nessuno.
+
+- **Manca la porta.** La maggior parte dei pannelli Xtream non gira sulla porta
+  80. L’indirizzo è `http://example.com:8080`, non `http://example.com`, e se il
+  fornitore ti ha dato una porta va inserita.
+- **La tua rete blocca il fornitore.** Se fallisce in Wi-Fi, prova la stessa
+  lista con i dati mobili. Un esito diverso sposta il guasto sulla connessione
+  anziché sulla lista. Per risolverlo in modo stabile, imposta un proxy in
+  **Impostazioni → Proxy**.
+- **L’indirizzo non esiste più.** I fornitori cambiano dominio e spengono il
+  vecchio. Dalla tua parte non c’è rimedio: chiedi l’indirizzo attuale.
+
+## 3. Si carica e arriva vuota
+
+**L’indizio:** nessun errore, la barra di avanzamento si completa e poi non c’è
+alcun canale.
+
+L’app ha ricevuto qualcosa — ma ciò che ha ricevuto non era una playlist. Ne
+esistono due versioni:
+
+- **Il server ha restituito una pagina di errore al posto della lista.** Sembra
+  che il link abbia funzionato, perché tecnicamente una risposta è arrivata; il
+  testo dentro è una pagina di avviso. Aprire il link in un browser e controllare
+  se la prima riga è `#EXTM3U` risolve in pochi secondi —
+  [cosa dice quella prima riga](/it/blog/dentro-un-file-m3u/) serve esattamente qui.
+- **L’abbonamento è scaduto e il pannello serve una lista vuota.** Alcuni
+  pannelli rispondono agli account scaduti con una playlist valida da zero
+  canali invece che con un errore. All’apparenza è identico al caso precedente.
+
+## 4. La connessione sicura fallisce
+
+**L’indizio:** succede solo sugli indirizzi `https`. Tutto ciò che è `http`
+funziona.
+
+Questo è quello che nessuno sospetta ed è il più facile da correggere:
+**l’orologio del dispositivo è sbagliato.** Stabilire una connessione cifrata
+comporta verificare che il certificato del server sia ancora valido, e quella
+verifica si fida dell’orologio del tuo apparecchio. Se la data è slittata di
+giorni, ogni certificato sembra non valido e la connessione viene rifiutata
+senza spiegazioni utili.
+
+Metti data e ora su automatico e riprova la lista.
+
+## 5. La lista si apre, i canali no
+
+**L’indizio:** nomi, categorie e loghi ci sono tutti. Non parte nulla.
+
+Questo non è più un problema di playlist. Una playlist è testo con nomi e
+indirizzi, e [il lavoro del lettore](/it/blog/cosa-fa-un-lettore-iptv/) è collegarsi
+all’indirizzo. Se riesci a leggere i nomi, la lista è arrivata correttamente: a
+fallire è l’altro capo degli indirizzi.
+
+Prova due o tre canali diversi. Se fallisce **tutto**, il blocco è a livello di
+account o di rete. Se fallisce **uno**, quel flusso è morto dal fornitore e
+niente nell’app lo resuscita. Se parte ma si spezza in continuazione, è tutt’altra
+faccenda e abita
+[nel percorso fra te e il server](/it/blog/risolvere-buffering-iptv/).
+
+## Distinguerli in fretta
+
+Tre domande, tre minuti:
+
+1. **L’errore è arrivato subito o dopo un’attesa?** Subito indica il guasto uno;
+   dopo un’attesa, il due.
+2. **I dati mobili si comportano diversamente?** Se sì, il guasto è la rete.
+3. **Cosa succede tirando giù nella schermata iniziale?** Quel gesto rilegge la
+   sorgente invece del catalogo in cache, così qualunque riparazione fatta dal
+   fornitore si vede lì per prima.
+
+Se dopo tutto questo sei ancora bloccato, scrivi al tuo fornitore prima di
+[rifare la configurazione](/it/blog/configurare-la-prima-playlist/). Quattro dei cinque
+guasti qui sopra non si risolvono dalla tua parte, e fare la domanda giusta è
+più veloce che ripetere l’intera installazione.

@@ -1,0 +1,104 @@
+---
+title: "Una lista en una URL o un archivo en tu dispositivo: cuál se mantiene al día"
+description: "Una vez cargadas parecen idénticas, y no son lo mismo en absoluto. Una vuelve a preguntar cada vez; la otra está congelada en el momento en que la recibiste."
+urlSlug: enlace-de-lista-o-archivo-local
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['listas', 'configuración']
+keywords: ['lista m3u actualizacion automatica', 'lista iptv no se actualiza', 'enlace m3u o archivo m3u', 'mantener lista de canales al dia']
+heroImageAlt: "Dos campos para dar de alta una lista, uno con una dirección web y otro con el nombre de un archivo del dispositivo."
+---
+
+Hay tres maneras de dar una lista a Vidonzo: credenciales de Xtream Codes, un
+enlace M3U o un archivo M3U que ya está en tu dispositivo.
+
+Las dos últimas se parecen mucho una vez cargadas. Los mismos canales, las
+mismas categorías, la misma reproducción. Pero se diferencian en un punto que
+decide bastante después: **si la lista puede cambiar por sí sola.**
+
+## Un archivo es una foto fija
+
+Cuando eliges un archivo del dispositivo, lo que Vidonzo lee es ese trozo de
+texto. [El contenido de una lista](/es/blog/dentro-de-un-archivo-m3u/) son nombres y
+direcciones y nada más: no hay conexión viva con tu proveedor en ninguna parte.
+
+Así que un archivo está congelado en el instante en que lo recibiste:
+
+- Los canales que el proveedor añada después no están dentro.
+- Los canales cuyas direcciones cambie el proveedor sencillamente dejan de
+  abrirse.
+- Las categorías reorganizadas en el origen mantienen su forma antigua en tu
+  dispositivo.
+
+Hay exactamente una manera de hacerlo avanzar: conseguir un archivo más nuevo y
+sustituir el viejo tú mismo.
+
+## Una URL es una pregunta que se repite cada vez
+
+Registra un enlace M3U y lo que Vidonzo guarda no es la lista de canales: es la
+**dirección**. Cada consulta devuelve lo que haya ahí en ese momento.
+
+- La primera carga lee el catálogo entero y monta logos y categorías. Es la
+  parte lenta, una sola vez.
+- Todas las cargas posteriores abren al instante desde el catálogo guardado
+  mientras una actualización corre por detrás.
+- Deslizar hacia abajo en la pantalla de inicio relee el origen en vez de la
+  caché. Cualquier cambio hecho por el proveedor se ve ahí primero.
+
+Los paneles Xtream a veces entregan un enlace `get.php` en una forma reducida
+que no lleva logos ni grupos. Vidonzo lee sin ruido la variante más completa,
+así que no tienes que editar el enlace para que aparezcan las imágenes.
+
+## No confundas la URL con la frescura
+
+Esta es la parte que la gente entiende mal. Registrar una URL no garantiza que
+nada se actualice. **La frescura viene del otro extremo del enlace.**
+
+Una URL que apunta a un archivo que nadie mantiene está exactamente igual de
+vieja que un archivo en tu dispositivo. Lo que la URL te compra es la
+*posibilidad* de que el cambio llegue; no produce el cambio.
+
+Si quieres una fuente que de verdad siga moviéndose,
+[la conexión Xtream](/es/blog/xtream-codes-o-m3u/) encaja mejor. Entrega el catálogo
+por una API en vez de como un archivo plano, así que categorías, series y guía
+de programación llegan ya estructuradas.
+
+## Cómo elegir
+
+**Una URL te conviene cuando:**
+
+- Tu proveedor añade y quita canales y quieres seguirle el ritmo.
+- La cabecera lleva una dirección `url-tvg`, de modo que
+  [la guía viaja con la lista](/es/blog/que-es-la-epg-iptv/).
+- Usas la misma lista en varios dispositivos. La cambias en un sitio y todos
+  coinciden.
+
+**Un archivo te conviene cuando:**
+
+- Quieres editar la lista. Es texto en tu dispositivo: borra filas, reordénalas,
+  renombra cosas.
+- No quieres que se envíe nada a la red. En este modo la lista nunca sale del
+  dispositivo.
+- Tu proveedor solo te dio un archivo. Entonces úsalo y ya.
+- Estás [arreglando nombres de canal
+  ilegibles](/es/blog/nombres-de-canales-ilegibles/). Poder abrirlo y volver a guardarlo en
+  UTF-8 es algo que solo permite un archivo local.
+
+## Trata la URL como una contraseña
+
+Una última cosa. Un enlace M3U suele llevar las credenciales incrustadas en la
+propia dirección. **Quien tenga ese enlace tiene tu suscripción.**
+
+Por eso no es algo que se comparta, y por eso existe
+[un estándar sobre cómo debe
+guardarse](/es/blog/por-que-cifrar-tus-credenciales/). Pegarlo en un chat,
+publicarlo en un foro, dejarlo visible en una captura: cada una de esas cosas es
+entregar una contraseña.
+
+---
+
+Así que la elección no va de qué opción es más capaz. **Coge la URL si quieres
+que los cambios te lleguen; coge el archivo si quieres que la lista se quede
+enteramente en tus manos.** La
+[configuración](/es/blog/configurar-primera-lista-iptv/) ofrece ambas, y nada impide que
+tengas una de cada una a la vez.

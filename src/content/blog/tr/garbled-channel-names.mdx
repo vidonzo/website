@@ -1,0 +1,109 @@
+---
+title: "Kanal adları neden anlamsız simgeler olarak geliyor"
+description: "Görüntü sorunsuz akıyor, okunmayan tek şey listenin kendisi. Bu bir kalite sorunu değil: karakter kodlamasını kimsenin bildirmediği bir metin dosyası."
+urlSlug: kanal-adlari-bozuk-gorunuyor
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['oynatma-listesi', 'sorun-giderme']
+keywords: ['iptv kanal adları bozuk', 'm3u dosya kodlaması', 'iptv listede türkçe karakter sorunu', 'm3u8 utf-8 karakter']
+heroImageAlt: "Aynı kanal listesi iki kez gösteriliyor, birinde adlar anlamsız simgelere dönüşmüş, diğerinde düzgün."
+---
+
+Liste yükleniyor. Kanallar açılıyor. Ama listede okuduğunuz şey `Ã‡ocuk`,
+`SporÃ¼` gibi bir şey ya da uzun bir soru işareti dizisi ve hangi satırın
+hangi kanal olduğunu anlamanın yolu yok.
+
+Yayınlarda bir sorun yok. Bozulan şey **metin** — ve metni onarmak videoyu
+onarmaktan çok daha kolay.
+
+## Oynatma listesi yalnızca metindir
+
+Bir M3U listesi, adlardan ve adreslerden oluşan düz bir metin dizinidir.
+[Bir oynatıcının onunla yaptığı her şey](/tr/blog/iptv-oynatici-ne-yapar/) şu
+kadardır: satırları okumak, listeyi kurmak ve seçtiğiniz satırdaki adrese
+bağlanmak.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kanal Bir",Kanal Bir
+http://example.com/live/one.ts
+```
+
+Ve herkesin gözünden kaçan nokta şu: **bir metin dosyası hangi karakter
+kodlamasıyla yazıldığını kendi başına söylemez.** Dosyanın içinde olan şey bir
+bayt dizisidir. O baytların hangi karakter tablosuyla yeniden harfe
+çevrileceği, okuyan tarafın vermesi gereken bir karardır. Yanlış tabloyu
+seçin, aynı baytlar başka harflere dönüşür. Meselenin tamamı bu.
+
+## Oynatıcı hangi tabloyu kullanır
+
+Vidonzo listeleri **UTF-8** olarak okur — bugün her dilde metnin varsayılanı
+ve `.m3u8` uzantısının [tam olarak bildirmek için var
+olduğu](/tr/blog/m3u-ile-m3u8-farki/) şey.
+
+Sonucun ne olacağı, listeyi nasıl verdiğinize bağlı:
+
+- **Bir liste bağlantısı.** Sunucu, gönderdiği içeriğin kodlamasını yanıtla
+  birlikte bildirir. Bildirim doğruysa hiçbir şey ters gitmez. Bozuk adlar,
+  bildirimin eksik olduğu ya da gerçek baytlarla uyuşmadığı anlamına gelir.
+- **Cihazdaki bir dosya.** Burada bildirecek kimse yoktur, dolayısıyla dosya
+  UTF-8 kabul edilerek okunur. Eski bir bölgesel kodlamayla kaydedilmiş bir
+  dosya yalnızca bozuk görünmeyebilir — hiç yüklenmeyebilir de.
+
+Vidonzo kodlamayı tahmin etmeye çalışmaz ve bu bilinçli bir tercihtir. Otomatik
+algılama sonuçta bir tahmindir, en çok da ona en fazla ihtiyaç duyan Latin dışı
+alfabelerde yanılır ve mümkün olan en kötü biçimde yanılır: **listenin bir
+kısmında doğru, geri kalanında yanlış.** Yarısı doğru bir liste, açıkça bozuk
+bir listeden daha kafa karıştırıcıdır.
+
+## Belirtiyi okumak
+
+Metin karakteristik biçimlerde bozulur; yani belirti, nedeni kendisi söyler.
+
+- **Türkçe harflerin yerinde `Ã§`, `Ã¼`, `Ä±`** — UTF-8 baytları Batı Avrupa
+  tablosuyla okunuyor. Klasik olan bu ve Türkçe listelerde en sık görüleni.
+- **Alakasız simge dizileri** — UTF-8 baytları, o metinle hiç ilgisi olmayan
+  bölgesel bir tabloyla okunuyor.
+- **`????` veya `___`** — karakterler daha yukarıda bir dönüştürme sırasında
+  atılmış. Aşağıdaki hiçbir şey onları geri getiremez; listenin yeniden
+  alınması gerekir.
+- **Sıra sıra boş kareler** — bu **kodlama sorunu değildir**.
+
+Sonuncusunu ayırmakta fayda var. Boş kareler, karakterlerin kusursuz
+çözüldüğünü ve cihazda onları çizebilecek bir yazı tipi bulunmadığını gösterir.
+Farklı neden, farklı çözüm — o iş
+[görüntüleme tarafına](/tr/blog/kendi-dilinizde-izlemek/) aittir.
+
+## Denemeye değer sıra
+
+1. **`.m3u8` bağlantısını isteyin.** Sağlayıcınız ikisini de yayınlıyorsa onu
+   alın. Arkasındaki kanallar birebir aynıdır, yalnızca metnin ele alınışı
+   değişir. En ucuz çözüm ve çoğu zaman yeter.
+2. **Listeyi yeniden okutun.** Ana ekranda aşağı çekin ki uygulama önbellekteki
+   katalog yerine kaynağı yeniden alsın. Bağlantıyı değiştirdikten sonra bu
+   adımı atlamak, eski listeyi yerinde bırakır.
+3. **Yerel dosyayı UTF-8 olarak yeniden kaydedin.** Bir metin düzenleyicide
+   açın, kodlamayı UTF-8 yapın, kaydedin ve
+   [yeniden ekleyin](/tr/blog/ilk-oynatma-listesi-kurulumu/). Adlar geri geldiyse teşhis
+   doğrulanmış demektir.
+4. **Xtream bağlantısına geçin.** Sağlayıcı kullanıcı adı ve şifre de
+   veriyorsa, [o yol](/tr/blog/xtream-codes-mi-m3u-mu/) kataloğu metin dosyası olarak
+   değil bir API üzerinden getirir; dosya kodlaması diye bir mesele hiç
+   doğmaz.
+
+## Yalnızca bazı adlar bozuksa
+
+Bütün bunlardan sonra bir avuç kanal hâlâ bozuk duruyorsa, artık sorun kodlama
+değildir — sağlayıcı o girdileri kaynağında böyle yazmıştır. Hiçbir oynatıcı,
+yazıldığı anda zaten yanlış olan bir metni kurtaramaz.
+
+O hâlde onları okumaya çalışmayı bırakın ve
+[izlediklerinizi favorilere alın](/tr/blog/buyuk-oynatma-listesi-duzenleme/). Bir kanalın
+nerede durduğunu hatırlamak için adının okunur olması gerekmez.
+
+---
+
+Bozuk adlar bir oynatıcı arızası değildir. Alfabe konusunda anlaşamayan
+sistemler arasında düz metin taşımanın eski ve sıradan bir tuzağıdır. `.m3u8`
+seçin, dosyaları UTF-8 tutun; kanal listeniz hangi dilde olursa olsun okunur
+kalsın.

@@ -1,0 +1,105 @@
+---
+title: "Regarder en données mobiles sans griller son forfait"
+description: "Un mois de données peut disparaître en deux soirées. Le nombre qui en décide n’est pas dans les réglages de l’application — mais quatre choses aident vraiment."
+urlSlug: regarder-en-donnees-mobiles
+publishedAt: 2026-08-19
+sourceLocale: id
+tags: ['lecture', 'configuration']
+keywords: ['consommation data iptv', 'combien de data pour la tv en direct', 'reduire consommation streaming', 'reglage buffer iptv']
+heroImageAlt: "Un écran de lecteur à côté d’un compteur de consommation montrant ce qu’une soirée de télévision prend au forfait."
+---
+
+Vingt gigaoctets paraissent généreux — jusqu’à ce que vous regardiez la
+télévision en direct deux soirs de suite. Vient alors la mauvaise conclusion :
+l’application doit être gourmande.
+
+Elle ne l’est pas. Ce qui dévore le forfait, c’est la vidéo, et sa taille était
+décidée avant qu’un seul octet n’atteigne votre téléphone. Il y a en revanche
+quelques leviers réellement à votre portée — et plusieurs réglages que l’on
+désactive en espérant économiser, sans le moindre effet.
+
+## Un nombre décide de presque tout
+
+Un flux en direct arrive à un débit à peu près fixe. Multipliez-le par votre
+temps de visionnage : ce sont vos données. Approximativement :
+
+- **Définition standard, environ 1,5 Mbit/s** — à peu près **0,7 Go par heure**.
+- **HD, environ 3–5 Mbit/s** — à peu près **1,4–2,3 Go par heure**.
+- **De la Full HD à la 4K, 8–20 Mbit/s** — **3,5 à 9 Go par heure**.
+
+Ces chiffres expliquent presque toutes les plaintes sur la consommation. Un match
+de quatre-vingt-dix minutes en Full HD fait confortablement cinq gigaoctets, et
+aucun réglage d’aucune application ne change cette arithmétique.
+
+## Ce que le lecteur ne contrôle pas
+
+Autant être franc. [Le travail d’un lecteur](/fr/blog/ce-que-fait-un-lecteur-iptv/) est de
+se connecter à une adresse, de recevoir le flux et de dessiner l’image. Il ne
+fabrique pas la vidéo, donc il ne décide pas de sa taille.
+
+Si votre fournisseur envoie une chaîne à 8 Mbit/s, c’est 8 Mbit/s qui arrivent.
+Il n’existe pas de bouton « baisser la qualité » capable de la réduire, car un
+choix de qualité n’existe que là où le fournisseur publie plusieurs versions.
+
+Il y a tout de même un vrai levier : **beaucoup de fournisseurs listent la même
+chaîne deux fois, une en SD et une en HD, comme deux entrées distinctes.**
+Cherchez dans votre liste le même nom avec un suffixe différent. Là où elle
+existe, l’entrée SD peut diviser votre consommation par deux ou davantage — et
+sur un écran de téléphone, l’écart est bien plus faible qu’on ne l’imagine.
+
+## Ce que vous pouvez vraiment changer
+
+**La taille du tampon.** Dans **Paramètres → Lecture** se trouve **Taille du
+tampon (cache)**, 30 Mo par défaut. Le tampon, ce sont des données récupérées à
+l’avance pour qu’une connexion instable ne se voie pas tout de suite. Tant que
+vous continuez à regarder, cela ne coûte rien de plus — mais à chaque changement
+de chaîne, tout ce qui avait été pris d’avance sans être regardé est jeté. Un
+grand tampon convient à une connexion instable ; un petit gaspille moins si vous
+sautez souvent. Si c’est la connexion elle-même qui pose problème,
+[la cause est en général ailleurs](/fr/blog/regler-le-buffering-iptv/).
+
+**L’habitude de zapper.** C’est le gaspillage le moins remarqué de tous. Chaque
+chaîne ouverte doit remplir un tampon depuis zéro avant que l’image apparaisse.
+Dix minutes d’errance dans la liste peuvent coûter autant qu’un quart d’heure de
+visionnage, sans que vous ayez vraiment regardé quoi que ce soit. Garder des
+favoris et [dompter une grande liste](/fr/blog/organiser-une-grande-playlist/) n’est pas
+qu’une question de rangement : cela réduit directement la consommation.
+
+**La lecture automatique de l’épisode suivant.** Désactivez-la si vous vous
+endormez devant les séries. La fonction poursuivra docilement jusqu’au matin.
+
+**Le premier chargement du catalogue.** Quand une playlist est lue pour la
+première fois, l’application la parcourt entièrement et récupère un logo par
+chaîne — et les logos sont des images, une par entrée. Sur une liste de dizaines
+de milliers, c’est un coût réel, même s’il n’arrive qu’une fois. Ensuite tout est
+enregistré et rouvrir l’application ne coûte rien. Donc, quand vous le pouvez,
+[configurez la playlist](/fr/blog/configurer-sa-premiere-playlist/) en Wi-Fi plutôt qu’en
+déplacement.
+
+**Le guide des programmes.** L’EPG est
+[un document distinct](/fr/blog/epg-guide-des-programmes/) de la liste des chaînes, et chez un
+gros fournisseur il peut peser des dizaines de mégaoctets par requête. Rien de
+bouleversant, mais bon à savoir quand le forfait touche à sa fin.
+
+## Ce qui ne change rien
+
+Plusieurs réglages sont désactivés dans l’espoir d’économiser, sans effet :
+
+- **Le décodage matériel.** Cela concerne la charge du processeur et la chaleur
+  du téléphone, pas les données.
+- **La taille et la couleur des sous-titres.** Les sous-titres voyagent déjà à
+  l’intérieur du même flux.
+- **Regarder sur une tablette plutôt que sur un téléphone.** Le flux est de la
+  même taille ; [seul l’écran change](/fr/blog/iptv-sur-tablette/).
+- **Le type de source utilisé.** Une playlist M3U et
+  [une connexion Xtream](/fr/blog/xtream-codes-ou-m3u/) ne diffèrent que par la façon
+  dont la liste de chaînes est récupérée — quelques centaines de kilooctets. La
+  vidéo est identique.
+
+---
+
+Alors : gérez votre temps de visionnage et votre choix de chaîne, pas les
+interrupteurs du menu des réglages. Une heure de HD, c’est une heure et demie de
+gigaoctets dans n’importe quelle application. Ce que vous pouvez réellement
+économiser, c’est l’errance dans la liste et un premier chargement qu’il aurait
+mieux valu faire en Wi-Fi.

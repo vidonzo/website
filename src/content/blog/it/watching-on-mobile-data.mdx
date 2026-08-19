@@ -1,0 +1,105 @@
+---
+title: "Guardare con i dati mobili senza bruciare il piano"
+description: "Un mese di traffico può svanire in due serate. Il numero che lo decide non sta nelle impostazioni dell’app, ma ci sono quattro cose che aiutano davvero."
+urlSlug: guardare-con-i-dati-mobili
+publishedAt: 2026-08-19
+sourceLocale: id
+tags: ['riproduzione', 'configurazione']
+keywords: ['consumo dati iptv', 'quanti giga consuma la diretta', 'risparmiare dati streaming', 'impostazione buffer iptv']
+heroImageAlt: "La schermata di un lettore accanto a un contatore di consumo che mostra quanto una serata di televisione toglie al piano."
+---
+
+Venti gigabyte sembrano generosi finché non guardi la televisione in diretta per
+due sere di fila. Poi arriva la conclusione sbagliata: l’app sarà uno spreco.
+
+Non lo è. A divorare il piano è il video, e la sua dimensione era già decisa
+prima che un solo byte raggiungesse il telefono. Ci sono però alcune cose
+davvero sotto il tuo controllo — e diverse che si disattivano sperando di
+risparmiare, senza il minimo effetto.
+
+## Un numero decide quasi tutto
+
+Una diretta arriva a una velocità grosso modo fissa. Moltiplicala per il tempo
+che guardi: quello è il tuo traffico. Approssimativamente:
+
+- **Definizione standard, circa 1,5 Mbps** — attorno a **0,7 GB all’ora**.
+- **HD, circa 3–5 Mbps** — attorno a **1,4–2,3 GB all’ora**.
+- **Dal Full HD al 4K, 8–20 Mbps** — da **3,5 a 9 GB all’ora**.
+
+Quei numeri spiegano quasi tutte le lamentele sul traffico. Una partita di
+novanta minuti in Full HD fa comodamente cinque gigabyte, e nessuna impostazione
+di nessuna app cambia quell’aritmetica.
+
+## Cosa il lettore non controlla
+
+Qui conviene essere schietti. [Il lavoro di un
+lettore](/it/blog/cosa-fa-un-lettore-iptv/) è collegarsi a un indirizzo, ricevere il
+flusso e disegnare l’immagine. Non crea il video, quindi non decide neanche
+quanto è grande.
+
+Se il tuo fornitore manda un canale a 8 Mbps, 8 Mbps è ciò che arriva. Non esiste
+un pulsante «abbassa la qualità» capace di rimpicciolirlo, perché una scelta di
+qualità esiste solo dove il fornitore pubblica più di una versione.
+
+Una leva vera però c’è: **molti fornitori elencano lo stesso canale due volte,
+una in SD e una in HD, come due voci separate.** Cerca nella tua lista lo stesso
+nome con un suffisso diverso. Dove esiste, la voce SD può dimezzare il consumo o
+meglio — e su uno schermo da telefono la differenza è assai minore di quanto si
+immagini.
+
+## Cosa puoi davvero cambiare
+
+**La dimensione del buffer.** In **Impostazioni → Riproduzione** c’è
+**Dimensione del buffer (cache)**, 30 MB come valore predefinito. Il buffer sono
+dati presi in anticipo perché una connessione instabile non si veda subito.
+Finché continui a guardare non costa nulla in più — ma ogni volta che cambi
+canale, tutto ciò che era stato preso in anticipo e mai visto viene buttato. Un
+buffer grande va bene con una connessione instabile; uno piccolo spreca meno se
+salti spesso. Se il problema è la connessione stessa,
+[la causa di solito è altrove](/it/blog/risolvere-buffering-iptv/).
+
+**L’abitudine di fare zapping.** È lo spreco meno notato di tutti. Ogni canale
+che apri deve riempire un buffer da zero prima che compaia l’immagine. Dieci
+minuti a girovagare nella lista possono costare quanto un quarto d’ora di
+visione, senza che tu abbia davvero guardato nulla. Tenere i preferiti e
+[domare una lista grande](/it/blog/organizzare-playlist-grandi/) non è solo questione di
+ordine: taglia il traffico direttamente.
+
+**Riproduzione automatica dell’episodio successivo.** Disattivala se ti
+addormenti davanti alle serie. La funzione andrà avanti ubbidiente fino al
+mattino.
+
+**Il primo caricamento del catalogo.** Quando una playlist viene letta la prima
+volta, l’app la percorre tutta e scarica un logo per canale — e i loghi sono
+immagini, una per voce. Su una lista da decine di migliaia è un costo reale,
+anche se una tantum. Dopo è tutto salvato e riaprire l’app non costa niente.
+Perciò, quando puoi,
+[configura la playlist](/it/blog/configurare-la-prima-playlist/) sul Wi-Fi e non per
+strada.
+
+**La guida ai programmi.** L’EPG è
+[un documento a parte](/it/blog/come-funziona-la-guida-epg/) rispetto alla lista canali, e presso un
+fornitore grande può pesare decine di megabyte per richiesta. Nulla di
+sconvolgente, ma vale saperlo quando il piano è quasi finito.
+
+## Cosa non fa alcuna differenza
+
+Alcune cose si spengono per speranza, senza effetto:
+
+- **La decodifica hardware.** Riguarda il carico del processore e quanto si
+  scalda il telefono, non i dati.
+- **Dimensione e colore dei sottotitoli.** I sottotitoli viaggiano già dentro lo
+  stesso flusso.
+- **Guardare su tablet invece che sul telefono.** Il flusso è grande uguale;
+  [cambia soltanto lo schermo](/it/blog/iptv-su-tablet/).
+- **Che tipo di sorgente usi.** Una playlist M3U e
+  [una connessione Xtream](/it/blog/xtream-codes-o-m3u/) differiscono solo per come
+  viene prelevata la lista canali — qualche centinaio di kilobyte. Il video è
+  identico.
+
+---
+
+Quindi: gestisci il tempo di visione e la scelta del canale, non gli interruttori
+del menu impostazioni. Un’ora di HD è un’ora e mezza di gigabyte in qualunque
+app. Ciò che puoi davvero risparmiare è il girovagare nella lista, e un primo
+caricamento che sarebbe stato meglio fare in Wi-Fi.

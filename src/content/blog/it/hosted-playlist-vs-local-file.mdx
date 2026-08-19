@@ -1,0 +1,105 @@
+---
+title: "Una playlist a un indirizzo o un file sul dispositivo: quale resta aggiornata"
+description: "Una volta caricate sembrano identiche, e non sono affatto la stessa cosa. Una richiede di nuovo ogni volta; l’altra è congelata al momento in cui l’hai ricevuta."
+urlSlug: link-della-playlist-o-file-locale
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlist', 'configurazione']
+keywords: ['playlist m3u aggiornamento automatico', 'playlist iptv non si aggiorna', 'link m3u o file m3u', 'tenere aggiornata la lista canali']
+heroImageAlt: "Due campi per inserire una playlist affiancati, uno con un indirizzo web e uno con il nome di un file sul dispositivo."
+---
+
+Ci sono tre modi per dare una playlist a Vidonzo: le credenziali Xtream Codes,
+un link M3U, o un file M3U già presente sul dispositivo.
+
+Gli ultimi due, una volta caricati, si somigliano moltissimo. Stessi canali,
+stesse categorie, stessa riproduzione. Ma differiscono su un punto che poi
+decide parecchio: **se la lista possa mai cambiare da sola.**
+
+## Un file è un’istantanea
+
+Quando scegli un file dal dispositivo, ciò che Vidonzo legge è quel singolo
+pezzo di testo. [Il contenuto di una playlist](/it/blog/dentro-un-file-m3u/) sono nomi
+e indirizzi e nient’altro: da nessuna parte c’è un collegamento vivo con il tuo
+fornitore.
+
+Quindi un file è congelato nell’istante in cui l’hai ricevuto:
+
+- I canali che il fornitore aggiunge dopo non ci sono.
+- I canali di cui il fornitore cambia gli indirizzi semplicemente smettono di
+  aprirsi.
+- Le categorie riorganizzate alla fonte restano nella vecchia forma sul tuo
+  dispositivo.
+
+C’è esattamente un modo per farlo avanzare: procurarti un file più recente e
+sostituire tu stesso quello vecchio.
+
+## Un indirizzo è una domanda, ripetuta ogni volta
+
+Registra un link M3U e ciò che Vidonzo conserva non è la lista dei canali: è
+l’**indirizzo**. Ogni richiesta restituisce quello che c’è in quel momento.
+
+- Il primo caricamento legge l’intero catalogo e monta loghi e categorie. È la
+  parte lenta, una volta sola.
+- Ogni caricamento successivo si apre all’istante dal catalogo salvato mentre un
+  aggiornamento gira dietro le quinte.
+- Trascinare verso il basso nella schermata iniziale rilegge la sorgente invece
+  della cache. Qualsiasi modifica fatta dal fornitore si vede lì per prima.
+
+I pannelli Xtream a volte consegnano un link `get.php` in una forma ridotta che
+non porta né loghi né gruppi. Vidonzo legge in silenzio la variante più completa,
+così non devi modificare tu il link per ottenere le immagini.
+
+## Non confondere l’indirizzo con la freschezza
+
+È qui che si sbaglia. Registrare un indirizzo non garantisce che qualcosa si
+aggiorni. **La freschezza arriva dall’altro capo del link.**
+
+Un indirizzo che punta a un file che nessuno cura è vecchio esattamente quanto un
+file fermo sul tuo dispositivo. Ciò che l’indirizzo ti compra è la *possibilità*
+che un cambiamento arrivi: non produce il cambiamento.
+
+Se vuoi una sorgente che continui davvero a muoversi,
+[la connessione Xtream](/it/blog/xtream-codes-o-m3u/) è più adatta. Consegna il
+catalogo tramite un’API invece che come file piatto, così categorie, serie e
+guida ai programmi arrivano già strutturate.
+
+## Scegliere fra i due
+
+**Un indirizzo fa per te quando:**
+
+- Il tuo fornitore aggiunge e toglie canali e vuoi stargli dietro.
+- L’intestazione porta un indirizzo `url-tvg`, così
+  [la guida viaggia insieme alla lista](/it/blog/come-funziona-la-guida-epg/).
+- Usi la stessa lista su più dispositivi. La cambi in un posto e vanno tutti
+  d’accordo.
+
+**Un file fa per te quando:**
+
+- Vuoi modificare la lista. È testo sul tuo dispositivo: cancella righe,
+  riordinale, rinomina.
+- Non vuoi che venga inviato nulla alla rete. In questa modalità la lista non
+  lascia mai il dispositivo.
+- Il tuo fornitore ti ha dato soltanto un file. Allora usalo e basta.
+- Stai
+  [riparando nomi di canali illeggibili](/it/blog/nomi-dei-canali-illeggibili/). Poterlo
+  aprire e risalvare in UTF-8 è una cosa che solo un file locale permette.
+
+## Tratta l’indirizzo come una password
+
+Un’ultima cosa. Un link M3U di solito porta le credenziali incorporate
+nell’indirizzo stesso. **Chi ha quel link ha il tuo abbonamento.**
+
+Per questo non è una cosa da condividere, e per questo esiste
+[uno standard su come vada
+conservato](/it/blog/perche-cifrare-le-credenziali/). Incollarlo in una chat,
+pubblicarlo su un forum, lasciarlo visibile in uno screenshot: ognuna di queste
+cose equivale a consegnare una password.
+
+---
+
+La scelta quindi non riguarda quale opzione sia più capace. **Prendi l’indirizzo
+se vuoi che i cambiamenti ti raggiungano; prendi il file se vuoi che la lista
+resti interamente nelle tue mani.** La
+[configurazione](/it/blog/configurare-la-prima-playlist/) offre entrambi, e nulla ti
+impedisce di tenerne uno per tipo, affiancati.

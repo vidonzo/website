@@ -1,0 +1,130 @@
+---
+title: "Di dalam berkas M3U: apa sebenarnya isi tiap barisnya"
+description: "Buka sekali di penyunting teks dan misterinya selesai. Empat jenis baris, segelintir atribut, dan tiap satunya menjelaskan sesuatu yang pernah Anda lihat di pemutar."
+urlSlug: isi-file-m3u
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlist', 'teknis']
+keywords: ['apa itu file m3u', 'format berkas m3u', 'penjelasan extinf', 'm3u tvg-id group-title']
+heroImageAlt: "Beberapa baris teks playlist M3U dengan baris tajuk, baris keterangan, dan alamat siaran ditandai."
+---
+
+Berkas M3U punya reputasi rumit yang sebenarnya tidak pantas ia sandang. Ia
+salah satu format paling sederhana yang masih dipakai sehari-hari: sederet nama,
+sederet alamat, dan beberapa catatan opsional. Anda bisa membacanya di
+penyunting teks, dan begitu terbaca, banyak perilaku pemutar berhenti terlihat
+sembarangan.
+
+Ini playlist lengkap yang benar-benar berjalan. Dua saluran, tanpa ada yang
+dipotong.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Berita",Saluran Satu
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Olahraga",Saluran Dua
+http://example.com/live/two.ts
+```
+
+Itulah seluruh formatnya. Sisanya adalah jalan-jalan menyusuri lima baris tadi.
+
+## Baris tajuk
+
+```
+#EXTM3U
+```
+
+Baris pertama harus persis seperti ini, dan tugasnya cuma satu: menyatakan bahwa
+"yang menyusul adalah M3U yang diperluas". Berkas tanpa baris ini mungkin tetap
+termuat, tapi pemutar tidak punya alasan untuk menantikan baris-baris keterangan
+sesudahnya.
+
+Tajuk juga tempat sebuah playlist bisa menunjuk ke panduan acaranya sendiri:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (atau `x-tvg-url`, artinya sama) menyebut sebuah berkas XMLTV —
+[dokumen terpisah dengan jadwalnya sendiri](/id/blog/panduan-acara-epg-iptv/) — yang memasok
+informasi acara yang sedang dan akan tayang. Kalau playlist sudah membawa ini
+tapi panduannya tetap tak muncul, setidaknya Anda tahu berkas mana dari dua itu
+yang patut disalahkan.
+
+## Baris keterangan
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Berita",Saluran Satu
+```
+
+`#EXTINF` memperkenalkan satu entri. Bacalah dalam tiga potongan.
+
+**Angkanya.** Tepat setelah titik dua ada durasi dalam detik. Untuk siaran
+langsung nilainya `-1`, artinya "tanpa panjang tetap" — siarannya memang terus
+berjalan. Untuk film, Anda bisa melihat angka sungguhan.
+
+**Atributnya.** Pasangan `kunci="nilai"` yang opsional. Yang penting:
+
+- **`tvg-id`** — pengenal yang menyambungkan saluran ini ke sebuah acara di
+  panduan XMLTV. Ini penyebab paling sering panduan termuat tapi tidak
+  menampilkan apa-apa: playlist dan panduannya berbeda soal pengenal, jadi tidak
+  ada yang berjodoh.
+- **`tvg-name`** — nama saluran untuk keperluan pencocokan dengan panduan, yang
+  tidak selalu sama dengan nama yang tampil di layar.
+- **`tvg-logo`** — alamat logo saluran. Ini gambar yang diambil lewat jaringan,
+  satu untuk tiap saluran, dan karena itulah daftar besar butuh sesaat sebelum
+  terlihat rampung pada pemuatan pertama.
+- **`group-title`** — kategori tempat saluran itu diarsipkan. Setiap judul
+  kategori yang Anda lewati saat menggulir di pemutar diketik di sini, oleh
+  penyedia Anda, satu saluran demi satu saluran. Ini juga alasan
+  [menata sendiri kategorinya itu sepadan](/id/blog/menata-playlist-besar/).
+
+**Nama tampilannya.** Setelah koma, semua yang membentang sampai akhir baris
+adalah nama yang benar-benar Anda lihat. Teks polos tanpa tanda kutip, jadi koma
+di dalam nama saluran adalah bahaya nyata pada format ini.
+
+## Alamatnya
+
+```
+http://example.com/live/one.ts
+```
+
+Baris tepat setelah `#EXTINF` adalah tempat videonya berada. Inilah satu-satunya
+baris dalam berkas yang menyentuh jaringan saat pemutaran, dan ia yang menentukan
+[bagaimana siaran itu berperilaku](/id/blog/protokol-streaming-hls-dash-rtsp/): alamat
+`.m3u8` berarti siaran HLS yang dikirim potong demi potong, alamat `.ts` berarti
+aliran transport yang menyambung.
+
+Dua akibat yang berguna. Pertama, entri dengan baris keterangan tapi tanpa
+alamat itu tak terlihat, karena tidak ada yang bisa diputar. Kedua, playlist yang
+termuat sempurna sementara semua salurannya gagal adalah playlist yang namanya
+baik-baik saja dan alamatnya mati — persoalan
+[di penyedia, bukan di pemutar](/id/blog/tugas-sebenarnya-pemutar-iptv/).
+
+## Yang tidak ada di dalamnya
+
+Sama menariknya adalah apa yang tidak bisa ditampung format ini:
+
+- **Tidak ada video.** Playlist berisi empat puluh ribu saluran hanyalah
+  beberapa megabita teks. Tak satu bingkai pun di dalamnya berupa gambar.
+- **Tidak ada data masuk.** Di mana kredensial dibutuhkan, biasanya ia sudah
+  tertanam di dalam alamatnya sendiri — itu sebabnya tautan playlist layak
+  diperlakukan sebagai kata sandi.
+- **Tidak ada sambungan hidup.** Berkas itu potret keadaan saat Anda
+  mengambilnya. Saluran yang ditambahkan sesudahnya tidak ada di sana, dan
+  itulah beda sesungguhnya dengan
+  [API Xtream Codes](/id/blog/xtream-codes-atau-m3u/) sekaligus alasan
+  [di mana daftar itu tinggal jadi penting](/id/blog/tautan-playlist-atau-berkas-di-perangkat/).
+- **Tidak ada pernyataan abjad.** Tidak ada apa pun dalam format ini yang
+  menyebut pengodeannya sendiri, dan persis karena itulah kadang
+  [nama saluran datang sebagai simbol](/id/blog/nama-saluran-jadi-simbol-aneh/).
+
+## Membaca milik Anda sendiri
+
+Kalau sebuah daftar berperilaku aneh, buka dan lihat. `#EXTM3U` yang hilang,
+`group-title` kosong di semua baris, `tvg-id` yang absen di seluruh berkas, nama
+dengan koma nyasar — masing-masing punya tanda tangan berbeda di pemutar, dan
+masing-masing terlihat dalam sepuluh detik membaca.
+
+Formatnya cukup kecil untuk ditampung utuh di kepala. Itu tidak biasa, dan layak
+dimanfaatkan.
