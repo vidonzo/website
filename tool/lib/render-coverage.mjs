@@ -68,9 +68,20 @@ function board(col, locales) {
   </section>`;
 }
 
-export function renderCoverage(data) {
+/**
+ * @param data  the result of computeCoverage()
+ * @param options.refresh  one sentence saying when *this* consumer's copy is
+ *   rebuilt. The renderer cannot know: the same board is a build-time artifact
+ *   on /admin and a just-now snapshot in the local CLI, and stating the wrong
+ *   one is what makes a fresh report look stale. Each caller passes its own.
+ */
+export function renderCoverage(data, options = {}) {
   const { locales, collections, summary, generatedAt } = data;
+  const { refresh = '' } = options;
 
+  // The stamp is when this HTML was generated, which is not the same as when
+  // the content last changed — hence "ساخته‌شده" (built) rather than
+  // "به‌روزرسانی" (updated), which read as a promise of live data.
   const date = new Intl.DateTimeFormat('fa-IR', { dateStyle: 'full' }).format(generatedAt);
   const gregorian = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long' }).format(generatedAt);
 
@@ -102,8 +113,10 @@ export function renderCoverage(data) {
   .cov-root .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin:0 0 10px}
   .cov-root h1{font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:0 0 8px;text-wrap:balance;letter-spacing:-.01em}
   .cov-root .sub{color:var(--ink-soft);margin:0;max-width:62ch}
+  .cov-root .sub code{background:var(--panel-2);padding:1px 6px;border-radius:6px;font-size:12px}
   .cov-root .meta{color:var(--ink-faint);font-size:13px;margin-top:12px}
   .cov-root .meta code{background:var(--panel-2);padding:1px 6px;border-radius:6px;font-size:12px}
+  .cov-root .meta.refresh{margin-top:4px;font-size:12.5px;opacity:.85}
   .cov-root .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0 20px}
   .cov-root .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
   .cov-root .tile .num{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
@@ -166,8 +179,9 @@ export function renderCoverage(data) {
   <div class="cov-root"><div class="wrap">
     <p class="eyebrow">ویدونزو · پوشش ترجمه‌ی محتوا</p>
     <h1>داشبورد پوشش ترجمه</h1>
-    <p class="sub">هر ردیف یک سند و هر ستون یکی از ${fa(summary.localeCount)} زبان سایت است. سلول پُر یعنی نسخه‌ی بومی موجود است؛ سلول خالی یعنی هنوز ترجمه نشده. این گزارش هر بار از روی فایل‌های زنده‌ی مخزن ساخته می‌شود.</p>
-    <p class="meta">به‌روزرسانی: ${esc(date)} (${esc(gregorian)}) · منبع: <code>src/content</code></p>
+    <p class="sub">هر ردیف یک سند و هر ستون یکی از ${fa(summary.localeCount)} زبان سایت است. سلول پُر یعنی نسخه‌ی بومی موجود است؛ سلول خالی یعنی هنوز ترجمه نشده. اعداد مستقیماً از روی فایل‌های <code>.mdx</code> مخزن خوانده می‌شوند، نه از یک فهرست دستی.</p>
+    <p class="meta">ساخته‌شده: ${esc(date)} (${esc(gregorian)}) · منبع: <code>src/content</code></p>
+    ${refresh ? `<p class="meta refresh">${esc(refresh)}</p>` : ''}
     <div class="stats">${tilesHtml}</div>
     <div class="legend">
       <span class="k"><span class="sw d">${CHECK}</span> ترجمه‌شده (استاندارد)</span>

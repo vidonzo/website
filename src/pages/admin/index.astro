@@ -13,7 +13,13 @@ import { renderCoverage } from '../../../tool/lib/render-coverage.mjs';
 // cwd is the repo root during `astro build`; pass it explicitly rather than
 // relying on the module's bundled location.
 const data = computeCoverage(process.cwd());
-const { html } = renderCoverage(data);
+// This page is a build artifact, not a live view: it is regenerated when the
+// site deploys and at no other moment. Content only changes by a merge, and a
+// merge deploys, so the numbers are never actually behind — but the timestamp
+// is the build's, so say so rather than let it read as a stale dashboard.
+const { html } = renderCoverage(data, {
+  refresh: 'این صفحه در هر استقرار سایت از نو ساخته می‌شود؛ داده‌های آن زنده نیست و با باز کردن دوباره‌ی صفحه تغییر نمی‌کند.',
+});
 ---
 
 <!doctype html>
