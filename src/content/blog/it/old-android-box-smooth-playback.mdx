@@ -1,0 +1,109 @@
+---
+title: "Far tornare fluido un vecchio box Android"
+description: "Un box che scatta raramente è troppo debole per riprodurre video; gli si chiede tutto il resto. Quali parti di un lettore costano su un dispositivo poco potente, e le impostazioni e abitudini che restituiscono il lavoro a chi può reggerlo."
+urlSlug: vecchio-box-android-riproduzione-fluida
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisione', 'riproduzione']
+keywords: ['lettore iptv per vecchio box android', 'lettore iptv leggero android tv', 'box android lento', 'iptv su hardware debole']
+heroImageAlt: "Un piccolo decoder leggermente graffiato su una mensola, spia accesa, polvere in un angolo."
+---
+
+In molti salotti, da qualche parte, c’è un piccolo box Android nero, di cinque
+o sei anni, con uno o due gigabyte di memoria e un chip che era economico già
+allora. Una volta riproduceva tutto. Ora l’app che ci gira scatta al cambio di
+canale, l’immagine sussulta nelle scene concitate e il menu ci mette un attimo
+a rispondere. L’istinto dice che il box è finito. Di solito non lo è. Anche in
+un box modesto c’è un decoder video dedicato perfettamente capace di disegnare
+1080p per tutta la sera; ciò che è cambiato è quanto lavoro *altro* si è preso
+il software attorno. Ecco dove va il costo, e come restituire il lavoro alle
+parti che possono reggerlo.
+
+## Cosa costa davvero su un box debole
+
+Tre cose, in ordine decrescente.
+
+**Decodificare il video via software.** Se l’app decodifica sulla CPU generica
+invece che sul blocco video, uno stream 1080p si mangia gran parte di un chip
+piccolo, e uno 4K o HEVC semplicemente non si può fare. Questa sola scelta
+separa un box che riproduce da uno che scatta, ed è un’impostazione.
+
+**Disegnare un’interfaccia elaborata.** Locandine, animazioni, sfondi sfocati,
+un carosello da cento schede, tutto ridisegnato mentre il video gira sotto.
+Ogni fotogramma di quella roba esce dallo stesso piccolo bilancio da cui esce
+il video. Un’interfaccia pesante sopra un decoder leggero è esattamente il modo
+in cui un box che *sa* riprodurre sembra non saperlo.
+
+**Tenere in memoria una playlist enorme nel modo sbagliato.** La lista completa
+di un fornitore è un file grande, e un’app che la tiene tutta come struttura
+piatta e la cerca scorrendo farà finire la memoria di un box piccolo — a quel
+punto il sistema comincia a chiudere cose, a volte l’app stessa.
+
+Nota cosa non è in elenco: la rete. Buffering e scatti si somigliano su un box
+lento, quindi conviene escludere prima la rete —
+[l’articolo sul buffering](/it/blog/risolvere-buffering-iptv/) lo copre in cinque
+minuti — prima di dare la colpa all’hardware.
+
+## Le impostazioni che contano
+
+**Decodifica hardware attiva.** In Vidonzo è *Impostazioni → Riproduzione →
+Decodifica hardware*, e su un box vecchio è tutta la partita. Attiva, il blocco
+video fa la decodifica e la CPU resta libera per disegnare l’interfaccia;
+disattiva, la CPU fa entrambe e perde. Se con essa attiva un canale dà
+[audio ma nessuna immagine](/it/blog/audio-si-immagine-no/), il formato di quel
+canale non è supportato dal decoder del box — inverti l’interruttore solo per
+quel canale e aspettati che sia più pesante.
+
+**Buffer dimensionato sulla connessione, non sul box.** Un buffer più grande
+costa memoria, e un box piccolo ne ha poca da spendere — ma un buffer troppo
+piccolo si ferma al primo singhiozzo, e fermarsi è proprio ciò che vuoi curare.
+Parti dal valore predefinito; alzalo solo se l’immagine si ferma davvero, e
+abbassalo solo se al box manca visibilmente memoria (le app che si chiudono da
+sole sono il segnale).
+
+**Tieni la guida, togli la decorazione.** La guida programmi è dati, non
+immagini, ed è economica da disegnare. Sono le schermate cariche di grafica a
+costare. Il layout TV di Vidonzo è
+[una barra laterale con cornici di focus](/it/blog/lettore-iptv-su-android-tv/),
+fatto per una croce direzionale e leggero per scelta — il box disegna una
+lista, non una vetrina.
+
+## Le abitudini che contano
+
+**Cura la lista.** [Preferiti e un paio di categorie](/it/blog/organizzare-playlist-grandi/)
+non sono solo comodi su un box piccolo: sono più leggeri. Sfogliare un elenco
+breve di ciò che guardi davvero non costa quasi nulla. Scorrere ogni sera
+l’intera lista del fornitore è la cosa più costosa che tu possa chiedere a un
+dispositivo debole.
+
+**Lascia sfogliare al telefono.** È il cambiamento che sorprende di più. Se un
+telefono o un tablet sulla stessa Wi-Fi
+[fa da telecomando del box](/it/blog/telefono-come-telecomando-tv/), il
+telefono disegna le locandine, esegue la ricerca e gestisce la digitazione — e
+al box resta solo da ricevere «riproduci questo» e riprodurlo. Un box debole con
+un telefono accanto si comporta come un box molto migliore, perché è stato
+retrocesso all’unico compito in cui è bravo.
+
+**Riavvialo ogni tanto.** Non è saggezza popolare: un box acceso da tre
+settimane ha accumulato tutto ciò che ogni app gli ha lasciato. Un riavvio
+settimanale costa un minuto e restituisce memoria che il lettore può usare.
+
+**Disinstalla ciò che non usi.** Ogni app che tiene un servizio in background
+spende dallo stesso piccolo bilancio. Un box che deve solo fare il box lascia
+di più all’immagine.
+
+## Quando è davvero l’hardware
+
+C’è un pavimento. Un box che non può decodificare HEVC in hardware non
+riprodurrà mai HEVC in modo fluido, qualunque cosa faccia il software, e i
+fornitori stanno passando a HEVC perché dimezza la loro banda. Se i canali del
+tuo fornitore sono per lo più HEVC e il decoder del tuo box è precedente, la
+risposta onesta è un dispositivo più recente — e non deve essere costoso; una
+chiavetta certificata attuale decodifica HEVC in hardware e costa poco.
+
+Ma prova prima il software. Decodifica hardware attiva, buffer al valore
+predefinito, interfaccia tenuta snella, il telefono che sfoglia: la maggior
+parte delle lamentele da «box vecchio» non sopravvive a questa lista, e
+percorrerla richiede una serata.
+[Impostare la playlist su un lettore nuovo](/it/blog/configurare-la-prima-playlist/)
+è circa un minuto di quella serata; il resto è guardare se scatta ancora.

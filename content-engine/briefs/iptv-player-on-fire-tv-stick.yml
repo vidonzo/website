@@ -1,0 +1,26 @@
+key: iptv-player-on-fire-tv-stick
+title: "Putting a real IPTV player on a Fire TV Stick"
+sourceLocale: en
+status: published
+publishNote: >
+  Published on the author's decision without a Fire OS device session. What the
+  article claims is what the manifest declares — a leanback launcher entry and
+  no touchscreen requirement — and Fire OS is Android, so the TV build installs
+  and navigates there. The remaining unknowns are cosmetic, not structural:
+  where Fire OS files a sideloaded app, and how the Fire remote's ring maps in
+  practice. A Fire OS session is still worth running; if it contradicts a
+  sentence, correct that sentence rather than pulling the article. Note also
+  that the direct APK is behind a tester passcode (commit fe76b99) and a Fire
+  TV has no Google Play, so step 2 currently ends at the access-code prompt —
+  the same door the Android TV article already leaves readers at.
+riskTier: medium
+intent: install-how-to
+targetQueries: ["iptv player fire tv stick", "iptv on firestick", "install iptv fire tv", "best iptv player for firestick"]
+audience: Fire TV owners — the largest install-intent query in the category.
+value: A sideload walkthrough that leads to a working setup with the phone as the remote.
+angle: Fire OS is Android; the app's TV build runs on it. Sideloading explained plainly, once.
+productFacts:
+  - Android TV build (leanback launcher, touchscreen not required in the manifest)
+  - phone as remote over the local network
+constraints: [no-piracy-adjacent-app-names, no-download-or-offline-wording-beyond-the-apk-itself]
+internalLinks: [iptv-player-on-android-tv, your-phone-is-a-better-remote, set-up-your-first-playlist]

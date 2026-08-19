@@ -1,0 +1,113 @@
+---
+title: "Das Bild füllt den Schirm nicht: Seitenverhältnis, Zoom und schwarze Balken"
+description: "Balken an den Seiten, Balken oben und unten, oder ein Bild, das etwas gequetscht wirkt. Jedes davon ist eine Entscheidung des Players — und wenn Sie wissen, welche er getroffen hat, behebt ein Bedienelement sie."
+urlSlug: bild-fuellt-den-schirm-nicht
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['fehlerbehebung', 'wiedergabe']
+keywords: ['iptv schwarze balken', 'bild nicht formatfüllend', 'iptv seitenverhältnis', 'bild zoomen fernseher']
+heroImageAlt: "Ein Fernsehschirm, in dem ein kleineres Rechteck zu sehen ist, mit dunklen Streifen darüber und darunter."
+---
+
+Ein Fernseher ist ein Rechteck mit fester Form, und Video kommt in einem
+Rechteck *irgendeiner* Form an — nicht immer derselben. Wann immer die beiden
+nicht übereinstimmen, muss der Player entscheiden, was mit der Differenz
+geschieht, und jede mögliche Entscheidung ärgert irgendjemanden. Balken,
+Beschnitt oder Verzerrung: Wählen Sie eins. Hier steht, was jedes ist, warum
+die Balken meist die *richtige* Antwort sind und wie Sie absichtlich die
+falsche wählen, wenn Sie sie lieber mögen.
+
+## Woher die Form kommt
+
+Jeder Stream deklariert seine Bildgröße — 1920×1080, 720×576 und so weiter —
+und getrennt davon die Form, in der diese Pixel gezeigt werden sollen. Das
+meiste heutige Fernsehen ist 16:9. Ältere Sendungen, manche regionalen Sender
+und viel Archivmaterial sind 4:3, näher am Quadrat. Filme sind oft noch
+breiter, 2,35:1, und kommen *innerhalb* eines 16:9-Rahmens an, mit schwarzen
+Streifen, die derjenige ins Bild gebacken hat, der es kodiert hat.
+
+Ihr Schirm ist derweil 16:9 — es sei denn, es ist ein hochkant gehaltenes
+Telefon oder ein Tablet im 4:3-Format; dann läuft die Abweichung andersherum.
+
+## Die drei Dinge, die ein Player tun kann
+
+Bei einem Bild der einen Form und einem Schirm der anderen gibt es genau drei
+ehrliche Optionen, und die Taste *Format* im Vidonzo-Player wechselt in dieser
+Reihenfolge durch:
+
+**Einpassen.** Zeige das ganze Bild, so groß es geht, in seiner wahren Form.
+Was übrig bleibt, wird schwarz gefüllt. Eine 4:3-Sendung auf einem
+16:9-Schirm bekommt Balken an den Seiten; ein breiter Film bekommt sie oben
+und unten. Nichts geht verloren, nichts wird verzerrt, und das ist die
+Voreinstellung, weil es die einzige Wahl ist, die Ihnen zeigt, was der Sender
+tatsächlich geschickt hat.
+
+**Zoom.** Fülle den Schirm in der wahren Form, indem das Bild vergrößert wird,
+bis die Balken verschwinden — und was über die Kanten hinausragt, wird
+abgeschnitten. Ein 4:3-Bild verliert oben und unten einen Streifen; ein breiter
+Film je einen an den Seiten. Gesichter behalten die richtige Form, aber ein
+Untertitel unten oder ein Spielstand oben kann mit dem Streifen verschwinden.
+
+**Verzerren.** Fülle den Schirm, indem die Form des Bildes geändert wird.
+Nichts wird beschnitten, aber alles wird breiter oder höher, als es sein
+sollte: Kreise werden Ovale, Menschen werden breiter. Es ist die Einstellung,
+die die meisten Fernseher voreinstellen und die die meisten Leute für „richtig“
+halten, weil sie die Alternative nie daneben gesehen haben.
+
+## Welche Sie wirklich wollen
+
+Die ehrliche Antwort ist *Einpassen*, fast immer, und es lohnt zu sagen, warum
+die Balken kein Fehler sind. Sie sind die Weigerung des Players, einen Teil des
+Bildes wegzuwerfen oder es zu verzerren. Hat man einmal bemerkt, dass die
+Menschen in einem verzerrten Bild subtil breit sind, kann man es nur schwer
+wieder verlernen.
+
+Aber es gibt zwei Fälle, in denen eine andere Wahl vernünftig ist — und für
+die gibt es die Taste:
+
+- **Ein Film mit eingebackenen Streifen auf einem breiten Schirm.** Der
+  Encoder hat schwarze Streifen in den 16:9-Rahmen gesetzt; der Film darin ist
+  breiter als der Rahmen. *Zoom* schneidet hier die Streifen weg und nichts vom
+  Film, und auf einem großen Fernseher ist das eine echte Verbesserung.
+- **Ein Sender mit kaputter Deklaration.** Hin und wieder sagt ein Stream, er
+  habe die eine Form, und hat sichtlich die andere — ein gequetschtes
+  4:3-Bild, das behauptet, 16:9 zu sein, oder umgekehrt. Für eine Lüge gibt es
+  keine richtige Antwort; *Verzerren* ist zufällig das, was sie rückgängig
+  macht. Probieren Sie alle drei und bleiben Sie bei der, in der ein Gesicht wie
+  ein Gesicht aussieht.
+
+## Wenn es gar nicht am Player liegt
+
+Zwei Dinge sehen wie ein Formatproblem aus und sind keines.
+
+**Balken bei jeder Quelle.** Erscheinen dieselben Balken bei der Streaming-App,
+der Konsole und dem Tuner, hat der Fernseher eine eigene Bildgrößen-Einstellung
+— oft *Screen Fit*, *Just Scan*, *Original* oder *16:9* genannt — und die
+überstimmt alle. Stellen Sie sie auf die Variante, die nicht skaliert, und
+lassen Sie jede Quelle selbst entscheiden.
+
+**Balken, die mit einem Programmwechsel kommen.** Ein Livesender kann mitten im
+Stream die Form wechseln — eine alte Folge nach einer modernen — und
+[was ein Decoder damit macht](/de/blog/ton-ohne-bild/), ist, den Rahmen
+in der neuen Größe neu zu zeichnen. Das ist kein Fehler; das ist das Bild, das
+korrekt dem Inhalt folgt. *Bleibt* das Bild danach falsch, öffnen Sie den
+Sender neu.
+
+## Untertitel folgen dem Bild, nicht dem Schirm
+
+Ein kleines Detail, das Vidonzo richtig macht und das leicht zu übersehen ist:
+Untertitel sind am *Bild* verankert, nicht an den Kanten des Schirms. Bei einem
+breiten Film mit Balken sitzt der Untertitel über der unteren Bildkante,
+statt im schwarzen Streifen darunter zu schweben — so wie im Kino. (Bei Zoom
+und Verzerren *ist* das Bild der Schirm, also fallen beide zusammen.) Deshalb
+lohnt es sich, [Spurwahl und Untertitelstil](/de/blog/untertitel-und-tonspuren/)
+einmal einzustellen und dann zu vergessen.
+
+## Am Fernseher, in einem Satz
+
+Einpassen ist richtig; Zoom ist für breite Filme mit eingebackenen Streifen;
+Verzerren ist für den gelegentlichen Sender, der über seine Form lügt.
+Schalten Sie die *Format*-Taste durch, bis ein Gesicht wie ein Gesicht
+aussieht — und sind die Balken überall, prüfen Sie die Bildgrößen-Einstellung
+des Fernsehers selbst, bevor Sie [die Box](/de/blog/iptv-player-auf-android-tv/)
+oder den Stream beschuldigen.

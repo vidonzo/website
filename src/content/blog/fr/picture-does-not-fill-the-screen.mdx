@@ -1,0 +1,111 @@
+---
+title: "L’image ne remplit pas l’écran : format, zoom et bandes noires"
+description: "Des bandes sur les côtés, des bandes en haut et en bas, ou une image un peu écrasée. Chacune est une décision prise par le lecteur, et une fois que vous savez laquelle, une seule commande la corrige."
+urlSlug: l-image-ne-remplit-pas-l-ecran
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['depannage', 'lecture']
+keywords: ['bandes noires iptv', 'image ne remplit pas l ecran', 'format d image iptv', 'zoom image television']
+heroImageAlt: "Un écran de téléviseur affichant un rectangle plus petit à l’intérieur, avec des bandes sombres au-dessus et au-dessous."
+---
+
+Un téléviseur est un rectangle de forme fixe, et la vidéo arrive dans un
+rectangle d’*une certaine* forme — pas toujours la même. Chaque fois que les
+deux divergent, le lecteur doit décider quoi faire de la différence, et toute
+décision possible agace quelqu’un. Bandes, recadrage ou étirement : il faut
+choisir. Voici ce qu’est chacune, pourquoi les bandes sont le plus souvent la
+*bonne* réponse, et comment choisir volontairement la mauvaise quand vous la
+préférez.
+
+## D’où vient la forme
+
+Chaque flux déclare la taille de son image — 1920×1080, 720×576, et ainsi de
+suite — et, séparément, la forme dans laquelle ces pixels doivent être
+affichés. L’essentiel de la télévision d’aujourd’hui est en 16:9. Les
+programmes plus anciens, certaines chaînes régionales et une bonne part des
+archives sont en 4:3, plus proches du carré. Les films sont souvent plus larges
+encore, 2,35:1, et arrivent *à l’intérieur* d’un cadre 16:9 avec des bandes
+noires déjà incrustées dans l’image par celui qui l’a encodée.
+
+Votre écran, lui, est en 16:9 — sauf s’il s’agit d’un téléphone tenu à la
+verticale ou d’une tablette en 4:3, auquel cas l’écart va dans l’autre sens.
+
+## Les trois choses qu’un lecteur peut faire
+
+Avec une image d’une forme et un écran d’une autre, il existe exactement trois
+options honnêtes, et la touche *Format* du lecteur Vidonzo les fait défiler
+dans cet ordre :
+
+**Ajuster.** Afficher toute l’image, aussi grande que possible, à sa forme
+réelle. Ce qui reste est rempli de noir. Un programme 4:3 sur un écran 16:9
+reçoit des bandes sur les côtés ; un film large en reçoit en haut et en bas.
+Rien n’est perdu, rien n’est déformé, et c’est le réglage par défaut parce que
+c’est le seul choix qui vous montre ce que le diffuseur a réellement envoyé.
+
+**Zoom.** Remplir l’écran, à la forme réelle, en agrandissant l’image jusqu’à
+faire disparaître les bandes — et en rognant ce qui dépasse des bords. Une
+image 4:3 perd une lanière en haut et en bas ; un film large en perd une de
+chaque côté. Les visages gardent la bonne forme, mais un sous-titre en bas ou un
+score en haut peut partir avec la lanière.
+
+**Étirer.** Remplir l’écran en changeant la forme de l’image. Rien n’est rogné,
+mais tout devient plus large ou plus haut qu’il ne devrait : les cercles
+deviennent des ovales, les gens s’élargissent. C’est le réglage que la plupart
+des téléviseurs prennent par défaut et que la plupart des gens prennent pour le
+« bon », faute d’avoir jamais vu l’alternative à côté.
+
+## Celui que vous voulez vraiment
+
+La réponse honnête est *ajuster*, presque toujours, et il vaut la peine de dire
+pourquoi les bandes ne sont pas un défaut. Elles sont le refus du lecteur de
+jeter une partie de l’image ou de la déformer. Une fois qu’on a remarqué que
+les gens, sur une image étirée, sont subtilement larges, il devient difficile
+de ne plus le voir.
+
+Mais il y a deux cas où un autre choix est raisonnable, et c’est pour eux que
+la touche existe :
+
+- **Un film avec des bandes incrustées sur un écran large.** L’encodeur a mis
+  des bandes noires dans le cadre 16:9 ; le film à l’intérieur est plus large
+  que le cadre. Ici le *zoom* rogne les bandes et rien du film, et sur un grand
+  téléviseur c’est une amélioration réelle.
+- **Une chaîne à la déclaration cassée.** De temps en temps, un flux dit
+  qu’il a une forme et en a manifestement une autre — une image 4:3 écrasée qui
+  prétend être en 16:9, ou l’inverse. Il n’y a pas de bonne réponse à un
+  mensonge ; *étirer* est celle qui, par hasard, l’annule. Essayez les trois et
+  arrêtez-vous à celle où un visage ressemble à un visage.
+
+## Quand ce n’est pas du tout le lecteur
+
+Deux choses ressemblent à un problème de format et n’en sont pas.
+
+**Des bandes sur toutes les sources.** Si les mêmes bandes apparaissent sur
+l’application de streaming, la console et le tuner, le téléviseur a son propre
+réglage de taille d’image — souvent appelé *Screen Fit*, *Just Scan*,
+*Original* ou *16:9* — et il prend le dessus sur tout le monde. Mettez-le sur
+celui qui ne redimensionne pas, et laissez chaque source décider.
+
+**Des bandes qui arrivent avec un changement d’émission.** Une chaîne en direct
+peut changer de forme en cours de flux — un vieil épisode après un moderne — et
+[ce qu’un décodeur en fait](/fr/blog/le-son-sans-l-image/), c’est redessiner
+l’image à la nouvelle taille. Ce n’est pas un défaut ; c’est l’image qui suit
+correctement le contenu. Si l’image *reste* fausse ensuite, rouvrez la chaîne.
+
+## Les sous-titres suivent l’image, pas l’écran
+
+Un petit détail que Vidonzo réussit et qu’on rate facilement : les sous-titres
+sont ancrés à l’*image*, pas aux bords de l’écran. Sur un film large avec
+bandes, le sous-titre se pose sur le bord inférieur du film au lieu de flotter
+dans la bande noire en dessous — comme au cinéma. (En zoom et en étirement,
+l’image *est* l’écran, donc les deux coïncident.) C’est pourquoi
+[le choix des pistes et le style des sous-titres](/fr/blog/sous-titres-et-pistes-audio/)
+méritent d’être réglés une fois puis oubliés.
+
+## Sur un téléviseur, en une phrase
+
+Ajuster est le bon choix ; le zoom est pour les films larges à bandes
+incrustées ; l’étirement est pour la chaîne occasionnelle qui ment sur sa
+forme. Faites défiler la touche *Format* jusqu’à ce qu’un visage ressemble à un
+visage et — si les bandes sont partout — vérifiez le réglage de taille d’image
+du téléviseur lui-même avant d’accuser
+[le boîtier](/fr/blog/lecteur-iptv-sur-android-tv/) ou le flux.

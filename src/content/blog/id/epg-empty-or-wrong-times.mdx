@@ -1,0 +1,113 @@
+---
+title: "Panduan acara kosong atau jamnya salah: memperbaiki EPG Anda"
+description: "Salurannya jalan tapi panduannya kosong, basi, atau geser tepat satu jam. Empat kerusakan menghasilkan gejala itu, masing-masing dengan tandanya sendiri, dan tak satu pun berbunyi «pemutarnya lambat»."
+urlSlug: panduan-acara-kosong-atau-jam-salah
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['pemecahan-masalah', 'playlist']
+keywords: ['epg tidak jalan iptv', 'panduan acara jam salah', 'epg kosong iptv', 'xmltv tidak termuat', 'selisih jam epg']
+heroImageAlt: "Sebuah kisi acara dengan sebagian besar selnya kosong dan satu baris bergeser satu kolom."
+---
+
+Panduan acara yang kosong lebih menjengkelkan daripada saluran yang rusak,
+karena semua yang *lain* berjalan. Gambarnya jalan, daftarnya penuh, dan satu
+baris yang seharusnya bilang apa yang tayang malah bilang «Tidak ada info
+program». Atau bilang sesuatu, tapi itu yang tayang sejam lalu. Kalau Anda sudah
+membaca [cara kerja panduan acara](/id/blog/panduan-acara-epg-iptv/), Anda sudah tahu
+fakta kuncinya: panduan adalah berkas terpisah, diambil terpisah, dicocokkan ke
+saluran Anda lewat nama. Setiap kerusakan di bawah adalah putusnya rantai itu di
+suatu titik. Inilah semuanya, dalam urutan yang biasanya terjadi.
+
+## 1. Pemutar tak pernah diberi tahu di mana panduannya
+
+Playlist M3U [membawa saluran](/id/blog/isi-file-m3u/); ia tak membawa
+panduan. Sebagian playlist menyebut alamat panduan di baris pertamanya
+(`url-tvg=`), banyak yang tidak, dan kalau punya Anda tidak, pemutar tak punya
+apa-apa untuk diambil dan setiap saluran bilang «Tidak ada info program» —
+panduannya tidak rusak, ia memang tidak ada.
+
+Tandanya: *setiap* saluran kosong, sejak hari pertama. Perbaikannya: minta
+alamat XMLTV ke penyedia Anda (biasanya berakhiran `.xml` atau `.xml.gz`) dan
+masukkan di pengaturan sumber, di samping tautan playlist. Kalau penyedia
+memberi Anda [login Xtream Codes](/id/blog/xtream-codes-atau-m3u/), panduannya
+ikut dengan login itu dan tak ada yang perlu dimasukkan — panduan kosong pada
+Xtream berarti salah satu kerusakan di bawah.
+
+## 2. Panduan dan salurannya tak saling kenal
+
+Ini yang paling umum, dan menghasilkan gejala paling membingungkan: *sebagian*
+saluran punya panduan dan sebagian lagi, seolah acak, tidak.
+
+Berkas panduan mendaftar acara terhadap sebuah pengenal saluran — `tvg-id`.
+Playlist juga memberi tiap saluran sebuah `tvg-id`. Di mana keduanya cocok,
+Anda dapat panduan; di mana tidak, Anda tak dapat apa-apa, meski salurannya ada
+di berkas panduan dengan nama yang sedikit berbeda. Penyedia yang membuat
+keduanya dari basis data yang sama cocok sempurna. Penyedia yang membautkan
+panduan pihak ketiga ke daftarnya cocok di tempat pengenalnya kebetulan
+sepakat.
+
+Tandanya: cakupan sebagian, stabil sepanjang waktu — saluran yang sama selalu
+kosong. Pemutar tak bisa berbuat banyak, karena ia tak bisa tahu bahwa
+`news24.example` dan `News24_HD` adalah stasiun yang sama tanpa menebak. Kalau
+penyedia Anda memberi lebih dari satu varian playlist, yang lebih lengkap
+sering punya pengenal yang lebih baik; kalau tidak, beri tahu penyedia saluran
+mana yang tak berpanduan.
+
+## 3. Jamnya geser — biasanya tepat satu jam
+
+Acaranya muncul, tapi kisinya bilang filmnya mulai jam sembilan padahal mulai
+jam sepuluh. Kalau gesernya bilangan jam yang bulat, ini masalah zona waktu, dan
+layak dipahami, karena inilah kerusakan yang paling sering ditimpakan ke pihak
+yang salah.
+
+Berkas XMLTV mencap tiap acara dengan waktu *dan* selisih terhadap UTC —
+`20260819210000 +0100`. Pemutar yang benar membaca selisih itu, mengonversi ke
+jam perangkat Anda, dan menampilkan waktu yang benar terlepas dari di mana
+panduannya dibuat. Vidonzo melakukannya — ini salah satu hal yang aplikasi
+cermati, karena [di sinilah panduan paling sering salah](/id/blog/panduan-acara-epg-iptv/)
+— jadi geseran biasanya berarti salah satu dari dua hal lain:
+
+- **Panduannya mendeklarasikan selisih yang salah.** Penyedia membuatnya di
+  server yang disetel ke zona lain dan tak memperbaiki capnya. Setiap saluran
+  geser sebanyak yang sama, dan geser di pemutar mana pun. Hanya penyedia yang
+  bisa membetulkannya.
+- **Jam atau zona perangkatnya sendiri salah.** Kotak TV yang dibiarkan pada
+  zona pabrik menggeser *segalanya*, termasuk jam di bilah statusnya. Cek
+  pengaturan tanggal dan waktu kotak sebelum apa pun — dan kalau ia di
+  «otomatis» pada jaringan yang memblokir server waktu, setel manual.
+
+Tanda yang memisahkan keduanya: kalau geserannya muncul di ponsel Anda juga,
+itu panduannya; kalau muncul hanya di satu perangkat, itu perangkatnya.
+
+## 4. Panduannya basi
+
+Minggu lalu semuanya baik dan kini kisinya menampilkan acara yang sudah lewat,
+atau berhenti mendadak tengah malam nanti. Berkas panduan mencakup satu jendela
+— sering beberapa hari — dan berkasnya harus diambil ulang untuk
+memperpanjangnya. Kalau pemutar tak bisa menjangkau alamatnya (pindah,
+kedaluwarsa, jaringan mati saat ia mencoba), salinan lamalah yang Anda lihat.
+
+Tandanya: panduan yang berakhir di titik tetap di masa lalu, atau berhenti
+beberapa jam ke depan. Gunakan *Perbarui sekarang* pada sumbernya; kalau itu
+mengisinya, pengambilannya memang cuma telat. Kalau tidak, alamatnya sendiri
+yang gagal, dan di sini berlaku
+[pemeriksaan yang sama seperti pada tautan playlist](/id/blog/playlist-tidak-mau-dimuat/)
+— tempel di peramban dan lihat apakah ia menjawab.
+
+## Urutan lima menit
+
+1. Pastikan sakelar panduan menyala (*Tampilkan panduan acara (EPG)*).
+2. Login Xtream? Berarti alamat bukan masalahnya; lompat ke 3. Tautan M3U?
+   Pastikan alamat XMLTV sudah dimasukkan.
+3. Semua saluran kosong → alamat (1) atau basi (4). Sebagian kosong →
+   pencocokan (2). Jam salah → zona (3).
+4. *Perbarui sekarang*, lalu buka lagi panduannya.
+5. Cek saluran yang sama di perangkat kedua sebelum menulis ke penyedia, supaya
+   Anda bisa bilang apakah kerusakannya mengikuti panduan atau perangkat.
+
+Satu catatan jujur untuk menutup: panduan hanya sebaik berkas di belakangnya,
+dan tugas pemutar adalah mengambilnya dengan andal, mencocokkannya dengan
+setia, dan — bagian yang paling sering salah pada kebanyakan pemutar —
+melakukan aritmetika zona waktu dengan benar. Begitu ketiganya beres, semua
+kerusakan yang tersisa ada di dalam berkas, dan perbaikan tercepat adalah tahu
+yang mana yang harus dilaporkan.

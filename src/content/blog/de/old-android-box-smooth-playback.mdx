@@ -1,0 +1,114 @@
+---
+title: "Eine alte Android-Box wieder flüssig machen"
+description: "Eine stockende Box ist selten zu schwach, um Video abzuspielen; sie soll nur alles andere nebenbei erledigen. Welche Teile eines Players ein schwaches Gerät kosten — und welche Einstellungen und Gewohnheiten die Arbeit dorthin zurückgeben, wo sie getragen werden kann."
+urlSlug: alte-android-box-wieder-fluessig
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['fernsehen', 'wiedergabe']
+keywords: ['iptv player für alte android box', 'leichter iptv player android tv', 'android box ruckelt', 'iptv auf schwacher hardware']
+heroImageAlt: "Eine kleine, leicht zerkratzte Set-Top-Box auf einem Regal, Kontrollleuchte an, Staub in der Ecke."
+---
+
+In vielen Wohnzimmern steht irgendwo eine kleine schwarze Android-Box, fünf
+oder sechs Jahre alt, mit ein oder zwei Gigabyte Speicher und einem Chip, der
+schon neu billig war. Früher spielte sie alles. Jetzt stockt die App darauf
+beim Senderwechsel, das Bild ruckelt in bewegten Szenen, und das Menü braucht
+einen Moment, bis es reagiert. Der Instinkt sagt: Die Box ist am Ende.
+Meistens ist sie es nicht. Selbst in einer bescheidenen Box steckt ein
+dedizierter Video-Decoder, der problemlos den ganzen Abend 1080p zeichnen kann;
+was sich geändert hat, ist, wie viel *andere* Arbeit die Software drumherum
+übernommen hat. Hier steht, wohin die Kosten gehen und wie Sie die Arbeit
+denen zurückgeben, die sie tragen können.
+
+## Was auf einer schwachen Box wirklich kostet
+
+Drei Dinge, in absteigender Reihenfolge.
+
+**Video in Software dekodieren.** Dekodiert die App auf der Allzweck-CPU statt
+im Videoblock, frisst ein 1080p-Stream den größten Teil eines kleinen Chips,
+und ein 4K- oder HEVC-Stream ist schlicht nicht machbar. Diese eine
+Entscheidung trennt eine Box, die spielt, von einer, die stockt — und sie ist
+eine Einstellung.
+
+**Eine aufwendige Oberfläche zeichnen.** Poster, Animationen, verwaschene
+Hintergründe, ein Karussell aus hundert Karten, alles neu gezeichnet, während
+das Video darunter läuft. Jeder Frame davon kommt aus demselben kleinen Budget
+wie das Video. Eine schwere Oberfläche über einem leichten Decoder ist genau
+das, was eine Box, die spielen *kann*, aussehen lässt, als könne sie es nicht.
+
+**Eine riesige Playlist falsch im Speicher halten.** Die volle Liste eines
+Anbieters ist eine große Datei, und eine App, die sie komplett als flache
+Struktur hält und per Scrollen durchsucht, treibt eine kleine Box aus dem
+Speicher — woraufhin das Betriebssystem anfängt, Dinge zu schließen, manchmal
+die App selbst.
+
+Beachten Sie, was nicht auf der Liste steht: das Netzwerk. Buffering und
+Ruckeln sehen auf einer langsamen Box gleich aus, deshalb lohnt es, das Netz
+zuerst auszuschließen — [der Buffering-Artikel](/de/blog/iptv-ruckeln-beheben/)
+erledigt das in fünf Minuten —, bevor Sie die Hardware verdächtigen.
+
+## Die Einstellungen, auf die es ankommt
+
+**Hardware-Dekodierung an.** In Vidonzo unter *Einstellungen → Wiedergabe →
+Hardware-Dekodierung*, und auf einer alten Box ist das die ganze Partie. An:
+Der Videoblock dekodiert, und die CPU bleibt fürs Zeichnen der Oberfläche
+übrig. Aus: Die CPU macht beides und verliert. Zeigt ein Sender bei
+eingeschalteter Hardware-Dekodierung
+[Ton, aber kein Bild](/de/blog/ton-ohne-bild/), unterstützt der Decoder
+der Box dessen Format nicht — drehen Sie den Schalter für diesen einen Sender
+um und rechnen Sie damit, dass es schwerer wird.
+
+**Puffer nach der Verbindung bemessen, nicht nach der Box.** Ein größerer
+Puffer kostet Speicher, und eine kleine Box hat wenig übrig — aber ein zu
+kleiner Puffer stockt beim ersten Schluckauf, und Stocken ist genau das, was
+Sie kurieren wollen. Beginnen Sie beim Standardwert; erhöhen Sie ihn nur, wenn
+das Bild tatsächlich stehen bleibt, und senken Sie ihn nur, wenn der Box
+sichtbar der Speicher ausgeht (Apps, die sich von selbst schließen, sind das
+Anzeichen).
+
+**Den Programmführer behalten, die Dekoration weglassen.** Der Programmführer
+ist Daten, keine Bilder, und billig zu zeichnen. Es sind die artwork-schweren
+Bildschirme, die kosten. Vidonzos Fernsehlayout ist
+[eine Seitenleiste mit Fokusrahmen](/de/blog/iptv-player-auf-android-tv/), fürs
+Steuerkreuz gebaut und bewusst leicht — die Box zeichnet eine Liste, keinen
+Ausstellungsraum.
+
+## Die Gewohnheiten, auf die es ankommt
+
+**Kuratieren.** [Favoriten und ein paar Kategorien](/de/blog/grosse-playlists-ordnen/)
+sind auf einer kleinen Box nicht nur bequem, sie sind leichter. Eine kurze
+Liste dessen zu durchblättern, was Sie tatsächlich schauen, kostet fast nichts.
+Jeden Abend die ganze Anbieterliste zu scrollen, ist das Teuerste, was Sie
+einem schwachen Gerät zumuten können.
+
+**Das Telefon blättern lassen.** Das ist die Änderung, die die meisten
+überrascht. Wenn ein Telefon oder Tablet im selben WLAN
+[als Fernbedienung der Box dient](/de/blog/smartphone-als-fernbedienung/),
+zeichnet das Telefon die Poster, führt die Suche aus und übernimmt das Tippen —
+die Box muss nur „spiel das“ empfangen und abspielen. Eine schwache Box mit
+einem Telefon daneben benimmt sich wie eine deutlich bessere, weil sie auf die
+eine Aufgabe herabgestuft wurde, in der sie gut ist.
+
+**Ab und zu neu starten.** Keine Volksweisheit: Eine Box, die drei Wochen
+gelaufen ist, hat gesammelt, was jede App darauf verloren hat. Ein Neustart pro
+Woche kostet eine Minute und gibt Speicher zurück, den der Player nutzen kann.
+
+**Deinstallieren, was Sie nicht nutzen.** Jede App, die einen
+Hintergrunddienst betreibt, gibt aus demselben kleinen Budget aus. Eine Box,
+die nur eine Box sein muss, hat mehr fürs Bild übrig.
+
+## Wenn es wirklich die Hardware ist
+
+Es gibt einen Boden. Eine Box, die HEVC nicht in Hardware dekodieren kann, wird
+HEVC nie flüssig abspielen, was die Software auch tut — und Anbieter gehen zu
+HEVC über, weil es ihre Bandbreite halbiert. Sind die Sender Ihres Anbieters
+überwiegend HEVC und ist der Decoder Ihrer Box älter als das Format, dann ist
+die ehrliche Antwort ein neueres Gerät — und es muss nicht teuer sein; ein
+aktueller zertifizierter Stick dekodiert HEVC in Hardware und kostet wenig.
+
+Aber probieren Sie erst die Software. Hardware-Dekodierung an, Puffer auf
+Standard, Oberfläche schlank gehalten, das Telefon zum Blättern: Die Mehrheit
+der „alte Box“-Klagen übersteht diese Liste nicht, und sie durchzuarbeiten
+dauert einen Abend.
+[Die Playlist auf einem neuen Player einzurichten](/de/blog/erste-playlist-einrichten/)
+ist etwa eine Minute davon; der Rest ist Zuschauen, ob es noch stockt.

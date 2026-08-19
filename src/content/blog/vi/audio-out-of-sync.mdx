@@ -1,0 +1,106 @@
+---
+title: "Tiếng lệch với hình: độ trễ bắt đầu từ đâu"
+description: "Môi mấp máy, lời thoại đến muộn. Có bốn nơi một luồng có thể mất đồng bộ — bộ mã hóa, mạng, bộ giải mã, màn hình — và chỉ hai trong số đó nằm trong tầm với của trình phát."
+urlSlug: tieng-lech-voi-hinh
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['khắc phục sự cố', 'phát lại']
+keywords: ['tiếng lệch hình iptv', 'trễ âm thanh khi xem', 'lỗi đồng bộ tiếng hình', 'sửa lệch tiếng']
+heroImageAlt: "Một bong bóng thoại vẽ hơi lệch khỏi cái miệng mà nó thuộc về, trên nền trơn."
+---
+
+Không gì phá hỏng một buổi xem nhanh bằng đôi môi kết thúc câu trước khi âm
+thanh tới. Đây cũng là một trong những lỗi bị chẩn đoán sai nhiều nhất, vì một
+luồng có bốn nơi riêng biệt mà hình và tiếng có thể rời nhau, và cách chữa mỗi
+nơi mỗi khác. Sửa nhầm chỗ thì độ lệch vẫn nguyên như cũ. Đây là bốn nơi ấy,
+theo thứ tự từ nguồn tới tai bạn, và cách nhận ra bạn đang gặp cái nào.
+
+## Trước hết, phân biệt lệch tăng dần với lệch cố định
+
+Xem một phút và tự hỏi một câu: khoảng cách *cố định* hay *lớn dần*?
+
+Lệch cố định — tiếng luôn chậm chừng một phần ba giây và giữ nguyên như vậy —
+đã được ấn định trước khi luồng đến bạn, hoặc do màn hình của bạn. Lệch lớn
+dần — mở kênh thì khớp, mười phút sau lệch một giây, hai mươi phút sau tệ hơn
+— là vấn đề đồng hồ, và nó chỉ vào bộ đệm hoặc việc giải mã ở phía bạn. Chỉ
+một quan sát đó đã cắt đôi danh sách.
+
+## 1. Bộ mã hóa: rời máy chủ đã như vậy rồi
+
+Hình và tiếng là hai luồng riêng [bện lại thành một luồng](/vi/blog/phu-de-va-luong-am-thanh/),
+mỗi luồng được đóng dấu thông tin thời gian để trình phát căn cho khớp. Nếu bộ
+mã hóa của nhà cung cấp đóng dấu sai — đường tiếng thêm độ trễ mà dấu thời gian
+không tính tới — thì mọi người xem kênh đó đều thấy cùng một độ lệch cố định,
+trên bất kỳ trình phát nào, thiết bị nào.
+
+Dấu hiệu: chỉ một kênh, hoặc các kênh của một nhà cung cấp, và trên điện thoại
+cũng giống hệt trên TV. Phía bạn không có gì để chỉnh; thuốc chữa chỉ nằm ở
+thượng nguồn. Kiểm tra kênh đó trên thiết bị thứ hai để chắc chắn, rồi báo nhà
+cung cấp là kênh nào và khoảng lệch chừng bao nhiêu.
+
+## 2. Mạng: các đoạn về không đúng nhịp
+
+Với [HLS và DASH](/vi/blog/giao-thuc-streaming-la-gi/), luồng được giao
+theo từng đoạn ngắn, và nếu các đoạn về muộn, trình phát phải chọn giữa khựng
+lại và đi tiếp. Đi tiếp chính là nơi độ lệch bắt đầu: nó phát những gì đang có,
+mà những gì đang có không phải lúc nào cũng đủ cả hai luồng như nhau. Trên
+transport stream thô, điều tương tự xuất hiện dưới dạng gói bị rơi khi tải
+nặng, mang theo cả thông tin thời gian.
+
+Dấu hiệu: độ lệch đến rồi đi theo đường mạng — tối hơn thì tệ hơn, ở đầu kia
+nhà thì tệ hơn, cắm dây cho chiếc hộp thì hết. Cách chữa cũng là cách chữa
+[hiện tượng đệm](/vi/blog/khac-phuc-iptv-giat-lag/): bộ đệm lớn hơn, và
+[đường sóng tốt hơn](/vi/blog/iptv-dung-hinh-tren-wifi/) giữa router và màn
+hình. Bộ đệm lớn hơn cho trình phát chỗ xoay xở để giữ hai luồng khớp nhau qua
+đoạn gập ghềnh thay vì ứng biến.
+
+## 3. Bộ giải mã: hai chiếc đồng hồ, một cái chậm
+
+Đây là trường hợp trình phát thật sự làm được điều gì đó. Hình do một bộ phận
+giải mã, tiếng do bộ phận khác, và trình phát giữ chúng đi cùng nhau bằng cách
+so đồng hồ của hai bên. Khi bộ giải mã hình không theo kịp — hộp yếu, bộ giải
+mã phần mềm nhai HEVC, điện thoại nóng nên tự hạ xung — hình tụt lại sau tiếng.
+Khoảng cách *lớn dần*, và trở về không khi bạn mở lại kênh.
+
+Dấu hiệu: lệch lớn dần trên thiết bị này mà không trên thiết bị kia, và tệ hơn
+ở các kênh nặng. Ba việc có ích, theo thứ tự:
+
+- **Bật giải mã phần cứng** trong *Cài đặt → Phát lại*, nếu nó đang tắt. Việc
+  này chuyển phần hình sang con chip sinh ra để làm điều đó, và đồng hồ hình
+  thôi thua cuộc. Trên vài chiếc hộp cũ, giải mã phần cứng cũng chính là thứ
+  [biến màn hình đen thành hình trở lại](/vi/blog/co-tieng-khong-co-hinh/).
+- **Mở lại luồng** khi nó lệch. Hai đồng hồ khởi động lại cùng nhau. Đây là
+  cách lách chứ không phải cách chữa, nhưng chỉ mất hai giây.
+- **Bớt việc cho thiết bị**: đóng các ứng dụng khác, và nếu chiếc hộp đã cũ thì
+  [những ghi chú về thiết lập gọn nhẹ cho phần cứng yếu](/vi/blog/hop-android-cu-phat-muot/)
+  nói đúng về chuyện này.
+
+## 4. Màn hình: chiếc TV đến muộn
+
+TV hiện đại xử lý hình ảnh — làm mượt chuyển động, nâng độ phân giải, khử nhiễu
+— và mỗi công đoạn thêm vài mili-giây mà tiếng không được cộng vào. Đưa tiếng
+tới loa thanh theo một đường và hình tới tấm nền theo đường khác, hai thứ sẽ
+đến lệch nhau. Khoảng lệch cố định, và giống nhau ở mọi nguồn: ứng dụng xem
+phim, máy chơi game, đầu thu.
+
+Dấu hiệu: mọi thứ đều bị, không riêng trình phát IPTV. Hầu hết TV có chế độ
+hình «game» hoặc «PC» tắt phần xử lý, còn loa thanh có mục chỉnh độ trễ âm
+thanh đúng cho việc này. Chỉnh một lần là mọi nguồn được sửa.
+
+## Điều một trình phát thành thật không làm được
+
+Nên nói rõ giới hạn. Trình phát kiểm soát bộ đệm và bộ giải mã — trường hợp 2
+và 3 — và có thể giữ hai luồng khớp đúng như chúng đã được đóng dấu. Nó không
+thể đóng dấu lại một luồng đã rời bộ mã hóa sai, và không nhìn thấy TV của bạn
+mất bao lâu để vẽ một khung hình. Vài trình phát có thanh chỉnh độ lệch tiếng
+thủ công; nó che được một độ lệch cố định trên một kênh, và sẽ không đụng tới
+độ lệch lớn dần, vì một giá trị cố định không đuổi kịp chiếc đồng hồ cứ trượt
+đi. Vidonzo hiện không có thanh đó, theo quan điểm rằng hai thứ mà trình phát
+*sửa được* thì nên sửa hơn là che.
+
+## Bản ngắn
+
+Cố định và ở mọi nguồn: chiếc TV. Cố định và một kênh: bộ mã hóa — báo nhà
+cung cấp. Đến rồi đi theo đường mạng: bộ đệm. Lớn dần cho tới khi mở lại: bộ
+giải mã — bật giải mã phần cứng. Bốn nguyên nhân, một phút quan sát để phân
+biệt.

@@ -1,0 +1,104 @@
+---
+title: "Eski bir Android kutuyu yeniden akıcı hâle getirmek"
+description: "Takılan bir kutu nadiren video oynatamayacak kadar güçsüzdür; ondan bunun dışındaki her şey istenir. Bir oynatıcının hangi parçaları güçsüz bir cihaza pahalıya patlar ve hangi ayarlar ile alışkanlıklar işi taşıyabilecek parçaya geri verir."
+urlSlug: eski-android-kutu-akici-oynatma
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televizyon', 'oynatma']
+keywords: ['eski android kutu için iptv oynatıcı', 'hafif iptv oynatıcı android tv', 'android kutu yavaşladı', 'zayıf donanımda iptv']
+heroImageAlt: "Rafta duran, hafif çizilmiş küçük bir uydu alıcı kutusu; ışığı yanıyor, köşesinde toz var."
+---
+
+Pek çok oturma odasının bir köşesinde beş altı yaşında, bir iki gigabayt
+belleği ve yeniyken bile ucuz olan bir yongası olan küçük siyah bir Android
+kutu durur. Eskiden her şeyi oynatırdı. Şimdi üzerindeki uygulama kanal
+değiştirirken takılıyor, hareketli sahnelerde görüntü sarsılıyor ve menü
+yanıt vermek için bir an bekletiyor. İçgüdü kutunun bittiğini söyler. Genelde
+bitmemiştir. Mütevazı bir kutuda bile, bütün akşam 1080p çizmeye fazlasıyla
+yeten özel bir video kod çözücü vardır; değişen şey, çevresindeki yazılımın ne
+kadar *başka* iş üstlendiğidir. İşte maliyetin nereye gittiği ve işi
+taşıyabilecek parçalara nasıl geri vereceğiniz.
+
+## Güçsüz bir kutuda gerçekten neyin maliyeti var
+
+Üç şey, azalan sırayla.
+
+**Videoyu yazılımla çözmek.** Uygulama video bloğu yerine genel amaçlı
+işlemcide çözerse, 1080p bir akış küçük yonganın çoğunu yer; 4K ya da HEVC ise
+basbayağı yapılamaz. Bu tek seçim, oynayan bir kutuyla takılan bir kutuyu
+ayırır ve bu bir ayardır.
+
+**Gösterişli bir arayüz çizmek.** Afişler, animasyonlar, bulanık arka planlar,
+yüz karttan oluşan bir karusel — hepsi altta video oynarken yeniden çiziliyor.
+Bunun her karesi videoyla aynı küçük bütçeden çıkar. Hafif bir kod çözücünün
+üzerindeki ağır arayüz, oynayabilen bir kutunun oynayamıyor gibi görünmesinin
+tam olarak yoludur.
+
+**Devasa bir listeyi bellekte yanlış biçimde tutmak.** Bir sağlayıcının tam
+listesi büyük bir dosyadır ve onu bütünüyle düz bir yapı olarak tutup kaydırarak
+arayan bir uygulama küçük bir kutunun belleğini bitirir — sonra işletim sistemi
+bir şeyleri kapatmaya başlar, bazen uygulamanın kendisini.
+
+Listede olmayana dikkat: ağ. Yavaş bir kutuda arabellek ve takılma birbirine
+benzer, bu yüzden donanımı suçlamadan önce ağı elemekte yarar var —
+[arabellek yazısı](/tr/blog/iptv-donma-sorunu-cozumu/) bunu beş dakikada halleder.
+
+## Önemli olan ayarlar
+
+**Donanımsal kod çözme açık.** Vidonzo'da *Ayarlar → Oynatma → Donanımsal kod
+çözme*; eski bir kutuda oyunun tamamı budur. Açıkken video bloğu çözer ve
+işlemci arayüzü çizmeye kalır; kapalıyken işlemci ikisini birden yapar ve
+kaybeder. Açıkken bir kanal [ses verip görüntü vermiyorsa](/tr/blog/ses-var-goruntu-yok/),
+o kanalın biçimini kutunun çözücüsü desteklemiyordur — anahtarı yalnız o kanal
+için ters çevirin ve daha ağır olacağını hesaba katın.
+
+**Arabellek bağlantıya göre, kutuya göre değil.** Daha büyük arabellek bellek
+harcar ve küçük bir kutunun ayıracak fazlası yoktur — ama çok küçük bir
+arabellek ilk hıçkırıkta takılır ve zaten iyileştirmeye çalıştığınız şey
+takılmadır. Varsayılandan başlayın; yalnızca görüntü gerçekten duruyorsa
+yükseltin ve yalnızca kutunun belleği apaçık yetmiyorsa düşürün (uygulamaların
+kendiliğinden kapanması işarettir).
+
+**Rehberi tutun, süsü atın.** Program rehberi veridir, resim değil, ve çizmesi
+ucuzdur. Maliyet, görsellerle yüklü ekranlardadır. Vidonzo'nun televizyon
+düzeni [odak çerçeveli bir yan şerittir](/tr/blog/android-tv-iptv-oynatici/),
+yön tuşları için yapılmıştır ve tasarım gereği hafiftir — kutu bir liste çizer,
+bir vitrin değil.
+
+## Önemli olan alışkanlıklar
+
+**Ayıklayın.** Küçük bir kutuda
+[favoriler ve birkaç kategori](/tr/blog/buyuk-oynatma-listesi-duzenleme/) yalnız
+pratik değildir; daha hafiftir. Gerçekten izlediklerinizin kısa bir listesinde
+gezinmek neredeyse hiçbir şeye mal olmaz. Her akşam sağlayıcının tüm listesini
+kaydırmak ise güçsüz bir cihazdan isteyebileceğiniz en pahalı şeydir.
+
+**Gezinmeyi telefona bırakın.** İnsanları en çok şaşırtan değişiklik budur.
+Aynı Wi-Fi'daki bir telefon ya da tablet
+[kutunun kumandası olduğunda](/tr/blog/telefonu-tv-kumandasina-donusturun/) afişleri
+telefon çizer, aramayı telefon yapar, yazmayı telefon üstlenir — kutuya yalnızca
+«bunu oynat»ı alıp oynatmak kalır. Yanında telefon olan güçsüz bir kutu, çok
+daha iyi bir kutu gibi davranır; çünkü iyi olduğu tek işe indirilmiştir.
+
+**Arada bir yeniden başlatın.** Halk inanışı değil: üç haftadır açık duran bir
+kutu, üzerindeki her uygulamanın sızdırdığı her şeyi biriktirmiştir. Haftada bir
+yeniden başlatma bir dakikaya mal olur ve oynatıcının kullanabileceği belleği
+geri verir.
+
+**Kullanmadıklarınızı kaldırın.** Arka planda hizmet çalıştıran her uygulama
+aynı küçük bütçeden harcar. Yalnızca kutu olması gereken bir kutu, görüntüye
+daha fazlasını bırakır.
+
+## Gerçekten donanım olduğunda
+
+Bir taban var. HEVC'yi donanımda çözemeyen bir kutu, yazılım ne yaparsa yapsın
+HEVC'yi asla akıcı oynatmaz; sağlayıcılar da bant genişliğini yarıya indirdiği
+için HEVC'ye geçiyor. Sağlayıcınızın kanalları çoğunlukla HEVC ise ve kutunuzun
+çözücüsü ondan eskiyse dürüst cevap daha yeni bir cihazdır — pahalı olması da
+gerekmez; güncel sertifikalı bir çubuk HEVC'yi donanımda çözer ve az tutar.
+
+Ama önce yazılımı deneyin. Donanımsal kod çözme açık, arabellek varsayılanda,
+arayüz yalın tutulmuş, gezinmeyi telefon yapıyor: «eski kutu» şikâyetlerinin
+çoğu bu listeden sağ çıkmaz ve listeyi baştan sona uygulamak bir akşam sürer.
+[Yeni bir oynatıcıda listeyi kurmak](/tr/blog/ilk-oynatma-listesi-kurulumu/) o
+akşamın yaklaşık bir dakikasıdır; gerisi takılıyor mu diye izlemektir.

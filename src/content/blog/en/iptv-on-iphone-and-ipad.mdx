@@ -1,0 +1,104 @@
+---
+title: "IPTV on iPhone and iPad: what changes when you leave Android"
+description: "The playlist is the same and the player model is the same. What differs is how the app arrives, where a file lives, and what the platform will and will not let a player do."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['setup', 'playback']
+keywords: ['iptv player iphone', 'iptv on ipad', 'iptv player ios', 'm3u player iphone']
+heroImageAlt: "An iPad propped on a kitchen counter, a stream playing, a coffee cup beside it."
+---
+
+IPTV has a reputation as an Android habit, and the reputation has a reason:
+Android will run almost anything, and a lot of what it runs is IPTV players.
+But the thing you actually own — a playlist from a provider — has no idea what
+device it is on. It is a login or a link, and an iPhone opens links. Here is
+what is genuinely different on iOS and iPadOS, what is identical, and the two
+places where people trip.
+
+## What is identical: the playlist and the player model
+
+Your provider gave you [one of two things](/blog/xtream-codes-vs-m3u/): an
+Xtream Codes login or an M3U/M3U8 address. Both are just text. Nothing about
+either is Android-shaped, and the model of the app is the same on every
+platform: [a player reads your list, fetches the stream, draws the picture](/blog/what-an-iptv-player-does/).
+It ships with no channels of its own, and it does not need an account to
+start. Paste the same login into Vidonzo on an iPhone and on an Android TV and
+you get the same library, because the library was never in the app.
+
+## What is different: how the app arrives
+
+On Android you may have sideloaded an APK. On iOS you will not; the App Store
+is the only route for ordinary users, and that is not a limitation to work
+around — it is the platform's whole model. Install Vidonzo from the App Store,
+open it, add your source. There is no "unknown sources" toggle to find, and
+updates arrive by themselves. If a website tells you to install a
+configuration profile or a "signed" package to get an IPTV player on an
+iPhone, close the tab; nothing about a playlist requires that.
+
+## What is different: where a file lives
+
+Most people use a link, and a link works identically everywhere. If your
+provider gave you an M3U *file*, iOS handles it slightly differently from
+Android: there is no system-wide file browser outside the Files app. The file
+lives there — in iCloud Drive, in "On My iPhone", or in a folder another app
+saved it to — and the player asks you to pick it from there. Once picked, it
+behaves [like any local file](/blog/playlist-url-vs-local-file/): frozen at
+the moment you received it, needing no server, and needing a fresh copy when
+the provider changes something. A link stays current on its own; if you have
+the choice, prefer the link.
+
+## What is different: the decoder
+
+iPhones and iPads decode video with a hardware block that is very good at the
+common formats — H.264 and HEVC — and does nothing at all for the rare ones.
+A player on iOS therefore leans on the system decoder for the usual case and
+falls back to software for the unusual one. In practice this means the common
+streams play cool and long on battery, and an odd stream may warm the phone
+more than you expect. If a particular channel [plays sound but no picture](/blog/sound-but-no-picture/),
+the article on decoders explains what is happening; it is a stream problem, not
+an Apple one.
+
+## What is different: the tablet is not a small TV
+
+An iPad is [the screen that moves](/blog/iptv-on-a-tablet/) — the kitchen, the
+garden, the bed. The interface adapts to it: a denser grid than a TV can
+afford, because the screen is close enough to touch, and subtitle size you can
+turn down from television scale to caption scale. It is a genuinely different
+way of watching, and in a lot of households the tablet ends up used more than
+the television.
+
+## What is the same again: the phone as the remote
+
+Here is the part Apple users assume they miss out on. If there is an Android TV
+in the house running Vidonzo, an iPhone or iPad on the same Wi-Fi can
+[act as its remote](/blog/turn-your-phone-into-a-tv-remote/): browse the TV's
+library on the phone, search with a real keyboard, and start playback on the
+big screen with a tap. Pairing runs over your own network, discovered
+automatically. The TV does not care what the phone runs.
+
+## The two places people trip
+
+**Expecting the App Store to be full of choices.** It is thinner than Google
+Play for this category, and the reason is worth knowing: Apple reviews apps
+against a rule that a player must not supply or promote content. A player that
+ships as a player — bring your own playlist, nothing inside — passes; the
+"catalogue" apps do not last. So the ones you find are, on the whole, the
+honest ones.
+
+**Typing a long Xtream password on a phone keyboard.** Paste it. Copy the
+credentials from wherever your provider sent them and paste into each field;
+a single wrong character in a 24-character password produces
+[a link that will not load](/blog/playlist-link-wont-load/) and no clue why.
+
+## Moving between the two
+
+If you already have Vidonzo on Android, signing in on the iPhone brings your
+favourites and resume points across; the encrypted playlist credentials
+follow once a device that can unlock them approves the new one. The mechanics
+are the same as [moving to any new phone](/blog/move-to-a-new-phone/). Nothing about the
+platform switch requires setting up twice.
+
+The short version: on an iPhone the playlist is the same, the player is the
+same, and the setup is [the same minute-long walkthrough](/blog/set-up-your-first-playlist/).
+What changes is that the app comes from one place, a file is picked from the
+Files app, and the phone will still happily drive the TV.

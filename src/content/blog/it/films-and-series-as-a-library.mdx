@@ -1,0 +1,101 @@
+---
+title: "Film e serie come una libreria, non come una cartella di nomi di file"
+description: "Il tuo fornitore manda film e serie come una lista di voci. Che tu veda locandine, stagioni e un punto di ripresa — o mille righe di nomi di file — è interamente opera del lettore."
+urlSlug: film-e-serie-come-una-libreria
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['prodotto', 'playlist']
+keywords: ['lettore vod iptv', 'serie stagioni episodi iptv', 'film con locandine iptv', 'continua a guardare iptv']
+heroImageAlt: "Uno scaffale di dorsi di libri con alcuni estratti a mostrare la copertina, accanto a una lista stampata e spoglia."
+---
+
+C’è un momento, uno o due giorni dopo aver configurato un lettore nuovo, in cui
+si apre per la prima volta la sezione «film» e si scopre cosa manda davvero il
+fornitore: una lista. Migliaia di righe chiamate `Some.Film.2019.1080p.WEB` e
+`Show.S03E04`, in ordine alfabetico, senza immagine, senza trama e senza la
+minima traccia di dove eri arrivato. È facile concluderne che il fornitore sia
+scadente. Di solito il fornitore va benissimo. Quello che stai guardando è la
+materia prima, e la differenza tra una lista e una libreria è lavoro che il
+lettore fa oppure no.
+
+## Cosa arriva davvero
+
+Dipende da [che forma ha la tua playlist](/it/blog/xtream-codes-o-m3u/).
+
+Un login **Xtream Codes** dà al lettore tre flussi separati — diretta, film,
+serie — e i flussi di film e serie portano struttura: titolo, anno, indirizzo
+della locandina, voto, trama, cast e, per le serie, una gerarchia di stagioni ed
+episodi con un ordine. È molto materiale su cui lavorare, e un buon lettore lo
+usa tutto.
+
+Un link **M3U** è [più piatto](/it/blog/dentro-un-file-m3u/): una riga per
+elemento, con un nome, un titolo di gruppo e spesso l’indirizzo di un logo.
+Alcuni fornitori mettono la locandina nel campo del logo e il nome della serie
+nel gruppo; altri no. Un lettore che lavora da M3U deve *dedurre* la struttura —
+capire che `Show.S03E04` e `Show.S03E05` sono episodi della stessa stagione
+della stessa serie — e lo fa con entusiasmo variabile.
+
+In ogni caso, niente arriva *come* libreria. La libreria viene costruita.
+
+## Cosa significa costruirla
+
+Cinque compiti, nell’ordine in cui compaiono sullo schermo.
+
+**Le immagini.** Una locandina è un indirizzo nei metadati; il lettore la
+recupera, la mette in cache, la dimensiona, e lo fa per ogni scheda in vista
+senza far inceppare lo scorrimento. Quando le locandine sono vuote di solito è
+perché l’indirizzo manca o è morto — i metadati del fornitore puntano a
+un’immagine che non c’è più — e un buon lettore mostra un segnaposto ordinato
+invece di un’immagine rotta.
+
+**I dettagli.** Voto, trama, cast, anno, genere — presentati in una scheda così
+da decidere se guardare *prima* di premere play, che è tutto il senso di una
+libreria. Vidonzo li dispone per titolo e aggiunge una navigazione per genere su
+tutto il catalogo, per le sere in cui non hai idea di cosa vuoi.
+
+**La struttura.** Le serie sono la parte difficile. Una stagione è un
+contenitore, un episodio un elemento ordinato al suo interno, e «successivo» ha
+un significato. Il lettore deve costruire quell’albero dal flusso (Xtream) o dai
+nomi (M3U), e poi presentare stagioni ed episodi come sono — non come una lista
+piatta in cui cerchi *S03E04* da qualche parte tra *S03E03* e *S03E05*. Fai
+bene questo e *riproduci automaticamente l’episodio successivo* diventa
+possibile, perché il lettore sa cosa sia il «successivo».
+
+**La memoria.** Continua a guardare è un punto di ripresa per elemento, per
+fonte: quanto sei avanti in quale episodio di quale serie, su quale fornitore.
+È ciò che trasforma una libreria da scaffale in *tuo* scaffale. Fermati sul
+telefono, riprendi sul televisore: la posizione è la stessa perché appartiene
+all’elemento e non al dispositivo.
+
+**La ricerca.** [Un campo solo, su diretta, film e serie insieme](/it/blog/organizzare-playlist-grandi/),
+perché non sai su quale scaffale sia un titolo e non dovresti doverlo sapere.
+Digita un nome; i risultati sono raggruppati per tipo; scegline uno.
+
+## Perché deve farlo il lettore
+
+È lecito chiedere perché il fornitore non mandi una libreria già pronta. Perché
+il fornitore non sa su quale schermo sei. Una griglia di locandine per il
+telefono, una barra laterale per il televisore e una tabella fitta per il tablet
+sono tre disposizioni diverse degli stessi dati, e solo il lettore sa quale sta
+disegnando. Il flusso porta i fatti; il lettore trasforma i fatti in uno
+scaffale che puoi sfogliare dal divano. È [tutta la divisione del lavoro](/it/blog/lettore-iptv-o-app-di-streaming/):
+l’app di un servizio di streaming è un negozio con uno schermo; il lettore IPTV
+è lo schermo da solo, e deve essere uno schermo molto buono.
+
+## Cosa guardare
+
+Se il tuo lettore attuale ti mostra nomi di file, i metadati quasi certamente ci
+sono e non vengono usati. Due controlli rapidi: apri una serie e guarda se ha le
+stagioni; apri un film e guarda se ha la trama. Se non c’è né l’uno né l’altro,
+il lettore legge la lista e si ferma lì. E verifica che
+[le tracce siano esposte](/it/blog/sottotitoli-e-tracce-audio/) — un film con
+tre lingue audio e due tracce di sottotitoli che riproduce solo la prima di
+ciascuna è una libreria con le pagine incollate.
+
+Vidonzo è stato costruito con la libreria come scopo: locandine, voti, trama e
+cast; stagioni ed episodi ad albero, con riproduzione automatica del successivo;
+continua a guardare per fonte e per elemento; una ricerca su tutto. La stessa
+lista che manda il tuo fornitore, letta fino in fondo. Se la tua sezione film è
+oggi una cartella di nomi di file,
+[aggiungere il login che hai già](/it/blog/configurare-la-prima-playlist/) richiede
+circa un minuto, e la differenza si vede alla prima schermata.

@@ -1,0 +1,19 @@
+key: iptv-setup-for-someone-not-technical
+title: "Setting up IPTV for someone who is not technical"
+sourceLocale: fa
+status: drafted
+riskTier: low
+intent: how-to-long-tail
+targetQueries:
+  fa: ["راه اندازی iptv برای پدر و مادر", "نصب iptv برای سالمندان", "ساده ترین پخش کننده iptv", "iptv برای خانواده"]
+  en: ["set up iptv for parents", "iptv for elderly", "simple iptv player for family", "iptv setup for someone else"]
+audience: The family technician — the reader is installing for a parent, grandparent, or relative abroad.
+value: Long-tail with almost no competition, and every reader is a second install. Locally-flavoured (families spread across countries), so fa first per locked decision 4.
+angle: Set it up so it needs no maintenance — one source, favourites curated, guide on, phone as remote for the person who helps, and what to teach in five minutes.
+productFacts:
+  - no account needed to start; three source kinds; favourites; Show program guide toggle
+  - Auto-refresh playlist policy so the list stays current without anyone touching it
+  - parental controls (PIN, hidden categories) where relevant
+  - phone as remote over the local network for the helper who visits
+constraints: [no-download-or-offline-wording, no-playlist-sourcing-tips, no-channel-counts]
+internalLinks: [set-up-your-first-playlist, your-phone-is-a-better-remote, parental-controls, organize-large-playlists, iptv-player-on-android-tv]

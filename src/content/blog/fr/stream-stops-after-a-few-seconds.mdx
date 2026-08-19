@@ -1,0 +1,127 @@
+---
+title: "Le flux s’arrête après quelques secondes : coupures, pas mise en tampon"
+description: "Il démarre bien, lit dix secondes et meurt — pas de roue qui tourne, juste une fin. C’est un défaut différent de la mise en tampon, avec d’autres causes, et un bon lecteur règle celles qui se règlent sans que vous le remarquiez."
+urlSlug: le-flux-s-arrete-apres-quelques-secondes
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['depannage', 'lecture']
+keywords: ['iptv coupe apres quelques secondes', 'iptv se deconnecte sans arret', 'flux coupe iptv', 'iptv arrete apres 10 secondes']
+heroImageAlt: "Une ligne droite qui court proprement sur une courte distance puis s’arrête net, sur fond uni."
+---
+
+La mise en tampon a une allure reconnaissable : la roue, le blocage, l’image
+qui rattrape. Ceci n’est pas cela. Ceci est une chaîne qui s’ouvre proprement,
+lit parfaitement cinq, dix ou trente secondes, puis s’arrête — retour à la
+liste, ou image figée, ou erreur, ou la même chaîne qui repart du début. Si
+vous relancez, cela recommence. C’est une *coupure*, et les causes diffèrent
+presque entièrement de [celles de la mise en tampon](/fr/blog/regler-le-buffering-iptv/).
+Voici les cinq qui expliquent presque tous les cas, et ce qu’un lecteur peut ou
+ne peut pas faire pour chacune.
+
+## 1. Le serveur a mis fin à la connexion
+
+La cause la plus fréquente. Le serveur du fournisseur vous donne un flux et,
+quelques secondes plus tard, ferme la connexion — parce qu’il est surchargé,
+parce qu’un processus a redémarré, parce qu’un répartiteur de charge vous a
+déplacé, parce que c’est mardi. Sur un flux de transport brut, les données
+cessent simplement d’arriver ; en
+[HLS](/fr/blog/protocoles-de-streaming-expliques/), le segment suivant n’arrive
+jamais.
+
+C’est le cas *pour lequel* un lecteur existe. Un lecteur bien conçu ne traite
+pas une connexion coupée comme la fin de l’émission ; il la traite comme un
+hoquet et se reconnecte discrètement. Vidonzo le fait au niveau du transport :
+une lecture bloquée expire en quelques secondes au lieu de rester suspendue, et
+la connexion est rétablie avec un court repli borné, de sorte qu’un serveur qui
+a fermé la porte la rouvre sans que vous voyiez plus qu’un instant de pause. Si
+une chaîne mourait à dix secondes dans votre ancien lecteur et se contente de
+cligner dans celui-ci, c’est ce mécanisme qui l’explique.
+
+La signature : chaînes au hasard, moments au hasard, davantage le soir. Rien à
+changer de votre côté ; si cela arrive sur *toutes* les chaînes en permanence,
+le serveur est réellement en difficulté et le fournisseur doit le savoir.
+
+## 2. Votre accès a expiré en pleine lecture
+
+Xtream Codes et beaucoup de liens M3U portent un jeton — une preuve de votre
+identité — dans l’adresse. Les jetons expirent. Quand c’est le cas, le serveur
+ne ferme pas poliment la connexion ; il répond à la requête suivante par une
+erreur : interdit, non autorisé, disparu.
+
+Ici, un bon lecteur choisit délibérément de *ne pas* continuer à se
+reconnecter. Marteler un serveur qui vient de dire « non » est inutile et, en
+nombre, ressemble à une attaque ; les fournisseurs bloquent pour cela. Vidonzo
+se reconnecte à travers une connexion coupée et s’arrête devant un refus
+explicite, exprès. Le remède est une playlist fraîche : utilisez *Actualiser
+maintenant* sur la source pour que le lecteur relise la liste courante — ou, si
+c’est l’abonnement lui-même qui a expiré, cela regarde vous et le fournisseur.
+
+La signature : ça marchait hier, tout échoue aujourd’hui, et l’échec est
+instantané plutôt qu’au bout de quelques secondes. Voir aussi
+[les cinq défauts derrière un lien qui ne charge pas](/fr/blog/la-playlist-ne-charge-pas/).
+
+## 3. Trop de flux à la fois
+
+La plupart des abonnements autorisent un nombre fixe de flux *simultanés* — un,
+deux, parfois plus. Ouvrez-en un troisième et le serveur en coupe un, et pas
+toujours le plus récent. Celui qui tombe ressemble exactement au cas 1, sauf
+qu’il coïncide avec quelqu’un d’autre dans la maison qui a lancé la lecture.
+
+La signature : cela échoue quand un autre appareil regarde, et se rétablit
+quand celui-ci s’arrête. Ce n’est pas un défaut du lecteur et il n’y a pas de
+réglage pour cela ; c’est l’arrangement que vous avez avec le fournisseur, et
+la solution est soit de regarder à tour de rôle, soit une formule qui autorise
+davantage. Un lecteur qui affiche une erreur claire au lieu de rouvrir
+silencieusement le même flux vous dit au moins dans quel cas vous êtes.
+
+## 4. L’appareil s’est endormi sur la connexion
+
+Les téléphones et les boîtiers TV économisent l’énergie avec zèle, et un flux
+vidéo est exactement le genre de connexion longue et silencieuse qu’ils aiment
+couper. Sur un téléphone, cela se voit comme un flux qui meurt quand l’écran
+s’assombrit ou quand vous passez un instant dans une autre application ; sur un
+boîtier, cela peut être un mode d’économie d’énergie Wi-Fi trop empressé qui
+coupe la radio entre les segments.
+
+La signature : liée à *vos* actions — l’écran, le changement d’application, une
+pause — et non à l’heure ni à la chaîne. Sur un téléphone, gardez l’application
+au premier plan pendant la lecture ; Vidonzo conditionne exprès sa reprise au
+premier plan, pour ne pas se battre avec le système pour une connexion que vous
+avez quittée. Sur un boîtier, cherchez un réglage d’économie d’énergie Wi-Fi ou
+« rester éveillé », ou
+[passez le boîtier au câble](/fr/blog/iptv-qui-fige-en-wifi/).
+
+## 5. Le réseau au milieu l’a laissée tomber
+
+Entre le serveur et l’écran se trouvent votre box, votre opérateur et — pour
+certains — un VPN ou un proxy. N’importe lequel peut réinitialiser une
+connexion : un routeur qui fait tourner une table NAT, un équipement de
+l’opérateur qui expire un flux qui semble inactif, un VPN qui se reconnecte. Le
+lecteur voit la même chose qu’au cas 1 et se reconnecte de la même façon ; la
+différence est que *tout* est touché, pas seulement un fournisseur.
+
+La signature : d’autres applications de streaming coupent aussi, et le motif
+suit le réseau — un routeur particulier, un VPN particulier, une heure
+particulière. Testez une minute en données mobiles ; si les coupures
+disparaissent, le défaut est du côté du réseau domestique.
+
+## Les distinguer en une minute
+
+- Chaînes au hasard, moments au hasard, brève pause → le serveur a coupé (1).
+  Le lecteur se reconnecte ; rien à faire.
+- Échec instantané sur tout, ça marchait hier → accès expiré (2). *Actualiser
+  maintenant*, puis parlez au fournisseur.
+- Échoue quand quelqu’un d’autre lance la lecture → trop de flux (3).
+- Meurt quand vous baissez l’écran ou changez d’application → économie
+  d’énergie (4).
+- Tout coupe, les autres applications aussi → le réseau (5).
+
+## Ce que le lecteur vous doit
+
+La limite honnête est celle-ci : un lecteur devrait se reconnecter à travers
+*toute* coupure qui n’est pas un refus, assez vite pour que vous le remarquiez
+rarement, et il devrait s’arrêter proprement et le dire à chaque coupure qui en
+est un. Tout le reste — garder un flux ouvert au-delà de son jeton, ignorer une
+limite de flux — n’est pas une fonctionnalité, c’est un problème à retardement.
+Réussissez la reconnexion, et le cas 1, qui est la majorité des cas, cesse
+d’être quelque chose auquel vous pensez.

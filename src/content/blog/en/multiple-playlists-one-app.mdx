@@ -1,0 +1,102 @@
+---
+title: "Two providers, one app: running multiple playlists side by side"
+description: "Two subscriptions, or one provider giving you both a login and a link — a player should keep them apart, each with its own guide, its own resume points and its own refresh, and let you switch in a tap."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'product']
+keywords: ['multiple iptv playlists one app', 'iptv player multiple sources', 'two iptv subscriptions one app', 'switch between iptv playlists']
+heroImageAlt: "Two neatly separated stacks of cards on a table, a hand reaching for the top card of one."
+---
+
+Sooner or later most households end up with more than one playlist. A second
+provider for a language the first one lacks. A family member's subscription
+alongside your own. Or the ordinary case: one provider who sends both an
+Xtream login *and* an M3U link, and you would like to keep the second as a
+spare. The wrong way to handle this is what a lot of players do — merge
+everything into one enormous list. Here is why that is wrong, what "side by
+side" should actually mean, and how it works.
+
+## Why merging is the wrong answer
+
+Two playlists are not one playlist with more lines. They come from different
+servers, they carry different [guides](/blog/epg-explained/), they update on
+different schedules, and each has its own login that can expire on its own
+day. Pour them into one list and every one of those differences becomes a
+symptom you cannot diagnose: the guide is right for half the channels; a
+provider outage looks like random failures; the same channel appears twice
+under two names and you never know which one is the one that stalls.
+
+The alternative is simple: keep each source as a source. Vidonzo does exactly
+that — you can add
+[an Xtream login, an M3U link, or a local file](/blog/xtream-codes-vs-m3u/) as
+many times as you have them, and switch between them from the playlist chip
+at the top of the home screen. Nothing is merged. Everything about each one stays its own.
+
+## What "its own" means in practice
+
+**Its own guide.** An Xtream source brings its guide with the login. An M3U
+source has an XMLTV address you set for *that* source. Two providers, two
+guides, each matched to its own channels — so the identifiers never fight and
+[an empty guide](/blog/epg-empty-or-wrong-times/) is always traceable to one
+place.
+
+**Its own resume points.** Continue watching is kept per source, per item. If
+both providers carry the same series, the episode you were forty minutes into
+on provider A is remembered as being on provider A. Switch sources and the
+other list is where you left it, not where the first one was.
+
+**Its own refresh.** A hosted playlist changes, and each source has its own
+auto-refresh policy — every launch, hourly, six-hourly, daily, weekly, or
+manual only — plus a *Refresh now* for the moment something looks missing. A
+provider that reshuffles nightly can be re-read daily; the spare you rarely
+touch can sit on manual. The cached list always shows instantly; the policy
+only decides when it updates in the background.
+
+**Its own credentials.** Two logins, held separately, and — since a login is
+your subscription — each
+[encrypted on the device](/blog/why-a-player-should-encrypt-your-credentials/) before
+it goes anywhere near sync. One expiring does not touch the other.
+
+## Switching, and the one thing that does cross over
+
+Switching is a tap on that chip: the list, the guide, the
+favourites and the resume points change together, because they all belong to
+the source. It is deliberately not a filter over one merged pile; it is a
+different library.
+
+The one thing that *does* cross over is search. Global search runs across
+live, films and series in the current source — and if you cannot find
+something, switching sources and searching again takes a second. That is a
+design choice: showing results from a source you are not currently in would
+mean playing from a login you did not choose, and the confusion is worse than
+the extra tap.
+
+## Three arrangements this makes easy
+
+**Login plus link from the same provider.** Add both. Use the Xtream login as
+the everyday source — it is usually the richer one, with films and series
+structured — and keep the M3U link as a spare for the day the login misbehaves.
+Same channels, two doors.
+
+**Two providers for two languages.** Each as its own source, each with its own
+guide in its own language, each with favourites that make sense for the person
+who watches it. Switching is the whole "which one" decision.
+
+**A hosted playlist and a local copy.** [A URL stays current, a file is
+frozen](/blog/playlist-url-vs-local-file/) — but a file needs no server. Keep
+the link as the main source and a local file as the fallback for the evening
+the server is unreachable. Two sources, one is always available.
+
+## What to avoid
+
+Do not add the same list twice hoping to organise it — favourites and
+[categories](/blog/organize-large-playlists/) do that within a source, and a
+duplicate just doubles the resume points to keep track of. And do not use
+sources as a way of sharing one subscription with more people than it allows;
+most providers limit simultaneous streams per login, and a second *source* on
+the same login is still the same login.
+
+The principle underneath is [the same one behind the whole player](/blog/bring-your-own-playlist/):
+the playlist is yours, and a player's job is to treat each one you own with
+the same respect — separately, and without ever pretending they were one
+thing.

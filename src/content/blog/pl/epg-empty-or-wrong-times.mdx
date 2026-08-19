@@ -1,0 +1,111 @@
+---
+title: "Przewodnik jest pusty albo pokazuje złe godziny: naprawa EPG"
+description: "Kanały grają, a przewodnik jest pusty, przeterminowany albo przesunięty dokładnie o godzinę. Te objawy dają cztery usterki, każda z własną sygnaturą, i żadna z nich nie brzmi „odtwarzacz jest wolny”."
+urlSlug: przewodnik-pusty-albo-zle-godziny
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['diagnostyka', 'playlisty']
+keywords: ['epg nie działa iptv', 'przewodnik zła godzina', 'pusty przewodnik iptv', 'xmltv się nie ładuje', 'przesuniecie czasu epg']
+heroImageAlt: "Siatka programu, w której większość pól jest pusta, a jeden wiersz przesunięty o kolumnę."
+---
+
+Pusty przewodnik irytuje bardziej niż zepsuty kanał, bo wszystko *inne*
+działa. Obraz gra, lista jest pełna, a jedyny wiersz, który powinien mówić, co
+leci, mówi „Brak informacji o programie”. Albo mówi coś, ale to, co leciało
+godzinę temu. Jeśli czytałeś [jak działa przewodnik](/pl/blog/epg-jak-dziala-program-telewizyjny/),
+znasz już rzecz kluczową: przewodnik to osobny plik, pobierany osobno,
+dopasowywany do twoich kanałów po nazwie. Każda usterka poniżej to pęknięcie
+gdzieś w tym łańcuchu. Oto one, w kolejności, w jakiej zwykle występują.
+
+## 1. Odtwarzaczowi nigdy nie powiedziano, gdzie jest przewodnik
+
+Playlista M3U [niesie kanały](/pl/blog/co-jest-w-pliku-m3u/); nie niesie
+przewodnika. Niektóre playlisty podają adres przewodnika w pierwszej linii
+(`url-tvg=`), wiele nie, a jeśli twoja nie podaje, odtwarzacz nie ma czego
+pobrać i każdy kanał mówi „Brak informacji o programie” — przewodnik nie jest
+zepsuty, po prostu go nie ma.
+
+Sygnatura: *każdy* kanał pusty, od pierwszego dnia. Naprawa: poproś dostawcę o
+adres XMLTV (zwykle kończy się na `.xml` albo `.xml.gz`) i wpisz go w
+ustawieniach źródła, obok linku playlisty. Jeśli dostawca dał ci
+[login Xtream Codes](/pl/blog/xtream-codes-czy-m3u/), przewodnik przychodzi
+razem z loginem i nie ma czego wpisywać — pusty przewodnik na Xtreamie oznacza
+jedną z usterek poniżej.
+
+## 2. Przewodnik i kanały nie znają się nawzajem
+
+Ta jest najczęstsza i daje najbardziej mylący objaw: *niektóre* kanały mają
+przewodnik, a inne, pozornie losowo, nie.
+
+Plik przewodnika wypisuje audycje przy identyfikatorze kanału — `tvg-id`.
+Playlista też nadaje każdemu kanałowi `tvg-id`. Tam, gdzie się zgadzają,
+dostajesz przewodnik; tam, gdzie nie, nie dostajesz nic, choćby kanał był w
+pliku przewodnika pod nieco inną nazwą. Dostawcy generujący oba z tej samej
+bazy trafiają idealnie. Ci, którzy dokręcają cudzy przewodnik do swojej listy,
+trafiają tam, gdzie identyfikatory przypadkiem się zgadzają.
+
+Sygnatura: częściowe pokrycie, stabilne w czasie — zawsze te same kanały puste.
+Odtwarzacz niewiele zrobi, bo nie może wiedzieć, że `news24.example` i
+`News24_HD` to ta sama stacja, nie zgadując. Jeśli dostawca daje więcej niż
+jeden wariant playlisty, ten pełniejszy zwykle ma lepsze identyfikatory; w
+przeciwnym razie zgłoś mu, którym kanałom brakuje przewodnika.
+
+## 3. Godziny są przesunięte — zwykle dokładnie o godzinę
+
+Audycje się pojawiają, ale siatka mówi, że film zaczął się o dziewiątej, choć
+zaczął się o dziesiątej. Jeśli przesunięcie to okrągła liczba godzin, to
+problem strefy czasowej — i warto go zrozumieć, bo to usterka najczęściej
+przypisywana niewłaściwej stronie.
+
+Plik XMLTV stempluje każdą audycję godziną *oraz* przesunięciem względem UTC —
+`20260819210000 +0100`. Poprawny odtwarzacz czyta to przesunięcie, przelicza na
+zegar twojego urządzenia i pokazuje właściwą godzinę niezależnie od tego, gdzie
+przewodnik powstał. Vidonzo tak robi — to jedna z rzeczy, przy których
+aplikacja jest staranna, bo
+[właśnie tam przewodniki najczęściej się mylą](/pl/blog/epg-jak-dziala-program-telewizyjny/) — więc
+przesunięcie oznacza zwykle jedną z dwóch innych rzeczy:
+
+- **Przewodnik deklaruje złe przesunięcie.** Dostawca wygenerował go na
+  serwerze ustawionym na inną strefę i nie poprawił stempli. Każdy kanał jest
+  przesunięty o tyle samo i jest przesunięty w każdym odtwarzaczu. Poprawić
+  może to tylko dostawca.
+- **Zegar albo strefa samego urządzenia są złe.** Przystawka telewizyjna
+  zostawiona na fabrycznej strefie przesuwa *wszystko*, łącznie z zegarem na
+  swoim pasku stanu. Sprawdź datę i godzinę przystawki przed czymkolwiek innym
+  — a jeśli stoi na „automatycznie” w sieci blokującej serwery czasu, ustaw
+  ręcznie.
+
+Sygnatura, która je rozdziela: jeśli przesunięcie pojawia się też na telefonie,
+to przewodnik; jeśli tylko na jednym urządzeniu, to to urządzenie.
+
+## 4. Przewodnik jest nieświeży
+
+W zeszłym tygodniu było dobrze, a teraz siatka pokazuje audycje, które już
+poszły, albo urywa się o północy. Pliki przewodnika obejmują okno — często
+kilka dni — i trzeba je pobrać na nowo, żeby je przedłużyć. Jeśli odtwarzacz nie
+może sięgnąć adresu (przeniósł się, wygasł, sieć leżała w chwili próby), to co
+widzisz, jest starą kopią.
+
+Sygnatura: przewodnik kończący się w stałym punkcie w przeszłości albo
+urywający się kilka godzin naprzód. Użyj *Odśwież teraz* na źródle; jeśli się
+zapełni, pobranie było po prostu zaległe. Jeśli nie, zawodzi sam adres i
+obowiązują tu [te same sprawdzenia co przy linku playlisty](/pl/blog/playlista-sie-nie-wczytuje/)
+— wklej go do przeglądarki i zobacz, czy odpowiada.
+
+## Kolejność na pięć minut
+
+1. Sprawdź, czy przełącznik przewodnika jest włączony (*Pokaż przewodnik
+   (EPG)*).
+2. Login Xtream? Wtedy adres nie jest problemem; przejdź do 3. Link M3U?
+   Sprawdź, czy wpisany jest adres XMLTV.
+3. Wszystkie kanały puste → adres (1) albo nieświeżość (4). Niektóre puste →
+   dopasowanie (2). Złe godziny → strefa (3).
+4. *Odśwież teraz*, potem otwórz przewodnik na nowo.
+5. Sprawdź ten sam kanał na drugim urządzeniu, zanim napiszesz do dostawcy,
+   żeby móc powiedzieć, czy usterka idzie za przewodnikiem, czy za urządzeniem.
+
+Uczciwa uwaga na koniec: przewodnik jest tylko tak dobry jak plik za nim, a
+zadaniem odtwarzacza jest pobrać go niezawodnie, dopasować wiernie i — to część,
+którą większość odtwarzaczy robi źle — poprawnie wykonać arytmetykę stref
+czasowych. Gdy te trzy rzeczy trzymają, wszystkie pozostałe usterki są w pliku,
+a najszybszą naprawą jest wiedzieć, którą zgłosić.

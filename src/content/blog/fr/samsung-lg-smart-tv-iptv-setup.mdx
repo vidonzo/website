@@ -1,0 +1,98 @@
+---
+title: "Votre smart TV Samsung ou LG n’a pas de bon lecteur IPTV : l’installation qui marche"
+description: "Tizen et webOS tournent sous leurs propres systèmes, avec leurs propres boutiques maigres. Plutôt que de se battre contre cela, laissez le téléviseur être l’écran, et mettez le lecteur sur quelque chose capable d’en faire tourner un."
+urlSlug: iptv-sur-smart-tv-samsung-ou-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['television', 'configuration']
+keywords: ['lecteur iptv samsung smart tv', 'iptv lg smart tv', 'iptv sur tizen', 'iptv webos', 'smart tv iptv sans application']
+heroImageAlt: "Un grand téléviseur plat au mur, un petit boîtier noir sur l’étagère en dessous, un seul câble les reliant."
+---
+
+Vous avez un bon téléviseur. Il est grand, la dalle est excellente, et il a
+une boutique d’applications — il semble donc évident qu’un lecteur IPTV
+devrait y vivre. Puis vous ouvrez la boutique et trouvez deux ou trois
+lecteurs, aucun qui convienne : l’un est une page web payante dans un cadre,
+l’autre réclame un code depuis un site, le troisième affiche vos chaînes en
+liste interminable sans guide. La tentation est de continuer à chercher. Il y
+a une meilleure réponse, et elle commence par comprendre pourquoi l’étagère
+est vide.
+
+## Pourquoi la boutique du téléviseur est maigre
+
+Les téléviseurs Samsung tournent sous Tizen. Les LG sous webOS. Ni l’un ni
+l’autre n’est Android. Ce sont deux systèmes parfaitement capables, mais ce
+sont des mondes à part, avec leurs propres outils de développement, leurs
+propres règles de validation et — surtout — une part infime des développeurs
+qui écrivent du logiciel vidéo sérieux. La lignée mpv et FFmpeg sur laquelle
+[les bons lecteurs IPTV sont bâtis](/fr/blog/ce-que-fait-un-lecteur-iptv/) vise
+Android, iOS, Windows, macOS et Linux ; un portage Tizen est un projet séparé
+pour un petit public, et la plupart des lecteurs n’en font jamais.
+
+Les lecteurs qui apparaissent dans la boutique du téléviseur sont donc le plus
+souvent des applications web légères, limitées à ce qu’un moteur de navigateur
+sait décoder. Sur un flux propre, ils lisent. Sur
+[les flux bizarres que les fournisseurs produisent réellement](/fr/blog/protocoles-de-streaming-expliques/)
+— transport streams bruts, codecs audio inhabituels, HEVC sur une dalle plus
+ancienne — ils calent, perdent le son ou refusent. Et presque aucun n’a de
+guide digne de ce nom.
+
+Vidonzo n’a pas non plus de version Tizen ou webOS. Plutôt que d’en promettre
+une, voici l’arrangement qui marche aujourd’hui, et qui marche bien.
+
+## Le téléviseur est l’écran ; le lecteur tourne sur un boîtier
+
+Tout téléviseur moderne a des ports HDMI libres, et l’un d’eux peut accueillir
+un petit appareil Android TV — clé ou boîtier, chez une poignée de fabricants,
+pour moins qu’un dîner modeste au restaurant. Branchez-le, et le téléviseur
+devient ce qu’il fait de mieux : un grand écran lumineux. Le lecteur tourne sur
+le boîtier, avec un vrai système en dessous et
+[une vraie interface de téléviseur au-dessus](/fr/blog/lecteur-iptv-sur-android-tv/).
+
+Le gain n’est pas subtil. Un boîtier conçu pour Android TV fait tourner le même
+moteur mpv qu’un téléphone, avec décodage matériel, un tampon réglable pour
+[une connexion capricieuse](/fr/blog/regler-le-buffering-iptv/), et un guide qui
+[affiche la bonne heure](/fr/blog/epg-guide-des-programmes/). Il cesse aussi de dépendre
+de la politique de boutique du fabricant du téléviseur. Quand le téléviseur
+sera remplacé dans six ans, le boîtier déménage sur le nouveau et rien de
+votre installation ne change.
+
+Deux remarques pratiques pour en choisir un. Préférez un appareil *certifié*
+Android TV ou Google TV à un « boîtier Android » générique — les certifiés ont
+Google Play, reçoivent des mises à jour, et leur télécommande comme le contrôle
+HDMI sont câblés correctement. Et activez le réglage HDMI-CEC du téléviseur
+lui-même pour que les flèches de sa télécommande pilotent le boîtier ; la
+plupart des foyers ne retouchent plus jamais à la télécommande du boîtier.
+
+## Puis laissez le téléphone taper
+
+La seule chose qu’un boîtier ne règle pas, c’est la saisie. Entrer un mot de
+passe Xtream avec des flèches est pénible sur n’importe quel appareil.
+Sautez l’étape : n’importe quel téléphone ou tablette sur le même Wi-Fi peut
+[servir de télécommande à Vidonzo sur le boîtier](/fr/blog/telephone-comme-telecommande-tv/).
+Le téléphone découvre le téléviseur tout seul, vous parcourez la bibliothèque
+du téléviseur et cherchez avec un vrai clavier, et la lecture démarre sur le
+grand écran d’un geste. En pratique, la plupart des gens configurent la
+playlist depuis le téléphone et ne tapent jamais sur le téléviseur.
+
+## L’ordre qui évite les accrocs habituels
+
+1. Connectez le boîtier au même réseau que le téléphone. Si le téléviseur est
+   dans la pièce du fond, [vérifiez d’abord le Wi-Fi de cette pièce](/fr/blog/iptv-qui-fige-en-wifi/)
+   — une liaison filaire vers le boîtier, si le routeur est proche, supprime
+   la cause la plus courante de gel.
+2. Installez Vidonzo sur le boîtier : [le guide d’installation TV](/fr/help/)
+   couvre le sujet.
+3. [Ajoutez votre playlist](/fr/blog/configurer-sa-premiere-playlist/) — depuis le
+   téléphone en télécommande si vous en avez un à portée.
+4. Ouvrez le guide, choisissez une chaîne, et seulement ensuite réglez quoi que
+   ce soit.
+
+## Et l’application de lecture du téléviseur lui-même, pour l’instant ?
+
+Gardez-la, si elle vous convient, pour la même raison qu’on garde VLC à côté
+d’un lecteur dédié : elle est là. Mais quand une chaîne perd le son ou que le
+guide est décalé d’une heure, ce n’est pas la faute de votre fournisseur ni du
+téléviseur — c’est qu’on demande à un moteur de navigateur dans un système
+verrouillé d’être un lecteur multimédia. Donnez au téléviseur un seul travail.
+Il est très bon dans ce travail-là.

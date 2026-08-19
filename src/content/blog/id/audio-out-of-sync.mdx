@@ -1,0 +1,112 @@
+---
+title: "Suara tidak sinkron dengan gambar: dari mana pergeseran itu mulai"
+description: "Bibir bergerak, kata-kata datang terlambat. Ada empat tempat sebuah siaran bisa kehilangan sinkron — encoder, jaringan, dekoder, layar — dan hanya dua di antaranya yang bisa dijangkau pemutar Anda."
+urlSlug: suara-tidak-sinkron-dengan-gambar
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['pemecahan-masalah', 'pemutaran']
+keywords: ['suara tidak sinkron iptv', 'audio telat dari video', 'masalah lipsync streaming', 'memperbaiki sinkron audio']
+heroImageAlt: "Balon dialog digambar sedikit bergeser dari mulut yang memilikinya, di atas latar polos."
+---
+
+Tak ada yang merusak sebuah siaran lebih cepat daripada bibir yang menyelesaikan
+kalimat sebelum suaranya tiba. Ini juga salah satu kerusakan yang paling sering
+salah didiagnosis, karena sebuah siaran punya empat tempat terpisah di mana
+gambar dan suara bisa berpisah, dan penanganannya berbeda-beda. Ubah yang
+salah, pergeserannya tetap persis di tempatnya. Inilah keempatnya, dari sumber
+sampai telinga Anda, dan cara mengetahui yang mana yang sedang Anda hadapi.
+
+## Pertama, bedakan pergeseran yang tumbuh dari selisih tetap
+
+Amati semenit dan tanyakan satu hal: jaraknya *tetap* atau *bertambah*?
+
+Selisih tetap — suara selalu terlambat sekitar sepertiga detik dan begitu terus
+— sudah ditetapkan sebelum siaran sampai ke Anda, atau oleh layar Anda.
+Pergeseran yang bertambah — sinkron saat saluran dibuka, sedetik setelah
+sepuluh menit, lebih parah setelah dua puluh — adalah masalah jam, dan
+menunjuk ke buffer atau pendekodean di sisi Anda. Satu pengamatan itu memotong
+daftarnya jadi separuh.
+
+## 1. Encoder: memang begitu saat meninggalkan server
+
+Video dan audio adalah jalur terpisah yang [dijalin jadi satu siaran](/id/blog/takarir-dan-trek-audio-iptv/),
+masing-masing dicap dengan informasi waktu agar pemutar bisa menyelaraskannya.
+Kalau encoder penyedia salah mencap — jalur audio menambah latensi yang tak
+diperhitungkan cap waktunya — setiap penonton saluran itu melihat selisih tetap
+yang sama, di pemutar mana pun, di perangkat mana pun.
+
+Tandanya: satu saluran, atau saluran-saluran satu penyedia, dan sama saja di
+ponsel maupun di TV. Tak ada yang bisa disetel di sisi Anda; obatnya hanya di
+hulu. Cek saluran itu di perangkat kedua untuk memastikan, lalu beri tahu
+penyedia saluran mana dan kira-kira seberapa besar jaraknya.
+
+## 2. Jaringan: segmen datang tak seirama
+
+Pada [HLS dan DASH](/id/blog/protokol-streaming-hls-dash-rtsp/) siaran dikirim
+dalam segmen pendek, dan kalau segmen datang terlambat pemutar harus memilih
+antara tersendat dan terus jalan. Terus jalan itulah tempat pergeseran dimulai:
+ia bisa memutar apa yang ada, dan apa yang ada tidak selalu kedua jalur dalam
+porsi sama. Pada transport stream mentah hal yang sama muncul sebagai paket
+yang jatuh saat beban tinggi, membawa serta informasi waktunya.
+
+Tandanya: pergeseran yang datang dan pergi mengikuti koneksi Anda — lebih buruk
+malam hari, lebih buruk di sisi rumah yang jauh, hilang pada kotak berkabel.
+Penanganannya sama dengan penanganan [buffering](/id/blog/mengatasi-buffering-iptv/):
+buffer lebih besar, dan [tautan radio](/id/blog/iptv-macet-di-wifi/) yang
+lebih baik antara router dan layar. Buffer lebih besar memberi pemutar ruang
+untuk menjaga kedua jalur tetap sejajar melewati bagian yang kasar alih-alih
+berimprovisasi.
+
+## 3. Dekoder: dua jam, satu di antaranya lambat
+
+Ini kasus yang benar-benar bisa ditangani pemutar. Video didekode satu
+komponen dan audio komponen lain, dan pemutar menjaga keduanya bersama dengan
+membandingkan jam mereka. Ketika dekoder video tak sanggup mengejar — kotak
+berdaya rendah, dekoder perangkat lunak yang mengunyah HEVC, ponsel hangat yang
+menurunkan performa — gambar tertinggal di belakang suara. Jaraknya *bertambah*,
+dan kembali nol saat Anda membuka ulang salurannya.
+
+Tandanya: pergeseran bertambah di satu perangkat dan tidak di perangkat lain,
+serta lebih parah pada saluran yang berat. Tiga hal membantu, berurutan:
+
+- **Nyalakan dekode perangkat keras** di *Pengaturan → Pemutaran* kalau mati.
+  Ini memindahkan kerja video ke cip yang memang dirancang untuknya, dan jam
+  video berhenti kalah balapan. Di beberapa kotak lama, dekode perangkat keras
+  juga yang [mengubah layar hitam kembali jadi gambar](/id/blog/ada-suara-tanpa-gambar/).
+- **Buka ulang siarannya** saat bergeser. Kedua jam mulai lagi bersamaan. Ini
+  akal-akalan, bukan perbaikan — tapi cuma dua detik.
+- **Kurangi beban perangkat**: tutup aplikasi lain, dan kalau kotaknya tua,
+  [catatan tentang penyiapan ramping untuk perangkat lemah](/id/blog/kotak-android-tua-pemutaran-mulus/)
+  persis membahas ini.
+
+## 4. Layar: televisinya yang terlambat
+
+Televisi modern mengolah gambar — pemulusan gerak, penskalaan, pengurangan
+derau — dan tiap tahap menambah beberapa milidetik yang tak didapat suara.
+Kirim audio ke soundbar lewat satu jalur dan video ke panel lewat jalur lain,
+keduanya tiba terpisah. Jaraknya tetap, dan sama di setiap sumber: aplikasi
+streaming, konsol game, tuner siaran.
+
+Tandanya: semuanya kena, bukan cuma pemutar IPTV Anda. Kebanyakan televisi
+punya mode gambar «game» atau «PC» yang mematikan pengolahan, dan soundbar
+punya pengaturan tunda audio justru untuk ini. Setel sekali dan setiap sumber
+beres.
+
+## Yang jujurnya tak bisa dilakukan pemutar
+
+Ada baiknya jelas soal batasnya. Pemutar mengendalikan buffer dan dekoder —
+kasus 2 dan 3 — dan bisa menjaga dua jalur sejajar sebagaimana dicap. Ia tak
+bisa mencap ulang siaran yang keluar salah dari encoder, dan tak bisa melihat
+berapa lama televisi Anda menggambar satu bingkai. Sebagian pemutar menyediakan
+penggeser offset audio manual; itu bisa menutupi selisih tetap pada satu
+saluran, dan takkan menyentuh pergeseran yang bertambah, karena offset tetap
+tak bisa mengejar jam yang terus melorot. Vidonzo saat ini tak menyediakannya,
+dengan pandangan bahwa dua hal yang *bisa* diperbaiki pemutar lebih baik
+diperbaiki daripada ditutupi.
+
+## Ringkasnya
+
+Tetap dan di mana-mana: televisi. Tetap dan satu saluran: encoder — beri tahu
+penyedia. Datang dan pergi mengikuti koneksi: buffer. Bertambah sampai Anda
+membuka ulang: dekoder — nyalakan dekode perangkat keras. Empat penyebab, satu
+menit mengamati untuk membedakannya.

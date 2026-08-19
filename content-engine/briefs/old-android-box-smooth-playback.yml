@@ -1,0 +1,15 @@
+key: old-android-box-smooth-playback
+title: "Making an old Android box play smoothly again"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: troubleshooting-with-install
+targetQueries: ["iptv player for old android box", "lightweight iptv player android tv", "android box lagging iptv", "best iptv player low end box"]
+audience: Owners of a 1–2 GB RAM box that stutters in the app they have.
+value: The reader is at the moment of switching apps; the article explains why a box struggles and which settings and choices help.
+angle: hardware decoding, cache sizing, avoiding a heavy UI, keeping the playlist lean, and letting the phone do the browsing.
+productFacts:
+  - libmpv engine, Hardware decoding toggle, Buffer size (cache) in MB
+  - side-rail TV layout with D-pad focus; phone as remote for browsing and typing
+constraints: [no-download-or-offline-wording, no-competitor-names, no-channel-counts]
+internalLinks: [iptv-player-on-android-tv, fix-iptv-buffering, sound-but-no-picture, organize-large-playlists, your-phone-is-a-better-remote]

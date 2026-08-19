@@ -1,0 +1,93 @@
+---
+title: "Smart TV Samsung atau LG Anda tidak punya pemutar IPTV yang bagus: penyiapan yang berhasil"
+description: "Tizen dan webOS menjalankan sistem operasi sendiri dengan toko aplikasi sendiri yang tipis. Daripada melawannya, biarkan TV jadi layar dan taruh pemutar di sesuatu yang sanggup menjalankannya."
+urlSlug: iptv-di-smart-tv-samsung-atau-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisi', 'pengaturan']
+keywords: ['pemutar iptv samsung smart tv', 'iptv lg smart tv', 'iptv di tizen', 'iptv webos', 'smart tv iptv tanpa aplikasi']
+heroImageAlt: "Televisi layar datar besar di dinding dengan kotak hitam kecil di rak bawahnya, satu kabel menghubungkan keduanya."
+---
+
+Anda punya televisi bagus. Besar, panelnya unggul, dan punya toko aplikasi,
+jadi tampak jelas bahwa pemutar IPTV semestinya tinggal di dalamnya. Lalu Anda
+buka tokonya dan menemukan dua tiga pemutar, tak satu pun tepat: satu adalah
+halaman web berbayar dalam bingkai, satu meminta kode dari situs web, satu
+menampilkan saluran Anda sebagai daftar tanpa akhir tanpa panduan. Godaannya
+adalah terus mencari. Ada jawaban yang lebih baik, dan ia mulai dengan memahami
+mengapa raknya kosong.
+
+## Mengapa toko TV tipis
+
+Televisi Samsung menjalankan Tizen. Televisi LG menjalankan webOS. Keduanya
+bukan Android. Keduanya sistem operasi yang sepenuhnya mampu, tapi dunia
+mereka sendiri, dengan alat pengembangan sendiri, aturan tinjauan sendiri, dan
+— yang menentukan — porsi kecil sekali dari pengembang yang menulis perangkat
+lunak video serius. Garis keturunan mpv dan FFmpeg tempat
+[pemutar IPTV yang baik dibangun](/id/blog/tugas-sebenarnya-pemutar-iptv/)
+menyasar Android, iOS, Windows, macOS, dan Linux; port Tizen adalah proyek
+terpisah dengan penonton kecil, dan kebanyakan pemutar tak pernah
+membuatnya.
+
+Maka pemutar yang muncul di toko TV cenderung aplikasi web ringan, terbatas
+pada apa yang bisa didekode mesin peramban. Di siaran rapi mereka jalan. Di
+[siaran aneh yang benar-benar diproduksi penyedia](/id/blog/protokol-streaming-hls-dash-rtsp/)
+— transport stream mentah, kodek audio tak biasa, HEVC di panel lama — mereka
+tersendat, kehilangan suara, atau menolak. Dan hampir tak ada yang punya
+panduan yang layak disebut panduan.
+
+Vidonzo juga tidak punya versi Tizen atau webOS. Daripada menjanjikannya,
+inilah penataan yang berhasil hari ini dan berhasil dengan baik.
+
+## TV adalah layar; pemutar berjalan di sebuah kotak
+
+Setiap televisi modern punya port HDMI lebih, dan salah satunya bisa memuat
+perangkat Android TV kecil — stik atau kotak, dari segelintir pabrikan,
+seharga kurang dari makan malam sederhana di luar. Colokkan, dan televisi
+menjadi apa yang paling ia kuasai: layar besar dan terang. Pemutar berjalan di
+kotak, dengan sistem operasi sungguhan di bawahnya dan
+[antarmuka televisi sungguhan di atasnya](/id/blog/pemutar-iptv-di-android-tv/).
+
+Keuntungannya tidak samar. Kotak yang dibuat untuk Android TV menjalankan mesin
+mpv yang sama dengan ponsel, dengan dekode perangkat keras, buffer yang bisa
+diatur untuk [koneksi yang goyah](/id/blog/mengatasi-buffering-iptv/), dan
+panduan yang [menunjukkan waktu yang benar](/id/blog/panduan-acara-epg-iptv/). Ia
+juga berhenti bergantung pada politik toko pabrikan TV. Saat TV diganti enam
+tahun lagi, kotaknya pindah ke TV baru dan tak ada yang berubah pada penataan
+Anda.
+
+Dua catatan praktis saat memilih. Utamakan perangkat yang *bersertifikat*
+Android TV atau Google TV alih-alih «kotak Android» generik — yang
+bersertifikat punya Google Play, menerima pembaruan, dan remote serta kontrol
+HDMI-nya terpasang benar. Dan aktifkan pengaturan HDMI-CEC di TV itu sendiri
+agar panah remote TV mengendalikan kotaknya; kebanyakan rumah tak pernah lagi
+menyentuh remote kotak.
+
+## Lalu biarkan ponsel yang mengetik
+
+Satu hal yang tak diselesaikan kotak adalah mengetik. Memasukkan kata sandi
+Xtream dengan tombol panah menyiksa di perangkat mana pun. Lewati: ponsel atau
+tablet mana pun di Wi-Fi yang sama bisa [jadi remote untuk Vidonzo di kotak](/id/blog/ponsel-sebagai-remot-tv/).
+Ponsel menemukan TV sendiri, Anda menelusuri pustaka TV dan mencari dengan
+papan ketik sungguhan, dan pemutaran mulai di layar besar dengan satu ketukan.
+Praktiknya kebanyakan orang menyiapkan playlist dari ponsel dan tak pernah
+mengetik di televisi sama sekali.
+
+## Urutan yang menghindari sandungan biasa
+
+1. Hubungkan kotak ke jaringan yang sama dengan ponsel. Kalau TV ada di kamar
+   jauh, [periksa dulu Wi-Fi kamar itu](/id/blog/iptv-macet-di-wifi/)
+   — koneksi kabel ke kotak, kalau router dekat, menghilangkan penyebab
+   pembekuan paling umum.
+2. Pasang Vidonzo di kotak: [panduan pemasangan TV](/id/help/) membahasnya.
+3. [Tambahkan playlist Anda](/id/blog/menyiapkan-playlist-pertama/) — dari
+   ponsel sebagai remote kalau ada di dekat Anda.
+4. Buka panduan, pilih saluran, dan baru setelah itu atur apa pun.
+
+## Bagaimana dengan aplikasi pemutar bawaan TV, untuk sekarang?
+
+Simpan, kalau berguna bagi Anda, dengan alasan yang sama seperti menyimpan VLC
+di samping pemutar khusus: ia ada. Tapi saat sebuah saluran kehilangan audio
+atau panduan meleset satu jam, salahnya bukan di penyedia dan bukan di TV —
+melainkan meminta mesin peramban dalam sistem operasi terkunci untuk jadi
+pemutar media. Beri TV satu tugas. Ia sangat bagus dalam tugas itu.

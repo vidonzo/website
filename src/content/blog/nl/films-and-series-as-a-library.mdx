@@ -1,0 +1,103 @@
+---
+title: "Films en series als bibliotheek, niet als map met bestandsnamen"
+description: "Je aanbieder stuurt films en series als een lijst met items. Of je posters, seizoenen en een hervatpunt ziet — of duizend regels bestandsnamen — is volledig het werk van de speler."
+urlSlug: films-en-series-als-bibliotheek
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['product', 'afspeellijsten']
+keywords: ['iptv vod speler', 'series seizoenen afleveringen iptv', 'films met posters iptv', 'verder kijken iptv']
+heroImageAlt: "Een plank met boekruggen waarvan er een paar zijn uitgetrokken om hun omslag te tonen, naast een kaal geprint lijstje."
+---
+
+Er is een moment, een dag of twee na het instellen van een nieuwe speler, waarop
+mensen voor het eerst de sectie «films» openen en ontdekken wat hun aanbieder
+werkelijk stuurt: een lijst. Duizenden regels met namen als
+`Some.Film.2019.1080p.WEB` en `Show.S03E04`, alfabetisch, zonder plaatje, zonder
+samenvatting, en zonder enig idee bij welke aflevering je was. Het is
+gemakkelijk te concluderen dat de aanbieder slecht is. Meestal is de aanbieder
+prima. Wat je ziet is het ruwe materiaal, en het verschil tussen een lijst en een
+bibliotheek is werk dat de speler wel of niet doet.
+
+## Wat er werkelijk binnenkomt
+
+Dat hangt af van [welke vorm je afspeellijst heeft](/nl/blog/xtream-codes-of-m3u/).
+
+Een **Xtream Codes**-login geeft de speler drie aparte feeds — live, films,
+series — en de film- en seriefeeds dragen structuur: een titel, een jaar, een
+posteradres, een beoordeling, een plot, een cast, en voor series een hiërarchie
+van seizoenen en afleveringen met een volgorde. Dat is veel om mee te werken, en
+een goede speler gebruikt het allemaal.
+
+Een **M3U**-link is [platter](/nl/blog/in-een-m3u-bestand/): één regel per
+item, met een naam, een groepstitel en vaak een logoadres. Sommige aanbieders
+zetten de poster in het logoveld en de serienaam in de groep; andere niet. Een
+speler die vanuit M3U werkt moet de structuur *afleiden* — herkennen dat
+`Show.S03E04` en `Show.S03E05` afleveringen zijn van hetzelfde seizoen van
+dezelfde serie — en dat doet hij met wisselend enthousiasme.
+
+Hoe dan ook: niets komt binnen *als* bibliotheek. De bibliotheek wordt gebouwd.
+
+## Wat bouwen betekent
+
+Vijf taken, in de volgorde waarin ze op het scherm verschijnen.
+
+**Beeldmateriaal.** Een poster is een adres in de metadata; de speler haalt hem
+op, bewaart hem in cache, schaalt hem, en doet dat voor elke kaart in beeld
+zonder dat het scrollen hapert. Zijn posters leeg, dan komt dat meestal doordat
+het adres ontbreekt of dood is — de metadata van de aanbieder wijzen naar een
+plaatje dat er niet meer is — en een goede speler toont een nette
+plaatsvervanger in plaats van een gebroken afbeelding.
+
+**Details.** Beoordeling, plot, cast, jaar, genre — gepresenteerd op een
+detailscherm zodat je *vóór* het indrukken van afspelen kunt beslissen of je wilt
+kijken, wat het hele punt van een bibliotheek is. Vidonzo zet dit per titel neer
+en voegt een genre-overzicht over de hele catalogus toe voor avonden waarop je
+geen idee hebt wat je wilt.
+
+**Structuur.** Series zijn het lastige deel. Een seizoen is een houder, een
+aflevering een geordend item daarbinnen, en «volgende» betekent iets. De speler
+moet die boom bouwen uit de feed (Xtream) of uit namen (M3U), en vervolgens
+seizoenen en afleveringen tonen zoals ze zijn — niet als een platte lijst waarin
+je *S03E04* ergens tussen *S03E03* en *S03E05* zoekt. Doe dit goed, en
+*volgende aflevering automatisch afspelen* wordt mogelijk, omdat de speler weet
+wat «volgende» is.
+
+**Geheugen.** Verder kijken is een hervatpunt per titel, per bron: hoe ver in
+welke aflevering van welke serie, bij welke aanbieder. Het is wat een
+bibliotheek van een plank in *jouw* plank verandert. Stop op de telefoon, ga
+verder op de tv, en de positie is dezelfde omdat hij bij de titel hoort en niet
+bij het apparaat.
+
+**Zoeken.** [Eén veld, over live, films en series tegelijk](/nl/blog/grote-afspeellijsten-ordenen/),
+omdat je niet weet op welke plank een titel staat en dat ook niet zou moeten
+hoeven. Typ een naam; de resultaten zijn gegroepeerd per soort; kies er een.
+
+## Waarom de speler dit moet doen
+
+Het is terecht te vragen waarom de aanbieder niet meteen een afgeronde
+bibliotheek stuurt. Omdat de aanbieder niet weet op welk scherm je zit. Een
+posterraster voor de telefoon, een zijbalk voor de tv en een dichte tabel voor
+de tablet zijn drie verschillende ordeningen van dezelfde gegevens, en alleen de
+speler weet welke hij tekent. De feed draagt feiten; de speler maakt van feiten
+een plank waar je vanaf de bank doorheen kunt bladeren. Dat is
+[de hele taakverdeling](/nl/blog/iptv-speler-of-streaming-app/): de app van een
+streamingdienst is een winkel met een scherm; de IPTV-speler is het scherm
+alleen, en hij moet een heel goed scherm zijn.
+
+## Waar je op moet letten
+
+Toont je huidige speler bestandsnamen, dan is de metadata er vrijwel zeker wel
+en wordt hij niet gebruikt. Twee snelle controles: open een serie en kijk of ze
+seizoenen heeft; open een film en kijk of hij een plot heeft. Is geen van beide
+er, dan leest de speler de lijst en stopt daar. En controleer of
+[de sporen beschikbaar zijn](/nl/blog/ondertiteling-en-audiosporen/) — een film met
+drie audiotalen en twee ondertitelsporen die alleen de eerste van elk afspeelt,
+is een bibliotheek met dichtgeplakte pagina's.
+
+Vidonzo is gebouwd met de bibliotheek als uitgangspunt: posters, beoordelingen,
+plot en cast; seizoenen en afleveringen als boom, met automatisch volgende
+aflevering; verder kijken per bron en per titel; één zoekopdracht over alles.
+Dezelfde lijst die je aanbieder stuurt, alleen helemaal uitgelezen. Is je
+filmsectie op dit moment een map met bestandsnamen, dan duurt
+[het toevoegen van de login die je al hebt](/nl/blog/eerste-afspeellijst-instellen/)
+ongeveer een minuut, en het verschil zie je op het eerste scherm.

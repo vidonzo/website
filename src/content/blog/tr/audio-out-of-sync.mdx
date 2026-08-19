@@ -1,0 +1,110 @@
+---
+title: "Ses görüntüyle uyuşmuyor: kayma nerede başlıyor"
+description: "Dudaklar oynuyor, kelimeler geç geliyor. Bir akışın senkronu kaybedebileceği dört yer var — kodlayıcı, ağ, kod çözücü, ekran — ve bunlardan yalnızca ikisi oynatıcınızın erişebildiği yer."
+urlSlug: ses-goruntuyle-uyusmuyor
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['sorun-giderme', 'oynatma']
+keywords: ['ses görüntü uyumsuz iptv', 'ses gecikmesi yayın', 'dudak senkronu sorunu', 'ses senkron düzeltme']
+heroImageAlt: "Ait olduğu ağzın biraz yanına çizilmiş bir konuşma balonu, sade bir zeminde."
+---
+
+Bir yayını, sesten önce cümleyi bitiren dudaklardan daha hızlı bozan bir şey
+yok. Bu aynı zamanda yayıncılıkta en sık yanlış teşhis edilen arızalardan
+biri, çünkü bir akışın görüntü ile sesin ayrılabileceği dört ayrı yeri var ve
+her birinin çaresi farklı. Yanlış şeyi değiştirin, kayma tam durduğu yerde
+kalır. İşte kaynaktan kulağınıza doğru bu dördü ve hangisiyle karşı karşıya
+olduğunuzu nasıl anlarsınız.
+
+## Önce kaymayı sabit farktan ayırın
+
+Bir dakika izleyin ve tek bir soru sorun: aradaki fark *sabit* mi, yoksa
+*büyüyor* mu?
+
+Sabit fark — ses hep saniyenin üçte biri kadar geç ve öyle kalıyor — akış size
+ulaşmadan önce ya da ekranınız tarafından belirlenmiştir. Büyüyen kayma —
+kanal açılırken uyumlu, on dakika sonra bir saniye, yirmi dakika sonra daha
+kötü — bir saat sorunudur ve sizin tarafınızdaki arabelleğe ya da kod çözmeye
+işaret eder. Bu tek gözlem listeyi yarıya indirir.
+
+## 1. Kodlayıcı: sunucudan öyle çıkmış
+
+Video ve ses, [tek bir akışta örülmüş](/tr/blog/iptv-altyazi-ve-ses-secenekleri/)
+ayrı parçalardır; her biri, oynatıcı hizalayabilsin diye zaman bilgisiyle
+damgalanır. Sağlayıcının kodlayıcısı yanlış damgaladıysa — ses yolu, damgaların
+hesaba katmadığı bir gecikme eklediyse — o kanaldaki her izleyici aynı sabit
+farkı görür; her oynatıcıda, her cihazda.
+
+İşaret: tek bir kanaldır ya da bir sağlayıcının kanallarıdır ve telefonunuzda
+da televizyonda da aynıdır. Sizin tarafınızda ayarlanacak bir şey yok; tek
+çare yukarıda. Emin olmak için kanalı ikinci bir cihazda deneyin, sonra
+sağlayıcıya hangi kanal ve farkın kabaca ne kadar olduğunu bildirin.
+
+## 2. Ağ: parçalar sırasız geliyor
+
+[HLS ve DASH'te](/tr/blog/hls-dash-rtsp-yayin-protokolleri/) akış kısa parçalar
+hâlinde teslim edilir; parçalar geç gelirse oynatıcı takılmakla devam etmek
+arasında seçim yapmak zorundadır. Devam etmek, kaymanın başladığı yerdir:
+elindekini oynatabilir ve elindeki her zaman iki parça eşit ölçüde değildir.
+Ham bir transport stream'de aynı şey, yük altında düşen ve zaman bilgisini de
+götüren paketler olarak görünür.
+
+İşaret: bağlantınızla gelip giden bir kayma — akşamları daha kötü, evin uzak
+tarafında daha kötü, kablolu bir kutuda yok. Çare, [arabellek sorununun](/tr/blog/iptv-donma-sorunu-cozumu/)
+çaresidir: daha büyük arabellek ve yönlendiriciyle ekran arasında daha iyi bir
+[telsiz bağlantı](/tr/blog/iptv-wifi-donma-sorunu/). Daha büyük arabellek,
+oynatıcıya sarsıntılı bir bölümde doğaçlama yapmak yerine iki parçayı hizada
+tutacak alan verir.
+
+## 3. Kod çözücü: iki saat, biri yavaş
+
+Bu, oynatıcının gerçekten bir şey yapabildiği durumdur. Videoyu bir bileşen,
+sesi başka bir bileşen çözer; oynatıcı saatlerini karşılaştırarak ikisini bir
+arada tutar. Video çözücü yetişemediğinde — güçsüz bir kutu, HEVC'yi çiğneyen
+bir yazılım çözücü, ısınıp kısılan bir telefon — görüntü sesin gerisine düşer.
+Fark *büyür* ve kanalı yeniden açtığınızda sıfırlanır.
+
+İşaret: bir cihazda büyüyen kayma, diğerinde yok; ve daha ağır kanallarda daha
+kötü. Şu sırayla üç şey yardımcı olur:
+
+- **Donanımsal kod çözmeyi açın**, kapalıysa *Ayarlar → Oynatma* içinde. Bu,
+  video işini onun için tasarlanmış yongaya taşır ve video saati yarışı
+  kaybetmeyi bırakır. Bazı eski kutularda donanımsal kod çözme aynı zamanda
+  [siyah ekranı yeniden görüntüye çeviren](/tr/blog/ses-var-goruntu-yok/)
+  şeydir.
+- **Akışı yeniden açın** kaydığında. İki saat birlikte yeniden başlar. Çözüm
+  değil geçici bir yol, ama iki saniyelik.
+- **Cihaza daha az iş verin**: diğer uygulamaları kapatın; kutu eskiyse
+  [zayıf donanım için yalın kurulum notları](/tr/blog/eski-android-kutu-akici-oynatma/)
+  tam olarak bunu anlatıyor.
+
+## 4. Ekran: televizyon geç kalıyor
+
+Modern televizyonlar görüntüyü işler — hareket yumuşatma, ölçekleme, gürültü
+azaltma — ve her aşama, sesin almadığı birkaç milisaniye ekler. Sesi bir yoldan
+ses çubuğuna, görüntüyü başka bir yoldan panele gönderin, ikisi ayrı ayrı
+varır. Fark sabittir ve her kaynakta aynıdır: yayın uygulaması, oyun konsolu,
+karasal alıcı.
+
+İşaret: her şeyi etkiler, sadece IPTV oynatıcınızı değil. Çoğu televizyonda
+işlemeyi kapatan bir «oyun» ya da «PC» görüntü modu vardır ve ses çubuklarında
+tam bunun için bir ses gecikmesi ayarı bulunur. Bir kez ayarlayın, her kaynak
+düzelir.
+
+## Bir oynatıcının dürüstçe yapamayacağı
+
+Sınırı net söylemekte yarar var. Oynatıcı arabelleği ve kod çözücüyü denetler —
+2. ve 3. durumlar — ve iki parçayı damgalandıkları gibi hizada tutabilir.
+Kodlayıcıdan yanlış çıkmış bir akışı yeniden damgalayamaz ve televizyonunuzun
+bir kareyi çizmesinin ne kadar sürdüğünü göremez. Bazı oynatıcılar elle ses
+kaydırma çubuğu sunar; tek bir kanaldaki sabit farkı örtebilir, büyüyen kaymaya
+ise dokunamaz, çünkü sabit bir kaydırma sürekli kayan bir saati kovalayamaz.
+Vidonzo şu an böyle bir şey sunmuyor; oynatıcının *düzeltebildiği* iki şeyin
+örtülmektense düzeltilmesinin daha doğru olduğu görüşüyle.
+
+## Kısa hâli
+
+Sabit ve her yerde: televizyon. Sabit ve tek kanal: kodlayıcı — sağlayıcıya
+bildirin. Bağlantıyla gelip gidiyor: arabellek. Yeniden açana kadar büyüyor:
+kod çözücü — donanımsal kod çözmeyi açın. Dört neden, ayırt etmek için bir
+dakikalık izleme.

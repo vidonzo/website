@@ -1,0 +1,109 @@
+---
+title: "Audio out of sync with the picture: where the drift starts"
+description: "Lips move, words arrive late. There are four places a stream can lose sync — the encoder, the network, the decoder, the display — and only two of them are anywhere your player can reach."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['troubleshooting', 'playback']
+keywords: ['iptv audio out of sync', 'iptv audio delay', 'sound not matching video', 'lip sync problem stream']
+heroImageAlt: "A speech bubble drawn slightly to the right of the mouth it belongs to, on a plain background."
+---
+
+Nothing ruins a broadcast faster than lips that finish a sentence before the
+sound does. It is also one of the most misdiagnosed faults in streaming,
+because a stream has four separate places where picture and sound can come
+apart, and the fixes for each are different. Change the wrong thing and the
+drift stays exactly where it was. Here are the four, in order from the source
+to your ears, and how to tell which one you are looking at.
+
+## First, tell drift from offset
+
+Watch for a minute and ask one question: is the gap *constant* or *growing*?
+
+A constant offset — the sound is always about a third of a second late, and
+stays that way — was set before the stream reached you, or by your display.
+A growing drift — in sync when the channel opens, a second out after ten
+minutes, worse after twenty — is a clock problem, and it points at buffering
+or decoding on your side. That single observation halves the list.
+
+## 1. The encoder: it left the server that way
+
+Video and audio are separate tracks
+[braided into one stream](/blog/subtitles-and-audio-tracks/), each stamped
+with timing information so the player can line them up. If the provider's
+encoder stamped them wrongly — the audio path added latency the timestamps do
+not account for — every viewer on that channel sees the same constant offset,
+on every player, on every device.
+
+The signature: it is one channel, or one provider's channels, and it is the
+same on your phone as on the TV. There is nothing on your side to adjust; the
+only cure is upstream. Check the channel on a second device to confirm, and
+tell the provider which channel and roughly how large the gap is.
+
+## 2. The network: segments arriving out of step
+
+On [HLS and DASH](/blog/streaming-protocols-explained/), a stream is delivered
+in short segments, and if segments arrive late the player has to choose
+between stalling and pressing on. Pressing on is where drift begins: it may
+play what it has, and what it has is not always both tracks in equal measure.
+On a raw transport stream the same thing appears as packets dropped under
+load, taking timing information with them.
+
+The signature: drift that comes and goes with your connection — worse in the
+evening, worse on the far side of the house, gone on a wired box. The fix is
+the fix for [buffering](/blog/fix-iptv-buffering/): a larger buffer, and a
+better [radio link](/blog/fix-iptv-freezing-on-wifi/) between the router and
+the screen. A larger buffer gives the player room to keep both tracks lined up
+through a rough patch instead of improvising.
+
+## 3. The decoder: two clocks, one of them slow
+
+This is the case a player can genuinely do something about. Video is decoded
+by one component and audio by another, and the player keeps them together by
+comparing their clocks. When the video decoder cannot keep up — a low-powered
+box, a software decoder chewing through HEVC, a phone that is warm and
+throttling — the picture falls behind the sound. The gap *grows*, and it
+resets to zero when you reopen the channel.
+
+The signature: growing drift on one device and not another, and worse on
+heavier channels. Three things help, in order:
+
+- **Turn on hardware decoding**, in *Settings → Playback*, if it is off. This
+  moves the video work to the chip designed for it, and the video clock stops
+  losing the race. On some older boxes hardware decoding is what
+  [turns a black screen back into a picture](/blog/sound-but-no-picture/) too.
+- **Reopen the stream** when it drifts. Both clocks restart together. It is a
+  workaround rather than a fix, but it is a two-second one.
+- **Give the device less to do**: close other apps, and if the box is old,
+  [the notes on lean setups for weak hardware](/blog/old-android-box-smooth-playback/)
+  are all about exactly this.
+
+## 4. The display: the television is late
+
+Modern televisions process the picture — motion smoothing, upscaling, noise
+reduction — and every stage of that adds a few milliseconds the sound does
+not get. Send audio to a soundbar over one path and video to the panel over
+another and the two arrive apart. The gap is constant, and it is the same on
+every source: the streaming app, the game console, the broadcast tuner.
+
+The signature: it is everything, not just your IPTV player. Most televisions
+have a "game" or "PC" picture mode that turns the processing off, and
+soundbars have an audio delay setting for precisely this. Set it once and
+every source is fixed.
+
+## What a player honestly cannot do
+
+It is worth being clear about the limit. A player controls the buffer and the
+decoder — cases 2 and 3 — and it can keep two tracks in step as they were
+stamped. It cannot re-stamp a stream that left the encoder wrong, and it
+cannot see how long your television takes to draw a frame. Some players offer
+a manual audio-offset slider; it can mask a constant offset on one channel,
+and it will not touch a growing drift, because a fixed offset cannot chase a
+clock that keeps slipping. Vidonzo does not ship one at present, on the view
+that the two things a player *can* fix are better fixed than masked.
+
+## The short version
+
+Constant and everywhere: the television. Constant and one channel: the
+encoder — tell the provider. Comes and goes with the connection: the buffer.
+Grows until you reopen: the decoder — turn on hardware decoding. Four causes,
+one minute of watching to tell them apart.

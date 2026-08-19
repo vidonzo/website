@@ -1,0 +1,15 @@
+key: vlc-as-an-iptv-player
+title: "Can VLC be your IPTV player? Where a general-purpose player stops"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: comparison
+targetQueries: ["vlc iptv", "vlc m3u playlist", "vlc iptv player", "vlc vs iptv player"]
+audience: People already opening M3U files in VLC and wondering whether that is enough.
+value: A fair account of what VLC does well and where a dedicated player earns its place. The honesty is the persuasion.
+angle: VLC is respected, not attacked. Guide, series structure, resume points, per-source state, TV navigation are the seams.
+productFacts:
+  - VLC (open source, general purpose) opens M3U and plays most streams — true and stated plainly
+  - Vidonzo adds EPG, series structure, continue watching, favourites, D-pad TV build, phone as remote
+constraints: [fair-to-vlc, no-download-or-offline-wording, no-channel-counts]
+internalLinks: [what-an-iptv-player-does, epg-explained, iptv-player-on-android-tv, organize-large-playlists, streaming-protocols-explained]

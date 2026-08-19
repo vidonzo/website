@@ -1,0 +1,113 @@
+---
+title: "Membuat kotak Android tua kembali mulus"
+description: "Kotak yang tersendat jarang terlalu lemah untuk memutar video; ia hanya diminta mengerjakan semua yang lain. Bagian mana dari sebuah pemutar yang mahal bagi perangkat lemah, dan pengaturan serta kebiasaan yang mengembalikan pekerjaan ke bagian yang sanggup memikulnya."
+urlSlug: kotak-android-tua-pemutaran-mulus
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisi', 'pemutaran']
+keywords: ['pemutar iptv untuk kotak android tua', 'pemutar iptv ringan android tv', 'kotak android lemot', 'iptv di perangkat lemah']
+heroImageAlt: "Kotak set-top kecil yang sedikit tergores di rak, lampunya menyala, debu di sudutnya."
+---
+
+Di banyak ruang keluarga, di suatu sudut, ada kotak Android hitam kecil berusia
+lima atau enam tahun, dengan memori satu atau dua gigabita dan cip yang sudah
+murah sejak baru. Dulu ia memutar apa saja. Sekarang aplikasi di dalamnya
+tersendat saat berganti saluran, gambarnya bergetar di adegan ramai, dan
+menunya butuh sedetik untuk merespons. Naluri bilang kotak itu sudah habis.
+Biasanya belum. Bahkan di kotak yang sederhana ada dekoder video khusus yang
+sangat sanggup menggambar 1080p sepanjang malam; yang berubah adalah seberapa
+banyak pekerjaan *lain* yang diambil alih perangkat lunak di sekitarnya. Inilah
+ke mana biayanya pergi, dan bagaimana mengembalikan pekerjaan ke bagian yang
+sanggup memikulnya.
+
+## Apa yang sebenarnya mahal di kotak lemah
+
+Tiga hal, dari yang terbesar.
+
+**Mendekode video lewat perangkat lunak.** Kalau aplikasi mendekode di CPU
+serbaguna alih-alih di blok video, siaran 1080p melahap sebagian besar cip
+kecil, dan 4K atau HEVC jelas tak mungkin. Pilihan tunggal ini memisahkan kotak
+yang memutar dari kotak yang tersendat, dan ia sebuah pengaturan.
+
+**Menggambar antarmuka yang megah.** Poster, animasi, latar buram, korsel berisi
+seratus kartu — semuanya digambar ulang sementara video berjalan di bawahnya.
+Tiap bingkai dari itu keluar dari anggaran kecil yang sama dengan video.
+Antarmuka berat di atas dekoder ringan persis cara sebuah kotak yang *bisa*
+memutar tampak seolah tak bisa.
+
+**Menyimpan playlist raksasa di memori dengan cara yang salah.** Daftar lengkap
+seorang penyedia adalah berkas besar, dan aplikasi yang menahannya seluruhnya
+sebagai struktur datar lalu mencarinya dengan menggulir akan menghabiskan memori
+kotak kecil — lalu sistem operasi mulai menutup sesuatu, kadang aplikasinya
+sendiri.
+
+Perhatikan apa yang tak ada di daftar: jaringan. Buffering dan tersendat tampak
+mirip di kotak lambat, jadi ada baiknya menyingkirkan jaringan lebih dulu —
+[artikel buffering](/id/blog/mengatasi-buffering-iptv/) menuntaskannya dalam lima
+menit — sebelum menuduh perangkat kerasnya.
+
+## Pengaturan yang penting
+
+**Dekode perangkat keras menyala.** Di Vidonzo ada di *Pengaturan → Pemutaran →
+Dekode perangkat keras*, dan di kotak tua inilah seluruh permainannya. Menyala,
+blok video mengerjakan pendekodean dan CPU tersisa untuk menggambar antarmuka;
+mati, CPU mengerjakan keduanya dan kalah. Kalau dengan itu menyala sebuah
+saluran memberi [suara tapi tanpa gambar](/id/blog/ada-suara-tanpa-gambar/),
+format saluran itu tak didukung dekoder kotaknya — balik sakelarnya khusus untuk
+saluran itu dan siap-siap ia jadi lebih berat.
+
+**Buffer sesuai koneksi, bukan sesuai kotak.** Buffer lebih besar memakan
+memori, dan kotak kecil tak punya banyak lebihan — tapi buffer terlalu kecil
+akan tersendat pada cegukan pertama, dan tersendat justru yang ingin Anda
+sembuhkan. Mulailah dari bawaan; naikkan hanya kalau gambarnya benar-benar
+berhenti, dan turunkan hanya kalau kotaknya jelas kekurangan memori (aplikasi
+yang menutup sendiri adalah tandanya).
+
+**Simpan panduan acara, buang hiasan.** Panduan acara adalah data, bukan gambar,
+dan murah untuk digambar. Yang mahal adalah layar yang sarat karya seni. Tata
+letak televisi Vidonzo adalah
+[panel samping dengan bingkai fokus](/id/blog/pemutar-iptv-di-android-tv/),
+dibuat untuk d-pad dan sengaja ringan — kotaknya menggambar daftar, bukan ruang
+pamer.
+
+## Kebiasaan yang penting
+
+**Kurasi.** [Favorit dan beberapa kategori](/id/blog/menata-playlist-besar/)
+di kotak kecil bukan sekadar praktis; keduanya lebih ringan. Menelusuri daftar
+pendek berisi yang benar-benar Anda tonton hampir tak memakan apa pun. Menggulir
+seluruh daftar penyedia tiap malam adalah hal termahal yang bisa Anda minta dari
+perangkat lemah.
+
+**Biarkan ponsel yang menelusuri.** Inilah perubahan yang paling mengejutkan
+orang. Kalau ponsel atau tablet di Wi-Fi yang sama
+[bertindak sebagai remote kotaknya](/id/blog/ponsel-sebagai-remot-tv/),
+ponsellah yang menggambar poster, menjalankan pencarian, dan mengurus
+pengetikan — kotaknya tinggal menerima «putar ini» dan memutarnya. Kotak lemah
+dengan ponsel di sampingnya berlaku seperti kotak yang jauh lebih baik, karena
+ia diturunkan ke satu-satunya pekerjaan yang ia kuasai.
+
+**Nyalakan ulang sesekali.** Ini bukan kearifan rakyat: kotak yang menyala tiga
+minggu telah mengumpulkan apa pun yang dibocorkan tiap aplikasi di dalamnya.
+Nyala ulang seminggu sekali memakan semenit dan mengembalikan memori yang bisa
+dipakai pemutar.
+
+**Copot yang tak Anda pakai.** Setiap aplikasi yang menjalankan layanan latar
+belakang membelanjakan anggaran kecil yang sama. Kotak yang cukup jadi kotak
+saja menyisakan lebih banyak untuk gambar.
+
+## Ketika memang perangkat kerasnya
+
+Ada lantainya. Kotak yang tak bisa mendekode HEVC di perangkat keras takkan
+pernah memutar HEVC dengan mulus, apa pun yang dilakukan perangkat lunak, dan
+para penyedia beralih ke HEVC karena itu memangkas separuh lebar pita mereka.
+Kalau saluran penyedia Anda sebagian besar HEVC dan dekoder kotak Anda lebih tua
+dari itu, jawaban jujurnya adalah perangkat yang lebih baru — dan itu tak harus
+mahal; stik bersertifikat masa kini mendekode HEVC di perangkat keras dan
+harganya sedikit.
+
+Tapi coba perangkat lunaknya dulu. Dekode perangkat keras menyala, buffer di
+bawaan, antarmuka dijaga ramping, ponsel yang menelusuri: mayoritas keluhan
+«kotak tua» tak selamat dari daftar itu, dan menjalaninya memakan satu malam.
+[Menyiapkan playlist di pemutar baru](/id/blog/menyiapkan-playlist-pertama/)
+adalah sekitar semenit dari malam itu; sisanya adalah menonton untuk melihat
+apakah masih tersendat.

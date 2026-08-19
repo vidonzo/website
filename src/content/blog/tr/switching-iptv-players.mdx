@@ -1,0 +1,100 @@
+---
+title: "Her şeyi yeniden kurmadan IPTV oynatıcı değiştirmek"
+description: "İnsanları sevmedikleri bir oynatıcıda tutan korku, sıfırdan başlamak. Neredeyse hiçbir şeyin sıfırdan başlaması gerekmiyor: işte taşınan, taşınmayan ve bunu yapmanın on beş dakikalık sırası."
+urlSlug: iptv-oynatici-degistirmek
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['oynatma-listesi', 'kurulum']
+keywords: ['iptv oynatıcı değiştirmek', 'iptv oynatıcı alternatifi', 'iptv uygulaması değiştirmek', 'iptv listesini yeni uygulamaya taşımak']
+heroImageAlt: "Yan yana iki kapı, biri açık, aralarındaki eşikte tek bir anahtar."
+---
+
+İnsanlar sevmedikleri bir oynatıcıda, sevmedikleri bir bankada kalmalarıyla
+aynı nedenle kalır: taşınmak her şeyi yeniden kurmak gibi gelir. IPTV
+oynatıcıda öyle değil ve nedeni yapısal. Oynatıcı kütüphanenizin sahibi hiç
+olmadı. [Liste sizin](/tr/blog/kendi-listenizi-getirin/), sağlayıcınızın
+verdiği bir şey, ve her dürüst oynatıcı aynı listeye bakan başka bir çift
+gözden ibaret. İşte gerçekten taşınan, taşınmayan ve bir akşamda nasıl
+yapılacağı.
+
+## Taşınan: önemli olan her şey
+
+**Listenin kendisi.** Hangi biçimde olursa olsun — Xtream girişi ya da
+M3U/M3U8 bağlantısı — size verilmiş bir metin parçası ve yeni oynatıcıda
+eskisinde çalıştığı gibi çalışır. Hatırlamıyorsanız eski uygulamayı
+kurcalamayın; sağlayıcınızdan yeniden isteyin ya da abone olduğunuzda
+gönderdiği mesaja bakın. Sağlayıcılar genellikle hem Xtream girişi hem M3U
+adresi gönderir; [ikisi de olur](/tr/blog/xtream-codes-mi-m3u-mu/), giriş
+genellikle daha zengin olanıdır.
+
+**Rehber adresi.** Sağlayıcınız program rehberi için ayrı bir XMLTV adresi
+verdiyse o da yeni oynatıcıya girer, ait olduğu kaynağın yanına. Xtream
+girişi kullanıyorsanız rehber onunla gelir, taşınacak bir şey yoktur.
+
+**Alışkanlıklarınız.** Gerçekten izlediğiniz kanallar aynı kanallar. İlk
+akşam favori düğmesiyle on dakika listenizin şeklini geri getirir, çoğu zaman
+da eskisinden iyi bir şekil olur — çoğu insanın ilk hafta eklediği ve bir daha
+hiç izlemediği favorileri vardır.
+
+## Taşınmayan ve bunun neden önemi yok
+
+**Eski uygulamadaki favoriler ve kaldığı yerler.** Bunlar eski uygulamanın
+kendi deposunda, kendi biçiminde yaşar ve hiçbir oynatıcı diğerininkini
+okuyamaz. Favorileri dakikalar içinde yeniden kurarsınız. Kaldığı yerler
+kaybolur — ortasında olduğunuz iki üç şey için bölüm numarasını not edin.
+Taşınmanın tüm bedeli bu.
+
+**Eski uygulamanın ayarları.** Arabellek boyutları, kod çözücü seçimleri,
+altyazı biçimi — kopyalamaya çalışmayın. Başka bir motor için ayarlanmıştı.
+Yeni oynatıcının varsayılanlarından başlayın ve yalnızca yanlış gördüğünüzü
+değiştirin.
+
+## Getirmemeniz gereken: dışa aktarılmış bir dosya
+
+Bazı oynatıcılar kurulumunuzu dosya olarak dışa aktarmayı önerir. Bunu taşınma
+yolu sanmak cazip. Genellikle değil: dışa aktarım zaten elinizdeki aynı giriş
+bilgisini, yalnızca o uygulamanın okuduğu bir biçime sarılı olarak içerir ve
+bazen o uygulamanın önbellekteki liste kopyasını da — dışa aktarıldığı anda
+donmuş, yani [yerel bir dosya gibi bayatlayan](/tr/blog/liste-baglantisi-mi-cihazdaki-dosya-mi/).
+Dosyayı atlayın. Giriş bilgisini ya da bağlantıyı yeni oynatıcıya girin ki
+güncel listeyi kaynaktan çeksin.
+
+## On beş dakika süren sıra
+
+1. **Giriş bilgisini ya da bağlantıyı not edin.** Sunucu adresi, kullanıcı
+   adı, şifre — ya da M3U adresi — ve varsa XMLTV adresi. Kopyalayabileceğiniz
+   bir yere yapıştırın; 24 karakterlik şifreyi elle yazmak,
+   [bağlantının açıklamasız yüklenmemesinin](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/)
+   yoludur.
+2. **Yeni oynatıcıyı kurun ve kaynağı ekleyin.** Vidonzo'da
+   [anlatım yaklaşık bir dakika](/tr/blog/ilk-oynatma-listesi-kurulumu/). Eski
+   uygulamayı henüz silmeyin.
+3. **Üç şeyi kontrol edin**: doğrulayabileceğiniz bir saatte rehberi, gerçekten
+   sahip olduğunuz bağlantıda bir kanalı ve listede olduğunu bildiğiniz bir
+   şeyin aramasını. Üçü de geçiyorsa geçiş esasen tamam.
+4. **Yenileme ilkesini ayarlayın.** Barındırılan liste değişir; oynatıcıya ne
+   sıklıkla yeniden okuyacağını söyleyin — çoğu kişiye günlük uyar, sağlayıcı
+   çok karıştırıyorsa saatlik — ve bir şey eksik göründüğünde *Şimdi yenile*
+   kullanın.
+5. **Favorileri ilk akşam yeniden kurun**, izlemeye devam et kendiliğinden
+   dolsun.
+6. **Eski uygulamayı bir hafta sonra kaldırın**, alışkanlıkla açmayı
+   bıraktığınızda. Sağlayıcı girişinizi tutuyorsa telefonda aboneliğinizin bir
+   kopyasını bırakmak yerine oradan silin.
+
+## İki sağlayıcı ya da iki cihazda bir sağlayıcı
+
+Değişimin nedeni artık iki sağlayıcınızın olmasıysa — ya da aynı sağlayıcının
+hem giriş hem bağlantıyla — [kaynakları yan yana tutan](/tr/blog/tek-uygulamada-birden-fazla-liste/)
+bir oynatıcı hiç seçmek zorunda kalmamanız demek. Değişim yeni bir telefon ya
+da televizyonla çakışıyorsa oturum açın ve
+[yeniden kurduğunuz her şey sizi izlesin](/tr/blog/kurulumu-yeni-telefona-tasiyin/),
+bir sonraki ekrana iki kez yapmadan.
+
+## Değişen tek şey
+
+Geçişten sonra gerçekten farklı olan kanallar değil — oynatıcının onlarla ne
+yaptığı: rehber doğru mu, kopan akış kendiliğinden bağlanıyor mu, filmler ve
+diziler kütüphane mi liste mi, ve uygulama sizin hakkınızda ne biliyor.
+Taşınmaya değmesinin ve bu kadar ucuza gelmesinin nedeni bu. Kütüphane hiçbir
+zaman uygulamanın içinde değildi.

@@ -1,0 +1,117 @@
+---
+title: "Yayın birkaç saniye sonra duruyor: kopmalar, arabellek değil"
+description: "Düzgün başlıyor, on saniye oynuyor ve ölüyor — dönen çark yok, sadece bir son. Bu, arabellekten farklı bir arıza; nedenleri de farklı ve iyi bir oynatıcı çözülebilir olanları siz fark etmeden çözüyor."
+urlSlug: yayin-birkac-saniye-sonra-duruyor
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['sorun-giderme', 'oynatma']
+keywords: ['iptv birkaç saniye sonra kesiliyor', 'iptv sürekli kopuyor', 'yayın kesiliyor iptv', 'iptv 10 saniye sonra duruyor']
+heroImageAlt: "Kısa bir mesafe boyunca temizce ilerleyip sonra öylece biten düz bir çizgi, sade bir zeminde."
+---
+
+Arabellek dolmanın belli bir görüntüsü vardır: çark, takılma, görüntünün
+kendini toparlaması. Bu o değil. Bu, temiz açılan, beş ya da on ya da otuz
+saniye kusursuz oynayan ve sonra duran bir kanal — listeye dönüş ya da donmuş
+bir kare ya da bir hata ya da aynı kanalın baştan başlaması. Oynat'a basarsanız
+yine olur. Bu bir *kopma* ve nedenleri
+[arabelleğin ardındakilerden](/tr/blog/iptv-donma-sorunu-cozumu/) neredeyse tamamen
+farklı. İşte vakaların hemen hepsini açıklayan beş neden ve oynatıcının her
+birinde ne yapıp ne yapamayacağı.
+
+## 1. Sunucu bağlantıyı sonlandırdı
+
+En yaygını. Sağlayıcının sunucusu size bir yayın verir ve saniyeler sonra
+bağlantıyı kapatır — yükü fazla olduğu için, bir süreç yeniden başladığı için,
+bir yük dengeleyici sizi taşıdığı için, salı olduğu için. Ham bir transport
+stream'de veri öylece kesilir; [HLS'te](/tr/blog/hls-dash-rtsp-yayin-protokolleri/)
+bir sonraki parça hiç gelmez.
+
+Bu, oynatıcının *var olma nedeni* olan durumdur. İyi yapılmış bir oynatıcı,
+kopmuş bir bağlantıyı programın sonu saymaz; onu bir hıçkırık sayar ve sessizce
+yeniden bağlanır. Vidonzo bunu taşıma katmanında yapar: takılmış bir okuma,
+asılı kalmak yerine saniyeler içinde zaman aşımına uğrar ve bağlantı kısa,
+sınırlı bir bekleme ile yeniden kurulur; böylece kapıyı kapatan sunucu onu bir
+anlık duraklamadan fazlasını görmenize gerek kalmadan yeniden açar. Bir kanal
+eski oynatıcınızda onuncu saniyede ölüyorken bunda yalnızca göz kırpıyorsa
+nedeni bu mekanizmadır.
+
+İşaret: rastgele kanallar, rastgele zamanlar, akşamları daha çok. Sizin
+tarafınızda değiştirilecek bir şey yok; *her* kanalda sürekli oluyorsa sunucu
+gerçekten sıkıntıdadır ve sağlayıcının bunu duyması gerekir.
+
+## 2. Erişiminiz yayın ortasında sona erdi
+
+Xtream Codes ve pek çok M3U bağlantısı, adresin içinde bir jeton taşır — kim
+olduğunuzun kanıtı. Jetonların süresi dolar. Dolduğunda sunucu bağlantıyı
+kibarca kapatmaz; sonraki isteği bir hatayla yanıtlar: yasak, yetkisiz, gitti.
+
+Burada iyi bir oynatıcı bilerek yeniden bağlanmayı *sürdürmez*. Az önce «hayır»
+demiş bir sunucuyu dövmek anlamsızdır ve toplu hâlde saldırı gibi görünür;
+sağlayıcılar bunun için engeller. Vidonzo kopmuş bir bağlantıyı aşarak yeniden
+bağlanır ve açık bir redde bilerek durur. Çare taze bir listedir: kaynakta
+*Şimdi yenile* deyin ki oynatıcı güncel listeyi yeniden okusun — ya da aboneliğin
+kendisi bittiyse, o sizinle sağlayıcı arasındadır.
+
+İşaret: dün çalışıyordu, bugün her şey başarısız ve başarısızlık birkaç saniye
+sonra değil, anında. Ayrıca bkz.
+[yüklenmeyen bir bağlantının ardındaki beş arıza](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/).
+
+## 3. Aynı anda çok fazla yayın
+
+Çoğu abonelik sabit sayıda *eşzamanlı* yayına izin verir — bir, iki, bazen daha
+fazla. Üçüncüyü açın, sunucu birini düşürür ve bu her zaman en yenisi olmaz.
+Düşen tam olarak 1. duruma benzer; farkı, evde başka birinin oynat'a basmasıyla
+çakışmasıdır.
+
+İşaret: başka bir cihaz izlerken başarısız olur ve o durunca toparlanır. Bu bir
+oynatıcı arızası değildir ve bunun için ayar yoktur; bu, sağlayıcıyla
+yaptığınız düzenlemedir ve çözüm ya sırayla izlemek ya da daha fazlasına izin
+veren bir plandır. Aynı yayını sessizce yeniden açmak yerine net bir hata
+gösteren bir oynatıcı, en azından hangi durumda olduğunuzu söyler.
+
+## 4. Cihaz bağlantının üzerinde uyudu
+
+Telefonlar ve TV kutuları enerjiyi hırsla tasarruf eder ve bir video yayını tam
+da kesmeyi sevdikleri türden uzun, sessiz bir bağlantıdır. Telefonda bu, ekran
+kararınca ya da kısa süre başka bir uygulamaya geçince ölen bir yayın olarak
+görünür; kutuda ise parçalar arasında telsizi düşüren aşırı hevesli bir Wi-Fi
+güç tasarrufu modu olabilir.
+
+İşaret: *sizin* eylemlerinize bağlıdır — ekran, uygulama değişimi, bir duraklama
+— saate ya da kanala değil. Telefonda oynatırken uygulamayı ön planda tutun;
+Vidonzo, uzaklaştığınız bir bağlantı için işletim sistemiyle boğuşmasın diye
+toparlanmasını bilerek ön plana bağlar. Kutuda bir Wi-Fi güç tasarrufu ya da
+«uyanık kal» ayarı arayın, ya da
+[kutuyu kabloya taşıyın](/tr/blog/iptv-wifi-donma-sorunu/).
+
+## 5. Aradaki ağ onu düşürdü
+
+Sunucu ile ekran arasında yönlendiriciniz, servis sağlayıcınız ve — kimileri
+için — bir VPN ya da vekil sunucu bulunur. Bunlardan herhangi biri bir
+bağlantıyı sıfırlayabilir: NAT tablosunu döndüren bir yönlendirici, boşta
+görünen bir akışı zaman aşımına uğratan bir operatör cihazı, yeniden bağlanan
+bir VPN. Oynatıcı 1. durumdakiyle aynı şeyi görür ve aynı şekilde yeniden
+bağlanır; fark, tek bir sağlayıcının değil *her şeyin* etkilenmesidir.
+
+İşaret: diğer yayın uygulamaları da kopar ve örüntü ağı izler — belirli bir
+yönlendirici, belirli bir VPN, günün belirli bir saati. Bir dakika mobil veriyle
+deneyin; kopmalar kayboluyorsa arıza ev ağı tarafındadır.
+
+## Bir dakikada ayırt etmek
+
+- Rastgele kanallar, rastgele zamanlar, kısa duraklama → sunucu düşürdü (1).
+  Oynatıcı yeniden bağlanır; yapacak bir şey yok.
+- Her şeyde anında başarısızlık, dün çalışıyordu → süresi dolmuş erişim (2).
+  *Şimdi yenile*, sonra sağlayıcıyla konuşun.
+- Başka biri oynat'a basınca başarısız → çok fazla yayın (3).
+- Ekranı karartınca ya da uygulama değiştirince ölüyor → güç tasarrufu (4).
+- Her şey kopuyor, diğer uygulamalar da → ağ (5).
+
+## Oynatıcının size borcu
+
+Dürüst sınır şu: bir oynatıcı, ret olmayan *her* kopmayı aşarak, siz nadiren
+fark edecek kadar hızlı yeniden bağlanmalı; ret olan her kopmada ise temizce
+durup bunu söylemelidir. Bunun ötesindeki her şey — jetonu geçmiş bir yayını
+açık tutmak, bir yayın sınırını yok saymak — özellik değil, gecikmeli bir
+sorundur. Yeniden bağlanmayı doğru yapın, vakaların çoğu olan 1. durum
+düşündüğünüz bir şey olmaktan çıksın.

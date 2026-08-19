@@ -1,0 +1,15 @@
+key: picture-does-not-fill-the-screen
+title: "The picture does not fill the screen: aspect ratio, zoom and black bars"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: troubleshooting
+targetQueries: ["iptv black bars", "iptv picture not full screen", "iptv aspect ratio", "stretch iptv picture", "iptv zoom tv"]
+audience: TV viewers with bars on the sides or top, or a picture that looks squashed.
+value: Explains what the bars are (a correct decision, mostly), the three fit modes, and when each is the right choice.
+angle: The Aspect control in the player cycles fit → zoom → stretch. Teach the reader which one they actually want.
+productFacts:
+  - Aspect button in the player cycles contain (fit), cover (zoom), fill (stretch)
+  - subtitles anchor to the picture, not the screen
+constraints: [no-download-or-offline-wording]
+internalLinks: [sound-but-no-picture, iptv-player-on-android-tv, subtitles-and-audio-tracks, streaming-protocols-explained]

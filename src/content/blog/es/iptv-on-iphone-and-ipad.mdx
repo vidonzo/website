@@ -1,0 +1,108 @@
+---
+title: "IPTV en iPhone y iPad: qué cambia cuando dejas Android"
+description: "La lista es la misma y el modelo de reproductor es el mismo. Lo que difiere es cómo llega la aplicación, dónde vive un archivo y qué permite —y qué no— la plataforma a un reproductor."
+urlSlug: iptv-en-iphone-y-ipad
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['configuración', 'reproducción']
+keywords: ['reproductor iptv iphone', 'iptv en ipad', 'reproductor iptv ios', 'reproductor m3u iphone']
+heroImageAlt: "Un iPad apoyado en la encimera de una cocina, con un stream reproduciéndose y una taza de café al lado."
+---
+
+IPTV tiene fama de costumbre de Android, y la fama tiene motivo: Android
+ejecuta casi cualquier cosa, y buena parte de lo que ejecuta son reproductores
+IPTV. Pero lo que realmente posees — una lista de un proveedor — no tiene ni
+idea de en qué dispositivo está. Es un login o un enlace, y un iPhone abre
+enlaces. Aquí va lo que de verdad cambia en iOS y iPadOS, lo que es idéntico y
+los dos sitios donde la gente tropieza.
+
+## Lo idéntico: la lista y el modelo de reproductor
+
+Tu proveedor te dio [una de dos cosas](/es/blog/xtream-codes-o-m3u/): unas
+credenciales Xtream Codes o una dirección M3U/M3U8. Las dos son solo texto.
+Nada en ellas tiene forma de Android, y el modelo de la aplicación es el
+mismo en cualquier plataforma:
+[un reproductor lee tu lista, trae el stream y dibuja la imagen](/es/blog/que-hace-un-reproductor-iptv/).
+No trae canales propios y no necesita cuenta para empezar. Pega el mismo login
+en Vidonzo en un iPhone y en un Android TV y obtienes la misma biblioteca,
+porque la biblioteca nunca estuvo en la aplicación.
+
+## Lo diferente: cómo llega la aplicación
+
+En Android quizá instalaste un APK. En iOS no lo harás; la App Store es la
+única vía para el usuario normal, y no es una limitación que haya que sortear:
+es todo el modelo de la plataforma. Instala Vidonzo desde la App Store, ábrelo,
+añade tu fuente. No hay interruptor de «orígenes desconocidos» que buscar, y
+las actualizaciones llegan solas. Si una web te dice que instales un perfil de
+configuración o un paquete «firmado» para tener un reproductor IPTV en un
+iPhone, cierra la pestaña; nada de una lista requiere eso.
+
+## Lo diferente: dónde vive un archivo
+
+La mayoría usa un enlace, y un enlace funciona igual en todas partes. Si tu
+proveedor te dio un *archivo* M3U, iOS lo maneja de forma algo distinta a
+Android: no hay un explorador de archivos general fuera de la app Archivos. El
+archivo vive ahí — en iCloud Drive, en «En mi iPhone» o en una carpeta donde
+otra app lo guardó — y el reproductor te pide elegirlo desde ahí. Una vez
+elegido, se comporta [como cualquier archivo local](/es/blog/enlace-de-lista-o-archivo-local/):
+congelado en el momento en que lo recibiste, sin necesidad de servidor, y
+necesitado de una copia nueva cuando el proveedor cambia algo. Un enlace se
+mantiene actual solo; si puedes elegir, prefiere el enlace.
+
+## Lo diferente: el decodificador
+
+Los iPhone y iPad decodifican vídeo con un bloque de hardware muy bueno en los
+formatos comunes — H.264 y HEVC — y que no hace nada con los raros. Un
+reproductor en iOS se apoya por tanto en el decodificador del sistema para el
+caso habitual y recurre al software para el inusual. En la práctica, los
+streams comunes se reproducen frescos y largo rato con batería, y un stream
+raro puede calentar el teléfono más de lo que esperas. Si un canal concreto
+[suena pero no se ve](/es/blog/se-oye-pero-no-se-ve/), el artículo sobre
+decodificadores explica qué pasa; es un problema del stream, no de Apple.
+
+## Lo diferente: la tableta no es un televisor pequeño
+
+Un iPad es [la pantalla que se mueve](/es/blog/iptv-en-tablet/) — la
+cocina, el jardín, la cama. La interfaz se adapta: una cuadrícula más densa de
+la que un televisor puede permitirse, porque la pantalla está al alcance de la
+mano, y un tamaño de subtítulos que puedes bajar de escala de televisor a
+escala de rótulo. Es una forma de ver genuinamente distinta, y en muchas casas
+la tableta acaba usándose más que el televisor.
+
+## Lo idéntico otra vez: el teléfono como mando
+
+Esta es la parte que los usuarios de Apple creen perderse. Si en casa hay un
+Android TV con Vidonzo, un iPhone o iPad en el mismo Wi-Fi puede
+[hacer de su mando](/es/blog/movil-como-mando-de-tv/): navegar la
+biblioteca del televisor en el teléfono, buscar con un teclado de verdad y
+lanzar la reproducción en la pantalla grande con un toque. El emparejamiento
+va por tu propia red, detectado automáticamente. Al televisor le da igual qué
+lleve el teléfono.
+
+## Los dos sitios donde la gente tropieza
+
+**Esperar que la App Store esté llena de opciones.** Es más escasa que Google
+Play en esta categoría, y el motivo merece saberse: Apple revisa las apps con
+una regla según la cual un reproductor no debe suministrar ni promocionar
+contenido. Un reproductor que llega como reproductor — trae tu lista, nada
+dentro — pasa; las apps «catálogo» no duran. Así que las que encuentras son,
+en conjunto, las honestas.
+
+**Escribir una contraseña Xtream larga con el teclado del móvil.** Pégala.
+Copia las credenciales de donde te las mandó el proveedor y pégalas en cada
+campo; un solo carácter mal en una contraseña de 24 produce
+[un enlace que no carga](/es/blog/la-lista-no-carga/) sin ninguna
+pista.
+
+## Pasar de uno a otro
+
+Si ya tienes Vidonzo en Android, iniciar sesión en el iPhone trae tus favoritos
+y puntos de reanudación; las credenciales cifradas de la lista te siguen en
+cuanto un dispositivo capaz de desbloquearlas aprueba el nuevo. La mecánica es
+la misma que al [cambiar a cualquier teléfono nuevo](/es/blog/cambiar-de-movil-sin-perder-nada/).
+Nada del cambio de plataforma obliga a configurar dos veces.
+
+En resumen: en un iPhone la lista es la misma, el reproductor es el mismo y la
+configuración es [el mismo minuto de siempre](/es/blog/configurar-primera-lista-iptv/).
+Lo que cambia es que la app viene de un solo sitio, un archivo se elige desde
+Archivos y el teléfono sigue manejando el televisor encantado.

@@ -1,0 +1,121 @@
+---
+title: "Le guide est vide ou affiche de mauvaises heures : réparer votre EPG"
+description: "Les chaînes passent et le guide est vide, périmé ou décalé d’exactement une heure. Quatre défauts produisent ces symptômes, chacun avec sa signature, et aucun n’est « le lecteur est lent »."
+urlSlug: guide-vide-ou-heures-fausses
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['depannage', 'playlists']
+keywords: ['epg ne fonctionne pas iptv', 'guide mauvaise heure', 'guide vide iptv', 'xmltv ne charge pas', 'decalage horaire epg']
+heroImageAlt: "Une grille de programmes dont la plupart des cases sont vides et dont une ligne est décalée d’une colonne."
+---
+
+Un guide vide agace plus qu’une chaîne cassée, parce que tout le *reste*
+fonctionne. L’image passe, la liste est pleine, et la seule ligne qui devrait
+dire ce qui est diffusé dit « Pas d’infos programme ». Ou elle dit quelque
+chose, mais c’est ce qui passait il y a une heure. Si vous avez lu
+[comment fonctionne le guide](/fr/blog/epg-guide-des-programmes/), vous connaissez le
+point clé : le guide est un fichier à part, récupéré séparément, associé à vos
+chaînes par leur nom. Chacun des défauts ci-dessous est une rupture quelque
+part dans cette chaîne. Les voici, dans l’ordre où ils surviennent
+habituellement.
+
+## 1. On n’a jamais dit au lecteur où se trouve le guide
+
+Une playlist M3U [transporte des chaînes](/fr/blog/dans-un-fichier-m3u/) ; elle
+ne transporte pas de guide. Certaines playlists indiquent l’adresse du guide
+dans leur première ligne (`url-tvg=`), beaucoup non, et si la vôtre ne le fait
+pas, le lecteur n’a rien à récupérer et chaque chaîne affiche « Pas d’infos
+programme » — le guide n’est pas cassé, il est absent.
+
+La signature : *toutes* les chaînes vides, dès le premier jour. Le remède :
+demandez à votre fournisseur l’adresse XMLTV (elle se termine généralement par
+`.xml` ou `.xml.gz`) et saisissez-la dans les réglages de la source, à côté du
+lien de la playlist. Si votre fournisseur vous a donné
+[des identifiants Xtream Codes](/fr/blog/xtream-codes-ou-m3u/), le guide vient
+avec eux et il n’y a rien à saisir — un guide vide en Xtream signifie l’un des
+défauts ci-dessous.
+
+## 2. Le guide et les chaînes ne se connaissent pas
+
+C’est le plus fréquent, et il produit le symptôme le plus déroutant :
+*certaines* chaînes ont un guide et d’autres, apparemment au hasard, non.
+
+Le fichier de guide liste les programmes en face d’un identifiant de chaîne —
+un `tvg-id`. La playlist donne aussi un `tvg-id` à chaque chaîne. Là où ils
+correspondent, vous avez un guide ; là où ils ne correspondent pas, vous n’avez
+rien, même si la chaîne figure dans le fichier de guide sous un nom légèrement
+différent. Les fournisseurs qui génèrent les deux depuis la même base
+correspondent parfaitement. Ceux qui greffent un guide tiers sur leur liste ne
+correspondent que là où les identifiants se trouvent d’accord.
+
+La signature : une couverture partielle, stable dans le temps — toujours les
+mêmes chaînes vides. Le lecteur ne peut pas grand-chose, car il ne peut pas
+savoir que `news24.example` et `News24_HD` sont la même station sans deviner.
+Si votre fournisseur propose plusieurs variantes de playlist, la plus complète
+a souvent de meilleurs identifiants ; sinon, indiquez-lui quelles chaînes sont
+sans guide.
+
+## 3. Les heures sont décalées — souvent d’exactement une heure
+
+Les programmes apparaissent, mais la grille dit que le film a commencé à neuf
+heures alors qu’il a commencé à dix. Si le décalage est un nombre rond
+d’heures, c’est un problème de fuseau horaire, et il vaut la peine de le
+comprendre, car c’est le défaut que l’on impute le plus souvent à la mauvaise
+partie.
+
+Un fichier XMLTV horodate chaque programme avec une heure *et* un décalage par
+rapport à UTC — `20260819210000 +0100`. Un lecteur correct lit ce décalage, le
+convertit vers l’horloge de votre appareil et affiche la bonne heure, où que le
+guide ait été fabriqué. Vidonzo le fait — c’est l’un des points où
+l’application est soigneuse, car
+[c’est là que les guides se trompent le plus souvent](/fr/blog/epg-guide-des-programmes/) —
+donc un décalage signifie généralement l’une de deux autres choses :
+
+- **Le guide déclare le mauvais décalage.** Le fournisseur l’a généré sur un
+  serveur réglé sur un autre fuseau et n’a pas corrigé les horodatages. Toutes
+  les chaînes sont décalées du même montant, et elles le sont dans tous les
+  lecteurs. Seul le fournisseur peut corriger.
+- **L’horloge ou le fuseau de l’appareil sont faux.** Un boîtier TV laissé sur
+  le fuseau d’usine décale *tout*, y compris l’horloge de sa barre d’état.
+  Vérifiez la date et l’heure du boîtier avant toute chose — et s’il est en
+  « automatique » sur un réseau qui bloque les serveurs de temps, réglez-le à
+  la main.
+
+La signature qui sépare les deux : si le décalage apparaît aussi sur votre
+téléphone, c’est le guide ; s’il n’apparaît que sur un appareil, c’est cet
+appareil.
+
+## 4. Le guide est périmé
+
+Tout allait bien la semaine dernière et la grille affiche maintenant des
+programmes déjà diffusés, ou s’arrête net à minuit. Les fichiers de guide
+couvrent une fenêtre — souvent quelques jours — et il faut les récupérer de
+nouveau pour l’étendre. Si le lecteur ne peut pas atteindre l’adresse (elle a
+changé, elle a expiré, le réseau était coupé au moment de l’essai), c’est
+l’ancienne copie que vous voyez.
+
+La signature : un guide qui s’arrête à un point fixe du passé, ou qui s’arrête
+quelques heures plus loin. Utilisez *Actualiser maintenant* sur la source ; si
+cela le remplit, la récupération était simplement en retard. Sinon, c’est
+l’adresse elle-même qui échoue, et
+[les mêmes vérifications que pour un lien de playlist](/fr/blog/la-playlist-ne-charge-pas/)
+s’appliquent ici — collez-la dans un navigateur et voyez si elle répond.
+
+## L’ordre en cinq minutes
+
+1. Vérifiez que l’interrupteur du guide est activé (*Afficher le guide des
+   programmes (EPG)*).
+2. Identifiants Xtream ? Alors l’adresse n’est pas en cause ; passez au 3. Lien
+   M3U ? Vérifiez qu’une adresse XMLTV est saisie.
+3. Toutes les chaînes vides → adresse (1) ou péremption (4). Certaines vides →
+   correspondance (2). Heures fausses → fuseau (3).
+4. *Actualiser maintenant*, puis rouvrez le guide.
+5. Vérifiez la même chaîne sur un second appareil avant d’écrire à votre
+   fournisseur, pour pouvoir lui dire si le défaut suit le guide ou l’appareil.
+
+Une note finale honnête : un guide ne vaut que le fichier derrière lui, et le
+travail d’un lecteur est de le récupérer fidèlement, de l’associer
+correctement, et — la partie que la plupart des lecteurs ratent — de faire
+juste l’arithmétique des fuseaux horaires. Une fois ces trois points tenus,
+tous les défauts restants sont dans le fichier, et le remède le plus rapide est
+de savoir lequel signaler.

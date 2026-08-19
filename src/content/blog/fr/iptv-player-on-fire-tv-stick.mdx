@@ -1,0 +1,105 @@
+---
+title: "Installer un vrai lecteur IPTV sur un Fire TV Stick"
+description: "Un Fire TV Stick est un appareil Android avec une autre boutique devant. C'est précisément pour cela qu'un vrai lecteur IPTV y tourne — et pour cela que l'installation demande une étape de plus."
+urlSlug: lecteur-iptv-sur-fire-tv-stick
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['television', 'configuration']
+keywords: ['lecteur iptv fire tv stick', 'iptv sur firestick', 'application iptv fire tv', 'installer un apk sur fire tv']
+heroImageAlt: "Une clé de streaming branchée à l'arrière d'un téléviseur, son court câble HDMI décrivant une courbe vers le port."
+---
+
+Le Fire TV Stick est sans doute le matériel le plus répandu derrière un
+téléviseur, et sa boutique d'applications n'est pas l'endroit où vivent les
+bons lecteurs IPTV. Ce n'est pas une limite du matériel. Sous l'interface, un
+Fire TV Stick est un appareil Android — la version d'Amazon, avec la boutique
+d'Amazon là où se trouverait Google Play. Les applications Android y
+fonctionnent, y compris un vrai lecteur IPTV doté d'une vraie interface de
+télévision. Voici ce que cela veut dire en pratique, et l'unique étape
+supplémentaire que cela coûte.
+
+## Pourquoi le rayon du Stick est si maigre
+
+Amazon examine les applications de sa boutique, et un lecteur qui n'apporte
+aucun contenu occupe là-bas une catégorie inconfortable : il ne fait rien tant
+qu'on ne lui donne pas de playlist, et l'examinateur ne peut pas voir ce que
+vous lui donnerez. Le rayon reste donc court. Quant à ce qui *y* figure, c'est
+le plus souvent soit le lecteur d'origine de la plateforme habillé d'un menu,
+soit une application qui embarque discrètement un catalogue — exactement
+[ce qu'un lecteur ne devrait pas faire](/fr/blog/apportez-votre-playlist/).
+
+Rien de tout cela ne change ce que le Stick sait exécuter. Cela change
+seulement la façon dont l'application y arrive.
+
+## Le sideloading, expliqué une bonne fois
+
+« Sideloading » est le mot courant pour installer une application Android
+depuis son fichier de paquet — un APK — plutôt que depuis une boutique. Sur un
+Fire TV Stick, cela tient en trois étapes, faites une seule fois :
+
+1. **Autoriser.** Dans les réglages du Stick, sous *Mon Fire TV → Options pour
+   les développeurs*, activez l'installation d'applications de sources
+   inconnues. Sur les versions récentes, Amazon masque les *Options pour les
+   développeurs* jusqu'à ce que vous tapiez plusieurs fois sur le nom de
+   l'appareil dans *À propos* ; c'est une friction voulue, pas une panne.
+2. **Amener le fichier sur le Stick.** Le Stick n'a pas de navigateur dans
+   lequel on aime taper, alors on passe par un petit utilitaire de la boutique
+   d'Amazon dont l'unique rôle est d'aller chercher un fichier à une adresse
+   que vous saisissez. Saisissez l'adresse de l'APK Android TV donnée sur la
+   [page de téléchargement](/fr/download/) ; le fichier arrive sur le Stick.
+3. **Installer.** L'utilitaire propose d'ouvrir le paquet ; confirmez
+   l'installation. Fire OS range une application installée de cette manière en
+   fin de liste plutôt que sur la rangée d'accueil : si Vidonzo n'est pas là où
+   vous l'attendiez, c'est là qu'il faut regarder — et de là, vous pouvez le
+   ramener en tête.
+
+Les mêmes trois étapes sont détaillées, pour le cas Android TV général, dans
+[le guide d'installation TV](/fr/help/) ; la variante Fire TV ne diffère que
+par l'endroit où se cache le réglage.
+
+Deux mises en garde honnêtes. Un APK est du code exécutable et la plateforme
+ne le vérifie pas à votre place : ne prenez le fichier qu'à l'adresse indiquée
+par la [page de téléchargement](/fr/download/), jamais depuis un forum, un
+message ou un « dépôt ». Et une application installée ainsi ne se met pas à
+jour toute seule ; quand une nouvelle version paraît, vous l'installez
+par-dessus l'ancienne et tout est conservé.
+
+## Ce que vous obtenez : une version télévision, pas une application mobile
+
+La version Android TV de Vidonzo est
+[pensée pour la distance du canapé](/fr/blog/lecteur-iptv-sur-android-tv/) :
+un rail latéral au lieu d'une barre en bas, un focus visible sur chaque
+commande, et une interface entièrement accessible à la croix directionnelle et
+au bouton central. Rien là-dedans n'est propre au Fire. La télécommande Fire
+envoie les mêmes codes de direction que n'importe quelle télécommande Android
+TV, et l'application demande au système une entrée de lanceur leanback tout en
+déclarant n'avoir besoin d'aucun écran tactile — c'est précisément ce qui la
+rend installable et pilotable sur un appareil sans dalle tactile ni pointeur.
+
+Le lecteur en dessous est le même que partout ailleurs — le moteur mpv, le
+décodage matériel, un tampon réglable pour
+[une connexion qui vacille](/fr/blog/regler-le-buffering-iptv/). Sur un Stick,
+cela compte : c'est un petit appareil en Wi-Fi derrière un téléviseur, et c'est
+[exactement la position où les liaisons radio deviennent capricieuses](/fr/blog/iptv-qui-fige-en-wifi/).
+
+## Posez la télécommande pour les parties pénibles
+
+La télécommande Fire fait très bien l'affaire pour changer de chaîne et se
+révèle désespérante pour saisir un mot de passe Xtream. Ne le saisissez pas.
+N'importe quel téléphone ou tablette sur le même Wi-Fi peut
+[servir de télécommande au Stick](/fr/blog/telephone-comme-telecommande-tv/) :
+le téléphone découvre le téléviseur tout seul, vous parcourez la bibliothèque
+de la télé, vous cherchez avec un vrai clavier et vous lancez la lecture sur le
+grand écran d'une simple pression. Vous configurez la playlist sur le
+téléphone ; le Stick affiche l'image. C'est l'arrangement auquel la plupart des
+foyers aboutissent dès le premier soir.
+
+## L'ordre des opérations
+
+Installez d'abord l'application sur le Stick, pour qu'elle soit visible sur le
+réseau. Puis
+[ajoutez votre playlist](/fr/blog/configurer-sa-premiere-playlist/) — depuis le
+téléphone s'il en traîne un à portée, à la télécommande s'il le faut. Ouvrez le
+guide, choisissez une chaîne, et ajustez le tampon si l'image cale. À partir de
+là, le Stick n'est plus qu'un écran doté d'un bon lecteur, ce qu'il n'a jamais
+eu besoin d'être davantage.

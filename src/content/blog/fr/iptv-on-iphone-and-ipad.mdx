@@ -1,0 +1,114 @@
+---
+title: "IPTV sur iPhone et iPad : ce qui change quand on quitte Android"
+description: "La playlist est la même et le modèle du lecteur est le même. Ce qui diffère, c’est la façon dont l’application arrive, l’endroit où vit un fichier, et ce que la plateforme autorise — ou non — à un lecteur."
+urlSlug: iptv-sur-iphone-et-ipad
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['configuration', 'lecture']
+keywords: ['lecteur iptv iphone', 'iptv sur ipad', 'lecteur iptv ios', 'lecteur m3u iphone']
+heroImageAlt: "Un iPad calé sur un plan de travail de cuisine, un flux en cours de lecture, une tasse de café à côté."
+---
+
+L’IPTV a la réputation d’être une habitude Android, et cette réputation a une
+raison : Android exécute à peu près n’importe quoi, et une bonne part de ce
+qu’il exécute, ce sont des lecteurs IPTV. Mais ce que vous possédez vraiment —
+une playlist venue d’un fournisseur — ignore sur quel appareil elle se trouve.
+C’est un identifiant ou un lien, et un iPhone ouvre des liens. Voici ce qui
+change réellement sur iOS et iPadOS, ce qui est identique, et les deux endroits
+où l’on trébuche.
+
+## Ce qui est identique : la playlist et le modèle du lecteur
+
+Votre fournisseur vous a donné [l’une de deux choses](/fr/blog/xtream-codes-ou-m3u/) :
+des identifiants Xtream Codes ou une adresse M3U/M3U8. Les deux ne sont que du
+texte. Rien n’y a la forme d’Android, et le modèle de l’application est le
+même sur toutes les plateformes :
+[un lecteur lit votre liste, va chercher le flux et dessine l’image](/fr/blog/ce-que-fait-un-lecteur-iptv/).
+Il n’apporte aucune chaîne à lui et n’a pas besoin de compte pour démarrer.
+Collez les mêmes identifiants dans Vidonzo sur un iPhone et sur une Android TV,
+et vous obtenez la même bibliothèque, parce que la bibliothèque n’a jamais été
+dans l’application.
+
+## Ce qui diffère : comment l’application arrive
+
+Sur Android, vous avez peut-être installé un APK. Sur iOS, non ; l’App Store
+est la seule voie pour l’utilisateur ordinaire, et ce n’est pas une limite à
+contourner — c’est tout le modèle de la plateforme. Installez Vidonzo depuis
+l’App Store, ouvrez-le, ajoutez votre source. Pas d’interrupteur « sources
+inconnues » à trouver, et les mises à jour arrivent d’elles-mêmes. Si un site
+vous dit d’installer un profil de configuration ou un paquet « signé » pour
+avoir un lecteur IPTV sur iPhone, fermez l’onglet ; rien dans une playlist ne
+l’exige.
+
+## Ce qui diffère : où vit un fichier
+
+La plupart des gens utilisent un lien, et un lien fonctionne partout de la
+même façon. Si votre fournisseur vous a donné un *fichier* M3U, iOS le traite
+un peu différemment d’Android : il n’y a pas d’explorateur de fichiers global
+en dehors de l’application Fichiers. Le fichier vit là — dans iCloud Drive,
+dans « Sur mon iPhone », ou dans un dossier où une autre application l’a
+enregistré — et le lecteur vous demande de le choisir depuis là. Une fois
+choisi, il se comporte [comme n’importe quel fichier local](/fr/blog/lien-de-playlist-ou-fichier-local/) :
+figé au moment où vous l’avez reçu, sans besoin de serveur, et réclamant une
+copie fraîche quand le fournisseur change quelque chose. Un lien reste à jour
+tout seul ; si vous avez le choix, préférez le lien.
+
+## Ce qui diffère : le décodeur
+
+Les iPhone et iPad décodent la vidéo avec un bloc matériel très bon sur les
+formats courants — H.264 et HEVC — et qui ne fait rien pour les formats rares.
+Un lecteur sur iOS s’appuie donc sur le décodeur du système dans le cas
+habituel et se replie sur le logiciel dans le cas inhabituel. En pratique, les
+flux courants se lisent au frais et longtemps sur batterie, et un flux
+atypique peut chauffer le téléphone plus que prévu. Si une chaîne particulière
+[a du son mais pas d’image](/fr/blog/le-son-sans-l-image/), l’article sur
+les décodeurs explique ce qui se passe ; c’est un problème de flux, pas
+d’Apple.
+
+## Ce qui diffère : la tablette n’est pas un petit téléviseur
+
+Un iPad est [l’écran qui se déplace](/fr/blog/iptv-sur-tablette/) — la
+cuisine, le jardin, le lit. L’interface s’y adapte : une grille plus dense
+qu’un téléviseur ne peut se le permettre, parce que l’écran est à portée de
+main, et une taille de sous-titres que l’on peut ramener de l’échelle télé à
+l’échelle légende. C’est une manière de regarder réellement différente, et
+dans bien des foyers la tablette finit plus utilisée que le téléviseur.
+
+## De nouveau identique : le téléphone comme télécommande
+
+C’est la partie dont les utilisateurs Apple pensent être privés. S’il y a dans
+la maison une Android TV sous Vidonzo, un iPhone ou un iPad sur le même Wi-Fi
+peut [lui servir de télécommande](/fr/blog/telephone-comme-telecommande-tv/) :
+parcourir la bibliothèque du téléviseur sur le téléphone, chercher avec un
+vrai clavier, et lancer la lecture sur le grand écran d’un geste.
+L’appairage passe par votre propre réseau, découvert automatiquement. Le
+téléviseur se moque de ce qui tourne sur le téléphone.
+
+## Les deux endroits où l’on trébuche
+
+**S’attendre à un App Store rempli de choix.** Il est plus maigre que Google
+Play dans cette catégorie, et la raison mérite d’être connue : Apple examine
+les applications selon une règle qui veut qu’un lecteur ne fournisse ni ne
+promeuve de contenu. Un lecteur qui se présente en lecteur — apportez votre
+playlist, rien à l’intérieur — passe ; les applications « catalogue » ne
+durent pas. Celles que vous trouvez sont donc, dans l’ensemble, les honnêtes.
+
+**Taper un long mot de passe Xtream sur un clavier de téléphone.** Collez-le.
+Copiez les identifiants là où le fournisseur les a envoyés et collez-les dans
+chaque champ ; un seul caractère faux dans un mot de passe de 24 signes donne
+[un lien qui ne charge pas](/fr/blog/la-playlist-ne-charge-pas/) sans le
+moindre indice.
+
+## Passer de l’un à l’autre
+
+Si vous avez déjà Vidonzo sur Android, vous connecter sur l’iPhone rapatrie
+vos favoris et vos points de reprise ; les identifiants de playlist chiffrés
+suivent dès qu’un appareil capable de les déverrouiller approuve le nouveau.
+La mécanique est la même que pour [passer à n’importe quel nouveau téléphone](/fr/blog/changer-de-telephone/).
+Rien dans le changement de plateforme n’oblige à tout refaire.
+
+En bref : sur iPhone, la playlist est la même, le lecteur est le même, et la
+configuration est [la même minute que partout](/fr/blog/configurer-sa-premiere-playlist/).
+Ce qui change, c’est que l’application vient d’un seul endroit, qu’un fichier
+se choisit dans Fichiers, et que le téléphone pilote toujours volontiers le
+téléviseur.

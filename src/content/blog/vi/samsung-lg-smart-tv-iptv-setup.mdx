@@ -1,0 +1,85 @@
+---
+title: "Smart TV Samsung hay LG của bạn không có trình phát IPTV tử tế: cách sắp xếp hiệu quả"
+description: "Tizen và webOS chạy hệ điều hành riêng với kho ứng dụng riêng và nghèo nàn. Thay vì vật lộn với điều đó, hãy để TV làm màn hình và đặt trình phát lên thứ có thể chạy được nó."
+urlSlug: iptv-tren-smart-tv-samsung-hoac-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['truyền hình', 'cài đặt']
+keywords: ['trình phát iptv samsung smart tv', 'iptv lg smart tv', 'iptv trên tizen', 'iptv webos', 'smart tv iptv không cần ứng dụng']
+heroImageAlt: "Một chiếc TV phẳng lớn treo tường, bên dưới trên kệ là một hộp đen nhỏ, một sợi cáp nối hai thứ."
+---
+
+Bạn có một chiếc TV tốt. Nó to, tấm nền tuyệt vời, và có kho ứng dụng, nên có
+vẻ hiển nhiên là trình phát IPTV nên nằm trong đó. Rồi bạn mở kho và thấy hai
+ba trình phát, chẳng cái nào ổn: một cái là trang web thu phí đóng khung, một
+cái đòi mã từ website, một cái hiện kênh của bạn thành danh sách dài vô tận
+không có lịch. Cám dỗ là tìm tiếp. Có câu trả lời tốt hơn, và nó bắt đầu từ
+việc hiểu vì sao kệ lại trống.
+
+## Vì sao kho của TV lại nghèo
+
+TV Samsung chạy Tizen. TV LG chạy webOS. Không cái nào là Android. Cả hai đều
+là hệ điều hành hoàn toàn có năng lực, nhưng là thế giới riêng, với công cụ
+phát triển riêng, luật duyệt riêng, và — quyết định nhất — một phần rất nhỏ
+trong số các nhà phát triển viết phần mềm video nghiêm túc. Dòng dõi mpv và
+FFmpeg mà [trình phát IPTV tốt được xây trên đó](/vi/blog/trinh-phat-iptv-lam-gi/)
+nhắm tới Android, iOS, Windows, macOS và Linux; bản Tizen là dự án riêng với
+lượng người dùng nhỏ, và hầu hết trình phát không bao giờ làm.
+
+Nên các trình phát xuất hiện trong kho của TV thường là ứng dụng web nhẹ, bị
+giới hạn ở những gì engine trình duyệt giải mã được. Với luồng sạch thì chúng
+phát. Với [các luồng kỳ quặc mà nhà cung cấp thật sự tạo ra](/vi/blog/giao-thuc-streaming-la-gi/)
+— transport stream thô, codec âm thanh lạ, HEVC trên tấm nền cũ — chúng khựng,
+mất tiếng hoặc từ chối. Và gần như không cái nào có lịch phát sóng đúng nghĩa.
+
+Vidonzo cũng không có bản Tizen hay webOS. Thay vì hứa hẹn, đây là cách sắp
+xếp chạy được hôm nay, và chạy tốt.
+
+## TV là màn hình; trình phát chạy trên một chiếc hộp
+
+TV hiện đại nào cũng có cổng HDMI dư, và một trong số đó có thể cắm một thiết
+bị Android TV nhỏ — que hay hộp, từ vài nhà sản xuất, giá rẻ hơn một bữa tối
+bình dân bên ngoài. Cắm vào, và TV trở thành thứ nó giỏi nhất: một màn hình
+lớn, sáng. Trình phát chạy trên hộp, với hệ điều hành thật bên dưới và
+[giao diện TV thật bên trên](/vi/blog/trinh-phat-iptv-tren-android-tv/).
+
+Lợi ích không hề nhỏ. Hộp xây cho Android TV chạy đúng engine mpv như điện
+thoại, với giải mã phần cứng, bộ đệm điều chỉnh được cho
+[đường mạng chập chờn](/vi/blog/khac-phuc-iptv-giat-lag/), và lịch phát sóng
+[hiện đúng giờ](/vi/blog/epg-la-gi-lich-phat-song/). Nó cũng thôi phụ thuộc vào chính
+sách kho ứng dụng của hãng TV. Sáu năm nữa đổi TV, hộp chuyển sang TV mới và
+chẳng gì trong thiết lập của bạn thay đổi.
+
+Hai lưu ý thực tế khi chọn. Ưu tiên thiết bị được *chứng nhận* Android TV hay
+Google TV thay vì «hộp Android» chung chung — loại có chứng nhận có Google
+Play, nhận cập nhật, và điều khiển cùng HDMI-CEC được nối đúng. Và bật cài đặt
+HDMI-CEC của chính TV để các phím mũi tên trên điều khiển TV điều khiển được
+hộp; hầu hết các nhà không bao giờ đụng tới điều khiển của hộp nữa.
+
+## Rồi để điện thoại lo phần gõ
+
+Thứ duy nhất hộp không giải quyết là gõ chữ. Nhập mật khẩu Xtream bằng phím
+mũi tên là cực hình trên mọi thiết bị. Bỏ qua nó: bất kỳ điện thoại hay máy
+tính bảng nào cùng Wi-Fi đều có thể [làm điều khiển cho Vidonzo trên hộp](/vi/blog/dien-thoai-lam-dieu-khien-tv/).
+Điện thoại tự tìm thấy TV, bạn duyệt thư viện của TV và tìm bằng bàn phím
+thật, và việc phát bắt đầu trên màn hình lớn bằng một cú chạm. Thực tế hầu hết
+mọi người thiết lập danh sách từ điện thoại và không bao giờ gõ trên TV.
+
+## Thứ tự tránh được các rắc rối thường gặp
+
+1. Nối hộp vào cùng mạng với điện thoại. Nếu TV ở phòng xa,
+   [kiểm tra Wi-Fi phòng đó trước](/vi/blog/iptv-dung-hinh-tren-wifi/) —
+   nối dây cho hộp, nếu router ở gần, loại bỏ nguyên nhân đơ hình phổ biến
+   nhất.
+2. Cài Vidonzo lên hộp: [hướng dẫn cài đặt trên TV](/vi/help/) có nói rõ.
+3. [Thêm danh sách phát](/vi/blog/cai-dat-danh-sach-phat-dau-tien/) — từ điện
+   thoại làm điều khiển nếu có sẵn.
+4. Mở lịch, chọn một kênh, và chỉ sau đó mới chỉnh gì.
+
+## Còn ứng dụng phát của chính TV thì sao, tạm thời?
+
+Cứ giữ, nếu nó hợp với bạn, cũng như người ta giữ VLC cạnh một trình phát
+chuyên dụng: nó có sẵn. Nhưng khi một kênh mất tiếng hay lịch lệch một giờ,
+lỗi không phải ở nhà cung cấp và không phải ở TV — mà là ở việc đòi một engine
+trình duyệt trong hệ điều hành đóng kín phải làm trình phát đa phương tiện.
+Hãy giao cho TV một việc thôi. Việc đó nó làm rất giỏi.

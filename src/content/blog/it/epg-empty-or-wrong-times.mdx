@@ -1,0 +1,112 @@
+---
+title: "La guida è vuota o mostra orari sbagliati: sistemare l’EPG"
+description: "I canali si vedono e la guida è vuota, vecchia o spostata di esattamente un’ora. Quattro guasti producono questi sintomi, ognuno con la sua firma, e nessuno è «il lettore è lento»."
+urlSlug: guida-vuota-o-orari-sbagliati
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['risoluzione problemi', 'playlist']
+keywords: ['epg non funziona iptv', 'guida orari sbagliati', 'guida vuota iptv', 'xmltv non si carica', 'sfasamento orario epg']
+heroImageAlt: "Una griglia programmi con la maggior parte delle celle vuote e una riga spostata di una colonna."
+---
+
+Una guida vuota dà più fastidio di un canale rotto, perché tutto il *resto*
+funziona. L’immagine va, la lista è piena, e l’unica riga che dovrebbe dire
+cosa c’è dice «Nessuna info programma». Oppure dice qualcosa, ma è quello che
+c’era un’ora fa. Se hai letto [come funziona la guida](/it/blog/come-funziona-la-guida-epg/)
+conosci già il fatto chiave: la guida è un file separato, scaricato a parte,
+abbinato ai tuoi canali per nome. Ogni guasto qui sotto è una rottura da
+qualche parte in quella catena. Eccoli, nell’ordine in cui di solito capitano.
+
+## 1. Al lettore non è mai stato detto dov’è la guida
+
+Una playlist M3U [porta canali](/it/blog/dentro-un-file-m3u/); non porta una
+guida. Alcune playlist indicano l’indirizzo della guida nella prima riga
+(`url-tvg=`), molte no, e se la tua non lo fa il lettore non ha nulla da
+scaricare e ogni canale dice «Nessuna info programma» — la guida non è rotta,
+è assente.
+
+La firma: *ogni* canale vuoto, dal primo giorno. Il rimedio: chiedi al
+fornitore l’indirizzo XMLTV (di solito finisce in `.xml` o `.xml.gz`) e
+inseriscilo nelle impostazioni della fonte, accanto al link della playlist. Se
+il fornitore ti ha dato [un login Xtream Codes](/it/blog/xtream-codes-o-m3u/),
+la guida arriva col login e non c’è nulla da inserire — una guida vuota su
+Xtream significa uno dei guasti qui sotto.
+
+## 2. La guida e i canali non si conoscono
+
+È il più comune, e produce il sintomo più confuso: *alcuni* canali hanno la
+guida e altri, apparentemente a caso, no.
+
+Il file della guida elenca i programmi contro un identificativo di canale — un
+`tvg-id`. Anche la playlist dà a ogni canale un `tvg-id`. Dove combaciano hai
+la guida; dove non combaciano non hai nulla, anche se il canale è lì nel file
+della guida sotto un nome leggermente diverso. I fornitori che generano
+entrambi dallo stesso database combaciano perfettamente. Quelli che avvitano
+una guida di terzi sulla propria lista combaciano dove gli identificativi si
+trovano d’accordo per caso.
+
+La firma: copertura parziale, stabile nel tempo — sempre gli stessi canali
+vuoti. Il lettore può fare poco, perché non può sapere che `news24.example` e
+`News24_HD` sono la stessa emittente senza indovinare. Se il tuo fornitore
+offre più di una variante di playlist, quella più completa ha spesso
+identificativi migliori; altrimenti digli quali canali restano senza guida.
+
+## 3. Gli orari sono spostati — di solito di un’ora esatta
+
+I programmi compaiono, ma la griglia dice che il film è iniziato alle nove
+quando è iniziato alle dieci. Se lo spostamento è un numero tondo di ore, è un
+problema di fuso orario, e vale la pena capirlo, perché è il guasto che più
+spesso viene addossato alla parte sbagliata.
+
+Un file XMLTV marca ogni programma con un orario *e* uno scarto rispetto a UTC
+— `20260819210000 +0100`. Un lettore corretto legge quello scarto, converte
+all’orologio del tuo dispositivo e mostra l’ora giusta indipendentemente da
+dove la guida sia stata fatta. Vidonzo lo fa — è una delle cose su cui l’app è
+attenta, perché [è lì che le guide sbagliano più spesso](/it/blog/come-funziona-la-guida-epg/)
+— quindi uno spostamento di solito significa una di altre due cose:
+
+- **La guida dichiara lo scarto sbagliato.** Il fornitore l’ha generata su un
+  server impostato su un altro fuso e non ha corretto i marcatori. Ogni canale
+  è spostato della stessa quantità, ed è spostato in ogni lettore. Solo il
+  fornitore può correggere.
+- **L’orologio o il fuso del dispositivo sono sbagliati.** Un box TV lasciato
+  sul fuso di fabbrica sposta *tutto*, compreso l’orologio nella sua barra di
+  stato. Controlla data e ora del box prima di ogni altra cosa — e se è su
+  «automatico» in una rete che blocca i server di tempo, impostalo a mano.
+
+La firma che separa i due: se lo spostamento appare anche sul telefono, è la
+guida; se appare solo su un dispositivo, è quel dispositivo.
+
+## 4. La guida è vecchia
+
+La settimana scorsa andava tutto bene e ora la griglia mostra programmi già
+andati in onda, oppure si ferma di colpo a mezzanotte. I file di guida coprono
+una finestra — spesso qualche giorno — e il file va riscaricato per estenderla.
+Se il lettore non riesce a raggiungere l’indirizzo (è cambiato, è scaduto, la
+rete era giù quando ci ha provato), quello che vedi è la vecchia copia.
+
+La firma: una guida che finisce a un punto fisso nel passato, o che si ferma
+qualche ora avanti. Usa *Aggiorna ora* sulla fonte; se si riempie, il recupero
+era semplicemente in ritardo. Se non si riempie, è l’indirizzo stesso a
+fallire, e qui valgono
+[gli stessi controlli di un link di playlist](/it/blog/la-playlist-non-si-carica/)
+— incollalo in un browser e vedi se risponde.
+
+## L’ordine da cinque minuti
+
+1. Verifica che l’interruttore della guida sia acceso (*Mostra guida programmi
+   (EPG)*).
+2. Login Xtream? Allora l’indirizzo non è il problema; salta al 3. Link M3U?
+   Verifica che sia inserito un indirizzo XMLTV.
+3. Tutti i canali vuoti → indirizzo (1) o obsolescenza (4). Alcuni vuoti →
+   abbinamento (2). Orari sbagliati → fuso (3).
+4. *Aggiorna ora*, poi riapri la guida.
+5. Controlla lo stesso canale su un secondo dispositivo prima di scrivere al
+   fornitore, così puoi dirgli se il guasto segue la guida o il dispositivo.
+
+Una nota onesta per chiudere: una guida vale quanto il file che le sta dietro,
+e il lavoro di un lettore è scaricarlo in modo affidabile, abbinarlo
+fedelmente e — la parte che quasi tutti i lettori sbagliano — fare
+correttamente l’aritmetica dei fusi orari. Una volta che questi tre reggono,
+tutti i guasti rimanenti stanno nel file, e il rimedio più veloce è sapere
+quale segnalare.

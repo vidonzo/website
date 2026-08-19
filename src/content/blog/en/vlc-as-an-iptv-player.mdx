@@ -1,0 +1,103 @@
+---
+title: "Can VLC be your IPTV player? Where a general-purpose player stops"
+description: "VLC opens an M3U and plays almost anything, and for a lot of people that is the whole answer. Here is exactly what it does well, and the five points at which a dedicated player earns its place."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['product', 'playback']
+keywords: ['vlc iptv', 'vlc m3u playlist', 'vlc as iptv player', 'vlc vs iptv player']
+heroImageAlt: "A traffic cone standing next to a television remote, both on a plain surface."
+---
+
+Ask in any forum how to open an IPTV playlist and someone will answer "just use
+VLC" — and they are not wrong. VLC is one of the most respected pieces of
+software ever released: free, open source, on every platform, and capable of
+decoding nearly anything you throw at it. If your provider gave you an M3U
+file, VLC will open it and play the first channel in seconds. So the honest
+question is not *whether* VLC works. It is at what point you notice what it was
+not built for.
+
+## What VLC does well, and it does it very well
+
+VLC is a media player in the fullest sense. Open a stream URL, drop in an M3U,
+and it plays: HLS, MPEG-TS, RTSP, obscure containers, broken files, all of it.
+Its decoder support is legendary and its playback controls are complete —
+audio and subtitle tracks, speed, aspect ratio, delay adjustments, filters.
+For checking that a stream is alive, or that a link your provider sent is
+valid, there is nothing quicker. Many people who use a dedicated IPTV player
+keep VLC beside it for exactly this reason.
+
+## Where the seams appear
+
+An IPTV playlist is not a folder of videos, and this is where a general-purpose
+player and a dedicated one part ways. Five places, in the order most people
+meet them.
+
+### 1. The list is a list
+
+VLC shows your playlist as what it literally is: a sequence of entries. A
+[real M3U carries more than that](/blog/inside-an-m3u-file/) — group titles,
+logos, channel identifiers — and a dedicated player uses those attributes to
+build categories, favourites and
+[search across the whole library at once](/blog/organize-large-playlists/).
+Ten channels are fine as a list. A provider's full playlist as a list is
+something you scroll for a living.
+
+### 2. There is no guide
+
+VLC has no notion of a programme guide, because a film on your disk does not
+have one. An IPTV channel does:
+[the EPG is a separate file](/blog/epg-explained/) that a dedicated player
+fetches, matches to channels by identifier, and renders as "what is on now,
+what is on next". Without it you are changing channels to find out what is
+playing — which is television as it was in 1985.
+
+### 3. Films and series are file names
+
+Xtream Codes accounts carry films and series with posters, synopses, seasons
+and episodes. VLC receives them as entries named
+`Show.Name.S02E07.1080p` and lists them alphabetically. A dedicated player
+[reassembles the structure](/blog/films-and-series-as-a-library/): a season
+you can browse, an episode that knows which one comes next, and a resume point
+that survives closing the app.
+
+### 4. Nothing is remembered per source
+
+Continue watching, favourites, a chosen audio language for a given channel,
+[credentials for two providers kept apart](/blog/multiple-playlists-one-app/)
+— all of that is state a dedicated player keeps and VLC has no reason to. VLC
+remembers recent files. It does not remember that you were forty minutes into
+an episode on Tuesday.
+
+### 5. It was not drawn for a television
+
+VLC exists on Android TV and it works, in the sense that video plays. But its
+interface is a desktop application's interface, and driving it from a sofa
+with a d-pad is an exercise in patience. A dedicated player
+[built for the television](/blog/iptv-player-on-android-tv/) has focus rings,
+a side rail, and — in Vidonzo's case —
+[a phone that acts as the remote](/blog/turn-your-phone-into-a-tv-remote/) so
+searching is typing rather than pecking.
+
+## The engine underneath is not the difference
+
+It is worth being precise about one thing, because it is often got wrong: the
+*decoding* is not where VLC loses. Vidonzo is built on libmpv, which shares
+much of the same lineage — FFmpeg underneath, hardware decoding on top,
+[the same protocols](/blog/streaming-protocols-explained/) handled at the same
+level. When a stream is broken, both players will show you it is broken. The
+difference is everything that sits *above* the decoder: what the app
+understands about a playlist, a guide, a season, a resume point, and a remote.
+
+## So: can VLC be your IPTV player?
+
+If your list is short, your provider gives you no guide, and you watch on a
+laptop, yes — genuinely, and you will not miss much. The moment any of those
+three change — a real-size playlist, a guide worth having, a television — you
+are asking a superb media player to be a thing it never claimed to be.
+
+The graceful arrangement is to keep both. Use VLC for what it is unmatched at:
+opening anything, checking a link, testing a stream. And use
+[a player whose entire job is the playlist](/blog/what-an-iptv-player-does/)
+for the evening. Vidonzo takes the same M3U or Xtream login you would have
+given VLC, and [the first playlist takes about a minute](/blog/set-up-your-first-playlist/);
+the file you already have is all it needs.

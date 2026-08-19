@@ -1,0 +1,113 @@
+---
+title: "Audio non sincronizzato con le immagini: dove nasce lo scarto"
+description: "Le labbra si muovono, le parole arrivano tardi. Ci sono quattro punti in cui uno stream può perdere il sincrono — l’encoder, la rete, il decoder, lo schermo — e solo due sono alla portata del tuo lettore."
+urlSlug: audio-non-sincronizzato-con-le-immagini
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['risoluzione problemi', 'riproduzione']
+keywords: ['audio non sincronizzato iptv', 'ritardo audio streaming', 'audio in anticipo sul video', 'risolvere sincronia audio']
+heroImageAlt: "Un fumetto disegnato leggermente di lato rispetto alla bocca a cui appartiene, su fondo neutro."
+---
+
+Niente rovina una trasmissione più in fretta di labbra che finiscono la frase
+prima che arrivi il suono. È anche uno dei guasti più spesso diagnosticati
+male nello streaming, perché uno stream ha quattro punti distinti in cui
+immagine e suono possono separarsi, e i rimedi sono diversi. Cambia la cosa
+sbagliata e lo scarto resta esattamente dov’era. Ecco i quattro, dalla sorgente
+alle tue orecchie, e come capire quale hai davanti.
+
+## Prima: distingui scarto da sfasamento
+
+Guarda un minuto e fatti una domanda: la distanza è *costante* o *crescente*?
+
+Uno sfasamento costante — l’audio è sempre in ritardo di circa un terzo di
+secondo e resta così — è stato deciso prima che lo stream arrivasse a te,
+oppure dal tuo schermo. Uno scarto crescente — sincrono quando apri il canale,
+un secondo dopo dieci minuti, peggio dopo venti — è un problema di orologio, e
+punta al buffer o alla decodifica dalla tua parte. Questa sola osservazione
+dimezza la lista.
+
+## 1. L’encoder: ha lasciato il server così
+
+Video e audio sono tracce separate [intrecciate in un unico stream](/it/blog/sottotitoli-e-tracce-audio/),
+ciascuna marcata con informazioni temporali perché il lettore possa
+allinearle. Se l’encoder del fornitore le ha marcate male — la catena audio ha
+aggiunto una latenza che i marcatori non considerano — ogni spettatore di quel
+canale vede lo stesso sfasamento costante, su qualsiasi lettore e qualsiasi
+dispositivo.
+
+La firma: è un canale, o i canali di un fornitore, ed è identico sul telefono
+e sul televisore. Dalla tua parte non c’è nulla da regolare; l’unica cura è a
+monte. Verifica il canale su un secondo dispositivo per confermarlo, e di’ al
+fornitore quale canale e quanto è grande lo scarto all’incirca.
+
+## 2. La rete: segmenti che arrivano fuori passo
+
+Con [HLS e DASH](/it/blog/protocolli-di-streaming-spiegati/) lo stream viene
+consegnato in brevi segmenti, e se i segmenti arrivano in ritardo il lettore
+deve scegliere tra fermarsi e proseguire. Proseguire è dove nasce lo scarto:
+può riprodurre ciò che ha, e ciò che ha non sono sempre entrambe le tracce in
+egual misura. Su un transport stream grezzo la stessa cosa appare come
+pacchetti persi sotto carico, che si portano via le informazioni temporali.
+
+La firma: uno scarto che va e viene con la connessione — peggio la sera,
+peggio dall’altra parte della casa, assente su un box via cavo. Il rimedio è
+quello del [buffering](/it/blog/risolvere-buffering-iptv/): un buffer più grande e
+un [collegamento radio](/it/blog/iptv-si-blocca-su-wifi/) migliore tra
+router e schermo. Un buffer più grande dà al lettore spazio per tenere allineate
+entrambe le tracce durante un tratto difficile invece di improvvisare.
+
+## 3. Il decoder: due orologi, uno lento
+
+Questo è il caso in cui un lettore può davvero fare qualcosa. Il video lo
+decodifica un componente e l’audio un altro, e il lettore li tiene insieme
+confrontando i loro orologi. Quando il decoder video non tiene il passo — un
+box poco potente, un decoder software che mastica HEVC, un telefono caldo che
+si limita — l’immagine resta indietro rispetto al suono. La distanza *cresce*,
+e si azzera quando riapri il canale.
+
+La firma: scarto crescente su un dispositivo e non su un altro, e peggiore sui
+canali più pesanti. Tre cose aiutano, in quest’ordine:
+
+- **Attiva la decodifica hardware**, in *Impostazioni → Riproduzione*, se è
+  spenta. Sposta il lavoro video sul chip progettato per farlo, e l’orologio
+  video smette di perdere la corsa. Su alcuni box più vecchi la decodifica
+  hardware è anche ciò che
+  [riporta un’immagine su uno schermo nero](/it/blog/audio-si-immagine-no/).
+- **Riapri lo stream** quando scarta. Entrambi gli orologi ripartono insieme.
+  È un espediente più che una soluzione, ma dura due secondi.
+- **Dai meno da fare al dispositivo**: chiudi le altre app, e se il box è
+  vecchio, [le note sulle configurazioni leggere per hardware debole](/it/blog/vecchio-box-android-riproduzione-fluida/)
+  parlano esattamente di questo.
+
+## 4. Lo schermo: il televisore è in ritardo
+
+I televisori moderni elaborano l’immagine — interpolazione del movimento,
+upscaling, riduzione del rumore — e ogni stadio aggiunge qualche millisecondo
+che il suono non riceve. Manda l’audio a una soundbar per una strada e il video
+al pannello per un’altra, e i due arrivano separati. La distanza è costante ed
+è la stessa su ogni sorgente: l’app di streaming, la console, il sintonizzatore.
+
+La firma: riguarda tutto, non solo il tuo lettore IPTV. Quasi tutti i
+televisori hanno una modalità immagine «gioco» o «PC» che spegne
+l’elaborazione, e le soundbar hanno un’impostazione di ritardo audio proprio
+per questo. Si imposta una volta e ogni sorgente è a posto.
+
+## Cosa un lettore onestamente non può fare
+
+Vale la pena essere chiari sul limite. Un lettore controlla il buffer e il
+decoder — i casi 2 e 3 — e può tenere due tracce allineate come sono state
+marcate. Non può rimarcare uno stream che ha lasciato l’encoder sbagliato, e
+non vede quanto impiega il tuo televisore a disegnare un fotogramma. Alcuni
+lettori offrono un cursore manuale di sfasamento audio; può mascherare uno
+sfasamento costante su un canale, e non toccherà uno scarto crescente, perché
+uno sfasamento fisso non può inseguire un orologio che continua a scivolare.
+Vidonzo al momento non ne offre uno, ritenendo che le due cose che un lettore
+*può* sistemare sia meglio sistemarle che mascherarle.
+
+## In breve
+
+Costante e ovunque: il televisore. Costante e un solo canale: l’encoder —
+segnalalo al fornitore. Va e viene con la connessione: il buffer. Cresce
+finché non riapri: il decoder — attiva la decodifica hardware. Quattro cause,
+un minuto di osservazione per distinguerle.

@@ -1,0 +1,120 @@
+---
+title: "O stream para depois de alguns segundos: quedas, não buffering"
+description: "Começa bem, toca dez segundos e morre — sem rodinha girando, só um fim. É uma falha diferente do buffering, com causas diferentes, e um bom player resolve as resolvíveis sem você perceber."
+urlSlug: o-stream-para-depois-de-alguns-segundos
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemas', 'reprodução']
+keywords: ['iptv para depois de alguns segundos', 'iptv desconecta sempre', 'stream cai iptv', 'iptv para depois de 10 segundos']
+heroImageAlt: "Uma linha reta que corre limpa por um trecho curto e então simplesmente acaba, sobre um campo liso."
+---
+
+Buffering tem uma cara conhecida: a rodinha, a travada, a imagem se
+recuperando. Isto não é aquilo. Isto é um canal que abre limpo, toca perfeito
+por cinco, dez ou trinta segundos, e então para — de volta à lista, ou um
+quadro congelado, ou um erro, ou o mesmo canal recomeçando do início. Se você
+aperta play, acontece de novo. É uma *queda de conexão*, e as causas são quase
+inteiramente diferentes [das que estão por trás do buffering](/pt/blog/iptv-travando-como-resolver/).
+Aqui estão as cinco que explicam quase todos os casos, e o que um player pode e
+não pode fazer em cada uma.
+
+## 1. O servidor encerrou a conexão
+
+A causa mais comum. O servidor do provedor entrega um stream e, alguns segundos
+depois, fecha a conexão — porque está sobrecarregado, porque um processo
+reiniciou, porque um balanceador de carga te moveu, porque é terça-feira. Num
+transport stream cru os dados simplesmente param de chegar; em
+[HLS](/pt/blog/protocolos-de-streaming-explicados/) o próximo segmento nunca vem.
+
+Este é o caso *para o qual* um player existe. Um player bem-feito não trata uma
+conexão caída como o fim do programa; trata como um soluço e reconecta em
+silêncio. O Vidonzo faz isso na camada de transporte: uma leitura travada expira
+em segundos em vez de ficar pendurada, e a conexão é restabelecida com uma
+espera curta e limitada, então um servidor que fechou a porta a reabre sem que
+você veja mais que um instante de pausa. Se um canal morria aos dez segundos no
+seu player anterior e neste apenas pisca, esse mecanismo é o motivo.
+
+A assinatura: canais aleatórios, horários aleatórios, mais à noite. Nada a
+mudar do seu lado; se acontece em *todos* os canais o tempo todo, o servidor
+está em apuros de verdade e o provedor precisa saber.
+
+## 2. Seu acesso expirou no meio do stream
+
+Xtream Codes e muitos links M3U carregam um token — uma prova de quem você é —
+no endereço. Tokens expiram. Quando um expira, o servidor não fecha a conexão
+com educação; responde à próxima requisição com um erro: proibido, não
+autorizado, sumiu.
+
+Aqui um bom player deliberadamente *não* fica reconectando. Martelar um
+servidor que acabou de dizer «não» é inútil e, em volume, parece um ataque;
+provedores bloqueiam por isso. O Vidonzo reconecta através de uma conexão caída
+e para diante de uma recusa explícita, de propósito. A cura é uma lista fresca:
+use *Atualizar agora* na fonte para o player reler a lista atual — ou, se foi a
+assinatura que venceu, isso é entre você e o provedor.
+
+A assinatura: funcionava ontem, hoje tudo falha, e a falha é instantânea em vez
+de alguns segundos depois. Veja também
+[as cinco falhas por trás de um link que não carrega](/pt/blog/a-lista-nao-carrega/).
+
+## 3. Streams demais ao mesmo tempo
+
+A maioria das assinaturas permite um número fixo de streams *simultâneos* — um,
+dois, às vezes mais. Abra um terceiro e o servidor derruba um, e nem sempre o
+mais novo. O derrubado parece exatamente o caso 1, exceto que coincide com
+outra pessoa da casa apertando play.
+
+A assinatura: falha quando outro aparelho está assistindo, e se recupera quando
+aquele para. Não é falha do player e não há ajuste para isso; é o arranjo que
+você tem com o provedor, e a solução é assistir em turnos ou um plano que
+permita mais. Um player que mostra um erro claro em vez de reabrir o mesmo
+stream em silêncio ao menos diz em qual caso você está.
+
+## 4. O aparelho dormiu em cima da conexão
+
+Celulares e caixas de TV economizam energia agressivamente, e um stream de
+vídeo é exatamente o tipo de conexão longa e silenciosa que eles gostam de
+cortar. Num celular isso aparece como um stream que morre quando a tela
+escurece ou quando você troca rapidinho para outro app; numa caixa pode ser um
+modo de economia de energia do Wi-Fi entusiasmado demais que corta o rádio
+entre segmentos.
+
+A assinatura: está atrelada às *suas* ações — a tela, a troca de app, uma pausa
+— não ao relógio nem ao canal. No celular, mantenha o app em primeiro plano
+enquanto toca; o Vidonzo condiciona sua recuperação ao primeiro plano de
+propósito, para não brigar com o sistema por uma conexão da qual você se
+afastou. Na caixa, procure um ajuste de economia de energia do Wi-Fi ou
+«manter acordado», ou
+[leve a caixa para o cabo](/pt/blog/iptv-travando-no-wifi/).
+
+## 5. A rede no meio derrubou
+
+Entre o servidor e a tela estão seu roteador, seu provedor de internet e — para
+alguns — uma VPN ou proxy. Qualquer um pode reiniciar uma conexão: um roteador
+girando uma tabela NAT, um equipamento do provedor que expira um fluxo que
+parece ocioso, uma VPN que reconecta. O player vê a mesma coisa do caso 1 e
+reconecta do mesmo jeito; a diferença é que *tudo* é afetado, não só um
+provedor.
+
+A assinatura: outros apps de streaming também caem, e o padrão segue a rede —
+um roteador específico, uma VPN específica, um horário específico do dia. Teste
+um minuto no dado móvel; se as quedas somem, a falha está do lado da rede de
+casa.
+
+## Distinguindo em um minuto
+
+- Canais aleatórios, horários aleatórios, pausa breve → o servidor derrubou (1).
+  O player reconecta; nada a fazer.
+- Falha instantânea em tudo, funcionava ontem → acesso expirado (2). *Atualizar
+  agora*, depois fale com o provedor.
+- Falha quando outra pessoa aperta play → streams demais (3).
+- Morre quando você escurece a tela ou troca de app → economia de energia (4).
+- Tudo cai, outros apps também → a rede (5).
+
+## O que o player deve a você
+
+O limite honesto é este: um player deveria reconectar através de *toda* queda
+que não seja uma recusa, rápido o bastante para você raramente notar, e deveria
+parar de forma limpa e dizer isso em toda queda que seja. Qualquer coisa além
+— manter um stream aberto depois do token, ignorar um limite de streams — não é
+um recurso, é um problema com atraso. Acerte a reconexão e o caso 1, que é a
+maioria dos casos, deixa de ser algo em que você pensa.

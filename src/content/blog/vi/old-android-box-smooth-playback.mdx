@@ -1,0 +1,105 @@
+---
+title: "Làm chiếc hộp Android cũ chạy mượt trở lại"
+description: "Chiếc hộp bị giật hiếm khi yếu tới mức không phát nổi video; nó chỉ bị bắt làm mọi thứ khác. Những phần nào của một trình phát tốn kém trên máy yếu, và các thiết lập, thói quen trả công việc về đúng chỗ gánh được nó."
+urlSlug: hop-android-cu-phat-muot
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['truyền hình', 'phát lại']
+keywords: ['trình phát iptv cho hộp android cũ', 'trình phát iptv nhẹ android tv', 'hộp android chạy chậm', 'iptv trên máy yếu']
+heroImageAlt: "Chiếc hộp set-top nhỏ hơi trầy đặt trên kệ, đèn báo sáng, một góc phủ bụi."
+---
+
+Ở đâu đó trong rất nhiều phòng khách là một chiếc hộp Android đen nhỏ, năm sáu
+năm tuổi, một hai gigabyte bộ nhớ và con chip vốn đã rẻ ngay từ lúc mới. Ngày
+trước nó phát được mọi thứ. Giờ ứng dụng trên đó giật khi chuyển kênh, hình rung
+ở cảnh động, và menu chậm một nhịp mới phản hồi. Bản năng bảo chiếc hộp hết
+đời rồi. Thường thì chưa. Ngay cả một chiếc hộp tầm thường cũng có bộ giải mã
+video riêng, thừa sức vẽ 1080p cả buổi tối; thứ đã thay đổi là khối lượng công
+việc *khác* mà phần mềm xung quanh ôm vào. Đây là nơi chi phí đi mất, và cách
+trả công việc về những phần gánh được nó.
+
+## Cái gì thực sự tốn kém trên một chiếc hộp yếu
+
+Ba thứ, theo thứ tự giảm dần.
+
+**Giải mã video bằng phần mềm.** Nếu ứng dụng giải mã trên CPU đa dụng thay vì
+khối video, một luồng 1080p ngốn gần hết con chip nhỏ, còn 4K hay HEVC thì đơn
+giản là không kham nổi. Chỉ riêng lựa chọn này đã tách chiếc hộp phát được khỏi
+chiếc hộp giật, và nó là một thiết lập.
+
+**Vẽ một giao diện cầu kỳ.** Áp phích, hoạt ảnh, nền mờ, băng chuyền trăm thẻ,
+tất cả được vẽ lại trong khi video chạy bên dưới. Từng khung hình của đám đó đều
+lấy từ đúng cái ngân sách nhỏ mà video đang dùng. Giao diện nặng đặt trên bộ
+giải mã nhẹ chính là cách một chiếc hộp *phát được* trông như thể không phát
+nổi.
+
+**Giữ một danh sách khổng lồ trong bộ nhớ theo cách sai.** Danh sách đầy đủ của
+nhà cung cấp là một tệp lớn, và ứng dụng giữ trọn nó dưới dạng cấu trúc phẳng
+rồi tìm bằng cách cuộn sẽ vắt cạn bộ nhớ của chiếc hộp nhỏ — lúc đó hệ điều hành
+bắt đầu đóng bớt thứ gì đó, đôi khi là chính ứng dụng ấy.
+
+Để ý xem thứ gì không có trong danh sách: mạng. Trên chiếc hộp chậm, hiện tượng
+đệm và hiện tượng giật trông giống nhau, nên đáng loại trừ mạng trước —
+[bài về hiện tượng đệm](/vi/blog/khac-phuc-iptv-giat-lag/) làm việc đó trong năm
+phút — trước khi quy tội cho phần cứng.
+
+## Những thiết lập quan trọng
+
+**Bật giải mã phần cứng.** Trong Vidonzo nó nằm ở *Cài đặt → Phát lại → Giải mã
+phần cứng*, và trên chiếc hộp cũ thì đó là toàn bộ ván bài. Bật lên, khối video
+lo phần giải mã và CPU rảnh tay vẽ giao diện; tắt đi, CPU làm cả hai và thua.
+Nếu bật rồi mà một kênh vẫn [có tiếng mà không có hình](/vi/blog/co-tieng-khong-co-hinh/),
+thì định dạng của kênh đó là thứ bộ giải mã của hộp không hỗ trợ — hãy đảo công
+tắc riêng cho kênh ấy và chấp nhận rằng nó sẽ nặng hơn.
+
+**Bộ đệm đo theo đường mạng, không theo chiếc hộp.** Bộ đệm lớn hơn tốn bộ nhớ,
+mà hộp nhỏ thì chẳng dư dả — nhưng bộ đệm quá nhỏ sẽ khựng ngay ở cái nấc đầu
+tiên, mà khựng chính là thứ bạn đang muốn chữa. Hãy bắt đầu từ mặc định; chỉ
+tăng nếu hình thực sự dừng lại, và chỉ giảm nếu chiếc hộp rõ ràng thiếu bộ nhớ
+(ứng dụng tự đóng là dấu hiệu).
+
+**Giữ lịch phát sóng, bỏ phần trang trí.** Lịch phát sóng là dữ liệu chứ không
+phải hình ảnh, và vẽ nó rất rẻ. Chính những màn hình nặng áp phích mới tốn.
+Bố cục TV của Vidonzo là
+[một thanh bên với khung tiêu điểm](/vi/blog/trinh-phat-iptv-tren-android-tv/), làm
+cho phím điều hướng và cố tình nhẹ — chiếc hộp vẽ một danh sách, không phải một
+gian trưng bày.
+
+## Những thói quen quan trọng
+
+**Chọn lọc.** [Yêu thích và vài danh mục](/vi/blog/sap-xep-danh-sach-phat-lon/)
+trên chiếc hộp nhỏ không chỉ tiện, mà còn nhẹ hơn. Duyệt một danh sách ngắn
+những thứ bạn thật sự xem gần như không tốn gì. Cuộn cả danh sách của nhà cung
+cấp mỗi tối là thứ đắt đỏ nhất bạn có thể bắt một thiết bị yếu làm.
+
+**Để điện thoại làm việc duyệt.** Đây là thay đổi khiến người ta bất ngờ nhất.
+Nếu một chiếc điện thoại hay máy tính bảng cùng Wi-Fi
+[đóng vai điều khiển cho chiếc hộp](/vi/blog/dien-thoai-lam-dieu-khien-tv/),
+thì điện thoại vẽ áp phích, chạy tìm kiếm và lo phần gõ chữ — chiếc hộp chỉ cần
+nhận «phát cái này» rồi phát. Một chiếc hộp yếu với chiếc điện thoại bên cạnh cư
+xử như một chiếc hộp tốt hơn hẳn, vì nó đã được hạ xuống đúng một việc mà nó
+giỏi.
+
+**Thỉnh thoảng khởi động lại.** Không phải mẹo dân gian: chiếc hộp bật liền ba
+tuần đã tích cóp mọi thứ mà từng ứng dụng trên đó rò rỉ ra. Khởi động lại mỗi
+tuần một lần tốn một phút và trả về bộ nhớ mà trình phát dùng được.
+
+**Gỡ những gì bạn không dùng.** Mỗi ứng dụng chạy dịch vụ nền đều tiêu từ đúng
+cái ngân sách nhỏ ấy. Chiếc hộp chỉ cần làm mỗi việc của một chiếc hộp sẽ còn
+lại nhiều hơn cho hình ảnh.
+
+## Khi đúng là do phần cứng
+
+Có một cái sàn. Chiếc hộp không giải mã HEVC bằng phần cứng thì sẽ không bao giờ
+phát HEVC mượt, dù phần mềm có làm gì đi nữa, mà các nhà cung cấp đang chuyển
+sang HEVC vì nó giảm một nửa băng thông của họ. Nếu kênh của nhà cung cấp phần
+lớn là HEVC còn bộ giải mã của hộp bạn có trước đó, câu trả lời thành thật là
+một thiết bị mới hơn — và nó không nhất thiết phải đắt; một chiếc que được chứng
+nhận đời nay giải mã HEVC bằng phần cứng và giá rất mềm.
+
+Nhưng hãy thử phần mềm trước. Bật giải mã phần cứng, bộ đệm để mặc định, giao
+diện giữ gọn, để điện thoại duyệt: phần lớn những lời than «hộp cũ» không sống
+sót nổi qua danh sách này, và làm hết nó mất một buổi tối.
+[Cài danh sách phát trên một trình phát mới](/vi/blog/cai-dat-danh-sach-phat-dau-tien/)
+là khoảng một phút của buổi tối ấy; phần còn lại là ngồi xem nó có còn giật
+không.

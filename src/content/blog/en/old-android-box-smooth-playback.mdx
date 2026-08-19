@@ -1,0 +1,104 @@
+---
+title: "Making an old Android box play smoothly again"
+description: "A box that stutters is rarely too weak to play video; it is being asked to do everything but. Which parts of a player cost a low-powered device, and the settings and habits that hand the work to the parts that can carry it."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['television', 'playback']
+keywords: ['iptv player for old android box', 'lightweight iptv player android tv', 'android box lagging', 'iptv on low end box']
+heroImageAlt: "A small, slightly scuffed set-top box on a shelf, its indicator light on, dust on the corner."
+---
+
+Somewhere in a lot of living rooms is a small black Android box, five or six
+years old, with a gigabyte or two of memory and a chip that was cheap when it
+was new. It used to play everything. Now the app it runs stutters on channel
+change, the picture judders on busy scenes, and the menu takes a beat to
+respond. The instinct is that the box is finished. It usually is not. The
+hardware in even a modest box has a dedicated video decoder that is perfectly
+capable of drawing 1080p all evening; what has changed is how much *other*
+work the software around it has taken on. Here is where the cost goes, and how
+to give the work back to the parts that can carry it.
+
+## What actually costs on a weak box
+
+Three things, in decreasing order.
+
+**Decoding video in software.** If the app decodes on the general-purpose
+CPU instead of the video block, a 1080p stream eats most of a small chip and
+a 4K or HEVC stream simply cannot be done. This single choice separates a box
+that plays and a box that stutters, and it is a setting.
+
+**Drawing an elaborate interface.** Posters, animations, blurred backgrounds,
+a carousel of a hundred cards, all being redrawn while the video plays
+underneath. Every frame of that comes out of the same small budget as the
+video does. A heavy interface on top of a light decoder is how a box that
+*can* play looks as though it cannot.
+
+**Holding a huge playlist in memory the wrong way.** A provider's full list
+is a large file, and an app that keeps all of it as a flat structure and
+searches it by scrolling will run a small box out of memory, at which point
+the operating system starts closing things — sometimes the app itself.
+
+Notice what is not on the list: the network. Buffering and stutter look alike
+on a slow box, so it is worth ruling out the network first —
+[the buffering article](/blog/fix-iptv-buffering/) covers that in five
+minutes — before assuming the hardware.
+
+## The settings that matter
+
+**Hardware decoding on.** In Vidonzo it is *Settings → Playback → Hardware
+decoding*, and on an old box it is the whole game. On, the video block does
+the decoding and the CPU is left to draw the interface; off, the CPU does
+both and loses. If a channel shows [sound but no picture](/blog/sound-but-no-picture/)
+with it on, that channel's format is one the box's decoder does not support —
+try the toggle the other way for that channel only, and expect it to be
+heavier.
+
+**Buffer sized to the connection, not to the box.** A larger buffer costs
+memory, and a small box has little to spare — but a buffer that is too small
+stalls on the first hiccup and stalling is what you are trying to cure. Start
+at the default; only raise it if the picture actually stops, and only lower it
+if the box is plainly short of memory (apps closing on their own is the tell).
+
+**Keep the guide, drop the decoration.** The programme guide is data, not
+pictures, and cheap to draw. It is the artwork-heavy screens that cost.
+Vidonzo's television layout is [a side rail with focus rings](/blog/iptv-player-on-android-tv/),
+built for a d-pad and light by design — the box draws a list, not a showroom.
+
+## The habits that matter
+
+**Curate.** [Favourites and a couple of categories](/blog/organize-large-playlists/)
+are not just convenient on a small box; they are lighter. Browsing a
+short list of things you actually watch costs almost nothing. Scrolling the
+whole provider list every evening is the most expensive thing you can ask a
+weak device to do.
+
+**Let the phone do the browsing.** This is the change that surprises people
+most. If a phone or tablet on the same Wi-Fi [acts as the box's remote](/blog/turn-your-phone-into-a-tv-remote/),
+the phone draws the posters, runs the search and handles the typing — the
+box only has to receive "play this" and play it. A weak box with a phone
+beside it behaves like a much better box, because it has been demoted to the
+one job it is good at.
+
+**Restart it occasionally.** Not folk wisdom: a box that has been on for
+three weeks has accumulated whatever every app on it leaked. A restart once a
+week costs a minute and returns memory the player can use.
+
+**Uninstall what you do not use.** Every app that runs a background service
+is spending the same small budget. A box that only has to be a box has more
+left for the picture.
+
+## When it really is the hardware
+
+There is a floor. A box that cannot decode HEVC in hardware will never play
+HEVC smoothly, whatever the software does, and providers are moving to HEVC
+because it halves their bandwidth. If your provider's channels are mostly
+HEVC and your box's decoder predates it, the honest answer is a newer device
+— and it need not be expensive; a current certified stick decodes HEVC in
+hardware and costs little.
+
+But try the software first. Hardware decoding on, buffer at the default, the
+interface kept lean, the phone doing the browsing: a majority of "old box"
+complaints do not survive that list, and it takes an evening to work through.
+[Setting the playlist up on a fresh player](/blog/set-up-your-first-playlist/)
+is about a minute of the evening; the rest is watching to see whether it
+stutters.

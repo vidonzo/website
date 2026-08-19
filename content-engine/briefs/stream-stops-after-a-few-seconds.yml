@@ -1,0 +1,16 @@
+key: stream-stops-after-a-few-seconds
+title: "The stream stops after a few seconds: disconnects, not buffering"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: troubleshooting
+targetQueries: ["iptv stream stops after few seconds", "iptv keeps disconnecting", "stream cuts out iptv", "iptv stops playing after 10 seconds"]
+audience: Someone whose stream starts fine and dies, repeatedly, without a buffering wheel.
+value: Distinguishes a disconnect from buffering; names the causes (connection limits, expiring tokens, server drops, aggressive power saving) and what a good player does about each.
+angle: Showcase for automatic recovery, honestly bounded — a player reconnects a dropped connection; it does not reconnect into a refused one.
+productFacts:
+  - automatic reconnect on network errors with a bounded back-off; a stalled read times out and re-enters the reconnect path
+  - deliberately does not hammer a server that answered with an HTTP error (expired token) — that needs a fresh playlist
+  - Refresh now / auto-refresh re-reads the source
+constraints: [no-download-or-offline-wording, no-connection-limit-workarounds]
+internalLinks: [fix-iptv-buffering, fix-iptv-freezing-on-wifi, playlist-link-wont-load, streaming-protocols-explained]

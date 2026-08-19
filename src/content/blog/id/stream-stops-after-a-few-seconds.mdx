@@ -1,0 +1,122 @@
+---
+title: "Siaran berhenti setelah beberapa detik: putus, bukan buffering"
+description: "Mulai mulus, jalan sepuluh detik, lalu mati — tanpa roda berputar, cuma berakhir. Ini kerusakan yang berbeda dari buffering, dengan penyebab berbeda, dan pemutar yang baik menangani yang bisa ditangani tanpa Anda sadari."
+urlSlug: siaran-berhenti-setelah-beberapa-detik
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['pemecahan-masalah', 'pemutaran']
+keywords: ['iptv berhenti setelah beberapa detik', 'iptv sering putus', 'siaran terputus iptv', 'iptv berhenti setelah 10 detik']
+heroImageAlt: "Sebuah garis lurus yang berjalan bersih sebentar lalu begitu saja berakhir, di atas bidang polos."
+---
+
+Buffering punya wajah yang khas: roda berputar, tersendat, gambar mengejar
+ketertinggalan. Ini bukan itu. Ini saluran yang terbuka mulus, jalan sempurna
+lima atau sepuluh atau tiga puluh detik, lalu berhenti — kembali ke daftar,
+atau bingkai membeku, atau pesan galat, atau saluran yang sama mulai lagi dari
+awal. Tekan putar, kejadian lagi. Ini *putus koneksi*, dan penyebabnya nyaris
+sepenuhnya berbeda dari [penyebab buffering](/id/blog/mengatasi-buffering-iptv/).
+Inilah lima yang menjelaskan hampir semua kasus, dan apa yang bisa dan tidak
+bisa dilakukan pemutar untuk masing-masing.
+
+## 1. Server mengakhiri koneksinya
+
+Yang paling umum. Server penyedia memberi Anda siaran lalu beberapa detik
+kemudian menutup koneksinya — karena kelebihan beban, karena sebuah proses
+dimulai ulang, karena penyeimbang beban memindahkan Anda, karena hari Selasa.
+Pada transport stream mentah datanya sekadar berhenti datang; pada
+[HLS](/id/blog/protokol-streaming-hls-dash-rtsp/) segmen berikutnya tak pernah
+tiba.
+
+Inilah kasus yang menjadi *alasan keberadaan* sebuah pemutar. Pemutar yang baik
+tak menganggap koneksi putus sebagai akhir acara; ia menganggapnya cegukan dan
+menyambung ulang diam-diam. Vidonzo melakukannya di lapisan transport: pembacaan
+yang macet kehabisan waktu dalam hitungan detik alih-alih menggantung, dan
+koneksinya dibangun ulang dengan jeda singkat yang terbatas — sehingga server
+yang menutup pintu membukanya lagi tanpa Anda melihat lebih dari sekejap jeda.
+Kalau sebuah saluran mati di detik kesepuluh pada pemutar lama Anda dan di sini
+hanya berkedip, mekanisme itulah alasannya.
+
+Tandanya: saluran acak, waktu acak, lebih sering malam hari. Tak ada yang perlu
+diubah di sisi Anda; kalau terjadi di *semua* saluran terus-menerus, servernya
+memang sedang bermasalah dan penyedia perlu tahu.
+
+## 2. Akses Anda kedaluwarsa di tengah siaran
+
+Xtream Codes dan banyak tautan M3U membawa token — bukti siapa Anda — di dalam
+alamatnya. Token kedaluwarsa. Saat itu terjadi, server tak menutup koneksi
+dengan sopan; ia menjawab permintaan berikutnya dengan galat: terlarang, tak
+berwenang, hilang.
+
+Di sini pemutar yang baik dengan sengaja *tidak* terus menyambung ulang.
+Menggedor server yang baru saja bilang «tidak» itu sia-sia dan, dalam jumlah
+besar, tampak seperti serangan; penyedia memblokir karenanya. Vidonzo menyambung
+ulang menembus koneksi yang putus dan berhenti pada penolakan yang tegas, dengan
+sengaja. Obatnya adalah playlist yang segar: gunakan *Perbarui sekarang* pada
+sumber agar pemutar membaca ulang daftar terkini — atau, kalau langganannya
+sendiri yang habis, itu urusan Anda dengan penyedia.
+
+Tandanya: kemarin jalan, hari ini semuanya gagal, dan kegagalannya seketika,
+bukan setelah beberapa detik. Lihat juga
+[lima kerusakan di balik tautan yang tak mau dimuat](/id/blog/playlist-tidak-mau-dimuat/).
+
+## 3. Terlalu banyak siaran sekaligus
+
+Kebanyakan langganan mengizinkan sejumlah tetap siaran *bersamaan* — satu, dua,
+kadang lebih. Buka yang ketiga dan server menjatuhkan satu, dan tak selalu yang
+terbaru. Yang jatuh tampak persis seperti kasus 1, hanya saja berbarengan dengan
+orang lain di rumah yang menekan putar.
+
+Tandanya: gagal saat perangkat lain sedang menonton, dan pulih ketika yang itu
+berhenti. Ini bukan kesalahan pemutar dan tak ada pengaturannya; ini kesepakatan
+Anda dengan penyedia, dan solusinya adalah menonton bergantian atau paket yang
+mengizinkan lebih. Pemutar yang menampilkan galat yang jelas alih-alih diam-diam
+membuka ulang siaran yang sama setidaknya memberi tahu Anda sedang di kasus
+yang mana.
+
+## 4. Perangkatnya tertidur di atas koneksi
+
+Ponsel dan kotak TV menghemat daya dengan galak, dan siaran video persis jenis
+koneksi panjang nan senyap yang mereka gemar putuskan. Di ponsel ini tampak
+sebagai siaran yang mati saat layar meredup atau saat Anda sebentar pindah ke
+aplikasi lain; di kotak bisa berupa mode hemat daya Wi-Fi yang terlalu
+bersemangat, memutus radionya di antara segmen.
+
+Tandanya: terikat pada *tindakan Anda* — layar, perpindahan aplikasi, sebuah
+jeda — bukan pada jam atau salurannya. Di ponsel, biarkan aplikasi di latar
+depan selama memutar; Vidonzo sengaja mengaitkan pemulihannya dengan latar
+depan, agar tak berebut dengan sistem operasi demi koneksi yang sudah Anda
+tinggalkan. Di kotak, cari pengaturan hemat daya Wi-Fi atau «tetap terjaga»,
+atau [pindahkan kotaknya ke kabel](/id/blog/iptv-macet-di-wifi/).
+
+## 5. Jaringan di tengah menjatuhkannya
+
+Antara server dan layar ada router Anda, penyedia internet Anda, dan — bagi
+sebagian orang — VPN atau proksi. Salah satunya bisa mereset koneksi: router
+yang memutar tabel NAT, perangkat operator yang mematikan aliran yang tampak
+menganggur, VPN yang menyambung ulang. Pemutar melihat hal yang sama seperti
+kasus 1 dan menyambung ulang dengan cara yang sama; bedanya, *semuanya* kena,
+bukan satu penyedia.
+
+Tandanya: aplikasi streaming lain juga putus, dan polanya mengikuti jaringan —
+router tertentu, VPN tertentu, jam tertentu. Coba semenit dengan data seluler;
+kalau putusnya lenyap, kerusakannya di sisi jaringan rumah.
+
+## Membedakannya dalam semenit
+
+- Saluran acak, waktu acak, jeda singkat → server menjatuhkannya (1). Pemutar
+  menyambung ulang; tak ada yang perlu dilakukan.
+- Gagal seketika di semuanya, kemarin jalan → akses kedaluwarsa (2). *Perbarui
+  sekarang*, lalu bicara dengan penyedia.
+- Gagal saat orang lain menekan putar → terlalu banyak siaran (3).
+- Mati saat Anda meredupkan layar atau berpindah aplikasi → hemat daya (4).
+- Semua putus, aplikasi lain juga → jaringan (5).
+
+## Apa yang pemutar utang pada Anda
+
+Batas yang jujur begini: pemutar semestinya menyambung ulang menembus *setiap*
+putus yang bukan penolakan, cukup cepat sampai Anda jarang menyadarinya, dan
+semestinya berhenti dengan rapi dan mengatakannya pada setiap putus yang memang
+penolakan. Apa pun lebih dari itu — menahan siaran tetap terbuka melewati
+tokennya, mengabaikan batas siaran — bukan fitur, melainkan masalah yang
+ditunda. Betulkan cara menyambung ulangnya, dan kasus 1, yang merupakan
+mayoritas kasus, berhenti jadi hal yang Anda pikirkan.

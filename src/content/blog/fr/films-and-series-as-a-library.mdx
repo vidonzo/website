@@ -1,0 +1,108 @@
+---
+title: "Films et séries comme une bibliothèque, pas comme un dossier de noms de fichiers"
+description: "Votre fournisseur envoie films et séries sous forme de liste d’entrées. Que vous voyiez des affiches, des saisons et un point de reprise — ou mille lignes de noms de fichiers — est entièrement l’œuvre du lecteur."
+urlSlug: films-et-series-comme-une-bibliotheque
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['produit', 'playlists']
+keywords: ['lecteur vod iptv', 'series saisons episodes iptv', 'films avec affiches iptv', 'reprendre la lecture iptv']
+heroImageAlt: "Une étagère de dos de livres dont quelques-uns sont sortis pour montrer leur couverture, à côté d’une liste imprimée toute simple."
+---
+
+Il y a un moment, un ou deux jours après avoir configuré un nouveau lecteur, où
+l’on ouvre pour la première fois la section « films » et où l’on découvre ce que
+le fournisseur envoie réellement : une liste. Des milliers de lignes nommées
+`Some.Film.2019.1080p.WEB` ou `Show.S03E04`, par ordre alphabétique, sans
+image, sans résumé, et sans la moindre trace de l’épisode où l’on en était. Il
+est facile d’en conclure que le fournisseur est mauvais. En général, le
+fournisseur va très bien. Ce que vous regardez, c’est la matière première, et la
+différence entre une liste et une bibliothèque, c’est un travail que le lecteur
+fait ou ne fait pas.
+
+## Ce qui arrive réellement
+
+Cela dépend de [la forme que prend votre playlist](/fr/blog/xtream-codes-ou-m3u/).
+
+Des identifiants **Xtream Codes** donnent au lecteur trois flux distincts —
+direct, films, séries — et les flux films et séries transportent de la
+structure : un titre, une année, une adresse d’affiche, une note, un synopsis,
+une distribution, et pour les séries une hiérarchie de saisons et d’épisodes
+avec un ordre. Il y a là beaucoup de matière, et un bon lecteur s’en sert
+entièrement.
+
+Un lien **M3U** est [plus plat](/fr/blog/dans-un-fichier-m3u/) : une ligne par
+élément, avec un nom, un titre de groupe, et souvent l’adresse d’un logo.
+Certains fournisseurs mettent l’affiche dans le champ du logo et le nom de la
+série dans le groupe ; d’autres non. Un lecteur qui travaille depuis du M3U doit
+*déduire* la structure — comprendre que `Show.S03E04` et `Show.S03E05` sont des
+épisodes de la même saison de la même série — et il le fait avec plus ou moins
+d’enthousiasme.
+
+Dans les deux cas, rien n’arrive *sous forme* de bibliothèque. La bibliothèque
+est construite.
+
+## Ce que construire veut dire
+
+Cinq tâches, dans l’ordre où elles apparaissent à l’écran.
+
+**Les visuels.** Une affiche est une adresse dans les métadonnées ; le lecteur
+la récupère, la met en cache, la dimensionne, et le fait pour chaque vignette à
+l’écran sans que le défilement cale. Quand les affiches sont vides, c’est
+généralement que l’adresse manque ou est morte — les métadonnées du fournisseur
+pointent vers une image qui n’existe plus — et un bon lecteur affiche un
+substitut soigné plutôt qu’une image cassée.
+
+**Les détails.** Note, synopsis, distribution, année, genre — présentés sur une
+fiche pour que vous décidiez de regarder *avant* d’appuyer sur lecture, ce qui
+est tout l’intérêt d’une bibliothèque. Vidonzo les met en page par titre et
+ajoute une navigation par genre sur tout le catalogue pour les soirs où l’on n’a
+aucune idée de ce qu’on veut.
+
+**La structure.** Les séries sont la partie difficile. Une saison est un
+conteneur, un épisode un élément ordonné à l’intérieur, et « suivant » a un
+sens. Le lecteur doit construire cet arbre à partir du flux (Xtream) ou des noms
+(M3U), puis présenter saisons et épisodes tels qu’ils sont — pas comme une liste
+plate où l’on cherche *S03E04* quelque part entre *S03E03* et *S03E05*.
+Réussissez cela et *lire automatiquement l’épisode suivant* devient possible,
+parce que le lecteur sait ce qu’est « suivant ».
+
+**La mémoire.** Reprendre la lecture, c’est un point de reprise par titre et par
+source : combien de minutes dans quel épisode de quelle série, chez quel
+fournisseur. C’est ce qui transforme une bibliothèque en *votre* étagère.
+Arrêtez sur le téléphone, reprenez sur le téléviseur : la position est la même,
+parce qu’elle appartient au titre et non à l’appareil.
+
+**La recherche.** [Un seul champ, sur le direct, les films et les séries à la fois](/fr/blog/organiser-une-grande-playlist/),
+parce que vous ne savez pas sur quelle étagère se trouve un titre et que vous ne
+devriez pas avoir à le savoir. Tapez un nom ; les résultats sont regroupés par
+type ; choisissez-en un.
+
+## Pourquoi c’est au lecteur de le faire
+
+Il est légitime de demander pourquoi le fournisseur n’envoie pas une
+bibliothèque toute faite. Parce que le fournisseur ne sait pas sur quel écran
+vous êtes. Une grille d’affiches pour un téléphone, une barre latérale pour un
+téléviseur et un tableau dense pour une tablette sont trois agencements
+différents des mêmes données, et seul le lecteur sait lequel il dessine. Le flux
+transporte des faits ; le lecteur transforme des faits en une étagère que l’on
+parcourt depuis le canapé. C’est [toute la division du travail](/fr/blog/lecteur-iptv-ou-application-streaming/) :
+l’application d’un service de streaming est une boutique avec un écran ; le
+lecteur IPTV est l’écran seul, et il doit être un très bon écran.
+
+## Ce qu’il faut regarder
+
+Si votre lecteur actuel vous montre des noms de fichiers, les métadonnées sont
+presque certainement là, inutilisées. Deux vérifications rapides : ouvrez une
+série et voyez si elle a des saisons ; ouvrez un film et voyez s’il a un
+synopsis. S’il n’y a ni l’un ni l’autre, le lecteur lit la liste et s’arrête là.
+Et vérifiez que [les pistes sont accessibles](/fr/blog/sous-titres-et-pistes-audio/)
+— un film avec trois langues audio et deux pistes de sous-titres qui ne lit que
+la première de chaque est une bibliothèque aux pages collées.
+
+Vidonzo a été construit avec la bibliothèque comme objectif : affiches, notes,
+synopsis et distribution ; saisons et épisodes en arbre, avec lecture
+automatique du suivant ; reprise par source et par titre ; une recherche sur
+tout. La même liste que votre fournisseur envoie, lue jusqu’au bout. Si votre
+section films est aujourd’hui un dossier de noms de fichiers,
+[ajouter les identifiants que vous avez déjà](/fr/blog/configurer-sa-premiere-playlist/)
+prend environ une minute, et la différence se voit dès le premier écran.

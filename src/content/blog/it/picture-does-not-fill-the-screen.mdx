@@ -1,0 +1,110 @@
+---
+title: "L’immagine non riempie lo schermo: formato, zoom e bande nere"
+description: "Bande ai lati, bande sopra e sotto, o un’immagine che sembra un po’ schiacciata. Ognuna è una decisione presa dal lettore, e quando sai quale ha preso, un comando la sistema."
+urlSlug: l-immagine-non-riempie-lo-schermo
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['risoluzione problemi', 'riproduzione']
+keywords: ['bande nere iptv', 'immagine non a tutto schermo', 'formato immagine iptv', 'zoom immagine tv']
+heroImageAlt: "Lo schermo di un televisore che mostra un rettangolo più piccolo al suo interno, con fasce scure sopra e sotto."
+---
+
+Un televisore è un rettangolo di forma fissa, e il video arriva in un
+rettangolo di *qualche* forma — non sempre la stessa. Ogni volta che le due
+non coincidono, il lettore deve decidere cosa fare della differenza, e ogni
+decisione possibile dà fastidio a qualcuno. Bande, ritaglio o allungamento:
+scegline una. Ecco cosa sono, perché le bande sono di solito la risposta
+*giusta*, e come scegliere quella sbagliata di proposito quando la preferisci.
+
+## Da dove viene la forma
+
+Ogni stream dichiara la dimensione della sua immagine — 1920×1080, 720×576 e
+così via — e, separatamente, la forma in cui quei pixel vanno mostrati. Quasi
+tutta la televisione di oggi è 16:9. I programmi più vecchi, alcuni canali
+locali e molto materiale d’archivio sono 4:3, più vicini al quadrato. I film
+spesso sono ancora più larghi, 2,35:1, e arrivano *dentro* una cornice 16:9 con
+fasce nere già cotte nell’immagine da chi l’ha codificata.
+
+Il tuo schermo, intanto, è 16:9 — a meno che non sia un telefono tenuto in
+verticale o un tablet in 4:3, nel qual caso lo scarto va nell’altra direzione.
+
+## Le tre cose che un lettore può fare
+
+Data un’immagine di una forma e uno schermo di un’altra, ci sono esattamente
+tre opzioni oneste, e il pulsante *Formato* nel lettore di Vidonzo le fa
+scorrere in quest’ordine:
+
+**Adatta.** Mostra tutta l’immagine, grande quanto ci sta, nella sua forma
+vera. Quel che avanza viene riempito di nero. Un programma 4:3 su uno schermo
+16:9 prende le bande ai lati; un film largo le prende sopra e sotto. Non si
+perde nulla, non si distorce nulla, ed è il valore predefinito perché è
+l’unica scelta che ti mostra ciò che l’emittente ha davvero mandato.
+
+**Zoom.** Riempi lo schermo, nella forma vera, ingrandendo l’immagine finché le
+bande spariscono — e ritagliando ciò che esce dai bordi. Un’immagine 4:3 perde
+una striscia sopra e sotto; un film largo ne perde una per lato. I volti
+mantengono la forma giusta, ma un sottotitolo in basso o un punteggio in alto
+possono andarsene con la striscia.
+
+**Allunga.** Riempi lo schermo cambiando la forma dell’immagine. Non si ritaglia
+nulla, ma tutto diventa più largo o più alto di quanto dovrebbe: i cerchi
+diventano ovali, le persone si allargano. È l’impostazione che quasi tutti i
+televisori danno per default e che quasi tutti scambiano per «corretta» perché
+non hanno mai visto l’alternativa accanto.
+
+## Quale vuoi davvero
+
+La risposta onesta è *adatta*, quasi sempre, e vale la pena dire perché le
+bande non sono un difetto. Sono il lettore che si rifiuta di buttare via una
+parte dell’immagine o di deformarla. Una volta che noti che le persone in
+un’immagine allungata sono impercettibilmente più larghe, diventa difficile non
+notarlo più.
+
+Ma ci sono due casi in cui un’altra scelta è ragionevole, ed è per quelli che
+il pulsante esiste:
+
+- **Un film con fasce cotte dentro su uno schermo largo.** L’encoder ha messo
+  fasce nere nella cornice 16:9; il film all’interno è più largo della
+  cornice. Qui lo *zoom* ritaglia le fasce e niente del film, e su un televisore
+  grande è un miglioramento reale.
+- **Un canale con la dichiarazione rotta.** Ogni tanto uno stream dice di avere
+  una forma e ne ha palesemente un’altra — un’immagine 4:3 schiacciata che
+  sostiene di essere 16:9, o il contrario. Per una bugia non esiste una
+  risposta giusta; *allunga* è quella che per caso la annulla. Prova tutte e tre
+  e fermati a quella in cui un volto sembra un volto.
+
+## Quando non è affatto il lettore
+
+Due cose sembrano un problema di formato e non lo sono.
+
+**Bande su ogni sorgente.** Se le stesse bande compaiono sull’app di streaming,
+sulla console e sul sintonizzatore, il televisore ha una sua impostazione di
+dimensione immagine — spesso chiamata *Screen Fit*, *Just Scan*, *Original* o
+*16:9* — e sta scavalcando tutti. Mettila su quella che non ridimensiona, e
+lascia che ogni sorgente decida per sé.
+
+**Bande che arrivano con un cambio di programma.** Un canale in diretta può
+cambiare forma a metà stream — un episodio vecchio dopo uno moderno — e
+[quello che un decoder ne fa](/it/blog/audio-si-immagine-no/) è ridisegnare il
+fotogramma alla nuova dimensione. Non è un guasto; è l’immagine che segue
+correttamente il contenuto. Se dopo l’immagine *resta* sbagliata, riapri il
+canale.
+
+## I sottotitoli seguono l’immagine, non lo schermo
+
+Un piccolo dettaglio che Vidonzo fa bene ed è facile perdersi: i sottotitoli
+sono ancorati all’*immagine*, non ai bordi dello schermo. Su un film largo con
+bande, il sottotitolo si posa sul bordo inferiore del film invece di
+galleggiare nella fascia nera sotto — come al cinema. (In zoom e allungamento
+l’immagine *è* lo schermo, quindi i due coincidono.) Per questo
+[la scelta delle tracce e lo stile dei sottotitoli](/it/blog/sottotitoli-e-tracce-audio/)
+vale la pena impostarli una volta e poi dimenticarli.
+
+## Sul televisore, in una frase
+
+Adatta è la scelta giusta; lo zoom è per i film larghi con fasce cotte dentro;
+l’allungamento è per il canale occasionale che mente sulla propria forma. Fai
+scorrere il pulsante *Formato* finché un volto sembra un volto e — se le bande
+sono ovunque — controlla l’impostazione di dimensione immagine del televisore
+stesso prima di incolpare [il box](/it/blog/lettore-iptv-su-android-tv/) o lo
+stream.

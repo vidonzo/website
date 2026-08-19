@@ -1,0 +1,16 @@
+key: epg-empty-or-wrong-times
+title: "The guide is empty or shows the wrong times: fixing your EPG"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: troubleshooting
+targetQueries: ["iptv epg not working", "epg wrong time", "iptv guide empty", "xmltv not loading", "epg time offset"]
+audience: Someone whose channels play but whose guide is blank, stale, or shifted by hours.
+value: The troubleshooting companion to epg-explained (that article is what; this one is why it broke).
+angle: Four faults with distinct signatures — no guide URL, unmatched channel ids, time-zone confusion, stale cache — and the fix for each.
+productFacts:
+  - XMLTV EPG URL is optional per source; Xtream EPG comes with the login
+  - time-zone handling is correct in the app; a shift usually means the source declared the wrong offset
+  - Show program guide (EPG) toggle; Refresh now re-fetches
+constraints: [no-download-or-offline-wording, no-epg-source-recommendations]
+internalLinks: [epg-explained, inside-an-m3u-file, xtream-codes-vs-m3u, garbled-channel-names]

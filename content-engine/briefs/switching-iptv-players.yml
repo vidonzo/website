@@ -1,0 +1,16 @@
+key: switching-iptv-players
+title: "Switching IPTV players without rebuilding everything"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: switch-with-install
+targetQueries: ["switch iptv player", "iptv player alternative", "change iptv app", "move iptv playlist to new app"]
+audience: Someone unhappy with their current player — the reader closest to installing.
+value: Reassurance that a playlist is portable and a checklist for the move; the fear of starting over is the barrier.
+angle: What travels (the playlist, the credentials, the EPG URL), what does not (favourites, resume points), and how to be set up in minutes.
+productFacts:
+  - three source kinds; multiple sources side by side; XMLTV EPG URL optional per source
+  - Auto-refresh playlist policy (Manual / Every launch / Hourly / 6h / Daily / Weekly), Refresh now
+  - favourites and continue watching rebuild quickly; sign-in syncs them across devices
+constraints: [no-download-or-offline-wording, no-competitor-names]
+internalLinks: [bring-your-own-playlist, xtream-codes-vs-m3u, set-up-your-first-playlist, move-to-a-new-phone, hosted-playlist-vs-local-file]

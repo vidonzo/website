@@ -1,0 +1,106 @@
+---
+title: "A imagem não preenche a tela: proporção, zoom e tarjas pretas"
+description: "Tarjas nas laterais, tarjas em cima e embaixo, ou uma imagem que parece um pouco achatada. Cada uma é uma decisão que o player tomou, e quando você sabe qual foi, um controle resolve."
+urlSlug: a-imagem-nao-preenche-a-tela
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemas', 'reprodução']
+keywords: ['tarjas pretas iptv', 'imagem nao preenche a tela', 'proporcao de tela iptv', 'esticar imagem tv', 'zoom imagem iptv']
+heroImageAlt: "A tela de uma televisão mostrando um retângulo menor dentro dela, com faixas escuras acima e abaixo."
+---
+
+Uma televisão é um retângulo de formato fixo, e o vídeo chega num retângulo de
+*algum* formato — nem sempre o mesmo. Sempre que os dois discordam, o player
+tem de decidir o que fazer com a diferença, e toda decisão possível incomoda
+alguém. Tarjas, corte ou esticada: escolha uma. Aqui está o que é cada uma, por
+que as tarjas costumam ser a resposta *certa*, e como escolher a errada de
+propósito quando você prefere.
+
+## De onde vem o formato
+
+Todo stream declara o tamanho da sua imagem — 1920×1080, 720×576 e assim por
+diante — e, separadamente, o formato em que esses pixels devem ser exibidos. A
+maior parte da televisão de hoje é 16:9. Programas mais antigos, alguns canais
+regionais e muito material de arquivo são 4:3, mais perto do quadrado. Filmes
+muitas vezes são ainda mais largos, 2,35:1, e chegam *dentro* de um quadro 16:9
+com faixas pretas já assadas na imagem por quem a codificou.
+
+Sua tela, enquanto isso, é 16:9 — a não ser que seja um celular na vertical ou
+um tablet em 4:3, e aí o desencontro vai para o outro lado.
+
+## As três coisas que um player pode fazer
+
+Dada uma imagem de um formato e uma tela de outro, existem exatamente três
+opções honestas, e o botão *Proporção* no player do Vidonzo alterna entre elas
+nesta ordem:
+
+**Ajustar.** Mostra a imagem inteira, do maior tamanho que couber, no seu
+formato verdadeiro. O que sobra é preenchido de preto. Um programa 4:3 numa
+tela 16:9 ganha tarjas nas laterais; um filme largo ganha em cima e embaixo.
+Nada se perde, nada se distorce, e esse é o padrão porque é a única escolha que
+mostra o que a emissora realmente mandou.
+
+**Zoom.** Preenche a tela, no formato verdadeiro, ampliando a imagem até as
+tarjas sumirem — e cortando o que passar das bordas. Uma imagem 4:3 perde uma
+faixa em cima e embaixo; um filme largo perde uma de cada lado. Os rostos
+mantêm o formato certo, mas uma legenda embaixo ou um placar em cima podem ir
+junto com a faixa.
+
+**Esticar.** Preenche a tela mudando o formato da imagem. Nada é cortado, mas
+tudo fica mais largo ou mais alto do que deveria: círculos viram ovais, pessoas
+ficam mais largas. É o ajuste que a maioria das TVs traz por padrão e que quase
+todo mundo confunde com «o certo» porque nunca viu a alternativa lado a lado.
+
+## Qual você realmente quer
+
+A resposta honesta é *ajustar*, quase sempre, e vale dizer por que as tarjas
+não são um defeito. Elas são o player se recusando a jogar fora parte da
+imagem ou a distorcê-la. Depois que você percebe que as pessoas numa imagem
+esticada estão sutilmente mais largas, fica difícil não perceber.
+
+Mas há dois casos em que outra escolha é razoável, e é para eles que o botão
+existe:
+
+- **Um filme com faixas assadas na imagem numa tela larga.** O codificador pôs
+  faixas pretas dentro do quadro 16:9; o filme lá dentro é mais largo que o
+  quadro. O *zoom* aqui corta as faixas e nada do filme, e numa TV grande é uma
+  melhora de verdade.
+- **Um canal com a declaração quebrada.** De vez em quando um stream diz ter um
+  formato e visivelmente tem outro — uma imagem 4:3 achatada afirmando ser 16:9,
+  ou o contrário. Para uma mentira não há resposta certa; *esticar* é a que por
+  acaso a desfaz. Experimente as três e pare naquela em que um rosto parece um
+  rosto.
+
+## Quando não é o player de jeito nenhum
+
+Duas coisas parecem problema de proporção e não são.
+
+**Tarjas em toda fonte.** Se as mesmas tarjas aparecem no app de streaming, no
+videogame e no sintonizador, a TV tem o seu próprio ajuste de tamanho de imagem
+— muitas vezes chamado *Screen Fit*, *Just Scan*, *Original* ou *16:9* — e está
+passando por cima de todo mundo. Deixe no que não redimensiona e permita que
+cada fonte decida por si.
+
+**Tarjas que chegam com a troca de programa.** Um canal ao vivo pode mudar de
+formato no meio do stream — um episódio antigo depois de um moderno — e
+[o que um decodificador faz com isso](/pt/blog/som-sem-imagem/) é
+redesenhar o quadro no novo tamanho. Isso não é defeito; é a imagem seguindo
+corretamente o conteúdo. Se a imagem *continuar* errada depois, reabra o canal.
+
+## As legendas seguem a imagem, não a tela
+
+Um detalhe pequeno que o Vidonzo acerta e que passa fácil despercebido: as
+legendas são ancoradas à *imagem*, não às bordas da tela. Num filme largo com
+tarjas, a legenda fica sobre a borda inferior do filme em vez de flutuar na
+faixa preta abaixo — como no cinema. (No zoom e no esticado a imagem *é* a
+tela, então os dois coincidem.) Por isso
+[a seleção de faixas e o estilo de legenda](/pt/blog/legendas-e-faixas-de-audio/)
+valem a pena ser ajustados uma vez e esquecidos.
+
+## Na televisão, em uma frase
+
+Ajustar é o certo; o zoom é para filmes largos com faixas assadas; esticar é
+para o canal ocasional que mente sobre o próprio formato. Passe pelo botão
+*Proporção* até um rosto parecer um rosto e — se as tarjas estão em tudo —
+confira o ajuste de tamanho de imagem da própria TV antes de culpar
+[a caixa](/pt/blog/player-de-iptv-na-android-tv/) ou o stream.

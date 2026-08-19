@@ -1,0 +1,120 @@
+---
+title: "Der Programmführer ist leer oder zeigt falsche Zeiten: EPG reparieren"
+description: "Die Sender laufen, und der Programmführer ist leer, veraltet oder um genau eine Stunde verschoben. Vier Fehler erzeugen diese Symptome, jeder mit eigener Signatur — und keiner davon heißt „der Player ist langsam“."
+urlSlug: programmfuehrer-leer-oder-falsche-zeiten
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['fehlerbehebung', 'playlists']
+keywords: ['iptv epg funktioniert nicht', 'epg falsche zeit', 'programmführer leer iptv', 'xmltv lädt nicht', 'epg zeitverschiebung']
+heroImageAlt: "Eine Programmtabelle, deren meiste Felder leer sind und deren eine Zeile um eine Spalte verrutscht ist."
+---
+
+Ein leerer Programmführer ist ärgerlicher als ein kaputter Sender, weil alles
+*andere* funktioniert. Das Bild läuft, die Liste ist voll, und die eine Zeile,
+die sagen sollte, was läuft, sagt „Keine Programminfo“. Oder sie sagt etwas —
+aber das, was vor einer Stunde lief. Wenn Sie gelesen haben,
+[wie der Programmführer funktioniert](/de/blog/epg-programmfuehrer-erklaert/), kennen Sie
+die entscheidende Tatsache: Der Führer ist eine eigene Datei, wird separat
+geholt und über Namen Ihren Sendern zugeordnet. Jeder Fehler unten ist ein
+Bruch irgendwo in dieser Kette. Hier sind sie, in der Reihenfolge, in der sie
+üblicherweise auftreten.
+
+## 1. Dem Player wurde nie gesagt, wo der Führer liegt
+
+Eine M3U-Playlist [trägt Sender](/de/blog/was-in-einer-m3u-datei-steht/); sie trägt
+keinen Programmführer. Manche Playlists nennen die Adresse des Führers in ihrer
+ersten Zeile (`url-tvg=`), viele nicht, und wenn Ihre es nicht tut, hat der
+Player nichts zu holen, und jeder Sender sagt „Keine Programminfo“ — der
+Führer ist nicht kaputt, er fehlt.
+
+Die Signatur: *Jeder* Sender ist leer, vom ersten Tag an. Die Abhilfe: Fragen
+Sie Ihren Anbieter nach der XMLTV-Adresse (endet meist auf `.xml` oder
+`.xml.gz`) und tragen Sie sie in den Einstellungen der Quelle ein, neben dem
+Playlist-Link. Hat Ihr Anbieter Ihnen ein
+[Xtream-Codes-Login](/de/blog/xtream-codes-oder-m3u/) gegeben, kommt der Führer
+mit dem Login, und es gibt nichts einzutragen — ein leerer Führer bei Xtream
+bedeutet einen der Fehler unten.
+
+## 2. Führer und Sender kennen einander nicht
+
+Das ist der häufigste Fall und erzeugt das verwirrendste Symptom: *manche*
+Sender haben einen Führer und andere, scheinbar zufällig, nicht.
+
+Die Führerdatei listet Sendungen gegen eine Senderkennung — eine `tvg-id`. Die
+Playlist gibt jedem Sender ebenfalls eine `tvg-id`. Wo sie übereinstimmen,
+bekommen Sie einen Führer; wo nicht, bekommen Sie nichts, selbst wenn der
+Sender in der Führerdatei unter leicht anderem Namen steht. Anbieter, die
+beides aus derselben Datenbank erzeugen, treffen perfekt. Anbieter, die einen
+Fremdführer an ihre Liste schrauben, treffen dort, wo die Kennungen zufällig
+zusammenpassen.
+
+Die Signatur: Teilabdeckung, über die Zeit stabil — immer dieselben Sender
+leer. Der Player kann wenig tun, denn er kann nicht wissen, dass
+`news24.example` und `News24_HD` derselbe Sender sind, ohne zu raten. Bietet
+Ihr Anbieter mehrere Playlist-Varianten, hat die vollständigere oft bessere
+Kennungen; andernfalls melden Sie dem Anbieter, welchen Sendern der Führer
+fehlt.
+
+## 3. Die Zeiten sind verschoben — meist um genau eine Stunde
+
+Sendungen erscheinen, aber das Raster sagt, der Film habe um neun begonnen,
+während er um zehn begann. Ist die Verschiebung eine runde Stundenzahl, ist es
+ein Zeitzonenproblem — und es lohnt, das zu verstehen, denn es ist der Fehler,
+den Menschen am häufigsten der falschen Partei anlasten.
+
+Eine XMLTV-Datei stempelt jede Sendung mit einer Zeit *und* einem Versatz zu
+UTC — `20260819210000 +0100`. Ein korrekter Player liest diesen Versatz,
+rechnet auf die Uhr Ihres Geräts um und zeigt die richtige Zeit, ganz gleich,
+wo der Führer erstellt wurde. Vidonzo tut das — es ist eine der Sachen, bei
+denen die App sorgfältig ist, weil
+[Führer genau dort am häufigsten falsch liegen](/de/blog/epg-programmfuehrer-erklaert/) —
+also bedeutet eine Verschiebung meist eines von zwei anderen Dingen:
+
+- **Der Führer deklariert den falschen Versatz.** Der Anbieter hat ihn auf
+  einem Server in anderer Zeitzone erzeugt und die Stempel nicht korrigiert.
+  Jeder Sender ist um denselben Betrag verschoben, und er ist es in jedem
+  Player. Nur der Anbieter kann das beheben.
+- **Uhr oder Zeitzone des Geräts sind falsch.** Eine TV-Box, die auf der
+  Werkszeitzone steht, verschiebt *alles*, einschließlich der Uhr in ihrer
+  Statusleiste. Prüfen Sie zuerst Datum und Uhrzeit der Box — und steht sie auf
+  „automatisch“ in einem Netz, das Zeitserver blockiert, stellen Sie sie von
+  Hand.
+
+Die Signatur, die beides trennt: Erscheint die Verschiebung auch auf Ihrem
+Telefon, ist es der Führer; erscheint sie nur auf einem Gerät, ist es dieses
+Gerät.
+
+## 4. Der Führer ist veraltet
+
+Letzte Woche war alles gut, und jetzt zeigt das Raster Sendungen, die schon
+gelaufen sind, oder es endet abrupt um Mitternacht. Führerdateien decken ein
+Fenster ab — oft ein paar Tage — und die Datei muss neu geholt werden, um es zu
+verlängern. Kann der Player die Adresse nicht erreichen (sie hat sich geändert,
+ist abgelaufen, das Netz war beim Versuch weg), sehen Sie die alte Kopie.
+
+Die Signatur: ein Führer, der an einem festen Punkt in der Vergangenheit endet,
+oder der einige Stunden voraus abbricht. Nutzen Sie *Jetzt aktualisieren* auf
+der Quelle; füllt sich der Führer, war der Abruf schlicht überfällig. Wenn
+nicht, versagt die Adresse selbst, und
+[dieselben Prüfungen wie bei einem Playlist-Link](/de/blog/playlist-laedt-nicht/)
+gelten hier — fügen Sie sie in einen Browser ein und schauen Sie, ob sie
+antwortet.
+
+## Die Fünf-Minuten-Reihenfolge
+
+1. Prüfen Sie, ob der Führer-Schalter an ist (*Programmführer anzeigen (EPG)*).
+2. Xtream-Login? Dann ist die Adresse nicht das Problem; weiter zu 3.
+   M3U-Link? Prüfen Sie, ob eine XMLTV-Adresse eingetragen ist.
+3. Alle Sender leer → Adresse (1) oder veraltet (4). Manche leer → Zuordnung
+   (2). Falsche Zeiten → Zeitzone (3).
+4. *Jetzt aktualisieren*, dann den Führer neu öffnen.
+5. Prüfen Sie denselben Sender auf einem zweiten Gerät, bevor Sie Ihrem
+   Anbieter schreiben — dann können Sie sagen, ob der Fehler dem Führer folgt
+   oder dem Gerät.
+
+Eine ehrliche Schlussbemerkung: Ein Führer ist nur so gut wie die Datei
+dahinter, und die Aufgabe eines Players ist es, sie zuverlässig zu holen, treu
+zuzuordnen und — der Teil, den die meisten Player falsch machen — die
+Zeitzonenrechnung korrekt auszuführen. Sobald diese drei stimmen, liegen alle
+verbleibenden Fehler in der Datei, und die schnellste Abhilfe ist zu wissen,
+welchen man meldet.
