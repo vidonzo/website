@@ -27,7 +27,9 @@ if (args.includes('--json')) {
   process.exit(0);
 }
 
-const { html } = renderCoverage(data);
+const { html } = renderCoverage(data, {
+  refresh: 'این گزارش همین حالا با اجرای «npm run coverage» ساخته شد. برای دیدن تغییرات بعدی، دوباره اجرایش کنید.',
+});
 const page = `<!doctype html>
 <html lang="fa" dir="rtl">
 <head>

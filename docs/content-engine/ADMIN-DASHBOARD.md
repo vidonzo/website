@@ -13,6 +13,14 @@ locale declared in `src/i18n/config.ts` and returns a per-collection matrix.
 (its own `<style>`, no client JavaScript). Both consumers below share them, so
 they can never disagree.
 
+The one thing the renderer cannot know is **when its own copy gets rebuilt** —
+the same board is a build-time artifact on `/admin` and a just-now snapshot in
+the local CLI. So each caller passes its own `refresh` sentence, and the
+timestamp is labelled `ساخته‌شده` (built), not `به‌روزرسانی` (updated). That
+wording matters: a build stamp that says "updated" reads as a promise of live
+data, which makes a perfectly current report look stale on any day without a
+deploy.
+
 Cell states:
 
 - **source** (`م`) — the locale the entry was authored in (`sourceLocale`, else `en`).
@@ -58,6 +66,12 @@ keeps people out.** Set it up once in the Cloudflare dashboard:
    setup; add Google/GitHub as a login method if you prefer.
 5. Save. Visiting `/admin/` now requires signing in; the data refreshes on every
    deploy (which is also the only time content changes).
+
+The page is static, so it does not refresh itself while open, and the date on it
+is the build's rather than today's. Since content only changes by a merge and
+every merge deploys, the numbers are never actually behind — but if the page
+looks stale after a merge, suspect the browser cache before the pipeline, and
+confirm against a public URL that only the newest deploy could serve.
 
 Free for up to 50 users. Nothing about the gate lives in this repo — it is
 account configuration — so there is no secret in the code to leak.
