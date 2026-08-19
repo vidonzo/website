@@ -1,0 +1,113 @@
+---
+title: "How to choose an IPTV player: the ten things that actually matter"
+description: "Every player opens a playlist. The differences show up later — in the guide, on the TV, on a bad connection, and in what the app knows about you. Ten questions to ask before you settle."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['product', 'playback']
+keywords: ['how to choose iptv player', 'best iptv player', 'iptv player features', 'what to look for in an iptv player']
+heroImageAlt: "A checklist of ten empty boxes drawn beside a television, with a phone lying in front of it."
+---
+
+Every IPTV player passes the first test: you paste a link or a login, a list
+appears, a channel plays. That is why comparing them by screenshots tells you
+so little. The differences arrive later — on the third evening, when the guide
+is wrong, or the connection dips, or you try to use it from a sofa with a
+remote. Here are the ten places where players actually diverge, in roughly the
+order they will matter to you.
+
+## 1. Does it take your playlist as it is?
+
+Providers hand out playlists in [two shapes](/blog/xtream-codes-vs-m3u/): an
+Xtream Codes login (server, username, password) or an M3U/M3U8 link. Some also
+give you a file. A player should accept all three without conversion, and it
+should let you keep more than one source side by side rather than forcing you
+to merge them. If the first screen asks you to reformat anything, that is a
+sign of what the rest of the app will be like.
+
+## 2. What engine is behind the picture?
+
+A player is only as good as the decoder underneath it. Ask what it is built on.
+Engines with a long history in difficult video — mpv and the FFmpeg family it
+sits on — cope with the odd, non-standard streams that providers produce, and
+they support hardware decoding so a two-hour film does not cook the phone. A
+player that hides its engine is usually wrapping the platform's stock one,
+which is fine on tidy streams and brittle on real ones.
+
+## 3. What happens when the connection wobbles?
+
+It will wobble. The question is whether the player reconnects quietly, or dumps
+you back to the channel list. Look for automatic recovery, and for a
+[cache or buffer size you can adjust](/blog/fix-iptv-buffering/) — a stable
+line wants a small buffer for fast channel changes; a shaky one wants a larger
+buffer for continuity. If neither is exposed, the app has decided for you, and
+it decided for the average connection rather than yours.
+
+## 4. Is the guide actually right?
+
+Almost every player says it "supports EPG". Fewer parse it correctly.
+[The guide is a separate file](/blog/epg-explained/) with its own time zone
+information, and a player that ignores that will show tonight's programme an
+hour off and call it your provider's fault. Try it at a known time: open a
+channel you can verify and check that "now" is now.
+
+## 5. Can you find anything in a large list?
+
+Real playlists are enormous. A player designed around a demo of twelve channels
+becomes unusable at real size.
+[Search across everything at once](/blog/organize-large-playlists/), favourites
+that stay in reach, categories that hold, and — for films and series — posters
+and seasons instead of a flat list of file names. This is the difference between
+watching and scrolling.
+
+## 6. Does it remember where you were?
+
+Continue watching sounds trivial until it is missing. A resume point per item,
+per source, so that stopping an episode on the phone and opening it on the TV
+picks up in the right place. If a player forgets, you will keep a notebook.
+
+## 7. Does the television version exist, or is it the phone app stretched?
+
+A TV is driven from three metres away with a d-pad. That needs a
+[layout designed for focus and distance](/blog/iptv-player-on-android-tv/):
+visible focus rings, a side rail instead of a bottom bar, and every control
+reachable without a touchscreen. Bonus points if the phone can act as the
+remote — searching and typing on a keyboard in your hand instead of pecking at
+letters with arrow keys.
+
+## 8. Who is the player talking to?
+
+A player's job needs one connection: to your provider. Anything else — an ad
+network, an analytics service, a "recommendation" backend — is there for the
+developer's benefit, not yours. Read the privacy policy for what is collected;
+[the honest ones are short](/blog/no-ads-no-trackers/). And ask how your
+provider login is stored: it is your subscription, and it should be
+[encrypted before it goes anywhere](/blog/why-a-player-should-encrypt-your-credentials/).
+
+## 9. Does it speak your language — properly?
+
+Not just a translated menu. Right-to-left layout for Persian, Arabic and Urdu.
+Correct fonts for Devanagari, Bengali and Thai. Subtitle and audio-track
+selection that shows the language names, not stream numbers. If you or someone
+in the house watches in a second language, this decides whether the app is
+usable at all.
+
+## 10. What does it cost, and what does that cost buy?
+
+Free with advertising is a business model, and you are the inventory. A paid
+tier that gates *playback* features — hardware decoding, EPG, subtitle
+selection — means the free version is a demo. Whatever the price, it should
+buy the whole player, and the app should not need to watch you use it to stay
+funded.
+
+## Applying the list
+
+You do not need to score anything. Install a candidate, add your real playlist,
+and try three things: open the guide at a time you can check, change channels
+on the connection you actually have, and find something in your list without
+scrolling. Most players fail one of the three within five minutes.
+
+Vidonzo was built by working down this list from the other side —
+[a player, not a content service](/blog/what-an-iptv-player-does/), on the mpv
+engine, with a real TV build and nothing inside that reports back. If it fits,
+[the first playlist takes about a minute](/blog/set-up-your-first-playlist/);
+if it doesn't, the ten questions still hold for whatever you pick instead.

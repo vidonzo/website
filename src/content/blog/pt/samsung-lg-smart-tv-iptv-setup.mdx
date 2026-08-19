@@ -1,0 +1,91 @@
+---
+title: "Sua smart TV Samsung ou LG não tem um bom player IPTV: a configuração que funciona"
+description: "Tizen e webOS rodam sistemas operacionais próprios com lojas próprias e magras. Em vez de brigar com isso, deixe a TV ser a tela e coloque o player em algo que consiga rodar um."
+urlSlug: iptv-na-smart-tv-samsung-ou-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisão', 'configuração']
+keywords: ['player iptv samsung smart tv', 'iptv lg smart tv', 'iptv no tizen', 'iptv webos', 'smart tv iptv sem app']
+heroImageAlt: "Uma grande TV plana na parede com uma pequena caixa preta na prateleira abaixo, um único cabo ligando as duas."
+---
+
+Você tem uma boa televisão. É grande, o painel é excelente e tem loja de
+aplicativos, então parece óbvio que um player IPTV deveria morar dentro dela.
+Aí você abre a loja e encontra dois ou três players, nenhum certo: um é uma
+página web paga numa moldura, outro pede um código de um site, outro mostra
+seus canais como uma lista interminável sem guia. A tentação é continuar
+procurando. Há uma resposta melhor, e ela começa por entender por que a
+prateleira está vazia.
+
+## Por que a loja da TV é magra
+
+TVs Samsung rodam Tizen. TVs LG rodam webOS. Nenhum dos dois é Android. Ambos
+são sistemas operacionais perfeitamente capazes, mas são mundos próprios, com
+suas próprias ferramentas de desenvolvimento, suas próprias regras de revisão
+e — decisivamente — uma fatia minúscula dos desenvolvedores que escrevem
+software de vídeo sério. A linhagem mpv e FFmpeg sobre a qual
+[os bons players IPTV são construídos](/pt/blog/o-que-faz-um-player-iptv/) mira
+Android, iOS, Windows, macOS e Linux; uma versão para Tizen é um projeto
+separado com público pequeno, e a maioria dos players nunca faz uma.
+
+Então os players que aparecem na loja da TV tendem a ser aplicações web leves,
+limitadas ao que um motor de navegador decodifica. Num stream arrumado, tocam.
+Nos [streams estranhos que os provedores realmente produzem](/pt/blog/protocolos-de-streaming-explicados/)
+— transport streams crus, codecs de áudio incomuns, HEVC num painel mais
+antigo — travam, perdem o som ou se recusam. E quase nenhum tem um guia digno
+do nome.
+
+O Vidonzo também não tem versão para Tizen nem webOS. Em vez de prometer uma,
+aqui está o arranjo que funciona hoje e funciona bem.
+
+## A TV é a tela; o player roda numa caixa
+
+Toda TV moderna tem portas HDMI sobrando e uma delas pode receber um pequeno
+aparelho Android TV — um stick ou uma caixa, de um punhado de fabricantes,
+por menos que um jantar modesto fora. Conecte, e a TV vira o que ela faz de
+melhor: um display grande e brilhante. O player roda na caixa, com um sistema
+operacional de verdade por baixo e
+[uma interface de TV de verdade por cima](/pt/blog/player-de-iptv-na-android-tv/).
+
+O ganho não é sutil. Uma caixa feita para Android TV roda o mesmo motor mpv de
+um celular, com decodificação por hardware, buffer ajustável para
+[uma conexão que oscila](/pt/blog/iptv-travando-como-resolver/) e um guia que
+[mostra a hora certa](/pt/blog/epg-guia-de-programacao/). Ela também deixa de depender
+da política da loja do fabricante da TV. Quando a TV for trocada daqui a seis
+anos, a caixa vai para a nova e nada na sua configuração muda.
+
+Duas notas práticas na hora de escolher. Prefira um aparelho *certificado*
+para Android TV ou Google TV em vez de uma «caixa Android» genérica — os
+certificados têm Google Play, recebem atualizações e têm controle e comando
+HDMI bem ligados. E use o ajuste HDMI-CEC da própria TV para que as setas do
+controle dela comandem a caixa; a maioria das casas nunca mais encosta no
+controle da caixa.
+
+## Depois deixe o celular digitar
+
+A única coisa que uma caixa não resolve é digitar. Colocar uma senha Xtream
+com setas é um martírio em qualquer aparelho. Pule isso: qualquer celular ou
+tablet no mesmo Wi-Fi pode [ser o controle do Vidonzo na caixa](/pt/blog/celular-como-controle-da-tv/).
+O celular descobre a TV sozinho, você navega pela biblioteca da TV e busca
+com um teclado de verdade, e a reprodução começa na tela grande com um toque.
+Na prática, a maioria configura a lista pelo celular e nunca digita na TV.
+
+## A ordem que evita os tropeços de sempre
+
+1. Conecte a caixa à mesma rede que o celular usa. Se a TV fica no quarto do
+   fundo, [confira o Wi-Fi daquele cômodo primeiro](/pt/blog/iptv-travando-no-wifi/)
+   — uma conexão por cabo até a caixa, se o roteador estiver perto, elimina a
+   causa mais comum de travamento.
+2. Instale o Vidonzo na caixa: [o guia de instalação na TV](/pt/help/) cobre
+   isso.
+3. [Adicione sua lista](/pt/blog/configurar-sua-primeira-lista/) — pelo celular
+   como controle, se tiver um por perto.
+4. Abra o guia, escolha um canal, e só então ajuste qualquer coisa.
+
+## E o app de player da própria TV, por enquanto?
+
+Mantenha, se funciona para você, pelo mesmo motivo de manter o VLC ao lado de
+um player dedicado: ele está ali. Mas quando um canal perde o áudio ou o guia
+está uma hora fora, a culpa não é do provedor nem da TV — é pedir a um motor
+de navegador num sistema fechado que seja um player de mídia. Dê à TV um só
+trabalho. Ela é muito boa nesse trabalho.

@@ -1,0 +1,18 @@
+key: iptv-on-iphone-and-ipad
+title: "IPTV on iPhone and iPad: what changes when you leave Android"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: informational-with-install
+targetQueries: ["iptv player iphone", "iptv on ipad", "iptv player ios", "m3u player iphone"]
+audience: Apple users who assume IPTV is an Android-only habit.
+value: The only major platform the blog has no article for; the App Store link is the CTA.
+angle: What is genuinely different on iOS (install path, file access, hardware decoding, no sideloading) — and what is identical (the playlist, the player model).
+productFacts:
+  - App Store install for iOS and iPadOS
+  - same three source kinds; local M3U picked from the Files app
+  - hardware decoding via the system decoder
+  - iPhone/iPad can act as the remote for Vidonzo on an Android TV over the local network
+  - continue watching and favourites follow a signed-in account across devices
+constraints: [no-download-or-offline-wording, no-sideloading-instructions-for-ios, no-channel-counts]
+internalLinks: [what-an-iptv-player-does, set-up-your-first-playlist, your-phone-is-a-better-remote, move-to-a-new-phone, iptv-on-a-tablet]

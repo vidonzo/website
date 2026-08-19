@@ -1,0 +1,111 @@
+---
+title: "O guia está vazio ou mostra horários errados: consertando seu EPG"
+description: "Os canais tocam e o guia está em branco, velho ou deslocado em exatamente uma hora. Quatro falhas produzem esses sintomas, cada uma com sua assinatura, e nenhuma delas é «o player está lento»."
+urlSlug: guia-vazio-ou-com-horarios-errados
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemas', 'listas']
+keywords: ['epg nao funciona iptv', 'guia com horario errado', 'guia vazio iptv', 'xmltv nao carrega', 'defasagem de horario epg']
+heroImageAlt: "Uma grade de programação com a maioria das células vazias e uma linha deslocada uma coluna à direita."
+---
+
+Um guia vazio irrita mais que um canal quebrado, porque todo o *resto*
+funciona. A imagem toca, a lista está cheia, e a única linha que deveria dizer
+o que está passando diz «Sem informações do programa». Ou diz alguma coisa, mas
+é o que passava uma hora atrás. Se você leu
+[como o guia funciona](/pt/blog/epg-guia-de-programacao/), já sabe o fato-chave: o guia é
+um arquivo separado, buscado em separado, casado com seus canais pelo nome.
+Cada falha abaixo é uma quebra em algum ponto dessa corrente. Aqui estão elas,
+na ordem em que costumam acontecer.
+
+## 1. Nunca disseram ao player onde fica o guia
+
+Uma lista M3U [carrega canais](/pt/blog/dentro-de-um-arquivo-m3u/); não carrega
+guia. Algumas listas dizem o endereço do guia na primeira linha (`url-tvg=`),
+muitas não, e se a sua não diz, o player não tem o que buscar e todo canal
+mostra «Sem informações do programa» — o guia não está quebrado, está ausente.
+
+A assinatura: *todos* os canais vazios, desde o primeiro dia. A correção: peça
+ao seu provedor o endereço XMLTV (costuma terminar em `.xml` ou `.xml.gz`) e
+coloque nas configurações da fonte, ao lado do link da lista. Se o provedor lhe
+deu um [login Xtream Codes](/pt/blog/xtream-codes-ou-m3u/), o guia vem com o
+login e não há nada a digitar — guia vazio no Xtream significa uma das falhas
+abaixo.
+
+## 2. O guia e os canais não se conhecem
+
+Esta é a mais comum, e produz o sintoma mais confuso: *alguns* canais têm guia
+e outros, aparentemente ao acaso, não.
+
+O arquivo de guia lista os programas contra um identificador de canal — um
+`tvg-id`. A lista também dá um `tvg-id` a cada canal. Onde os dois batem, você
+tem guia; onde não batem, não tem nada, mesmo que o canal esteja lá no arquivo
+de guia com um nome ligeiramente diferente. Provedores que geram os dois a
+partir do mesmo banco batem perfeitamente. Provedores que parafusam um guia de
+terceiros na lista batem onde os identificadores por acaso concordam.
+
+A assinatura: cobertura parcial, estável ao longo do tempo — sempre os mesmos
+canais vazios. O player pouco pode fazer, porque não tem como saber que
+`news24.example` e `News24_HD` são a mesma emissora sem adivinhar. Se o seu
+provedor oferece mais de uma variante de lista, a mais completa costuma ter
+identificadores melhores; caso contrário, diga a ele quais canais ficam sem
+guia.
+
+## 3. Os horários estão deslocados — geralmente uma hora exata
+
+Os programas aparecem, mas a grade diz que o filme começou às nove quando
+começou às dez. Se o deslocamento for um número redondo de horas, isso é
+problema de fuso horário, e vale entender, porque é a falha que as pessoas mais
+costumam pôr na conta de quem não tem culpa.
+
+Um arquivo XMLTV carimba cada programa com um horário *e* um deslocamento em
+relação ao UTC — `20260819210000 +0100`. Um player correto lê esse
+deslocamento, converte para o relógio do seu aparelho e mostra o horário certo
+independentemente de onde o guia foi feito. O Vidonzo faz isso — é uma das
+coisas com que o aplicativo tem cuidado, porque
+[é onde os guias mais erram](/pt/blog/epg-guia-de-programacao/) — então um deslocamento
+normalmente significa uma de duas outras coisas:
+
+- **O guia declara o deslocamento errado.** O provedor o gerou num servidor
+  ajustado para outro fuso e não corrigiu os carimbos. Todo canal está
+  deslocado na mesma medida, e está deslocado em qualquer player. Só o
+  provedor pode corrigir.
+- **O relógio ou o fuso do próprio aparelho estão errados.** Uma caixa de TV
+  deixada no fuso de fábrica desloca *tudo*, inclusive o relógio da barra de
+  status. Confira data e hora da caixa antes de qualquer coisa — e se estiver
+  em «automático» numa rede que bloqueia servidores de tempo, ajuste na mão.
+
+A assinatura que separa as duas: se o deslocamento também aparece no seu
+celular, é o guia; se aparece só num aparelho, é aquele aparelho.
+
+## 4. O guia está velho
+
+Semana passada estava tudo bem e agora a grade mostra programas que já foram ao
+ar, ou para de repente à meia-noite. Arquivos de guia cobrem uma janela — em
+geral alguns dias — e o arquivo precisa ser buscado de novo para estendê-la. Se
+o player não consegue alcançar o endereço (mudou, expirou, a rede caiu na hora
+da tentativa), a cópia velha é o que você vê.
+
+A assinatura: um guia que termina num ponto fixo no passado, ou que para
+algumas horas à frente. Use *Atualizar agora* na fonte; se encher, a busca só
+estava atrasada. Se não encher, o próprio endereço está falhando, e aqui valem
+[as mesmas checagens de um link de lista](/pt/blog/a-lista-nao-carrega/) —
+cole num navegador e veja se responde.
+
+## A ordem de cinco minutos
+
+1. Confirme que a chave do guia está ligada (*Mostrar guia de programação
+   (EPG)*).
+2. Login Xtream? Então o endereço não é o problema; pule para 3. Link M3U?
+   Confirme que há um endereço XMLTV inserido.
+3. Todos os canais vazios → endereço (1) ou desatualização (4). Alguns vazios →
+   casamento (2). Horários errados → fuso (3).
+4. *Atualizar agora*, e reabra o guia.
+5. Confira o mesmo canal num segundo aparelho antes de escrever ao provedor,
+   para poder dizer se a falha segue o guia ou o aparelho.
+
+Uma nota honesta para fechar: um guia é tão bom quanto o arquivo por trás dele,
+e o trabalho de um player é buscá-lo com confiabilidade, casá-lo com fidelidade
+e — a parte que a maioria dos players erra — fazer a aritmética de fuso horário
+corretamente. Quando essas três coisas valem, todas as falhas restantes estão
+no arquivo, e a correção mais rápida é saber qual reportar.

@@ -1,0 +1,116 @@
+---
+title: "Redonner de la fluidité à un vieux boîtier Android"
+description: "Un boîtier qui saccade est rarement trop faible pour lire de la vidéo ; on lui demande tout le reste. Quelles parties d’un lecteur coûtent cher à un appareil peu puissant, et les réglages et habitudes qui rendent le travail à ce qui peut le porter."
+urlSlug: vieux-boitier-android-lecture-fluide
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['television', 'lecture']
+keywords: ['lecteur iptv pour vieux boitier android', 'lecteur iptv leger android tv', 'boitier android lent', 'iptv sur materiel faible']
+heroImageAlt: "Un petit boîtier décodeur légèrement rayé sur une étagère, voyant allumé, poussière dans un coin."
+---
+
+Quelque part dans beaucoup de salons se trouve un petit boîtier Android noir,
+vieux de cinq ou six ans, avec un ou deux gigaoctets de mémoire et une puce
+déjà bon marché à l’époque. Avant, il lisait tout. Maintenant l’application
+qu’il fait tourner saccade au changement de chaîne, l’image tremble dans les
+scènes chargées, et le menu met un temps à répondre. L’instinct dit que le
+boîtier est fini. Le plus souvent, il ne l’est pas. Même un boîtier modeste
+possède un décodeur vidéo dédié parfaitement capable de dessiner du 1080p toute
+la soirée ; ce qui a changé, c’est la quantité de travail *autre* que le
+logiciel autour a pris en charge. Voici où part le coût, et comment rendre le
+travail aux parties qui peuvent le porter.
+
+## Ce qui coûte réellement sur un boîtier faible
+
+Trois choses, par ordre décroissant.
+
+**Décoder la vidéo en logiciel.** Si l’application décode sur le processeur
+généraliste plutôt que sur le bloc vidéo, un flux 1080p dévore l’essentiel
+d’une petite puce, et un flux 4K ou HEVC est tout simplement hors de portée. Ce
+seul choix sépare un boîtier qui lit d’un boîtier qui saccade, et c’est un
+réglage.
+
+**Dessiner une interface chargée.** Affiches, animations, arrière-plans
+flous, un carrousel de cent vignettes, le tout redessiné pendant que la vidéo
+tourne en dessous. Chaque image de tout cela sort du même petit budget que la
+vidéo. Une interface lourde par-dessus un décodeur léger, c’est exactement
+comme un boîtier qui *sait* lire finit par avoir l’air incapable.
+
+**Garder une énorme playlist en mémoire de la mauvaise façon.** La liste
+complète d’un fournisseur est un gros fichier, et une application qui la garde
+entière sous forme de structure plate et la parcourt en défilant fera manquer
+de mémoire un petit boîtier — après quoi le système commence à fermer des
+choses, parfois l’application elle-même.
+
+Remarquez ce qui n’est pas dans la liste : le réseau. La mise en tampon et le
+saccadement se ressemblent sur un boîtier lent, alors il vaut mieux écarter
+d’abord le réseau — [l’article sur la mise en tampon](/fr/blog/regler-le-buffering-iptv/)
+s’en charge en cinq minutes — avant d’accuser le matériel.
+
+## Les réglages qui comptent
+
+**Décodage matériel activé.** Dans Vidonzo, c’est *Réglages → Lecture →
+Décodage matériel*, et sur un vieux boîtier c’est toute la partie. Activé, le
+bloc vidéo décode et le processeur reste libre pour dessiner l’interface ;
+désactivé, le processeur fait les deux et perd. Si, activé, une chaîne donne
+[du son mais pas d’image](/fr/blog/le-son-sans-l-image/), c’est que son
+format n’est pas pris en charge par le décodeur du boîtier — inversez le
+réglage pour cette chaîne seulement, et attendez-vous à ce que ce soit plus
+lourd.
+
+**Un tampon dimensionné pour la connexion, pas pour le boîtier.** Un tampon
+plus grand coûte de la mémoire, et un petit boîtier n’en a guère à revendre —
+mais un tampon trop petit cale au premier hoquet, et caler est justement ce que
+vous cherchez à soigner. Partez de la valeur par défaut ; ne l’augmentez que si
+l’image s’arrête vraiment, et ne la baissez que si le boîtier manque
+visiblement de mémoire (des applications qui se ferment toutes seules en sont
+le signe).
+
+**Gardez le guide, jetez la décoration.** Le guide des programmes, ce sont des
+données, pas des images, et c’est peu coûteux à dessiner. Ce sont les écrans
+chargés d’affiches qui coûtent. La mise en page télé de Vidonzo est
+[une barre latérale avec des cadres de focus](/fr/blog/lecteur-iptv-sur-android-tv/),
+conçue pour une croix directionnelle et légère par choix — le boîtier dessine
+une liste, pas une salle d’exposition.
+
+## Les habitudes qui comptent
+
+**Faites le tri.** [Des favoris et deux ou trois catégories](/fr/blog/organiser-une-grande-playlist/)
+ne sont pas seulement pratiques sur un petit boîtier : ils sont plus légers.
+Parcourir une courte liste de ce que vous regardez vraiment ne coûte presque
+rien. Faire défiler chaque soir la liste complète du fournisseur est la chose
+la plus coûteuse que vous puissiez demander à un appareil faible.
+
+**Laissez le téléphone naviguer.** C’est le changement qui surprend le plus.
+Si un téléphone ou une tablette sur le même Wi-Fi
+[sert de télécommande au boîtier](/fr/blog/telephone-comme-telecommande-tv/), le
+téléphone dessine les affiches, effectue la recherche et prend en charge la
+saisie — et le boîtier n’a plus qu’à recevoir « lis ceci » et à le lire. Un
+boîtier faible avec un téléphone à côté se comporte comme un boîtier bien
+meilleur, parce qu’il a été rétrogradé à la seule tâche qu’il fait bien.
+
+**Redémarrez-le de temps en temps.** Ce n’est pas une superstition : un boîtier
+allumé depuis trois semaines a accumulé tout ce que chaque application y a
+laissé fuir. Un redémarrage hebdomadaire coûte une minute et rend de la mémoire
+que le lecteur peut utiliser.
+
+**Désinstallez ce que vous n’utilisez pas.** Chaque application qui fait
+tourner un service en arrière-plan puise dans le même petit budget. Un boîtier
+qui n’a qu’à être un boîtier garde davantage pour l’image.
+
+## Quand c’est vraiment le matériel
+
+Il y a un plancher. Un boîtier incapable de décoder le HEVC en matériel ne
+lira jamais le HEVC de façon fluide, quoi que fasse le logiciel, et les
+fournisseurs passent au HEVC parce que cela divise leur bande passante par
+deux. Si les chaînes de votre fournisseur sont majoritairement en HEVC et que
+le décodeur de votre boîtier lui est antérieur, la réponse honnête est un
+appareil plus récent — et il n’a pas besoin d’être cher ; une clé certifiée
+actuelle décode le HEVC en matériel et coûte peu.
+
+Mais essayez d’abord le logiciel. Décodage matériel activé, tampon par défaut,
+interface allégée, le téléphone pour naviguer : la majorité des plaintes
+« vieux boîtier » ne survivent pas à cette liste, et la parcourir prend une
+soirée. [Installer la playlist sur un lecteur neuf](/fr/blog/configurer-sa-premiere-playlist/)
+représente une minute de cette soirée ; le reste consiste à regarder si ça
+saccade encore.

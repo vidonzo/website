@@ -1,0 +1,87 @@
+---
+title: "Samsung ya da LG akıllı televizyonunuzda iyi bir IPTV oynatıcı yok: işe yarayan kurulum"
+description: "Tizen ve webOS kendi işletim sistemlerini ve kendi cılız mağazalarını çalıştırır. Bununla savaşmak yerine televizyonun ekran olmasına izin verin ve oynatıcıyı bir oynatıcı çalıştırabilen bir şeye koyun."
+urlSlug: samsung-ve-lg-akilli-tv-iptv-kurulumu
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televizyon', 'kurulum']
+keywords: ['samsung smart tv iptv oynatıcı', 'lg smart tv iptv', 'tizen iptv', 'webos iptv', 'uygulamasız smart tv iptv']
+heroImageAlt: "Duvarda büyük düz bir televizyon, altındaki rafta küçük siyah bir kutu, ikisini tek bir kablo birleştiriyor."
+---
+
+İyi bir televizyonunuz var. Büyük, paneli mükemmel ve bir uygulama mağazası
+var; bu yüzden bir IPTV oynatıcının içinde yaşaması gerektiği apaçık görünür.
+Sonra mağazayı açar ve iki üç oynatıcı bulursunuz, hiçbiri doğru değildir:
+biri çerçeve içinde ücretli bir web sayfası, biri bir siteden kod istiyor,
+biri kanallarınızı rehbersiz, sonsuz bir liste olarak gösteriyor. Aramaya
+devam etmek cazip gelir. Daha iyi bir cevap var ve rafın neden boş olduğunu
+anlamakla başlıyor.
+
+## Televizyonun mağazası neden cılız
+
+Samsung televizyonlar Tizen çalıştırır. LG televizyonlar webOS. İkisi de
+Android değil. İkisi de gayet yetenekli işletim sistemleri ama kendi
+dünyaları; kendi geliştirme araçları, kendi inceleme kuralları ve — belirleyici
+olan — ciddi video yazılımı yazan geliştiricilerin minicik bir payı var.
+[İyi IPTV oynatıcıların üzerine kurulduğu](/tr/blog/iptv-oynatici-ne-yapar/)
+mpv ve FFmpeg soyu Android, iOS, Windows, macOS ve Linux'u hedefler; Tizen
+portu küçük kitleli ayrı bir projedir ve çoğu oynatıcı hiç yapmaz.
+
+Dolayısıyla televizyon mağazasında görünen oynatıcılar genelde bir tarayıcı
+motorunun çözebildiğiyle sınırlı hafif web uygulamalarıdır. Temiz bir akışta
+oynarlar. [Sağlayıcıların gerçekten ürettiği tuhaf akışlarda](/tr/blog/hls-dash-rtsp-yayin-protokolleri/)
+— ham transport stream'ler, alışılmadık ses kodekleri, eski bir panelde HEVC —
+takılır, sesi düşürür ya da reddederler. Ve neredeyse hiçbirinde adına layık
+bir rehber yoktur.
+
+Vidonzo'nun da Tizen ya da webOS sürümü yok. Söz vermek yerine, bugün işleyen
+ve iyi işleyen düzen şu.
+
+## Televizyon ekrandır; oynatıcı bir kutuda çalışır
+
+Her modern televizyonda boş HDMI girişleri vardır ve biri küçük bir Android TV
+cihazını taşıyabilir — birkaç üreticiden bir çubuk ya da kutu, mütevazı bir
+dışarıda yemekten daha ucuza. Takın, televizyon en iyi olduğu şeye dönüşür:
+büyük, parlak bir ekran. Oynatıcı kutuda çalışır; altında gerçek bir işletim
+sistemi, üstünde [gerçek bir televizyon arayüzü](/tr/blog/android-tv-iptv-oynatici/).
+
+Kazanç ince değil. Android TV için yapılmış bir kutu, telefonla aynı mpv
+motorunu çalıştırır; donanımsal kod çözme, [sallanan bir bağlantı](/tr/blog/iptv-donma-sorunu-cozumu/)
+için ayarlanabilir arabellek ve [doğru saati gösteren](/tr/blog/epg-yayin-rehberi-nedir/)
+bir rehberle. Televizyon üreticisinin mağaza politikasına bağımlı olmaktan da
+çıkar. Televizyon altı yıl sonra değiştiğinde kutu yenisine geçer ve
+kurulumunuzda hiçbir şey değişmez.
+
+Seçerken iki pratik not. Genel bir «Android kutu» yerine Android TV ya da
+Google TV için *sertifikalı* bir cihazı tercih edin — sertifikalılarda Google
+Play var, güncelleme alıyorlar, kumandaları ve HDMI kontrolü düzgün bağlı.
+Televizyonun kendi HDMI-CEC ayarını açın ki televizyon kumandasının okları
+kutuyu yönetsin; çoğu ev kutunun kumandasına bir daha dokunmaz.
+
+## Sonra yazmayı telefona bırakın
+
+Kutunun çözmediği tek şey yazmak. Ok tuşlarıyla Xtream şifresi girmek her
+cihazda çiledir. Atlayın: aynı Wi-Fi'daki herhangi bir telefon ya da tablet
+[kutudaki Vidonzo'nun kumandası olabilir](/tr/blog/telefonu-tv-kumandasina-donusturun/).
+Telefon televizyonu kendisi bulur, televizyonun kütüphanesinde gezinip gerçek
+klavyeyle ararsınız ve oynatma tek dokunuşla büyük ekranda başlar. Pratikte
+çoğu kişi listeyi telefondan kurar ve televizyonda hiç yazmaz.
+
+## Alışılmış aksaklıkları önleyen sıra
+
+1. Kutuyu telefonun kullandığı ağa bağlayın. Televizyon uzak odadaysa
+   [önce o odanın Wi-Fi'ını kontrol edin](/tr/blog/iptv-wifi-donma-sorunu/)
+   — yönlendirici yakınsa kutuya kablolu bağlantı, donmanın en yaygın nedenini
+   ortadan kaldırır.
+2. Vidonzo'yu kutuya kurun: [TV kurulum rehberi](/tr/help/) anlatıyor.
+3. [Listenizi ekleyin](/tr/blog/ilk-oynatma-listesi-kurulumu/) — yakında varsa
+   kumanda olarak telefondan.
+4. Rehberi açın, bir kanal seçin ve ancak ondan sonra bir şey ayarlayın.
+
+## Peki televizyonun kendi oynatıcı uygulaması, şimdilik?
+
+Size yarıyorsa tutun; VLC'yi özel bir oynatıcının yanında tutmakla aynı
+nedenle: orada. Ama bir kanal sesi düşürdüğünde ya da rehber bir saat kaydığında
+kabahat sağlayıcınızda da televizyonda da değil — kilitli bir işletim
+sistemindeki tarayıcı motorundan medya oynatıcısı olmasını istemekte. Televizyona
+tek bir iş verin. O işte çok iyidir.

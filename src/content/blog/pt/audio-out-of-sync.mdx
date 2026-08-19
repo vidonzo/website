@@ -1,0 +1,113 @@
+---
+title: "Áudio fora de sincronia com a imagem: onde começa a defasagem"
+description: "Os lábios se mexem, as palavras chegam atrasadas. Há quatro lugares onde um stream pode perder a sincronia — o codificador, a rede, o decodificador, a tela — e só dois deles estão ao alcance do seu player."
+urlSlug: audio-fora-de-sincronia-com-a-imagem
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemas', 'reprodução']
+keywords: ['audio fora de sincronia iptv', 'atraso de audio streaming', 'som nao acompanha imagem', 'corrigir sincronia de audio']
+heroImageAlt: "Um balão de fala desenhado um pouco ao lado da boca a que pertence, sobre fundo liso."
+---
+
+Nada estraga uma transmissão mais rápido do que lábios que terminam a frase
+antes de o som chegar. Também é um dos defeitos mais mal diagnosticados do
+streaming, porque um stream tem quatro lugares distintos onde imagem e som
+podem se separar, e a correção de cada um é diferente. Mexa na coisa errada e
+a defasagem fica exatamente onde estava. Aqui estão os quatro, da origem até
+seus ouvidos, e como saber qual você está vendo.
+
+## Primeiro, separe defasagem de deslocamento
+
+Assista um minuto e faça uma pergunta: a diferença é *constante* ou
+*crescente*?
+
+Um deslocamento constante — o som está sempre uns três décimos de segundo
+atrasado e continua assim — foi definido antes de o stream chegar até você, ou
+pela sua tela. Uma defasagem crescente — sincronizada quando o canal abre, um
+segundo depois de dez minutos, pior depois de vinte — é problema de relógio, e
+aponta para o buffer ou a decodificação do seu lado. Essa única observação corta
+a lista pela metade.
+
+## 1. O codificador: saiu do servidor assim
+
+Vídeo e áudio são faixas separadas [trançadas em um só stream](/pt/blog/legendas-e-faixas-de-audio/),
+cada uma carimbada com informação de tempo para que o player possa alinhá-las.
+Se o codificador do provedor carimbou errado — o caminho do áudio acrescentou
+uma latência que os carimbos não consideram — todo espectador daquele canal vê
+o mesmo deslocamento constante, em qualquer player, em qualquer aparelho.
+
+A assinatura: é um canal, ou os canais de um provedor, e é igual no celular e
+na TV. Não há nada a ajustar do seu lado; a única cura está lá em cima. Confira
+o canal num segundo aparelho para ter certeza e diga ao provedor qual canal e
+qual o tamanho aproximado da diferença.
+
+## 2. A rede: segmentos chegando fora de compasso
+
+Em [HLS e DASH](/pt/blog/protocolos-de-streaming-explicados/) o stream é entregue
+em segmentos curtos, e se os segmentos chegam atrasados o player tem de
+escolher entre travar e seguir. Seguir é onde a defasagem começa: ele pode
+tocar o que tem, e o que ele tem nem sempre são as duas faixas em igual medida.
+Num transport stream cru a mesma coisa aparece como pacotes descartados sob
+carga, levando junto a informação de tempo.
+
+A assinatura: defasagem que vai e vem com a sua conexão — pior à noite, pior do
+outro lado da casa, sumida numa caixa por cabo. A correção é a mesma do
+[buffering](/pt/blog/iptv-travando-como-resolver/): um buffer maior e um
+[enlace de rádio melhor](/pt/blog/iptv-travando-no-wifi/) entre o roteador
+e a tela. Um buffer maior dá ao player espaço para manter as duas faixas
+alinhadas num trecho ruim em vez de improvisar.
+
+## 3. O decodificador: dois relógios, um deles lento
+
+Este é o caso em que um player realmente pode fazer algo. O vídeo é
+decodificado por um componente e o áudio por outro, e o player os mantém juntos
+comparando seus relógios. Quando o decodificador de vídeo não dá conta — uma
+caixa fraca, um decodificador em software mastigando HEVC, um celular quente
+que reduz o desempenho — a imagem fica atrás do som. A diferença *cresce*, e
+zera quando você reabre o canal.
+
+A assinatura: defasagem crescente em um aparelho e não em outro, e pior nos
+canais mais pesados. Três coisas ajudam, nesta ordem:
+
+- **Ligue a decodificação por hardware**, em *Configurações → Reprodução*, se
+  estiver desligada. Isso passa o trabalho de vídeo para o chip feito para ele,
+  e o relógio do vídeo para de perder a corrida. Em algumas caixas antigas a
+  decodificação por hardware é também o que
+  [transforma uma tela preta de volta em imagem](/pt/blog/som-sem-imagem/).
+- **Reabra o stream** quando defasar. Os dois relógios recomeçam juntos. É um
+  contorno, não uma cura — mas de dois segundos.
+- **Dê menos trabalho ao aparelho**: feche outros apps, e se a caixa for
+  antiga, [as notas sobre configurações enxutas para hardware fraco](/pt/blog/caixa-android-velha-reproducao-fluida/)
+  são exatamente sobre isso.
+
+## 4. A tela: a televisão está atrasada
+
+TVs modernas processam a imagem — suavização de movimento, upscaling, redução
+de ruído — e cada etapa acrescenta alguns milissegundos que o som não ganha.
+Mande o áudio para uma soundbar por um caminho e o vídeo para o painel por
+outro e os dois chegam separados. A diferença é constante e é a mesma em toda
+fonte: o app de streaming, o videogame, o sintonizador.
+
+A assinatura: é tudo, não só o seu player IPTV. A maioria das TVs tem um modo
+de imagem «jogo» ou «PC» que desliga o processamento, e as soundbars têm um
+ajuste de atraso de áudio exatamente para isso. Ajuste uma vez e toda fonte
+fica resolvida.
+
+## O que um player honestamente não consegue
+
+Vale ser claro sobre o limite. Um player controla o buffer e o decodificador —
+casos 2 e 3 — e consegue manter duas faixas alinhadas como foram carimbadas.
+Não consegue recarimbar um stream que saiu errado do codificador, e não
+enxerga quanto tempo a sua TV leva para desenhar um quadro. Alguns players
+oferecem um controle manual de deslocamento de áudio; ele pode mascarar um
+deslocamento constante em um canal, e não vai tocar numa defasagem crescente,
+porque um deslocamento fixo não persegue um relógio que escorrega. O Vidonzo
+não traz um por enquanto, no entendimento de que as duas coisas que um player
+*consegue* corrigir é melhor corrigir do que mascarar.
+
+## A versão curta
+
+Constante e em tudo: a televisão. Constante e num canal só: o codificador —
+avise o provedor. Vai e vem com a conexão: o buffer. Cresce até você reabrir:
+o decodificador — ligue a decodificação por hardware. Quatro causas, um minuto
+de observação para distinguir.

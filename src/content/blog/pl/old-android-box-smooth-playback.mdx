@@ -1,0 +1,109 @@
+---
+title: "Jak sprawić, by stara przystawka z Androidem znów grała płynnie"
+description: "Przystawka, która się zacina, rzadko jest za słaba, żeby odtwarzać wideo; po prostu wymaga się od niej wszystkiego innego. Które części odtwarzacza kosztują na słabym sprzęcie i jakie ustawienia oraz nawyki oddają pracę temu, co ją udźwignie."
+urlSlug: stara-przystawka-android-plynne-odtwarzanie
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['telewizja', 'odtwarzanie']
+keywords: ['odtwarzacz iptv na stara przystawke android', 'lekki odtwarzacz iptv android tv', 'przystawka android muli', 'iptv na slabym sprzecie']
+heroImageAlt: "Mała, lekko porysowana przystawka na półce, dioda się świeci, w rogu kurz."
+---
+
+Gdzieś w wielu salonach stoi mała czarna przystawka z Androidem, sprzed pięciu
+czy sześciu lat, z jednym albo dwoma gigabajtami pamięci i układem, który był
+tani już jako nowy. Kiedyś odtwarzała wszystko. Teraz aplikacja na niej zacina
+się przy zmianie kanału, obraz drga w ruchliwych scenach, a menu reaguje z
+opóźnieniem. Instynkt mówi, że przystawka skończyła. Zwykle nie skończyła.
+Nawet skromna przystawka ma dedykowany dekoder wideo, całkowicie zdolny rysować
+1080p przez cały wieczór; zmieniło się to, ile *innej* roboty wzięło na siebie
+oprogramowanie dookoła. Oto gdzie idzie koszt i jak oddać pracę tym częściom,
+które ją udźwigną.
+
+## Co naprawdę kosztuje na słabej przystawce
+
+Trzy rzeczy, malejąco.
+
+**Dekodowanie wideo programowo.** Jeśli aplikacja dekoduje na ogólnym
+procesorze zamiast w bloku wideo, strumień 1080p zjada większość małego układu,
+a 4K albo HEVC po prostu się nie da. Ten jeden wybór dzieli przystawkę, która
+gra, od tej, która się zacina — i jest ustawieniem.
+
+**Rysowanie wypasionego interfejsu.** Plakaty, animacje, rozmyte tła, karuzela
+stu kafelków, wszystko przerysowywane, podczas gdy pod spodem leci wideo. Każda
+klatka tego wychodzi z tego samego małego budżetu co wideo. Ciężki interfejs na
+lekkim dekoderze to dokładnie sposób, w jaki przystawka, która *umie* grać,
+wygląda, jakby nie umiała.
+
+**Trzymanie ogromnej playlisty w pamięci w zły sposób.** Pełna lista dostawcy
+to duży plik, a aplikacja, która trzyma ją całą jako płaską strukturę i
+przeszukuje przewijaniem, wyczerpie pamięć małej przystawki — a wtedy system
+zaczyna zamykać rzeczy, czasem samą aplikację.
+
+Zauważ, czego nie ma na liście: sieci. Buforowanie i zacinanie wyglądają na
+wolnej przystawce podobnie, więc warto najpierw wykluczyć sieć —
+[artykuł o buforowaniu](/pl/blog/jak-naprawic-buforowanie-iptv/) załatwia to w pięć minut
+— zanim obwinisz sprzęt.
+
+## Ustawienia, które mają znaczenie
+
+**Dekodowanie sprzętowe włączone.** W Vidonzo to *Ustawienia → Odtwarzanie →
+Dekodowanie sprzętowe*, a na starej przystawce to cała gra. Włączone: blok
+wideo dekoduje, a procesor zostaje do rysowania interfejsu. Wyłączone: procesor
+robi jedno i drugie i przegrywa. Jeśli przy włączonym kanał daje
+[dźwięk bez obrazu](/pl/blog/dzwiek-jest-obrazu-nie-ma/), to format tego kanału nie
+jest wspierany przez dekoder przystawki — przełącz to tylko dla tego kanału i
+licz się z tym, że będzie ciężej.
+
+**Bufor dobrany do łącza, nie do przystawki.** Większy bufor kosztuje pamięć, a
+mała przystawka ma jej niewiele — ale zbyt mały bufor zatrzymuje się przy
+pierwszej czkawce, a zatrzymywanie się jest właśnie tym, co chcesz wyleczyć.
+Zacznij od domyślnej wartości; podnoś tylko wtedy, gdy obraz naprawdę staje, a
+obniżaj tylko wtedy, gdy przystawce wyraźnie brakuje pamięci (aplikacje
+zamykające się same to sygnał).
+
+**Zatrzymaj przewodnik, odrzuć ozdoby.** Przewodnik po programach to dane, nie
+obrazki, i jest tani w rysowaniu. Kosztują ekrany naładowane grafiką. Układ
+telewizyjny Vidonzo to [pasek boczny z ramkami fokusu](/pl/blog/odtwarzacz-iptv-na-android-tv/),
+zbudowany pod krzyżak i lekki z założenia — przystawka rysuje listę, a nie
+salon wystawowy.
+
+## Nawyki, które mają znaczenie
+
+**Selekcjonuj.** [Ulubione i kilka kategorii](/pl/blog/jak-uporzadkowac-duza-playliste/)
+na małej przystawce nie są tylko wygodne — są lżejsze. Przeglądanie krótkiej
+listy tego, co naprawdę oglądasz, nie kosztuje prawie nic. Przewijanie co
+wieczór całej listy dostawcy to najdroższa rzecz, jakiej możesz zażądać od
+słabego urządzenia.
+
+**Niech przegląda telefon.** To zmiana, która zaskakuje najbardziej. Jeśli
+telefon albo tablet w tej samej sieci Wi-Fi
+[pełni rolę pilota przystawki](/pl/blog/telefon-jako-pilot-do-telewizora/), to
+telefon rysuje plakaty, wykonuje wyszukiwanie i obsługuje pisanie — a
+przystawka musi tylko odebrać „odtwórz to” i odtworzyć. Słaba przystawka z
+telefonem obok zachowuje się jak dużo lepsza, bo została zdegradowana do
+jedynego zadania, w którym jest dobra.
+
+**Restartuj ją od czasu do czasu.** To nie ludowa mądrość: przystawka
+działająca od trzech tygodni zebrała wszystko, co każda aplikacja na niej
+przeciekła. Restart raz w tygodniu kosztuje minutę i oddaje pamięć, z której
+odtwarzacz może skorzystać.
+
+**Odinstaluj to, czego nie używasz.** Każda aplikacja z usługą w tle wydaje z
+tego samego małego budżetu. Przystawka, która ma być tylko przystawką, zostawia
+więcej na obraz.
+
+## Kiedy to naprawdę sprzęt
+
+Jest podłoga. Przystawka, która nie potrafi dekodować HEVC sprzętowo, nigdy nie
+odtworzy HEVC płynnie, cokolwiek zrobi oprogramowanie, a dostawcy przechodzą na
+HEVC, bo to o połowę zmniejsza im pasmo. Jeśli kanały twojego dostawcy są w
+większości HEVC, a dekoder twojej przystawki jest starszy, uczciwą odpowiedzią
+jest nowsze urządzenie — i nie musi być drogie; współczesny certyfikowany stick
+dekoduje HEVC sprzętowo i kosztuje niewiele.
+
+Ale najpierw spróbuj oprogramowania. Dekodowanie sprzętowe włączone, bufor
+domyślny, interfejs utrzymany oszczędnie, telefon do przeglądania: większość
+skarg na „starą przystawkę” nie przeżywa tej listy, a przejście przez nią
+zajmuje wieczór.
+[Ustawienie playlisty na świeżym odtwarzaczu](/pl/blog/jak-dodac-pierwsza-playliste/)
+to jakaś minuta tego wieczoru; reszta to patrzenie, czy dalej się zacina.

@@ -1,0 +1,117 @@
+---
+title: "Ton nicht synchron zum Bild: wo die Abweichung entsteht"
+description: "Die Lippen bewegen sich, die Worte kommen zu spät. Es gibt vier Stellen, an denen ein Stream die Synchronität verlieren kann — Encoder, Netzwerk, Decoder, Display — und nur zwei davon liegen in Reichweite Ihres Players."
+urlSlug: ton-nicht-synchron-zum-bild
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['fehlerbehebung', 'wiedergabe']
+keywords: ['iptv ton nicht synchron', 'audio verzögert stream', 'lippensynchronität problem', 'ton bild versatz beheben']
+heroImageAlt: "Eine Sprechblase, leicht neben dem Mund gezeichnet, zu dem sie gehört, auf schlichtem Grund."
+---
+
+Nichts ruiniert eine Sendung schneller als Lippen, die einen Satz beenden,
+bevor der Ton da ist. Es ist auch einer der am häufigsten fehldiagnostizierten
+Fehler beim Streaming, denn ein Stream hat vier getrennte Stellen, an denen
+Bild und Ton auseinanderlaufen können, und die Abhilfen unterscheiden sich.
+Ändern Sie das Falsche, und die Abweichung bleibt genau, wo sie war. Hier sind
+die vier, von der Quelle bis zu Ihren Ohren, und wie Sie erkennen, welche
+vorliegt.
+
+## Zuerst: Abweichung von Versatz unterscheiden
+
+Schauen Sie eine Minute zu und stellen Sie eine Frage: Ist der Abstand
+*konstant* oder *wachsend*?
+
+Ein konstanter Versatz — der Ton ist immer etwa eine Drittelsekunde zu spät
+und bleibt so — wurde festgelegt, bevor der Stream Sie erreichte, oder von
+Ihrem Display. Eine wachsende Abweichung — beim Öffnen des Senders synchron,
+nach zehn Minuten eine Sekunde, nach zwanzig schlimmer — ist ein Taktproblem
+und deutet auf Puffer oder Dekodierung auf Ihrer Seite. Diese eine Beobachtung
+halbiert die Liste.
+
+## 1. Der Encoder: So hat es den Server verlassen
+
+Video und Audio sind getrennte Spuren, [zu einem Stream verflochten](/de/blog/untertitel-und-tonspuren/),
+jede mit Zeitstempeln versehen, damit der Player sie ausrichten kann. Hat der
+Encoder des Anbieters falsch gestempelt — der Audioweg fügte Latenz hinzu, die
+die Zeitstempel nicht berücksichtigen —, sieht jeder Zuschauer dieses Senders
+denselben konstanten Versatz, auf jedem Player, auf jedem Gerät.
+
+Die Signatur: Es ist ein Sender, oder die Sender eines Anbieters, und auf dem
+Telefon genauso wie am Fernseher. Auf Ihrer Seite gibt es nichts einzustellen;
+die einzige Heilung liegt stromaufwärts. Prüfen Sie den Sender auf einem
+zweiten Gerät zur Bestätigung und nennen Sie dem Anbieter den Sender und
+ungefähr die Größe des Versatzes.
+
+## 2. Das Netzwerk: Segmente kommen aus dem Takt
+
+Bei [HLS und DASH](/de/blog/streaming-protokolle-erklaert/) wird ein Stream in
+kurzen Segmenten geliefert, und wenn Segmente spät ankommen, muss der Player
+zwischen Stocken und Weitermachen wählen. Weitermachen ist, wo die Abweichung
+beginnt: Er spielt womöglich, was er hat, und was er hat, sind nicht immer
+beide Spuren zu gleichen Teilen. Bei einem rohen Transportstrom zeigt sich
+dasselbe als unter Last verworfene Pakete, die Zeitinformationen mitnehmen.
+
+Die Signatur: Abweichung, die mit Ihrer Verbindung kommt und geht — abends
+schlimmer, auf der anderen Seite des Hauses schlimmer, an einer verkabelten
+Box weg. Die Abhilfe ist die gegen [Buffering](/de/blog/iptv-ruckeln-beheben/):
+ein größerer Puffer und eine bessere
+[Funkstrecke](/de/blog/iptv-friert-im-wlan-ein/) zwischen Router und
+Bildschirm. Ein größerer Puffer gibt dem Player Raum, beide Spuren durch eine
+holprige Passage ausgerichtet zu halten, statt zu improvisieren.
+
+## 3. Der Decoder: zwei Uhren, eine davon langsam
+
+Das ist der Fall, bei dem ein Player wirklich etwas ausrichten kann. Video
+dekodiert eine Komponente, Audio eine andere, und der Player hält sie zusammen,
+indem er ihre Uhren vergleicht. Kommt der Video-Decoder nicht hinterher — eine
+schwache Box, ein Software-Decoder, der sich durch HEVC kaut, ein warmes
+Telefon, das drosselt —, fällt das Bild hinter den Ton zurück. Der Abstand
+*wächst* und wird auf null zurückgesetzt, wenn Sie den Sender neu öffnen.
+
+Die Signatur: wachsende Abweichung auf einem Gerät und nicht auf einem anderen,
+und schlimmer bei schwereren Sendern. Drei Dinge helfen, in dieser Reihenfolge:
+
+- **Hardware-Dekodierung einschalten**, unter *Einstellungen → Wiedergabe*,
+  falls sie aus ist. Das verlagert die Videoarbeit auf den dafür gebauten Chip,
+  und die Videouhr verliert das Rennen nicht mehr. Auf manchen älteren Boxen
+  ist Hardware-Dekodierung auch das, was
+  [aus einem schwarzen Bild wieder ein Bild macht](/de/blog/ton-ohne-bild/).
+- **Den Stream neu öffnen**, wenn er abdriftet. Beide Uhren starten gemeinsam
+  neu. Ein Behelf, keine Lösung — aber einer von zwei Sekunden.
+- **Dem Gerät weniger zumuten**: andere Apps schließen, und wenn die Box alt
+  ist, drehen sich [die Hinweise zu schlanken Setups für schwache Hardware](/de/blog/alte-android-box-wieder-fluessig/)
+  genau darum.
+
+## 4. Das Display: der Fernseher ist spät
+
+Moderne Fernseher verarbeiten das Bild — Bewegungsglättung, Hochskalierung,
+Rauschunterdrückung — und jede Stufe fügt einige Millisekunden hinzu, die der
+Ton nicht bekommt. Schicken Sie Audio über einen Weg an eine Soundbar und Video
+über einen anderen an das Panel, kommen beide getrennt an. Der Abstand ist
+konstant und bei jeder Quelle gleich: Streaming-App, Spielkonsole, Tuner.
+
+Die Signatur: Es betrifft alles, nicht nur Ihren IPTV-Player. Die meisten
+Fernseher haben einen „Spiele“- oder „PC“-Bildmodus, der die Verarbeitung
+abschaltet, und Soundbars haben genau dafür eine Audio-Verzögerungseinstellung.
+Einmal einstellen, und jede Quelle ist behoben.
+
+## Was ein Player ehrlicherweise nicht kann
+
+Es lohnt, die Grenze klar zu benennen. Ein Player steuert Puffer und Decoder —
+Fall 2 und 3 — und kann zwei Spuren so ausgerichtet halten, wie sie gestempelt
+wurden. Er kann einen Stream nicht neu stempeln, der den Encoder falsch
+verlassen hat, und er sieht nicht, wie lange Ihr Fernseher zum Zeichnen eines
+Bildes braucht. Manche Player bieten einen manuellen Audio-Versatzregler; er
+kann einen konstanten Versatz auf einem Sender kaschieren und rührt eine
+wachsende Abweichung nicht an, weil ein fester Versatz keiner ständig
+rutschenden Uhr folgen kann. Vidonzo bietet derzeit keinen — in der Auffassung,
+dass die zwei Dinge, die ein Player *beheben* kann, besser behoben als
+kaschiert werden.
+
+## Die Kurzfassung
+
+Konstant und überall: der Fernseher. Konstant und ein Sender: der Encoder —
+dem Anbieter melden. Kommt und geht mit der Verbindung: der Puffer. Wächst, bis
+Sie neu öffnen: der Decoder — Hardware-Dekodierung einschalten. Vier Ursachen,
+eine Minute Zuschauen, um sie zu unterscheiden.

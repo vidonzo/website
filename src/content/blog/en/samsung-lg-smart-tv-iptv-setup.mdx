@@ -1,0 +1,89 @@
+---
+title: "Your Samsung or LG smart TV has no good IPTV player: the setup that works"
+description: "Tizen and webOS run their own operating systems with their own thin app stores. Rather than fight that, let the television be the screen and put the player on something that can run one."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['television', 'setup']
+keywords: ['iptv player samsung smart tv', 'iptv lg smart tv', 'iptv on tizen', 'iptv webos', 'smart tv iptv without app']
+heroImageAlt: "A large flat television on a wall with a small black box on the shelf below it, one cable joining them."
+---
+
+You have a good television. It is large, the panel is excellent, and it has an
+app store, so it seems obvious that an IPTV player should live inside it. Then
+you open the store and find two or three players, none of them right: one is a
+paid web page in a frame, one wants a code from a website, one shows your
+channels as an endless list with no guide. The temptation is to keep
+searching. There is a better answer, and it starts with understanding why the
+shelf is empty.
+
+## Why the TV's store is thin
+
+Samsung televisions run Tizen. LG televisions run webOS. Neither is Android.
+Both are perfectly capable operating systems, but they are their own worlds,
+with their own development tools, their own review rules, and — decisively —
+a tiny share of the developers who write serious video software. The mpv and
+FFmpeg lineage that [good IPTV players are built on](/blog/what-an-iptv-player-does/)
+targets Android, iOS, Windows, macOS and Linux; a Tizen port is a separate
+project with a small audience, and most players never make one.
+
+So the players that appear in the TV's own store tend to be lightweight web
+applications, limited to what a browser engine will decode. On a tidy stream
+they play. On [the odd streams providers actually produce](/blog/streaming-protocols-explained/)
+— raw transport streams, unusual audio codecs, HEVC on an older panel — they
+stall, drop sound, or refuse. And almost none of them have a guide worth the
+name.
+
+Vidonzo does not have a Tizen or webOS build either. Rather than promise one,
+here is the arrangement that works today and works well.
+
+## The television is the screen; the player runs on a box
+
+Every modern television has spare HDMI ports and one of them can hold a small
+Android TV device — a stick or a box, from a handful of manufacturers, costing
+less than a modest dinner out. Plug it in, and the television
+becomes what it is best at: a large, bright display. The player runs on the
+box, with a real operating system underneath it and
+[a real television interface on top](/blog/iptv-player-on-android-tv/).
+
+The gain is not subtle. A box built for Android TV runs the same mpv engine as
+a phone, with hardware decoding, an adjustable buffer for
+[a wobbly connection](/blog/fix-iptv-buffering/), and a guide that
+[shows the correct time](/blog/epg-explained/). It also stops depending on
+the television manufacturer's app-store politics. When the TV is replaced in
+six years, the box moves to the new one and nothing about your setup changes.
+
+Two practical notes on choosing one. Prefer a device that is *certified* for
+Android TV or Google TV rather than a generic "Android box" — the certified
+ones have Google Play, receive updates, and have their remotes and HDMI
+control wired properly. And use the television's own HDMI-CEC setting so the
+TV remote's arrows drive the box; most households never touch the box's remote
+again.
+
+## Then let the phone do the typing
+
+The one thing a box does not fix is typing. Entering an Xtream password with
+arrow keys is miserable on any device. Skip it: any phone or tablet on the same
+Wi-Fi can [act as the remote for Vidonzo on the box](/blog/turn-your-phone-into-a-tv-remote/).
+The phone discovers the TV by itself, you browse the TV's library and search
+with a real keyboard, and playback starts on the big screen with a tap. In
+practice most people set up the playlist from the phone and never type on the
+television at all.
+
+## The order that avoids the usual snags
+
+1. Connect the box to the same network the phone uses. If the television is
+   in the far room, [check that room's Wi-Fi first](/blog/fix-iptv-freezing-on-wifi/)
+   — a wired connection to the box, if the router is close, removes the
+   commonest cause of freezing.
+2. Install Vidonzo on the box: the [TV install guide](/help/) covers it.
+3. [Add your playlist](/blog/set-up-your-first-playlist/) — from the phone
+   as the remote if you have one nearby.
+4. Open the guide, pick a channel, and only then adjust anything.
+
+## What about the TV's own player app, for now?
+
+Keep it, if it works for you, for the same reason you might keep VLC beside a
+dedicated player: it is there. But when a channel drops audio or the guide is
+an hour off, the fault is not your provider and it is not the television — it
+is asking a browser engine in a locked-down operating system to be a media
+player. Give the television one job. It is very good at that job.

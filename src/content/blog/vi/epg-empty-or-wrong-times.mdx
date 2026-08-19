@@ -1,0 +1,104 @@
+---
+title: "Lịch phát sóng trống hoặc sai giờ: sửa EPG của bạn"
+description: "Kênh vẫn phát mà lịch thì trống, cũ, hoặc lệch đúng một tiếng. Bốn lỗi tạo ra những triệu chứng đó, mỗi lỗi một dấu hiệu riêng, và không lỗi nào là «trình phát chạy chậm»."
+urlSlug: lich-phat-song-trong-hoac-sai-gio
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['khắc phục sự cố', 'danh sách phát']
+keywords: ['epg không chạy iptv', 'lịch phát sóng sai giờ', 'lịch trống iptv', 'xmltv không tải', 'lệch giờ epg']
+heroImageAlt: "Một bảng lịch phát sóng với phần lớn ô trống và một hàng lệch sang phải một cột."
+---
+
+Lịch trống khó chịu hơn cả một kênh hỏng, vì mọi thứ *khác* đều chạy. Hình vẫn
+lên, danh sách vẫn đầy, và cái hàng lẽ ra phải cho biết đang chiếu gì thì ghi
+«Không có thông tin chương trình». Hoặc nó ghi một thứ, nhưng là thứ chiếu cách
+đây một tiếng. Nếu bạn đã đọc [lịch phát sóng hoạt động ra sao](/vi/blog/epg-la-gi-lich-phat-song/)
+thì bạn biết sự thật cốt lõi: lịch là một tệp riêng, được lấy riêng, khớp với
+các kênh của bạn theo tên. Mỗi lỗi dưới đây là một chỗ đứt ở đâu đó trong chuỗi
+ấy. Đây là chúng, theo thứ tự thường gặp.
+
+## 1. Chưa ai nói cho trình phát biết lịch nằm ở đâu
+
+Danh sách M3U [mang theo kênh](/vi/blog/ben-trong-tep-m3u/); nó không mang
+theo lịch. Một số danh sách ghi địa chỉ lịch ngay dòng đầu (`url-tvg=`), nhiều
+danh sách thì không, và nếu danh sách của bạn không ghi thì trình phát chẳng có
+gì để lấy, và mọi kênh đều ghi «Không có thông tin chương trình» — lịch không
+hỏng, nó vắng mặt.
+
+Dấu hiệu: *mọi* kênh đều trống, ngay từ ngày đầu. Cách sửa: xin nhà cung cấp
+địa chỉ XMLTV (thường kết thúc bằng `.xml` hoặc `.xml.gz`) rồi nhập vào phần
+cài đặt của nguồn, cạnh liên kết danh sách. Nếu nhà cung cấp đưa bạn
+[đăng nhập Xtream Codes](/vi/blog/xtream-codes-hay-m3u/), lịch đi kèm đăng nhập
+và chẳng có gì phải nhập — lịch trống trên Xtream nghĩa là một trong các lỗi
+dưới đây.
+
+## 2. Lịch và các kênh không nhận ra nhau
+
+Đây là lỗi phổ biến nhất, và tạo ra triệu chứng gây bối rối nhất: *một số*
+kênh có lịch, số khác, tưởng như ngẫu nhiên, thì không.
+
+Tệp lịch liệt kê chương trình đối chiếu với một mã định danh kênh — `tvg-id`.
+Danh sách cũng gán cho mỗi kênh một `tvg-id`. Chỗ nào hai bên khớp, bạn có
+lịch; chỗ nào không, bạn chẳng có gì, dù kênh đó nằm ngay trong tệp lịch dưới
+một cái tên hơi khác. Nhà cung cấp sinh cả hai từ cùng một cơ sở dữ liệu thì
+khớp hoàn hảo. Nhà cung cấp bắt vít một tệp lịch của bên thứ ba vào danh sách
+của mình thì chỉ khớp ở nơi mã định danh tình cờ trùng.
+
+Dấu hiệu: phủ sóng một phần, ổn định theo thời gian — vẫn những kênh ấy trống.
+Trình phát làm được rất ít, vì nó không thể biết `news24.example` và
+`News24_HD` là cùng một đài mà không đoán. Nếu nhà cung cấp có nhiều biến thể
+danh sách, biến thể đầy đủ hơn thường có mã định danh tốt hơn; nếu không, hãy
+báo cho họ những kênh nào thiếu lịch.
+
+## 3. Giờ bị lệch — thường là đúng một tiếng
+
+Chương trình vẫn hiện, nhưng bảng lịch nói bộ phim bắt đầu lúc chín giờ trong
+khi nó bắt đầu lúc mười giờ. Nếu độ lệch là một số giờ tròn, đó là chuyện múi
+giờ, và đáng hiểu, bởi đây là lỗi mà người ta hay đổ cho nhầm bên nhất.
+
+Tệp XMLTV đóng dấu mỗi chương trình bằng một thời điểm *và* một độ lệch so với
+UTC — `20260819210000 +0100`. Trình phát đúng đắn đọc độ lệch đó, quy về đồng
+hồ của thiết bị bạn, và hiện đúng giờ bất kể lịch được làm ở đâu. Vidonzo làm
+vậy — đây là một trong những điểm ứng dụng cẩn thận, vì
+[đó là chỗ lịch hay sai nhất](/vi/blog/epg-la-gi-lich-phat-song/) — nên độ lệch thường
+nghĩa là một trong hai chuyện khác:
+
+- **Lịch khai báo sai độ lệch.** Nhà cung cấp tạo nó trên máy chủ đặt ở múi giờ
+  khác mà không sửa dấu thời gian. Mọi kênh lệch cùng một lượng, và lệch trên
+  mọi trình phát. Chỉ nhà cung cấp mới sửa được.
+- **Đồng hồ hoặc múi giờ của chính thiết bị sai.** Chiếc hộp TV để nguyên múi
+  giờ xuất xưởng sẽ làm lệch *mọi thứ*, kể cả đồng hồ trên thanh trạng thái của
+  nó. Kiểm tra ngày giờ của hộp trước tiên — và nếu nó để «tự động» trên mạng
+  chặn máy chủ thời gian, hãy đặt tay.
+
+Dấu hiệu tách hai trường hợp: nếu độ lệch cũng xuất hiện trên điện thoại, đó là
+lịch; nếu chỉ trên một thiết bị, đó là thiết bị ấy.
+
+## 4. Lịch đã cũ
+
+Tuần trước vẫn ổn, giờ bảng lịch hiện những chương trình đã phát, hoặc dừng
+phắt vào nửa đêm nay. Tệp lịch phủ một khoảng thời gian — thường vài ngày — và
+phải lấy lại tệp để nối dài khoảng ấy. Nếu trình phát không với tới địa chỉ (nó
+đổi chỗ, hết hạn, mạng chết đúng lúc thử), thứ bạn thấy là bản sao cũ.
+
+Dấu hiệu: lịch kết thúc ở một điểm cố định trong quá khứ, hoặc dừng vài giờ
+phía trước. Dùng *Làm mới ngay* trên nguồn; nếu nó đầy lên thì việc lấy chỉ đơn
+giản là quá hạn. Nếu không, chính địa chỉ đang hỏng, và ở đây áp dụng
+[đúng những kiểm tra dành cho liên kết danh sách](/vi/blog/danh-sach-phat-khong-tai-duoc/)
+— dán vào trình duyệt và xem nó có trả lời không.
+
+## Trình tự năm phút
+
+1. Xác nhận công tắc lịch đang bật (*Hiện lịch phát sóng (EPG)*).
+2. Đăng nhập Xtream? Vậy địa chỉ không phải vấn đề; nhảy sang 3. Liên kết M3U?
+   Xác nhận đã nhập một địa chỉ XMLTV.
+3. Mọi kênh đều trống → địa chỉ (1) hoặc cũ (4). Một số trống → khớp mã (2).
+   Sai giờ → múi giờ (3).
+4. *Làm mới ngay*, rồi mở lại lịch.
+5. Kiểm tra cùng kênh đó trên thiết bị thứ hai trước khi viết cho nhà cung cấp,
+   để bạn nói được lỗi đi theo lịch hay đi theo thiết bị.
+
+Một ghi chú thành thật để khép lại: lịch chỉ tốt bằng tệp đứng sau nó, và việc
+của trình phát là lấy tệp ấy một cách đáng tin, khớp trung thực, và — phần mà
+đa số trình phát làm sai — tính toán múi giờ cho đúng. Khi ba điều đó vững, mọi
+lỗi còn lại đều nằm trong tệp, và cách chữa nhanh nhất là biết báo cáo lỗi nào.

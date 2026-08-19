@@ -1,0 +1,106 @@
+---
+title: "Rehber boş ya da yanlış saatleri gösteriyor: EPG'yi düzeltmek"
+description: "Kanallar oynuyor ve rehber boş, bayat ya da tam bir saat kaymış. Bu belirtileri dört arıza üretir, her birinin kendi imzası var ve hiçbiri «oynatıcı yavaş» değil."
+urlSlug: rehber-bos-ya-da-yanlis-saat
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['sorun-giderme', 'oynatma-listesi']
+keywords: ['epg çalışmıyor iptv', 'rehber yanlış saat', 'boş rehber iptv', 'xmltv yüklenmiyor', 'epg saat kayması']
+heroImageAlt: "Çoğu hücresi boş bir yayın akışı tablosu ve bir sütun kaymış tek bir satır."
+---
+
+Boş bir rehber, bozuk bir kanaldan daha çok sinir bozar; çünkü *geri kalan* her
+şey çalışıyordur. Görüntü oynuyor, liste dolu ve ne oynadığını söylemesi
+gereken tek satır «Program bilgisi yok» diyor. Ya da bir şey diyor, ama bir
+saat önce oynayanı. [Rehberin nasıl çalıştığını](/tr/blog/epg-yayin-rehberi-nedir/)
+okuduysanız kilit gerçeği biliyorsunuz: rehber ayrı bir dosyadır, ayrı çekilir,
+kanallarınıza adla eşleştirilir. Aşağıdaki her arıza bu zincirin bir yerindeki
+kopmadır. İşte genellikle ortaya çıkma sırasıyla.
+
+## 1. Oynatıcıya rehberin nerede olduğu hiç söylenmemiş
+
+Bir M3U listesi [kanal taşır](/tr/blog/m3u-dosyasinin-icinde-ne-var/); rehber taşımaz.
+Bazı listeler rehberin adresini ilk satırlarında belirtir (`url-tvg=`), pek
+çoğu belirtmez; sizinki belirtmiyorsa oynatıcının çekecek bir şeyi yoktur ve her
+kanal «Program bilgisi yok» der — rehber bozuk değildir, yoktur.
+
+İmza: *her* kanal boş, ilk günden beri. Çözüm: sağlayıcınızdan XMLTV adresini
+isteyin (genellikle `.xml` ya da `.xml.gz` ile biter) ve kaynağın ayarlarında,
+liste bağlantısının yanına girin. Sağlayıcınız size
+[Xtream Codes girişi](/tr/blog/xtream-codes-mi-m3u-mu/) verdiyse rehber girişle
+birlikte gelir ve girilecek bir şey yoktur — Xtream'de boş rehber, aşağıdaki
+arızalardan biri demektir.
+
+## 2. Rehber ile kanallar birbirini tanımıyor
+
+En yaygını budur ve en kafa karıştırıcı belirtiyi üretir: *bazı* kanalların
+rehberi vardır, bazılarının, görünüşte rastgele, yoktur.
+
+Rehber dosyası programları bir kanal kimliğine karşılık listeler — `tvg-id`.
+Liste de her kanala bir `tvg-id` verir. Eşleştikleri yerde rehber alırsınız;
+eşleşmedikleri yerde hiçbir şey — kanal rehber dosyasında biraz farklı bir adla
+duruyor olsa bile. İkisini de aynı veritabanından üreten sağlayıcılar kusursuz
+eşleşir. Listesine üçüncü taraf bir rehber vidalayan sağlayıcılar, kimlikler
+tesadüfen uyuştuğu yerde eşleşir.
+
+İmza: kısmi kapsama, zaman içinde sabit — hep aynı kanallar boş. Oynatıcının
+yapabileceği pek bir şey yok, çünkü tahmin yürütmeden `news24.example` ile
+`News24_HD`'nin aynı istasyon olduğunu bilemez. Sağlayıcınız birden fazla liste
+sürümü veriyorsa, daha dolu olanın kimlikleri çoğu zaman daha iyidir; yoksa
+hangi kanalların rehbersiz kaldığını sağlayıcıya bildirin.
+
+## 3. Saatler kaymış — genellikle tam bir saat
+
+Programlar görünür, ama tablo filmin dokuzda başladığını söyler, oysa onda
+başlamıştır. Kayma yuvarlak bir saat sayısıysa bu bir saat dilimi sorunudur ve
+anlamaya değer, çünkü insanların en sık yanlış tarafa yıktığı arızadır.
+
+Bir XMLTV dosyası her programı bir saatle *ve* UTC'ye göre bir farkla damgalar
+— `20260819210000 +0100`. Doğru bir oynatıcı bu farkı okur, cihazınızın saatine
+çevirir ve rehber nerede yapılmış olursa olsun doğru saati gösterir. Vidonzo
+bunu yapar — uygulamanın özen gösterdiği şeylerden biridir, çünkü
+[rehberlerin en çok yanıldığı yer burasıdır](/tr/blog/epg-yayin-rehberi-nedir/) — dolayısıyla
+kayma genellikle diğer iki şeyden birini gösterir:
+
+- **Rehber yanlış farkı bildiriyor.** Sağlayıcı onu başka bir dilime ayarlı bir
+  sunucuda üretmiş ve damgaları düzeltmemiştir. Her kanal aynı miktarda kaymıştır
+  ve her oynatıcıda kaymıştır. Bunu yalnızca sağlayıcı düzeltebilir.
+- **Cihazın kendi saati ya da dilimi yanlış.** Fabrika dilimine bırakılmış bir
+  TV kutusu *her şeyi* kaydırır, durum çubuğundaki saat dâhil. Her şeyden önce
+  kutunun tarih ve saat ayarlarını kontrol edin — zaman sunucularını engelleyen
+  bir ağda «otomatik»teyse elle ayarlayın.
+
+İkisini ayıran imza: kayma telefonunuzda da görünüyorsa rehberdir; yalnızca tek
+cihazda görünüyorsa o cihazdır.
+
+## 4. Rehber bayat
+
+Geçen hafta her şey yolundaydı, şimdi tablo çoktan yayınlanmış programları
+gösteriyor ya da bu gece yarısı birden bitiyor. Rehber dosyaları bir pencereyi
+kapsar — çoğu zaman birkaç gün — ve pencereyi uzatmak için dosyanın yeniden
+çekilmesi gerekir. Oynatıcı adrese ulaşamazsa (taşınmış, süresi dolmuş, dener
+ken ağ yoktu) gördüğünüz eski kopyadır.
+
+İmza: geçmişte sabit bir noktada biten ya da birkaç saat ileride duran bir
+rehber. Kaynakta *Şimdi yenile* deyin; doluyorsa çekim yalnızca gecikmişti.
+Dolmuyorsa adresin kendisi başarısız oluyordur ve burada
+[liste bağlantısı için geçerli olan kontroller](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/)
+geçerlidir — bir tarayıcıya yapıştırın ve yanıt veriyor mu bakın.
+
+## Beş dakikalık sıra
+
+1. Rehber anahtarının açık olduğunu doğrulayın (*Program rehberini göster
+   (EPG)*).
+2. Xtream girişi mi? O hâlde adres sorun değil; 3'e geçin. M3U bağlantısı mı?
+   Bir XMLTV adresinin girildiğini doğrulayın.
+3. Tüm kanallar boş → adres (1) ya da bayatlık (4). Bazıları boş → eşleşme (2).
+   Yanlış saatler → dilim (3).
+4. *Şimdi yenile*, sonra rehberi yeniden açın.
+5. Sağlayıcınıza yazmadan önce aynı kanalı ikinci bir cihazda kontrol edin ki
+   arızanın rehberi mi yoksa cihazı mı izlediğini söyleyebilesiniz.
+
+Dürüst bir kapanış notu: bir rehber, ardındaki dosya kadar iyidir; oynatıcının
+işi onu güvenilir biçimde çekmek, sadakatle eşleştirmek ve — çoğu oynatıcının
+yanlış yaptığı kısım — saat dilimi aritmetiğini doğru yapmaktır. Bu üçü
+tuttuğunda geriye kalan tüm arızalar dosyanın içindedir ve en hızlı çözüm,
+hangisini bildireceğinizi bilmektir.

@@ -1,0 +1,17 @@
+key: audio-out-of-sync
+title: "Audio out of sync with the picture: where the drift starts"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: troubleshooting
+targetQueries: ["iptv audio out of sync", "iptv audio delay", "sound not matching video iptv", "lip sync iptv"]
+audience: Anyone watching a stream where lips and words disagree.
+value: Separates the four origins of drift (encoder, network, decoder, display) so the reader stops fixing the wrong one.
+angle: Honest about the player's role: it can help with decoder-side and buffer-side drift; it cannot repair a stream that arrived wrong.
+productFacts:
+  - Hardware decoding toggle under Settings → Playback
+  - Buffer size (cache) in MB
+  - re-opening a stream re-syncs clocks
+  - NO manual audio-offset control exists — do not claim one
+constraints: [no-false-feature-claims, no-download-or-offline-wording]
+internalLinks: [sound-but-no-picture, fix-iptv-buffering, streaming-protocols-explained, subtitles-and-audio-tracks]

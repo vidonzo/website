@@ -1,0 +1,107 @@
+---
+title: "Dos proveedores, una aplicación: varias listas conviviendo"
+description: "Dos suscripciones, o un proveedor que te da un login y un enlace — un reproductor debería mantenerlas separadas, cada una con su guía, sus puntos de reanudación y su actualización, y dejarte cambiar con un toque."
+urlSlug: varias-listas-en-una-aplicacion
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['listas', 'producto']
+keywords: ['varias listas iptv en una app', 'reproductor iptv varias fuentes', 'dos suscripciones iptv una app', 'cambiar entre listas iptv']
+heroImageAlt: "Dos montones de cartas bien separados sobre una mesa, con una mano alcanzando la carta superior de uno."
+---
+
+Tarde o temprano, la mayoría de las casas acaba con más de una lista. Un
+segundo proveedor para un idioma que al primero le falta. La suscripción de un
+familiar junto a la tuya. O el caso corriente: un proveedor que envía tanto un
+login Xtream *como* un enlace M3U, y te gustaría conservar el segundo como
+reserva. La forma equivocada de manejarlo es lo que hacen muchos reproductores:
+fundirlo todo en una única lista enorme. Aquí va por qué eso está mal, qué
+debería significar de verdad «conviviendo» y cómo funciona.
+
+## Por qué fundirlas es la respuesta equivocada
+
+Dos listas no son una lista con más líneas. Vienen de servidores distintos,
+llevan [guías](/es/blog/que-es-la-epg-iptv/) distintas, se actualizan con
+calendarios distintos, y cada una tiene su propio login que puede caducar su
+propio día. Viértelas en una sola lista y cada una de esas diferencias se
+convierte en un síntoma que no puedes diagnosticar: la guía es correcta para la
+mitad de los canales; una caída de un proveedor parece fallos aleatorios; el
+mismo canal aparece dos veces con dos nombres y nunca sabes cuál es el que se
+atasca.
+
+La alternativa es sencilla: mantén cada fuente como una fuente. Vidonzo hace
+exactamente eso — puedes añadir
+[unas credenciales Xtream, un enlace M3U o un archivo local](/es/blog/xtream-codes-o-m3u/)
+tantas veces como los tengas, y cambiar entre ellos desde el chip de lista en
+la parte superior de la pantalla de inicio. Nada se funde. Todo lo de cada uno
+sigue siendo suyo.
+
+## Qué significa «suyo» en la práctica
+
+**Su propia guía.** Una fuente Xtream trae su guía con el login. Una fuente M3U
+tiene una dirección XMLTV que configuras para *esa* fuente. Dos proveedores,
+dos guías, cada una emparejada con sus propios canales — así los
+identificadores nunca pelean y una
+[guía vacía](/es/blog/guia-vacia-o-con-horas-equivocadas/) siempre se puede rastrear
+hasta un único sitio.
+
+**Sus propios puntos de reanudación.** Continuar viendo se guarda por fuente y
+por elemento. Si ambos proveedores llevan la misma serie, el episodio en el que
+ibas por el minuto cuarenta en el proveedor A se recuerda como del proveedor A.
+Cambia de fuente y la otra lista está donde la dejaste, no donde estaba la
+primera.
+
+**Su propia actualización.** Una lista alojada cambia, y cada fuente tiene su
+propia política de actualización automática — cada inicio, cada hora, cada seis
+horas, diaria, semanal o solo manual — más un *Actualizar ahora* para el
+momento en que algo parezca faltar. Un proveedor que reordena cada noche puede
+releerse a diario; la reserva que casi no tocas puede quedarse en manual. La
+lista en caché aparece siempre al instante; la política solo decide cuándo se
+actualiza en segundo plano.
+
+**Sus propias credenciales.** Dos logins, guardados por separado, y — como un
+login es tu suscripción — cada uno
+[cifrado en el dispositivo](/es/blog/por-que-cifrar-tus-credenciales/) antes
+de acercarse siquiera a la sincronización. Que caduque uno no toca al otro.
+
+## Cambiar, y lo único que cruza
+
+Cambiar es un toque en ese chip: la lista, la guía, los favoritos y los puntos
+de reanudación cambian a la vez, porque todos pertenecen a la fuente.
+Deliberadamente no es un filtro sobre un montón fundido; es otra biblioteca.
+
+Lo único que *cruza* es la búsqueda. La búsqueda global recorre directos,
+películas y series de la fuente actual — y si no encuentras algo, cambiar de
+fuente y buscar otra vez lleva un segundo. Es una decisión de diseño: mostrar
+resultados de una fuente en la que no estás significaría reproducir desde un
+login que no has elegido, y la confusión es peor que el toque de más.
+
+## Tres arreglos que esto vuelve fáciles
+
+**Login más enlace del mismo proveedor.** Añade los dos. Usa el login Xtream
+como fuente del día a día — suele ser el más rico, con películas y series
+estructuradas — y guarda el enlace M3U como reserva para el día en que el login
+se porte mal. Los mismos canales, dos puertas.
+
+**Dos proveedores para dos idiomas.** Cada uno como su propia fuente, cada uno
+con su guía en su idioma, cada uno con favoritos que tengan sentido para quien
+lo ve. Cambiar es toda la decisión de «cuál».
+
+**Una lista alojada y una copia local.**
+[Una URL se mantiene al día, un archivo está congelado](/es/blog/enlace-de-lista-o-archivo-local/)
+— pero un archivo no necesita servidor. Deja el enlace como fuente principal y
+un archivo local como respaldo para la noche en que el servidor no responda.
+Dos fuentes, una siempre disponible.
+
+## Qué evitar
+
+No añadas la misma lista dos veces con la esperanza de organizarla — los
+favoritos y las [categorías](/es/blog/organizar-listas-grandes-iptv/) hacen eso
+dentro de una fuente, y un duplicado solo dobla los puntos de reanudación que
+hay que seguir. Y no uses las fuentes como forma de compartir una suscripción
+con más gente de la que permite; la mayoría de proveedores limita los streams
+simultáneos por login, y una segunda *fuente* con el mismo login sigue siendo
+el mismo login.
+
+El principio de fondo es [el mismo que hay tras todo el reproductor](/es/blog/trae-tu-propia-lista/):
+la lista es tuya, y el trabajo de un reproductor es tratar cada una que posees
+con el mismo respeto — por separado, y sin fingir jamás que eran una sola cosa.

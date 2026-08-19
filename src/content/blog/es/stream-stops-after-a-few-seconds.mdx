@@ -1,0 +1,123 @@
+---
+title: "El stream se corta a los pocos segundos: desconexiones, no buffering"
+description: "Arranca bien, va diez segundos y muere — sin rueda girando, solo un final. Es un fallo distinto del buffering, con causas distintas, y un buen reproductor resuelve las resolubles sin que te enteres."
+urlSlug: el-stream-se-corta-a-los-pocos-segundos
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['solución de problemas', 'reproducción']
+keywords: ['iptv se corta a los pocos segundos', 'iptv se desconecta', 'el canal se corta iptv', 'iptv para a los 10 segundos']
+heroImageAlt: "Una línea recta que avanza limpia un tramo corto y luego simplemente termina, sobre un fondo liso."
+---
+
+El buffering tiene un aspecto reconocible: la rueda, el parón, la imagen
+poniéndose al día. Esto no es eso. Esto es un canal que abre limpio, va
+perfecto cinco, diez o treinta segundos, y luego para — de vuelta a la lista, o
+un fotograma congelado, o un error, o el mismo canal empezando otra vez desde
+el principio. Si le das a reproducir, vuelve a pasar. Es una *desconexión*, y
+sus causas son casi totalmente distintas de
+[las que hay detrás del buffering](/es/blog/solucionar-cortes-iptv/). Aquí van las
+cinco que explican casi todos los casos, y lo que un reproductor puede y no
+puede hacer con cada una.
+
+## 1. El servidor cerró la conexión
+
+La causa más común. El servidor del proveedor te entrega un stream y, unos
+segundos después, cierra la conexión — porque va sobrecargado, porque un
+proceso se reinició, porque un balanceador te movió, porque es martes. En un
+transport stream en crudo los datos simplemente dejan de llegar; en
+[HLS](/es/blog/protocolos-de-streaming-hls-dash-rtsp/) el siguiente segmento no llega
+nunca.
+
+Este es el caso *para el que* existe un reproductor. Uno bien hecho no trata
+una conexión caída como el final del programa; la trata como un hipo y
+reconecta en silencio. Vidonzo lo hace en la capa de transporte: una lectura
+atascada agota su tiempo en segundos en vez de quedarse colgada, y la conexión
+se restablece con una espera corta y acotada, de modo que un servidor que
+cerró la puerta la vuelve a abrir sin que veas más que un instante de pausa. Si
+un canal moría a los diez segundos en tu reproductor anterior y en este solo
+parpadea, ese mecanismo es la razón.
+
+La señal: canales al azar, momentos al azar, más por la noche. Nada que cambiar
+de tu lado; si pasa en *todos* los canales constantemente, el servidor está en
+apuros de verdad y el proveedor necesita saberlo.
+
+## 2. Tu acceso caducó a mitad del stream
+
+Xtream Codes y muchos enlaces M3U llevan un token — una prueba de quién eres —
+en la dirección. Los tokens caducan. Cuando uno lo hace, el servidor no cierra
+la conexión con educación; responde a la siguiente petición con un error:
+prohibido, no autorizado, ya no está.
+
+Aquí un buen reproductor deliberadamente *no* sigue reconectando. Machacar un
+servidor que acaba de decir «no» es inútil y, en volumen, parece un ataque; los
+proveedores bloquean por ello. Vidonzo reconecta a través de una conexión caída
+y se detiene ante un rechazo explícito, a propósito. La cura es una lista
+fresca: usa *Actualizar ahora* en la fuente para que el reproductor relea la
+lista actual — o, si es la suscripción la que expiró, eso es entre tú y el
+proveedor.
+
+La señal: ayer funcionaba, hoy falla todo, y el fallo es instantáneo en lugar
+de a los pocos segundos. Véase también
+[los cinco fallos tras un enlace que no carga](/es/blog/la-lista-no-carga/).
+
+## 3. Demasiados streams a la vez
+
+La mayoría de suscripciones permite un número fijo de streams *simultáneos* —
+uno, dos, a veces más. Abre un tercero y el servidor tira uno, y no siempre el
+más nuevo. El que cae se parece exactamente al caso 1, salvo que coincide con
+que otra persona de la casa le ha dado a reproducir.
+
+La señal: falla cuando otro dispositivo está viendo, y se recupera cuando ese
+para. No es un fallo del reproductor y no hay ajuste para ello; es el acuerdo
+que tienes con el proveedor, y la solución es ver por turnos o un plan que
+permita más. Un reproductor que muestra un error claro en vez de reabrir en
+silencio el mismo stream al menos te dice en qué caso estás.
+
+## 4. El dispositivo se durmió sobre la conexión
+
+Los móviles y las cajas de TV ahorran energía de forma agresiva, y un stream de
+vídeo es justo el tipo de conexión larga y silenciosa que les gusta cortar. En
+un móvil se ve como un stream que muere cuando la pantalla se atenúa o cuando
+cambias un momento a otra app; en una caja puede ser un modo de ahorro de
+energía del Wi-Fi demasiado entusiasta que corta la radio entre segmentos.
+
+La señal: va ligada a *tus* acciones — la pantalla, el cambio de app, una
+pausa — no al reloj ni al canal. En el móvil, mantén la app en primer plano
+mientras reproduce; Vidonzo condiciona su recuperación al primer plano a
+propósito, para no pelear con el sistema por una conexión de la que te has ido.
+En una caja, busca un ajuste de ahorro de energía del Wi-Fi o de «mantener
+despierto», o [lleva la caja a un cable](/es/blog/iptv-se-congela-por-wifi/).
+
+## 5. La red intermedia la dejó caer
+
+Entre el servidor y la pantalla están tu router, tu operador y — para algunos —
+una VPN o un proxy. Cualquiera puede reiniciar una conexión: un router que rota
+una tabla NAT, un intermediario del operador que agota el tiempo de un flujo
+que parece inactivo, una VPN que reconecta. El reproductor ve lo mismo que en
+el caso 1 y reconecta igual; la diferencia es que *todo* se ve afectado, no
+solo un proveedor.
+
+La señal: otras apps de streaming también se cortan, y el patrón sigue a la red
+— un router concreto, una VPN concreta, una hora concreta del día. Prueba un
+minuto con datos móviles; si los cortes desaparecen, el fallo está en el lado
+de la red de casa.
+
+## Distinguirlos en un minuto
+
+- Canales al azar, momentos al azar, pausa breve → lo cortó el servidor (1). El
+  reproductor reconecta; nada que hacer.
+- Fallo instantáneo en todo, ayer funcionaba → acceso caducado (2). *Actualizar
+  ahora*, y luego habla con el proveedor.
+- Falla cuando otra persona le da a reproducir → demasiados streams (3).
+- Muere cuando atenúas la pantalla o cambias de app → ahorro de energía (4).
+- Se cae todo, otras apps también → la red (5).
+
+## Lo que el reproductor te debe
+
+El límite honesto es este: un reproductor debería reconectar a través de *toda*
+caída que no sea un rechazo, lo bastante rápido como para que rara vez lo
+notes, y debería detenerse limpiamente y decirlo en toda caída que sí lo sea.
+Cualquier cosa más — mantener un stream abierto pasado su token, ignorar un
+límite de streams — no es una función, es un problema con retardo. Haz bien la
+reconexión y el caso 1, que es la mayoría de los casos, deja de ser algo en lo
+que piensas.

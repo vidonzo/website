@@ -1,0 +1,96 @@
+---
+title: "La tua smart TV Samsung o LG non ha un buon lettore IPTV: la configurazione che funziona"
+description: "Tizen e webOS girano con sistemi operativi propri e store sottili. Invece di combatterlo, lascia che il televisore sia lo schermo e metti il lettore su qualcosa in grado di farne girare uno."
+urlSlug: iptv-su-smart-tv-samsung-o-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisione', 'configurazione']
+keywords: ['lettore iptv samsung smart tv', 'iptv lg smart tv', 'iptv su tizen', 'iptv webos', 'smart tv iptv senza app']
+heroImageAlt: "Un grande televisore piatto a parete con una piccola scatola nera sulla mensola sotto, un solo cavo a unirli."
+---
+
+Hai un buon televisore. È grande, il pannello è eccellente e ha uno store di
+app, quindi sembra ovvio che un lettore IPTV debba vivere lì dentro. Poi apri
+lo store e trovi due o tre lettori, nessuno giusto: uno è una pagina web a
+pagamento in una cornice, uno vuole un codice da un sito, uno mostra i tuoi
+canali come una lista infinita senza guida. La tentazione è continuare a
+cercare. C’è una risposta migliore, e comincia col capire perché lo scaffale è
+vuoto.
+
+## Perché lo store del televisore è sottile
+
+I televisori Samsung usano Tizen. Quelli LG usano webOS. Nessuno dei due è
+Android. Entrambi sono sistemi operativi perfettamente capaci, ma sono mondi a
+sé, con i propri strumenti di sviluppo, le proprie regole di revisione e —
+decisivamente — una quota minuscola degli sviluppatori che scrivono software
+video serio. La discendenza mpv e FFmpeg su cui
+[si costruiscono i buoni lettori IPTV](/it/blog/cosa-fa-un-lettore-iptv/) punta
+ad Android, iOS, Windows, macOS e Linux; un porting Tizen è un progetto a parte
+con un pubblico piccolo, e la maggior parte dei lettori non lo fa mai.
+
+Così i lettori che compaiono nello store del televisore tendono a essere
+applicazioni web leggere, limitate a ciò che un motore browser sa
+decodificare. Su uno stream pulito funzionano. Sui
+[flussi strani che i fornitori producono davvero](/it/blog/protocolli-di-streaming-spiegati/)
+— transport stream grezzi, codec audio insoliti, HEVC su un pannello più
+vecchio — si inceppano, perdono l’audio o rifiutano. E quasi nessuno ha una
+guida degna del nome.
+
+Vidonzo non ha una versione Tizen o webOS nemmeno lui. Invece di prometterla,
+ecco la configurazione che funziona oggi e funziona bene.
+
+## Il televisore è lo schermo; il lettore gira su un box
+
+Ogni televisore moderno ha porte HDMI libere e una di queste può ospitare un
+piccolo dispositivo Android TV — una chiavetta o un box, da una manciata di
+produttori, al prezzo di una cena modesta fuori. Collegalo, e il televisore
+diventa ciò in cui è migliore: un display grande e luminoso. Il lettore gira
+sul box, con un vero sistema operativo sotto e
+[una vera interfaccia da televisore sopra](/it/blog/lettore-iptv-su-android-tv/).
+
+Il guadagno non è sottile. Un box costruito per Android TV fa girare lo stesso
+motore mpv di un telefono, con decodifica hardware, un buffer regolabile per
+[una connessione ballerina](/it/blog/risolvere-buffering-iptv/) e una guida che
+[mostra l’ora giusta](/it/blog/come-funziona-la-guida-epg/). Inoltre smette di dipendere
+dalle politiche dello store del produttore del televisore. Quando tra sei anni
+il televisore verrà sostituito, il box passa a quello nuovo e niente della tua
+configurazione cambia.
+
+Due note pratiche per sceglierne uno. Preferisci un dispositivo *certificato*
+Android TV o Google TV a un «box Android» generico — quelli certificati hanno
+Google Play, ricevono aggiornamenti e hanno telecomando e controllo HDMI
+cablati come si deve. E usa l’impostazione HDMI-CEC del televisore stesso così
+che le frecce del suo telecomando guidino il box; la maggior parte delle case
+non tocca più il telecomando del box.
+
+## Poi lascia che a scrivere sia il telefono
+
+L’unica cosa che un box non risolve è la scrittura. Inserire una password
+Xtream con le frecce è una pena su qualsiasi dispositivo. Saltalo: qualsiasi
+telefono o tablet sullo stesso Wi-Fi può
+[fare da telecomando a Vidonzo sul box](/it/blog/telefono-come-telecomando-tv/).
+Il telefono trova il televisore da solo, sfogli la libreria del televisore e
+cerchi con una tastiera vera, e la riproduzione parte sul grande schermo con un
+tocco. In pratica quasi tutti configurano la playlist dal telefono e non
+scrivono mai sul televisore.
+
+## L’ordine che evita gli intoppi soliti
+
+1. Collega il box alla stessa rete che usa il telefono. Se il televisore è
+   nella stanza in fondo, [controlla prima il Wi-Fi di quella stanza](/it/blog/iptv-si-blocca-su-wifi/)
+   — un collegamento via cavo al box, se il router è vicino, elimina la causa
+   più comune dei blocchi.
+2. Installa Vidonzo sul box: [la guida all’installazione su TV](/it/help/) lo
+   copre.
+3. [Aggiungi la tua playlist](/it/blog/configurare-la-prima-playlist/) — dal
+   telefono come telecomando se ne hai uno vicino.
+4. Apri la guida, scegli un canale, e solo allora regola qualcosa.
+
+## E l’app lettore del televisore, per ora?
+
+Tienila, se ti funziona, per la stessa ragione per cui terresti VLC accanto a
+un lettore dedicato: c’è. Ma quando un canale perde l’audio o la guida è
+spostata di un’ora, la colpa non è del tuo fornitore e non è del televisore —
+è chiedere a un motore browser in un sistema operativo chiuso di fare il
+lettore multimediale. Dai al televisore un solo lavoro. In quel lavoro è
+bravissimo.

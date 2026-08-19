@@ -1,0 +1,108 @@
+---
+title: "The guide is empty or shows the wrong times: fixing your EPG"
+description: "The channels play and the guide is blank, stale, or shifted by exactly one hour. Four faults produce those symptoms, each with its own signature, and none of them is the player being slow."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['troubleshooting', 'playlists']
+keywords: ['iptv epg not working', 'epg wrong time', 'iptv guide empty', 'xmltv not loading', 'epg time offset']
+heroImageAlt: "A programme grid with most cells empty and one row shifted a column to the right."
+---
+
+An empty guide is more annoying than a broken channel, because everything
+*else* works. The picture plays, the list is full, and the one row that
+should say what is on says "No program info". Or it says something, but it
+is what was on an hour ago. If you have read
+[how the guide works](/blog/epg-explained/) you already know the key fact: the
+guide is a separate file, fetched separately, matched to your channels by
+name. Every fault below is a break somewhere in that chain. Here they are, in
+the order they usually occur.
+
+## 1. The player was never told where the guide is
+
+An M3U playlist [carries channels](/blog/inside-an-m3u-file/); it does not
+carry a guide. Some playlists name the guide's address in their first line
+(`url-tvg=`), many do not, and if yours does not, the player has nothing to
+fetch and every channel says "No program info" — the guide is not broken, it
+is absent.
+
+The signature: *every* channel is empty, from the first day. The fix: ask
+your provider for the XMLTV address (it usually ends in `.xml` or `.xml.gz`)
+and enter it in the source's settings, next to the playlist link. If your
+provider gave you an [Xtream Codes login](/blog/xtream-codes-vs-m3u/), the
+guide comes with the login and there is nothing to enter — an empty guide on
+Xtream means one of the faults below.
+
+## 2. The guide and the channels do not know each other
+
+This is the commonest one, and it produces the most confusing symptom: *some*
+channels have a guide and others, seemingly at random, do not.
+
+The guide file lists programmes against a channel identifier — a `tvg-id`.
+The playlist gives each channel a `tvg-id` too. Where they match, you get a
+guide; where they do not, you get nothing, even if the channel is right there
+in the guide file under a slightly different name. Providers who generate both
+from the same database match perfectly. Providers who bolt a third-party guide
+onto their list match where the identifiers happen to agree.
+
+The signature: partial coverage, stable over time — the same channels always
+empty. There is little the player can do, because it cannot know that
+`news24.example` and `News24_HD` are the same station without guessing. If your
+provider gives more than one playlist variant, the fuller one often has better
+identifiers; otherwise, tell the provider which channels lack a guide.
+
+## 3. The times are shifted — usually by exactly one hour
+
+Programmes appear, but the grid says the film started at nine when it started
+at ten. If the shift is a round number of hours, this is a time-zone problem,
+and it is worth understanding, because it is the fault people most often
+blame on the wrong party.
+
+An XMLTV file stamps every programme with a time *and* an offset from UTC —
+`20260819210000 +0100`. A correct player reads that offset, converts to your
+device's clock, and shows the right time regardless of where the guide was
+made. Vidonzo does this — it is one of the things the app is careful about,
+because [it is where guides most often go wrong](/blog/epg-explained/) — so a
+shift usually means one of two other things:
+
+- **The guide declares the wrong offset.** The provider generated it on a
+  server set to a different zone and did not fix the stamps. Every channel is
+  off by the same amount, and it is off in every player. Only the provider can
+  correct it.
+- **The device's own clock or zone is wrong.** A TV box left on a factory
+  time zone will shift *everything*, including the clock in its status bar.
+  Check the box's date and time settings before anything else — and if it is
+  set to "automatic" on a network that blocks time servers, set it by hand.
+
+The signature that separates the two: if the shift also appears on your phone,
+it is the guide; if it appears only on one device, it is that device.
+
+## 4. The guide is stale
+
+Everything was fine last week and now the grid shows programmes that already
+aired, or stops dead at midnight tonight. Guide files cover a window — often
+a few days — and the file has to be re-fetched to extend it. If the player
+cannot reach the address (it moved, it expired, the network was down when it
+tried), the old copy is what you see.
+
+The signature: a guide that ends at a fixed point in the past, or that stops
+some hours ahead. Use *Refresh now* on the source; if that fills it, the
+fetch was simply overdue. If it does not, the address itself is failing, and
+[the same checks that apply to a playlist link](/blog/playlist-link-wont-load/)
+apply here — paste it into a browser and see whether it answers.
+
+## The five-minute order
+
+1. Confirm the guide toggle is on (*Show program guide (EPG)*).
+2. Xtream login? Then the address is not the problem; skip to 3. M3U link?
+   Confirm an XMLTV address is entered.
+3. All channels empty → address (1) or stale (4). Some empty → matching (2).
+   Wrong times → zone (3).
+4. *Refresh now*, then reopen the guide.
+5. Check the same channel on a second device before writing to your provider,
+   so you can tell them whether the fault follows the guide or the device.
+
+An honest closing note: a guide is only as good as the file behind it, and a
+player's job is to fetch it reliably, match it faithfully, and — the part
+most players get wrong — do the time-zone arithmetic correctly. Once those
+three hold, the remaining faults are all in the file, and the fastest fix is
+knowing which one to report.

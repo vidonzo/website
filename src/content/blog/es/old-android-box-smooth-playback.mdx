@@ -1,0 +1,109 @@
+---
+title: "Hacer que una caja Android vieja vuelva a ir fluida"
+description: "Una caja que se atasca rara vez es demasiado débil para reproducir vídeo; es que se le pide todo lo demás. Qué partes de un reproductor cuestan en un aparato flojo, y los ajustes y hábitos que devuelven el trabajo a la parte que sí puede con él."
+urlSlug: caja-android-vieja-reproduccion-fluida
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisión', 'reproducción']
+keywords: ['reproductor iptv para caja android vieja', 'reproductor iptv ligero android tv', 'caja android va lenta', 'iptv en hardware flojo']
+heroImageAlt: "Una pequeña caja decodificadora algo rayada en una estantería, con el piloto encendido y polvo en una esquina."
+---
+
+En muchos salones hay, en algún rincón, una cajita negra con Android de cinco o
+seis años, con uno o dos gigas de memoria y un chip que ya era barato cuando
+era nuevo. Antes lo reproducía todo. Ahora la app que lleva se atasca al
+cambiar de canal, la imagen tiembla en las escenas movidas y el menú tarda un
+instante en responder. El instinto dice que la caja está acabada. Normalmente
+no lo está. Hasta una caja modesta lleva un decodificador de vídeo dedicado
+perfectamente capaz de pintar 1080p toda la noche; lo que ha cambiado es cuánto
+trabajo *ajeno* ha ido asumiendo el software a su alrededor. Aquí va adónde se
+va el coste y cómo devolver el trabajo a las partes que sí pueden con él.
+
+## Qué cuesta de verdad en una caja floja
+
+Tres cosas, en orden decreciente.
+
+**Decodificar vídeo por software.** Si la app decodifica en la CPU de propósito
+general en vez de en el bloque de vídeo, un stream 1080p se come la mayor parte
+de un chip pequeño, y uno 4K o HEVC sencillamente no se puede. Esta sola
+decisión separa una caja que reproduce de una que se atasca, y es un ajuste.
+
+**Dibujar una interfaz recargada.** Carátulas, animaciones, fondos
+difuminados, un carrusel de cien tarjetas, todo redibujándose mientras el vídeo
+va por debajo. Cada fotograma de eso sale del mismo presupuesto pequeño del que
+sale el vídeo. Una interfaz pesada sobre un decodificador ligero es exactamente
+cómo una caja que *sí puede* reproducir parece que no puede.
+
+**Tener una lista enorme en memoria de la forma equivocada.** La lista completa
+de un proveedor es un archivo grande, y una app que la mantiene entera como una
+estructura plana y la busca haciendo scroll dejará sin memoria a una caja
+pequeña — y entonces el sistema empieza a cerrar cosas, a veces la propia app.
+
+Fíjate en lo que no está en la lista: la red. El buffering y el tirón se
+parecen en una caja lenta, así que conviene descartar primero la red — [el
+artículo sobre buffering](/es/blog/solucionar-cortes-iptv/) lo cubre en cinco
+minutos — antes de dar por culpable al hardware.
+
+## Los ajustes que importan
+
+**Decodificación por hardware activada.** En Vidonzo está en *Ajustes →
+Reproducción → Decodificación por hardware*, y en una caja vieja es toda la
+partida. Activada, el bloque de vídeo hace la decodificación y la CPU queda
+libre para pintar la interfaz; desactivada, la CPU hace las dos cosas y pierde.
+Si con ella activada un canal muestra
+[sonido pero no imagen](/es/blog/se-oye-pero-no-se-ve/), el formato de ese
+canal es uno que el decodificador de la caja no soporta — invierte el
+interruptor solo para ese canal y cuenta con que irá más pesado.
+
+**Búfer a la medida de la conexión, no de la caja.** Un búfer mayor cuesta
+memoria, y una caja pequeña tiene poca de sobra — pero un búfer demasiado
+pequeño se para en el primer hipo, y pararse es justo lo que quieres curar.
+Empieza por el valor por defecto; súbelo solo si la imagen realmente se
+detiene, y bájalo solo si a la caja le falta memoria de forma evidente (las
+apps cerrándose solas son la señal).
+
+**Conserva la guía, quita el adorno.** La guía de programación son datos, no
+imágenes, y es barata de dibujar. Lo que cuesta son las pantallas cargadas de
+carátulas. La interfaz de televisor de Vidonzo es
+[una barra lateral con marcos de foco](/es/blog/reproductor-iptv-en-android-tv/),
+hecha para una cruceta y ligera por diseño — la caja dibuja una lista, no un
+escaparate.
+
+## Los hábitos que importan
+
+**Cura tu lista.** [Favoritos y un par de categorías](/es/blog/organizar-listas-grandes-iptv/)
+no solo son cómodos en una caja pequeña: son más ligeros. Recorrer una lista
+corta de lo que realmente ves no cuesta casi nada. Hacer scroll por la lista
+completa del proveedor cada noche es lo más caro que puedes pedirle a un
+aparato flojo.
+
+**Deja que el teléfono navegue.** Este es el cambio que más sorprende a la
+gente. Si un móvil o tableta en el mismo Wi-Fi
+[hace de mando de la caja](/es/blog/movil-como-mando-de-tv/), el
+teléfono dibuja las carátulas, ejecuta la búsqueda y se encarga de teclear — y
+la caja solo tiene que recibir «reproduce esto» y reproducirlo. Una caja floja
+con un móvil al lado se comporta como una caja mucho mejor, porque ha sido
+degradada al único trabajo en el que es buena.
+
+**Reinícialo de vez en cuando.** No es sabiduría popular: una caja encendida
+tres semanas ha acumulado todo lo que cada app ha ido soltando. Un reinicio
+semanal cuesta un minuto y devuelve memoria que el reproductor puede usar.
+
+**Desinstala lo que no uses.** Cada app que corre un servicio en segundo plano
+gasta del mismo presupuesto pequeño. Una caja que solo tiene que ser una caja
+deja más para la imagen.
+
+## Cuando de verdad es el hardware
+
+Hay un suelo. Una caja que no puede decodificar HEVC por hardware nunca
+reproducirá HEVC con fluidez, haga lo que haga el software, y los proveedores
+se están pasando a HEVC porque les reduce el ancho de banda a la mitad. Si los
+canales de tu proveedor son en su mayoría HEVC y el decodificador de tu caja es
+anterior, la respuesta honesta es un aparato más nuevo — y no tiene por qué ser
+caro; un stick certificado actual decodifica HEVC por hardware y cuesta poco.
+
+Pero prueba primero el software. Decodificación por hardware activada, búfer
+por defecto, interfaz ligera, el teléfono navegando: la mayoría de las quejas
+de «caja vieja» no sobreviven a esta lista, y recorrerla lleva una tarde.
+[Configurar la lista en un reproductor nuevo](/es/blog/configurar-primera-lista-iptv/)
+es un minuto de esa tarde; el resto es mirar a ver si se atasca.

@@ -1,0 +1,98 @@
+---
+title: "Filmler ve diziler bir kütüphane olarak, dosya adları klasörü olarak değil"
+description: "Sağlayıcınız film ve dizileri bir girdi listesi olarak gönderir. Afişler, sezonlar ve bir kaldığınız yer noktası görmeniz — ya da bin satır dosya adı görmeniz — tamamen oynatıcının işidir."
+urlSlug: filmler-ve-diziler-bir-kutuphane-olarak
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['urun', 'oynatma-listesi']
+keywords: ['iptv vod oynatıcı', 'dizi sezon bölüm iptv', 'afişli filmler iptv', 'izlemeye devam et iptv']
+heroImageAlt: "Kitap sırtlarıyla dolu bir raf; birkaçı kapakları görünsün diye dışarı çekilmiş, yanında sade basılı bir liste."
+---
+
+Yeni bir oynatıcıyı kurduktan bir iki gün sonra öyle bir an gelir ki, insanlar
+«filmler» bölümünü ilk kez açar ve sağlayıcılarının aslında ne gönderdiğini
+keşfeder: bir liste. `Some.Film.2019.1080p.WEB` ve `Show.S03E04` gibi adlarla
+binlerce satır, alfabetik, resimsiz, özetsiz ve hangi bölümde kaldığınıza dair
+hiçbir izi olmadan. Sağlayıcının kötü olduğu sonucuna varmak kolaydır.
+Genellikle sağlayıcıda bir sorun yoktur. Baktığınız şey ham maddedir ve bir
+listeyle bir kütüphane arasındaki fark, oynatıcının ya yaptığı ya yapmadığı bir
+iştir.
+
+## Gerçekte ne geliyor
+
+Bu, [listenizin hangi biçimde olduğuna](/tr/blog/xtream-codes-mi-m3u-mu/) bağlı.
+
+**Xtream Codes** girişi oynatıcıya üç ayrı besleme verir — canlı, film, dizi —
+ve film ile dizi beslemeleri yapı taşır: başlık, yıl, afiş adresi, puan, konu,
+oyuncu kadrosu ve diziler için sıralı sezon–bölüm hiyerarşisi. Bu, üzerinde
+çalışılacak epey malzemedir ve iyi bir oynatıcı hepsini kullanır.
+
+**M3U** bağlantısı [daha düzdür](/tr/blog/m3u-dosyasinin-icinde-ne-var/): öğe başına bir
+satır, bir ad, bir grup başlığı ve çoğunlukla bir logo adresi. Kimi sağlayıcılar
+afişi logo alanına, dizi adını gruba koyar; kimileri koymaz. M3U'dan çalışan bir
+oynatıcının yapıyı *çıkarsaması* gerekir — `Show.S03E04` ile `Show.S03E05`'in aynı
+dizinin aynı sezonuna ait bölümler olduğunu anlaması — ve bunu değişen
+gayretlerle yapar.
+
+Her hâlükârda hiçbir şey *kütüphane olarak* gelmez. Kütüphane inşa edilir.
+
+## İnşa etmek ne demek
+
+Ekranda göründükleri sırayla beş iş.
+
+**Görseller.** Afiş, üstverideki bir adrestir; oynatıcı onu çeker, önbelleğe
+alır, boyutlandırır ve bunu görüş alanındaki her kart için, kaydırmayı
+takmadan yapar. Afişler boşsa bunun nedeni genellikle adresin eksik ya da ölü
+olmasıdır — sağlayıcının üstverisi artık orada olmayan bir resmi gösteriyordur —
+ve iyi bir oynatıcı kırık bir resim yerine derli toplu bir yer tutucu gösterir.
+
+**Ayrıntılar.** Puan, konu, kadro, yıl, tür — oynat'a basmadan *önce* izleyip
+izlemeyeceğinize karar verebilesiniz diye bir ayrıntı ekranında sunulur; bir
+kütüphanenin bütün amacı da budur. Vidonzo bunları başlık başına düzenler ve ne
+istediğinizi bilmediğiniz akşamlar için tüm kataloğu kapsayan türe göre gezinme
+ekler.
+
+**Yapı.** Diziler işin zor kısmıdır. Sezon bir kaptır, bölüm onun içinde sıralı
+bir öğedir ve «sonraki»nin bir anlamı vardır. Oynatıcının bu ağacı beslemeden
+(Xtream) ya da adlardan (M3U) kurması, sonra sezon ve bölümleri oldukları gibi
+sunması gerekir — *S03E04*'ü *S03E03* ile *S03E05* arasında bir yerde aradığınız
+düz bir liste olarak değil. Bunu doğru yapın, *sonraki bölümü otomatik oynat*
+mümkün hâle gelir; çünkü oynatıcı «sonraki»nin ne olduğunu bilir.
+
+**Bellek.** İzlemeye devam et, öğe başına ve kaynak başına bir kaldığınız yer
+noktasıdır: hangi dizinin hangi bölümünde ne kadar ilerlediğiniz, hangi
+sağlayıcıda. Bir kütüphaneyi raftan *sizin* rafınıza dönüştüren şey budur.
+Telefonda durun, televizyonda devam edin; konum aynıdır, çünkü cihaza değil öğeye
+aittir.
+
+**Arama.** [Tek alan, canlı, film ve dizilerde aynı anda](/tr/blog/buyuk-oynatma-listesi-duzenleme/),
+çünkü bir başlığın hangi rafta olduğunu bilmezsiniz ve bilmeniz de gerekmez. Bir
+ad yazın; sonuçlar türe göre gruplanır; birini seçin.
+
+## Bunu neden oynatıcı yapmak zorunda
+
+Sağlayıcı neden bitmiş bir kütüphane göndermiyor diye sormak yerindedir. Çünkü
+sağlayıcı hangi ekranda olduğunuzu bilmez. Telefon için afiş ızgarası, televizyon
+için yan şerit ve tablet için sık bir tablo, aynı verinin üç ayrı düzenlemesidir
+ve hangisini çizdiğini yalnızca oynatıcı bilir. Besleme olguları taşır; oynatıcı
+olguları, kanepeden göz gezdirebileceğiniz bir rafa çevirir. Bu
+[iş bölümünün tamamıdır](/tr/blog/iptv-oynatici-ile-yayin-platformu-farki/): bir yayın
+servisinin uygulaması ekranı olan bir dükkândır; IPTV oynatıcı ise ekranın
+kendisidir — ve çok iyi bir ekran olmak zorundadır.
+
+## Neye bakmalı
+
+Şu anki oynatıcınız size dosya adları gösteriyorsa, üstveri neredeyse kesinlikle
+oradadır ve kullanılmıyordur. İki hızlı kontrol: bir dizi açın ve sezonları var
+mı bakın; bir film açın ve konusu var mı bakın. İkisi de yoksa oynatıcı listeyi
+okuyup orada duruyordur. Ayrıca
+[parçaların açığa çıkarıldığını](/tr/blog/iptv-altyazi-ve-ses-secenekleri/) doğrulayın
+— üç ses dili ve iki altyazı parçası olup her birinin yalnızca ilkini oynatan bir
+film, sayfaları birbirine yapışmış bir kütüphanedir.
+
+Vidonzo kütüphane amaç edinilerek yapıldı: afişler, puanlar, konu ve kadro; ağaç
+olarak sezonlar ve bölümler, sonrakini otomatik oynatmayla; kaynak ve öğe başına
+izlemeye devam et; her şeyin üzerinde tek bir arama. Sağlayıcınızın gönderdiği
+listenin aynısı, sonuna kadar okunmuş hâli. Film bölümünüz şu an bir dosya adları
+klasörüyse, [elinizde zaten olan girişi eklemek](/tr/blog/ilk-oynatma-listesi-kurulumu/)
+yaklaşık bir dakika sürer ve fark ilk ekranda görünür.

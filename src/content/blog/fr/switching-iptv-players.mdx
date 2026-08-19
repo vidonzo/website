@@ -1,0 +1,108 @@
+---
+title: "Changer de lecteur IPTV sans tout reconstruire"
+description: "La peur qui garde les gens sur un lecteur qu’ils n’aiment pas, c’est de repartir de zéro. Presque rien n’a besoin de repartir de zéro : voici ce qui suit, ce qui ne suit pas, et l’ordre en quinze minutes pour le faire."
+urlSlug: changer-de-lecteur-iptv
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'configuration']
+keywords: ['changer de lecteur iptv', 'alternative lecteur iptv', 'changer application iptv', 'transferer playlist iptv vers nouvelle application']
+heroImageAlt: "Deux portes côte à côte, l’une ouverte, une seule clé posée sur le seuil entre les deux."
+---
+
+Les gens restent sur un lecteur qu’ils n’aiment pas pour la même raison qu’ils
+restent dans une banque qu’ils n’aiment pas : le déménagement donne
+l’impression de devoir tout reconfigurer. Avec un lecteur IPTV, ce n’est pas le
+cas, et la raison est structurelle. Le lecteur n’a jamais possédé votre
+bibliothèque. [Votre playlist est à vous](/fr/blog/apportez-votre-playlist/),
+délivrée par votre fournisseur, et tout lecteur honnête n’est qu’une autre
+paire d’yeux sur la même liste. Voici ce qui suit réellement, ce qui ne suit
+pas, et comment le faire en une soirée.
+
+## Ce qui suit : tout ce qui compte
+
+**La playlist elle-même.** Quelle que soit sa forme — des identifiants Xtream
+ou un lien M3U/M3U8 — c’est un bout de texte qu’on vous a donné, et il
+fonctionne dans le nouveau lecteur exactement comme dans l’ancien. Si vous ne
+vous en souvenez pas, ne fouillez pas l’ancienne application ; redemandez-le à
+votre fournisseur, ou relisez le message envoyé à l’inscription. Les
+fournisseurs envoient souvent à la fois des identifiants Xtream et une adresse
+M3U ; [l’un ou l’autre convient](/fr/blog/xtream-codes-ou-m3u/), et les
+identifiants sont généralement le plus riche des deux.
+
+**L’adresse du guide.** Si votre fournisseur vous a donné une URL XMLTV séparée
+pour le guide des programmes, elle va aussi dans le nouveau lecteur, à côté de
+la source à laquelle elle appartient. Si vous utilisez des identifiants Xtream,
+le guide vient avec et il n’y a rien à déplacer.
+
+**Vos habitudes.** Les chaînes que vous regardez réellement sont les mêmes.
+Dix minutes avec le bouton favoris le premier soir redonnent sa forme à votre
+liste, souvent une meilleure forme qu’avant — la plupart des gens ont des
+favoris ajoutés la première semaine et jamais regardés depuis.
+
+## Ce qui ne suit pas, et pourquoi ça n’a pas d’importance
+
+**Les favoris et points de reprise de l’ancienne application.** Ils vivent dans
+le stockage propre de l’ancienne application, dans un format à elle, et aucun
+lecteur ne peut lire celui d’un autre. Les favoris, vous les refaites en
+quelques minutes. Les points de reprise sont perdus — pour les deux ou trois
+choses en cours, notez l’épisode. C’est tout le coût du changement.
+
+**Les réglages de l’ancienne application.** Tailles de tampon, choix du
+décodeur, style des sous-titres — n’essayez pas de les copier. Ils étaient
+réglés pour un autre moteur. Partez des valeurs par défaut du nouveau lecteur
+et n’ajustez que ce qui est visiblement faux.
+
+## Ce qu’il ne faut *pas* apporter : un fichier exporté
+
+Certains lecteurs proposent d’exporter votre configuration dans un fichier.
+Tentant d’y voir le chemin de migration. Ce n’en est généralement pas un :
+l’export contient les mêmes identifiants que vous avez déjà, emballés dans un
+format que seule l’application exportatrice sait lire, et parfois aussi la
+copie en cache de la playlist de cette application — figée au moment de
+l’export, donc [périmée comme un fichier local](/fr/blog/lien-de-playlist-ou-fichier-local/).
+Laissez le fichier. Saisissez les identifiants ou le lien dans le nouveau
+lecteur, pour qu’il récupère la liste actuelle à la source.
+
+## L’ordre qui prend quinze minutes
+
+1. **Notez les identifiants ou le lien.** Adresse du serveur, nom
+   d’utilisateur, mot de passe — ou l’URL M3U — et l’adresse XMLTV si vous en
+   avez une. Collez-les quelque part d’où vous pourrez copier ; taper à la
+   main un mot de passe de 24 caractères, c’est ainsi qu’
+   [un lien refuse de charger sans explication](/fr/blog/la-playlist-ne-charge-pas/).
+2. **Installez le nouveau lecteur et ajoutez la source.** Pour Vidonzo,
+   [le guide prend environ une minute](/fr/blog/configurer-sa-premiere-playlist/).
+   Ne supprimez pas encore l’ancienne application.
+3. **Vérifiez trois choses** : le guide à une heure que vous pouvez contrôler,
+   une chaîne sur la connexion que vous avez vraiment, et une recherche de
+   quelque chose dont vous savez que c’est dans la liste. Si les trois passent,
+   le changement est pour l’essentiel terminé.
+4. **Réglez la politique d’actualisation.** Une playlist hébergée change ;
+   dites au lecteur à quelle fréquence la relire — quotidien convient à la
+   plupart, horaire si votre fournisseur remanie beaucoup — et utilisez
+   *Actualiser maintenant* dès que quelque chose semble manquer.
+5. **Reconstituez les favoris** au cours de la première soirée, et laissez
+   « reprendre la lecture » se remplir tout seul.
+6. **Supprimez l’ancienne application** une semaine plus tard, quand vous
+   aurez cessé de l’ouvrir par habitude. Si elle contenait vos identifiants
+   fournisseur, effacez-les de là plutôt que de laisser une copie de votre
+   abonnement sur le téléphone.
+
+## Deux fournisseurs, ou un seul sur deux appareils
+
+Si la raison du changement est que vous avez désormais deux fournisseurs — ou
+le même à la fois par identifiants et par lien — un lecteur qui
+[garde les sources côte à côte](/fr/blog/plusieurs-playlists-dans-une-application/)
+signifie que vous n’avez jamais à choisir. Et si le changement coïncide avec un
+nouveau téléphone ou un nouveau téléviseur, connectez-vous et
+[tout ce que vous reconstituez vous suit](/fr/blog/changer-de-telephone/) sur
+l’écran suivant sans le refaire deux fois.
+
+## La seule chose qui change
+
+Ce qui diffère réellement après le changement, ce ne sont pas les chaînes —
+c’est ce que le lecteur en fait : si le guide est juste, si un flux coupé se
+reconnecte tout seul, si les films et séries sont une bibliothèque ou une
+liste, et ce que l’application sait de vous. C’est pour cela que le changement
+vaut la peine et coûte si peu. La bibliothèque n’a jamais été dans
+l’application.

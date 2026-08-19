@@ -1,0 +1,112 @@
+---
+title: "Geluid loopt niet gelijk met het beeld: waar de afwijking begint"
+description: "De lippen bewegen, de woorden komen te laat. Er zijn vier plekken waar een stream de synchronisatie kan verliezen — de encoder, het netwerk, de decoder, het scherm — en maar twee daarvan liggen binnen bereik van je speler."
+urlSlug: geluid-loopt-niet-gelijk-met-het-beeld
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemen-oplossen', 'afspelen']
+keywords: ['geluid niet synchroon iptv', 'audio vertraging stream', 'lipsync probleem', 'audio beeld verschuiving oplossen']
+heroImageAlt: "Een tekstballon die iets naast de mond staat waar hij bij hoort, op een effen ondergrond."
+---
+
+Niets verpest een uitzending sneller dan lippen die een zin afmaken voordat het
+geluid er is. Het is ook een van de vaakst verkeerd gediagnosticeerde fouten
+bij streamen, want een stream kent vier aparte plekken waar beeld en geluid uit
+elkaar kunnen lopen, en de oplossingen verschillen. Verander het verkeerde en
+de afwijking blijft precies waar hij was. Hier zijn de vier, van de bron tot je
+oren, en hoe je ziet met welke je te maken hebt.
+
+## Eerst: onderscheid afwijking van verschuiving
+
+Kijk een minuut en stel één vraag: is het gat *constant* of *groeiend*?
+
+Een constante verschuiving — het geluid is altijd ongeveer een derde seconde
+te laat en blijft dat — is vastgelegd voordat de stream jou bereikte, of door
+je scherm. Een groeiende afwijking — gelijk bij het openen van de zender, na
+tien minuten een seconde, na twintig erger — is een klokprobleem en wijst naar
+de buffer of de decodering aan jouw kant. Die ene waarneming halveert de lijst.
+
+## 1. De encoder: zo verliet het de server
+
+Video en audio zijn losse sporen, [samengevlochten tot één stream](/nl/blog/ondertiteling-en-audiosporen/),
+elk voorzien van tijdinformatie zodat de speler ze kan uitlijnen. Heeft de
+encoder van de aanbieder verkeerd gestempeld — de audioweg voegde vertraging
+toe waar de stempels geen rekening mee houden — dan ziet elke kijker van die
+zender dezelfde constante verschuiving, op elke speler, op elk apparaat.
+
+Het kenmerk: het is één zender, of de zenders van één aanbieder, en het is
+hetzelfde op je telefoon als op de tv. Aan jouw kant valt niets bij te stellen;
+de enige remedie ligt stroomopwaarts. Controleer de zender op een tweede
+apparaat ter bevestiging en meld de aanbieder welke zender en ongeveer hoe
+groot het gat is.
+
+## 2. Het netwerk: segmenten die uit de pas aankomen
+
+Bij [HLS en DASH](/nl/blog/streamingprotocollen-uitgelegd/) wordt een stream in
+korte segmenten geleverd, en als segmenten laat aankomen moet de speler kiezen
+tussen haperen en doorgaan. Doorgaan is waar de afwijking begint: hij speelt
+misschien wat hij heeft, en wat hij heeft zijn niet altijd beide sporen in
+gelijke mate. Bij een ruwe transportstream verschijnt hetzelfde als pakketten
+die onder belasting wegvallen en tijdinformatie meenemen.
+
+Het kenmerk: afwijking die komt en gaat met je verbinding — 's avonds erger,
+aan de andere kant van het huis erger, weg bij een bekabelde box. De oplossing
+is die voor [bufferen](/nl/blog/iptv-buffering-oplossen/): een grotere buffer en een
+betere [radioverbinding](/nl/blog/iptv-bevriest-op-wifi/) tussen router en
+scherm. Een grotere buffer geeft de speler ruimte om beide sporen door een
+hobbelig stuk heen uitgelijnd te houden in plaats van te improviseren.
+
+## 3. De decoder: twee klokken, één ervan traag
+
+Dit is het geval waar een speler werkelijk iets aan kan doen. Video wordt door
+de ene component gedecodeerd en audio door de andere, en de speler houdt ze
+samen door hun klokken te vergelijken. Als de videodecoder het niet bijhoudt —
+een zwakke box, een softwaredecoder die zich door HEVC kauwt, een warme
+telefoon die terugschakelt — raakt het beeld achter op het geluid. Het gat
+*groeit* en gaat terug naar nul zodra je de zender opnieuw opent.
+
+Het kenmerk: groeiende afwijking op het ene apparaat en niet op het andere, en
+erger bij zwaardere zenders. Drie dingen helpen, in deze volgorde:
+
+- **Zet hardwaredecodering aan**, bij *Instellingen → Afspelen*, als hij uit
+  staat. Dat verplaatst het videowerk naar de chip die ervoor is gemaakt, en de
+  videoklok verliest de race niet meer. Op sommige oudere boxen is
+  hardwaredecodering ook wat
+  [een zwart scherm weer beeld maakt](/nl/blog/wel-geluid-geen-beeld/).
+- **Open de stream opnieuw** als hij wegloopt. Beide klokken starten samen
+  opnieuw. Een omweg in plaats van een oplossing, maar eentje van twee seconden.
+- **Geef het apparaat minder te doen**: sluit andere apps, en als de box oud is
+  gaan [de aantekeningen over slanke setups voor zwakke hardware](/nl/blog/oude-android-box-weer-soepel/)
+  precies hierover.
+
+## 4. Het scherm: de tv is laat
+
+Moderne tv's bewerken het beeld — bewegingsverzachting, opschalen,
+ruisonderdrukking — en elke stap voegt milliseconden toe die het geluid niet
+krijgt. Stuur audio via de ene weg naar een soundbar en video via de andere
+naar het paneel, en ze komen apart aan. Het gat is constant en bij elke bron
+gelijk: de streaming-app, de spelcomputer, de tuner.
+
+Het kenmerk: het is alles, niet alleen je IPTV-speler. De meeste tv's hebben
+een «game»- of «pc»-beeldstand die de bewerking uitschakelt, en soundbars
+hebben hiervoor een audiovertraging-instelling. Eén keer instellen en elke bron
+is verholpen.
+
+## Wat een speler eerlijk gezegd niet kan
+
+Het loont de grens duidelijk te benoemen. Een speler beheert de buffer en de
+decoder — geval 2 en 3 — en kan twee sporen uitgelijnd houden zoals ze
+gestempeld zijn. Hij kan een stream die verkeerd de encoder verliet niet
+opnieuw stempelen, en hij ziet niet hoe lang je tv over een beeldje doet.
+Sommige spelers bieden een handmatige audio-verschuivingsregelaar; die kan een
+constante verschuiving op één zender maskeren en raakt een groeiende afwijking
+niet aan, omdat een vaste verschuiving een steeds wegglijdende klok niet kan
+volgen. Vidonzo heeft er voorlopig geen, vanuit de gedachte dat de twee dingen
+die een speler *wel* kan verhelpen beter verholpen dan gemaskeerd worden.
+
+## De korte versie
+
+Constant en overal: de tv. Constant en één zender: de encoder — meld het de
+aanbieder. Komt en gaat met de verbinding: de buffer. Groeit tot je opnieuw
+opent: de decoder — zet hardwaredecodering aan. Vier oorzaken, één minuut
+kijken om ze te onderscheiden.

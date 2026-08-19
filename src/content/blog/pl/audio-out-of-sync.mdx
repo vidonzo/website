@@ -1,0 +1,111 @@
+---
+title: "Dźwięk rozjechany z obrazem: skąd bierze się przesunięcie"
+description: "Usta się poruszają, słowa docierają później. Są cztery miejsca, w których strumień może stracić synchronizację — koder, sieć, dekoder, ekran — i tylko dwa z nich są w zasięgu twojego odtwarzacza."
+urlSlug: dzwiek-rozjechany-z-obrazem
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['diagnostyka', 'odtwarzanie']
+keywords: ['dzwiek nie zgodny z obrazem iptv', 'opoznienie dzwieku strumien', 'brak synchronizacji audio', 'naprawa synchronizacji dzwieku']
+heroImageAlt: "Dymek dialogowy narysowany nieco obok ust, do których należy, na gładkim tle."
+---
+
+Nic nie psuje transmisji szybciej niż usta, które kończą zdanie, zanim dotrze
+dźwięk. To także jedna z najczęściej błędnie diagnozowanych usterek
+streamingu, bo strumień ma cztery osobne miejsca, w których obraz i dźwięk mogą
+się rozjechać, a lekarstwo na każde jest inne. Zmień nie to, co trzeba, a
+przesunięcie zostanie dokładnie tam, gdzie było. Oto te cztery, od źródła do
+twoich uszu, i jak rozpoznać, z którym masz do czynienia.
+
+## Najpierw odróżnij przesunięcie narastające od stałego
+
+Popatrz minutę i zadaj jedno pytanie: odstęp jest *stały* czy *rośnie*?
+
+Stałe przesunięcie — dźwięk zawsze spóźnia się o mniej więcej jedną trzecią
+sekundy i tak zostaje — powstało, zanim strumień do ciebie dotarł, albo
+tworzy je twój ekran. Przesunięcie narastające — zgodne przy otwarciu kanału,
+sekunda po dziesięciu minutach, gorzej po dwudziestu — to problem zegara i
+wskazuje na buforowanie albo dekodowanie po twojej stronie. Ta jedna obserwacja
+skraca listę o połowę.
+
+## 1. Koder: opuścił serwer właśnie taki
+
+Obraz i dźwięk to osobne ścieżki [splecione w jeden strumień](/pl/blog/napisy-i-sciezki-audio/),
+każda ostemplowana informacją czasową, żeby odtwarzacz mógł je zestroić. Jeśli
+koder dostawcy ostemplował je źle — ścieżka dźwiękowa dodała opóźnienie, którego
+znaczniki nie uwzględniają — każdy widz tego kanału widzi to samo stałe
+przesunięcie, na każdym odtwarzaczu i każdym urządzeniu.
+
+Sygnatura: to jeden kanał albo kanały jednego dostawcy, i tak samo jest na
+telefonie jak na telewizorze. Po twojej stronie nie ma czego regulować; jedyne
+lekarstwo leży wyżej. Sprawdź kanał na drugim urządzeniu dla pewności i podaj
+dostawcy, który to kanał i mniej więcej jak duży odstęp.
+
+## 2. Sieć: segmenty docierają nie w takt
+
+W [HLS i DASH](/pl/blog/protokoly-streamingu-hls-dash-rtsp/) strumień dostarczany
+jest w krótkich segmentach, a gdy segmenty spóźniają się, odtwarzacz musi
+wybrać między zacięciem a jazdą dalej. Jazda dalej jest tym, od czego zaczyna
+się przesunięcie: może odtwarzać to, co ma, a to, co ma, nie zawsze jest obiema
+ścieżkami po równo. Na surowym transport streamie to samo objawia się jako
+pakiety gubione pod obciążeniem, zabierające ze sobą informacje o czasie.
+
+Sygnatura: przesunięcie przychodzi i odchodzi razem z łączem — gorzej
+wieczorem, gorzej po drugiej stronie mieszkania, znika na przystawce po kablu.
+Lekarstwo to lekarstwo na [buforowanie](/pl/blog/jak-naprawic-buforowanie-iptv/): większy
+bufor i lepsze [łącze radiowe](/pl/blog/iptv-zacina-sie-na-wifi/) między
+routerem a ekranem. Większy bufor daje odtwarzaczowi zapas, by przez trudny
+odcinek trzymać obie ścieżki zestrojone, zamiast improwizować.
+
+## 3. Dekoder: dwa zegary, jeden powolny
+
+To przypadek, z którym odtwarzacz naprawdę może coś zrobić. Obraz dekoduje
+jeden podzespół, dźwięk drugi, a odtwarzacz trzyma je razem, porównując ich
+zegary. Gdy dekoder obrazu nie nadąża — słaba przystawka, dekoder programowy
+przeżuwający HEVC, rozgrzany telefon, który się ogranicza — obraz zostaje w
+tyle za dźwiękiem. Odstęp *rośnie*, a zeruje się po ponownym otwarciu kanału.
+
+Sygnatura: narastające przesunięcie na jednym urządzeniu, a na innym nie, i
+gorsze na cięższych kanałach. Pomagają trzy rzeczy, w tej kolejności:
+
+- **Włącz dekodowanie sprzętowe** w *Ustawieniach → Odtwarzanie*, jeśli jest
+  wyłączone. Przenosi to pracę nad obrazem na układ zaprojektowany do tego, a
+  zegar obrazu przestaje przegrywać wyścig. Na niektórych starszych
+  przystawkach dekodowanie sprzętowe jest też tym, co
+  [zamienia czarny ekran z powrotem w obraz](/pl/blog/dzwiek-jest-obrazu-nie-ma/).
+- **Otwórz strumień na nowo**, gdy się rozjedzie. Oba zegary startują razem. To
+  obejście, nie naprawa — ale dwusekundowe.
+- **Daj urządzeniu mniej roboty**: zamknij inne aplikacje, a jeśli przystawka
+  jest stara, [uwagi o lekkich konfiguracjach dla słabego sprzętu](/pl/blog/stara-przystawka-android-plynne-odtwarzanie/)
+  są dokładnie o tym.
+
+## 4. Ekran: telewizor się spóźnia
+
+Nowoczesne telewizory przetwarzają obraz — wygładzanie ruchu, skalowanie,
+redukcja szumów — i każdy etap dodaje kilka milisekund, których dźwięk nie
+dostaje. Poślij dźwięk do soundbara jedną drogą, a obraz do panelu drugą, i
+dotrą osobno. Odstęp jest stały i taki sam dla każdego źródła: aplikacji
+streamingowej, konsoli, tunera.
+
+Sygnatura: dotyczy wszystkiego, nie tylko twojego odtwarzacza IPTV. Większość
+telewizorów ma tryb obrazu „gra” lub „PC”, który wyłącza przetwarzanie, a
+soundbary mają ustawienie opóźnienia dźwięku właśnie po to. Ustaw raz i każde
+źródło jest naprawione.
+
+## Czego odtwarzacz uczciwie nie potrafi
+
+Warto jasno nazwać granicę. Odtwarzacz steruje buforem i dekoderem —
+przypadki 2 i 3 — i potrafi trzymać dwie ścieżki zestrojone tak, jak je
+ostemplowano. Nie potrafi ostemplować na nowo strumienia, który wyszedł z
+kodera źle, i nie widzi, ile czasu twój telewizor potrzebuje na narysowanie
+klatki. Niektóre odtwarzacze oferują ręczny suwak przesunięcia dźwięku; potrafi
+zamaskować stałe przesunięcie na jednym kanale i nie ruszy przesunięcia
+narastającego, bo stała wartość nie dogoni zegara, który wciąż się ześlizguje.
+Vidonzo obecnie takiego nie ma, wychodząc z założenia, że te dwie rzeczy, które
+odtwarzacz *potrafi* naprawić, lepiej naprawić niż zamaskować.
+
+## Wersja krótka
+
+Stałe i wszędzie: telewizor. Stałe i jeden kanał: koder — zgłoś dostawcy.
+Przychodzi i odchodzi z łączem: bufor. Rośnie, aż otworzysz na nowo: dekoder —
+włącz dekodowanie sprzętowe. Cztery przyczyny, minuta patrzenia, żeby je
+rozróżnić.

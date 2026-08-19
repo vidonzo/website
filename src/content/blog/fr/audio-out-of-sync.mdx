@@ -1,0 +1,119 @@
+---
+title: "Le son désynchronisé de l’image : où commence la dérive"
+description: "Les lèvres bougent, les mots arrivent en retard. Il y a quatre endroits où un flux peut perdre la synchronisation — l’encodeur, le réseau, le décodeur, l’écran — et seulement deux sont à portée de votre lecteur."
+urlSlug: son-desynchronise-de-l-image
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['depannage', 'lecture']
+keywords: ['son desynchronise iptv', 'decalage audio streaming', 'audio en retard sur video', 'corriger synchro audio']
+heroImageAlt: "Une bulle de dialogue dessinée légèrement à droite de la bouche à laquelle elle appartient, sur fond uni."
+---
+
+Rien ne gâche plus vite une diffusion que des lèvres qui terminent une phrase
+avant que le son n’arrive. C’est aussi l’un des défauts les plus mal
+diagnostiqués du streaming, car un flux comporte quatre endroits distincts où
+l’image et le son peuvent se séparer, et les remèdes diffèrent. Changez la
+mauvaise chose, et la dérive reste exactement où elle était. Voici les quatre,
+de la source à vos oreilles, et comment savoir lequel vous avez.
+
+## D’abord, distinguez dérive et décalage
+
+Regardez une minute et posez une seule question : l’écart est-il *constant* ou
+*croissant* ?
+
+Un décalage constant — le son a toujours environ un tiers de seconde de retard
+et cela ne bouge pas — a été fixé avant que le flux ne vous parvienne, ou par
+votre écran. Une dérive croissante — synchrone à l’ouverture de la chaîne, une
+seconde après dix minutes, pire après vingt — est un problème d’horloge, et
+elle pointe vers la mise en tampon ou le décodage de votre côté. Cette seule
+observation divise la liste par deux.
+
+## 1. L’encodeur : c’est parti du serveur ainsi
+
+La vidéo et l’audio sont des pistes distinctes
+[tressées en un seul flux](/fr/blog/sous-titres-et-pistes-audio/), chacune
+horodatée pour que le lecteur puisse les aligner. Si l’encodeur du fournisseur
+les a mal horodatées — la chaîne audio a ajouté une latence dont les
+horodatages ne tiennent pas compte — tous les spectateurs de cette chaîne
+voient le même décalage constant, sur n’importe quel lecteur et n’importe quel
+appareil.
+
+La signature : c’est une chaîne, ou les chaînes d’un fournisseur, et c’est
+pareil sur votre téléphone et sur le téléviseur. Rien à régler chez vous ; le
+seul remède est en amont. Vérifiez la chaîne sur un second appareil pour
+confirmer, et indiquez au fournisseur quelle chaîne et l’ampleur approximative
+de l’écart.
+
+## 2. Le réseau : des segments qui arrivent en désordre
+
+En [HLS et DASH](/fr/blog/protocoles-de-streaming-expliques/), un flux est livré
+par courts segments, et si des segments arrivent en retard, le lecteur doit
+choisir entre caler et poursuivre. Poursuivre, c’est là que la dérive
+commence : il peut lire ce qu’il a, et ce qu’il a n’est pas toujours les deux
+pistes à parts égales. Sur un flux de transport brut, la même chose apparaît
+sous forme de paquets perdus sous charge, emportant l’information de temps.
+
+La signature : une dérive qui va et vient avec votre connexion — pire le soir,
+pire à l’autre bout de la maison, absente sur un boîtier filaire. Le remède est
+celui de [la mise en tampon](/fr/blog/regler-le-buffering-iptv/) : un tampon plus
+grand et une meilleure [liaison radio](/fr/blog/iptv-qui-fige-en-wifi/)
+entre la box et l’écran. Un tampon plus grand donne au lecteur de quoi garder
+les deux pistes alignées pendant un passage difficile plutôt que d’improviser.
+
+## 3. Le décodeur : deux horloges, dont une lente
+
+C’est le cas où un lecteur peut vraiment faire quelque chose. La vidéo est
+décodée par un composant et l’audio par un autre, et le lecteur les maintient
+ensemble en comparant leurs horloges. Quand le décodeur vidéo ne suit pas —
+boîtier peu puissant, décodeur logiciel qui mâche du HEVC, téléphone chaud qui
+se bride — l’image prend du retard sur le son. L’écart *grandit*, et il repart
+à zéro quand vous rouvrez la chaîne.
+
+La signature : dérive croissante sur un appareil et pas sur un autre, et pire
+sur les chaînes les plus lourdes. Trois choses aident, dans cet ordre :
+
+- **Activez le décodage matériel**, dans *Réglages → Lecture*, s’il est
+  désactivé. Cela confie le travail vidéo à la puce prévue pour, et l’horloge
+  vidéo cesse de perdre la course. Sur certains boîtiers anciens, le décodage
+  matériel est aussi ce qui
+  [retransforme un écran noir en image](/fr/blog/le-son-sans-l-image/).
+- **Rouvrez le flux** quand il dérive. Les deux horloges repartent ensemble.
+  C’est un contournement plutôt qu’un correctif, mais il prend deux secondes.
+- **Donnez moins de travail à l’appareil** : fermez les autres applications,
+  et si le boîtier est ancien,
+  [les notes sur les configurations légères pour matériel faible](/fr/blog/vieux-boitier-android-lecture-fluide/)
+  parlent exactement de cela.
+
+## 4. L’écran : le téléviseur est en retard
+
+Les téléviseurs modernes traitent l’image — lissage du mouvement, mise à
+l’échelle, réduction du bruit — et chaque étape ajoute quelques millisecondes
+que le son n’obtient pas. Envoyez l’audio à une barre de son par un chemin et
+la vidéo à la dalle par un autre, et les deux arrivent séparément. L’écart est
+constant, et identique pour toutes les sources : l’application de streaming,
+la console, le tuner.
+
+La signature : c’est tout, pas seulement votre lecteur IPTV. La plupart des
+téléviseurs ont un mode d’image « jeu » ou « PC » qui coupe le traitement, et
+les barres de son ont un réglage de retard audio précisément pour cela. Réglez
+une fois, et toutes les sources sont corrigées.
+
+## Ce qu’un lecteur ne peut honnêtement pas faire
+
+Il vaut la peine d’être clair sur la limite. Un lecteur contrôle le tampon et
+le décodeur — cas 2 et 3 — et peut garder deux pistes alignées telles qu’elles
+ont été horodatées. Il ne peut pas ré-horodater un flux parti de l’encodeur de
+travers, et il ne voit pas combien de temps votre téléviseur met à dessiner une
+image. Certains lecteurs proposent un curseur manuel de décalage audio ; il
+peut masquer un décalage constant sur une chaîne, et il ne touchera pas une
+dérive croissante, car un décalage fixe ne peut pas rattraper une horloge qui
+glisse sans cesse. Vidonzo n’en propose pas actuellement, considérant que les
+deux choses qu’un lecteur *peut* corriger valent mieux corrigées que masquées.
+
+## La version courte
+
+Constant et partout : le téléviseur. Constant et une seule chaîne :
+l’encodeur — prévenez le fournisseur. Va et vient avec la connexion : le
+tampon. Grandit jusqu’à ce que vous rouvriez : le décodeur — activez le
+décodage matériel. Quatre causes, une minute d’observation pour les
+distinguer.

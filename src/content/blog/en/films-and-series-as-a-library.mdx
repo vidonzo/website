@@ -1,0 +1,98 @@
+---
+title: "Films and series as a library, not a folder of file names"
+description: "Your provider sends films and series as a list of entries. Whether you see posters, seasons and a resume point — or a thousand lines of file names — is entirely the player's doing. Here is what it has to do to build a library out of a list."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['product', 'playlists']
+keywords: ['iptv vod player', 'iptv series episodes app', 'iptv movies with posters', 'iptv player continue watching']
+heroImageAlt: "A shelf of spines with a few pulled out to show their covers, beside a plain printed list."
+---
+
+There is a moment, a day or two after setting up a new player, when people
+open the "films" section for the first time and discover what their provider
+actually sends: a list. Thousands of lines named things like
+`Some.Film.2019.1080p.WEB` and `Show.S03E04`, alphabetical, with no picture,
+no synopsis, and no idea which episode you were on. It is easy to conclude
+that the provider is poor. Usually the provider is fine. What you are looking
+at is the raw material, and the difference between a list and a library is
+work the player either does or does not do.
+
+## What actually arrives
+
+It depends on [which shape your playlist takes](/blog/xtream-codes-vs-m3u/).
+
+An **Xtream Codes** login gives the player three separate feeds — live, films,
+series — and the films and series feeds carry structure: a title, a year, a
+poster address, a rating, a plot, a cast list, and for series a hierarchy of
+seasons and episodes with an ordering. That is a lot to work with, and a good
+player uses all of it.
+
+An **M3U** link is [flatter](/blog/inside-an-m3u-file/): one line per item,
+with a name, a group title, and often a logo address. Some providers put the
+poster in the logo field and the series name in the group; some do not. A
+player working from M3U has to *infer* the structure — recognise that
+`Show.S03E04` and `Show.S03E05` are episodes of the same season of the same
+show — and it does that with varying enthusiasm.
+
+Either way, nothing arrives *as* a library. The library is built.
+
+## What building it means
+
+Five jobs, in the order they show up on screen.
+
+**Artwork.** A poster is an address in the metadata; the player fetches it,
+caches it, sizes it, and does so for every card in view without stalling the
+scroll. When posters are blank it is usually because the address is missing or
+dead — the provider's metadata pointing at a picture that is no longer
+there — and a good player shows a tidy placeholder rather than a broken image.
+
+**Details.** Rating, plot, cast, year, genre — presented on a detail screen so
+you can decide whether to watch *before* pressing play, which is the entire
+point of a library. Vidonzo lays these out per title, and adds a genre browse
+across the whole catalogue for the evenings when you have no idea what you
+want.
+
+**Structure.** Series are the hard part. A season is a container, an episode is
+an ordered item within it, and "next" has a meaning. The player has to build
+that tree from the feed (Xtream) or from names (M3U), then present seasons and
+episodes as they are — not as a flat list you scroll to find *S03E04*
+somewhere between *S03E03* and *S03E05*. Get this right and *auto-play next
+episode* becomes possible, because the player knows what "next" is.
+
+**Memory.** Continue watching is a resume point per item, per source: how far
+into which episode of which show, on which provider. It is what turns a
+library from a shelf into *your* shelf. Stop on the phone, resume on the TV,
+and the position is the same because it belongs to the item and not to the
+device.
+
+**Search.** [One field, across live, films and series at once](/blog/organize-large-playlists/),
+because you do not know which shelf a title is on and should not have to. Type
+a name; the results are grouped by kind; pick one.
+
+## Why the player has to do it
+
+It is fair to ask why the provider does not send a finished library. Because
+the provider does not know what screen you are on. A poster grid for a phone,
+a side rail for a television and a dense table for a tablet are three
+different arrangements of the same data, and only the player knows which one
+it is drawing. The feed carries facts; the player turns facts into a shelf you
+can browse from a sofa. This is [the whole division of labour](/blog/iptv-player-vs-streaming-apps/):
+the streaming service's app is a shop with a screen; the IPTV player is the
+screen alone, and it has to be a very good screen.
+
+## What to look for
+
+If your current player shows you file names, the metadata is almost certainly
+there and unused. Two quick checks: open a series and see whether it has
+seasons; open a film and see whether it has a plot. If neither, the player is
+reading the list and stopping. And check that
+[the tracks are exposed](/blog/subtitles-and-audio-tracks/) — a film with three
+audio languages and two subtitle tracks that plays only in the first of each
+is a library with the pages glued together.
+
+Vidonzo was built with the library as the point: posters, ratings, plot and
+cast; seasons and episodes as a tree, with auto-play next; continue watching
+per source and per item; one search over everything. The same list your
+provider sends, read all the way to the end. If your films section is
+currently a folder of file names, [adding the login you already have](/blog/set-up-your-first-playlist/)
+takes about a minute, and the difference is visible on the first screen.

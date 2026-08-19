@@ -1,0 +1,97 @@
+---
+title: "Ihr Samsung- oder LG-Smart-TV hat keinen guten IPTV-Player: die Lösung, die funktioniert"
+description: "Tizen und webOS laufen mit eigenen Betriebssystemen und eigenen dünnen App-Stores. Statt dagegen anzukämpfen: Lassen Sie den Fernseher der Bildschirm sein und setzen Sie den Player auf etwas, das einen ausführen kann."
+urlSlug: iptv-auf-samsung-und-lg-smart-tv
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['fernsehen', 'einrichtung']
+keywords: ['iptv player samsung smart tv', 'iptv lg smart tv', 'iptv auf tizen', 'iptv webos', 'smart tv iptv ohne app']
+heroImageAlt: "Ein großer Flachbildfernseher an der Wand, darunter auf dem Regal eine kleine schwarze Box, ein Kabel verbindet beide."
+---
+
+Sie haben einen guten Fernseher. Er ist groß, das Panel ist hervorragend, und
+er hat einen App-Store — also scheint es selbstverständlich, dass ein
+IPTV-Player darin leben sollte. Dann öffnen Sie den Store und finden zwei oder
+drei Player, keiner richtig: einer ist eine bezahlte Webseite in einem Rahmen,
+einer will einen Code von einer Website, einer zeigt Ihre Sender als endlose
+Liste ohne Programmführer. Die Versuchung ist, weiterzusuchen. Es gibt eine
+bessere Antwort, und sie beginnt mit dem Verständnis, warum das Regal leer ist.
+
+## Warum der Store des Fernsehers dünn ist
+
+Samsung-Fernseher laufen mit Tizen. LG-Fernseher mit webOS. Keins davon ist
+Android. Beide sind vollkommen fähige Betriebssysteme, aber sie sind eigene
+Welten mit eigenen Entwicklungswerkzeugen, eigenen Prüfregeln und —
+entscheidend — einem winzigen Anteil der Entwickler, die ernsthafte
+Videosoftware schreiben. Die mpv- und FFmpeg-Linie, auf der
+[gute IPTV-Player aufbauen](/de/blog/was-ein-iptv-player-tut/), zielt auf
+Android, iOS, Windows, macOS und Linux; eine Tizen-Portierung ist ein eigenes
+Projekt mit kleinem Publikum, und die meisten Player machen nie eine.
+
+Die Player, die im Store des Fernsehers auftauchen, sind daher meist leichte
+Webanwendungen, begrenzt auf das, was eine Browser-Engine dekodiert. Auf
+sauberen Streams spielen sie. Bei [den eigenwilligen Streams, die Anbieter wirklich produzieren](/de/blog/streaming-protokolle-erklaert/)
+— rohe Transportströme, ungewöhnliche Audiocodecs, HEVC auf einem älteren
+Panel — stocken sie, verlieren den Ton oder verweigern. Und fast keiner hat
+einen Programmführer, der den Namen verdient.
+
+Vidonzo hat auch keine Tizen- oder webOS-Version. Statt eine zu versprechen,
+hier die Lösung, die heute funktioniert — und gut funktioniert.
+
+## Der Fernseher ist der Bildschirm; der Player läuft auf einer Box
+
+Jeder moderne Fernseher hat freie HDMI-Anschlüsse, und einer davon kann ein
+kleines Android-TV-Gerät aufnehmen — Stick oder Box, von einer Handvoll
+Hersteller, für weniger als ein bescheidenes Abendessen auswärts. Einstecken,
+und der Fernseher wird zu dem, was er am besten kann: ein großes, helles
+Display. Der Player läuft auf der Box, mit einem echten Betriebssystem darunter
+und [einer echten Fernsehoberfläche darüber](/de/blog/iptv-player-auf-android-tv/).
+
+Der Gewinn ist nicht subtil. Eine für Android TV gebaute Box führt dieselbe
+mpv-Engine aus wie ein Telefon, mit Hardware-Dekodierung, einem einstellbaren
+Puffer für [eine wackelige Verbindung](/de/blog/iptv-ruckeln-beheben/) und einem
+Programmführer, der [die richtige Zeit zeigt](/de/blog/epg-programmfuehrer-erklaert/). Sie
+hängt außerdem nicht mehr von der App-Store-Politik des Fernseherherstellers
+ab. Wird der Fernseher in sechs Jahren ersetzt, zieht die Box zum neuen um, und
+nichts an Ihrer Einrichtung ändert sich.
+
+Zwei praktische Hinweise zur Auswahl. Bevorzugen Sie ein Gerät, das für
+Android TV oder Google TV *zertifiziert* ist, statt einer generischen
+„Android-Box“ — die zertifizierten haben Google Play, bekommen Updates, und
+ihre Fernbedienungen und HDMI-Steuerung sind sauber verdrahtet. Und nutzen Sie
+die HDMI-CEC-Einstellung des Fernsehers, damit die Pfeile der TV-Fernbedienung
+die Box steuern; die meisten Haushalte rühren die Fernbedienung der Box danach
+nie wieder an.
+
+## Dann lassen Sie das Telefon tippen
+
+Das Einzige, was eine Box nicht löst, ist das Tippen. Ein Xtream-Passwort mit
+Pfeiltasten einzugeben ist auf jedem Gerät eine Qual. Überspringen Sie es:
+Jedes Telefon oder Tablet im selben WLAN kann
+[die Fernbedienung für Vidonzo auf der Box sein](/de/blog/smartphone-als-fernbedienung/).
+Das Telefon findet den Fernseher von selbst, Sie blättern durch die Bibliothek
+des Fernsehers und suchen mit einer echten Tastatur, und die Wiedergabe startet
+mit einem Tipp auf dem großen Bildschirm. In der Praxis richten die meisten die
+Playlist vom Telefon aus ein und tippen nie auf dem Fernseher.
+
+## Die Reihenfolge, die die üblichen Stolperfallen vermeidet
+
+1. Verbinden Sie die Box mit demselben Netz, das das Telefon nutzt. Steht der
+   Fernseher im hinteren Zimmer, [prüfen Sie zuerst das WLAN dort](/de/blog/iptv-friert-im-wlan-ein/)
+   — eine Kabelverbindung zur Box, wenn der Router nah ist, beseitigt die
+   häufigste Ursache für Einfrieren.
+2. Installieren Sie Vidonzo auf der Box: [die TV-Installationsanleitung](/de/help/)
+   deckt es ab.
+3. [Fügen Sie Ihre Playlist hinzu](/de/blog/erste-playlist-einrichten/) —
+   vom Telefon als Fernbedienung, wenn eins in der Nähe ist.
+4. Öffnen Sie den Programmführer, wählen Sie einen Sender, und passen Sie erst
+   dann etwas an.
+
+## Und die Player-App des Fernsehers, vorerst?
+
+Behalten Sie sie, wenn sie für Sie funktioniert — aus demselben Grund, aus dem
+man VLC neben einem dedizierten Player behält: Sie ist da. Aber wenn ein Sender
+den Ton verliert oder der Programmführer eine Stunde daneben liegt, ist weder
+Ihr Anbieter noch der Fernseher schuld — sondern dass eine Browser-Engine in
+einem abgeschotteten Betriebssystem Medienplayer spielen soll. Geben Sie dem
+Fernseher eine Aufgabe. Die kann er sehr gut.

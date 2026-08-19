@@ -1,0 +1,111 @@
+---
+title: "De gids is leeg of toont verkeerde tijden: je EPG repareren"
+description: "De zenders spelen en de gids is leeg, verouderd of precies een uur verschoven. Vier fouten geven die symptomen, elk met een eigen kenmerk, en geen ervan is «de speler is traag»."
+urlSlug: gids-leeg-of-verkeerde-tijden
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['problemen-oplossen', 'afspeellijsten']
+keywords: ['epg werkt niet iptv', 'gids verkeerde tijd', 'programmagids leeg iptv', 'xmltv laadt niet', 'epg tijdverschil']
+heroImageAlt: "Een programmaraster met de meeste vakjes leeg en één rij een kolom opgeschoven."
+---
+
+Een lege gids ergert meer dan een kapotte zender, want al het *andere* werkt.
+Het beeld speelt, de lijst is vol, en de ene regel die zou moeten zeggen wat er
+is, zegt «Geen programma-info». Of hij zegt iets, maar het is wat een uur
+geleden liep. Als je hebt gelezen [hoe de gids werkt](/nl/blog/epg-uitgelegd-programmagids/),
+ken je het kernfeit al: de gids is een apart bestand, apart opgehaald, op naam
+gekoppeld aan je zenders. Elke fout hieronder is een breuk ergens in die
+keten. Hier zijn ze, in de volgorde waarin ze meestal voorkomen.
+
+## 1. De speler is nooit verteld waar de gids staat
+
+Een M3U-afspeellijst [draagt zenders](/nl/blog/in-een-m3u-bestand/); hij draagt
+geen gids. Sommige afspeellijsten noemen het adres van de gids in hun eerste
+regel (`url-tvg=`), veel niet, en als die van jou dat niet doet, heeft de
+speler niets op te halen en zegt elke zender «Geen programma-info» — de gids is
+niet stuk, hij ontbreekt.
+
+Het kenmerk: *elke* zender leeg, vanaf dag één. De oplossing: vraag je
+aanbieder om het XMLTV-adres (eindigt meestal op `.xml` of `.xml.gz`) en voer
+het in bij de instellingen van de bron, naast de afspeellijstlink. Gaf je
+aanbieder je een [Xtream Codes-login](/nl/blog/xtream-codes-of-m3u/), dan komt
+de gids met de login mee en valt er niets in te voeren — een lege gids bij
+Xtream betekent een van de fouten hieronder.
+
+## 2. Gids en zenders kennen elkaar niet
+
+Dit is de meest voorkomende, en hij geeft het verwarrendste symptoom:
+*sommige* zenders hebben een gids en andere, schijnbaar willekeurig, niet.
+
+Het gidsbestand somt programma's op tegen een zender-id — een `tvg-id`. De
+afspeellijst geeft elke zender ook een `tvg-id`. Waar ze overeenkomen krijg je
+een gids; waar niet, krijg je niets, zelfs als de zender gewoon in het
+gidsbestand staat onder een iets andere naam. Aanbieders die beide uit dezelfde
+database genereren, matchen perfect. Aanbieders die een gids van derden aan hun
+lijst schroeven, matchen waar de id's toevallig overeenkomen.
+
+Het kenmerk: gedeeltelijke dekking, stabiel in de tijd — steeds dezelfde
+zenders leeg. De speler kan weinig doen, want hij kan niet weten dat
+`news24.example` en `News24_HD` hetzelfde station zijn zonder te gokken. Biedt
+je aanbieder meerdere afspeellijstvarianten, dan heeft de volledigere vaak
+betere id's; anders: meld hem welke zenders een gids missen.
+
+## 3. De tijden zijn verschoven — meestal precies een uur
+
+Programma's verschijnen, maar het raster zegt dat de film om negen uur begon
+terwijl hij om tien uur begon. Is de verschuiving een rond aantal uren, dan is
+het een tijdzoneprobleem, en dat is het waard te begrijpen, want het is de fout
+die mensen het vaakst bij de verkeerde partij leggen.
+
+Een XMLTV-bestand stempelt elk programma met een tijd *én* een verschil ten
+opzichte van UTC — `20260819210000 +0100`. Een correcte speler leest dat
+verschil, rekent om naar de klok van je apparaat en toont de juiste tijd,
+ongeacht waar de gids gemaakt is. Vidonzo doet dat — het is een van de dingen
+waar de app zorgvuldig in is, omdat
+[gidsen daar het vaakst de mist in gaan](/nl/blog/epg-uitgelegd-programmagids/) — dus een
+verschuiving betekent meestal een van twee andere dingen:
+
+- **De gids declareert het verkeerde verschil.** De aanbieder maakte hem op een
+  server met een andere tijdzone en corrigeerde de stempels niet. Elke zender
+  is met hetzelfde bedrag verschoven, en dat is hij in elke speler. Alleen de
+  aanbieder kan dat rechtzetten.
+- **De klok of tijdzone van het apparaat zelf klopt niet.** Een tv-box die op
+  de fabriekszone blijft staan verschuift *alles*, inclusief de klok in zijn
+  statusbalk. Controleer datum en tijd van de box vóór alles — en staat hij op
+  «automatisch» in een netwerk dat tijdservers blokkeert, stel hem dan
+  handmatig in.
+
+Het kenmerk dat de twee scheidt: verschijnt de verschuiving ook op je telefoon,
+dan is het de gids; verschijnt hij op één apparaat, dan is het dat apparaat.
+
+## 4. De gids is verouderd
+
+Vorige week ging alles goed en nu toont het raster programma's die al geweest
+zijn, of het stopt abrupt om middernacht. Gidsbestanden dekken een venster —
+vaak een paar dagen — en het bestand moet opnieuw opgehaald worden om dat te
+verlengen. Kan de speler het adres niet bereiken (het is verhuisd, verlopen,
+het netwerk lag eruit toen hij het probeerde), dan is de oude kopie wat je
+ziet.
+
+Het kenmerk: een gids die op een vast punt in het verleden eindigt, of die een
+paar uur vooruit ophoudt. Gebruik *Nu verversen* op de bron; vult hij zich, dan
+was het ophalen simpelweg achterstallig. Zo niet, dan faalt het adres zelf, en
+hier gelden [dezelfde controles als bij een afspeellijstlink](/nl/blog/afspeellijst-laadt-niet/)
+— plak hem in een browser en kijk of hij antwoordt.
+
+## De vijf-minutenvolgorde
+
+1. Bevestig dat de gidsschakelaar aan staat (*Programmagids tonen (EPG)*).
+2. Xtream-login? Dan is het adres niet het probleem; door naar 3.
+   M3U-link? Controleer of er een XMLTV-adres is ingevuld.
+3. Alle zenders leeg → adres (1) of verouderd (4). Sommige leeg → koppeling
+   (2). Verkeerde tijden → tijdzone (3).
+4. *Nu verversen*, en open de gids opnieuw.
+5. Controleer dezelfde zender op een tweede apparaat voordat je je aanbieder
+   schrijft, zodat je kunt zeggen of de fout de gids volgt of het apparaat.
+
+Een eerlijke slotopmerking: een gids is niet beter dan het bestand erachter, en
+de taak van een speler is het betrouwbaar op te halen, trouw te koppelen en —
+het deel dat de meeste spelers verkeerd doen — de tijdzonerekensom correct uit
+te voeren. Zodra die drie kloppen, zitten alle overgebleven fouten in het
+bestand, en de snelste oplossing is weten welke je moet melden.

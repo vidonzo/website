@@ -1,0 +1,113 @@
+---
+title: "La guía está vacía o muestra horas equivocadas: arreglar tu EPG"
+description: "Los canales se ven y la guía está en blanco, vieja o desplazada exactamente una hora. Cuatro fallos producen esos síntomas, cada uno con su firma, y ninguno es que el reproductor vaya lento."
+urlSlug: guia-vacia-o-con-horas-equivocadas
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['solución de problemas', 'listas']
+keywords: ['epg no funciona iptv', 'guia con hora equivocada', 'guia vacia iptv', 'xmltv no carga', 'desfase horario epg']
+heroImageAlt: "Una parrilla de programación con la mayoría de celdas vacías y una fila desplazada una columna."
+---
+
+Una guía vacía molesta más que un canal roto, porque todo lo *demás* funciona.
+La imagen va, la lista está llena, y la única fila que debería decir qué hay
+dice «Sin información del programa». O dice algo, pero es lo que había hace una
+hora. Si has leído [cómo funciona la guía](/es/blog/que-es-la-epg-iptv/) ya sabes
+el dato clave: la guía es un archivo aparte, se descarga aparte y se empareja
+con tus canales por nombre. Cada fallo de abajo es una rotura en algún punto de
+esa cadena. Aquí están, en el orden en que suelen darse.
+
+## 1. Nunca se le dijo al reproductor dónde está la guía
+
+Una lista M3U [lleva canales](/es/blog/dentro-de-un-archivo-m3u/); no lleva guía.
+Algunas listas nombran la dirección de la guía en su primera línea
+(`url-tvg=`), muchas no, y si la tuya no lo hace, el reproductor no tiene nada
+que descargar y todos los canales dicen «Sin información del programa» — la
+guía no está rota, está ausente.
+
+La señal: *todos* los canales vacíos, desde el primer día. La solución: pide a
+tu proveedor la dirección XMLTV (suele terminar en `.xml` o `.xml.gz`) e
+introdúcela en los ajustes de la fuente, junto al enlace de la lista. Si tu
+proveedor te dio [unas credenciales Xtream Codes](/es/blog/xtream-codes-o-m3u/),
+la guía viene con ellas y no hay nada que escribir — una guía vacía en Xtream
+significa uno de los fallos siguientes.
+
+## 2. La guía y los canales no se conocen
+
+Este es el más común y produce el síntoma más confuso: *algunos* canales tienen
+guía y otros, aparentemente al azar, no.
+
+El archivo de guía lista los programas contra un identificador de canal — un
+`tvg-id`. La lista también da a cada canal un `tvg-id`. Donde coinciden,
+obtienes guía; donde no, no obtienes nada, aunque el canal esté ahí mismo en el
+archivo de guía con un nombre ligeramente distinto. Los proveedores que generan
+ambos desde la misma base de datos casan a la perfección. Los que atornillan
+una guía de terceros a su lista casan donde los identificadores coinciden por
+casualidad.
+
+La señal: cobertura parcial, estable en el tiempo — siempre los mismos canales
+vacíos. El reproductor poco puede hacer, porque no puede saber que
+`news24.example` y `News24_HD` son la misma emisora sin adivinar. Si tu
+proveedor ofrece más de una variante de lista, la más completa suele tener
+mejores identificadores; si no, dile qué canales se quedan sin guía.
+
+## 3. Las horas están desplazadas — normalmente una hora exacta
+
+Los programas aparecen, pero la parrilla dice que la película empezó a las
+nueve cuando empezó a las diez. Si el desplazamiento es un número redondo de
+horas, es un problema de zona horaria, y vale la pena entenderlo, porque es el
+fallo que más a menudo se le echa en cara a quien no es.
+
+Un archivo XMLTV marca cada programa con una hora *y* un desfase respecto a UTC
+— `20260819210000 +0100`. Un reproductor correcto lee ese desfase, convierte al
+reloj de tu dispositivo y muestra la hora correcta sin importar dónde se hizo
+la guía. Vidonzo lo hace — es una de las cosas con las que la aplicación es
+cuidadosa, porque
+[es donde las guías se tuercen más a menudo](/es/blog/que-es-la-epg-iptv/) — así
+que un desplazamiento suele significar una de estas otras dos cosas:
+
+- **La guía declara el desfase equivocado.** El proveedor la generó en un
+  servidor con otra zona horaria y no corrigió las marcas. Todos los canales
+  están desplazados lo mismo, y lo están en todos los reproductores. Solo el
+  proveedor puede corregirlo.
+- **El reloj o la zona del propio dispositivo están mal.** Una caja de TV
+  dejada en la zona horaria de fábrica desplaza *todo*, incluido el reloj de su
+  barra de estado. Comprueba la fecha y la hora de la caja antes que nada — y
+  si está en «automático» en una red que bloquea los servidores de tiempo,
+  ponla a mano.
+
+La señal que los separa: si el desplazamiento también aparece en tu móvil, es
+la guía; si aparece solo en un aparato, es ese aparato.
+
+## 4. La guía está caducada
+
+La semana pasada iba bien y ahora la parrilla muestra programas que ya se
+emitieron, o se corta en seco a medianoche. Los archivos de guía cubren una
+ventana — a menudo unos días — y hay que volver a descargarlos para
+extenderla. Si el reproductor no puede alcanzar la dirección (se movió, expiró,
+la red estaba caída cuando lo intentó), lo que ves es la copia vieja.
+
+La señal: una guía que termina en un punto fijo del pasado, o que se detiene
+unas horas por delante. Usa *Actualizar ahora* en la fuente; si se llena, la
+descarga simplemente iba con retraso. Si no, la dirección misma está fallando,
+y aquí valen [las mismas comprobaciones que para un enlace de lista](/es/blog/la-lista-no-carga/)
+— pégala en un navegador y mira si responde.
+
+## El orden de cinco minutos
+
+1. Confirma que el interruptor de la guía está activado (*Mostrar guía de
+   programas (EPG)*).
+2. ¿Login Xtream? Entonces la dirección no es el problema; salta a 3. ¿Enlace
+   M3U? Confirma que hay una dirección XMLTV introducida.
+3. Todos los canales vacíos → dirección (1) o caducidad (4). Algunos vacíos →
+   emparejamiento (2). Horas equivocadas → zona horaria (3).
+4. *Actualizar ahora*, y vuelve a abrir la guía.
+5. Comprueba el mismo canal en un segundo dispositivo antes de escribir a tu
+   proveedor, para poder decirle si el fallo sigue a la guía o al aparato.
+
+Una nota final honesta: una guía solo es tan buena como el archivo que la
+sustenta, y el trabajo de un reproductor es descargarlo con fiabilidad,
+emparejarlo con fidelidad y — la parte que la mayoría de reproductores hace mal
+— hacer bien la aritmética de zonas horarias. Una vez que esas tres se cumplen,
+todos los fallos que quedan están en el archivo, y la solución más rápida es
+saber cuál reportar.

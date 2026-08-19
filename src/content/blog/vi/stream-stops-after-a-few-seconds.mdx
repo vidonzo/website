@@ -1,0 +1,116 @@
+---
+title: "Luồng dừng sau vài giây: đứt kết nối, không phải đệm"
+description: "Khởi động ngon lành, chạy mười giây rồi chết — không có vòng xoay, chỉ là hết. Đây là lỗi khác với hiện tượng đệm, nguyên nhân khác, và một trình phát tốt xử lý những cái xử lý được mà bạn không kịp nhận ra."
+urlSlug: luong-dung-sau-vai-giay
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['khắc phục sự cố', 'phát lại']
+keywords: ['iptv dừng sau vài giây', 'iptv liên tục mất kết nối', 'luồng bị ngắt iptv', 'iptv dừng sau 10 giây']
+heroImageAlt: "Một đường thẳng chạy sạch sẽ một đoạn ngắn rồi đơn giản là kết thúc, trên nền trơn."
+---
+
+Hiện tượng đệm có dáng vẻ riêng: vòng xoay, khựng lại, hình đuổi kịp. Cái này
+không phải vậy. Đây là một kênh mở lên sạch sẽ, chạy hoàn hảo năm hoặc mười
+hoặc ba mươi giây, rồi dừng — quay về danh sách, hoặc một khung hình đóng băng,
+hoặc một thông báo lỗi, hoặc chính kênh đó bắt đầu lại từ đầu. Bấm phát thì lại
+thế. Đây là *đứt kết nối*, và nguyên nhân gần như hoàn toàn khác
+[những nguyên nhân gây đệm](/vi/blog/khac-phuc-iptv-giat-lag/). Đây là năm nguyên
+nhân chiếm gần hết các trường hợp, và trình phát làm được gì, không làm được gì
+với mỗi cái.
+
+## 1. Máy chủ đã kết thúc kết nối
+
+Phổ biến nhất. Máy chủ của nhà cung cấp đưa bạn một luồng rồi vài giây sau đóng
+kết nối — vì quá tải, vì một tiến trình khởi động lại, vì bộ cân bằng tải
+chuyển bạn đi, vì hôm nay là thứ Ba. Trên transport stream thô, dữ liệu đơn
+giản là ngừng tới; trên [HLS](/vi/blog/giao-thuc-streaming-la-gi/), đoạn
+tiếp theo không bao giờ đến.
+
+Đây chính là trường hợp mà trình phát *sinh ra để* xử lý. Một trình phát làm
+tốt không coi kết nối đứt là hết chương trình; nó coi đó là cái nấc và lặng lẽ
+nối lại. Vidonzo làm điều này ở tầng vận chuyển: một thao tác đọc bị treo sẽ hết
+giờ trong vài giây thay vì lơ lửng, và kết nối được dựng lại với khoảng lùi
+ngắn có giới hạn — nên máy chủ vừa đóng cửa sẽ mở lại mà bạn chỉ thấy một
+thoáng dừng. Nếu một kênh chết ở giây thứ mười trên trình phát cũ và ở đây chỉ
+chớp mắt, cơ chế ấy là lý do.
+
+Dấu hiệu: kênh ngẫu nhiên, thời điểm ngẫu nhiên, buổi tối nhiều hơn. Phía bạn
+chẳng có gì để đổi; nếu chuyện đó xảy ra liên tục trên *mọi* kênh thì máy chủ
+đang thực sự có vấn đề và nhà cung cấp cần biết.
+
+## 2. Quyền truy cập hết hạn giữa chừng
+
+Xtream Codes và nhiều liên kết M3U mang một token — bằng chứng bạn là ai —
+trong địa chỉ. Token có hạn. Khi nó hết hạn, máy chủ không đóng kết nối một
+cách lịch sự; nó trả lời yêu cầu kế tiếp bằng một lỗi: cấm, không được phép,
+không còn.
+
+Ở đây trình phát tốt cố ý *không* nối lại nữa. Nện vào một máy chủ vừa nói
+«không» là vô ích, và với số lượng lớn thì trông như một cuộc tấn công; nhà
+cung cấp chặn vì điều đó. Vidonzo nối lại xuyên qua kết nối bị đứt và dừng
+trước một lời từ chối rõ ràng — có chủ đích. Cách chữa là một danh sách mới:
+dùng *Làm mới ngay* trên nguồn để trình phát đọc lại danh sách hiện thời — hoặc,
+nếu chính gói thuê bao đã hết hạn, đó là chuyện giữa bạn và nhà cung cấp.
+
+Dấu hiệu: hôm qua còn chạy, hôm nay hỏng hết, và hỏng ngay lập tức chứ không
+phải sau vài giây. Xem thêm
+[năm lỗi đằng sau một liên kết không tải được](/vi/blog/danh-sach-phat-khong-tai-duoc/).
+
+## 3. Quá nhiều luồng cùng lúc
+
+Phần lớn gói thuê bao cho phép một số luồng *đồng thời* cố định — một, hai, đôi
+khi nhiều hơn. Mở cái thứ ba là máy chủ đá một cái ra, và không phải lúc nào
+cũng là cái mới nhất. Cái bị đá trông y hệt trường hợp 1, chỉ khác là nó trùng
+với việc ai đó trong nhà vừa bấm phát.
+
+Dấu hiệu: hỏng khi có thiết bị khác đang xem, và ổn lại khi thiết bị đó dừng.
+Đây không phải lỗi trình phát và không có thiết lập nào cho nó; đây là thỏa
+thuận giữa bạn và nhà cung cấp, và cách giải quyết là xem luân phiên hoặc gói
+cho phép nhiều hơn. Một trình phát hiện thông báo lỗi rõ ràng thay vì lặng lẽ
+mở lại đúng luồng đó, ít nhất cũng cho bạn biết mình đang ở trường hợp nào.
+
+## 4. Thiết bị ngủ quên trên kết nối
+
+Điện thoại và hộp TV tiết kiệm pin rất hăng, và một luồng video đúng là loại
+kết nối dài và lặng lẽ mà chúng thích cắt. Trên điện thoại, điều này hiện ra
+thành luồng chết khi màn hình tối đi hoặc khi bạn chuyển nhanh sang ứng dụng
+khác; trên hộp, đó có thể là chế độ tiết kiệm điện Wi-Fi quá nhiệt tình, ngắt
+sóng giữa các đoạn.
+
+Dấu hiệu: gắn với *hành động của bạn* — màn hình, việc chuyển ứng dụng, một lần
+tạm dừng — chứ không gắn với đồng hồ hay kênh. Trên điện thoại, hãy giữ ứng
+dụng ở tiền cảnh khi đang phát; Vidonzo cố ý gắn việc phục hồi với tiền cảnh, để
+không tranh giành với hệ điều hành một kết nối mà bạn đã bỏ đi. Trên hộp, tìm
+mục tiết kiệm điện Wi-Fi hoặc «giữ thức», hoặc
+[đưa chiếc hộp sang dây mạng](/vi/blog/iptv-dung-hinh-tren-wifi/).
+
+## 5. Mạng ở giữa đánh rơi nó
+
+Giữa máy chủ và màn hình là router của bạn, nhà mạng của bạn, và — với một số
+người — một VPN hoặc proxy. Bất kỳ cái nào cũng có thể đặt lại kết nối: router
+xoay bảng NAT, thiết bị của nhà mạng hết giờ một dòng có vẻ nhàn rỗi, VPN nối
+lại. Trình phát thấy y như trường hợp 1 và nối lại y như vậy; khác biệt là
+*mọi thứ* đều bị, không riêng một nhà cung cấp.
+
+Dấu hiệu: các ứng dụng xem khác cũng rớt, và quy luật đi theo mạng — một router
+cụ thể, một VPN cụ thể, một khung giờ cụ thể. Thử một phút bằng dữ liệu di
+động; nếu hết rớt thì lỗi nằm ở phía mạng nhà.
+
+## Phân biệt trong một phút
+
+- Kênh ngẫu nhiên, giờ ngẫu nhiên, dừng ngắn → máy chủ ngắt (1). Trình phát nối
+  lại; không phải làm gì.
+- Hỏng ngay trên mọi thứ, hôm qua còn chạy → hết hạn truy cập (2). *Làm mới
+  ngay*, rồi nói chuyện với nhà cung cấp.
+- Hỏng khi có người khác bấm phát → quá nhiều luồng (3).
+- Chết khi bạn giảm sáng màn hình hoặc chuyển ứng dụng → tiết kiệm điện (4).
+- Mọi thứ đều rớt, ứng dụng khác cũng vậy → mạng (5).
+
+## Trình phát nợ bạn điều gì
+
+Ranh giới thành thật là thế này: trình phát nên nối lại xuyên qua *mọi* lần đứt
+không phải là từ chối, đủ nhanh để bạn hiếm khi nhận ra, và nên dừng dứt khoát
+và nói rõ ở mọi lần đứt vốn là từ chối. Bất cứ điều gì hơn thế — giữ một luồng
+mở quá hạn token, phớt lờ giới hạn số luồng — không phải là tính năng, mà là
+một vấn đề bị hoãn lại. Làm cho việc nối lại đúng đắn, thì trường hợp 1, tức là
+phần lớn các trường hợp, thôi là thứ bạn phải bận tâm.

@@ -1,0 +1,19 @@
+key: how-to-choose-an-iptv-player
+title: "How to choose an IPTV player: the ten things that actually matter"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: commercial-investigation
+targetQueries: ["best iptv player", "how to choose iptv player", "iptv player features", "what to look for in an iptv player"]
+audience: Someone with a playlist in hand, comparing players before installing one.
+value: A criteria checklist a reader can apply to any player, ours included. Sells by being useful, not by ranking competitors.
+angle: The checklist is neutral in wording; every criterion is one Vidonzo meets. No competitor is named.
+productFacts:
+  - three source kinds (Xtream, M3U/M3U8 URL, local M3U file), multiple sources side by side
+  - libmpv engine, hardware decoding toggle, Buffer size (cache) in MB, automatic reconnect
+  - XMLTV + Xtream EPG with time-zone handling
+  - global search, continue watching, favourites, series structure
+  - no ad SDKs, no analytics, credentials encryptable on device
+  - Android TV build with D-pad, phone as remote, 70 UI languages incl. RTL
+constraints: [no-download-or-offline-wording, no-competitor-names, no-channel-counts]
+internalLinks: [what-an-iptv-player-does, iptv-player-vs-streaming-apps, no-ads-no-trackers, epg-explained, organize-large-playlists]

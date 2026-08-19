@@ -1,0 +1,113 @@
+---
+title: "El audio no va sincronizado con la imagen: dónde empieza el desfase"
+description: "Los labios se mueven, las palabras llegan tarde. Hay cuatro sitios donde un stream puede perder la sincronía — el codificador, la red, el decodificador, la pantalla — y solo dos están al alcance de tu reproductor."
+urlSlug: audio-desincronizado-con-la-imagen
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['solución de problemas', 'reproducción']
+keywords: ['audio desincronizado iptv', 'retardo de audio streaming', 'sonido no coincide con imagen', 'arreglar sincronia audio']
+heroImageAlt: "Un bocadillo de diálogo dibujado ligeramente a la derecha de la boca a la que pertenece, sobre fondo liso."
+---
+
+Nada estropea una emisión más rápido que unos labios que terminan la frase
+antes de que llegue el sonido. También es uno de los fallos peor
+diagnosticados del streaming, porque un stream tiene cuatro sitios distintos
+donde imagen y sonido pueden separarse, y la solución de cada uno es diferente.
+Cambia lo que no toca y el desfase se queda exactamente donde estaba. Aquí van
+los cuatro, del origen a tus oídos, y cómo saber cuál tienes delante.
+
+## Primero, distingue desfase de desplazamiento
+
+Mira un minuto y hazte una pregunta: ¿la diferencia es *constante* o *creciente*?
+
+Un desplazamiento constante — el sonido siempre llega un tercio de segundo
+tarde y se queda así — se fijó antes de que el stream llegara a ti, o lo pone
+tu pantalla. Un desfase creciente — sincronizado al abrir el canal, un segundo
+a los diez minutos, peor a los veinte — es un problema de reloj y apunta al
+búfer o a la decodificación de tu lado. Esa sola observación reduce la lista a
+la mitad.
+
+## 1. El codificador: salió así del servidor
+
+Vídeo y audio son pistas separadas [trenzadas en un solo stream](/es/blog/subtitulos-y-pistas-de-audio-iptv/),
+cada una marcada con información de tiempo para que el reproductor pueda
+alinearlas. Si el codificador del proveedor las marcó mal — la cadena de audio
+añadió una latencia que las marcas no contemplan — todos los espectadores de ese
+canal ven el mismo desplazamiento constante, en cualquier reproductor y en
+cualquier dispositivo.
+
+La señal: es un canal, o los canales de un proveedor, y es igual en el móvil
+que en el televisor. No hay nada que ajustar de tu lado; la única cura está
+aguas arriba. Comprueba el canal en un segundo dispositivo para confirmarlo y
+dile al proveedor qué canal es y aproximadamente cuánta diferencia hay.
+
+## 2. La red: segmentos que llegan a destiempo
+
+En [HLS y DASH](/es/blog/protocolos-de-streaming-hls-dash-rtsp/) el stream se entrega
+en segmentos cortos, y si llegan tarde el reproductor tiene que elegir entre
+pararse y seguir. Seguir es donde empieza el desfase: puede reproducir lo que
+tiene, y lo que tiene no siempre son las dos pistas por igual. En un transport
+stream en crudo lo mismo aparece como paquetes descartados bajo carga, que se
+llevan con ellos la información de tiempo.
+
+La señal: un desfase que va y viene con tu conexión — peor por la noche, peor
+al otro lado de la casa, ausente en una caja por cable. La solución es la del
+[buffering](/es/blog/solucionar-cortes-iptv/): un búfer mayor y un mejor
+[enlace de radio](/es/blog/iptv-se-congela-por-wifi/) entre el router y la
+pantalla. Un búfer mayor le da al reproductor margen para mantener ambas pistas
+alineadas durante un tramo malo en vez de improvisar.
+
+## 3. El decodificador: dos relojes, uno lento
+
+Este es el caso en el que un reproductor sí puede hacer algo. El vídeo lo
+decodifica un componente y el audio otro, y el reproductor los mantiene juntos
+comparando sus relojes. Cuando el decodificador de vídeo no da abasto — una
+caja de poca potencia, un decodificador por software masticando HEVC, un móvil
+caliente que se limita — la imagen se queda por detrás del sonido. La
+diferencia *crece*, y se pone a cero al reabrir el canal.
+
+La señal: desfase creciente en un dispositivo y no en otro, y peor en canales
+más pesados. Tres cosas ayudan, en este orden:
+
+- **Activa la decodificación por hardware**, en *Ajustes → Reproducción*, si
+  está desactivada. Eso pasa el trabajo de vídeo al chip diseñado para ello, y
+  el reloj de vídeo deja de perder la carrera. En algunas cajas antiguas la
+  decodificación por hardware es también lo que
+  [convierte una pantalla negra otra vez en imagen](/es/blog/se-oye-pero-no-se-ve/).
+- **Reabre el stream** cuando se desfase. Ambos relojes arrancan juntos. Es un
+  apaño más que una solución, pero de dos segundos.
+- **Dale menos trabajo al aparato**: cierra otras apps, y si la caja es vieja,
+  [las notas sobre configuraciones ligeras para hardware flojo](/es/blog/caja-android-vieja-reproduccion-fluida/)
+  van exactamente de esto.
+
+## 4. La pantalla: el televisor llega tarde
+
+Los televisores modernos procesan la imagen — suavizado de movimiento,
+escalado, reducción de ruido — y cada etapa añade unos milisegundos que el
+sonido no recibe. Manda el audio a una barra de sonido por un camino y el vídeo
+al panel por otro, y llegan separados. La diferencia es constante e igual en
+todas las fuentes: la app de streaming, la consola, el sintonizador.
+
+La señal: es todo, no solo tu reproductor IPTV. Casi todos los televisores
+tienen un modo de imagen «juego» o «PC» que apaga el procesado, y las barras de
+sonido tienen un ajuste de retardo de audio precisamente para esto. Se
+configura una vez y queda arreglado para todas las fuentes.
+
+## Lo que un reproductor honestamente no puede hacer
+
+Vale la pena ser claro con el límite. Un reproductor controla el búfer y el
+decodificador — los casos 2 y 3 — y puede mantener dos pistas alineadas tal
+como fueron marcadas. No puede volver a marcar un stream que salió mal del
+codificador, y no ve cuánto tarda tu televisor en dibujar un fotograma. Algunos
+reproductores ofrecen un deslizador manual de desplazamiento de audio; puede
+enmascarar un desplazamiento constante en un canal, y no tocará un desfase
+creciente, porque un desplazamiento fijo no puede perseguir un reloj que se
+desliza. Vidonzo no incluye uno por ahora, con la idea de que las dos cosas que
+un reproductor *sí* puede arreglar es mejor arreglarlas que taparlas.
+
+## La versión corta
+
+Constante y en todo: el televisor. Constante y un canal: el codificador —
+avisa al proveedor. Va y viene con la conexión: el búfer. Crece hasta que
+reabres: el decodificador — activa la decodificación por hardware. Cuatro
+causas, un minuto mirando para distinguirlas.

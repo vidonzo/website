@@ -1,0 +1,107 @@
+---
+title: "The picture does not fill the screen: aspect ratio, zoom and black bars"
+description: "Bars at the sides, bars at the top, or a picture that looks a little squashed. Each one is the player making a decision, and once you know which decision it made, one control fixes it."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['troubleshooting', 'playback']
+keywords: ['iptv black bars', 'iptv picture not full screen', 'iptv aspect ratio', 'stretch iptv picture', 'zoom video on tv']
+heroImageAlt: "A television screen showing a smaller rectangle inside it, with dark bands above and below."
+---
+
+A television is a rectangle of a fixed shape, and video arrives in a rectangle
+of *some* shape — not always the same one. Whenever the two disagree, the
+player has to decide what to do with the difference, and every possible
+decision annoys somebody. Bars, cropping, or stretching: pick one. Here is
+what each of them is, why the bars are usually the *right* answer, and how to
+choose the wrong one on purpose when you prefer it.
+
+## Where the shape comes from
+
+Every stream declares its picture size — 1920×1080, 720×576, and so on — and,
+separately, the shape those pixels are meant to be shown at. Most modern
+television is 16:9. Older programmes, some regional channels and a lot of
+archive material are 4:3, closer to square. Films are often wider still,
+2.35:1, and arrive *inside* a 16:9 frame with black bands already baked into
+the picture by whoever encoded it.
+
+Your screen, meanwhile, is 16:9 — unless it is a phone held upright, or a
+tablet at 4:3, in which case the disagreement runs the other way.
+
+## The three things a player can do
+
+Given a picture of one shape and a screen of another, there are exactly three
+honest options, and Vidonzo's *Aspect* button in the player cycles through
+them in this order:
+
+**Fit.** Show the whole picture, as large as it will go, at its true shape.
+Whatever is left over is filled with black. A 4:3 programme on a 16:9 screen
+gets bars at the sides; a wide film gets bars top and bottom. Nothing is lost,
+nothing is distorted, and this is the default because it is the only choice
+that shows you what the broadcaster actually sent.
+
+**Zoom.** Fill the screen, at the true shape, by enlarging the picture until
+the bars disappear — and cropping whatever falls off the edges. A 4:3 picture
+loses a strip from the top and bottom; a wide film loses a strip from each
+side. Faces stay the right shape, but a caption at the bottom or a score at
+the top may go with the strip.
+
+**Stretch.** Fill the screen by changing the picture's shape. Nothing is
+cropped, but everything gets wider or taller than it should be: circles
+become ovals, people become broader. It is the setting most televisions
+default to and most people mistake for "correct" because they have never seen
+the alternative side by side.
+
+## Which one you actually want
+
+The honest answer is *fit*, nearly always, and it is worth saying why the bars
+are not a fault. They are the player declining to throw away part of the
+picture or distort it. Once you notice that the people on a stretched picture
+are subtly wide, it becomes hard to un-notice.
+
+But there are two cases where another choice is reasonable, and the button
+exists for them:
+
+- **A film with baked-in bands on a wide screen.** The encoder put black bands
+  into the 16:9 frame; the film inside is wider than the frame. *Zoom* here
+  crops away the bands and nothing of the film, and on a large television
+  it is a real improvement.
+- **A channel with a broken declaration.** Now and again a stream says it is
+  one shape and is plainly another — a squashed 4:3 picture claiming to be
+  16:9, or the reverse. There is no right answer for a lie; *stretch* is
+  the one that happens to undo it. Try the three and stop at the one where
+  a face looks like a face.
+
+## When it is not the player at all
+
+Two things look like an aspect problem and are not.
+
+**Bars on every source.** If the same bars appear on the streaming app, the
+console and the tuner, the television has its own picture-size setting —
+often called *Screen Fit*, *Just Scan*, *Original* or *16:9* — and it is
+overriding everyone. Set it to the one that does not scale, and let each
+source decide for itself.
+
+**Bars that arrive with a channel change.** A live channel can switch shape
+mid-stream when a programme changes — an old episode after a modern one — and
+[what a decoder does with that](/blog/sound-but-no-picture/) is to redraw the
+frame at the new size. That is not a fault; it is the picture correctly
+following the content. If the picture *stays* wrong afterwards, reopen the
+channel.
+
+## Subtitles follow the picture, not the screen
+
+One small detail Vidonzo gets right that is easy to miss: subtitles are
+anchored to the *picture*, not to the edges of the screen. On a wide film with
+bars, the caption sits over the film's lower edge rather than floating in the
+black band below it — the way it would in a cinema. (In zoom and stretch the
+picture *is* the screen, so the two coincide.) It is why
+[track selection and subtitle styling](/blog/subtitles-and-audio-tracks/) are
+worth setting once and then forgetting.
+
+## On a television, in a sentence
+
+Fit is right; zoom is for wide films with baked-in bands; stretch is for the
+occasional channel that lies about its shape. Cycle the *Aspect* button until
+a face looks like a face, and — if the bars are everywhere — check the
+television's own picture-size setting before blaming
+[the box](/blog/iptv-player-on-android-tv/) or the stream.

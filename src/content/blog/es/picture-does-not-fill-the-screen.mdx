@@ -1,0 +1,109 @@
+---
+title: "La imagen no llena la pantalla: relación de aspecto, zoom y barras negras"
+description: "Barras a los lados, barras arriba y abajo, o una imagen que se ve un poco achatada. Cada una es una decisión que ha tomado el reproductor, y cuando sabes cuál tomó, un control lo arregla."
+urlSlug: la-imagen-no-llena-la-pantalla
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['solución de problemas', 'reproducción']
+keywords: ['barras negras iptv', 'imagen no ocupa toda la pantalla', 'relacion de aspecto iptv', 'estirar imagen tv', 'zoom imagen iptv']
+heroImageAlt: "La pantalla de un televisor con un rectángulo más pequeño dentro y franjas oscuras arriba y abajo."
+---
+
+Un televisor es un rectángulo de forma fija, y el vídeo llega en un rectángulo
+de *alguna* forma — no siempre la misma. Cuando ambas no coinciden, el
+reproductor tiene que decidir qué hacer con la diferencia, y cada decisión
+posible molesta a alguien. Barras, recorte o estiramiento: elige una. Aquí va
+qué es cada una, por qué las barras suelen ser la respuesta *correcta* y cómo
+elegir la incorrecta a propósito cuando la prefieres.
+
+## De dónde viene la forma
+
+Todo stream declara el tamaño de su imagen — 1920×1080, 720×576, etcétera — y,
+por separado, la forma en la que esos píxeles deben mostrarse. Casi toda la
+televisión de hoy es 16:9. Los programas antiguos, algunos canales regionales y
+mucho material de archivo son 4:3, más cercanos al cuadrado. Las películas a
+menudo son aún más anchas, 2,35:1, y llegan *dentro* de un marco 16:9 con
+franjas negras ya incrustadas en la imagen por quien la codificó.
+
+Tu pantalla, mientras tanto, es 16:9 — salvo que sea un móvil en vertical o una
+tableta en 4:3, en cuyo caso el desajuste va al revés.
+
+## Las tres cosas que puede hacer un reproductor
+
+Con una imagen de una forma y una pantalla de otra hay exactamente tres
+opciones honestas, y el botón *Aspecto* del reproductor de Vidonzo las recorre
+en este orden:
+
+**Ajustar.** Muestra la imagen entera, tan grande como quepa, en su forma
+verdadera. Lo que sobra se rellena de negro. Un programa 4:3 en una pantalla
+16:9 tiene barras a los lados; una película ancha las tiene arriba y abajo. No
+se pierde nada, no se distorsiona nada, y es el valor por defecto porque es la
+única opción que te enseña lo que realmente envió la emisora.
+
+**Zoom.** Llena la pantalla, en la forma verdadera, agrandando la imagen hasta
+que las barras desaparezcan — y recortando lo que se sale por los bordes. Una
+imagen 4:3 pierde una franja arriba y abajo; una película ancha, una a cada
+lado. Las caras conservan la forma correcta, pero un subtítulo abajo o un
+marcador arriba pueden irse con la franja.
+
+**Estirar.** Llena la pantalla cambiando la forma de la imagen. No se recorta
+nada, pero todo queda más ancho o más alto de lo que debería: los círculos se
+vuelven óvalos, las personas se ensanchan. Es el ajuste que la mayoría de los
+televisores trae por defecto y que casi todo el mundo confunde con «lo
+correcto» porque nunca ha visto la alternativa al lado.
+
+## Cuál quieres de verdad
+
+La respuesta honesta es *ajustar*, casi siempre, y vale la pena decir por qué
+las barras no son un fallo. Son el reproductor negándose a tirar parte de la
+imagen o a deformarla. Una vez que notas que la gente en una imagen estirada es
+sutilmente más ancha, cuesta dejar de notarlo.
+
+Pero hay dos casos en los que otra elección es razonable, y el botón existe
+para ellos:
+
+- **Una película con franjas incrustadas en una pantalla ancha.** El
+  codificador metió franjas negras dentro del marco 16:9; la película que hay
+  dentro es más ancha que el marco. Aquí el *zoom* recorta las franjas y nada
+  de la película, y en un televisor grande es una mejora real.
+- **Un canal con la declaración rota.** De vez en cuando un stream dice que
+  tiene una forma y visiblemente tiene otra — una imagen 4:3 achatada que dice
+  ser 16:9, o al revés. Para una mentira no hay respuesta correcta; *estirar*
+  es la que da la casualidad de deshacerla. Prueba las tres y quédate con
+  aquella en la que una cara parece una cara.
+
+## Cuando no es el reproductor en absoluto
+
+Dos cosas parecen un problema de aspecto y no lo son.
+
+**Barras en todas las fuentes.** Si las mismas barras aparecen en la app de
+streaming, la consola y el sintonizador, el televisor tiene su propio ajuste de
+tamaño de imagen — a menudo llamado *Screen Fit*, *Just Scan*, *Original* o
+*16:9* — y está pasando por encima de todos. Ponlo en el que no escala y deja
+que cada fuente decida por sí misma.
+
+**Barras que llegan con un cambio de programa.** Un canal en directo puede
+cambiar de forma a mitad del stream — un episodio viejo después de uno moderno
+— y [lo que hace un decodificador con eso](/es/blog/se-oye-pero-no-se-ve/) es
+redibujar el fotograma al nuevo tamaño. Eso no es un fallo; es la imagen
+siguiendo correctamente al contenido. Si la imagen *se queda* mal después,
+vuelve a abrir el canal.
+
+## Los subtítulos siguen a la imagen, no a la pantalla
+
+Un pequeño detalle que Vidonzo hace bien y que es fácil pasar por alto: los
+subtítulos están anclados a la *imagen*, no a los bordes de la pantalla. En una
+película ancha con barras, el subtítulo se sitúa sobre el borde inferior de la
+película en vez de flotar en la franja negra de debajo — como en el cine. (En
+zoom y estirado la imagen *es* la pantalla, así que ambos coinciden.) Por eso
+[la selección de pistas y el estilo de subtítulos](/es/blog/subtitulos-y-pistas-de-audio-iptv/)
+merecen configurarse una vez y olvidarse.
+
+## En el televisor, en una frase
+
+Ajustar es lo correcto; el zoom es para películas anchas con franjas
+incrustadas; estirar es para el canal ocasional que miente sobre su forma.
+Recorre el botón *Aspecto* hasta que una cara parezca una cara y — si las
+barras están en todas partes — comprueba el ajuste de tamaño de imagen del
+propio televisor antes de culpar a
+[la caja](/es/blog/reproductor-iptv-en-android-tv/) o al stream.

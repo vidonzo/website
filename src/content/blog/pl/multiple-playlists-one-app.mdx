@@ -1,0 +1,104 @@
+---
+title: "Dwóch dostawców, jedna aplikacja: kilka playlist obok siebie"
+description: "Dwa abonamenty albo jeden dostawca dający ci i login, i link — odtwarzacz powinien trzymać je osobno, każdą z własnym przewodnikiem, punktami wznowienia i odświeżaniem, i pozwalać przełączać się jednym dotknięciem."
+urlSlug: kilka-playlist-w-jednej-aplikacji
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlisty', 'produkt']
+keywords: ['kilka playlist iptv w jednej aplikacji', 'odtwarzacz iptv wiele zrodel', 'dwa abonamenty iptv jedna aplikacja', 'przelaczanie miedzy playlistami']
+heroImageAlt: "Dwa równo rozdzielone stosy kart na stole, dłoń sięgająca po wierzchnią kartę jednego z nich."
+---
+
+Prędzej czy później większość domów ma więcej niż jedną playlistę. Drugi
+dostawca dla języka, którego brakuje pierwszemu. Abonament kogoś z rodziny obok
+twojego. Albo przypadek zwyczajny: jeden dostawca przysyła i login Xtream, *i*
+link M3U, a ty chciałbyś zachować ten drugi jako zapas. Zły sposób to ten, który
+stosuje wiele odtwarzaczy — zlać wszystko w jedną wielką listę. Oto dlaczego to
+błąd, co „obok siebie” powinno naprawdę znaczyć i jak to działa.
+
+## Dlaczego scalanie to zła odpowiedź
+
+Dwie playlisty to nie jedna playlista z większą liczbą linii. Pochodzą z różnych
+serwerów, niosą różne [przewodniki](/pl/blog/epg-jak-dziala-program-telewizyjny/), aktualizują się
+w różnych rytmach, a każda ma własny login, który może wygasnąć własnego dnia.
+Wlej je w jedną listę, a każda z tych różnic staje się objawem, którego nie
+umiesz zdiagnozować: przewodnik zgadza się dla połowy kanałów; awaria u jednego
+dostawcy wygląda jak losowe usterki; ten sam kanał pojawia się dwa razy pod
+dwiema nazwami i nigdy nie wiadomo, który się zacina.
+
+Alternatywa jest prosta: trzymaj każde źródło jako źródło. Vidonzo robi
+dokładnie to — możesz dodać
+[login Xtream, link M3U albo plik lokalny](/pl/blog/xtream-codes-czy-m3u/) tyle
+razy, ile ich masz, i przełączać się między nimi z chipa playlisty u góry
+ekranu głównego. Nic nie jest scalane. Wszystko, co należy do każdego, zostaje
+jego.
+
+## Co „jego” znaczy w praktyce
+
+**Własny przewodnik.** Źródło Xtream przynosi przewodnik razem z loginem. Źródło
+M3U ma adres XMLTV, który ustawiasz dla *tego* źródła. Dwóch dostawców, dwa
+przewodniki, każdy dopasowany do swoich kanałów — więc identyfikatory nigdy się
+nie kłócą, a [pusty przewodnik](/pl/blog/przewodnik-pusty-albo-zle-godziny/) zawsze da
+się prześledzić do jednego miejsca.
+
+**Własne punkty wznowienia.** Kontynuowanie oglądania jest trzymane per źródło i
+per pozycja. Jeśli obaj dostawcy mają ten sam serial, odcinek, w którym byłeś w
+czterdziestej minucie u dostawcy A, jest zapamiętany jako u dostawcy A. Zmień
+źródło, a druga lista jest tam, gdzie ją zostawiłeś, nie tam, gdzie skończyła
+pierwsza.
+
+**Własne odświeżanie.** Hostowana playlista się zmienia, a każde źródło ma swoją
+politykę automatycznego odświeżania — przy każdym uruchomieniu, co godzinę, co
+sześć godzin, codziennie, co tydzień albo tylko ręcznie — plus *Odśwież teraz* na
+moment, gdy czegoś zdaje się brakować. Dostawcę, który co noc przestawia listę,
+można czytać codziennie; zapas, którego rzadko dotykasz, może zostać na ręcznym.
+Zbuforowana lista zawsze pokazuje się od razu; polityka decyduje tylko, kiedy
+odświeża się w tle.
+
+**Własne dane logowania.** Dwa loginy, trzymane osobno, a — skoro login to twój
+abonament — każdy [zaszyfrowany na urządzeniu](/pl/blog/dlaczego-szyfrowac-dane-logowania/),
+zanim w ogóle zbliży się do synchronizacji. Wygaśnięcie jednego nie tyka
+drugiego.
+
+## Przełączanie i to jedno, co przechodzi w poprzek
+
+Przełączanie to dotknięcie tego chipa: lista, przewodnik, ulubione i punkty
+wznowienia zmieniają się razem, bo wszystkie należą do źródła. Celowo nie jest
+to filtr nad jedną zlaną kupą; to inna biblioteka.
+
+Jedyne, co *przechodzi w poprzek*, to wyszukiwanie. Wyszukiwarka globalna
+przebiega przez transmisje na żywo, filmy i seriale w bieżącym źródle — a jeśli
+czegoś nie znajdziesz, zmiana źródła i ponowne szukanie zajmuje sekundę. To
+decyzja projektowa: pokazywanie wyników ze źródła, w którym nie jesteś,
+oznaczałoby odtwarzanie z loginu, którego nie wybrałeś, a to zamieszanie jest
+gorsze niż jedno dodatkowe dotknięcie.
+
+## Trzy układy, które to ułatwia
+
+**Login plus link od tego samego dostawcy.** Dodaj oba. Login Xtream niech będzie
+źródłem codziennym — zwykle jest bogatszy, z uporządkowanymi filmami i serialami
+— a link M3U zostaw jako zapas na dzień, w którym login zacznie kaprysić. Te same
+kanały, dwoje drzwi.
+
+**Dwóch dostawców dla dwóch języków.** Każdy jako osobne źródło, każdy z
+przewodnikiem w swoim języku, każdy z ulubionymi, które mają sens dla osoby,
+która go ogląda. Przełączenie to cała decyzja „który”.
+
+**Hostowana playlista i lokalna kopia.**
+[Adres URL zostaje aktualny, plik jest zamrożony](/pl/blog/link-do-playlisty-czy-plik-na-urzadzeniu/)
+— ale plik nie potrzebuje serwera. Trzymaj link jako źródło główne, a plik
+lokalny jako awaryjne na wieczór, gdy serwer jest nieosiągalny. Dwa źródła, jedno
+zawsze dostępne.
+
+## Czego unikać
+
+Nie dodawaj tej samej listy dwa razy w nadziei na uporządkowanie — ulubione i
+[kategorie](/pl/blog/jak-uporzadkowac-duza-playliste/) robią to wewnątrz źródła, a
+duplikat tylko podwaja punkty wznowienia do pilnowania. I nie używaj źródeł jako
+sposobu na dzielenie jednego abonamentu z większą liczbą osób, niż on pozwala;
+większość dostawców ogranicza jednoczesne strumienie na login, a drugie *źródło*
+na tym samym loginie to nadal ten sam login.
+
+Zasada leżąca u podstaw to [ta sama, która stoi za całym odtwarzaczem](/pl/blog/wlasna-playlista-i-prywatnosc/):
+playlista jest twoja, a zadaniem odtwarzacza jest traktować każdą, którą
+posiadasz, z tym samym szacunkiem — osobno i nie udając nigdy, że były jednym.

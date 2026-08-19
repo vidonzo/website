@@ -1,0 +1,120 @@
+---
+title: "Strumień urywa się po kilku sekundach: rozłączenia, nie buforowanie"
+description: "Startuje czysto, gra dziesięć sekund i umiera — bez kręcącego się kółka, po prostu koniec. To inna usterka niż buforowanie, o innych przyczynach, a dobry odtwarzacz naprawia te naprawialne, zanim zdążysz zauważyć."
+urlSlug: strumien-urywa-sie-po-kilku-sekundach
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['diagnostyka', 'odtwarzanie']
+keywords: ['iptv urywa sie po kilku sekundach', 'iptv ciagle sie rozlacza', 'strumien sie przerywa iptv', 'iptv zatrzymuje sie po 10 sekundach']
+heroImageAlt: "Prosta linia, która biegnie czysto przez krótki odcinek, a potem po prostu się kończy, na gładkim tle."
+---
+
+Buforowanie ma swój wygląd: kółko, przystanek, obraz nadrabiający zaległości. To
+nie jest to. To kanał, który otwiera się czysto, gra bez zarzutu pięć, dziesięć
+albo trzydzieści sekund, a potem staje — powrót do listy albo zamrożona klatka,
+albo błąd, albo ten sam kanał startujący od nowa. Naciśniesz play i dzieje się
+znowu. To *rozłączenie*, a jego przyczyny są niemal całkiem inne niż
+[te za buforowaniem](/pl/blog/jak-naprawic-buforowanie-iptv/). Oto pięć, które
+odpowiadają za niemal wszystkie przypadki, i co odtwarzacz może, a czego nie
+może z każdą zrobić.
+
+## 1. Serwer zakończył połączenie
+
+Najczęstsza przyczyna. Serwer dostawcy podaje ci strumień, a kilka sekund
+później zamyka połączenie — bo jest przeciążony, bo proces się zrestartował, bo
+load balancer cię przeniósł, bo jest wtorek. Na surowym transport streamie dane
+po prostu przestają przychodzić; na
+[HLS](/pl/blog/protokoly-streamingu-hls-dash-rtsp/) kolejny segment nigdy nie
+nadchodzi.
+
+To jest przypadek, *dla którego* odtwarzacz istnieje. Dobrze zbudowany nie
+traktuje zerwanego połączenia jako końca audycji; traktuje je jak czkawkę i po
+cichu łączy się na nowo. Vidonzo robi to na warstwie transportowej: zablokowany
+odczyt kończy się przekroczeniem czasu w kilka sekund zamiast wisieć, a
+połączenie jest odtwarzane z krótkim, ograniczonym odczekaniem — więc serwer,
+który zamknął drzwi, otwiera je z powrotem, a ty widzisz co najwyżej chwilę
+pauzy. Jeśli kanał umierał w dziesiątej sekundzie w twoim poprzednim
+odtwarzaczu, a w tym tylko mrugnie, to właśnie ten mechanizm.
+
+Sygnatura: losowe kanały, losowe pory, wieczorami częściej. Po twojej stronie
+nie ma czego zmieniać; jeśli dzieje się na *każdym* kanale bez przerwy, serwer
+naprawdę ma kłopoty i dostawca powinien o tym usłyszeć.
+
+## 2. Twój dostęp wygasł w środku strumienia
+
+Xtream Codes i wiele linków M3U niosą token — dowód, kim jesteś — w adresie.
+Tokeny wygasają. Kiedy to się dzieje, serwer nie zamyka połączenia grzecznie;
+odpowiada na kolejne żądanie błędem: zabronione, nieuprawnione, nie ma.
+
+Tutaj dobry odtwarzacz świadomie *nie* łączy się dalej. Walenie w serwer, który
+przed chwilą powiedział „nie”, jest bezcelowe, a w skali wygląda jak atak;
+dostawcy za to blokują. Vidonzo łączy się na nowo przez zerwane połączenie i
+zatrzymuje się przy wyraźnej odmowie — celowo. Lekarstwem jest świeża
+playlista: użyj *Odśwież teraz* na źródle, żeby odtwarzacz wczytał bieżącą listę
+— a jeśli wygasł sam abonament, to sprawa między tobą a dostawcą.
+
+Sygnatura: wczoraj działało, dziś zawodzi wszystko, a awaria jest natychmiastowa,
+a nie po kilku sekundach. Zobacz też
+[pięć usterek za linkiem, który się nie ładuje](/pl/blog/playlista-sie-nie-wczytuje/).
+
+## 3. Za dużo strumieni naraz
+
+Większość abonamentów pozwala na stałą liczbę *jednoczesnych* strumieni —
+jeden, dwa, czasem więcej. Otwórz trzeci, a serwer zrzuci jeden, i nie zawsze
+najnowszy. Zrzucony wygląda dokładnie jak przypadek 1, tyle że koreluje z tym,
+że ktoś inny w domu nacisnął play.
+
+Sygnatura: zawodzi, gdy ogląda inne urządzenie, i wraca, gdy tamto przestaje. To
+nie usterka odtwarzacza i nie ma na to ustawienia; to umowa, którą masz z
+dostawcą, a rozwiązaniem jest oglądanie na zmianę albo plan pozwalający na
+więcej. Odtwarzacz, który pokazuje jasny błąd zamiast po cichu otwierać ten sam
+strumień, przynajmniej mówi ci, w którym przypadku jesteś.
+
+## 4. Urządzenie zasnęło na połączeniu
+
+Telefony i przystawki telewizyjne oszczędzają energię agresywnie, a strumień
+wideo to dokładnie taki długi, cichy związek, który lubią przerwać. Na telefonie
+objawia się to strumieniem umierającym, gdy ekran przygasa albo gdy na chwilę
+przełączysz się do innej aplikacji; na przystawce może to być nadgorliwy tryb
+oszczędzania energii Wi-Fi, który wyłącza radio między segmentami.
+
+Sygnatura: powiązana z *twoimi* działaniami — ekranem, przełączeniem aplikacji,
+pauzą — a nie z zegarem czy kanałem. Na telefonie trzymaj aplikację na
+pierwszym planie podczas odtwarzania; Vidonzo celowo wiąże swoje odzyskiwanie z
+pierwszym planem, żeby nie walczyć z systemem o połączenie, od którego
+odszedłeś. Na przystawce poszukaj ustawienia oszczędzania energii Wi-Fi albo
+„nie usypiaj”, albo [przenieś przystawkę na kabel](/pl/blog/iptv-zacina-sie-na-wifi/).
+
+## 5. Sieć pośrodku je upuściła
+
+Między serwerem a ekranem siedzą twój router, twój dostawca internetu i — u
+niektórych — VPN albo proxy. Każde z nich może zresetować połączenie: router
+rotujący tablicę NAT, urządzenie operatora, które przeterminowuje pozornie
+bezczynny strumień, VPN, który się przełącza. Odtwarzacz widzi to samo co w
+przypadku 1 i łączy się tak samo; różnica polega na tym, że dotknięte jest
+*wszystko*, nie jeden dostawca.
+
+Sygnatura: inne aplikacje streamingowe też się rwą, a wzór idzie za siecią —
+konkretny router, konkretny VPN, konkretna pora dnia. Sprawdź minutę na danych
+komórkowych; jeśli zrywy znikną, usterka leży po stronie sieci domowej.
+
+## Rozróżnienie w minutę
+
+- Losowe kanały, losowe pory, krótka pauza → serwer zerwał (1). Odtwarzacz
+  łączy się na nowo; nic do roboty.
+- Natychmiastowa awaria na wszystkim, wczoraj działało → wygasły dostęp (2).
+  *Odśwież teraz*, potem porozmawiaj z dostawcą.
+- Zawodzi, gdy ktoś inny naciśnie play → za dużo strumieni (3).
+- Umiera, gdy przygaszasz ekran albo zmieniasz aplikację → oszczędzanie energii
+  (4).
+- Wszystko się rwie, inne aplikacje też → sieć (5).
+
+## Co odtwarzacz jest ci winien
+
+Uczciwa granica brzmi tak: odtwarzacz powinien łączyć się na nowo przez *każde*
+zerwanie, które nie jest odmową, na tyle szybko, żebyś rzadko to zauważał, i
+powinien zatrzymać się czysto i powiedzieć o tym przy każdym zerwaniu, które
+odmową jest. Cokolwiek więcej — trzymanie strumienia otwartego po wygaśnięciu
+tokena, ignorowanie limitu strumieni — nie jest funkcją, tylko problemem z
+opóźnieniem. Zrób poprawnie ponowne łączenie, a przypadek 1, czyli większość
+przypadków, przestanie być czymś, o czym myślisz.

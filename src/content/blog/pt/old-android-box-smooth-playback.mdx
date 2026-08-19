@@ -1,0 +1,106 @@
+---
+title: "Fazer uma caixa Android velha voltar a rodar liso"
+description: "Uma caixa que engasga raramente é fraca demais para tocar vídeo; é que pedem a ela tudo menos isso. Quais partes de um player custam num aparelho fraco, e os ajustes e hábitos que devolvem o trabalho à parte que aguenta."
+urlSlug: caixa-android-velha-reproducao-fluida
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisão', 'reprodução']
+keywords: ['player iptv para caixa android velha', 'player iptv leve android tv', 'caixa android travando', 'iptv em hardware fraco']
+heroImageAlt: "Uma pequena caixa decodificadora um pouco riscada numa prateleira, com a luz acesa e poeira no canto."
+---
+
+Em muitas salas há, em algum canto, uma caixinha preta com Android de cinco ou
+seis anos, com um ou dois gigas de memória e um chip que já era barato quando
+era novo. Antes tocava tudo. Agora o aplicativo que roda nela engasga na troca
+de canal, a imagem treme em cenas agitadas e o menu demora um instante para
+responder. O instinto diz que a caixa acabou. Normalmente não acabou. Até uma
+caixa modesta tem um decodificador de vídeo dedicado perfeitamente capaz de
+desenhar 1080p a noite inteira; o que mudou foi o quanto de trabalho *alheio* o
+software em volta foi assumindo. Aqui está para onde vai o custo e como
+devolver o trabalho às partes que aguentam.
+
+## O que realmente custa numa caixa fraca
+
+Três coisas, em ordem decrescente.
+
+**Decodificar vídeo por software.** Se o app decodifica na CPU de uso geral em
+vez de no bloco de vídeo, um stream 1080p come a maior parte de um chip
+pequeno, e um 4K ou HEVC simplesmente não dá. Essa única escolha separa uma
+caixa que toca de uma que engasga, e ela é um ajuste.
+
+**Desenhar uma interface enfeitada.** Pôsteres, animações, fundos borrados, um
+carrossel de cem cartões, tudo sendo redesenhado enquanto o vídeo roda por
+baixo. Cada quadro disso sai do mesmo orçamento pequeno de onde sai o vídeo.
+Uma interface pesada sobre um decodificador leve é exatamente como uma caixa
+que *consegue* tocar parece que não consegue.
+
+**Manter uma lista enorme na memória do jeito errado.** A lista completa de um
+provedor é um arquivo grande, e um app que a mantém inteira como estrutura
+plana e a busca rolando vai esgotar a memória de uma caixa pequena — e aí o
+sistema começa a fechar coisas, às vezes o próprio app.
+
+Repare no que não está na lista: a rede. Buffering e engasgo se parecem numa
+caixa lenta, então vale descartar a rede primeiro —
+[o artigo sobre buffering](/pt/blog/iptv-travando-como-resolver/) resolve isso em cinco
+minutos — antes de culpar o hardware.
+
+## Os ajustes que importam
+
+**Decodificação por hardware ligada.** No Vidonzo fica em *Configurações →
+Reprodução → Decodificação por hardware*, e numa caixa velha é o jogo inteiro.
+Ligada, o bloco de vídeo decodifica e a CPU fica livre para desenhar a
+interface; desligada, a CPU faz as duas coisas e perde. Se com ela ligada um
+canal der [som mas nenhuma imagem](/pt/blog/som-sem-imagem/), o formato
+daquele canal é um que o decodificador da caixa não suporta — inverta a chave só
+para aquele canal e espere que fique mais pesado.
+
+**Buffer no tamanho da conexão, não da caixa.** Um buffer maior custa memória,
+e uma caixa pequena tem pouca sobrando — mas um buffer pequeno demais trava no
+primeiro soluço, e travar é justamente o que você quer curar. Comece pelo
+padrão; só aumente se a imagem realmente parar, e só diminua se a caixa
+estiver visivelmente sem memória (apps se fechando sozinhos é o sinal).
+
+**Mantenha o guia, descarte o enfeite.** O guia de programação é dado, não
+imagem, e é barato de desenhar. O que custa são as telas cheias de arte. O
+layout de TV do Vidonzo é
+[uma barra lateral com molduras de foco](/pt/blog/player-de-iptv-na-android-tv/),
+feito para um direcional e leve por projeto — a caixa desenha uma lista, não uma
+vitrine.
+
+## Os hábitos que importam
+
+**Faça curadoria.** [Favoritos e umas poucas categorias](/pt/blog/organizar-listas-grandes-de-canais/)
+não são só convenientes numa caixa pequena: são mais leves. Passear por uma
+lista curta do que você realmente assiste não custa quase nada. Rolar a lista
+inteira do provedor toda noite é a coisa mais cara que você pode pedir a um
+aparelho fraco.
+
+**Deixe o celular navegar.** Essa é a mudança que mais surpreende as pessoas. Se
+um celular ou tablet no mesmo Wi-Fi
+[faz de controle da caixa](/pt/blog/celular-como-controle-da-tv/), o celular
+desenha os pôsteres, roda a busca e cuida da digitação — e a caixa só precisa
+receber «toca isso» e tocar. Uma caixa fraca com um celular ao lado se comporta
+como uma caixa bem melhor, porque foi rebaixada ao único trabalho em que é boa.
+
+**Reinicie de vez em quando.** Não é sabedoria popular: uma caixa ligada há três
+semanas acumulou tudo o que cada app nela vazou. Um reinício por semana custa um
+minuto e devolve memória que o player pode usar.
+
+**Desinstale o que você não usa.** Cada app que roda um serviço em segundo plano
+gasta do mesmo orçamento pequeno. Uma caixa que só precisa ser uma caixa sobra
+mais para a imagem.
+
+## Quando é mesmo o hardware
+
+Existe um piso. Uma caixa que não consegue decodificar HEVC por hardware nunca
+vai tocar HEVC liso, faça o software o que fizer, e os provedores estão indo
+para HEVC porque isso corta a banda deles pela metade. Se os canais do seu
+provedor são majoritariamente HEVC e o decodificador da sua caixa é anterior a
+isso, a resposta honesta é um aparelho mais novo — e não precisa ser caro; um
+stick certificado atual decodifica HEVC por hardware e custa pouco.
+
+Mas experimente o software primeiro. Decodificação por hardware ligada, buffer
+no padrão, interface mantida enxuta, o celular navegando: a maioria das
+reclamações de «caixa velha» não sobrevive a essa lista, e percorrê-la leva uma
+noite. [Configurar a lista num player novo](/pt/blog/configurar-sua-primeira-lista/)
+é cerca de um minuto dessa noite; o resto é assistir para ver se ainda engasga.

@@ -1,0 +1,113 @@
+---
+title: "Deux fournisseurs, une application : plusieurs playlists côte à côte"
+description: "Deux abonnements, ou un fournisseur qui vous donne à la fois des identifiants et un lien — un lecteur devrait les garder séparés, chacun avec son guide, ses points de reprise et son actualisation, et vous laisser basculer d’un geste."
+urlSlug: plusieurs-playlists-dans-une-application
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'produit']
+keywords: ['plusieurs playlists iptv une application', 'lecteur iptv plusieurs sources', 'deux abonnements iptv une application', 'basculer entre playlists']
+heroImageAlt: "Deux piles de cartes nettement séparées sur une table, une main saisissant la carte du dessus de l’une d’elles."
+---
+
+Tôt ou tard, la plupart des foyers se retrouvent avec plus d’une playlist. Un
+deuxième fournisseur pour une langue qui manque au premier. L’abonnement d’un
+proche à côté du vôtre. Ou le cas ordinaire : un fournisseur qui envoie à la
+fois des identifiants Xtream *et* un lien M3U, et vous aimeriez garder le second
+en réserve. La mauvaise façon de gérer cela est celle qu’adoptent beaucoup de
+lecteurs : tout fondre dans une seule liste énorme. Voici pourquoi c’est une
+erreur, ce que « côte à côte » devrait vraiment vouloir dire, et comment ça
+marche.
+
+## Pourquoi fusionner est une mauvaise réponse
+
+Deux playlists ne sont pas une playlist avec plus de lignes. Elles viennent de
+serveurs différents, transportent des [guides](/fr/blog/epg-guide-des-programmes/)
+différents, se mettent à jour selon des calendriers différents, et chacune a
+ses propres identifiants susceptibles d’expirer un jour à elle. Versez-les dans
+une seule liste, et chacune de ces différences devient un symptôme que vous ne
+pouvez pas diagnostiquer : le guide est juste pour la moitié des chaînes ; une
+panne chez un fournisseur ressemble à des défaillances aléatoires ; la même
+chaîne apparaît deux fois sous deux noms et vous ne savez jamais laquelle cale.
+
+L’alternative est simple : gardez chaque source comme une source. Vidonzo fait
+exactement cela — vous pouvez ajouter
+[des identifiants Xtream, un lien M3U ou un fichier local](/fr/blog/xtream-codes-ou-m3u/)
+autant de fois que vous en avez, et basculer entre eux depuis la puce de
+playlist en haut de l’écran d’accueil. Rien n’est fusionné. Tout ce qui
+appartient à chacune lui reste propre.
+
+## Ce que « propre » signifie en pratique
+
+**Son propre guide.** Une source Xtream apporte son guide avec les
+identifiants. Une source M3U a une adresse XMLTV que vous réglez pour *cette*
+source. Deux fournisseurs, deux guides, chacun apparié à ses propres chaînes —
+ainsi les identifiants ne se disputent jamais, et un
+[guide vide](/fr/blog/guide-vide-ou-heures-fausses/) est toujours traçable jusqu’à
+un seul endroit.
+
+**Ses propres points de reprise.** La reprise de lecture est conservée par
+source et par titre. Si les deux fournisseurs proposent la même série,
+l’épisode où vous en étiez à quarante minutes chez le fournisseur A est mémorisé
+comme étant chez A. Changez de source et l’autre liste est là où vous l’avez
+laissée, pas là où en était la première.
+
+**Sa propre actualisation.** Une playlist hébergée change, et chaque source a
+sa propre règle d’actualisation automatique — à chaque lancement, toutes les
+heures, toutes les six heures, quotidienne, hebdomadaire, ou manuelle
+seulement — plus un *Actualiser maintenant* pour le moment où quelque chose
+semble manquer. Un fournisseur qui remanie chaque nuit peut être relu
+quotidiennement ; la réserve à laquelle vous touchez rarement peut rester en
+manuel. La liste en cache s’affiche toujours instantanément ; la règle décide
+seulement du moment de la mise à jour en arrière-plan.
+
+**Ses propres identifiants.** Deux comptes, conservés séparément, et — puisque
+des identifiants sont votre abonnement — chacun
+[chiffré sur l’appareil](/fr/blog/pourquoi-chiffrer-vos-identifiants/) avant
+même d’approcher la synchronisation. L’expiration de l’un ne touche pas
+l’autre.
+
+## Basculer, et la seule chose qui traverse
+
+Basculer, c’est une pression sur cette puce : la liste, le guide, les favoris
+et les points de reprise changent ensemble, parce qu’ils appartiennent tous à la
+source. Ce n’est délibérément pas un filtre sur un tas fusionné ; c’est une
+autre bibliothèque.
+
+La seule chose qui *traverse*, c’est la recherche. La recherche globale
+parcourt le direct, les films et les séries de la source courante — et si vous
+ne trouvez pas quelque chose, changer de source et rechercher prend une
+seconde. C’est un choix de conception : afficher des résultats d’une source où
+vous n’êtes pas reviendrait à lire depuis des identifiants que vous n’avez pas
+choisis, et la confusion serait pire que la pression supplémentaire.
+
+## Trois arrangements que cela rend faciles
+
+**Identifiants et lien du même fournisseur.** Ajoutez les deux. Utilisez les
+identifiants Xtream comme source du quotidien — c’est en général la plus riche,
+avec films et séries structurés — et gardez le lien M3U en réserve pour le jour
+où les identifiants font des leurs. Les mêmes chaînes, deux portes.
+
+**Deux fournisseurs pour deux langues.** Chacun comme source à part, chacun
+avec son guide dans sa langue, chacun avec des favoris qui ont du sens pour la
+personne qui le regarde. Basculer, c’est toute la décision du « lequel ».
+
+**Une playlist hébergée et une copie locale.**
+[Une URL reste à jour, un fichier est figé](/fr/blog/lien-de-playlist-ou-fichier-local/)
+— mais un fichier n’a besoin d’aucun serveur. Gardez le lien comme source
+principale et un fichier local en repli pour le soir où le serveur est
+injoignable. Deux sources, l’une est toujours disponible.
+
+## Ce qu’il faut éviter
+
+N’ajoutez pas deux fois la même liste en espérant l’organiser — les favoris et
+les [catégories](/fr/blog/organiser-une-grande-playlist/) font cela à l’intérieur
+d’une source, et un doublon ne fait que doubler les points de reprise à suivre.
+Et n’utilisez pas les sources comme moyen de partager un abonnement avec plus
+de personnes qu’il n’autorise ; la plupart des fournisseurs limitent les flux
+simultanés par compte, et une seconde *source* sur le même compte reste le même
+compte.
+
+Le principe derrière tout cela est [celui qui sous-tend tout le lecteur](/fr/blog/apportez-votre-playlist/) :
+la playlist est à vous, et le travail d’un lecteur est de traiter chacune de
+celles que vous possédez avec le même respect — séparément, et sans jamais
+faire semblant qu’elles n’en formaient qu’une.

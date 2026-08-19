@@ -1,0 +1,108 @@
+---
+title: "Een oude Android-box weer soepel krijgen"
+description: "Een box die hapert is zelden te zwak om video af te spelen; er wordt hem alleen al het andere gevraagd. Welke delen van een speler een zwak apparaat kosten, en de instellingen en gewoonten die het werk teruggeven aan wat het wél kan dragen."
+urlSlug: oude-android-box-weer-soepel
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['televisie', 'afspelen']
+keywords: ['iptv speler voor oude android box', 'lichte iptv speler android tv', 'android box traag', 'iptv op zwakke hardware']
+heroImageAlt: "Een klein, licht bekrast settopkastje op een plank, lampje aan, stof in de hoek."
+---
+
+Ergens in veel woonkamers staat een klein zwart Android-kastje, vijf of zes
+jaar oud, met een of twee gigabyte geheugen en een chip die al goedkoop was
+toen hij nieuw was. Vroeger speelde hij alles af. Nu hapert de app erop bij het
+zappen, trilt het beeld in drukke scènes, en duurt het even voordat het menu
+reageert. Het instinct zegt dat de box op is. Meestal is dat niet zo. Zelfs in
+een bescheiden box zit een aparte videodecoder die prima de hele avond 1080p
+kan tekenen; wat veranderd is, is hoeveel *ander* werk de software eromheen op
+zich heeft genomen. Hier staat waar de kosten heen gaan, en hoe je het werk
+teruggeeft aan de onderdelen die het kunnen dragen.
+
+## Wat er op een zwakke box werkelijk kost
+
+Drie dingen, in afnemende volgorde.
+
+**Video in software decoderen.** Decodeert de app op de algemene processor in
+plaats van in het videoblok, dan vreet een 1080p-stream het grootste deel van
+een kleine chip op, en een 4K- of HEVC-stream kan simpelweg niet. Die ene keuze
+scheidt een box die speelt van een box die hapert — en het is een instelling.
+
+**Een uitbundige interface tekenen.** Posters, animaties, wazige achtergronden,
+een carrousel van honderd kaarten, alles opnieuw getekend terwijl de video
+eronder loopt. Elk beeldje daarvan komt uit hetzelfde kleine budget als de
+video. Een zware interface boven een lichte decoder is precies hoe een box die
+wél kan spelen eruitziet alsof hij het niet kan.
+
+**Een enorme afspeellijst verkeerd in het geheugen houden.** De volledige lijst
+van een aanbieder is een groot bestand, en een app die hem in zijn geheel als
+platte structuur bewaart en er scrollend doorheen zoekt, jaagt een kleine box
+uit zijn geheugen — waarna het systeem dingen begint te sluiten, soms de app
+zelf.
+
+Let op wat er niet in de lijst staat: het netwerk. Bufferen en haperen lijken
+op een trage box op elkaar, dus loont het eerst het netwerk uit te sluiten —
+[het bufferartikel](/nl/blog/iptv-buffering-oplossen/) doet dat in vijf minuten —
+voordat je de hardware verdenkt.
+
+## De instellingen die ertoe doen
+
+**Hardwaredecodering aan.** In Vidonzo bij *Instellingen → Afspelen →
+Hardwaredecodering*, en op een oude box is dat het hele spel. Aan: het
+videoblok decodeert en de processor blijft over voor het tekenen van de
+interface. Uit: de processor doet allebei en verliest. Geeft een zender met
+hardwaredecodering aan [wel geluid maar geen beeld](/nl/blog/wel-geluid-geen-beeld/),
+dan ondersteunt de decoder van de box dat formaat niet — zet de schakelaar voor
+alleen die zender om en reken erop dat het zwaarder wordt.
+
+**Buffer op maat van de verbinding, niet van de box.** Een grotere buffer kost
+geheugen, en een kleine box heeft weinig over — maar een te kleine buffer
+hapert bij de eerste hik, en haperen is nu net wat je wilt verhelpen. Begin bij
+de standaardwaarde; verhoog hem alleen als het beeld werkelijk stilvalt, en
+verlaag hem alleen als de box zichtbaar geheugen tekortkomt (apps die vanzelf
+sluiten zijn het teken).
+
+**Houd de gids, laat de opsmuk vallen.** De programmagids is data, geen
+plaatjes, en goedkoop te tekenen. Het zijn de artwork-zware schermen die
+kosten. Vidonzo's tv-indeling is
+[een zijbalk met focuskaders](/nl/blog/iptv-speler-op-android-tv/), gebouwd voor
+een d-pad en met opzet licht — de box tekent een lijst, geen showroom.
+
+## De gewoonten die ertoe doen
+
+**Cureer.** [Favorieten en een paar categorieën](/nl/blog/grote-afspeellijsten-ordenen/)
+zijn op een kleine box niet alleen handig, ze zijn lichter. Een korte lijst
+doorbladeren van wat je echt kijkt kost bijna niets. Elke avond de hele
+aanbiederslijst doorscrollen is het duurste wat je een zwak apparaat kunt
+vragen.
+
+**Laat de telefoon bladeren.** Dit is de verandering die mensen het meest
+verrast. Als een telefoon of tablet op hetzelfde wifi
+[de afstandsbediening van de box is](/nl/blog/telefoon-als-afstandsbediening-tv/),
+tekent de telefoon de posters, voert hij de zoekopdracht uit en neemt hij het
+typen over — en hoeft de box alleen «speel dit» te ontvangen en af te spelen.
+Een zwakke box met een telefoon ernaast gedraagt zich als een veel betere box,
+omdat hij is gedegradeerd tot de ene taak waar hij goed in is.
+
+**Herstart hem af en toe.** Geen volkswijsheid: een box die drie weken aanstaat
+heeft alles verzameld wat elke app erop heeft laten lekken. Een herstart per
+week kost een minuut en geeft geheugen terug dat de speler kan gebruiken.
+
+**Verwijder wat je niet gebruikt.** Elke app die een achtergronddienst draait
+put uit hetzelfde kleine budget. Een box die alleen een box hoeft te zijn houdt
+meer over voor het beeld.
+
+## Wanneer het echt de hardware is
+
+Er is een bodem. Een box die HEVC niet in hardware kan decoderen zal HEVC nooit
+soepel afspelen, wat de software ook doet, en aanbieders stappen over op HEVC
+omdat het hun bandbreedte halveert. Zijn de zenders van je aanbieder
+overwegend HEVC en dateert de decoder van je box van daarvoor, dan is het
+eerlijke antwoord een nieuwer apparaat — en het hoeft niet duur te zijn; een
+actuele gecertificeerde stick decodeert HEVC in hardware en kost weinig.
+
+Maar probeer eerst de software. Hardwaredecodering aan, buffer op standaard,
+interface slank gehouden, de telefoon die bladert: de meerderheid van de
+«oude box»-klachten overleeft die lijst niet, en hem doorwerken kost een avond.
+[De afspeellijst op een verse speler zetten](/nl/blog/eerste-afspeellijst-instellen/)
+is ongeveer een minuut van die avond; de rest is kijken of het nog hapert.

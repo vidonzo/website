@@ -1,0 +1,91 @@
+---
+title: "Twój smart TV Samsunga albo LG nie ma dobrego odtwarzacza IPTV: konfiguracja, która działa"
+description: "Tizen i webOS to osobne systemy z własnymi, chudymi sklepami. Zamiast z tym walczyć, niech telewizor będzie ekranem, a odtwarzacz postaw na czymś, co potrafi go uruchomić."
+urlSlug: iptv-na-smart-tv-samsung-lub-lg
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['telewizja', 'konfiguracja']
+keywords: ['odtwarzacz iptv samsung smart tv', 'iptv lg smart tv', 'iptv na tizen', 'iptv webos', 'smart tv iptv bez aplikacji']
+heroImageAlt: "Duży płaski telewizor na ścianie, pod nim na półce mała czarna skrzynka, łączy je jeden kabel."
+---
+
+Masz dobry telewizor. Jest duży, panel znakomity, ma sklep z aplikacjami — więc
+wydaje się oczywiste, że odtwarzacz IPTV powinien w nim mieszkać. Potem
+otwierasz sklep i znajdujesz dwa–trzy odtwarzacze, żaden właściwy: jeden to
+płatna strona WWW w ramce, drugi chce kodu ze strony, trzeci pokazuje kanały
+jako niekończącą się listę bez przewodnika. Kusi, żeby szukać dalej. Jest
+lepsza odpowiedź i zaczyna się od zrozumienia, dlaczego półka jest pusta.
+
+## Dlaczego sklep telewizora jest chudy
+
+Telewizory Samsunga działają na Tizenie. LG — na webOS. Żaden nie jest
+Androidem. Oba to w pełni zdolne systemy, ale to osobne światy, z własnymi
+narzędziami, własnymi regułami przeglądu i — co decydujące — maleńką częścią
+programistów piszących poważne oprogramowanie wideo. Linia mpv i FFmpeg, na
+której [buduje się dobre odtwarzacze IPTV](/pl/blog/co-robi-odtwarzacz-iptv/),
+celuje w Androida, iOS, Windows, macOS i Linuksa; port na Tizena to osobny
+projekt dla małej publiczności i większość odtwarzaczy nigdy go nie robi.
+
+Odtwarzacze w sklepie telewizora to więc zwykle lekkie aplikacje webowe,
+ograniczone do tego, co dekoduje silnik przeglądarki. Na czystym strumieniu
+grają. Na [dziwnych strumieniach, które dostawcy naprawdę produkują](/pl/blog/protokoly-streamingu-hls-dash-rtsp/)
+— surowych transport streamach, nietypowych kodekach audio, HEVC na starszym
+panelu — zacinają się, gubią dźwięk albo odmawiają. I prawie żaden nie ma
+przewodnika godnego tej nazwy.
+
+Vidonzo też nie ma wersji na Tizena ani webOS. Zamiast ją obiecywać — oto
+układ, który działa dziś i działa dobrze.
+
+## Telewizor jest ekranem; odtwarzacz działa na przystawce
+
+Każdy nowoczesny telewizor ma wolne porty HDMI i jeden z nich może przyjąć małe
+urządzenie Android TV — sticka albo przystawkę od kilku producentów, za mniej
+niż skromna kolacja na mieście. Podłącz, a telewizor staje się tym, w czym jest
+najlepszy: dużym, jasnym wyświetlaczem. Odtwarzacz działa na przystawce, z
+prawdziwym systemem pod spodem i
+[prawdziwym interfejsem telewizyjnym na wierzchu](/pl/blog/odtwarzacz-iptv-na-android-tv/).
+
+Zysk nie jest subtelny. Przystawka zbudowana pod Android TV uruchamia ten sam
+silnik mpv co telefon, z dekodowaniem sprzętowym, regulowanym buforem na
+[chwiejne łącze](/pl/blog/jak-naprawic-buforowanie-iptv/) i przewodnikiem, który
+[pokazuje właściwą godzinę](/pl/blog/epg-jak-dziala-program-telewizyjny/). Przestaje też zależeć
+od polityki sklepu producenta telewizora. Gdy za sześć lat wymienisz
+telewizor, przystawka przejdzie do nowego i nic w twojej konfiguracji się nie
+zmieni.
+
+Dwie praktyczne uwagi przy wyborze. Wybierz urządzenie *certyfikowane* dla
+Android TV lub Google TV, a nie ogólny „box z Androidem” — certyfikowane mają
+Google Play, dostają aktualizacje, a pilot i sterowanie HDMI mają poprawnie
+okablowane. I włącz w samym telewizorze HDMI-CEC, żeby strzałki pilota
+telewizora sterowały przystawką; większość domów już nigdy nie dotyka pilota
+od przystawki.
+
+## Potem niech pisze telefon
+
+Jedyne, czego przystawka nie rozwiązuje, to pisanie. Wpisywanie hasła Xtream
+strzałkami jest męką na każdym urządzeniu. Pomiń to: każdy telefon albo tablet
+w tej samej sieci Wi-Fi może [być pilotem dla Vidonzo na przystawce](/pl/blog/telefon-jako-pilot-do-telewizora/).
+Telefon sam wykrywa telewizor, przeglądasz bibliotekę telewizora i szukasz
+prawdziwą klawiaturą, a odtwarzanie rusza na dużym ekranie jednym dotknięciem.
+W praktyce większość ludzi konfiguruje playlistę z telefonu i nigdy nie pisze
+na telewizorze.
+
+## Kolejność, która omija zwykłe potknięcia
+
+1. Podłącz przystawkę do tej samej sieci, z której korzysta telefon. Jeśli
+   telewizor stoi w dalszym pokoju, [najpierw sprawdź tamtejsze Wi-Fi](/pl/blog/iptv-zacina-sie-na-wifi/)
+   — kabel do przystawki, jeśli router jest blisko, usuwa najczęstszą
+   przyczynę zacięć.
+2. Zainstaluj Vidonzo na przystawce: [instrukcja instalacji na TV](/pl/help/)
+   to opisuje.
+3. [Dodaj playlistę](/pl/blog/jak-dodac-pierwsza-playliste/) — z telefonu jako
+   pilota, jeśli masz go pod ręką.
+4. Otwórz przewodnik, wybierz kanał i dopiero wtedy cokolwiek reguluj.
+
+## A co z własną aplikacją odtwarzacza w telewizorze, na razie?
+
+Zostaw ją, jeśli ci służy, z tego samego powodu, dla którego trzyma się VLC
+obok dedykowanego odtwarzacza: jest. Ale gdy kanał gubi dźwięk albo przewodnik
+jest przesunięty o godzinę, to nie wina dostawcy ani telewizora — to proszenie
+silnika przeglądarki w zamkniętym systemie, żeby był odtwarzaczem
+multimedialnym. Daj telewizorowi jedno zadanie. W nim jest bardzo dobry.

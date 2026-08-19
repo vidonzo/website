@@ -1,0 +1,106 @@
+---
+title: "Obraz nie wypełnia ekranu: proporcje, powiększenie i czarne pasy"
+description: "Pasy po bokach, pasy u góry i dołu albo obraz, który wygląda na lekko ściśnięty. Każde z tego to decyzja odtwarzacza, a gdy wiesz, którą podjął, naprawia ją jeden przycisk."
+urlSlug: obraz-nie-wypelnia-ekranu
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['diagnostyka', 'odtwarzanie']
+keywords: ['czarne pasy iptv', 'obraz nie na caly ekran', 'proporcje obrazu iptv', 'rozciaganie obrazu telewizor']
+heroImageAlt: "Ekran telewizora z mniejszym prostokątem w środku i ciemnymi pasami nad nim i pod nim."
+---
+
+Telewizor to prostokąt o stałym kształcie, a wideo przychodzi w prostokącie o
+*jakimś* kształcie — nie zawsze tym samym. Ilekroć te dwa się nie zgadzają,
+odtwarzacz musi zdecydować, co zrobić z różnicą, a każda możliwa decyzja kogoś
+irytuje. Pasy, przycięcie albo rozciągnięcie: wybierz jedno. Oto czym każde z
+nich jest, dlaczego pasy są zwykle *właściwą* odpowiedzią i jak celowo wybrać
+tę niewłaściwą, gdy wolisz.
+
+## Skąd bierze się kształt
+
+Każdy strumień deklaruje rozmiar swojego obrazu — 1920×1080, 720×576 i tak
+dalej — a osobno kształt, w jakim te piksele mają być pokazane. Większość
+dzisiejszej telewizji to 16:9. Starsze programy, część kanałów regionalnych i
+sporo materiałów archiwalnych to 4:3, bliżej kwadratu. Filmy bywają jeszcze
+szersze, 2,35:1, i przychodzą *wewnątrz* kadru 16:9 z czarnymi pasami już
+wpieczonymi w obraz przez tego, kto go zakodował.
+
+Twój ekran tymczasem ma 16:9 — chyba że to telefon trzymany pionowo albo tablet
+w 4:3, i wtedy rozbieżność idzie w drugą stronę.
+
+## Trzy rzeczy, które odtwarzacz może zrobić
+
+Mając obraz o jednym kształcie i ekran o innym, są dokładnie trzy uczciwe
+opcje, a przycisk *Proporcje* w odtwarzaczu Vidonzo przełącza je w tej
+kolejności:
+
+**Dopasuj.** Pokaż cały obraz, tak duży, jak się zmieści, w jego prawdziwym
+kształcie. To, co zostaje, wypełnia się czernią. Program 4:3 na ekranie 16:9
+dostaje pasy po bokach; szeroki film dostaje je u góry i dołu. Nic nie ginie,
+nic nie jest zniekształcone, i to jest ustawienie domyślne, bo to jedyny wybór,
+który pokazuje ci, co nadawca faktycznie wysłał.
+
+**Powiększ.** Wypełnij ekran w prawdziwym kształcie, powiększając obraz, aż
+pasy znikną — i przycinając to, co wypada poza krawędzie. Obraz 4:3 traci pasek
+u góry i dołu; szeroki film po jednym z każdej strony. Twarze zachowują
+właściwy kształt, ale napis na dole albo wynik u góry mogą odejść razem z
+paskiem.
+
+**Rozciągnij.** Wypełnij ekran, zmieniając kształt obrazu. Nic nie jest
+przycięte, ale wszystko robi się szersze albo wyższe, niż powinno: koła stają
+się owalami, ludzie szerszymi. To ustawienie, które większość telewizorów ma
+domyślnie i które większość ludzi bierze za „poprawne”, bo nigdy nie widzieli
+alternatywy obok.
+
+## Które naprawdę chcesz
+
+Uczciwa odpowiedź to *dopasuj*, niemal zawsze, i warto powiedzieć, dlaczego
+pasy nie są usterką. To odtwarzacz odmawiający wyrzucenia części obrazu albo
+zniekształcenia go. Gdy raz zauważysz, że ludzie na rozciągniętym obrazie są
+subtelnie szersi, trudno przestać to widzieć.
+
+Ale są dwa przypadki, w których inny wybór jest rozsądny — i po to jest ten
+przycisk:
+
+- **Film z wpieczonymi pasami na szerokim ekranie.** Koder wstawił czarne pasy
+  w kadr 16:9; film w środku jest szerszy niż kadr. *Powiększenie* przycina tu
+  pasy i nic z filmu, a na dużym telewizorze to realna poprawa.
+- **Kanał ze zepsutą deklaracją.** Co jakiś czas strumień mówi, że ma jeden
+  kształt, a wyraźnie ma inny — ściśnięty obraz 4:3 twierdzący, że jest 16:9,
+  albo odwrotnie. Na kłamstwo nie ma poprawnej odpowiedzi; *rozciągnięcie*
+  akurat je odwraca. Spróbuj trzech i zatrzymaj się przy tym, w którym twarz
+  wygląda jak twarz.
+
+## Kiedy to wcale nie odtwarzacz
+
+Dwie rzeczy wyglądają jak problem proporcji, a nim nie są.
+
+**Pasy na każdym źródle.** Jeśli te same pasy pojawiają się w aplikacji
+streamingowej, na konsoli i w tunerze, telewizor ma własne ustawienie rozmiaru
+obrazu — często nazwane *Screen Fit*, *Just Scan*, *Original* albo *16:9* — i
+przebija wszystkich. Ustaw je na to, które nie skaluje, i pozwól każdemu źródłu
+decydować za siebie.
+
+**Pasy pojawiające się przy zmianie programu.** Kanał na żywo może zmienić
+kształt w środku strumienia — stary odcinek po nowoczesnym — a
+[to, co robi z tym dekoder](/pl/blog/dzwiek-jest-obrazu-nie-ma/), to przerysowanie
+kadru w nowym rozmiarze. To nie usterka; to obraz poprawnie podążający za
+treścią. Jeśli obraz *zostaje* potem zły, otwórz kanał na nowo.
+
+## Napisy podążają za obrazem, nie za ekranem
+
+Drobiazg, który Vidonzo robi dobrze i który łatwo przeoczyć: napisy są
+zakotwiczone w *obrazie*, a nie w krawędziach ekranu. Na szerokim filmie z
+pasami napis siada na dolnej krawędzi filmu, zamiast unosić się w czarnym pasie
+pod nim — tak jak w kinie. (W powiększeniu i rozciągnięciu obraz *jest*
+ekranem, więc oba się pokrywają.) Dlatego
+[wybór ścieżek i styl napisów](/pl/blog/napisy-i-sciezki-audio/) warto
+ustawić raz i zapomnieć.
+
+## Na telewizorze, w jednym zdaniu
+
+Dopasowanie jest właściwe; powiększenie jest do szerokich filmów z wpieczonymi
+pasami; rozciągnięcie do sporadycznego kanału, który kłamie o swoim kształcie.
+Przełączaj przycisk *Proporcje*, aż twarz będzie wyglądać jak twarz — a jeśli
+pasy są wszędzie, sprawdź ustawienie rozmiaru obrazu w samym telewizorze, zanim
+obwinisz [przystawkę](/pl/blog/odtwarzacz-iptv-na-android-tv/) albo strumień.

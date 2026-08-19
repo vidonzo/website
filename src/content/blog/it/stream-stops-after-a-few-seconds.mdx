@@ -1,0 +1,124 @@
+---
+title: "Lo stream si ferma dopo pochi secondi: disconnessioni, non buffering"
+description: "Parte bene, va dieci secondi e muore — nessuna rotellina, solo una fine. È un guasto diverso dal buffering, con cause diverse, e un buon lettore risolve quelle risolvibili senza che te ne accorga."
+urlSlug: lo-stream-si-ferma-dopo-pochi-secondi
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['risoluzione problemi', 'riproduzione']
+keywords: ['iptv si ferma dopo pochi secondi', 'iptv si disconnette', 'lo stream si interrompe iptv', 'iptv si blocca dopo 10 secondi']
+heroImageAlt: "Una linea retta che corre pulita per un tratto breve e poi semplicemente finisce, su un campo neutro."
+---
+
+Il buffering ha un aspetto riconoscibile: la rotellina, lo stallo, l’immagine
+che recupera. Questo non è quello. Questo è un canale che si apre pulito, va
+perfetto per cinque, dieci o trenta secondi, e poi si ferma — ritorno alla
+lista, o un fotogramma congelato, o un errore, o lo stesso canale che riparte
+da capo. Se premi play succede di nuovo. È una *disconnessione*, e le cause
+sono quasi del tutto diverse da
+[quelle dietro il buffering](/it/blog/risolvere-buffering-iptv/). Ecco le cinque che
+spiegano quasi tutti i casi, e cosa un lettore può e non può fare per ciascuna.
+
+## 1. Il server ha chiuso la connessione
+
+La causa più comune. Il server del fornitore ti dà uno stream e, dopo qualche
+secondo, chiude la connessione — perché è sovraccarico, perché un processo è
+ripartito, perché un bilanciatore ti ha spostato, perché è martedì. Su un
+transport stream grezzo i dati semplicemente smettono di arrivare; su
+[HLS](/it/blog/protocolli-di-streaming-spiegati/) il segmento successivo non
+arriva mai.
+
+Questo è il caso *per cui* esiste un lettore. Uno fatto bene non tratta una
+connessione caduta come la fine del programma; la tratta come un singhiozzo e
+si riconnette in silenzio. Vidonzo lo fa a livello di trasporto: una lettura
+bloccata va in timeout in pochi secondi invece di restare appesa, e la
+connessione viene ristabilita con un breve back-off limitato, così un server
+che ha chiuso la porta la riapre senza che tu veda più di un attimo di pausa.
+Se un canale moriva al decimo secondo nel tuo vecchio lettore e in questo si
+limita a battere le ciglia, il motivo è quel meccanismo.
+
+La firma: canali a caso, momenti a caso, più la sera. Nulla da cambiare dalla
+tua parte; se accade su *ogni* canale di continuo, il server è davvero nei
+guai e il fornitore deve saperlo.
+
+## 2. Il tuo accesso è scaduto a metà stream
+
+Xtream Codes e molti link M3U portano un token — una prova di chi sei —
+nell’indirizzo. I token scadono. Quando uno scade, il server non chiude la
+connessione con garbo; risponde alla richiesta successiva con un errore:
+vietato, non autorizzato, sparito.
+
+Qui un buon lettore deliberatamente *non* continua a riconnettersi. Martellare
+un server che ha appena detto «no» è inutile e, in quantità, sembra un attacco;
+i fornitori bloccano per questo. Vidonzo si riconnette attraverso una
+connessione caduta e si ferma davanti a un rifiuto esplicito, di proposito. La
+cura è una playlist fresca: usa *Aggiorna ora* sulla fonte perché il lettore
+rilegga la lista corrente — o, se è scaduto l’abbonamento stesso, quello è tra
+te e il fornitore.
+
+La firma: ieri funzionava, oggi fallisce tutto, e il fallimento è istantaneo
+invece che dopo qualche secondo. Vedi anche
+[i cinque guasti dietro un link che non si carica](/it/blog/la-playlist-non-si-carica/).
+
+## 3. Troppi stream insieme
+
+La maggior parte degli abbonamenti consente un numero fisso di stream
+*simultanei* — uno, due, a volte di più. Aprine un terzo e il server ne butta
+giù uno, e non sempre il più recente. Quello caduto sembra esattamente il caso
+1, se non che coincide con qualcun altro in casa che ha premuto play.
+
+La firma: fallisce quando un altro dispositivo sta guardando, e si riprende
+quando quello smette. Non è un guasto del lettore e non c’è impostazione;
+è l’accordo che hai col fornitore, e il rimedio è guardare a turno oppure un
+piano che consenta di più. Un lettore che mostra un errore chiaro invece di
+riaprire in silenzio lo stesso stream almeno ti dice in quale caso ti trovi.
+
+## 4. Il dispositivo si è addormentato sulla connessione
+
+Telefoni e box TV risparmiano energia con zelo, e uno stream video è
+esattamente il tipo di connessione lunga e silenziosa che amano tagliare. Su un
+telefono si manifesta come uno stream che muore quando lo schermo si attenua o
+quando passi un attimo a un’altra app; su un box può essere una modalità di
+risparmio energetico Wi-Fi troppo entusiasta che stacca la radio tra i
+segmenti.
+
+La firma: legata alle *tue* azioni — lo schermo, il cambio di app, una pausa —
+non all’orologio né al canale. Su un telefono tieni l’app in primo piano
+durante la riproduzione; Vidonzo lega di proposito il suo recupero al primo
+piano, per non litigare col sistema operativo su una connessione da cui ti sei
+allontanato. Su un box cerca un’impostazione di risparmio energetico Wi-Fi o
+«mantieni sveglio», oppure
+[porta il box su cavo](/it/blog/iptv-si-blocca-su-wifi/).
+
+## 5. La rete in mezzo l’ha lasciata cadere
+
+Tra il server e lo schermo ci sono il tuo router, il tuo operatore e — per
+alcuni — una VPN o un proxy. Ognuno può resettare una connessione: un router
+che ruota una tabella NAT, un apparato dell’operatore che manda in timeout un
+flusso apparentemente inattivo, una VPN che si riconnette. Il lettore vede la
+stessa cosa del caso 1 e si riconnette allo stesso modo; la differenza è che
+*tutto* ne risente, non solo un fornitore.
+
+La firma: cadono anche altre app di streaming, e lo schema segue la rete — un
+router particolare, una VPN particolare, un’ora particolare del giorno. Prova
+un minuto in rete mobile; se le cadute spariscono, il guasto è dal lato della
+rete di casa.
+
+## Distinguerli in un minuto
+
+- Canali a caso, momenti a caso, breve pausa → il server ha chiuso (1). Il
+  lettore si riconnette; nulla da fare.
+- Fallimento istantaneo su tutto, ieri funzionava → accesso scaduto (2).
+  *Aggiorna ora*, poi parla col fornitore.
+- Fallisce quando qualcun altro preme play → troppi stream (3).
+- Muore quando abbassi lo schermo o cambi app → risparmio energetico (4).
+- Cade tutto, anche le altre app → la rete (5).
+
+## Cosa il lettore ti deve
+
+Il confine onesto è questo: un lettore dovrebbe riconnettersi attraverso *ogni*
+caduta che non sia un rifiuto, abbastanza in fretta da farti raramente
+accorgere, e dovrebbe fermarsi con pulizia e dirlo a ogni caduta che lo è.
+Qualsiasi cosa in più — tenere aperto uno stream oltre il suo token, ignorare
+un limite di stream — non è una funzione, è un problema con un ritardo. Fai
+bene la riconnessione e il caso 1, che è la maggior parte dei casi, smette di
+essere una cosa a cui pensi.

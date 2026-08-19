@@ -1,0 +1,15 @@
+key: multiple-playlists-one-app
+title: "Two providers, one app: running multiple playlists side by side"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: feature-informational
+targetQueries: ["multiple iptv playlists one app", "iptv player multiple sources", "two iptv subscriptions one app", "switch between iptv playlists"]
+audience: Households with two providers, or one provider giving both an Xtream login and an M3U link.
+value: A real, low-competition differentiator: multiple sources kept apart cleanly, each with its own state.
+angle: Why sources should not be merged into one list, what stays per-source (resume points, EPG, refresh policy), and how switching works.
+productFacts:
+  - multiple sources side by side; switch between them
+  - continue watching kept per source per item; XMLTV EPG URL per source; auto-refresh policy
+constraints: [no-download-or-offline-wording, no-playlist-sourcing-tips, no-channel-counts]
+internalLinks: [xtream-codes-vs-m3u, hosted-playlist-vs-local-file, organize-large-playlists, epg-explained, bring-your-own-playlist]

@@ -1,0 +1,103 @@
+---
+title: "İki sağlayıcı, tek uygulama: birden fazla listeyi yan yana çalıştırmak"
+description: "İki abonelik ya da size hem giriş bilgisi hem bağlantı veren tek bir sağlayıcı — bir oynatıcı bunları ayrı tutmalı; her birinin kendi rehberi, kendi kaldığı yer noktaları ve kendi yenilemesi olmalı, ve tek dokunuşla geçebilmelisiniz."
+urlSlug: tek-uygulamada-birden-fazla-liste
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['oynatma-listesi', 'urun']
+keywords: ['tek uygulamada birden fazla iptv listesi', 'iptv oynatıcı çoklu kaynak', 'iki iptv aboneliği tek uygulama', 'listeler arasında geçiş']
+heroImageAlt: "Bir masada özenle ayrılmış iki kart destesi; bir el, birinin en üstteki kartına uzanıyor."
+---
+
+Er ya da geç çoğu evde birden fazla liste birikir. İlkinde olmayan bir dil için
+ikinci bir sağlayıcı. Kendi aboneliğinizin yanında bir aile ferdinin aboneliği.
+Ya da olağan durum: hem Xtream girişi *hem de* M3U bağlantısı gönderen tek bir
+sağlayıcı ve ikincisini yedek olarak tutma isteği. Bunu ele almanın yanlış yolu
+pek çok oynatıcının yaptığıdır: her şeyi tek bir devasa listeye eritmek. İşte
+bunun neden yanlış olduğu, «yan yana»nın aslında ne anlama gelmesi gerektiği ve
+bunun nasıl işlediği.
+
+## Neden eritmek yanlış cevaptır
+
+İki liste, daha çok satırı olan tek bir liste değildir. Farklı sunuculardan
+gelirler, farklı [rehberler](/tr/blog/epg-yayin-rehberi-nedir/) taşırlar, farklı
+takvimlerle güncellenirler ve her birinin kendi gününde sona erebilecek kendi
+girişi vardır. Bunları tek listeye dökün, bu farkların her biri teşhis
+edemeyeceğiniz bir belirtiye dönüşür: rehber kanalların yarısı için doğrudur;
+bir sağlayıcıdaki kesinti rastgele arızalar gibi görünür; aynı kanal iki adla
+iki kez belirir ve hangisinin takıldığını asla bilemezsiniz.
+
+Alternatifi basit: her kaynağı kaynak olarak tutun. Vidonzo tam olarak bunu
+yapar — [bir Xtream girişini, bir M3U bağlantısını ya da yerel bir dosyayı](/tr/blog/xtream-codes-mi-m3u-mu/)
+elinizde kaç tane varsa o kadar ekleyebilir, ana ekranın üstündeki liste
+çipinden aralarında geçiş yapabilirsiniz. Hiçbir şey eritilmez. Her birine ait
+olan her şey kendisine ait kalır.
+
+## «Kendisine ait» pratikte ne demek
+
+**Kendi rehberi.** Bir Xtream kaynağı rehberini girişle birlikte getirir. Bir
+M3U kaynağının, *o* kaynak için ayarladığınız bir XMLTV adresi vardır. İki
+sağlayıcı, iki rehber, her biri kendi kanallarıyla eşleşmiş — böylece kimlikler
+asla çatışmaz ve [boş bir rehber](/tr/blog/rehber-bos-ya-da-yanlis-saat/) her zaman
+tek bir yere kadar izlenebilir.
+
+**Kendi kaldığı yer noktaları.** İzlemeye devam et, kaynak başına ve öğe başına
+tutulur. İki sağlayıcı da aynı diziyi taşıyorsa, A sağlayıcısında kırkıncı
+dakikasında kaldığınız bölüm A sağlayıcısındaki olarak hatırlanır. Kaynağı
+değiştirin, diğer liste sizin bıraktığınız yerdedir; ilkinin kaldığı yerde
+değil.
+
+**Kendi yenilemesi.** Barındırılan bir liste değişir ve her kaynağın kendi
+otomatik yenileme politikası vardır — her açılışta, saatlik, altı saatte bir,
+günlük, haftalık ya da yalnızca elle — artı bir şeyin eksik göründüğü an için
+*Şimdi yenile*. Her gece listeyi karıştıran bir sağlayıcı günlük okunabilir;
+nadiren dokunduğunuz yedek elle kalabilir. Önbellekteki liste her zaman anında
+görünür; politika yalnızca arka planda ne zaman güncelleneceğini belirler.
+
+**Kendi giriş bilgileri.** İki giriş, ayrı tutulmuş ve — giriş sizin aboneliğiniz
+olduğu için — her biri eşitlemeye yaklaşmadan önce
+[cihazda şifrelenmiş](/tr/blog/giris-bilgileri-neden-sifrelenmeli/). Birinin
+süresinin dolması diğerine dokunmaz.
+
+## Geçiş yapmak ve karşıya geçen tek şey
+
+Geçiş, o çipe bir dokunuştur: liste, rehber, favoriler ve kaldığı yer noktaları
+birlikte değişir; çünkü hepsi kaynağa aittir. Bu, bilerek, eritilmiş bir yığının
+üstündeki bir süzgeç değildir; başka bir kütüphanedir.
+
+Karşıya *geçen* tek şey aramadır. Genel arama, geçerli kaynaktaki canlı yayın,
+film ve dizilerde birlikte çalışır — ve bir şeyi bulamazsanız kaynağı değiştirip
+yeniden aramak bir saniye sürer. Bu bir tasarım tercihi: içinde bulunmadığınız
+bir kaynaktan sonuç göstermek, seçmediğiniz bir girişten oynatmak demektir ve
+bunun yarattığı karışıklık fazladan bir dokunuştan kötüdür.
+
+## Bunun kolaylaştırdığı üç düzen
+
+**Aynı sağlayıcıdan giriş artı bağlantı.** İkisini de ekleyin. Xtream girişini
+günlük kaynağınız yapın — genellikle daha zengin olanıdır, film ve diziler
+yapılandırılmış hâlde — ve M3U bağlantısını girişin huysuzlandığı gün için yedek
+tutun. Aynı kanallar, iki kapı.
+
+**İki dil için iki sağlayıcı.** Her biri kendi kaynağı, her biri kendi dilinde
+kendi rehberiyle, her biri onu izleyen kişi için anlamlı favorilerle. Geçiş
+yapmak, «hangisi» kararının tamamıdır.
+
+**Barındırılan bir liste ve yerel bir kopya.**
+[Bir bağlantı güncel kalır, bir dosya donmuştur](/tr/blog/liste-baglantisi-mi-cihazdaki-dosya-mi/)
+— ama dosya sunucuya ihtiyaç duymaz. Bağlantıyı ana kaynak, yerel dosyayı da
+sunucuya erişilemeyen akşam için yedek olarak tutun. İki kaynak, biri her zaman
+kullanılabilir.
+
+## Kaçınılması gerekenler
+
+Düzene sokmak umuduyla aynı listeyi iki kez eklemeyin — favoriler ve
+[kategoriler](/tr/blog/buyuk-oynatma-listesi-duzenleme/) bunu bir kaynağın içinde
+yapar ve bir kopya yalnızca takip etmeniz gereken kaldığı yer noktalarını
+ikiye katlar. Kaynakları, bir aboneliği izin verdiğinden çok kişiyle paylaşmanın
+yolu olarak da kullanmayın; çoğu sağlayıcı giriş başına eşzamanlı yayınları
+sınırlar ve aynı girişteki ikinci bir *kaynak* hâlâ aynı giriştir.
+
+Altta yatan ilke [bütün oynatıcının ardındaki ilkeyle](/tr/blog/kendi-listenizi-getirin/)
+aynıdır: liste sizindir ve bir oynatıcının işi, sahip olduğunuz her listeye aynı
+saygıyla davranmaktır — ayrı ayrı ve onların hiçbir zaman tek bir şey olduğunu
+farz etmeden.

@@ -1,0 +1,15 @@
+key: films-and-series-as-a-library
+title: "Films and series as a library, not a folder of file names"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: feature-informational
+targetQueries: ["iptv vod player", "iptv series episodes app", "iptv movies posters", "iptv player continue watching"]
+audience: Someone whose provider gives films and series but whose player shows them as a flat list.
+value: The visible difference that makes people switch: posters, seasons and episodes, resume points, search across everything.
+angle: Where the metadata comes from (Xtream VOD/series endpoints, M3U attributes), why the player has to build the structure, and what a good one does with it.
+productFacts:
+  - posters, ratings, synopses, cast; seasons and episodes structured
+  - continue watching per source per item; global search across live, films, series; favourites
+constraints: [no-download-or-offline-wording, no-catalogue-language, no-channel-counts]
+internalLinks: [inside-an-m3u-file, xtream-codes-vs-m3u, organize-large-playlists, iptv-player-vs-streaming-apps, subtitles-and-audio-tracks]

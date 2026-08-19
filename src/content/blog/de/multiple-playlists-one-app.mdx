@@ -1,0 +1,112 @@
+---
+title: "Zwei Anbieter, eine App: mehrere Playlists nebeneinander betreiben"
+description: "Zwei Abos, oder ein Anbieter, der Ihnen Login und Link gibt — ein Player sollte sie getrennt halten, jede mit eigenem Programmführer, eigenen Wiedereinstiegspunkten und eigener Aktualisierung, und Sie mit einem Tipp wechseln lassen."
+urlSlug: mehrere-playlists-in-einer-app
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'produkt']
+keywords: ['mehrere iptv playlists eine app', 'iptv player mehrere quellen', 'zwei iptv abos eine app', 'zwischen playlists wechseln']
+heroImageAlt: "Zwei ordentlich getrennte Kartenstapel auf einem Tisch, eine Hand greift nach der obersten Karte des einen."
+---
+
+Früher oder später haben die meisten Haushalte mehr als eine Playlist. Ein
+zweiter Anbieter für eine Sprache, die dem ersten fehlt. Das Abo eines
+Familienmitglieds neben dem eigenen. Oder der gewöhnliche Fall: ein Anbieter,
+der sowohl ein Xtream-Login *als auch* einen M3U-Link schickt, und Sie möchten
+den zweiten als Reserve behalten. Der falsche Weg ist das, was viele Player
+tun: alles in eine einzige riesige Liste zusammenwerfen. Hier steht, warum das
+falsch ist, was „nebeneinander“ eigentlich heißen sollte und wie es
+funktioniert.
+
+## Warum Zusammenlegen die falsche Antwort ist
+
+Zwei Playlists sind nicht eine Playlist mit mehr Zeilen. Sie kommen von
+verschiedenen Servern, tragen verschiedene [Programmführer](/de/blog/epg-programmfuehrer-erklaert/),
+aktualisieren sich nach verschiedenen Zeitplänen, und jede hat ein eigenes
+Login, das an einem eigenen Tag ablaufen kann. Schütten Sie sie in eine Liste,
+wird jeder dieser Unterschiede zu einem Symptom, das Sie nicht diagnostizieren
+können: Der Führer stimmt für die Hälfte der Sender; ein Ausfall bei einem
+Anbieter sieht aus wie zufällige Fehler; derselbe Sender taucht zweimal unter
+zwei Namen auf, und Sie wissen nie, welcher der stockende ist.
+
+Die Alternative ist einfach: Halten Sie jede Quelle als Quelle. Vidonzo tut
+genau das — Sie können
+[ein Xtream-Login, einen M3U-Link oder eine lokale Datei](/de/blog/xtream-codes-oder-m3u/)
+so oft hinzufügen, wie Sie davon haben, und über den Playlist-Chip oben auf dem
+Startbildschirm zwischen ihnen wechseln. Nichts wird zusammengelegt. Alles an
+jeder Quelle bleibt ihr eigenes.
+
+## Was „ihr eigenes“ in der Praxis heißt
+
+**Ein eigener Programmführer.** Eine Xtream-Quelle bringt ihren Führer mit dem
+Login mit. Eine M3U-Quelle hat eine XMLTV-Adresse, die Sie für *diese* Quelle
+setzen. Zwei Anbieter, zwei Führer, jeder auf seine eigenen Sender abgeglichen —
+so streiten die Kennungen nie miteinander, und ein
+[leerer Führer](/de/blog/programmfuehrer-leer-oder-falsche-zeiten/) ist immer auf eine Stelle
+zurückzuführen.
+
+**Eigene Wiedereinstiegspunkte.** Weiterschauen wird pro Quelle und pro Titel
+gehalten. Führen beide Anbieter dieselbe Serie, wird die Folge, in der Sie bei
+Anbieter A vierzig Minuten weit waren, als bei Anbieter A gemerkt. Wechseln Sie
+die Quelle, ist die andere Liste dort, wo Sie sie verlassen haben — nicht dort,
+wo die erste war.
+
+**Eine eigene Aktualisierung.** Eine gehostete Playlist ändert sich, und jede
+Quelle hat ihre eigene Auto-Refresh-Regel — bei jedem Start, stündlich,
+sechsstündlich, täglich, wöchentlich oder nur manuell — plus ein *Jetzt
+aktualisieren* für den Moment, in dem etwas zu fehlen scheint. Ein Anbieter,
+der nächtlich umsortiert, kann täglich neu gelesen werden; die Reserve, die Sie
+selten anfassen, kann auf manuell stehen. Die zwischengespeicherte Liste
+erscheint immer sofort; die Regel entscheidet nur, wann sie im Hintergrund
+aktualisiert wird.
+
+**Eigene Zugangsdaten.** Zwei Logins, getrennt gehalten, und — da ein Login
+Ihr Abo ist — jedes [auf dem Gerät verschlüsselt](/de/blog/playlist-zugangsdaten-verschluesseln/),
+bevor es überhaupt in die Nähe einer Synchronisierung kommt. Läuft eines ab,
+rührt das das andere nicht an.
+
+## Wechseln — und das eine, was übergreift
+
+Wechseln ist ein Tipp auf diesen Chip: Liste, Programmführer, Favoriten und
+Wiedereinstiegspunkte ändern sich gemeinsam, weil sie alle zur Quelle gehören.
+Es ist bewusst kein Filter über einem zusammengeworfenen Haufen; es ist eine
+andere Bibliothek.
+
+Das eine, was *übergreift*, ist die Suche. Die globale Suche läuft über Live,
+Filme und Serien in der aktuellen Quelle — und finden Sie etwas nicht, dauert
+Quelle wechseln und erneut suchen eine Sekunde. Das ist eine
+Designentscheidung: Ergebnisse aus einer Quelle zu zeigen, in der Sie gerade
+nicht sind, hieße, von einem Login abzuspielen, das Sie nicht gewählt haben —
+und die Verwirrung ist schlimmer als der zusätzliche Tipp.
+
+## Drei Arrangements, die das leicht macht
+
+**Login plus Link vom selben Anbieter.** Fügen Sie beide hinzu. Nehmen Sie das
+Xtream-Login als Alltagsquelle — es ist meist die reichhaltigere, mit
+strukturierten Filmen und Serien — und behalten Sie den M3U-Link als Reserve für
+den Tag, an dem sich das Login danebenbenimmt. Dieselben Sender, zwei Türen.
+
+**Zwei Anbieter für zwei Sprachen.** Jeder als eigene Quelle, jeder mit seinem
+Führer in seiner Sprache, jeder mit Favoriten, die für die Person sinnvoll
+sind, die ihn schaut. Der Wechsel ist die ganze „welcher denn“-Entscheidung.
+
+**Eine gehostete Playlist und eine lokale Kopie.**
+[Eine URL bleibt aktuell, eine Datei ist eingefroren](/de/blog/playlist-link-oder-datei-am-geraet/)
+— aber eine Datei braucht keinen Server. Behalten Sie den Link als Hauptquelle
+und eine lokale Datei als Rückfall für den Abend, an dem der Server nicht
+erreichbar ist. Zwei Quellen, eine ist immer verfügbar.
+
+## Was zu vermeiden ist
+
+Fügen Sie nicht dieselbe Liste zweimal hinzu in der Hoffnung, sie zu ordnen —
+Favoriten und [Kategorien](/de/blog/grosse-playlists-ordnen/) tun das
+innerhalb einer Quelle, und ein Duplikat verdoppelt bloß die
+Wiedereinstiegspunkte, die Sie im Blick behalten müssen. Und benutzen Sie
+Quellen nicht als Weg, ein Abo mit mehr Leuten zu teilen, als es erlaubt; die
+meisten Anbieter begrenzen gleichzeitige Streams pro Login, und eine zweite
+*Quelle* auf demselben Login ist immer noch dasselbe Login.
+
+Das Prinzip dahinter ist [dasselbe wie hinter dem ganzen Player](/de/blog/eigene-playlist-mitbringen/):
+Die Playlist gehört Ihnen, und die Aufgabe eines Players ist, jede, die Sie
+besitzen, mit demselben Respekt zu behandeln — getrennt, und ohne je so zu tun,
+als wären sie ein Ding gewesen.

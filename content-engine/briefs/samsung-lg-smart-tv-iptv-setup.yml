@@ -1,0 +1,15 @@
+key: samsung-lg-smart-tv-iptv-setup
+title: "Your Samsung or LG smart TV has no good IPTV player: the setup that works"
+sourceLocale: en
+status: drafted
+riskTier: low
+intent: problem-solution-with-install
+targetQueries: ["iptv player samsung smart tv", "iptv lg smart tv", "iptv tizen", "iptv webos", "iptv smart tv without app"]
+audience: Owners of Tizen/webOS TVs who cannot find a good player in the TV's own store.
+value: An honest explanation of why the TV store is thin, and the setup that actually works: an Android TV device plus a phone as the remote.
+angle: The TV becomes the screen; the player runs on a box; the phone drives it.
+productFacts:
+  - Android TV build on Google Play for certified boxes
+  - phone/tablet as remote, discovered automatically on the local network
+constraints: [no-download-or-offline-wording, no-competitor-names, no-channel-counts, no-claim-of-a-tizen-or-webos-app]
+internalLinks: [iptv-player-on-android-tv, your-phone-is-a-better-remote, set-up-your-first-playlist, fix-iptv-freezing-on-wifi]

@@ -1,0 +1,119 @@
+---
+title: "The stream stops after a few seconds: disconnects, not buffering"
+description: "It starts fine, plays for ten seconds, and dies — no spinning wheel, just an end. That is a different fault from buffering, with different causes, and a good player handles the fixable ones without you noticing."
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['troubleshooting', 'playback']
+keywords: ['iptv stream stops after few seconds', 'iptv keeps disconnecting', 'stream cuts out', 'iptv stops playing after 10 seconds']
+heroImageAlt: "A straight line that runs cleanly for a short stretch and then simply ends, drawn on a plain field."
+---
+
+Buffering has a look: the wheel, the stall, the picture catching up. This is
+not that. This is a channel that opens cleanly, plays perfectly for five or ten
+or thirty seconds, and then stops — back to the list, or a frozen frame, or an
+error, or the same channel starting over from the beginning. If you press play
+it happens again. It is a *disconnect*, and the causes are almost entirely
+different from [the ones behind buffering](/blog/fix-iptv-buffering/). Here
+are the five that account for nearly all of them, and what a player can and
+cannot do about each.
+
+## 1. The server ended the connection
+
+The commonest cause. A provider's server hands you a stream and, some seconds
+later, closes the connection — because it is overloaded, because a process
+restarted, because a load balancer moved you, because it is Tuesday. On a raw
+transport stream the data simply stops arriving; on
+[HLS](/blog/streaming-protocols-explained/) the next segment never comes.
+
+This is the case a player is *for*. A well-built one does not treat a dropped
+connection as the end of the programme; it treats it as a hiccup and quietly
+reconnects. Vidonzo does this at the transport layer: a stalled read times out
+within seconds rather than hanging, and the connection is re-established with
+a short, bounded back-off, so a server that closed the door reopens it without
+you seeing more than a moment's pause. If a channel used to die at ten seconds
+in your old player and merely blinks in this one, that mechanism is why.
+
+The signature: random channels, random times, more in the evening. Nothing to
+change on your side; if it happens on *every* channel constantly, the server is
+in genuine trouble and the provider needs to hear it.
+
+## 2. Your access expired mid-stream
+
+Xtream Codes and many M3U links carry a token — a proof of who you are — in
+the address. Tokens expire. When one does, the server does not close the
+connection politely; it answers the next request with an error: forbidden,
+unauthorised, gone.
+
+Here a good player deliberately does *not* keep reconnecting. Hammering a
+server that has just said "no" is pointless and, in volume, looks like an
+attack; providers block for it. Vidonzo reconnects through a dropped
+connection and stops at an explicit refusal, on purpose. The cure is a fresh
+playlist: use *Refresh now* on the source so the player re-reads the current
+list — or, if the subscription itself lapsed, that is between you and the
+provider.
+
+The signature: it worked yesterday, everything fails today, and the failure is
+instant rather than a few seconds in. See also
+[the five faults behind a link that will not load](/blog/playlist-link-wont-load/).
+
+## 3. Too many streams at once
+
+Most subscriptions allow a fixed number of *simultaneous* streams — one, two,
+sometimes more. Open a third and the server drops one, and it is not always the
+newest. The dropped one looks exactly like case 1, except that it correlates
+with someone else in the house pressing play.
+
+The signature: it fails when another device is watching, and recovers when
+that one stops. This is not a player fault and there is no setting for it;
+it is the arrangement you have with the provider, and the fix is either
+watching in turns or a plan that allows more. A player that shows a clear
+error rather than silently reopening the same stream at least tells you which
+case you are in.
+
+## 4. The device went to sleep on the connection
+
+Phones and TV boxes save power aggressively, and a video stream is exactly the
+kind of long, quiet connection they like to cut. On a phone this shows as a
+stream that dies when the screen dims or when you switch briefly to another
+app; on a TV box it can be an over-eager Wi-Fi power-saving mode that drops
+the radio between segments.
+
+The signature: tied to *your* actions — the screen, the app switch, a pause —
+not to the clock or the channel. On a phone, keep the app in the foreground
+while playing; Vidonzo gates its recovery to the foreground on purpose, so it
+does not fight the operating system for a connection you have walked away
+from. On a box, look for a Wi-Fi power-saving or "keep awake" setting, or
+[move the box to a wire](/blog/fix-iptv-freezing-on-wifi/).
+
+## 5. The network in between dropped it
+
+Between the server and the screen sit your router, your ISP, and — for some
+people — a VPN or a proxy. Any of them can reset a connection: a router
+rotating a NAT table, an ISP's middlebox timing out an idle-looking flow, a
+VPN reconnecting. The player sees the same thing it sees in case 1, and it
+reconnects the same way; the difference is that *everything* is affected, not
+just one provider.
+
+The signature: other streaming apps drop too, and the pattern follows the
+network — a particular router, a particular VPN, a particular time of day.
+Test on mobile data for a minute; if the drops vanish, the fault is on the
+home network side.
+
+## Telling them apart in a minute
+
+- Random channels, random times, brief pause → the server dropped it (1). The
+  player reconnects; nothing to do.
+- Instant failure on everything, worked yesterday → expired access (2).
+  *Refresh now*, then talk to the provider.
+- Fails when someone else presses play → too many streams (3).
+- Dies when you dim the screen or switch apps → power saving (4).
+- Everything drops, other apps too → the network (5).
+
+## What the player owes you
+
+The honest boundary is this: a player should reconnect through *every* drop
+that is not a refusal, fast enough that you rarely notice, and it should stop
+cleanly and say so at every drop that is. Anything more — keeping a stream
+open past its token, ignoring a stream limit — is not a feature, it is a
+problem with a delay. Get the reconnecting right and case 1, which is most of
+the cases, stops being a thing you think about.
