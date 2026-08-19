@@ -1,0 +1,37 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="alpine-nature-4k" tvg-name="Alpine Nature 4K" tvg-logo="http://localhost:8787/logos/alpine-nature-4k.png" group-title="Nature",Alpine Nature 4K
+http://localhost:8787/streams/alpine-nature-4k.m3u8
+#EXTINF:-1 tvg-id="aurora-news-24" tvg-name="Aurora News 24" tvg-logo="http://localhost:8787/logos/aurora-news-24.png" group-title="News",Aurora News 24
+http://localhost:8787/streams/aurora-news-24.m3u8
+#EXTINF:-1 tvg-id="blue-ridge-classics" tvg-name="Blue Ridge Classics" tvg-logo="http://localhost:8787/logos/blue-ridge-classics.png" group-title="Classics",Blue Ridge Classics
+http://localhost:8787/streams/blue-ridge-classics.m3u8
+#EXTINF:-1 tvg-id="cascade-kids" tvg-name="Cascade Kids" tvg-logo="http://localhost:8787/logos/cascade-kids.png" group-title="Kids",Cascade Kids
+http://localhost:8787/streams/cascade-kids.m3u8
+#EXTINF:-1 tvg-id="delta-documentary" tvg-name="Delta Documentary" tvg-logo="http://localhost:8787/logos/delta-documentary.png" group-title="Documentary",Delta Documentary
+http://localhost:8787/streams/delta-documentary.m3u8
+#EXTINF:-1 tvg-id="echo-music-live" tvg-name="Echo Music Live" tvg-logo="http://localhost:8787/logos/echo-music-live.png" group-title="Music",Echo Music Live
+http://localhost:8787/streams/echo-music-live.m3u8
+#EXTINF:-1 tvg-id="fjord-explorer" tvg-name="Fjord Explorer" tvg-logo="http://localhost:8787/logos/fjord-explorer.png" group-title="Travel",Fjord Explorer
+http://localhost:8787/streams/fjord-explorer.m3u8
+#EXTINF:-1 tvg-id="golden-age-cinema" tvg-name="Golden Age Cinema" tvg-logo="http://localhost:8787/logos/golden-age-cinema.png" group-title="Movies",Golden Age Cinema
+http://localhost:8787/streams/golden-age-cinema.m3u8
+#EXTINF:-1 tvg-id="harbor-sports-desk" tvg-name="Harbor Sports Desk" tvg-logo="http://localhost:8787/logos/harbor-sports-desk.png" group-title="Sports",Harbor Sports Desk
+http://localhost:8787/streams/harbor-sports-desk.m3u8
+#EXTINF:-1 tvg-id="ivory-kitchen" tvg-name="Ivory Kitchen" tvg-logo="http://localhost:8787/logos/ivory-kitchen.png" group-title="Food",Ivory Kitchen
+http://localhost:8787/streams/ivory-kitchen.m3u8
+#EXTINF:-1 tvg-id="lumen-science" tvg-name="Lumen Science" tvg-logo="http://localhost:8787/logos/lumen-science.png" group-title="Science",Lumen Science
+http://localhost:8787/streams/lumen-science.m3u8
+#EXTINF:-1 tvg-id="meridian-world" tvg-name="Meridian World" tvg-logo="http://localhost:8787/logos/meridian-world.png" group-title="News",Meridian World
+http://localhost:8787/streams/meridian-world.m3u8
+#EXTINF:-1 tvg-id="nightfall-cinema" tvg-name="Nightfall Cinema" tvg-logo="http://localhost:8787/logos/nightfall-cinema.png" group-title="Movies",Nightfall Cinema
+http://localhost:8787/streams/nightfall-cinema.m3u8
+#EXTINF:-1 tvg-id="orchard-lifestyle" tvg-name="Orchard Lifestyle" tvg-logo="http://localhost:8787/logos/orchard-lifestyle.png" group-title="Lifestyle",Orchard Lifestyle
+http://localhost:8787/streams/orchard-lifestyle.m3u8
+#EXTINF:-1 tvg-id="prairie-classics" tvg-name="Prairie Classics" tvg-logo="http://localhost:8787/logos/prairie-classics.png" group-title="Classics",Prairie Classics
+http://localhost:8787/streams/prairie-classics.m3u8
+#EXTINF:-1 tvg-id="quartz-tech-today" tvg-name="Quartz Tech Today" tvg-logo="http://localhost:8787/logos/quartz-tech-today.png" group-title="Science",Quartz Tech Today
+http://localhost:8787/streams/quartz-tech-today.m3u8
+#EXTINF:-1 tvg-id="riverside-kids" tvg-name="Riverside Kids" tvg-logo="http://localhost:8787/logos/riverside-kids.png" group-title="Kids",Riverside Kids
+http://localhost:8787/streams/riverside-kids.m3u8
+#EXTINF:-1 tvg-id="summit-sports" tvg-name="Summit Sports" tvg-logo="http://localhost:8787/logos/summit-sports.png" group-title="Sports",Summit Sports
+http://localhost:8787/streams/summit-sports.m3u8

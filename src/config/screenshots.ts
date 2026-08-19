@@ -10,6 +10,12 @@ import languageFa from '../assets/app/language-fa.webp';
 /**
  * Real captures from the app running on an iPhone simulator, not mockups.
  *
+ * The channels *inside* the captures are invented, though — names, logos and
+ * all. Brand rule 2 keeps other people's networks off our marketing pages, and
+ * the way that rule gets broken is by pointing the app at a real public
+ * playlist to get something on screen. `tool/screenshot-catalog/` is the
+ * playlist these were taken against, and how to re-capture one.
+ *
  * Persian has its own set because the app mirrors fully in right-to-left, and
  * showing a left-to-right capture on the Persian page would undersell the one
  * thing that page's readers most want to see. Arabic still gets the English
