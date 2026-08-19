@@ -1,0 +1,160 @@
+---
+title: "Le son sans l'image : ce que fait vraiment un décodeur"
+description: "L'audio se joue, l'écran reste noir. Ce seul détail élimine la plupart des suspects habituels et désigne un composant : celui qui retransforme les octets en images."
+urlSlug: le-son-sans-l-image
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['depannage', 'lecture']
+keywords: ["iptv son mais pas d'image", "écran noir avec le son iptv", "hevc h265 ne se lit pas android", "décodage matériel lecteur iptv"]
+heroImageAlt: "Un flux qui se sépare en deux chemins à l'intérieur de l'appareil : l'un atteint le haut-parleur, l'autre s'arrête devant un écran vide."
+---
+
+La plupart des pannes de lecture sont muettes dans les deux sens du terme : rien
+ne se joue, et rien n'explique pourquoi. Celle-ci fait exception, et cette
+exception est un cadeau : vous entendez parfaitement le commentaire pendant que
+l'écran reste noir. Quelque chose arrive, quelque chose est compris, et
+exactement une étape de la chaîne a renoncé.
+
+Cela réduit sérieusement le champ. Votre playlist va bien, sinon le flux ne se
+serait même pas ouvert. Le serveur va bien, et
+[le chemin qui vous en sépare](/fr/blog/regler-le-buffering-iptv/) aussi : le son
+est la démonstration en direct que les octets arrivent toujours. Reste la
+dernière étape avant l'image, celle qui retransforme les données compressées en
+trames.
+
+## Codec et conteneur ne sont pas la même chose
+
+Le `.m3u8` à la fin de l'URL ne vous apprend presque rien là-dessus. C'est le
+*conteneur* : l'enveloppe qui transporte les pistes et la synchronisation qui les
+tient ensemble. Savoir si votre appareil peut lire ce qu'il y a dedans est une
+autre question, tranchée par le **codec** : la méthode de compression utilisée
+pour encoder chaque piste.
+
+Un direct tresse en général au moins deux codecs —
+[vidéo, audio, parfois texte](/fr/blog/sous-titres-et-pistes-audio/) — et chacun a
+le sien. C'est pourquoi deux flux d'apparence identique, chez le même
+fournisseur, peuvent se comporter de façon radicalement différente sur le même
+appareil.
+
+## Pourquoi l'image tombe et pas le son
+
+Compresser de l'audio ne coûte rien. N'importe quel processeur fabriqué durant ce
+siècle décode une piste stéréo en logiciel sans s'en apercevoir : voilà pourquoi
+le son fonctionne presque toujours. La vidéo, c'est l'inverse. Décoder une image
+1080p en temps réel est réellement coûteux, et les méthodes modernes paient leur
+poids réduit par davantage de calcul sur chaque trame.
+
+Ce coût explique la présence, dans les appareils, d'une **puce de décodage**
+dédiée — et c'est précisément là que meurt la compatibilité. Cette puce implémente
+une *liste figée* de formats, gelée le jour où le matériel a été conçu. H.264
+figure sur toutes les listes. H.265 — aussi appelé HEVC, et de plus en plus
+répandu parce qu'il transporte la même image avec nettement moins de bande
+passante — figure sur la plupart des listes récentes et manque à beaucoup de
+boîtiers plus anciens. Des méthodes plus récentes comme AV1 manquent à presque
+tous.
+
+Quand un flux arrive dans un format que la puce n'implémente pas, la piste audio
+passe sans encombre et la piste vidéo s'arrête net. D'où l'écran noir avec un son
+impeccable.
+
+Il existe une variante plus subtile, qui mérite d'être connue parce qu'elle
+explique qu'une chaîne HEVC se lise et pas la suivante. La prise en charge d'une
+puce n'est jamais simplement « HEVC » : elle couvre un *profil* et un *niveau*
+précis — une profondeur de couleur, un plafond de résolution, un plafond de
+fréquence d'images. Un flux 10 bits sur un décodeur 8 bits, ou de la 4K sur une
+puce spécifiée jusqu'en 1080p, est refusé aussi sèchement qu'un format inconnu.
+Et certaines puces acceptent le flux, annoncent que tout va bien, puis ne
+produisent discrètement rien du tout.
+
+## Le correctif qui ne devrait pas être votre travail
+
+Il existe toujours une solution de repli : le processeur généraliste sait décoder
+n'importe quel format en logiciel, à condition d'avoir assez de cycles. Cela coûte
+de la batterie, chauffe l'appareil et, sur un boîtier modeste, peut ne pas suivre
+un flux en haute résolution. Mais cela marche quand la puce refuse.
+
+Le remède est donc connu. Le problème, c'est que le *diagnostic* a historiquement
+été reporté sur le spectateur, sous la forme d'un réglage de décodeur dans un
+menu : un choix qui vous demande de savoir une chose que vous n'avez aucun moyen
+de savoir, à propos d'une puce dont vous n'avez jamais lu la fiche technique, et
+ce face à un écran noir.
+
+Vidonzo considère que c'est le travail du lecteur. Le décodage matériel est activé
+par défaut, parce que c'est presque toujours la bonne réponse : il est plus rapide
+et consomme bien moins d'énergie. Ce qui compte, c'est ce qui se passe quand c'est
+la mauvaise. Le lecteur surveille deux choses à la fois : des octets arrivent-ils,
+et une trame a-t-elle été produite ? Ensemble, ces deux faits ne laissent aucune
+ambiguïté. Des données sans image, c'est un problème de décodage et rien d'autre ;
+aucune donnée, c'est une panne réseau déguisée en écran noir, et le décodeur y est
+innocent.
+
+Quand le premier cas de figure dure plusieurs secondes, le lecteur descend d'un
+cran vers le décodage logiciel et rouvre le flux de lui-même. Pas de boîte de
+dialogue, pas de question, pas de menu : le texte de chargement dit simplement
+qu'il ajuste encore. Si un deuxième flux réclame le même sauvetage, la session
+cesse de réapprendre la leçon à chaque changement de chaîne et démarre directement
+au cran inférieur. Cette mémoire n'est délibérément **pas** permanente : un flux
+capricieux ne doit pas condamner votre GPU pour toujours, donc un nouveau
+démarrage repart du haut de l'échelle et ne redescend que s'il le faut.
+
+L'interrupteur **Réglages → Lecture → Décodage matériel** reste là, pour ce
+rarissime appareil dont la puce accepte tout et n'affiche rien. Ce n'est pas un
+réglage que vous devriez avoir à toucher.
+
+## Lire les preuves vous-même
+
+Le bouton d'information des commandes ouvre **Infos du flux**, qui est la version
+courte de tout ce qui précède :
+
+- **Codec** — ce que sont réellement les pistes vidéo et audio. Si HEVC s'affiche
+  ici sur un boîtier de quelques années, vous tenez votre explication.
+- **Décodeur** — quel chemin fait le travail en ce moment. Voir « software »
+  signifie que l'échelle a déjà sauvé ce flux.
+- **Résolution et fréquence d'images** — les chiffres qui décident si le décodage
+  logiciel peut raisonnablement suivre.
+- **Débit et tampon** — le côté réseau, pour
+  [distinguer un échec de décodage d'une connexion affamée](/fr/blog/regler-le-buffering-iptv/).
+
+Le décodage logiciel en 1080p passe très bien sur un téléphone récent et reste
+limite sur une clé TV bon marché. Si l'image est là mais saccade et que le
+décodeur indique « software », vous regardez un processeur perdre une course : la
+panne s'est simplement déplacée d'un cran.
+
+## Le symptôme miroir
+
+L'image sans le son, c'est la même histoire à l'envers. La cause habituelle : les
+formats audio multicanaux — un flux en son surround sur un appareil qui ne
+comprend que la stéréo, ou un téléviseur qui transmet l'audio à une barre de son
+qui refuse ce format. Le remède est en général une autre piste audio, quand le
+flux en propose une : le même
+[sélecteur de pistes](/fr/blog/sous-titres-et-pistes-audio/) que celui qui change
+de langue.
+
+## Quand le codec n'y est pour rien
+
+Deux pannes y ressemblent sans en être :
+
+- **Écran noir et aucun son, jamais.** Rien n'a été décodé parce que rien n'est
+  arrivé. C'est [le flux ou le chemin qui y mène](/fr/blog/la-playlist-ne-charge-pas/),
+  pas le décodeur — et si cela n'arrive que dans certaines pièces,
+  [le suspect est la liaison radio](/fr/blog/iptv-qui-fige-en-wifi/).
+- **Tout se lit, mais la liste est illisible.** C'est du texte, pas de la vidéo :
+  [un problème d'encodage de caractères dans le fichier](/fr/blog/noms-de-chaines-illisibles/).
+
+Un échec de décodage a une signature précise : un flux qui s'ouvre, un tampon qui
+se remplit, un son qui sort, et une image qui n'arrive jamais.
+
+## Ce que cela dit du choix d'un appareil
+
+Si un flux précis échoue sur votre boîtier TV et se lit sur votre téléphone, le
+flux va bien et le boîtier est vieux. Autant le savoir avant de passer une soirée
+dans les réglages : les décodeurs matériels ne se mettent pas à jour, parce que
+c'est du silicium, pas du logiciel.
+
+C'est aussi le meilleur argument en faveur d'un lecteur qui s'adapte en silence
+plutôt que d'un lecteur qui vous tend un menu de décodeurs.
+[Sur un téléviseur](/fr/blog/lecteur-iptv-sur-android-tv/), où toute l'interface se
+pilote à la croix directionnelle depuis trois mètres, une question modale sur le
+décodage vidéo n'est pas une fonctionnalité. Le travail du lecteur, c'est
+[lire votre liste, chercher le flux et dessiner l'image](/fr/blog/ce-que-fait-un-lecteur-iptv/) —
+y compris quand la façon évidente de la dessiner ne marche pas.

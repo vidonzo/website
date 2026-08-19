@@ -1,0 +1,148 @@
+---
+title: "Ses var, görüntü yok: kod çözücü aslında ne yapar"
+description: "Ses geliyor, ekran siyah kalıyor. Bu tek ayrıntı her zamanki şüphelilerin çoğunu eler ve tek bir parçayı işaret eder: baytları yeniden kareye çeviren şeyi."
+urlSlug: ses-var-goruntu-yok
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["sorun-giderme", "oynatma"]
+keywords: ["iptv ses var görüntü yok", "iptv siyah ekran ses geliyor", "hevc h265 android oynatmıyor", "donanımsal kod çözme oynatıcı"]
+heroImageAlt: "Cihazın içinde iki yola ayrılan bir yayın: biri hoparlöre ulaşıyor, diğeri boş bir ekranın önünde duruyor."
+---
+
+Oynatma arızalarının çoğu iki anlamda birden sessizdir: hiçbir şey oynamaz ve
+hiçbir şey nedenini açıklamaz. Bu arıza farklı, ve fark tam bir armağan: ekran
+kapkara dururken sesi kusursuz duyarsınız. Demek ki bir şey geliyor, bir şey
+anlaşılıyor ve zincirde tam olarak tek bir halka pes etmiş.
+
+Bu, alanı hatırı sayılır ölçüde daraltır. Listeniz sağlam — olmasaydı yayın zaten
+açılmazdı. Sunucu sağlam, [sizinle sunucu arasındaki
+yol](/tr/blog/iptv-donma-sorunu-cozumu/) da öyle: ses, baytların hâlâ geldiğinin
+canlı kanıtı. Geriye görüntüden önceki son aşama kalıyor — sıkıştırılmış veriyi
+yeniden karelere döndüren aşama.
+
+## Kodek ile kapsayıcı aynı şey değildir
+
+Yayın adresinin sonundaki `.m3u8` bu konuda size neredeyse hiçbir şey söylemez. O
+*kapsayıcıdır*: izleri ve onları bir arada tutan zamanlamayı taşıyan zarf.
+Cihazınızın içindekini oynatıp oynatamayacağı ayrı bir sorudur ve cevabını
+**kodek** verir: her izin hangi sıkıştırma yöntemiyle kodlandığı.
+
+Canlı bir yayın genelde en az iki tanesini birlikte örer —
+[görüntü, ses, bazen de metin](/tr/blog/iptv-altyazi-ve-ses-secenekleri/) — ve her
+biri kendi yöntemiyle sıkıştırılır. Bu yüzden aynı sağlayıcıdan gelen, görünüşte
+birbirinin aynı iki yayın aynı cihazda bambaşka davranabilir.
+
+## Görüntü neden düşer de ses düşmez
+
+Ses sıkıştırma ucuzdur. Bu yüzyılda üretilmiş herhangi bir işlemci bir stereo ses
+izini yazılımla, zahmetini hissetmeden çözer; ses bu yüzden hemen her zaman
+çalışır. Videoda durum tam tersidir: 1080p bir görüntüyü gerçek zamanlı çözmek
+gerçekten pahalıdır ve modern yöntemler küçük dosya boyutlarını kare başına daha
+fazla aritmetikle satın alır.
+
+İşte bu maliyet yüzünden cihazların içinde özel bir **kod çözücü yonga** bulunur —
+ve uyumluluk tam orada ölür. O yonga, donanım tasarlandığı gün dondurulmuş
+*sabit bir liste* uygular. H.264 her listede vardır. Aynı görüntüyü belirgin
+biçimde daha az bant genişliğiyle taşıdığı için giderek yaygınlaşan H.265 — diğer
+adıyla HEVC — modern listelerin çoğunda vardır, eski kutuların birçoğunda yoktur.
+AV1 gibi daha yeni yöntemler ise çoğunda hiç yoktur.
+
+Yonganın uygulamadığı bir biçimde yayın geldiğinde ses izi rahatça geçer, görüntü
+izi olduğu yerde durur. Kusursuz sesle gelen siyah ekranın sebebi budur.
+
+Bilmeye değer daha ince bir varyant da var, çünkü bir HEVC kanalının oynayıp
+sonrakinin oynamamasını o açıklıyor. Bir yonganın desteği asla sadece "HEVC"
+değildir: belirli bir *profil* ve *seviyeyi* kapsar — bir renk derinliği, bir
+çözünürlük tavanı, bir kare hızı tavanı. 8 bitlik bir çözücüde 10 bitlik yayın ya
+da 1080p'ye kadar belgelenmiş bir yongada 4K, bilinmeyen bir biçim kadar kesin
+reddedilir. Bazı yongalar ise yayını kabul eder, başarı bildirir ve sonra sessizce
+hiçbir şey üretmez.
+
+## Sizin işiniz olmaması gereken çözüm
+
+Her zaman bir yedek yol vardır: genel amaçlı işlemci, yeterli çevrim verildiğinde
+her biçimi yazılımla çözebilir. Pil harcar, cihazı ısıtır ve zayıf bir kutuda
+yüksek çözünürlüklü bir yayına hiç yetişemeyebilir. Ama yonga reddettiğinde iş
+görür.
+
+Yani çözüm biliniyor. Sorun, *teşhisin* tarihsel olarak izleyicinin sırtına
+yıkılmış olması: menüdeki bir kod çözücü ayarı biçiminde. Bu, hiç görmediğiniz bir
+yonganın belgelerine dair, bilmenize imkân olmayan bir şeyi bilmenizi isteyen bir
+seçim — üstelik önünüzde siyah bir ekran dururken.
+
+Vidonzo bunu oynatıcının işi sayar. Donanımsal kod çözme varsayılan olarak
+açıktır, çünkü neredeyse her zaman doğru cevap odur: daha hızlıdır ve çok daha az
+güç harcar. Asıl mesele, yanlış cevap olduğunda ne olduğu. Oynatıcı aynı anda iki
+şeyi izler: bayt gelip gelmediğini ve herhangi bir karenin üretilip
+üretilmediğini. Bu iki olgu birlikte tereddüde yer bırakmaz. Veri var, görüntü yok
+ise sorun yalnızca kod çözücüdedir; hiç veri yoksa bu, aynı siyah ekranı giymiş
+bir ağ arızasıdır ve kod çözücü suçsuzdur.
+
+İlk örüntü birkaç saniye sürdüğünde, oynatıcı kendiliğinden bir basamak inip
+yazılımsal çözmeye geçer ve yayını yeniden açar. Diyalog yok, soru yok, menü yok —
+yükleme metni yalnızca hâlâ ayarlandığını söyler. İkinci bir yayın da aynı
+kurtarmaya ihtiyaç duyarsa, oturum bu dersi her kanal değişiminde yeniden
+öğrenmeyi bırakır ve doğrudan alt basamaktan başlar. Bu bellek bilinçli olarak
+kalıcı **değildir**: tek bir aksi yayın GPU'nuzu ilelebet mahkûm etmemeli, bu
+yüzden her yeni açılış merdivenin tepesinden başlar ve ancak mecbur kalırsa iner.
+
+**Ayarlar → Oynatma → Donanımsal kod çözme** anahtarı yerinde duruyor; yongası her
+şeyi kabul edip hiçbir şey çizmeyen o nadir cihaz için. Elinizi atmanız gereken
+bir ayar olmamalı.
+
+## Kanıtı kendiniz okuyun
+
+Oynatıcı kontrollerindeki bilgi düğmesi **Yayın bilgisi** panelini açar; yukarıda
+anlatılan her şeyin kısa hâlidir:
+
+- **Kodek** — görüntü ve ses izlerinin gerçekte ne olduğu. Birkaç yıllık bir
+  kutuda burada HEVC yazıyorsa açıklamanız hazır.
+- **Kod çözücü** — işi şu anda hangi yolun yaptığı. Burada "software" görmek,
+  merdivenin bu yayını çoktan kurtardığı anlamına gelir.
+- **Çözünürlük ve kare hızı** — yazılımsal çözmenin yetişme ihtimalini belirleyen
+  sayılar.
+- **Bit hızı ve tampon** — ağ tarafı;
+  [çözme arızasını aç kalmış bir bağlantıdan ayırmak](/tr/blog/iptv-donma-sorunu-cozumu/)
+  için.
+
+1080p'de yazılımsal çözme modern bir telefonda gayet iyidir, ucuz bir TV çubuğunda
+sınırdadır. Görüntü var ama takılıyorsa ve kod çözücü "software" diyorsa, bir
+işlemcinin yarışı kaybedişini izliyorsunuz demektir — arıza yalnızca bir adım
+ileri kaymıştır.
+
+## Aynadaki belirti
+
+Görüntü var, ses yok ise aynı hikâyenin tersidir. Olağan sebep çok kanallı ses
+biçimleridir: yalnızca stereo anlayan bir cihazda surround ses taşıyan bir yayın
+ya da sesi, o biçimi kabul etmeyen bir ses çubuğuna aktaran bir televizyon. Çözüm
+genellikle başka bir ses izidir — dilleri değiştiren o aynı
+[iz seçici](/tr/blog/iptv-altyazi-ve-ses-secenekleri/).
+
+## Ne zaman kodekle ilgisi yoktur
+
+İki arıza buna benzer ama bu değildir:
+
+- **Siyah ekran ve hiç ses yok.** Hiçbir şey çözülmedi çünkü hiçbir şey gelmedi.
+  Bu, kod çözücü değil
+  [yayının ya da ona giden yolun sorunudur](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/) —
+  ve yalnızca belirli odalarda oluyorsa
+  [şüpheli telsiz bağlantıdır](/tr/blog/iptv-wifi-donma-sorunu/).
+- **Her şey oynuyor ama liste okunmuyor.** Bu video değil metin sorunudur:
+  [oynatma listesi dosyasındaki karakter kodlaması](/tr/blog/kanal-adlari-bozuk-gorunuyor/).
+
+Çözme arızasının imzası nettir: açılan bir yayın, dolan bir tampon, çalan bir ses
+ve hiç gelmeyen bir görüntü.
+
+## Cihaz seçerken bunun anlamı
+
+Belirli bir yayın TV kutunuzda başarısız olup telefonunuzda oynuyorsa, yayın
+sağlamdır ve kutu eskidir. Bunu bir akşamı ayarlara harcamadan önce bilmekte
+fayda var: donanımsal kod çözücüler güncellenemez, çünkü yazılım değil silisyum.
+
+Aynı zamanda, size kod çözücü menüsü uzatan bir oynatıcı yerine sessizce uyum
+sağlayan bir oynatıcı için en güçlü gerekçe budur.
+[Televizyonda](/tr/blog/android-tv-iptv-oynatici/), tüm arayüzün üç metre öteden
+bir yön tuşuyla sürüldüğü yerde, video çözme hakkında ekranı kaplayan bir soru
+özellik değildir. Oynatıcının işi
+[listenizi okumak, yayını getirmek ve görüntüyü çizmektir](/tr/blog/iptv-oynatici-ne-yapar/) —
+çizmenin bariz yolu işe yaramadığında da.

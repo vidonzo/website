@@ -1,0 +1,149 @@
+---
+title: "Sound but no picture: what a decoder actually does"
+description: "The audio plays, the screen stays black. That single detail rules out most of the usual suspects and points at one component: the thing turning bytes back into frames."
+urlSlug: sound-but-no-picture
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["troubleshooting", "playback"]
+keywords: ["iptv sound but no picture", "iptv black screen with audio", "hevc h265 not playing android", "hardware decoding iptv player"]
+heroImageAlt: "A stream splitting into two paths inside a device: one reaching a speaker, the other stopping at a blank screen."
+---
+
+Most playback failures are silent in both senses — nothing plays, and nothing
+explains why. This one is different, and the difference is a gift: you can hear
+the commentary perfectly while the screen stays black. Something is arriving,
+something is being understood, and exactly one stage of the chain has given up.
+
+That narrows the field considerably. Your playlist is fine — the stream would
+not have opened otherwise. The server is fine, and so is
+[the path between you and it](/blog/fix-iptv-buffering/): audio is a live
+demonstration that bytes are still landing. What is left is the last stage
+before the picture, the one that turns compressed data back into frames.
+
+## Codecs and containers are not the same thing
+
+The `.m3u8` at the end of a stream URL tells you almost nothing about this.
+That is the *container* — the envelope that carries the tracks and the timing
+that keeps them together. Whether your device can play what is inside is a
+separate question, decided by the **codec**: the compression scheme each track
+was encoded with.
+
+A live stream typically braids at least two of them —
+[video, audio, and sometimes text](/blog/subtitles-and-audio-tracks/) — and
+each is compressed by its own scheme. Two identical-looking streams from the
+same provider can therefore behave completely differently on the same device.
+
+## Why the picture fails and the sound does not
+
+Audio compression is cheap. Any processor made this century can decode a stereo
+audio track in software without noticing the effort, so audio almost always
+just works. Video is the opposite: decoding a 1080p picture in real time is
+genuinely expensive, and modern schemes buy their smaller file sizes with more
+arithmetic per frame.
+
+That expense is why devices contain a dedicated **decoder chip**, and why the
+chip is where compatibility goes to die. It implements a *fixed list* of
+formats, frozen when the hardware was designed. H.264 is on every list. H.265 —
+also called HEVC, and increasingly common because it carries the same picture
+in noticeably less bandwidth — is on most modern ones and missing from plenty
+of older boxes. Newer schemes such as AV1 are missing from most.
+
+When a stream arrives in a format the chip does not implement, the audio track
+sails through and the video track stops dead. Hence the black screen with
+perfect sound.
+
+There is a subtler variant worth knowing about, because it explains the cases
+where one HEVC channel plays and the next one does not. A chip's support is
+never simply "HEVC" — it covers a particular *profile* and *level*: a colour
+depth, a resolution ceiling, a frame-rate ceiling. A 10-bit stream on an 8-bit
+decoder, or 4K on a chip specified to 1080p, is refused just as flatly as an
+unknown format. And some chips accept a stream, report success, and then quietly
+produce nothing at all.
+
+## The fix that should not be your job
+
+There is always a fallback: the general-purpose processor can decode any format
+in software, given enough cycles. It costs battery, it makes the device warm,
+and on a weak box it may not keep up with a high-resolution stream at all. But
+it works when the chip will not.
+
+So the fix is known. The problem is that the *diagnosis* has historically been
+pushed onto the viewer, in the form of a decoder setting in a menu — a choice
+that asks you to know something you have no way of knowing, about a chip you
+have never seen a specification for, while a black screen sits in front of you.
+
+Vidonzo treats that as the player's job instead. Hardware decoding is on by
+default, because it is the right answer nearly always: it is faster and it uses
+far less power. What matters is what happens when it is the wrong answer.
+The player watches two things at once — whether bytes are arriving, and whether
+any frame has been produced. Those two facts together are unambiguous. Data
+with no picture is a decoder problem and nothing else; no data at all is a
+network problem wearing the same black screen, and the decoder is innocent.
+
+When the first pattern holds for several seconds, the player steps down to
+software decoding and reopens the stream by itself. No dialog, no question, no
+menu — the loading state simply says it is still adjusting. If a second stream
+needs the same rescue, the session stops re-learning the lesson on every channel
+change and starts lower. That memory is deliberately *not* permanent: one
+awkward stream should not condemn your GPU forever, so a fresh start begins at
+the top of the ladder again and earns its way down only if it must.
+
+The switch in **Settings → Playback → Hardware decoding** stays, for the rare
+device where the chip accepts everything and renders nothing. It is not a
+setting you should ever need to reach for.
+
+## Reading the evidence yourself
+
+The info button in the player controls opens **Stream info**, which is the
+short version of everything above:
+
+- **Codec** — what the video and audio tracks actually are. If this reads HEVC
+  on a box from several years ago, you have your explanation.
+- **Decoder** — which path is doing the work right now. Seeing software here
+  means the ladder already rescued this stream.
+- **Resolution and frame rate** — the numbers that decide whether software
+  decoding can plausibly keep up.
+- **Bitrate and buffer** — the network side, for
+  [telling a decode failure apart from a starving connection](/blog/fix-iptv-buffering/).
+
+Software decoding at 1080p is fine on a modern phone and marginal on a cheap TV
+stick. If the picture is present but juddering and the decoder reads software,
+you are watching a processor lose a race — the failure has simply moved one step
+later.
+
+## The mirror-image symptom
+
+Picture with no sound is the same story told the other way round. Multichannel
+audio formats are the usual cause: a stream carrying surround audio on a device
+that only handles stereo, or a television passing audio through to a sound bar
+that does not accept that format. The fix is usually a different audio track,
+where the stream offers one — the same
+[track selector](/blog/subtitles-and-audio-tracks/) that switches languages.
+
+## When it is not a codec at all
+
+Two failures look similar and are not:
+
+- **Black screen and no sound, ever.** Nothing decoded because nothing arrived.
+  That is [the stream or the path to it](/blog/playlist-link-wont-load/), not
+  the decoder — and if it only happens in certain rooms,
+  [the radio is the suspect](/blog/fix-iptv-freezing-on-wifi/).
+- **Everything plays, but the list is unreadable.** Text, not video —
+  [a character-encoding problem in the playlist file](/blog/why-channel-names-look-garbled/).
+
+A decode failure is specific: a stream that opens, a buffer that fills, audio
+that plays, and a picture that never appears.
+
+## What this means for choosing a device
+
+If one particular stream fails on your TV box and plays on your phone, the
+stream is fine and the box is old. That is worth knowing before you spend an
+evening on settings — hardware decoders cannot be updated, because they are
+silicon, not software.
+
+It is also the strongest argument for a player that adapts silently rather than
+one that hands you a decoder menu. [On a television](/blog/iptv-player-on-android-tv/),
+where the whole interface is driven by a d-pad from three metres away, a modal
+question about video decoding is not a feature. The player's job is
+[to read your list, fetch the stream and draw the picture](/blog/what-an-iptv-player-does/) —
+including when the obvious way to draw it turns out not to work.

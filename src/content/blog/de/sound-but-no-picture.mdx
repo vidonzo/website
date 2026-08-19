@@ -1,0 +1,155 @@
+---
+title: "Ton ohne Bild: was ein Decoder wirklich tut"
+description: "Der Ton läuft, der Bildschirm bleibt schwarz. Dieses eine Detail schließt die meisten üblichen Verdächtigen aus und zeigt auf ein Bauteil: das, was Bytes wieder in Bilder verwandelt."
+urlSlug: ton-ohne-bild
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["fehlerbehebung", "wiedergabe"]
+keywords: ["iptv ton aber kein bild", "schwarzer bildschirm mit ton iptv", "hevc h265 läuft nicht android", "hardware-dekodierung iptv player"]
+heroImageAlt: "Ein Stream, der sich im Gerät in zwei Wege teilt: einer erreicht den Lautsprecher, der andere endet vor einem leeren Bildschirm."
+---
+
+Die meisten Wiedergabefehler sind in doppelter Hinsicht stumm: Es läuft nichts,
+und nichts erklärt, warum. Dieser hier ist anders, und der Unterschied ist ein
+Geschenk: Sie hören den Kommentar einwandfrei, während der Bildschirm schwarz
+bleibt. Es kommt also etwas an, es wird etwas verstanden, und genau eine Stufe der
+Kette hat aufgegeben.
+
+Das grenzt die Sache erheblich ein. Ihre Playlist ist in Ordnung — sonst hätte
+sich der Stream gar nicht erst geöffnet. Der Server ist in Ordnung, und
+[der Weg zwischen ihm und Ihnen](/de/blog/iptv-ruckeln-beheben/) ebenfalls: Der Ton
+ist der laufende Beweis dafür, dass weiterhin Bytes eintreffen. Übrig bleibt die
+letzte Stufe vor dem Bild — jene, die komprimierte Daten zurück in Einzelbilder
+verwandelt.
+
+## Codec und Container sind nicht dasselbe
+
+Das `.m3u8` am Ende der Stream-Adresse sagt darüber so gut wie nichts. Das ist der
+*Container*: der Umschlag, der die Spuren und die Zeitsteuerung transportiert, die
+sie zusammenhält. Ob Ihr Gerät den Inhalt abspielen kann, ist eine andere Frage —
+und die entscheidet der **Codec**: das Kompressionsverfahren, mit dem jede Spur
+kodiert wurde.
+
+Ein Livestream flicht in der Regel mindestens zwei davon zusammen —
+[Bild, Ton und manchmal Text](/de/blog/untertitel-und-tonspuren/) — jeweils mit
+eigenem Verfahren. Deshalb können sich zwei scheinbar identische Streams desselben
+Anbieters auf demselben Gerät völlig unterschiedlich verhalten.
+
+## Warum das Bild ausfällt und der Ton nicht
+
+Audiokompression ist billig. Jeder Prozessor aus diesem Jahrhundert dekodiert eine
+Stereospur in Software, ohne die Mühe überhaupt zu bemerken; deshalb funktioniert
+Ton fast immer. Bei Video ist es umgekehrt: Ein 1080p-Bild in Echtzeit zu
+dekodieren ist wirklich teuer, und moderne Verfahren erkaufen ihre kleineren
+Datenmengen mit mehr Rechenaufwand pro Einzelbild.
+
+Genau dieser Aufwand ist der Grund, warum in Geräten ein eigener **Decoder-Chip**
+sitzt — und genau dort stirbt die Kompatibilität. Der Chip implementiert eine
+*feste Liste* von Formaten, eingefroren an dem Tag, an dem die Hardware entworfen
+wurde. H.264 steht auf jeder Liste. H.265 — auch HEVC genannt und zunehmend
+verbreitet, weil es dasselbe Bild mit merklich weniger Bandbreite transportiert —
+steht auf den meisten neueren und fehlt auf vielen älteren Boxen. Neuere Verfahren
+wie AV1 fehlen auf den allermeisten.
+
+Trifft ein Stream in einem Format ein, das der Chip nicht implementiert, geht die
+Tonspur glatt durch und die Bildspur bleibt stehen. Daher der schwarze Bildschirm
+bei perfektem Ton.
+
+Es gibt eine feinere Variante, die man kennen sollte, denn sie erklärt, warum ein
+HEVC-Kanal läuft und der nächste nicht. Die Unterstützung eines Chips lautet nie
+einfach „HEVC": Sie umfasst ein bestimmtes *Profil* und *Level* — eine Farbtiefe,
+eine Auflösungsgrenze, eine Bildratengrenze. Ein 10-Bit-Stream auf einem
+8-Bit-Decoder oder 4K auf einem bis 1080p spezifizierten Chip wird genauso
+kategorisch abgelehnt wie ein unbekanntes Format. Und manche Chips nehmen den
+Stream an, melden Erfolg und produzieren dann klammheimlich gar nichts.
+
+## Die Lösung, die nicht Ihre Aufgabe sein sollte
+
+Es gibt immer einen Ausweg: Der Allzweckprozessor kann jedes Format in Software
+dekodieren, sofern er genug Takte übrig hat. Das kostet Akku, macht das Gerät warm
+und reicht auf einer schwachen Box womöglich nicht für einen hochaufgelösten
+Stream. Aber es funktioniert, wenn der Chip streikt.
+
+Das Mittel ist also bekannt. Das Problem ist, dass die *Diagnose* historisch dem
+Zuschauer aufgebürdet wurde — in Form einer Decoder-Einstellung in einem Menü.
+Eine Wahl, die von Ihnen verlangt, etwas zu wissen, das Sie unmöglich wissen
+können, über einen Chip, dessen Datenblatt Sie nie gesehen haben, während vor
+Ihnen ein schwarzer Bildschirm steht.
+
+Vidonzo betrachtet das als Aufgabe des Players. Hardware-Dekodierung ist
+standardmäßig aktiv, weil sie fast immer die richtige Antwort ist: schneller und
+deutlich sparsamer. Entscheidend ist, was passiert, wenn sie die falsche ist. Der
+Player beobachtet zwei Dinge gleichzeitig: ob Bytes ankommen und ob überhaupt ein
+Einzelbild entstanden ist. Zusammen sind diese beiden Tatsachen eindeutig. Daten
+ohne Bild sind ein Decoder-Problem und sonst nichts; gar keine Daten sind ein
+Netzwerkfehler im selben schwarzen Gewand, und daran ist der Decoder unschuldig.
+
+Hält das erste Muster mehrere Sekunden an, steigt der Player eine Stufe hinab auf
+Software-Dekodierung und öffnet den Stream von selbst neu. Kein Dialog, keine
+Rückfrage, kein Menü — der Ladehinweis sagt lediglich, dass noch angepasst wird.
+Braucht ein zweiter Stream dieselbe Rettung, hört die Sitzung auf, die Lektion bei
+jedem Kanalwechsel neu zu lernen, und startet gleich eine Stufe tiefer. Dieses
+Gedächtnis ist bewusst **nicht** dauerhaft: Ein einziger sperriger Stream soll
+nicht Ihre GPU für immer verurteilen, also beginnt jeder Neustart wieder ganz oben
+auf der Leiter und steigt nur ab, wenn es sein muss.
+
+Der Schalter **Einstellungen → Wiedergabe → Hardware-Dekodierung** bleibt — für
+das seltene Gerät, dessen Chip alles annimmt und nichts zeichnet. Es ist keine
+Einstellung, nach der Sie je greifen müssten.
+
+## Die Belege selbst lesen
+
+Die Info-Schaltfläche in den Wiedergabesteuerungen öffnet **Stream-Info**, die
+Kurzfassung von allem oben Gesagten:
+
+- **Codec** — was Bild- und Tonspur tatsächlich sind. Steht hier HEVC auf einer
+  einige Jahre alten Box, haben Sie Ihre Erklärung.
+- **Decoder** — welcher Weg gerade die Arbeit macht. „software" heißt: Die Leiter
+  hat diesen Stream bereits gerettet.
+- **Auflösung und Bildrate** — die Zahlen, die darüber entscheiden, ob
+  Software-Dekodierung überhaupt mithalten kann.
+- **Bitrate und Puffer** — die Netzwerkseite, um
+  [einen Dekodierfehler von einer hungernden Verbindung zu unterscheiden](/de/blog/iptv-ruckeln-beheben/).
+
+Software-Dekodierung bei 1080p ist auf einem modernen Telefon problemlos und auf
+einem billigen TV-Stick grenzwertig. Ist das Bild da, ruckelt aber, und der
+Decoder meldet „software", sehen Sie einem Prozessor beim Verlieren eines Rennens
+zu — der Fehler ist nur einen Schritt weitergewandert.
+
+## Das Spiegelsymptom
+
+Bild ohne Ton ist dieselbe Geschichte andersherum. Üblicher Grund sind
+Mehrkanal-Tonformate: ein Stream mit Raumklang auf einem Gerät, das nur Stereo
+versteht, oder ein Fernseher, der den Ton an eine Soundbar durchreicht, die dieses
+Format nicht annimmt. Abhilfe schafft meist eine andere Tonspur, sofern der Stream
+eine anbietet — derselbe
+[Spurwähler](/de/blog/untertitel-und-tonspuren/), der auch die Sprache umschaltet.
+
+## Wann es gar nicht am Codec liegt
+
+Zwei Fehler sehen ähnlich aus und sind es nicht:
+
+- **Schwarzer Bildschirm und nie Ton.** Es wurde nichts dekodiert, weil nichts
+  ankam. Das ist [der Stream oder der Weg dorthin](/de/blog/playlist-laedt-nicht/),
+  nicht der Decoder — und wenn es nur in bestimmten Zimmern passiert, ist
+  [die Funkstrecke der Verdächtige](/de/blog/iptv-friert-im-wlan-ein/).
+- **Alles läuft, aber die Liste ist unlesbar.** Das ist Text, nicht Video:
+  [ein Zeichenkodierungsproblem in der Playlist-Datei](/de/blog/kanalnamen-werden-kryptisch/).
+
+Ein Dekodierfehler hat eine klare Signatur: ein Stream, der sich öffnet, ein
+Puffer, der sich füllt, Ton, der läuft — und ein Bild, das nie erscheint.
+
+## Was das für die Gerätewahl bedeutet
+
+Scheitert ein bestimmter Stream auf Ihrer TV-Box und läuft auf dem Telefon, ist
+der Stream in Ordnung und die Box alt. Das sollte man wissen, bevor man einen
+Abend in den Einstellungen verbringt: Hardware-Decoder lassen sich nicht
+aktualisieren, denn sie sind Silizium, keine Software.
+
+Es ist zugleich das stärkste Argument für einen Player, der sich still anpasst,
+statt Ihnen ein Decoder-Menü hinzuhalten.
+[Am Fernseher](/de/blog/iptv-player-auf-android-tv/), wo die gesamte Oberfläche aus
+drei Metern Entfernung mit einem Steuerkreuz bedient wird, ist eine modale Frage
+zur Videodekodierung kein Feature. Die Aufgabe des Players ist es,
+[Ihre Liste zu lesen, den Stream zu holen und das Bild zu zeichnen](/de/blog/was-ein-iptv-player-tut/) —
+auch dann, wenn der naheliegende Weg dorthin nicht funktioniert.

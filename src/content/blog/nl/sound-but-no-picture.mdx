@@ -1,0 +1,150 @@
+---
+title: "Wel geluid, geen beeld: wat een decoder eigenlijk doet"
+description: "Het geluid speelt, het scherm blijft zwart. Dat ene detail schrapt de meeste gebruikelijke verdachten en wijst naar één onderdeel: dat wat bytes weer in beelden verandert."
+urlSlug: wel-geluid-geen-beeld
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["problemen-oplossen", "afspelen"]
+keywords: ["iptv wel geluid geen beeld", "zwart scherm met geluid iptv", "hevc h265 speelt niet af android", "hardwaredecodering iptv speler"]
+heroImageAlt: "Een stream die zich in het apparaat splitst in twee routes: de ene bereikt de luidspreker, de andere stokt voor een leeg scherm."
+---
+
+De meeste afspeelstoringen zijn in twee opzichten stil: er speelt niets, en niets
+legt uit waarom. Deze is anders, en dat verschil is een cadeau: je hoort het
+commentaar glashelder terwijl het scherm zwart blijft. Er komt dus iets binnen, er
+wordt iets begrepen, en precies één schakel in de keten heeft het opgegeven.
+
+Dat versmalt het veld aanzienlijk. Je afspeellijst is in orde — anders was de
+stream niet eens geopend. De server is in orde, en
+[de weg ertussen](/nl/blog/iptv-buffering-oplossen/) ook: het geluid is het levende
+bewijs dat er nog steeds bytes binnenkomen. Wat overblijft is de laatste stap vóór
+het beeld: die de gecomprimeerde data terugverandert in frames.
+
+## Codec en container zijn niet hetzelfde
+
+De `.m3u8` aan het eind van de stream-URL zegt hier vrijwel niets over. Dat is de
+*container*: de envelop die de sporen draagt en de timing die ze bij elkaar houdt.
+Of jouw apparaat kan afspelen wat erin zit, is een aparte vraag, en die beslist de
+**codec**: de compressiemethode waarmee elk spoor is gecodeerd.
+
+Een live-uitzending vlecht er meestal minstens twee door elkaar —
+[beeld, geluid en soms tekst](/nl/blog/ondertiteling-en-audiosporen/) — elk met zijn
+eigen methode. Daarom kunnen twee ogenschijnlijk identieke streams van dezelfde
+aanbieder zich op hetzelfde apparaat totaal anders gedragen.
+
+## Waarom het beeld wegvalt en het geluid niet
+
+Audiocompressie is goedkoop. Elke processor die deze eeuw is gemaakt, decodeert een
+stereospoor in software zonder het te merken; daarom werkt geluid vrijwel altijd.
+Video is het tegenovergestelde: een 1080p-beeld in realtime decoderen is echt duur,
+en moderne methoden kopen hun kleinere omvang met meer rekenwerk per frame.
+
+Die kostenpost is de reden dat apparaten een aparte **decoderchip** bevatten — en
+precies daar sterft de compatibiliteit. Die chip implementeert een *vaste lijst*
+formaten, bevroren op de dag dat de hardware werd ontworpen. H.264 staat op elke
+lijst. H.265 — ook HEVC genoemd, en steeds gangbaarder omdat het hetzelfde beeld met
+merkbaar minder bandbreedte vervoert — staat op de meeste moderne lijsten en
+ontbreekt op heel wat oudere kastjes. Nieuwere methoden als AV1 ontbreken op vrijwel
+alle.
+
+Komt er een stream binnen in een formaat dat de chip niet implementeert, dan gaat
+het audiospoor moeiteloos door en staat het videospoor pal stil. Vandaar het zwarte
+scherm met onberispelijk geluid.
+
+Er is nog een subtielere variant die het waard is te kennen, want die verklaart
+waarom de ene HEVC-zender wel speelt en de volgende niet. De ondersteuning van een
+chip is nooit simpelweg "HEVC": ze dekt een bepaald *profiel* en *level* — een
+kleurdiepte, een resolutieplafond, een framerateplafond. Een 10-bits stream op een
+8-bits decoder, of 4K op een chip die tot 1080p is gespecificeerd, wordt net zo
+resoluut geweigerd als een onbekend formaat. En sommige chips accepteren de stream,
+melden succes en produceren vervolgens stilletjes helemaal niets.
+
+## De oplossing die niet jouw taak zou moeten zijn
+
+Er is altijd een terugvaloptie: de algemene processor kan elk formaat in software
+decoderen, mits hij genoeg klokcycli overheeft. Dat kost batterij, maakt het
+apparaat warm en kan op een zwak kastje een stream met hoge resolutie helemaal niet
+bijbenen. Maar het werkt wanneer de chip weigert.
+
+De remedie is dus bekend. Het probleem is dat de *diagnose* historisch bij de kijker
+is gelegd, in de vorm van een decoderinstelling in een menu: een keuze die van je
+vraagt iets te weten wat je onmogelijk kunt weten, over een chip waarvan je nooit
+een specificatie hebt gezien, terwijl er een zwart scherm voor je staat.
+
+Vidonzo beschouwt dat als werk voor de speler. Hardwaredecodering staat standaard
+aan, omdat het bijna altijd het juiste antwoord is: sneller en veel zuiniger. Wat
+telt, is wat er gebeurt als het het verkeerde antwoord is. De speler let op twee
+dingen tegelijk: komen er bytes binnen, en is er ook maar één frame geproduceerd?
+Samen zijn die twee feiten ondubbelzinnig. Data zonder beeld is een decoderprobleem
+en niets anders; helemaal geen data is een netwerkstoring in hetzelfde zwarte jasje,
+en daar treft de decoder geen blaam.
+
+Houdt het eerste patroon een paar seconden aan, dan zakt de speler zelf een trede
+naar softwaredecodering en opent hij de stream opnieuw. Geen dialoogvenster, geen
+vraag, geen menu — de laadtekst zegt alleen dat er nog wordt bijgesteld. Heeft een
+tweede stream dezelfde redding nodig, dan houdt de sessie op die les bij elke
+zenderwissel opnieuw te leren en begint ze meteen op de lagere trede. Dat geheugen
+is bewust **niet** blijvend: één weerbarstige stream hoort je GPU niet voorgoed te
+veroordelen, dus elke nieuwe start begint weer bovenaan de ladder en daalt alleen
+als het moet.
+
+De schakelaar **Instellingen → Afspelen → Hardwaredecodering** blijft bestaan, voor
+dat zeldzame apparaat waarvan de chip alles aanneemt en niets tekent. Het is geen
+instelling die je ooit nodig zou moeten hebben.
+
+## Zelf het bewijs lezen
+
+De infoknop in de bediening opent **Streaminfo**, de korte versie van alles
+hierboven:
+
+- **Codec** — wat het video- en audiospoor werkelijk zijn. Staat hier HEVC op een
+  kastje van enkele jaren oud, dan heb je je verklaring.
+- **Decoder** — welke route op dit moment het werk doet. "software" betekent dat de
+  ladder deze stream al heeft gered.
+- **Resolutie en framerate** — de cijfers die bepalen of softwaredecodering het
+  plausibel kan bijbenen.
+- **Bitrate en buffer** — de netwerkkant, om
+  [een decodeerfout te scheiden van een uitgehongerde verbinding](/nl/blog/iptv-buffering-oplossen/).
+
+Softwaredecodering op 1080p gaat prima op een moderne telefoon en is krap op een
+goedkope tv-stick. Is het beeld er wel maar hapert het, en meldt de decoder
+"software", dan kijk je naar een processor die een race verliest — de storing is
+gewoon één stap opgeschoven.
+
+## Het spiegelbeeldsymptoom
+
+Beeld zonder geluid is hetzelfde verhaal andersom. De gebruikelijke oorzaak zijn
+meerkanaals audioformaten: een stream met surroundgeluid op een apparaat dat alleen
+stereo begrijpt, of een televisie die het geluid doorgeeft aan een soundbar die dat
+formaat niet accepteert. De oplossing is meestal een ander audiospoor, als de stream
+er een biedt — dezelfde
+[spoorkiezer](/nl/blog/ondertiteling-en-audiosporen/) waarmee je van taal wisselt.
+
+## Wanneer het helemaal geen codec is
+
+Twee storingen lijken erop en zijn het niet:
+
+- **Zwart scherm en nooit geluid.** Er is niets gedecodeerd omdat er niets aankwam.
+  Dat is [de stream of de weg ernaartoe](/nl/blog/afspeellijst-laadt-niet/), niet de
+  decoder — en gebeurt het alleen in bepaalde kamers, dan is
+  [de radioverbinding de verdachte](/nl/blog/iptv-bevriest-op-wifi/).
+- **Alles speelt, maar de lijst is onleesbaar.** Dat is tekst, geen video:
+  [een tekencoderingsprobleem in het afspeellijstbestand](/nl/blog/kanaalnamen-vol-vreemde-tekens/).
+
+Een decodeerfout heeft een specifieke handtekening: een stream die opent, een buffer
+die vult, geluid dat speelt, en een beeld dat nooit verschijnt.
+
+## Wat dit betekent bij het kiezen van een apparaat
+
+Faalt één bepaalde stream op je tv-kastje en speelt hij op je telefoon, dan is de
+stream in orde en het kastje oud. Dat is nuttig om te weten vóór je een avond aan
+instellingen besteedt: hardwaredecoders kun je niet updaten, want het is silicium,
+geen software.
+
+Het is meteen het sterkste argument voor een speler die zich stilletjes aanpast in
+plaats van je een decodermenu voor te schotelen.
+[Op een televisie](/nl/blog/iptv-speler-op-android-tv/), waar de hele interface met
+een richtingsknop vanaf drie meter wordt bestuurd, is een modale vraag over
+videodecodering geen functie. De taak van de speler is
+[je lijst lezen, de stream ophalen en het beeld tekenen](/nl/blog/wat-een-iptv-speler-doet/) —
+ook wanneer de voor de hand liggende manier van tekenen niet blijkt te werken.
