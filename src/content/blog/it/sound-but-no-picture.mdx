@@ -1,0 +1,155 @@
+---
+title: "Audio sì, immagine no: che cosa fa davvero un decoder"
+description: "L'audio si sente e lo schermo resta nero. Questo solo dettaglio scarta quasi tutti i soliti sospetti e indica un componente: quello che riporta i byte a essere fotogrammi."
+urlSlug: audio-si-immagine-no
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["risoluzione problemi", "riproduzione"]
+keywords: ["iptv audio ma non video", "schermo nero con audio iptv", "hevc h265 non si riproduce android", "decodifica hardware lettore iptv"]
+heroImageAlt: "Un flusso che si divide in due strade dentro il dispositivo: una arriva all'altoparlante, l'altra si ferma davanti a uno schermo vuoto."
+---
+
+Quasi tutti i guasti di riproduzione sono muti in entrambi i sensi: non si vede
+niente e niente spiega il perché. Questo è diverso, e la differenza è un regalo:
+senti il commento con assoluta chiarezza mentre lo schermo resta nero. Qualcosa sta
+arrivando, qualcosa viene compreso, ed esattamente uno stadio della catena si è
+arreso.
+
+Il campo si restringe parecchio. La tua playlist è a posto, altrimenti il flusso
+non si sarebbe nemmeno aperto. Il server è a posto, e lo è anche
+[la strada che vi separa](/it/blog/risolvere-buffering-iptv/): l'audio è la
+dimostrazione dal vivo che i byte continuano ad arrivare. Resta l'ultimo stadio
+prima dell'immagine, quello che riporta i dati compressi alla forma di fotogrammi.
+
+## Codec e contenitore non sono la stessa cosa
+
+Il `.m3u8` in fondo all'URL non dice quasi nulla al riguardo. Quello è il
+*contenitore*: la busta che trasporta le tracce e la sincronia che le tiene
+insieme. Se il tuo apparecchio riesca a riprodurre ciò che c'è dentro è un'altra
+domanda, e la decide il **codec**: il metodo di compressione con cui ogni traccia è
+stata codificata.
+
+Una diretta ne intreccia di solito almeno due —
+[video, audio e a volte testo](/it/blog/sottotitoli-e-tracce-audio/) — ognuno con il
+proprio metodo. Ecco perché due flussi in apparenza identici dello stesso fornitore
+possono comportarsi in modo completamente diverso sullo stesso apparecchio.
+
+## Perché cade l'immagine e non il suono
+
+Comprimere l'audio costa poco. Qualunque processore costruito in questo secolo
+decodifica una traccia stereo via software senza accorgersene, per cui il suono
+funziona quasi sempre. Il video è l'opposto: decodificare un'immagine 1080p in
+tempo reale è davvero costoso, e gli schemi moderni pagano la loro leggerezza con
+più aritmetica per fotogramma.
+
+Proprio quel costo spiega perché nei dispositivi c'è un **chip decodificatore**
+dedicato — ed è lì che la compatibilità muore. Il chip implementa un *elenco fisso*
+di formati, congelato il giorno in cui l'hardware è stato progettato. H.264 è in
+ogni elenco. H.265 — chiamato anche HEVC, e sempre più diffuso perché trasporta la
+stessa immagine con una banda sensibilmente inferiore — è nella maggior parte degli
+elenchi recenti e manca in parecchi box più datati. Schemi più nuovi come AV1
+mancano quasi ovunque.
+
+Quando arriva un flusso in un formato che il chip non implementa, la traccia audio
+passa liscia e quella video si ferma di colpo. Da qui lo schermo nero con un audio
+impeccabile.
+
+C'è una variante più sottile che vale la pena conoscere, perché spiega i casi in
+cui un canale HEVC si vede e il successivo no. Il supporto di un chip non è mai
+semplicemente «HEVC»: riguarda un *profilo* e un *livello* precisi — una profondità
+di colore, un tetto di risoluzione, un tetto di frequenza dei fotogrammi. Un flusso
+a 10 bit su un decoder a 8 bit, o il 4K su un chip specificato fino a 1080p, viene
+rifiutato con la stessa nettezza di un formato sconosciuto. E certi chip accettano
+il flusso, dichiarano che è tutto a posto e poi non producono nulla, in silenzio.
+
+## La soluzione che non dovrebbe toccare a te
+
+Un'alternativa c'è sempre: il processore generico sa decodificare qualunque formato
+via software, se ha cicli a sufficienza. Costa batteria, scalda l'apparecchio e su
+un box modesto può non stare dietro a un flusso ad alta risoluzione. Ma funziona
+quando il chip si rifiuta.
+
+Il rimedio, insomma, è noto. Il problema è che la *diagnosi* è stata storicamente
+scaricata sullo spettatore, sotto forma di un'impostazione per scegliere il decoder
+in un menu: una scelta che ti chiede di sapere qualcosa che non hai modo di sapere,
+su un chip di cui non hai mai letto la scheda tecnica, mentre davanti hai uno
+schermo nero.
+
+Vidonzo lo considera un compito del lettore. La decodifica hardware è attiva per
+impostazione predefinita, perché è quasi sempre la risposta giusta: è più veloce e
+consuma molta meno energia. Ciò che conta è cosa succede quando è quella sbagliata.
+Il lettore tiene d'occhio due cose insieme: se arrivano byte e se è stato prodotto
+almeno un fotogramma. Insieme, questi due fatti non lasciano ambiguità. Dati senza
+immagine è un problema di decodifica e nient'altro; nessun dato è un guasto di rete
+travestito dallo stesso schermo nero, e lì il decoder è innocente.
+
+Quando il primo schema regge per qualche secondo, il lettore scende di un gradino
+verso la decodifica software e riapre il flusso da solo. Nessuna finestra, nessuna
+domanda, nessun menu: il testo di caricamento dice soltanto che sta ancora
+regolando. Se anche un secondo flusso ha bisogno dello stesso salvataggio, la
+sessione smette di reimparare la lezione a ogni cambio di canale e parte già dal
+gradino più basso. Questa memoria di proposito **non** è permanente: un singolo
+flusso scorbutico non deve condannare per sempre la tua GPU, quindi ogni avvio
+riparte dall'alto della scala e scende solo se serve.
+
+L'interruttore **Impostazioni → Riproduzione → Decodifica hardware** resta lì, per
+quel raro apparecchio il cui chip accetta tutto e non disegna niente. Non è
+un'impostazione che dovresti mai dover toccare.
+
+## Leggere le prove da soli
+
+Il pulsante info tra i comandi apre **Info stream**, cioè la versione breve di
+tutto quanto sopra:
+
+- **Codec** — che cosa sono davvero la traccia video e quella audio. Se qui leggi
+  HEVC su un box di qualche anno fa, la spiegazione ce l'hai.
+- **Decoder** — quale strada sta facendo il lavoro in questo momento. Vedere
+  «software» significa che la scala ha già salvato questo flusso.
+- **Risoluzione e frequenza dei fotogrammi** — i numeri che decidono se la
+  decodifica software può plausibilmente reggere il passo.
+- **Bitrate e buffer** — il lato rete, per
+  [distinguere un guasto di decodifica da una connessione affamata](/it/blog/risolvere-buffering-iptv/).
+
+La decodifica software a 1080p va benissimo su un telefono recente ed è al limite
+su una chiavetta TV economica. Se l'immagine c'è ma scatta e il decoder segna
+«software», stai guardando un processore perdere una gara: il guasto si è solo
+spostato un passo più avanti.
+
+## Il sintomo speculare
+
+Immagine senza audio è la stessa storia rovesciata. La causa abituale sono i
+formati audio multicanale: un flusso con suono surround su un apparecchio che
+capisce solo lo stereo, o un televisore che passa l'audio a una soundbar che quel
+formato non lo accetta. Di solito si risolve con un'altra traccia audio, se il
+flusso ne offre una — lo stesso
+[selettore di tracce](/it/blog/sottotitoli-e-tracce-audio/) che cambia lingua.
+
+## Quando non c'entra il codec
+
+Due guasti gli somigliano ma non lo sono:
+
+- **Schermo nero e nessun audio, mai.** Non è stato decodificato niente perché non
+  è arrivato niente. Quello è
+  [il flusso o la strada per raggiungerlo](/it/blog/la-playlist-non-si-carica/), non
+  il decoder — e se succede solo in certe stanze,
+  [il sospettato è la radio](/it/blog/iptv-si-blocca-su-wifi/).
+- **Tutto si riproduce, ma l'elenco è illeggibile.** Quello è testo, non video:
+  [un problema di codifica dei caratteri nel file](/it/blog/nomi-dei-canali-illeggibili/).
+
+Il guasto di decodifica ha una firma precisa: un flusso che si apre, un buffer che
+si riempie, un audio che suona e un'immagine che non arriva mai.
+
+## Che cosa significa quando scegli un apparecchio
+
+Se un flusso preciso fallisce sul tuo box TV e si vede sul telefono, il flusso sta
+bene ed è il box a essere vecchio. Meglio saperlo prima di passare una serata nelle
+impostazioni: i decoder hardware non si aggiornano, perché sono silicio, non
+software.
+
+È anche l'argomento più forte a favore di un lettore che si adatta in silenzio
+invece di consegnarti un menu di decoder.
+[Sul televisore](/it/blog/lettore-iptv-su-android-tv/), dove tutta l'interfaccia si
+guida con una croce direzionale da tre metri, una domanda a tutto schermo sulla
+decodifica video non è una funzione. Il compito del lettore è
+[leggere la tua lista, recuperare il flusso e disegnare l'immagine](/it/blog/cosa-fa-un-lettore-iptv/) —
+anche quando il modo ovvio di disegnarla si rivela non funzionare.

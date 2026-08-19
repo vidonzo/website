@@ -452,6 +452,31 @@
         "ko": "첫-재생목록-설정하기"
       }
     },
+    "sound-but-no-picture": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "sound-but-no-picture",
+        "fa": "صدا-هست-تصویر-نیست",
+        "ar": "صوت-بلا-صورة",
+        "es": "se-oye-pero-no-se-ve",
+        "tr": "ses-var-goruntu-yok",
+        "fr": "le-son-sans-l-image",
+        "de": "ton-ohne-bild",
+        "pt": "som-sem-imagem",
+        "ru": "звук-есть-картинки-нет",
+        "id": "ada-suara-tanpa-gambar",
+        "it": "audio-si-immagine-no",
+        "vi": "co-tieng-khong-co-hinh",
+        "pl": "dzwiek-jest-obrazu-nie-ma",
+        "nl": "wel-geluid-geen-beeld",
+        "hi": "आवाज-है-तस्वीर-नहीं",
+        "bn": "শব্দ-আছে-ছবি-নেই",
+        "th": "มีเสียง-แต่ไม่มีภาพ",
+        "ur": "آواز-ہے-تصویر-نہیں",
+        "ja": "音だけ出て映像が出ない-原因",
+        "ko": "소리는-나는데-화면이-없을-때"
+      }
+    },
     "streaming-protocols-explained": {
       "sourceLocale": "en",
       "locales": {

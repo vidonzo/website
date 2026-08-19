@@ -1,0 +1,148 @@
+---
+title: "Có tiếng mà không có hình: bộ giải mã thật ra làm gì"
+description: "Tiếng vẫn chạy, màn hình vẫn đen. Chỉ một chi tiết đó thôi đã loại gần hết những nghi phạm quen thuộc và chỉ đúng vào một bộ phận: thứ biến các byte trở lại thành khung hình."
+urlSlug: co-tieng-khong-co-hinh
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["khắc phục sự cố", "phát lại"]
+keywords: ["iptv có tiếng không có hình", "màn hình đen vẫn có tiếng iptv", "hevc h265 không phát được android", "giải mã phần cứng trình phát iptv"]
+heroImageAlt: "Một luồng tách thành hai đường bên trong thiết bị: một đường tới loa, đường còn lại dừng trước màn hình trống."
+---
+
+Phần lớn lỗi phát hình đều câm lặng theo cả hai nghĩa: không có gì chạy, và cũng
+không có gì giải thích vì sao. Lỗi này thì khác, và cái khác ấy là một món quà: bạn
+nghe rõ mồn một tiếng bình luận trong khi màn hình vẫn đen kịt. Nghĩa là có thứ
+đang tới, có thứ đang được hiểu, và đúng một mắt xích trong chuỗi đã bỏ cuộc.
+
+Điều đó thu hẹp phạm vi đáng kể. Danh sách phát của bạn không sao — nếu có sao thì
+luồng đã chẳng mở được. Máy chủ không sao, và
+[đường đi giữa bạn với nó](/vi/blog/khac-phuc-iptv-giat-lag/) cũng vậy: tiếng chính
+là bằng chứng sống cho thấy các byte vẫn đang về. Chỉ còn lại chặng cuối trước khi
+có hình — chặng biến dữ liệu nén trở lại thành khung hình.
+
+## Codec và vùng chứa không phải một
+
+Đuôi `.m3u8` ở cuối địa chỉ luồng gần như không nói gì về chuyện này. Đó là *vùng
+chứa* (container): cái phong bì mang các luồng thành phần và nhịp thời gian giữ
+chúng khớp nhau. Thiết bị của bạn có phát được thứ bên trong hay không lại là câu
+hỏi khác, và người trả lời là **codec**: cách nén mà mỗi luồng thành phần đã được
+mã hóa.
+
+Một kênh trực tiếp thường bện ít nhất hai thứ —
+[hình, tiếng và đôi khi cả chữ](/vi/blog/phu-de-va-luong-am-thanh/) — mỗi thứ nén
+theo cách riêng. Vì vậy hai luồng trông y hệt nhau từ cùng một nhà cung cấp vẫn có
+thể hành xử hoàn toàn khác nhau trên cùng một thiết bị.
+
+## Vì sao hình gãy mà tiếng thì không
+
+Nén âm thanh rất rẻ. Bất kỳ bộ xử lý nào ra đời trong thế kỷ này cũng giải mã được
+một luồng âm thanh stereo bằng phần mềm mà chẳng thấy nặng nhọc gì, nên tiếng gần
+như luôn chạy. Video thì ngược lại: giải mã một khung hình 1080p theo thời gian
+thực thực sự tốn kém, và các chuẩn hiện đại đổi dung lượng nhỏ hơn lấy nhiều phép
+tính hơn trên mỗi khung.
+
+Chính khoản tốn kém đó là lý do trong thiết bị có một **chip giải mã** riêng — và
+cũng chính chỗ đó là nơi khả năng tương thích chết. Con chip ấy hiện thực một *danh
+sách cố định* các định dạng, đóng băng từ ngày phần cứng được thiết kế. H.264 có
+trong mọi danh sách. H.265 — còn gọi là HEVC, ngày càng phổ biến vì mang cùng chất
+hình với băng thông thấp hơn hẳn — có trong hầu hết danh sách đời mới và vắng mặt ở
+rất nhiều đầu phát cũ. Những chuẩn mới hơn như AV1 thì vắng ở gần hết.
+
+Khi một luồng đến với định dạng mà chip không hiện thực, luồng tiếng đi qua trót
+lọt còn luồng hình đứng khựng. Đó là màn hình đen với âm thanh hoàn hảo.
+
+Còn một biến thể tinh tế hơn đáng biết, vì nó giải thích vì sao kênh HEVC này chạy
+mà kênh HEVC kế bên thì không. Hỗ trợ của một con chip không bao giờ chỉ đơn giản
+là "HEVC": nó gắn với một *profile* và một *level* cụ thể — một độ sâu màu, một
+trần độ phân giải, một trần tốc độ khung hình. Luồng 10 bit trên bộ giải mã 8 bit,
+hay 4K trên con chip chỉ ghi thông số tới 1080p, đều bị từ chối dứt khoát y như một
+định dạng lạ. Và có những chip nhận luồng, báo thành công, rồi lặng lẽ không tạo ra
+gì cả.
+
+## Cách sửa lẽ ra không nên là việc của bạn
+
+Luôn có đường lui: bộ xử lý đa dụng có thể giải mã mọi định dạng bằng phần mềm, nếu
+đủ chu kỳ tính toán. Cái giá là pin, là máy nóng lên, và trên một đầu phát yếu thì
+có khi không theo kịp luồng độ phân giải cao. Nhưng nó chạy được khi con chip từ
+chối.
+
+Vậy là thuốc thì đã biết. Vấn đề nằm ở chỗ *việc chẩn đoán* xưa nay bị đẩy sang cho
+người xem, dưới dạng một tùy chọn chọn bộ giải mã trong menu — một lựa chọn đòi bạn
+biết điều mà bạn không có cách nào biết, về một con chip mà bạn chưa từng đọc thông
+số, trong khi trước mặt là màn hình đen.
+
+Vidonzo coi đó là việc của trình phát. Giải mã phần cứng bật sẵn, vì gần như lúc
+nào nó cũng là đáp án đúng: nhanh hơn và tốn ít điện hơn nhiều. Điều đáng nói là
+chuyện gì xảy ra khi nó là đáp án sai. Trình phát theo dõi cùng lúc hai thứ: byte
+có đang về hay không, và đã có khung hình nào được tạo ra chưa. Hai dữ kiện đó đặt
+cạnh nhau thì không còn mơ hồ. Có dữ liệu mà không có hình là lỗi bộ giải mã, không
+gì khác; không có dữ liệu nào cả là lỗi mạng khoác chính bộ mặt màn hình đen ấy, và
+ở đó bộ giải mã vô can.
+
+Khi kiểu thứ nhất kéo dài vài giây, trình phát tự bước xuống một nấc sang giải mã
+phần mềm và mở lại luồng. Không hộp thoại, không câu hỏi, không menu — dòng chữ
+đang tải chỉ nói rằng nó vẫn đang điều chỉnh. Nếu luồng thứ hai cũng cần đúng cú
+cứu ấy, phiên làm việc thôi học lại bài học đó mỗi lần chuyển kênh và khởi đầu ngay
+ở nấc dưới. Trí nhớ này cố tình **không** vĩnh viễn: một luồng khó tính không nên
+kết án GPU của bạn mãi mãi, nên mỗi lần mở ứng dụng mới, mọi thứ lại bắt đầu từ nấc
+trên cùng và chỉ tụt xuống nếu buộc phải thế.
+
+Công tắc **Cài đặt → Phát lại → Giải mã phần cứng** vẫn ở đó, dành cho thiết bị
+hiếm hoi có con chip nhận tất cả mà chẳng vẽ ra gì. Đó không phải tùy chọn mà bạn
+nên phải với tay tới.
+
+## Tự đọc bằng chứng
+
+Nút thông tin trên thanh điều khiển mở bảng **Thông tin luồng**, tức bản rút gọn
+của mọi điều ở trên:
+
+- **Codec** — luồng hình và luồng tiếng thực chất là gì. Nếu ở đây ghi HEVC trên
+  một đầu phát vài năm tuổi thì bạn đã có lời giải thích.
+- **Bộ giải mã** — đường nào đang gánh việc lúc này. Thấy "software" nghĩa là cái
+  thang nấc kia đã cứu luồng này rồi.
+- **Độ phân giải và tốc độ khung hình** — những con số quyết định giải mã phần mềm
+  có cơ theo kịp hay không.
+- **Bitrate và bộ đệm** — phía mạng, để
+  [phân biệt lỗi giải mã với một kết nối đang đói](/vi/blog/khac-phuc-iptv-giat-lag/).
+
+Giải mã phần mềm ở 1080p thì ổn trên điện thoại đời mới và chật vật trên chiếc TV
+stick giá rẻ. Nếu hình có mà giật cục còn bộ giải mã ghi "software", bạn đang xem
+một bộ xử lý thua cuộc đua — lỗi chỉ dịch đi đúng một bước.
+
+## Triệu chứng soi gương
+
+Có hình mà không có tiếng là cùng một câu chuyện kể ngược. Thủ phạm quen thuộc là
+các định dạng âm thanh đa kênh: luồng mang âm thanh vòm trên thiết bị chỉ hiểu
+stereo, hoặc chiếc TV chuyển tiếng sang loa thanh không nhận định dạng đó. Cách gỡ
+thường là chọn luồng tiếng khác, nếu luồng có sẵn — vẫn là
+[bộ chọn luồng](/vi/blog/phu-de-va-luong-am-thanh/) dùng để đổi ngôn ngữ.
+
+## Khi hoàn toàn không phải chuyện codec
+
+Hai lỗi sau trông giống nhưng không phải:
+
+- **Màn hình đen và chẳng có tiếng nào.** Không có gì được giải mã vì chẳng có gì
+  tới. Đó là
+  [luồng hoặc đường tới luồng](/vi/blog/danh-sach-phat-khong-tai-duoc/), không phải
+  bộ giải mã — và nếu chỉ xảy ra ở vài phòng nhất định thì
+  [nghi phạm là sóng Wi-Fi](/vi/blog/iptv-dung-hinh-tren-wifi/).
+- **Mọi thứ vẫn phát, chỉ danh sách là không đọc nổi.** Đó là chữ, không phải hình:
+  [lỗi mã hóa ký tự trong tệp danh sách](/vi/blog/ten-kenh-bi-loi-font/).
+
+Lỗi giải mã có chữ ký rất riêng: luồng mở được, bộ đệm đầy lên, tiếng chạy, và hình
+thì không bao giờ hiện ra.
+
+## Điều này nói gì khi chọn thiết bị
+
+Nếu một luồng nhất định hỏng trên đầu phát TV mà chạy ngon trên điện thoại, thì
+luồng vẫn tốt còn đầu phát đã cũ. Biết điều đó trước khi bỏ cả buổi tối vào trang
+cài đặt thì hơn — bộ giải mã phần cứng không cập nhật được, vì nó là silicon chứ
+không phải phần mềm.
+
+Đây cũng là lập luận mạnh nhất cho một trình phát tự thích nghi trong im lặng thay
+vì dúi cho bạn một menu bộ giải mã.
+[Trên TV](/vi/blog/trinh-phat-iptv-tren-android-tv/), nơi cả giao diện được lái
+bằng phím điều hướng từ khoảng cách ba mét, một hộp thoại chắn ngang hỏi về giải mã
+video không phải là tính năng. Việc của trình phát là
+[đọc danh sách của bạn, lấy luồng về và vẽ ra hình](/vi/blog/trinh-phat-iptv-lam-gi/) —
+kể cả khi cách vẽ hiển nhiên hóa ra lại không chạy.

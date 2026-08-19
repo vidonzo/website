@@ -1,0 +1,149 @@
+---
+title: "Som sem imagem: o que um decodificador realmente faz"
+description: "O áudio toca e a tela continua preta. Esse único detalhe elimina quase todos os suspeitos de sempre e aponta para uma peça: a que transforma bytes de volta em quadros."
+urlSlug: som-sem-imagem
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["problemas", "reprodução"]
+keywords: ["iptv com som mas sem imagem", "tela preta com som iptv", "hevc h265 não reproduz android", "decodificação por hardware player iptv"]
+heroImageAlt: "Um stream que se divide em dois caminhos dentro do aparelho: um chega ao alto-falante e o outro para diante de uma tela vazia."
+---
+
+Quase toda falha de reprodução é silenciosa nos dois sentidos: nada toca e nada
+explica por quê. Esta é diferente, e a diferença é um presente: você ouve a
+narração com perfeição enquanto a tela permanece preta. Alguma coisa está
+chegando, alguma coisa está sendo compreendida, e exatamente uma etapa da cadeia
+desistiu.
+
+Isso estreita bastante o campo. Sua lista está boa — caso contrário o stream nem
+teria aberto. O servidor está bom, e
+[o caminho entre vocês dois](/pt/blog/iptv-travando-como-resolver/) também: o áudio
+é a prova ao vivo de que os bytes continuam chegando. Sobra a última etapa antes
+da imagem, a que devolve os dados comprimidos à forma de quadros.
+
+## Codec e contêiner não são a mesma coisa
+
+O `.m3u8` no fim da URL não diz quase nada sobre isso. Aquilo é o *contêiner*: o
+envelope que carrega as faixas e a sincronia que as mantém juntas. Se o seu
+aparelho consegue reproduzir o que vem dentro é outra pergunta, decidida pelo
+**codec**: o método de compressão com que cada faixa foi codificada.
+
+Uma transmissão ao vivo costuma trançar pelo menos dois —
+[vídeo, áudio e às vezes texto](/pt/blog/legendas-e-faixas-de-audio/) — cada um com
+seu próprio método. É por isso que dois streams aparentemente idênticos do mesmo
+provedor podem se comportar de maneira completamente diferente no mesmo aparelho.
+
+## Por que a imagem cai e o som não
+
+Comprimir áudio é barato. Qualquer processador feito neste século decodifica uma
+faixa estéreo por software sem sentir o esforço, e por isso o som quase sempre
+funciona. Com vídeo é o oposto: decodificar uma imagem 1080p em tempo real é
+genuinamente caro, e os métodos modernos compram seu tamanho menor com mais
+aritmética por quadro.
+
+Esse custo é a razão de os aparelhos trazerem um **chip decodificador** dedicado —
+e é exatamente ali que a compatibilidade morre. O chip implementa uma *lista fixa*
+de formatos, congelada no dia em que o hardware foi projetado. H.264 está em todas
+as listas. O H.265 — também chamado de HEVC, e cada vez mais comum porque leva a
+mesma imagem com bem menos banda — está na maioria das listas modernas e falta em
+muitas caixas antigas. Métodos mais novos, como o AV1, faltam em quase todas.
+
+Quando chega um stream em um formato que o chip não implementa, a faixa de áudio
+passa tranquila e a de vídeo para de vez. Daí a tela preta com som impecável.
+
+Há uma variante mais sutil que vale conhecer, porque explica os casos em que um
+canal HEVC toca e o seguinte não. O suporte de um chip nunca é simplesmente
+"HEVC": ele cobre um *perfil* e um *nível* específicos — uma profundidade de cor,
+um teto de resolução, um teto de taxa de quadros. Um stream de 10 bits num
+decodificador de 8 bits, ou 4K num chip especificado até 1080p, é recusado com a
+mesma secura de um formato desconhecido. E alguns chips aceitam o stream, informam
+sucesso e depois não produzem nada, em silêncio.
+
+## O conserto que não deveria ser tarefa sua
+
+Sempre existe um plano B: o processador de uso geral consegue decodificar qualquer
+formato por software, desde que tenha ciclos de sobra. Isso custa bateria, esquenta
+o aparelho e, numa caixa fraca, pode não dar conta de um stream em alta resolução.
+Mas funciona quando o chip se recusa.
+
+Ou seja: o remédio é conhecido. O problema é que o *diagnóstico* foi historicamente
+empurrado para o espectador, na forma de uma configuração de decodificador num
+menu — uma escolha que exige que você saiba algo que não tem como saber, sobre um
+chip cuja ficha técnica você nunca viu, e com uma tela preta na sua frente.
+
+O Vidonzo trata isso como trabalho do player. A decodificação por hardware vem
+ligada por padrão, porque é quase sempre a resposta certa: é mais rápida e gasta
+muito menos energia. O que importa é o que acontece quando ela é a resposta errada.
+O player observa duas coisas ao mesmo tempo: se estão chegando bytes e se algum
+quadro foi produzido. Juntos, esses dois fatos não deixam margem a dúvida. Dados
+sem imagem é problema de decodificação e nada mais; nenhum dado é uma falha de rede
+vestindo a mesma tela preta, e nela o decodificador é inocente.
+
+Quando o primeiro padrão se mantém por alguns segundos, o player desce um degrau
+para a decodificação por software e reabre o stream sozinho. Sem diálogo, sem
+pergunta, sem menu — o texto de carregamento apenas diz que ainda está ajustando.
+Se um segundo stream precisar do mesmo resgate, a sessão para de reaprender a lição
+a cada troca de canal e já começa no degrau de baixo. Essa memória
+deliberadamente **não** é permanente: um stream teimoso não deve condenar sua GPU
+para sempre, então cada nova execução recomeça no topo da escada e só desce se
+precisar.
+
+A chave em **Configurações → Reprodução → Decodificação por hardware** continua
+ali, para aquele aparelho raro cujo chip aceita tudo e não desenha nada. Não é uma
+configuração que você deva precisar tocar.
+
+## Ler as evidências você mesmo
+
+O botão de informações nos controles abre **Informações do stream**, que é a versão
+curta de tudo acima:
+
+- **Codec** — o que as faixas de vídeo e áudio realmente são. Se aqui aparecer HEVC
+  numa caixa de alguns anos atrás, você já tem sua explicação.
+- **Decodificador** — qual caminho está fazendo o trabalho agora. Ver "software"
+  significa que a escada já resgatou este stream.
+- **Resolução e taxa de quadros** — os números que decidem se a decodificação por
+  software tem alguma chance de acompanhar.
+- **Bitrate e buffer** — o lado da rede, para
+  [separar uma falha de decodificação de uma conexão faminta](/pt/blog/iptv-travando-como-resolver/).
+
+Decodificar 1080p por software vai bem num celular moderno e fica no limite num
+dongle de TV barato. Se a imagem aparece mas engasga e o decodificador diz
+"software", você está vendo um processador perder uma corrida — a falha só andou um
+passo adiante.
+
+## O sintoma espelhado
+
+Imagem sem som é a mesma história ao contrário. A causa habitual são os formatos de
+áudio multicanal: um stream com som surround num aparelho que só entende estéreo,
+ou uma TV que repassa o áudio para uma soundbar que não aceita aquele formato. A
+solução costuma ser outra faixa de áudio, quando o stream oferece — o mesmo
+[seletor de faixas](/pt/blog/legendas-e-faixas-de-audio/) que troca de idioma.
+
+## Quando não é codec nenhum
+
+Duas falhas se parecem com esta e não são:
+
+- **Tela preta e som nenhum, nunca.** Nada foi decodificado porque nada chegou. Isso
+  é [o stream ou o caminho até ele](/pt/blog/a-lista-nao-carrega/), não o
+  decodificador — e, se só acontece em certos cômodos,
+  [o suspeito é o rádio](/pt/blog/iptv-travando-no-wifi/).
+- **Tudo toca, mas a lista está ilegível.** Isso é texto, não vídeo:
+  [um problema de codificação de caracteres no arquivo](/pt/blog/nomes-de-canais-ilegiveis/).
+
+A falha de decodificação tem assinatura própria: um stream que abre, um buffer que
+enche, um áudio que toca e uma imagem que nunca chega.
+
+## O que isso significa na hora de escolher o aparelho
+
+Se um stream específico falha na sua caixa de TV e toca no celular, o stream está
+bom e a caixa está velha. Vale saber disso antes de gastar uma noite nas
+configurações: decodificadores de hardware não recebem atualização, porque são
+silício, não software.
+
+É também o argumento mais forte a favor de um player que se adapta em silêncio, em
+vez de um que lhe entrega um menu de decodificadores.
+[Na televisão](/pt/blog/player-de-iptv-na-android-tv/), onde a interface inteira é
+dirigida por um direcional a três metros de distância, uma pergunta modal sobre
+decodificação de vídeo não é recurso. O trabalho do player é
+[ler sua lista, buscar o stream e desenhar a imagem](/pt/blog/o-que-faz-um-player-iptv/) —
+inclusive quando o jeito óbvio de desenhar não funciona.

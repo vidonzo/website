@@ -1,0 +1,158 @@
+---
+title: "Se oye pero no se ve: qué hace realmente un decodificador"
+description: "El audio suena y la pantalla sigue en negro. Ese único detalle descarta a casi todos los sospechosos habituales y señala a una pieza: la que convierte los bytes otra vez en imágenes."
+urlSlug: se-oye-pero-no-se-ve
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ["solución de problemas", "reproducción"]
+keywords: ["iptv se oye pero no se ve", "pantalla negra con sonido iptv", "hevc h265 no se reproduce android", "decodificación por hardware reproductor"]
+heroImageAlt: "Un flujo que se divide dentro del aparato en dos caminos: uno llega al altavoz y el otro se detiene ante una pantalla vacía."
+---
+
+Casi todos los fallos de reproducción son silenciosos en los dos sentidos: no se
+reproduce nada y nada explica por qué. Este es distinto, y esa diferencia es un
+regalo: oyes el comentario con total claridad mientras la pantalla sigue negra.
+Algo está llegando, algo se está entendiendo, y exactamente una etapa de la
+cadena se ha rendido.
+
+Eso reduce mucho el campo. Tu lista está bien: si no, el flujo ni siquiera se
+habría abierto. El servidor está bien, y también
+[el camino entre él y tú](/es/blog/solucionar-cortes-iptv/): el audio es la
+prueba en directo de que los bytes siguen llegando. Queda la última etapa antes
+de la imagen, la que convierte los datos comprimidos de nuevo en fotogramas.
+
+## Códec y contenedor no son lo mismo
+
+El `.m3u8` del final de la URL no te dice casi nada sobre esto. Eso es el
+*contenedor*: el sobre que transporta las pistas y la sincronización que las
+mantiene unidas. Si tu aparato puede reproducir lo que va dentro es otra
+pregunta, y la responde el **códec**: el método de compresión con el que se
+codificó cada pista.
+
+Un directo suele trenzar al menos dos —
+[vídeo, audio y a veces texto](/es/blog/subtitulos-y-pistas-de-audio-iptv/) — y
+cada uno lleva su propio método. Por eso dos flujos aparentemente idénticos del
+mismo proveedor pueden comportarse de forma completamente distinta en el mismo
+aparato.
+
+## Por qué cae la imagen y no el sonido
+
+Comprimir audio es barato. Cualquier procesador fabricado en este siglo
+decodifica una pista de audio estéreo por software sin despeinarse, así que el
+sonido casi siempre funciona. El vídeo es lo contrario: decodificar una imagen
+1080p en tiempo real es genuinamente caro, y los métodos modernos pagan su menor
+tamaño con más cálculo por fotograma.
+
+Ese coste es la razón de que los aparatos lleven un **chip decodificador**
+dedicado, y también el motivo por el que la compatibilidad muere justo ahí. El
+chip implementa una *lista fija* de formatos, congelada el día en que se diseñó
+el hardware. H.264 está en todas las listas. H.265 —también llamado HEVC, y cada
+vez más común porque transporta la misma imagen con bastante menos ancho de
+banda— está en la mayoría de las modernas y falta en muchos aparatos antiguos.
+Métodos más nuevos como AV1 faltan en casi todos.
+
+Cuando llega un flujo en un formato que el chip no implementa, la pista de audio
+pasa sin problemas y la de vídeo se detiene en seco. De ahí la pantalla negra con
+un sonido impecable.
+
+Hay una variante más sutil que conviene conocer, porque explica los casos en que
+un canal HEVC se ve y el siguiente no. La compatibilidad de un chip nunca es
+simplemente «HEVC»: cubre un *perfil* y un *nivel* concretos, es decir, una
+profundidad de color, un techo de resolución y un techo de fotogramas por
+segundo. Un flujo de 10 bits en un decodificador de 8 bits, o 4K en un chip
+especificado hasta 1080p, se rechaza con la misma rotundidad que un formato
+desconocido. Y algunos chips aceptan el flujo, informan de que todo va bien y
+después no producen nada en absoluto.
+
+## El arreglo que no debería ser tarea tuya
+
+Siempre hay una alternativa: el procesador de propósito general puede decodificar
+cualquier formato por software si le sobran ciclos. Cuesta batería, calienta el
+aparato y en una caja modesta puede no dar abasto con un flujo de alta
+resolución. Pero funciona cuando el chip se niega.
+
+Así que la solución se conoce. El problema es que el *diagnóstico* se ha
+descargado históricamente sobre el espectador, en forma de un ajuste de
+decodificador en un menú: una elección que te pide saber algo que no tienes
+manera de saber, sobre un chip cuya ficha técnica no has visto nunca, y con una
+pantalla negra delante.
+
+Vidonzo lo trata como trabajo del reproductor. La decodificación por hardware
+está activada por defecto, porque casi siempre es la respuesta correcta: es más
+rápida y consume muchísima menos energía. Lo importante es qué ocurre cuando es
+la respuesta equivocada. El reproductor vigila dos cosas a la vez: si están
+llegando bytes y si se ha producido algún fotograma. Juntas, esas dos señales no
+son ambiguas. Datos sin imagen es un problema del decodificador y de nada más;
+ningún dato es un fallo de red disfrazado con la misma pantalla negra, y ahí el
+decodificador es inocente.
+
+Cuando el primer patrón se mantiene unos segundos, el reproductor baja un peldaño
+a decodificación por software y vuelve a abrir el flujo por su cuenta. Sin
+diálogo, sin preguntas, sin menús: el texto de carga se limita a decir que sigue
+ajustando. Si un segundo flujo necesita el mismo rescate, la sesión deja de
+reaprender la lección en cada cambio de canal y arranca ya en el peldaño de
+abajo. Esa memoria deliberadamente **no** es permanente: un flujo problemático no
+debe condenar tu GPU para siempre, así que un arranque nuevo empieza arriba del
+todo y solo baja si le toca.
+
+El interruptor de **Ajustes → Reproducción → Decodificación por hardware** sigue
+ahí, para ese aparato raro cuyo chip lo acepta todo y no dibuja nada. No es un
+ajuste que debieras necesitar.
+
+## Leer tú mismo las pruebas
+
+El botón de información de los controles abre **Información del stream**, que es
+la versión corta de todo lo anterior:
+
+- **Códec** — qué son realmente las pistas de vídeo y audio. Si aquí pone HEVC en
+  un aparato de hace unos años, ya tienes la explicación.
+- **Decodificador** — qué camino está haciendo el trabajo ahora mismo. Ver
+  «software» significa que la escalera ya rescató este flujo.
+- **Resolución y fotogramas** — las cifras que deciden si la decodificación por
+  software puede seguir el ritmo.
+- **Bitrate y búfer** — el lado de la red, para
+  [distinguir un fallo de decodificación de una conexión hambrienta](/es/blog/solucionar-cortes-iptv/).
+
+Decodificar 1080p por software va bien en un móvil moderno y va justo en un
+dongle de televisión barato. Si la imagen está pero da tirones y el decodificador
+dice «software», estás viendo a un procesador perder una carrera: el fallo
+simplemente se ha movido un paso más allá.
+
+## El síntoma espejo
+
+Imagen sin sonido es la misma historia contada al revés. La causa habitual son
+los formatos de audio multicanal: un flujo con sonido envolvente en un aparato
+que solo entiende estéreo, o un televisor que pasa el audio a una barra de sonido
+que no acepta ese formato. La solución suele ser otra pista de audio, si el flujo
+la ofrece: el mismo
+[selector de pistas](/es/blog/subtitulos-y-pistas-de-audio-iptv/) que cambia de
+idioma.
+
+## Cuándo no es el códec
+
+Dos fallos se le parecen y no lo son:
+
+- **Pantalla negra y ningún sonido.** No se decodificó nada porque no llegó nada.
+  Eso es [el flujo o el camino hasta él](/es/blog/la-lista-no-carga/), no el
+  decodificador; y si solo pasa en ciertas habitaciones,
+  [el sospechoso es la radio](/es/blog/iptv-se-congela-por-wifi/).
+- **Todo se reproduce, pero la lista es ilegible.** Eso es texto, no vídeo:
+  [un problema de codificación de caracteres en el archivo](/es/blog/nombres-de-canales-ilegibles/).
+
+Un fallo de decodificación tiene una firma concreta: un flujo que abre, un búfer
+que se llena, un audio que suena y una imagen que nunca aparece.
+
+## Qué significa esto al elegir aparato
+
+Si un flujo concreto falla en tu caja de televisión y se ve en el móvil, el flujo
+está bien y la caja es vieja. Conviene saberlo antes de dedicar una tarde a los
+ajustes: los decodificadores por hardware no se actualizan, porque son silicio,
+no software.
+
+Es también el mejor argumento a favor de un reproductor que se adapta en silencio
+en lugar de uno que te planta un menú de decodificadores.
+[En un televisor](/es/blog/reproductor-iptv-en-android-tv/), donde toda la
+interfaz se maneja con una cruceta a tres metros, una pregunta modal sobre
+decodificación de vídeo no es una función. El trabajo del reproductor es
+[leer tu lista, traer el flujo y dibujar la imagen](/es/blog/que-hace-un-reproductor-iptv/),
+incluido cuando la forma obvia de dibujarla resulta no funcionar.
