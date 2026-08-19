@@ -1,0 +1,113 @@
+---
+title: "Danh sách phát không tải được: năm kiểu hỏng và ý nghĩa từng kiểu"
+description: "Bạn dán đường dẫn vào, ứng dụng nghĩ một lúc rồi hiện ra một lỗi chẳng nói lên điều gì. Đằng sau dòng chữ ấy là năm hỏng hóc khác nhau, mỗi cái một dấu hiệu riêng."
+urlSlug: danh-sach-phat-khong-tai-duoc
+publishedAt: 2026-08-19
+sourceLocale: tr
+tags: ['khắc phục sự cố', 'danh sách phát']
+keywords: ['danh sách iptv không tải được', 'link m3u không chạy', 'lỗi đăng nhập xtream', 'iptv không nạp được danh sách']
+heroImageAlt: "Màn hình thêm danh sách phát, bên dưới là một cảnh báo giải thích vì sao việc tải bị dừng."
+---
+
+Bạn dán đường dẫn nhà cung cấp đưa, ứng dụng nghĩ một lúc, rồi một lỗi ngắn hiện
+ra. Nội dung thông báo hiếm khi giúp được gì. Câu hỏi thật sự là: lỗi ở bạn, ở
+mạng của bạn, hay ở nhà cung cấp?
+
+Có năm kiểu hỏng. Nhìn từ ngoài chúng giống nhau cả, và mỗi kiểu đều có dấu
+hiệu riêng. Đoán trúng ngay từ đầu nhanh hơn nhiều so với đập đi làm lại toàn bộ
+thiết lập.
+
+## 1. Thông tin đăng nhập bị từ chối
+
+**Dấu hiệu:** thất bại ngay lập tức. Không phải chờ.
+
+Máy chủ đã được liên lạc, và máy chủ nói không. Vậy là mạng của bạn ổn; vấn đề
+nằm ở tài khoản. Theo mức độ hay gặp:
+
+- **Gõ sai mật khẩu.** Hãy gõ thay vì dán. Một dấu cách lỡ dính vào khi sao chép
+  thì bạn không thấy, nhưng với máy chủ đó là một mật khẩu khác.
+- **Gói cước đã hết hạn.** Tài khoản Xtream kết thúc vào một ngày cụ thể, và sau
+  ngày đó không một kênh nào mở được.
+- **Bạn vượt giới hạn thiết bị.** Phần lớn nhà cung cấp giới hạn số thiết bị
+  được phát cùng lúc. Một luồng bị bỏ quên vẫn chạy trên tivi là nguyên nhân
+  phổ biến đến bất ngờ của lỗi "người dùng không hợp lệ" trên điện thoại. Hãy
+  đăng xuất ở thiết bị kia rồi thử lại.
+
+Đọc lại cả địa chỉ máy chủ nữa:
+[bạn được cấp kiểu kết nối nào](/vi/blog/xtream-codes-hay-m3u/) sẽ quyết định một địa
+chỉ đúng trông ra sao.
+
+## 2. Không hề chạm tới máy chủ
+
+**Dấu hiệu:** chờ rất lâu, rồi hết thời gian. Lỗi đến muộn.
+
+Lần này chẳng ai nói không — chẳng ai trả lời cả.
+
+- **Thiếu cổng.** Đa số bảng điều khiển Xtream không chạy trên cổng 80. Địa chỉ
+  phải là `http://example.com:8080`, không phải `http://example.com`, và nếu nhà
+  cung cấp có đưa cổng thì bạn phải điền vào.
+- **Mạng của bạn chặn nhà cung cấp.** Nếu hỏng trên Wi-Fi, hãy thử đúng danh
+  sách ấy bằng dữ liệu di động. Kết quả khác nhau nghĩa là lỗi nằm ở kết nối chứ
+  không phải ở danh sách. Để xử lý lâu dài, hãy đặt một proxy trong
+  **Cài đặt → Proxy**.
+- **Địa chỉ không còn nữa.** Nhà cung cấp đổi tên miền rồi khai tử cái cũ. Bên
+  bạn không sửa được gì; hãy hỏi xin địa chỉ hiện hành.
+
+## 3. Tải xong nhưng rỗng không
+
+**Dấu hiệu:** không lỗi, thanh tiến trình chạy hết, rồi chẳng có kênh nào.
+
+Ứng dụng có nhận được thứ gì đó — nhưng thứ nhận được không phải danh sách phát.
+Có hai biến thể:
+
+- **Máy chủ trả về trang báo lỗi thay vì danh sách.** Trông như đường dẫn đã
+  chạy, vì về mặt kỹ thuật có phản hồi trở về; văn bản bên trong là một trang
+  thông báo. Mở đường dẫn ấy bằng trình duyệt và xem dòng đầu tiên có phải
+  `#EXTM3U` không sẽ giải quyết trong vài giây —
+  [dòng đầu tiên ấy nói gì](/vi/blog/ben-trong-tep-m3u/) chính là chỗ dùng đến.
+- **Gói cước hết hạn và bảng điều khiển gửi ra danh sách rỗng.** Vài bảng điều
+  khiển đáp lại tài khoản hết hạn bằng một danh sách hợp lệ không chứa kênh nào,
+  chứ không bằng một lỗi. Nhìn thì y hệt trường hợp trên.
+
+## 4. Không thiết lập được kết nối an toàn
+
+**Dấu hiệu:** chỉ xảy ra với địa chỉ `https`. Mọi thứ qua `http` đều chạy.
+
+Đây là thứ chẳng ai ngờ tới và lại dễ sửa nhất: **đồng hồ của máy chạy sai.**
+Việc thiết lập một kết nối mã hóa bao gồm kiểm tra xem chứng chỉ của máy chủ còn
+hiệu lực hay không, và phép kiểm tra ấy tin vào đồng hồ trên máy bạn. Nếu ngày
+tháng lệch đi vài hôm, mọi chứng chỉ đều trông như không hợp lệ và kết nối bị từ
+chối mà chẳng có lời giải thích nào ra hồn.
+
+Hãy đặt ngày giờ về chế độ tự động rồi thử lại danh sách.
+
+## 5. Danh sách mở được, kênh thì không
+
+**Dấu hiệu:** tên, nhóm, logo đều đủ cả. Nhưng không gì phát được.
+
+Đây không còn là chuyện của danh sách phát nữa. Danh sách phát là văn bản chứa
+tên và địa chỉ, còn [việc của trình phát](/vi/blog/trinh-phat-iptv-lam-gi/) là kết
+nối tới địa chỉ đó. Nếu bạn đọc được tên, danh sách đã về đúng — thứ đang hỏng là
+đầu bên kia của các địa chỉ.
+
+Hãy thử hai ba kênh khác nhau. Nếu **tất cả** đều hỏng thì rào cản nằm ở tài
+khoản hoặc mạng. Nếu **một** kênh hỏng thì luồng ấy đã chết ở nhà cung cấp và
+không gì trong ứng dụng cứu nổi. Còn nếu phát được nhưng cứ đứt quãng thì đó là
+chuyện hoàn toàn khác, và nó nằm
+[trên đường đi giữa bạn và máy chủ](/vi/blog/khac-phuc-iptv-giat-lag/).
+
+## Phân biệt cho nhanh
+
+Ba câu hỏi, ba phút:
+
+1. **Lỗi đến ngay hay đến sau một hồi chờ?** Ngay lập tức là kiểu một; sau khi
+   chờ là kiểu hai.
+2. **Dữ liệu di động có khác không?** Nếu có, lỗi nằm ở mạng.
+3. **Kéo xuống để làm mới ở màn hình chính thì sao?** Thao tác đó đọc lại nguồn
+   thay vì danh mục đã lưu, nên bất cứ thứ gì được sửa ở phía nhà cung cấp sẽ
+   hiện ra ở đấy trước tiên.
+
+Nếu sau chừng ấy vẫn tắc, hãy viết cho nhà cung cấp trước khi
+[dựng lại thiết lập từ đầu](/vi/blog/cai-dat-danh-sach-phat-dau-tien/). Bốn trong năm kiểu
+hỏng ở trên không thể sửa từ phía bạn, và hỏi đúng câu còn nhanh hơn lặp lại
+toàn bộ quá trình cài đặt.

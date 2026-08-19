@@ -1,0 +1,106 @@
+---
+title: "Een afspeellijst op een URL of een bestand op je toestel: wat blijft actueel"
+description: "Eenmaal geladen zien ze er identiek uit, en ze zijn totaal niet hetzelfde. De een vraagt elke keer opnieuw; de ander is bevroren op het moment dat je hem kreeg."
+urlSlug: afspeellijst-url-of-bestand-op-je-toestel
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['afspeellijsten', 'instellen']
+keywords: ['m3u afspeellijst automatisch bijwerken', 'iptv afspeellijst wordt niet bijgewerkt', 'm3u link of m3u bestand', 'kanaallijst actueel houden']
+heroImageAlt: "Twee invoervelden voor een afspeellijst naast elkaar, een met een webadres en een met de naam van een bestand op het toestel."
+---
+
+Er zijn drie manieren om Vidonzo een afspeellijst te geven:
+Xtream Codes-gegevens, een M3U-link, of een M3U-bestand dat al op je toestel
+staat.
+
+Die laatste twee lijken na het laden bijna hetzelfde. Dezelfde kanalen, dezelfde
+categorieën, hetzelfde afspelen. Maar ze verschillen op één punt dat daarna
+behoorlijk wat beslist: **of de lijst ooit uit zichzelf kan veranderen.**
+
+## Een bestand is een momentopname
+
+Kies je een bestand van het toestel, dan is wat Vidonzo leest dat ene stuk
+tekst. [De inhoud van een afspeellijst](/nl/blog/in-een-m3u-bestand/) bestaat uit namen
+en adressen en verder niets — nergens zit er een levende verbinding met je
+aanbieder in.
+
+Een bestand is dus bevroren op het moment waarop je het ontving:
+
+- Kanalen die de aanbieder later toevoegt, zitten er niet in.
+- Kanalen waarvan de aanbieder het adres wijzigt, gaan gewoon niet meer open.
+- Categorieën die bij de bron zijn geherstructureerd, houden op jouw toestel hun
+  oude vorm.
+
+Er is precies één manier om hem vooruit te helpen: een nieuwer bestand
+bemachtigen en het oude zelf vervangen.
+
+## Een URL is een vraag die elke keer opnieuw wordt gesteld
+
+Registreer een M3U-link en wat Vidonzo bewaart is niet de kanaallijst, maar het
+**adres**. Elke ophaalactie levert wat daar op dat moment staat.
+
+- De eerste keer laden leest de hele catalogus en zet logo's en categorieën in
+  elkaar. Dat is het trage deel, eenmalig.
+- Elke keer daarna opent hij direct vanuit de bewaarde catalogus terwijl er op
+  de achtergrond wordt ververst.
+- Omlaag trekken op het beginscherm leest de bron opnieuw in plaats van de
+  cache. Elke wijziging aan de kant van de aanbieder verschijnt daar het eerst.
+
+Xtream-panelen leveren een `get.php`-link soms in een uitgeklede vorm zonder
+logo's of groepen. Vidonzo leest stilletjes de vollere variant, zodat je de link
+niet zelf hoeft te bewerken om afbeeldingen te krijgen.
+
+## Verwar de URL niet met de versheid
+
+Hier gaat het mis in de hoofden van mensen. Een URL registreren garandeert niet
+dat er iets wordt bijgewerkt. **De versheid komt van het verre eind van de
+link.**
+
+Een URL die wijst naar een bestand dat niemand onderhoudt, is precies even oud
+als een bestand op je toestel. Wat de URL je oplevert is de *mogelijkheid* dat er
+verandering binnenkomt — hij brengt de verandering niet voort.
+
+Wil je een bron die echt in beweging blijft, dan past
+[de Xtream-verbinding](/nl/blog/xtream-codes-of-m3u/) beter. Die levert de catalogus
+via een API in plaats van als plat bestand, zodat categorieën, series en
+programmagids al gestructureerd binnenkomen.
+
+## Kiezen tussen de twee
+
+**Een URL past bij je wanneer:**
+
+- Je aanbieder kanalen toevoegt en weghaalt en je wilt meebewegen.
+- De kopregel een `url-tvg`-adres draagt, zodat
+  [de gids meereist met de lijst](/nl/blog/epg-uitgelegd-programmagids/).
+- Je dezelfde lijst op meerdere toestellen gebruikt. Verander hem op één plek en
+  ze zijn het allemaal eens.
+
+**Een bestand past bij je wanneer:**
+
+- Je de lijst wilt bewerken. Het is tekst op je toestel — verwijder regels,
+  verander de volgorde, hernoem dingen.
+- Je niets naar het netwerk wilt sturen. In deze modus verlaat de lijst het
+  toestel nooit.
+- Je aanbieder je alleen maar een bestand heeft gegeven. Gebruik het dan gewoon.
+- Je [verminkte kanaalnamen aan het repareren
+  bent](/nl/blog/kanaalnamen-vol-vreemde-tekens/). Het kunnen openen en terug opslaan als UTF-8
+  is iets dat alleen een lokaal bestand toestaat.
+
+## Behandel de URL als een wachtwoord
+
+Nog één ding. Een M3U-link draagt de inloggegevens meestal ingebakken in het
+adres zelf. **Wie die link heeft, heeft jouw abonnement.**
+
+Daarom is het niets om te delen, en daarom bestaat er
+[een norm voor hoe hij bewaard
+hoort te worden](/nl/blog/waarom-een-speler-inloggegevens-versleutelt/). Hem in een chat
+plakken, op een forum zetten, zichtbaar laten op een schermafbeelding — elk
+daarvan is een wachtwoord weggeven.
+
+---
+
+De keuze gaat dus niet over welke optie meer kan. **Neem de URL als je wilt dat
+veranderingen je bereiken; neem het bestand als je wilt dat de lijst volledig in
+jouw handen blijft.** Het
+[instellen](/nl/blog/eerste-afspeellijst-instellen/) biedt allebei, en niets houdt je
+tegen om er van elk één naast elkaar te bewaren.

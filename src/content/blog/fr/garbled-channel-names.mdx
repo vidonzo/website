@@ -1,0 +1,114 @@
+---
+title: "Pourquoi les noms de vos chaînes arrivent en symboles incompréhensibles"
+description: "La vidéo est parfaite et seule la liste est illisible. Ce n’est pas un problème de qualité : c’est un fichier texte dont personne n’a déclaré l’encodage."
+urlSlug: noms-de-chaines-illisibles
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlists', 'depannage']
+keywords: ['noms de chaines iptv illisibles', 'encodage fichier m3u', 'playlist iptv caracteres bizarres', 'm3u8 utf-8 accents']
+heroImageAlt: "La même liste de chaînes affichée deux fois, une fois avec des noms réduits à des symboles et une fois correctement."
+---
+
+La playlist se charge. Les chaînes se lancent. Et pourtant ce que vous lisez
+ressemble à `TÃ©lÃ© Une` ou à une longue suite de points d’interrogation, et
+rien ne permet de savoir quelle ligne correspond à quelle chaîne.
+
+Les flux vont bien. Ce qui est cassé, c’est le **texte** — et le texte se
+répare bien plus facilement que la vidéo.
+
+## Une playlist n’est que du texte
+
+Une playlist M3U est un index en texte brut : des noms et des adresses. Tout ce
+que [fait un lecteur avec elle](/fr/blog/ce-que-fait-un-lecteur-iptv/) consiste à lire
+ces lignes, construire la liste et se connecter à l’adresse de la ligne que
+vous avez choisie.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Chaîne Une",Chaîne Une
+http://example.com/live/one.ts
+```
+
+Et voici ce qui piège tout le monde : **un fichier texte ne déclare pas
+lui-même l’encodage dans lequel il a été écrit.** Ce qu’il contient est une
+suite d’octets. La table de caractères par laquelle relire ces octets est une
+décision que doit prendre celui qui lit. Prenez la mauvaise table et les mêmes
+octets deviennent d’autres lettres. Tout est là.
+
+## Quelle table le lecteur utilise
+
+Vidonzo lit les playlists en **UTF-8** — la référence actuelle pour le texte
+dans toutes les langues, et précisément ce que l’extension `.m3u8`
+[existe pour déclarer](/fr/blog/m3u-ou-m3u8/).
+
+La suite dépend de la manière dont vous avez fourni la liste :
+
+- **Une URL de playlist.** Le serveur déclare avec sa réponse l’encodage du
+  contenu qu’il envoie. Quand la déclaration est juste, rien ne dérape. Des
+  noms abîmés signifient qu’elle manquait, ou qu’elle contredisait les octets
+  réels.
+- **Un fichier sur l’appareil.** Là, personne ne déclare quoi que ce soit : il
+  est lu comme de l’UTF-8. Un fichier enregistré dans un ancien encodage
+  régional peut ne pas seulement mal s’afficher — il peut refuser de se
+  charger.
+
+Vidonzo ne cherche pas à deviner l’encodage, et c’est délibéré. La détection
+automatique reste une supposition ; elle échoue surtout sur les alphabets non
+latins qui en auraient le plus besoin, et elle échoue de la pire façon :
+**juste sur une partie de la liste et fausse sur le reste.** Une liste à moitié
+correcte est plus déroutante qu’une liste manifestement cassée.
+
+## Lire le symptôme
+
+Le texte se casse de façons caractéristiques : le symptôme nomme donc la cause.
+
+- **`Ã©`, `Ã¨`, `Ã§` à la place des accents** — des octets UTF-8 lus à travers
+  une table d’Europe occidentale. Le grand classique en français, en turc, en
+  polonais ou en vietnamien.
+- **De longues suites de symboles sans rapport** — des octets UTF-8 lus à
+  travers une table régionale qui n’a rien à voir avec ce texte.
+- **`????` ou `___`** — les caractères ont été jetés lors d’une conversion en
+  amont. Rien en aval ne peut les ramener : il faut récupérer la liste à
+  nouveau.
+- **Des rangées de carrés vides** — ce n’est **pas** un problème d’encodage.
+
+Ce dernier cas mérite d’être mis à part. Des carrés vides signifient que les
+caractères ont été décodés parfaitement et que l’appareil n’a simplement pas de
+police capable de les dessiner. Autre cause, autre remède — celui-là relève
+[du côté affichage](/fr/blog/regarder-dans-votre-langue/).
+
+## L’ordre à suivre
+
+1. **Demandez le lien `.m3u8`.** Si votre fournisseur publie les deux, prenez
+   celui-là. Les chaînes derrière sont identiques ; seul le traitement du texte
+   change. C’est la solution la moins coûteuse et elle suffit le plus souvent.
+2. **Relisez la playlist.** Tirez vers le bas sur l’écran d’accueil pour que
+   l’application récupère la source au lieu d’afficher le catalogue en cache.
+   Après avoir changé de lien, sauter cette étape laisse l’ancienne liste en
+   place.
+3. **Réenregistrez un fichier local en UTF-8.** Ouvrez-le dans un éditeur de
+   texte, réglez l’encodage sur UTF-8, enregistrez et
+   [ajoutez-le de nouveau](/fr/blog/configurer-sa-premiere-playlist/). Si les noms
+   reviennent, le diagnostic est confirmé.
+4. **Passez à la connexion Xtream.** Lorsque le fournisseur donne aussi un
+   identifiant et un mot de passe, [cette voie](/fr/blog/xtream-codes-ou-m3u/) livre
+   le catalogue par une API plutôt que par un fichier texte : la question de
+   l’encodage ne se pose plus.
+
+## Quand seuls certains noms sont cassés
+
+Si, après tout cela, une poignée de chaînes reste illisible, l’encodage n’est
+plus en cause : le fournisseur les a saisies ainsi à la source. Aucun lecteur ne
+peut récupérer un texte qui était déjà faux au moment où il a été écrit.
+
+Dans ce cas, cessez d’essayer de les lire et
+[mettez plutôt en favoris celles que vous
+regardez](/fr/blog/organiser-une-grande-playlist/). Un nom n’a pas besoin d’être lisible
+pour qu’on se souvienne où il se trouve.
+
+---
+
+Des noms illisibles ne sont pas un défaut du lecteur. C’est un vieux piège très
+ordinaire du transport de texte entre systèmes qui ne s’accordent pas sur
+l’alphabet. Choisissez `.m3u8`, gardez vos fichiers en UTF-8, et votre liste
+reste lisible dans n’importe quelle langue.

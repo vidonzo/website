@@ -1,0 +1,103 @@
+---
+title: "Playlista pod adresem czy plik na urządzeniu: która pozostaje aktualna"
+description: "Po wczytaniu wyglądają identycznie, a wcale nie są tym samym. Jedna pyta na nowo za każdym razem; druga zamarła w chwili, w której ją otrzymałeś."
+urlSlug: link-do-playlisty-czy-plik-na-urzadzeniu
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlisty', 'konfiguracja']
+keywords: ['playlista m3u automatyczna aktualizacja', 'playlista iptv się nie aktualizuje', 'link m3u czy plik m3u', 'utrzymanie aktualnej listy kanałów']
+heroImageAlt: "Dwa pola dodawania playlisty obok siebie: w jednym adres internetowy, w drugim nazwa pliku na urządzeniu."
+---
+
+Playlistę można podać Vidonzo na trzy sposoby: danymi Xtream Codes, odnośnikiem
+M3U albo plikiem M3U leżącym już na urządzeniu.
+
+Dwa ostatnie po wczytaniu wyglądają niemal tak samo. Te same kanały, te same
+kategorie, to samo odtwarzanie. Różnią się jednak w jednym punkcie, który
+przesądza potem o bardzo wielu rzeczach: **czy lista w ogóle może zmienić się
+sama.**
+
+## Plik jest migawką
+
+Kiedy wybierasz plik z urządzenia, Vidonzo czyta dokładnie ten jeden kawałek
+tekstu. [Zawartość playlisty](/pl/blog/co-jest-w-pliku-m3u/) to nazwy i adresy i nic
+poza tym — nigdzie w niej nie ma żywego połączenia z dostawcą.
+
+Plik jest więc zamrożony w chwili, w której go otrzymałeś:
+
+- Kanałów dodanych przez dostawcę później po prostu w nim nie ma.
+- Kanały, którym dostawca zmieni adresy, przestają się otwierać.
+- Kategorie przeorganizowane u źródła zachowują na twoim urządzeniu dawny
+  kształt.
+
+Jest dokładnie jeden sposób, by ruszyć go naprzód: zdobyć nowszy plik i samemu
+zastąpić stary.
+
+## Odnośnik to pytanie zadawane od nowa za każdym razem
+
+Zarejestruj odnośnik M3U, a Vidonzo zapamięta nie listę kanałów, lecz **adres**.
+Każde pobranie zwraca to, co jest tam w danej chwili.
+
+- Pierwsze wczytanie czyta cały katalog i składa logotypy oraz kategorie. To ta
+  wolna część, jednorazowo.
+- Każde następne otwiera się natychmiast z zapisanego katalogu, a odświeżanie
+  biegnie w tle.
+- Pociągnięcie w dół na ekranie głównym czyta źródło na nowo zamiast pamięci
+  podręcznej. Cokolwiek zmieniono u dostawcy, pojawi się tam najpierw.
+
+Panele Xtream czasem wydają odnośnik `get.php` w okrojonej postaci, bez logotypów
+i grup. Vidonzo po cichu czyta pełniejszy wariant, więc nie musisz sam edytować
+odnośnika, żeby dostać grafiki.
+
+## Nie myl odnośnika ze świeżością
+
+Tu ludzie się mylą. Zarejestrowanie odnośnika niczego nie gwarantuje.
+**Świeżość przychodzi z drugiego końca odnośnika.**
+
+Odnośnik wskazujący plik, którego nikt nie utrzymuje, jest dokładnie tak samo
+stary jak plik leżący na twoim urządzeniu. To, co kupujesz odnośnikiem, to
+*możliwość* nadejścia zmiany — sam odnośnik zmiany nie wytwarza.
+
+Jeśli chcesz źródła, które naprawdę pozostaje w ruchu, lepiej pasuje
+[połączenie Xtream](/pl/blog/xtream-codes-czy-m3u/). Dostarcza katalog przez API, a nie
+jako płaski plik, więc kategorie, seriale i program telewizyjny przychodzą już
+uporządkowane.
+
+## Wybór między nimi
+
+**Odnośnik pasuje do ciebie, gdy:**
+
+- Dostawca dodaje i usuwa kanały, a ty chcesz za tym nadążać.
+- Nagłówek niesie adres `url-tvg`, dzięki czemu
+  [program telewizyjny podróżuje razem z listą](/pl/blog/epg-jak-dziala-program-telewizyjny/).
+- Używasz tej samej listy na kilku urządzeniach. Zmieniasz w jednym miejscu, a
+  wszystkie się zgadzają.
+
+**Plik pasuje do ciebie, gdy:**
+
+- Chcesz listę edytować. To tekst na twoim urządzeniu — usuwaj wiersze, zmieniaj
+  kolejność, przemianowuj.
+- Nie chcesz, by cokolwiek szło do sieci. W tym trybie lista nigdy nie opuszcza
+  urządzenia.
+- Dostawca dał ci wyłącznie plik. To go po prostu użyj.
+- [Naprawiasz zniekształcone nazwy kanałów](/pl/blog/nazwy-kanalow-w-krzakach/).
+  Możliwość otwarcia go i zapisania z powrotem w UTF-8 daje tylko plik lokalny.
+
+## Traktuj odnośnik jak hasło
+
+Ostatnia rzecz. Odnośnik M3U zwykle niesie dane dostępu wpisane wprost w adres.
+**Kto ma ten odnośnik, ma twój abonament.**
+
+Dlatego nie jest to coś do udostępniania i dlatego istnieje
+[norma tego, jak powinien być
+przechowywany](/pl/blog/dlaczego-szyfrowac-dane-logowania/). Wklejenie go na czacie,
+opublikowanie na forum, pozostawienie widocznym na zrzucie ekranu — każde z tych
+działań to oddanie hasła.
+
+---
+
+Wybór nie dotyczy więc tego, która opcja więcej potrafi. **Weź odnośnik, jeśli
+chcesz, by zmiany do ciebie docierały; weź plik, jeśli chcesz, by lista została
+w całości w twoich rękach.**
+[Konfiguracja](/pl/blog/jak-dodac-pierwsza-playliste/) oferuje oba i nic nie stoi na
+przeszkodzie, byś trzymał po jednym z każdego obok siebie.

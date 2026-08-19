@@ -1,0 +1,132 @@
+---
+title: "Dans un fichier M3U : ce que dit vraiment chaque ligne"
+description: "Ouvrez-le une fois dans un éditeur de texte et le mystère s’évapore. Quatre types de lignes, une poignée d’attributs, et chacun explique quelque chose que vous avez déjà vu dans un lecteur."
+urlSlug: dans-un-fichier-m3u
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'technique']
+keywords: ['fichier m3u c est quoi', 'format fichier m3u', 'extinf explication', 'm3u tvg-id group-title']
+heroImageAlt: "Quelques lignes de texte d’une playlist M3U avec l’en-tête, la ligne de description et l’adresse du flux mises en évidence."
+---
+
+Le fichier M3U passe pour technique, réputation qu’il ne mérite pas. C’est l’un
+des formats les plus simples encore en usage quotidien : une liste de noms, une
+liste d’adresses et quelques annotations facultatives. Vous pouvez le lire dans
+un éditeur de texte, et dès que c’est fait, beaucoup de comportements du lecteur
+cessent de paraître arbitraires.
+
+Voici une playlist complète et fonctionnelle. Deux chaînes, rien d’omis.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Info",Chaîne Une
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Sport",Chaîne Deux
+http://example.com/live/two.ts
+```
+
+Voilà tout le format. Ce qui suit est une visite guidée de ces cinq lignes.
+
+## L’en-tête
+
+```
+#EXTM3U
+```
+
+La première ligne doit être exactement celle-ci, et son unique rôle est
+d’annoncer « ce qui suit est un M3U étendu ». Un fichier qui en est dépourvu se
+chargera peut-être quand même, mais le lecteur n’a aucune raison d’attendre les
+lignes de description qui viennent ensuite.
+
+L’en-tête est aussi l’endroit où une playlist peut désigner son propre guide des
+programmes :
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (ou `x-tvg-url`, qui signifie la même chose) nomme un fichier XMLTV —
+[un document distinct, avec son propre calendrier](/fr/blog/epg-guide-des-programmes/) — qui
+fournit ce qui passe maintenant et ensuite. Quand une playlist le porte et que le
+guide n’apparaît toujours pas, vous savez au moins lequel des deux fichiers
+incriminer.
+
+## La ligne de description
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Info",Chaîne Une
+```
+
+`#EXTINF` introduit une entrée. Lisez-la en trois morceaux.
+
+**Le nombre.** Juste après les deux-points vient une durée en secondes. Pour la
+télévision en direct, c’est `-1`, autrement dit « pas de durée fixe » : le flux
+continue, simplement. Pour un film, vous pouvez voir un vrai nombre.
+
+**Les attributs.** Des paires facultatives `clé="valeur"`. Celles qui comptent :
+
+- **`tvg-id`** — l’identifiant qui relie cette chaîne à un programme du guide
+  XMLTV. C’est de loin la raison la plus fréquente pour qu’un guide se charge
+  sans rien afficher : la playlist et le guide ne s’accordent pas sur
+  l’identifiant, donc rien ne correspond.
+- **`tvg-name`** — le nom de la chaîne à des fins d’appariement avec le guide,
+  qui n’est pas toujours celui affiché à l’écran.
+- **`tvg-logo`** — l’adresse du logo de la chaîne. Ce sont des images récupérées
+  sur le réseau, une par chaîne, et c’est pourquoi une grande liste met un
+  instant à paraître complète la première fois.
+- **`group-title`** — la catégorie sous laquelle la chaîne est rangée. Chaque
+  en-tête de catégorie que vous faites défiler dans un lecteur a été tapé ici,
+  par votre fournisseur, chaîne après chaîne. C’est aussi pourquoi
+  [il vaut la peine de dompter les catégories
+  soi-même](/fr/blog/organiser-une-grande-playlist/).
+
+**Le nom affiché.** Après la virgule, tout ce qui court jusqu’à la fin de la
+ligne est le nom que vous voyez réellement. C’est du texte brut sans guillemets,
+si bien qu’une virgule dans un nom de chaîne est un vrai piège du format.
+
+## L’adresse
+
+```
+http://example.com/live/one.ts
+```
+
+La ligne qui suit immédiatement `#EXTINF` est là où vit la vidéo. C’est la seule
+ligne du fichier qui touche au réseau au moment de la lecture, et elle décide
+[du comportement du flux](/fr/blog/protocoles-de-streaming-expliques/) : une adresse en
+`.m3u8` est un flux HLS livré en segments, une adresse en `.ts` un flux de
+transport continu.
+
+Deux conséquences utiles. D’abord, une entrée avec une ligne de description mais
+sans adresse est invisible, car il n’y a rien à lire. Ensuite, une playlist qui
+se charge parfaitement pendant que toutes les chaînes échouent est une playlist
+dont les noms vont bien et dont les adresses sont mortes — un problème
+[chez le fournisseur, pas dans le lecteur](/fr/blog/ce-que-fait-un-lecteur-iptv/).
+
+## Ce qui ne s’y trouve pas
+
+Ce que le format ne peut pas contenir est tout aussi instructif :
+
+- **Aucune vidéo.** Une playlist de quarante mille chaînes, c’est quelques
+  mégaoctets de texte. Pas une seule image dedans.
+- **Aucun identifiant de connexion en clair.** Là où des identifiants sont
+  nécessaires, ils sont généralement intégrés aux adresses elles-mêmes, et c’est
+  pourquoi un lien de playlist doit être traité comme un mot de passe.
+- **Aucune connexion vivante.** Le fichier est un instantané de ce qui existait
+  au moment où vous l’avez récupéré. Les chaînes ajoutées ensuite n’y sont pas :
+  c’est la vraie différence avec
+  [l’API Xtream Codes](/fr/blog/xtream-codes-ou-m3u/) et la raison pour laquelle
+  [l’endroit où vit la liste compte](/fr/blog/lien-de-playlist-ou-fichier-local/).
+- **Aucun alphabet déclaré.** Rien dans le format n’indique son propre encodage,
+  et c’est exactement pour cela que
+  [les noms de chaînes arrivent parfois en
+  symboles](/fr/blog/noms-de-chaines-illisibles/).
+
+## Lire la vôtre
+
+Si une liste se comporte bizarrement, ouvrez-la et regardez. Un `#EXTM3U`
+manquant, un `group-title` vide sur toutes les lignes, un `tvg-id` absent
+partout, un nom avec une virgule égarée : chacun a une signature distincte dans
+le lecteur, et chacun se repère en une dizaine de secondes de lecture.
+
+Le format est assez petit pour tenir entier dans la tête. C’est rare, et cela
+vaut la peine d’en profiter.

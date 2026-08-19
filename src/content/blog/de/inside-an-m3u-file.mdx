@@ -1,0 +1,131 @@
+---
+title: "In einer M3U-Datei: was jede Zeile tatsächlich sagt"
+description: "Einmal im Texteditor geöffnet, hört das Rätselhafte auf. Vier Arten von Zeilen, eine Handvoll Attribute — und jedes davon erklärt etwas, das Sie im Player schon gesehen haben."
+urlSlug: was-in-einer-m3u-datei-steht
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['playlists', 'technik']
+keywords: ['was ist eine m3u datei', 'm3u dateiformat', 'extinf erklärt', 'm3u tvg-id group-title']
+heroImageAlt: "Einige Zeilen Text aus einer M3U-Playlist, in denen Kopfzeile, Beschreibungszeile und Streamadresse hervorgehoben sind."
+---
+
+Die M3U-Datei gilt als technisch, und das zu Unrecht. Sie ist eines der
+einfachsten Formate, die täglich noch im Einsatz sind: eine Liste von Namen,
+eine Liste von Adressen und ein paar optionale Notizen. Man kann sie in einem
+Texteditor lesen, und sobald man das getan hat, wirkt vieles am Verhalten eines
+Players nicht mehr willkürlich.
+
+Hier eine vollständige, funktionierende Playlist. Zwei Kanäle, nichts
+weggelassen.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Nachrichten",Kanal Eins
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Sport",Kanal Zwei
+http://example.com/live/two.ts
+```
+
+Das ist das gesamte Format. Was folgt, ist ein Rundgang durch diese fünf Zeilen.
+
+## Die Kopfzeile
+
+```
+#EXTM3U
+```
+
+Die erste Zeile muss genau so lauten, und ihre einzige Aufgabe ist die Ansage:
+„Was jetzt kommt, ist ein erweitertes M3U.“ Eine Datei ohne sie lädt vielleicht
+trotzdem, aber der Player hat keinen Grund, die Beschreibungszeilen zu erwarten,
+die danach folgen.
+
+Die Kopfzeile ist außerdem der Ort, an dem eine Playlist auf ihren eigenen
+Programmführer zeigen kann:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (oder `x-tvg-url`, was dasselbe bedeutet) benennt eine XMLTV-Datei —
+[ein eigenes Dokument mit eigenem Zeitplan](/de/blog/epg-programmfuehrer-erklaert/) —, die liefert,
+was gerade läuft und was als Nächstes kommt. Trägt eine Playlist das und der
+Programmführer erscheint dennoch nicht, wissen Sie zumindest, welche der beiden
+Dateien schuld ist.
+
+## Die Beschreibungszeile
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Nachrichten",Kanal Eins
+```
+
+`#EXTINF` leitet einen Eintrag ein. Lesen Sie ihn in drei Teilen.
+
+**Die Zahl.** Direkt nach dem Doppelpunkt steht eine Dauer in Sekunden. Beim
+Livefernsehen ist das `-1`, also „keine feste Länge“ — der Stream läuft einfach
+weiter. Bei einem Film sehen Sie womöglich eine echte Zahl.
+
+**Die Attribute.** Optionale `Schlüssel="Wert"`-Paare. Die wichtigen:
+
+- **`tvg-id`** — die Kennung, die diesen Kanal mit einer Sendung im
+  XMLTV-Programmführer verbindet. Das ist der mit Abstand häufigste Grund dafür,
+  dass ein Programmführer lädt und nichts anzeigt: Playlist und Führer sind sich
+  über die Kennung uneins, also passt nichts zusammen.
+- **`tvg-name`** — der Kanalname zum Zweck des Abgleichs mit dem Programmführer,
+  nicht immer der Name, der auf dem Bildschirm steht.
+- **`tvg-logo`** — die Adresse des Senderlogos. Das sind Bilder, die über das
+  Netz geholt werden, eines pro Kanal — deshalb braucht eine große Liste beim
+  ersten Mal einen Moment, bis sie fertig aussieht.
+- **`group-title`** — die Kategorie, unter der der Kanal abgelegt ist. Jede
+  Kategorieüberschrift, an der Sie im Player vorbeiscrollen, wurde hier
+  eingetippt, von Ihrem Anbieter, Kanal für Kanal. Auch deshalb
+  [lohnt es sich, die Kategorien selbst zu
+  bändigen](/de/blog/grosse-playlists-ordnen/).
+
+**Der Anzeigename.** Nach dem Komma ist alles bis zum Zeilenende der Name, den
+Sie tatsächlich sehen. Es ist reiner Text ohne Anführungszeichen, weshalb ein
+Komma innerhalb eines Kanalnamens eine echte Falle dieses Formats ist.
+
+## Die Adresse
+
+```
+http://example.com/live/one.ts
+```
+
+Die Zeile direkt nach `#EXTINF` ist der Ort, an dem das Video liegt. Sie ist die
+einzige Zeile der Datei, die beim Abspielen ein Netzwerk berührt, und sie
+entscheidet, [wie sich der Stream verhält](/de/blog/streaming-protokolle-erklaert/):
+Eine `.m3u8`-Adresse ist ein HLS-Stream, der in Segmenten geliefert wird, eine
+`.ts`-Adresse ein durchgehender Transportstrom.
+
+Zwei nützliche Folgerungen. Erstens: Ein Eintrag mit Beschreibungszeile, aber
+ohne Adresse ist unsichtbar, weil es nichts abzuspielen gibt. Zweitens: Eine
+Playlist, die einwandfrei lädt, während jeder Kanal scheitert, ist eine
+Playlist mit heilen Namen und toten Adressen — ein Problem
+[beim Anbieter, nicht beim Player](/de/blog/was-ein-iptv-player-tut/).
+
+## Was nicht drinsteht
+
+Ebenso aufschlussreich ist, was das Format nicht fassen kann:
+
+- **Kein Video.** Eine Playlist mit vierzigtausend Kanälen sind ein paar
+  Megabyte Text. Kein einziges Bild davon ist Bild.
+- **Keine Anmeldung.** Wo Zugangsdaten nötig sind, stecken sie meist in den
+  Adressen selbst — weshalb ein Playlist-Link wie ein Passwort behandelt gehört.
+- **Keine lebende Verbindung.** Die Datei ist eine Momentaufnahme dessen, was
+  beim Abruf existierte. Später hinzugefügte Kanäle stehen nicht drin; das ist
+  der eigentliche Unterschied zur
+  [Xtream-Codes-Schnittstelle](/de/blog/xtream-codes-oder-m3u/) und der Grund, warum
+  [es zählt, wo die Liste liegt](/de/blog/playlist-link-oder-datei-am-geraet/).
+- **Kein deklariertes Alphabet.** Nichts im Format nennt seine eigene
+  Zeichenkodierung, und genau deshalb kommen
+  [Kanalnamen manchmal als Symbole an](/de/blog/kanalnamen-werden-kryptisch/).
+
+## Die eigene lesen
+
+Verhält sich eine Liste seltsam, öffnen Sie sie und schauen Sie hin. Ein
+fehlendes `#EXTM3U`, ein leeres `group-title` in jeder Zeile, durchgehend
+fehlende `tvg-id`, ein Name mit einem verirrten Komma — jedes davon hat im
+Player eine eigene Signatur, und jedes sieht man in etwa zehn Sekunden Lesen.
+
+Das Format ist klein genug, um es vollständig im Kopf zu behalten. Das ist
+ungewöhnlich, und man sollte es ausnutzen.

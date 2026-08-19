@@ -1,0 +1,112 @@
+---
+title: "Waarom je kanaalnamen als vreemde tekens binnenkomen"
+description: "Het beeld loopt prima en alleen de lijst is onleesbaar. Dat is geen kwaliteitsprobleem: het is een tekstbestand waarvan niemand de tekencodering heeft opgegeven."
+urlSlug: kanaalnamen-vol-vreemde-tekens
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['afspeellijsten', 'problemen-oplossen']
+keywords: ['iptv kanaalnamen vreemde tekens', 'm3u bestand codering', 'afspeellijst vraagtekens', 'm3u8 utf-8 codering']
+heroImageAlt: "Dezelfde kanaallijst tweemaal, één keer met namen die tot betekenisloze tekens zijn vervallen en één keer correct weergegeven."
+---
+
+De afspeellijst laadt. De kanalen spelen. En toch lees je iets als
+`Ã©Ã©n TV` of een lange rij vraagtekens, en er is geen manier om te zien welke
+regel bij welke zender hoort.
+
+Met de streams is niets mis. Wat kapot is, is de **tekst** — en tekst is
+aanzienlijk makkelijker te repareren dan video.
+
+## Een afspeellijst is alleen maar tekst
+
+Een M3U-afspeellijst is een tekstregister van namen en adressen. Alles wat
+[een speler ermee doet](/nl/blog/wat-een-iptv-speler-doet/) is die regels lezen, de
+lijst opbouwen en verbinden met het adres op de regel die jij aanwees.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kanaal Een",Kanaal Een
+http://example.com/live/one.ts
+```
+
+En hier zit het punt waar iedereen op struikelt: **een tekstbestand vertelt niet
+uit zichzelf in welke codering het geschreven is.** Wat erin staat is een reeks
+bytes. Via welke tekentabel die bytes terug moeten worden gelezen, is een keuze
+van degene die leest. Kies de verkeerde tabel en dezelfde bytes worden andere
+letters. Meer is het niet.
+
+## Welke tabel de speler gebruikt
+
+Vidonzo leest afspeellijsten als **UTF-8** — vandaag de standaard voor tekst in
+elke taal, en precies waarvoor de extensie `.m3u8`
+[bestaat](/nl/blog/m3u-of-m3u8-verschil/).
+
+Hoe dat uitpakt hangt af van hoe je de lijst hebt aangeleverd:
+
+- **Een afspeellijst-URL.** De server geeft bij zijn antwoord op welke codering
+  de inhoud heeft die hij stuurt. Klopt die opgave, dan gaat er niets mis.
+  Verminkte namen betekenen dat de opgave ontbrak of niet strookte met de
+  werkelijke bytes.
+- **Een bestand op het toestel.** Hier is niemand die iets opgeeft, dus wordt
+  het als UTF-8 gelezen. Een bestand dat in een oude regionale codering is
+  bewaard, ziet er niet alleen misschien fout uit — het kan ook weigeren te
+  laden.
+
+Vidonzo probeert de codering niet te raden, en dat is bewust. Automatische
+detectie blijft gokwerk; ze faalt het vaakst bij juist de niet-Latijnse
+alfabetten die haar het hardst nodig zouden hebben, en ze faalt op de slechtst
+denkbare manier: **goed voor een deel van de lijst en fout voor de rest.** Een
+half kloppende lijst is verwarrender dan een die overduidelijk stuk is.
+
+## Het symptoom lezen
+
+Tekst breekt op karakteristieke manieren, dus het symptoom noemt de oorzaak.
+
+- **`Ã©`, `Ã¨`, `Ã¯` waar accenten horen** — UTF-8-bytes gelezen via een
+  West-Europese tabel. De klassieker, en het meest gezien in Nederlandse,
+  Franse, Turkse en Poolse lijsten.
+- **Lange rijen willekeurige symbolen** — UTF-8-bytes gelezen via een regionale
+  tabel die niets met die tekst te maken heeft.
+- **`????` of `___`** — de tekens zijn stroomopwaarts bij een conversie
+  weggegooid. Niets verderop haalt ze terug; de lijst moet opnieuw opgehaald
+  worden.
+- **Rijen lege blokjes** — dit is **geen** coderingsprobleem.
+
+Dat laatste verdient het om apart te staan. Lege blokjes betekenen dat de tekens
+foutloos zijn gedecodeerd en dat het toestel eenvoudigweg geen lettertype heeft
+dat ze kan tekenen. Andere oorzaak, andere oplossing — die hoort bij
+[de weergavekant](/nl/blog/kijken-in-je-eigen-taal/).
+
+## De volgorde die de moeite waard is
+
+1. **Vraag om de `.m3u8`-link.** Publiceert je aanbieder beide, neem dan die.
+   De kanalen erachter zijn identiek; alleen de omgang met tekst verandert. De
+   goedkoopste oplossing, en meestal genoeg.
+2. **Lees de afspeellijst opnieuw in.** Trek omlaag op het beginscherm zodat de
+   app de bron opnieuw ophaalt in plaats van de bewaarde catalogus te tonen. Na
+   het wisselen van een link laat het overslaan van deze stap de oude lijst
+   staan.
+3. **Bewaar een lokaal bestand opnieuw als UTF-8.** Open het in een
+   teksteditor, zet de codering op UTF-8, sla op en
+   [voeg het opnieuw toe](/nl/blog/eerste-afspeellijst-instellen/). Komen de namen terug,
+   dan is de diagnose bevestigd.
+4. **Stap over op de Xtream-verbinding.** Waar een aanbieder ook een
+   gebruikersnaam en wachtwoord uitgeeft, levert
+   [die route](/nl/blog/xtream-codes-of-m3u/) de catalogus via een API in plaats van
+   als tekstbestand, zodat de vraag naar bestandscodering niet eens opkomt.
+
+## Als alleen sommige namen stuk zijn
+
+Blijft na dit alles een handvol kanalen verminkt, dan is de codering niet langer
+de boosdoener — de aanbieder heeft die regels bij de bron zo ingetikt. Geen
+speler kan tekst redden die al fout was toen hij werd geschreven.
+
+Stop in dat geval met proberen ze te lezen en
+[zet de kanalen die je kijkt in favorieten](/nl/blog/grote-afspeellijsten-ordenen/). Een
+naam hoeft niet leesbaar te zijn om te onthouden waar hij staat.
+
+---
+
+Verminkte namen zijn geen fout van de speler. Ze zijn een oude, doodgewone
+valkuil bij het verplaatsen van tekst tussen systemen die het niet eens zijn
+over alfabetten. Kies `.m3u8`, houd bestanden in UTF-8, en je kanaallijst blijft
+leesbaar in elke taal.

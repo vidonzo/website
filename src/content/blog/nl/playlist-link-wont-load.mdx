@@ -1,0 +1,119 @@
+---
+title: "De afspeellijst laadt niet: vijf storingen en wat elke ervan betekent"
+description: "Je plakt de link, de app denkt even na en er verschijnt een nietszeggende foutmelding. Achter dat bericht zitten vijf verschillende storingen, elk met een eigen handtekening."
+urlSlug: afspeellijst-laadt-niet
+publishedAt: 2026-08-19
+sourceLocale: tr
+tags: ['problemen-oplossen', 'afspeellijsten']
+keywords: ['iptv afspeellijst laadt niet', 'm3u link werkt niet', 'xtream inloggen mislukt', 'iptv lijst laadt niet']
+heroImageAlt: "Een scherm om een afspeellijst toe te voegen, met daaronder een waarschuwing die uitlegt waarom het laden stopte."
+---
+
+Je plakt de link die je aanbieder gaf, de app denkt er even over na, en dan
+verschijnt een korte fout. Wat erin staat helpt zelden. De vraag die ertoe doet
+is: ligt het aan jou, aan je netwerk of aan je aanbieder?
+
+Er zijn vijf storingen. Van buiten lijken ze allemaal op elkaar, en elk heeft een
+verklikker. Meteen de juiste te pakken hebben gaat veel sneller dan de hele
+installatie afbreken en opnieuw beginnen.
+
+## 1. De inloggegevens worden geweigerd
+
+**De verklikker:** het mislukt onmiddellijk. Geen wachttijd.
+
+De server is bereikt en de server zei nee. Je netwerk is dus in orde; het
+probleem is het account. Op volgorde van hoe vaak het voorkomt:
+
+- **Het wachtwoord is verkeerd getypt.** Typ het in plaats van het te plakken.
+  Een spatie die bij het kopiëren is meegekomen is voor jou onzichtbaar en voor
+  de server een ander wachtwoord.
+- **Het abonnement is verlopen.** Xtream-accounts eindigen op een datum, en
+  daarna gaat er geen enkel kanaal meer open.
+- **Je zit boven de apparaatlimiet.** De meeste aanbieders beperken hoeveel
+  apparaten tegelijk mogen streamen. Een vergeten stream die nog op de televisie
+  doorloopt is een verrassend gewone oorzaak van de melding "ongeldige gebruiker"
+  op de telefoon. Log op dat andere apparaat uit en probeer opnieuw.
+
+Lees ook het serveradres nog eens:
+[welk verbindingsformaat je hebt gekregen](/nl/blog/xtream-codes-of-m3u/) verandert
+hoe een correct adres er überhaupt uitziet.
+
+## 2. De server wordt nooit bereikt
+
+**De verklikker:** lang wachten, dan een time-out. De fout komt laat.
+
+Deze keer heeft niemand nee gezegd — er heeft helemaal niemand geantwoord.
+
+- **De poort ontbreekt.** De meeste Xtream-panelen draaien niet op poort 80. Het
+  adres is `http://example.com:8080`, niet `http://example.com`, en als je
+  aanbieder een poort gaf, hoort die erbij.
+- **Je netwerk blokkeert de aanbieder.** Mislukt het op wifi, probeer dezelfde
+  lijst dan op mobiele data. Een andere uitkomst legt de storing bij de
+  verbinding in plaats van bij de lijst. Voor een blijvende oplossing stel je een
+  proxy in onder **Instellingen → Proxy**.
+- **Het adres bestaat niet meer.** Aanbieders wisselen van domein en zetten het
+  oude uit. Aan jouw kant valt daar niets aan te doen: vraag het huidige adres.
+
+## 3. Hij laadt en komt leeg binnen
+
+**De verklikker:** geen fout, de voortgangsbalk loopt vol, en daarna zijn er geen
+kanalen.
+
+De app heeft iets ontvangen — alleen was dat geen afspeellijst. Er zijn twee
+varianten:
+
+- **De server gaf een foutpagina terug in plaats van de lijst.** Het lijkt of de
+  link werkte, want technisch kwam er een antwoord; de tekst erin is een
+  mededelingspagina. De link in een browser openen en kijken of de eerste regel
+  `#EXTM3U` is, beslecht het in seconden —
+  [wat die eerste regel betekent](/nl/blog/in-een-m3u-bestand/) helpt precies hier.
+- **Het abonnement is afgelopen en het paneel serveert een lege lijst.** Sommige
+  panelen antwoorden verlopen accounts met een geldige afspeellijst zonder één
+  kanaal in plaats van met een fout. Het ziet er identiek uit aan het geval
+  hierboven.
+
+## 4. De beveiligde verbinding mislukt
+
+**De verklikker:** het gebeurt alleen bij `https`-adressen. Alles via `http`
+werkt.
+
+Dit is degene die niemand verdenkt en die het makkelijkst te verhelpen is: **de
+klok van het toestel loopt verkeerd.** Bij het opzetten van een versleutelde
+verbinding wordt gecontroleerd of het certificaat van de server op dit moment
+geldig is, en die controle vertrouwt op de klok van jouw apparaat. Is de datum
+dagen weggedreven, dan lijkt elk certificaat ongeldig en wordt de verbinding
+geweigerd zonder bruikbare uitleg.
+
+Zet datum en tijd op automatisch en probeer de lijst opnieuw.
+
+## 5. De lijst gaat open, de kanalen niet
+
+**De verklikker:** namen, categorieën en logo's staan er allemaal. Er speelt
+niets.
+
+Dit is geen afspeellijstprobleem meer. Een afspeellijst is tekst met namen en
+adressen, en [het werk van de speler](/nl/blog/wat-een-iptv-speler-doet/) is
+verbinden met het adres. Kun je de namen lezen, dan is de lijst goed
+aangekomen — wat faalt is het andere eind van de adressen.
+
+Probeer twee of drie andere kanalen. Faalt **alles**, dan zit de blokkade bij het
+account of het netwerk. Faalt er **één**, dan is die stream dood bij de aanbieder
+en brengt niets in de app hem terug. Speelt hij wel maar valt hij steeds weg, dan
+is dat iets heel anders en woont het
+[op het pad tussen jou en de server](/nl/blog/iptv-buffering-oplossen/).
+
+## Snel uit elkaar houden
+
+Drie vragen, drie minuten:
+
+1. **Kwam de fout meteen of na wachten?** Meteen wijst op storing één; na wachten
+   op storing twee.
+2. **Doet mobiele data het anders?** Zo ja, dan is het netwerk de boosdoener.
+3. **Wat gebeurt er als je op het beginscherm omlaag trekt?** Dat leest de bron
+   opnieuw in plaats van de bewaarde catalogus, dus alles wat bij de aanbieder is
+   gerepareerd, verschijnt daar het eerst.
+
+Zit je daarna nog vast, schrijf dan je aanbieder voordat je
+[de installatie opnieuw opbouwt](/nl/blog/eerste-afspeellijst-instellen/). Vier van de
+vijf storingen hierboven zijn van jouw kant niet op te lossen, en de juiste vraag
+stellen gaat sneller dan de hele installatie herhalen.

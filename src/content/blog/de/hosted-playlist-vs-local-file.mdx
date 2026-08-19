@@ -1,0 +1,107 @@
+---
+title: "Playlist an einer URL oder Datei auf dem Gerät: was bleibt aktuell"
+description: "Geladen sehen sie identisch aus, und sie sind überhaupt nicht dasselbe. Die eine fragt jedes Mal neu, die andere ist in dem Moment eingefroren, in dem Sie sie bekommen haben."
+urlSlug: playlist-link-oder-datei-am-geraet
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlists', 'einrichtung']
+keywords: ['m3u playlist automatisch aktualisieren', 'iptv playlist aktualisiert sich nicht', 'm3u link oder m3u datei', 'kanalliste aktuell halten']
+heroImageAlt: "Zwei Eingabefelder für eine Playlist nebeneinander, eines mit einer Webadresse und eines mit dem Namen einer Datei auf dem Gerät."
+---
+
+Es gibt drei Wege, Vidonzo eine Playlist zu geben: Xtream-Codes-Zugangsdaten,
+einen M3U-Link oder eine M3U-Datei, die schon auf Ihrem Gerät liegt.
+
+Die letzten beiden sehen nach dem Laden fast gleich aus. Dieselben Kanäle,
+dieselben Kategorien, dieselbe Wiedergabe. Sie unterscheiden sich aber in einem
+Punkt, der danach eine Menge entscheidet: **ob sich die Liste überhaupt von
+selbst ändern kann.**
+
+## Eine Datei ist eine Momentaufnahme
+
+Wenn Sie eine Datei vom Gerät wählen, liest Vidonzo genau dieses eine Stück
+Text. [Der Inhalt einer Playlist](/de/blog/was-in-einer-m3u-datei-steht/) sind Namen und
+Adressen und sonst nichts — nirgendwo darin steckt eine lebende Verbindung zu
+Ihrem Anbieter.
+
+Eine Datei ist also in dem Augenblick eingefroren, in dem Sie sie bekommen
+haben:
+
+- Kanäle, die der Anbieter später hinzufügt, stehen nicht drin.
+- Kanäle, deren Adressen der Anbieter ändert, öffnen einfach nicht mehr.
+- An der Quelle neu geordnete Kategorien behalten auf Ihrem Gerät ihre alte
+  Gestalt.
+
+Es gibt genau einen Weg, sie weiterzubringen: eine neuere Datei besorgen und die
+alte selbst ersetzen.
+
+## Eine URL ist eine Frage, jedes Mal neu gestellt
+
+Tragen Sie einen M3U-Link ein, dann speichert Vidonzo nicht die Kanalliste,
+sondern die **Adresse**. Jeder Abruf liefert das, was dort in diesem Moment
+liegt.
+
+- Der erste Ladevorgang liest den ganzen Katalog und setzt Logos und Kategorien
+  zusammen. Das ist der langsame Teil, einmalig.
+- Jeder Ladevorgang danach öffnet sofort aus dem gespeicherten Katalog, während
+  im Hintergrund aktualisiert wird.
+- Das Herunterziehen auf dem Startbildschirm liest die Quelle neu statt den
+  Zwischenspeicher. Was beim Anbieter geändert wurde, zeigt sich dort zuerst.
+
+Xtream-Panels geben einen `get.php`-Link manchmal in einer verkürzten Form
+heraus, die weder Logos noch Gruppen trägt. Vidonzo liest still die vollere
+Variante, damit Sie den Link nicht selbst bearbeiten müssen, um Bilder zu
+bekommen.
+
+## Verwechseln Sie die URL nicht mit der Aktualität
+
+Hier liegt der verbreitete Irrtum. Eine URL einzutragen garantiert nicht, dass
+sich etwas aktualisiert. **Die Aktualität kommt vom anderen Ende des Links.**
+
+Eine URL, die auf eine Datei zeigt, die niemand pflegt, ist ganz genauso veraltet
+wie eine Datei auf Ihrem Gerät. Was die URL Ihnen einbringt, ist die
+*Möglichkeit*, dass eine Änderung ankommt — sie erzeugt die Änderung nicht.
+
+Wenn Sie eine Quelle wollen, die sich wirklich bewegt, passt
+[die Xtream-Verbindung](/de/blog/xtream-codes-oder-m3u/) besser. Sie liefert den Katalog
+über eine API statt als flache Datei, sodass Kategorien, Serien und
+Programmführer bereits strukturiert ankommen.
+
+## Die Wahl treffen
+
+**Eine URL passt zu Ihnen, wenn:**
+
+- Ihr Anbieter Kanäle hinzufügt und entfernt und Sie mitziehen wollen.
+- Die Kopfzeile eine `url-tvg`-Adresse trägt, sodass
+  [der Programmführer mit der Liste reist](/de/blog/epg-programmfuehrer-erklaert/).
+- Sie dieselbe Liste auf mehreren Geräten nutzen. Einmal ändern, und alle sind
+  sich einig.
+
+**Eine Datei passt zu Ihnen, wenn:**
+
+- Sie die Liste bearbeiten wollen. Es ist Text auf Ihrem Gerät — Zeilen löschen,
+  umsortieren, umbenennen.
+- Sie nichts ans Netz senden wollen. In diesem Modus verlässt die Liste das
+  Gerät nie.
+- Ihr Anbieter Ihnen ohnehin nur eine Datei gegeben hat. Dann nehmen Sie sie.
+- Sie [zerstörte Kanalnamen
+  reparieren](/de/blog/kanalnamen-werden-kryptisch/). Sie öffnen und wieder als UTF-8
+  speichern zu können, erlaubt nur eine lokale Datei.
+
+## Behandeln Sie die URL wie ein Passwort
+
+Noch eines. Ein M3U-Link trägt die Zugangsdaten meist direkt in der Adresse.
+**Wer diesen Link hat, hat Ihr Abonnement.**
+
+Deshalb ist er nichts zum Teilen, und deshalb gibt es
+[einen Maßstab dafür, wie er aufbewahrt gehört](/de/blog/playlist-zugangsdaten-verschluesseln/).
+Ihn in einen Chat einfügen, in ein Forum stellen, auf einem Screenshot sichtbar
+lassen — jedes davon heißt, ein Passwort weiterzureichen.
+
+---
+
+Die Wahl geht also nicht darum, welche Variante mehr kann. **Nehmen Sie die URL,
+wenn Änderungen Sie erreichen sollen; nehmen Sie die Datei, wenn die Liste
+vollständig in Ihren Händen bleiben soll.** Die
+[Einrichtung](/de/blog/erste-playlist-einrichten/) bietet beides, und nichts hindert
+Sie daran, von jeder Sorte eine nebeneinander zu behalten.

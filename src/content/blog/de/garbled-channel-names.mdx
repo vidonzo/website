@@ -1,0 +1,115 @@
+---
+title: "Warum Ihre Kanalnamen als kryptische Zeichen ankommen"
+description: "Das Bild läuft einwandfrei, unlesbar ist nur die Liste. Das ist kein Qualitätsproblem, sondern eine Textdatei, deren Zeichenkodierung niemand deklariert hat."
+urlSlug: kanalnamen-werden-kryptisch
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlists', 'fehlerbehebung']
+keywords: ['iptv kanalnamen kryptisch', 'm3u datei zeichenkodierung', 'playlist umlaute falsch', 'm3u8 utf-8 kodierung']
+heroImageAlt: "Dieselbe Kanalliste zweimal, einmal mit zu sinnlosen Zeichen zerfallenen Namen und einmal korrekt dargestellt."
+---
+
+Die Playlist lädt. Die Kanäle laufen. Und trotzdem steht in der Liste etwas wie
+`MÃ¼nchen Eins` oder eine lange Reihe Fragezeichen, und es gibt keine
+Möglichkeit zu erkennen, welche Zeile zu welchem Sender gehört.
+
+Mit den Streams ist alles in Ordnung. Kaputt ist der **Text** — und Text lässt
+sich weit leichter reparieren als Video.
+
+## Eine Playlist ist nur Text
+
+Eine M3U-Playlist ist ein Textverzeichnis aus Namen und Adressen. Alles, was
+[ein Player damit tut](/de/blog/was-ein-iptv-player-tut/), ist: diese Zeilen lesen,
+die Liste aufbauen und sich mit der Adresse der Zeile verbinden, die Sie
+ausgewählt haben.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kanal Eins",Kanal Eins
+http://example.com/live/one.ts
+```
+
+Und hier ist die Stelle, an der es alle erwischt: **Eine Textdatei sagt von
+sich aus nicht, in welcher Zeichenkodierung sie geschrieben wurde.** In der
+Datei steht eine Folge von Bytes. Durch welche Zeichentabelle diese Bytes
+zurückgelesen werden sollen, muss der Lesende entscheiden. Nehmen Sie die
+falsche Tabelle, werden aus denselben Bytes andere Buchstaben. Mehr ist es
+nicht.
+
+## Welche Tabelle der Player verwendet
+
+Vidonzo liest Playlists als **UTF-8** — heute der Standard für Text in jeder
+Sprache und genau das, wofür die Endung `.m3u8`
+[überhaupt existiert](/de/blog/m3u-oder-m3u8/).
+
+Was daraus folgt, hängt davon ab, wie Sie die Liste übergeben haben:
+
+- **Eine Playlist-URL.** Der Server deklariert zusammen mit seiner Antwort die
+  Kodierung des Inhalts, den er schickt. Stimmt die Deklaration, geht nichts
+  schief. Zerstörte Namen bedeuten, dass sie fehlte oder den tatsächlichen
+  Bytes widersprach.
+- **Eine Datei auf dem Gerät.** Hier deklariert niemand etwas, also wird sie
+  als UTF-8 gelesen. Eine Datei in einer alten regionalen Kodierung sieht
+  womöglich nicht nur falsch aus — sie lädt unter Umständen gar nicht.
+
+Vidonzo versucht nicht, die Kodierung zu erraten, und das ist Absicht. Eine
+automatische Erkennung bleibt Raterei; sie scheitert am häufigsten genau an den
+nichtlateinischen Alphabeten, die sie am dringendsten bräuchten, und sie
+scheitert auf die denkbar schlechteste Weise: **richtig für einen Teil der
+Liste und falsch für den Rest.** Eine halb korrekte Liste verwirrt mehr als
+eine offensichtlich kaputte.
+
+## Das Symptom lesen
+
+Text bricht auf charakteristische Weise, das Symptom benennt also die Ursache.
+
+- **`Ã¼`, `Ã¶`, `ÃŸ` statt Umlauten** — UTF-8-Bytes, gelesen durch eine
+  westeuropäische Tabelle. Der Klassiker, und in deutschen, türkischen,
+  polnischen und vietnamesischen Listen der häufigste Fall.
+- **Lange Reihen zusammenhangloser Zeichen** — UTF-8-Bytes, gelesen durch eine
+  regionale Tabelle, die mit diesem Text nichts zu tun hat.
+- **`????` oder `___`** — die Zeichen wurden weiter oben bei einer Umwandlung
+  verworfen. Nichts weiter unten holt sie zurück; die Liste muss neu geholt
+  werden.
+- **Reihen leerer Kästchen** — das ist **kein** Kodierungsproblem.
+
+Der letzte Punkt gehört ausdrücklich getrennt. Leere Kästchen heißen, dass die
+Zeichen einwandfrei dekodiert wurden und das Gerät schlicht keine Schrift
+besitzt, die sie zeichnen kann. Andere Ursache, andere Lösung — das gehört
+[auf die Darstellungsseite](/de/blog/in-der-eigenen-sprache-schauen/).
+
+## Die Reihenfolge, die sich lohnt
+
+1. **Fragen Sie nach dem `.m3u8`-Link.** Veröffentlicht Ihr Anbieter beide,
+   nehmen Sie diesen. Die Kanäle dahinter sind identisch; nur der Umgang mit
+   Text ändert sich. Der billigste Handgriff, und meistens reicht er.
+2. **Lesen Sie die Playlist neu ein.** Ziehen Sie auf dem Startbildschirm nach
+   unten, damit die App die Quelle erneut abruft statt den zwischengespeicherten
+   Katalog zu zeigen. Nach einem Linkwechsel lässt das Überspringen dieses
+   Schritts die alte Liste stehen.
+3. **Speichern Sie eine lokale Datei erneut als UTF-8.** In einem Texteditor
+   öffnen, Kodierung auf UTF-8 stellen, speichern und
+   [neu hinzufügen](/de/blog/erste-playlist-einrichten/). Kommen die Namen zurück,
+   ist die Diagnose bestätigt.
+4. **Wechseln Sie zur Xtream-Verbindung.** Wo ein Anbieter auch Benutzername
+   und Passwort ausgibt, liefert [dieser Weg](/de/blog/xtream-codes-oder-m3u/) den
+   Katalog über eine API statt als Textdatei — die Frage nach der
+   Dateikodierung stellt sich dann gar nicht.
+
+## Wenn nur einzelne Namen kaputt sind
+
+Bleibt nach alldem eine Handvoll Kanäle zerstört, ist nicht mehr die Kodierung
+schuld — der Anbieter hat diese Einträge an der Quelle so eingetippt. Kein
+Player kann Text retten, der schon beim Schreiben falsch war.
+
+Hören Sie in dem Fall auf, sie lesen zu wollen, und
+[legen Sie stattdessen die genutzten in die
+Favoriten](/de/blog/grosse-playlists-ordnen/). Ein Name muss nicht lesbar sein, damit
+man sich merkt, wo er steht.
+
+---
+
+Kryptische Namen sind kein Fehler des Players. Sie sind eine alte, ganz
+gewöhnliche Falle beim Transport von Text zwischen Systemen, die sich über
+Alphabete nicht einig sind. Nehmen Sie `.m3u8`, halten Sie Dateien in UTF-8 —
+dann bleibt Ihre Kanalliste in jeder Sprache lesbar.

@@ -1,0 +1,127 @@
+---
+title: "Dentro de un archivo M3U: qué dice en realidad cada línea"
+description: "Ábrelo una vez en un editor de texto y deja de ser un misterio. Cuatro tipos de línea, un puñado de atributos, y cada uno explica algo que ya has visto en el reproductor."
+urlSlug: dentro-de-un-archivo-m3u
+publishedAt: 2026-08-19
+sourceLocale: en
+tags: ['listas', 'ingeniería']
+keywords: ['que es un archivo m3u', 'formato archivo m3u', 'extinf explicado', 'm3u tvg-id group-title']
+heroImageAlt: "Unas líneas de texto de una lista M3U con la cabecera, la línea de descripción y la dirección del stream destacadas."
+---
+
+El archivo M3U tiene fama de técnico, y no se la merece. Es uno de los formatos
+más simples que siguen en uso diario: una lista de nombres, una lista de
+direcciones y unas cuantas anotaciones opcionales. Puedes leerlo en un editor de
+texto y, en cuanto lo haces, mucho del comportamiento del reproductor deja de
+parecer arbitrario.
+
+Esta es una lista completa y funcional. Dos canales, sin omitir nada.
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" tvg-logo="http://example.com/one.png" group-title="Noticias",Canal Uno
+http://example.com/live/one.ts
+#EXTINF:-1 tvg-id="two.example" tvg-name="Channel Two" group-title="Deportes",Canal Dos
+http://example.com/live/two.ts
+```
+
+Ese es el formato entero. Lo que sigue es un recorrido por esas cinco líneas.
+
+## La cabecera
+
+```
+#EXTM3U
+```
+
+La primera línea tiene que ser exactamente esta, y su único cometido es decir
+«lo que viene a continuación es un M3U extendido». Un archivo sin ella quizá se
+cargue igualmente, pero el reproductor no tiene motivo para esperar las líneas
+de descripción que vienen después.
+
+La cabecera es además donde una lista puede apuntar a su propia guía de
+programación:
+
+```
+#EXTM3U url-tvg="http://example.com/guide.xml"
+```
+
+`url-tvg` (o `x-tvg-url`, que significa lo mismo) nombra un archivo XMLTV,
+[un documento aparte con su propio calendario](/es/blog/que-es-la-epg-iptv/) que aporta qué
+hay ahora y qué viene después. Cuando una lista lo lleva y aun así la guía no
+aparece, al menos sabes cuál de los dos archivos culpar.
+
+## La línea de descripción
+
+```
+#EXTINF:-1 tvg-id="one.example" tvg-name="Channel One" group-title="Noticias",Canal Uno
+```
+
+`#EXTINF` introduce una entrada. Léela en tres partes.
+
+**El número.** Justo después de los dos puntos viene una duración en segundos.
+En televisión en directo es `-1`, es decir, «sin longitud fija»: la emisión
+sigue y sigue. En una película puedes ver un número real.
+
+**Los atributos.** Pares opcionales `clave="valor"`. Los que importan:
+
+- **`tvg-id`** — el identificador que une este canal con un programa de la guía
+  XMLTV. Es el motivo más habitual de que la guía cargue y no muestre nada: la
+  lista y la guía no coinciden en el identificador, así que no encaja nada.
+- **`tvg-name`** — el nombre del canal a efectos de emparejarlo con la guía, que
+  no siempre es el nombre que ves en pantalla.
+- **`tvg-logo`** — la dirección del logo del canal. Son imágenes que se
+  descargan por red, una por canal, y por eso una lista grande tarda un momento
+  en verse terminada la primera vez.
+- **`group-title`** — la categoría bajo la que se archiva el canal. Cada
+  encabezado de categoría por el que pasas en el reproductor se escribió aquí,
+  por tu proveedor, canal a canal. También es la razón de que
+  [merezca la pena domar las categorías tú mismo](/es/blog/organizar-listas-grandes-iptv/).
+
+**El nombre visible.** Después de la coma, todo lo que llega hasta el final de
+la línea es el nombre que realmente ves. Es texto plano sin comillas, así que
+una coma dentro del nombre de un canal es un peligro real de este formato.
+
+## La dirección
+
+```
+http://example.com/live/one.ts
+```
+
+La línea justo después de `#EXTINF` es donde vive el vídeo. Es la única línea
+del archivo que toca la red en el momento de reproducir, y decide
+[cómo se comporta el stream](/es/blog/protocolos-de-streaming-hls-dash-rtsp/): una dirección
+`.m3u8` es un stream HLS entregado en fragmentos; una `.ts` es un flujo de
+transporte continuo.
+
+Dos consecuencias útiles. Primera: una entrada con línea de descripción y sin
+dirección es invisible, porque no hay nada que reproducir. Segunda: una lista
+que carga perfectamente mientras todos los canales fallan es una lista cuyos
+nombres están bien y cuyas direcciones están muertas, un problema
+[del proveedor, no del reproductor](/es/blog/que-hace-un-reproductor-iptv/).
+
+## Lo que no cabe ahí
+
+Igual de instructivo es lo que el formato no puede contener:
+
+- **Nada de vídeo.** Una lista de cuarenta mil canales son unos pocos megabytes
+  de texto. Ni un solo fotograma es imagen.
+- **Ningún inicio de sesión.** Donde hacen falta credenciales, suelen ir
+  incrustadas en las propias direcciones, y por eso un enlace de lista debe
+  tratarse como una contraseña.
+- **Ninguna conexión viva.** El archivo es una foto de lo que existía cuando lo
+  obtuviste. Los canales añadidos después no están, y esa es la diferencia real
+  con [la API de Xtream Codes](/es/blog/xtream-codes-o-m3u/) y el motivo de que
+  [importe dónde vive la lista](/es/blog/enlace-de-lista-o-archivo-local/).
+- **Ningún alfabeto declarado.** Nada en el formato indica su propia
+  codificación, y justo por eso a veces
+  [los nombres de canal llegan como símbolos](/es/blog/nombres-de-canales-ilegibles/).
+
+## Leer la tuya
+
+Si una lista se comporta de forma extraña, ábrela y mira. Un `#EXTM3U` que
+falta, un `group-title` vacío en todas las líneas, `tvg-id` ausente en todo el
+archivo, un nombre con una coma perdida: cada uno tiene una firma distinta en el
+reproductor, y cada uno se ve en unos diez segundos de lectura.
+
+El formato es lo bastante pequeño como para tenerlo entero en la cabeza. Eso es
+poco común, y conviene aprovecharlo.

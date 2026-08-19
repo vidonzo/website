@@ -1,0 +1,101 @@
+---
+title: "Bağlantıdaki liste mi, cihazdaki dosya mı: hangisi güncel kalır"
+description: "Yüklendikten sonra birbirinin aynısı görünüyorlar, oysa hiç de aynı şey değiller. Biri her seferinde yeniden soruyor, diğeri onu aldığınız anda donmuş durumda."
+urlSlug: liste-baglantisi-mi-cihazdaki-dosya-mi
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['oynatma-listesi', 'kurulum']
+keywords: ['m3u listesi otomatik güncelleme', 'iptv listesi güncellenmiyor', 'm3u linki mi dosyası mı', 'kanal listesini güncel tutmak']
+heroImageAlt: "Yan yana iki oynatma listesi giriş alanı; birinde bir web adresi, diğerinde cihazdaki bir dosyanın adı var."
+---
+
+Vidonzo'ya oynatma listesi vermenin üç yolu var: Xtream Codes bilgileri, bir M3U
+bağlantısı, ya da cihazınızda hâlihazırda duran bir M3U dosyası.
+
+Son ikisi yüklendikten sonra neredeyse aynı görünür. Aynı kanallar, aynı
+kategoriler, aynı oynatma. Ama bir noktada ayrılırlar ve o nokta sonrasını epey
+belirler: **listenin kendiliğinden değişebilme ihtimali olup olmadığı.**
+
+## Dosya bir anlık görüntüdür
+
+Cihazdan bir dosya seçtiğinizde Vidonzo'nun okuduğu şey o tek metin parçasıdır.
+[Bir oynatma listesinin içeriği](/tr/blog/m3u-dosyasinin-icinde-ne-var/) adlar ve adreslerden
+ibarettir — içinde sağlayıcınızla canlı bir bağ hiçbir yerde yoktur.
+
+Yani dosya, onu aldığınız anda donmuştur:
+
+- Sağlayıcının sonradan eklediği kanallar onun içinde değildir.
+- Sağlayıcının adresini değiştirdiği kanallar öylece açılmaz olur.
+- Kaynakta yeniden düzenlenen kategoriler sizin cihazınızda eski hâliyle kalır.
+
+Onu ileri taşımanın tam olarak tek bir yolu vardır: daha yeni bir dosya edinip
+eskisini kendiniz değiştirmek.
+
+## Bağlantı, her seferinde yeniden sorulan bir sorudur
+
+Bir M3U bağlantısı kaydettiğinizde Vidonzo'nun sakladığı şey kanal listesi
+değil, **adrestir**. Her getirişte o anda orada ne varsa o döner.
+
+- İlk yükleme kataloğun tamamını okur, logoları ve kategorileri kurar. Yavaş
+  olan kısım budur ve bir kez olur.
+- Sonraki her açılış, kaydedilmiş katalogdan anında açılır; yenileme arkada
+  çalışır.
+- Ana ekranda aşağı çekmek, önbellek yerine kaynağı yeniden okur. Sağlayıcı
+  tarafında yapılan her değişiklik önce orada görünür.
+
+Xtream panelleri bazen `get.php` bağlantısını logo ve grup taşımayan kısaltılmış
+bir biçimde verir. Vidonzo sessizce daha dolu olan biçimi okur; görsellerin
+gelmesi için bağlantıyı kendiniz düzenlemeniz gerekmez.
+
+## Bağlantıyı güncellikle karıştırmayın
+
+İnsanların yanıldığı yer burası. Bir bağlantı kaydetmek hiçbir şeyin
+güncelleneceğini garanti etmez. **Güncellik bağlantının öbür ucundan gelir.**
+
+Kimsenin bakmadığı bir dosyayı gösteren bağlantı, cihazınızda duran bir dosya
+kadar eskidir. Bağlantının size kazandırdığı şey, değişikliğin ulaşabilme
+*ihtimalidir* — değişikliği üretmez.
+
+Gerçekten hareket hâlinde kalan bir kaynak istiyorsanız
+[Xtream bağlantısı](/tr/blog/xtream-codes-mi-m3u-mu/) daha uygundur. Kataloğu düz bir
+dosya olarak değil bir API üzerinden getirir; kategoriler, diziler ve yayın
+rehberi baştan yapılandırılmış hâlde gelir.
+
+## Aralarında seçim yapmak
+
+**Bağlantı size uygundur, eğer:**
+
+- Sağlayıcınız kanal ekleyip çıkarıyorsa ve bunu takip etmek istiyorsanız.
+- Başlıkta bir `url-tvg` adresi varsa, böylece
+  [yayın rehberi listeyle birlikte yolculuk eder](/tr/blog/epg-yayin-rehberi-nedir/).
+- Aynı listeyi birkaç cihazda kullanıyorsanız. Bir yerde değiştirin, hepsi
+  uyuşsun.
+
+**Dosya size uygundur, eğer:**
+
+- Listeyi düzenlemek istiyorsanız. Cihazınızdaki bir metindir — satır silin,
+  sıralayın, adları değiştirin.
+- Ağa hiçbir şey gitsin istemiyorsanız. Bu kipte liste cihazdan hiç çıkmaz.
+- Sağlayıcınız size yalnızca bir dosya verdiyse. O zaman onu kullanın.
+- [Bozuk kanal adlarını onarıyorsanız](/tr/blog/kanal-adlari-bozuk-gorunuyor/). Açıp UTF-8
+  olarak yeniden kaydedebilmek, yalnızca yerel bir dosyanın izin verdiği şeydir.
+
+## Bağlantıya parola gibi davranın
+
+Son bir şey. Bir M3U bağlantısı genellikle kimlik bilgilerini adresin içine
+gömülü taşır. **O bağlantıyı elinde tutan, aboneliğinizi elinde tutuyor
+demektir.**
+
+Bu yüzden paylaşılacak bir şey değildir ve bu yüzden
+[nasıl saklanması gerektiğine dair bir
+ölçüt](/tr/blog/giris-bilgileri-neden-sifrelenmeli/) vardır. Bir sohbete yapıştırmak,
+bir foruma yazmak, ekran görüntüsünde görünür bırakmak — bunların her biri bir
+parolayı teslim etmektir.
+
+---
+
+Yani seçim, hangi seçeneğin daha yetenekli olduğuyla ilgili değil.
+**Değişikliklerin size ulaşmasını istiyorsanız bağlantıyı, listenin tümüyle
+sizde kalmasını istiyorsanız dosyayı alın.**
+[Kurulum](/tr/blog/ilk-oynatma-listesi-kurulumu/) ikisini de sunar ve her birinden birer
+tane yan yana tutmanıza da hiçbir engel yoktur.

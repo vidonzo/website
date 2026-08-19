@@ -1,0 +1,106 @@
+---
+title: "Vì sao tên kênh hiện lên thành những ký tự lạ"
+description: "Hình vẫn chạy mượt, chỉ mỗi danh sách là không đọc nổi. Đây không phải chuyện chất lượng mà là một tệp văn bản chẳng ai khai báo bảng mã cho nó."
+urlSlug: ten-kenh-bi-loi-font
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['danh sách phát', 'khắc phục sự cố']
+keywords: ['tên kênh iptv bị lỗi font', 'bảng mã tệp m3u', 'danh sách iptv hiện dấu hỏi', 'm3u8 utf-8 tiếng việt']
+heroImageAlt: "Cùng một danh sách kênh hiển thị hai lần, một lần tên bị vỡ thành ký tự vô nghĩa và một lần hiển thị đúng."
+---
+
+Danh sách phát nạp xong. Các kênh vẫn chạy. Vậy mà thứ bạn đọc được lại giống
+`Viá»‡t Nam` hay một hàng dài dấu hỏi, và không cách nào biết dòng nào ứng với
+đài nào.
+
+Luồng phát không có vấn đề gì. Thứ bị hỏng là **văn bản** — mà văn bản thì dễ
+sửa hơn video rất nhiều.
+
+## Danh sách phát chỉ là văn bản
+
+Một danh sách M3U là bảng chỉ mục dạng văn bản thuần gồm tên và địa chỉ. Toàn
+bộ [việc một trình phát làm với nó](/vi/blog/trinh-phat-iptv-lam-gi/) là đọc những
+dòng ấy, dựng danh sách, rồi kết nối tới địa chỉ ở dòng bạn chọn.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Kênh Một",Kênh Một
+http://example.com/live/one.ts
+```
+
+Và đây là chỗ khiến ai cũng vấp: **một tệp văn bản không tự nói nó được viết
+bằng bảng mã nào.** Thứ nằm trong tệp chỉ là một chuỗi byte. Dùng bảng ký tự
+nào để đọc ngược chuỗi byte đó thành chữ là quyết định của bên đọc. Chọn nhầm
+bảng, cùng những byte ấy sẽ thành chữ khác. Chỉ có vậy thôi.
+
+## Trình phát dùng bảng nào
+
+Vidonzo đọc danh sách phát theo **UTF-8** — chuẩn mặc định ngày nay cho văn bản
+ở mọi ngôn ngữ, và đúng là thứ mà phần mở rộng `.m3u8`
+[sinh ra để khai báo](/vi/blog/m3u-va-m3u8-khac-gi/).
+
+Kết quả ra sao còn tùy cách bạn đưa danh sách vào:
+
+- **Một địa chỉ danh sách phát.** Máy chủ khai báo kèm theo phản hồi rằng nội
+  dung nó gửi dùng bảng mã nào. Khai báo đúng thì chẳng có gì trục trặc. Tên bị
+  vỡ nghĩa là khai báo đó thiếu, hoặc mâu thuẫn với chuỗi byte thật.
+- **Một tệp trên máy.** Ở đây không có ai khai báo cả, nên tệp được đọc như
+  UTF-8. Một tệp lưu bằng bảng mã khu vực cũ không chỉ có thể hiển thị sai — nó
+  còn có thể từ chối nạp luôn.
+
+Vidonzo không đoán bảng mã, và đó là chủ ý. Dò tự động rốt cuộc vẫn là phỏng
+đoán; nó sai nhiều nhất đúng ở những hệ chữ ngoài Latinh vốn cần nó nhất, và sai
+theo cách tệ nhất có thể: **đúng ở một phần danh sách và sai ở phần còn lại.**
+Một danh sách đúng nửa vời gây rối hơn một danh sách hỏng rõ ràng.
+
+## Đọc triệu chứng
+
+Văn bản hỏng theo những kiểu rất đặc trưng, nên triệu chứng tự nó gọi tên
+nguyên nhân.
+
+- **`Ã¡`, `á»`, `Æ°` thay cho chữ có dấu** — byte UTF-8 bị đọc qua bảng Tây Âu.
+  Kiểu kinh điển, và phổ biến nhất với danh sách tiếng Việt, tiếng Pháp hay
+  tiếng Ba Lan.
+- **Từng hàng ký hiệu chẳng liên quan** — byte UTF-8 bị đọc qua một bảng khu
+  vực không dính dáng gì tới văn bản đó.
+- **`????` hoặc `___`** — các ký tự đã bị vứt bỏ trong một lần chuyển đổi ở
+  phía trên. Không gì ở phía dưới lấy lại được; phải tải danh sách về lần nữa.
+- **Từng hàng ô vuông rỗng** — cái này **không phải** lỗi bảng mã.
+
+Trường hợp cuối đáng tách riêng. Ô vuông rỗng nghĩa là ký tự đã được giải mã
+hoàn hảo, chỉ là máy không có phông chữ nào vẽ nổi chúng. Nguyên nhân khác, cách
+chữa khác — chuyện đó thuộc
+[phía hiển thị](/vi/blog/xem-bang-ngon-ngu-cua-ban/).
+
+## Thứ tự nên thử
+
+1. **Hỏi xin đường dẫn `.m3u8`.** Nếu nhà cung cấp phát hành cả hai, hãy lấy
+   cái đó. Kênh phía sau y hệt nhau, chỉ khác cách xử lý văn bản. Đây là cách rẻ
+   nhất và thường là đủ.
+2. **Đọc lại danh sách phát.** Kéo xuống ở màn hình chính để ứng dụng lấy lại
+   nguồn thay vì hiển thị danh mục đã lưu. Sau khi đổi đường dẫn, bỏ qua bước
+   này sẽ khiến danh sách cũ nằm nguyên đó.
+3. **Lưu lại tệp trên máy dưới dạng UTF-8.** Mở bằng trình soạn thảo văn bản,
+   đặt bảng mã là UTF-8, lưu rồi
+   [thêm lại](/vi/blog/cai-dat-danh-sach-phat-dau-tien/). Nếu tên hiện đúng trở lại thì
+   chẩn đoán đã được xác nhận.
+4. **Chuyển sang kết nối Xtream.** Khi nhà cung cấp có cấp cả tên đăng nhập và
+   mật khẩu, [hướng đó](/vi/blog/xtream-codes-hay-m3u/) gửi danh mục qua API chứ không
+   qua tệp văn bản, nên chuyện bảng mã tệp không bao giờ phát sinh.
+
+## Khi chỉ vài tên bị hỏng
+
+Nếu sau tất cả những việc trên vẫn còn dăm ba kênh không đọc được thì bảng mã
+không còn là nguyên nhân — nhà cung cấp đã gõ đúng như thế ngay từ nguồn. Không
+trình phát nào cứu được một đoạn văn bản đã sai ngay lúc được viết ra.
+
+Khi ấy hãy thôi cố đọc chúng và
+[đưa những kênh bạn hay xem vào mục yêu thích](/vi/blog/sap-xep-danh-sach-phat-lon/).
+Bạn không cần một cái tên đọc được mới nhớ nổi nó nằm ở đâu.
+
+---
+
+Tên kênh bị vỡ không phải lỗi của trình phát. Đó là một cái bẫy cũ và hết sức
+bình thường khi chuyển văn bản giữa những hệ thống bất đồng về bảng chữ cái.
+Hãy chọn `.m3u8`, giữ tệp ở UTF-8, và danh sách kênh của bạn sẽ đọc được ở bất
+kỳ ngôn ngữ nào.

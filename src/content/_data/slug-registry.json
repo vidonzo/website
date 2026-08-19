@@ -106,14 +106,50 @@
       "sourceLocale": "ja",
       "locales": {
         "en": "why-channel-names-look-garbled",
-        "ja": "チャンネル名-が-文字化け-する-理由"
+        "fa": "نام-کانال-ها-به-هم-ریخته",
+        "ar": "أسماء-القنوات-تظهر-رموزا",
+        "es": "nombres-de-canales-ilegibles",
+        "tr": "kanal-adlari-bozuk-gorunuyor",
+        "fr": "noms-de-chaines-illisibles",
+        "de": "kanalnamen-werden-kryptisch",
+        "pt": "nomes-de-canais-ilegiveis",
+        "ru": "имена-каналов-в-виде-символов",
+        "id": "nama-saluran-jadi-simbol-aneh",
+        "it": "nomi-dei-canali-illeggibili",
+        "vi": "ten-kenh-bi-loi-font",
+        "pl": "nazwy-kanalow-w-krzakach",
+        "nl": "kanaalnamen-vol-vreemde-tekens",
+        "hi": "चैनल-नाम-अजीब-अक्षरों-में",
+        "bn": "চ্যানেলের-নাম-অদ্ভুত-অক্ষরে",
+        "th": "ชื่อช่อง-เป็น-ตัวอักษร-ประหลาด",
+        "ur": "چینل-کے-نام-عجیب-حروف-میں",
+        "ja": "チャンネル名-が-文字化け-する-理由",
+        "ko": "채널-이름이-깨져-보일-때"
       }
     },
     "hosted-playlist-vs-local-file": {
       "sourceLocale": "ja",
       "locales": {
         "en": "playlist-url-vs-local-file",
-        "ja": "url-の-プレイリスト-と-端末内-の-ファイル"
+        "fa": "لینک-پلی-لیست-یا-فایل-روی-گوشی",
+        "ar": "رابط-قائمة-التشغيل-أم-ملف-على-جهازك",
+        "es": "enlace-de-lista-o-archivo-local",
+        "tr": "liste-baglantisi-mi-cihazdaki-dosya-mi",
+        "fr": "lien-de-playlist-ou-fichier-local",
+        "de": "playlist-link-oder-datei-am-geraet",
+        "pt": "link-de-lista-ou-arquivo-local",
+        "ru": "ссылка-на-плейлист-или-файл-на-устройстве",
+        "id": "tautan-playlist-atau-berkas-di-perangkat",
+        "it": "link-della-playlist-o-file-locale",
+        "vi": "lien-ket-danh-sach-phat-hay-tep-tren-may",
+        "pl": "link-do-playlisty-czy-plik-na-urzadzeniu",
+        "nl": "afspeellijst-url-of-bestand-op-je-toestel",
+        "hi": "प्लेलिस्ट-लिंक-या-डिवाइस-की-फाइल",
+        "bn": "প্লেলিস্ট-লিংক-নাকি-ডিভাইসের-ফাইল",
+        "th": "ลิงก์-เพลย์ลิสต์-หรือ-ไฟล์-ในเครื่อง",
+        "ur": "پلے-لسٹ-لنک-یا-ڈیوائس-کی-فائل",
+        "ja": "url-の-プレイリスト-と-端末内-の-ファイル",
+        "ko": "재생목록-주소와-기기-속-파일"
       }
     },
     "how-vidonzo-encrypts-your-playlists": {
@@ -144,7 +180,26 @@
     "inside-an-m3u-file": {
       "sourceLocale": "en",
       "locales": {
-        "en": "inside-an-m3u-file"
+        "en": "inside-an-m3u-file",
+        "fa": "داخل-فایل-m3u-چیست",
+        "ar": "داخل-ملف-m3u",
+        "es": "dentro-de-un-archivo-m3u",
+        "tr": "m3u-dosyasinin-icinde-ne-var",
+        "fr": "dans-un-fichier-m3u",
+        "de": "was-in-einer-m3u-datei-steht",
+        "pt": "dentro-de-um-arquivo-m3u",
+        "ru": "что-внутри-файла-m3u",
+        "id": "isi-file-m3u",
+        "it": "dentro-un-file-m3u",
+        "vi": "ben-trong-tep-m3u",
+        "pl": "co-jest-w-pliku-m3u",
+        "nl": "in-een-m3u-bestand",
+        "hi": "m3u-फाइल-के-अंदर-क्या-है",
+        "bn": "m3u-ফাইলের-ভেতরে-কী-আছে",
+        "th": "ข้างใน-ไฟล์-m3u-มีอะไร",
+        "ur": "m3u-فائل-کے-اندر-کیا-ہے",
+        "ja": "m3u-ファイル-の-中身",
+        "ko": "m3u-파일-안에는-무엇이-있나"
       }
     },
     "iptv-on-a-tablet": {
@@ -351,7 +406,25 @@
       "sourceLocale": "tr",
       "locales": {
         "en": "playlist-link-wont-load",
-        "tr": "oynatma-listesi-baglantisi-acilmiyor"
+        "fa": "پلی-لیست-باز-نمی-شود",
+        "ar": "قائمة-التشغيل-لا-تفتح",
+        "es": "la-lista-no-carga",
+        "tr": "oynatma-listesi-baglantisi-acilmiyor",
+        "fr": "la-playlist-ne-charge-pas",
+        "de": "playlist-laedt-nicht",
+        "pt": "a-lista-nao-carrega",
+        "ru": "плейлист-не-загружается",
+        "id": "playlist-tidak-mau-dimuat",
+        "it": "la-playlist-non-si-carica",
+        "vi": "danh-sach-phat-khong-tai-duoc",
+        "pl": "playlista-sie-nie-wczytuje",
+        "nl": "afspeellijst-laadt-niet",
+        "hi": "प्लेलिस्ट-लोड-नहीं-हो-रही",
+        "bn": "প্লেলিস্ট-লোড-হচ্ছে-না",
+        "th": "เพลย์ลิสต์-โหลดไม่ขึ้น",
+        "ur": "پلے-لسٹ-لوڈ-نہیں-ہو-رہی",
+        "ja": "プレイリスト-が-読み込めない-とき",
+        "ko": "재생목록이-열리지-않을-때"
       }
     },
     "set-up-your-first-playlist": {
@@ -458,7 +531,25 @@
       "sourceLocale": "id",
       "locales": {
         "en": "watching-on-mobile-data",
-        "id": "nonton-iptv-pakai-kuota"
+        "fa": "تماشا-با-اینترنت-همراه",
+        "ar": "المشاهدة-عبر-بيانات-الجوال",
+        "es": "ver-con-datos-moviles",
+        "tr": "mobil-veriyle-izlemek",
+        "fr": "regarder-en-donnees-mobiles",
+        "de": "mit-mobilen-daten-schauen",
+        "pt": "assistir-usando-dados-moveis",
+        "ru": "просмотр-через-мобильный-интернет",
+        "id": "nonton-iptv-pakai-kuota",
+        "it": "guardare-con-i-dati-mobili",
+        "vi": "xem-bang-du-lieu-di-dong",
+        "pl": "ogladanie-na-danych-mobilnych",
+        "nl": "kijken-via-mobiele-data",
+        "hi": "मोबाइल-डेटा-पर-देखना",
+        "bn": "মোবাইল-ডেটায়-দেখা",
+        "th": "ดู-ผ่าน-เน็ตมือถือ",
+        "ur": "موبائل-ڈیٹا-پر-دیکھنا",
+        "ja": "モバイル通信-で-見る-ときの-データ量",
+        "ko": "모바일-데이터로-볼-때"
       }
     },
     "what-an-iptv-player-does": {

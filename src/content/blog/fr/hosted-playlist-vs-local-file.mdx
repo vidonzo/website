@@ -1,0 +1,104 @@
+---
+title: "Une playlist à une URL ou un fichier sur votre appareil : laquelle reste à jour"
+description: "Une fois chargées, elles semblent identiques, et ce ne sont pas du tout les mêmes. L’une repose la question à chaque fois ; l’autre est figée à l’instant où vous l’avez reçue."
+urlSlug: lien-de-playlist-ou-fichier-local
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlists', 'configuration']
+keywords: ['playlist m3u mise a jour automatique', 'playlist iptv ne se met pas a jour', 'lien m3u ou fichier m3u', 'garder sa liste de chaines a jour']
+heroImageAlt: "Deux champs de saisie de playlist côte à côte, l’un contenant une adresse web et l’autre le nom d’un fichier sur l’appareil."
+---
+
+Il y a trois façons de donner une playlist à Vidonzo : des identifiants Xtream
+Codes, un lien M3U, ou un fichier M3U déjà présent sur votre appareil.
+
+Les deux derniers se ressemblent beaucoup une fois chargés. Mêmes chaînes, mêmes
+catégories, même lecture. Mais ils diffèrent sur un point qui décide de
+beaucoup de choses par la suite : **la liste peut-elle changer d’elle-même ?**
+
+## Un fichier est un instantané
+
+Quand vous choisissez un fichier sur l’appareil, ce que Vidonzo lit est ce
+morceau de texte. [Le contenu d’une playlist](/fr/blog/dans-un-fichier-m3u/), ce sont
+des noms et des adresses, rien d’autre — il n’y a nulle part de connexion vivante
+avec votre fournisseur.
+
+Un fichier est donc figé à l’instant où vous l’avez reçu :
+
+- Les chaînes ajoutées ensuite par le fournisseur n’y sont pas.
+- Les chaînes dont il change l’adresse cessent tout simplement de s’ouvrir.
+- Les catégories réorganisées à la source gardent leur ancienne forme sur votre
+  appareil.
+
+Il existe exactement une manière de le faire avancer : obtenir un fichier plus
+récent et remplacer l’ancien vous-même.
+
+## Une URL est une question, reposée à chaque fois
+
+Enregistrez un lien M3U et ce que Vidonzo garde n’est pas la liste des chaînes,
+c’est **l’adresse**. Chaque requête renvoie ce qui s’y trouve à cet instant.
+
+- Le premier chargement lit tout le catalogue et assemble logos et catégories.
+  C’est la partie lente, une seule fois.
+- Chaque chargement suivant s’ouvre instantanément depuis le catalogue
+  enregistré pendant qu’un rafraîchissement travaille derrière.
+- Tirer vers le bas sur l’écran d’accueil relit la source au lieu du cache. Tout
+  changement effectué chez le fournisseur apparaît là en premier.
+
+Les panneaux Xtream livrent parfois un lien `get.php` dans une forme réduite qui
+ne porte ni logos ni groupes. Vidonzo lit discrètement la variante plus complète,
+si bien que vous n’avez pas à modifier le lien pour obtenir les visuels.
+
+## Ne confondez pas l’URL et la fraîcheur
+
+C’est là que l’on se trompe. Enregistrer une URL ne garantit pas que quoi que ce
+soit se mette à jour. **La fraîcheur vient de l’autre bout du lien.**
+
+Une URL pointant vers un fichier que personne n’entretient est exactement aussi
+périmée qu’un fichier posé sur votre appareil. Ce que l’URL vous achète, c’est la
+*possibilité* qu’un changement arrive — elle ne produit pas le changement.
+
+Si vous voulez une source qui bouge vraiment,
+[la connexion Xtream](/fr/blog/xtream-codes-ou-m3u/) convient mieux. Elle livre le
+catalogue par une API plutôt que sous forme de fichier plat, donc catégories,
+séries et guide des programmes arrivent déjà structurés.
+
+## Choisir entre les deux
+
+**Une URL vous convient quand :**
+
+- Votre fournisseur ajoute et retire des chaînes et que vous voulez suivre.
+- L’en-tête porte une adresse `url-tvg`, si bien que
+  [le guide voyage avec la liste](/fr/blog/epg-guide-des-programmes/).
+- Vous utilisez la même liste sur plusieurs appareils. Changez-la à un endroit et
+  tous s’accordent.
+
+**Un fichier vous convient quand :**
+
+- Vous voulez modifier la liste. C’est du texte sur votre appareil : supprimez
+  des lignes, réordonnez-les, renommez.
+- Vous ne voulez rien envoyer sur le réseau. Dans ce mode, la liste ne quitte
+  jamais l’appareil.
+- Votre fournisseur ne vous a jamais donné qu’un fichier. Alors servez-vous-en.
+- Vous [réparez des noms de chaînes
+  illisibles](/fr/blog/noms-de-chaines-illisibles/). Pouvoir l’ouvrir et le réenregistrer en
+  UTF-8 est une chose que seul un fichier local autorise.
+
+## Traitez l’URL comme un mot de passe
+
+Un dernier point. Un lien M3U contient généralement les identifiants intégrés à
+l’adresse elle-même. **Quiconque détient ce lien détient votre abonnement.**
+
+C’est pourquoi il ne se partage pas, et pourquoi il existe
+[une norme sur la façon dont il doit être
+conservé](/fr/blog/pourquoi-chiffrer-vos-identifiants/). Le coller dans une
+conversation, le publier sur un forum, le laisser visible sur une capture
+d’écran : chacun de ces gestes revient à donner un mot de passe.
+
+---
+
+Le choix ne porte donc pas sur l’option la plus puissante. **Prenez l’URL si
+vous voulez que les changements vous parviennent ; prenez le fichier si vous
+voulez que la liste reste entièrement entre vos mains.** La
+[configuration](/fr/blog/configurer-sa-premiere-playlist/) propose les deux, et rien ne vous
+empêche d’en garder une de chaque, côte à côte.

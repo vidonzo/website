@@ -1,0 +1,110 @@
+---
+title: "Kenapa nama saluran Anda muncul sebagai simbol aneh"
+description: "Videonya mulus dan hanya daftarnya yang tidak terbaca. Ini bukan soal kualitas, melainkan berkas teks yang pengodean hurufnya tidak pernah diumumkan siapa pun."
+urlSlug: nama-saluran-jadi-simbol-aneh
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlist', 'pemecahan-masalah']
+keywords: ['nama saluran iptv berantakan', 'pengodean berkas m3u', 'playlist iptv tanda tanya', 'm3u8 utf-8 karakter']
+heroImageAlt: "Daftar saluran yang sama ditampilkan dua kali, satu dengan nama yang runtuh jadi simbol tak bermakna dan satu tampil benar."
+---
+
+Playlist termuat. Salurannya jalan. Tapi yang terbaca di daftar justru
+`SatuÃ¢â‚¬â„¢` atau deretan panjang tanda tanya, dan tidak ada cara mengetahui
+baris mana milik stasiun mana.
+
+Tidak ada yang salah dengan siarannya. Yang rusak adalah **teksnya** — dan teks
+jauh lebih mudah diperbaiki daripada video.
+
+## Playlist hanyalah teks
+
+Playlist M3U adalah indeks teks biasa berisi nama dan alamat. Seluruh
+[pekerjaan sebuah pemutar](/id/blog/tugas-sebenarnya-pemutar-iptv/) atasnya cuma membaca
+baris-baris itu, menyusun daftar, lalu menyambung ke alamat pada baris yang
+Anda pilih.
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-name="Saluran Satu",Saluran Satu
+http://example.com/live/one.ts
+```
+
+Dan inilah bagian yang mengecoh semua orang: **berkas teks tidak menyatakan
+sendiri dengan pengodean apa ia ditulis.** Isi berkasnya hanyalah deretan bita.
+Tabel karakter mana yang harus dipakai untuk mengembalikan bita itu menjadi
+huruf adalah keputusan pihak yang membaca. Salah pilih tabel, bita yang sama
+berubah jadi huruf lain. Sesederhana itu.
+
+## Tabel mana yang dipakai pemutar
+
+Vidonzo membaca playlist sebagai **UTF-8** — standar teks masa kini untuk semua
+bahasa, dan persis itulah yang
+[hendak diumumkan](/id/blog/perbedaan-m3u-dan-m3u8/) oleh akhiran `.m3u8`.
+
+Hasilnya bergantung pada cara Anda menyerahkan daftarnya:
+
+- **Tautan playlist.** Server ikut menyatakan pengodean isi yang ia kirim.
+  Kalau pernyataannya benar, tidak ada yang meleset. Nama yang berantakan
+  berarti pernyataan itu hilang, atau bertentangan dengan bita yang sebenarnya.
+- **Berkas di perangkat.** Di sini tidak ada yang menyatakan apa pun, jadi ia
+  dibaca sebagai UTF-8. Berkas yang disimpan dengan pengodean regional lama
+  bukan cuma bisa tampak salah — bisa juga menolak dimuat sama sekali.
+
+Vidonzo tidak menebak pengodean, dan itu disengaja. Deteksi otomatis pada
+akhirnya adalah tebakan; ia paling sering gagal justru pada aksara non-Latin
+yang paling membutuhkannya, dan gagal dengan cara terburuk: **benar untuk
+sebagian daftar dan salah untuk sisanya.** Daftar yang setengah benar lebih
+membingungkan daripada daftar yang jelas-jelas rusak.
+
+## Membaca gejalanya
+
+Teks rusak dengan pola yang khas, jadi gejalanya sendiri menyebut penyebabnya.
+
+- **`Ã©`, `Ã¼`, `Ã§` di tempat huruf beraksen** — bita UTF-8 dibaca lewat tabel
+  Eropa Barat. Ini yang paling klasik.
+- **Deretan simbol yang tak berhubungan** — bita UTF-8 dibaca lewat tabel
+  regional yang sama sekali tidak berkaitan dengan teks itu.
+- **`????` atau `___`** — karakternya sudah dibuang saat konversi di hulu.
+  Tidak ada yang bisa mengembalikannya di hilir; daftarnya harus diambil ulang.
+- **Deretan kotak kosong** — ini **bukan** masalah pengodean.
+
+Yang terakhir perlu dipisahkan. Kotak kosong berarti karakternya terbaca
+sempurna dan perangkatnya sekadar tidak punya fonta yang sanggup
+menggambarkannya. Penyebab beda, solusi beda — itu urusan
+[sisi tampilan](/id/blog/menonton-dalam-bahasa-anda/).
+
+## Urutan yang layak dicoba
+
+1. **Minta tautan `.m3u8`.** Kalau penyedia Anda menerbitkan keduanya, ambil
+   yang itu. Saluran di baliknya identik; yang berubah hanya perlakuan atas
+   teks. Ini solusi termurah dan biasanya sudah cukup.
+2. **Baca ulang playlist-nya.** Tarik ke bawah di layar utama supaya aplikasi
+   mengambil sumbernya lagi, bukan menampilkan katalog tersimpan. Setelah
+   mengganti tautan, melewatkan langkah ini membuat daftar lama tetap di
+   tempatnya.
+3. **Simpan ulang berkas lokal sebagai UTF-8.** Buka di penyunting teks, atur
+   pengodean ke UTF-8, simpan, lalu
+   [tambahkan lagi](/id/blog/menyiapkan-playlist-pertama/). Kalau namanya kembali
+   normal, diagnosisnya terbukti.
+4. **Beralih ke sambungan Xtream.** Kalau penyedia juga memberi nama pengguna
+   dan kata sandi, [jalur itu](/id/blog/xtream-codes-atau-m3u/) mengirim katalog lewat
+   API alih-alih berkas teks, sehingga soal pengodean berkas tidak pernah
+   muncul.
+
+## Kalau hanya sebagian nama yang rusak
+
+Kalau setelah semua itu masih ada segelintir saluran yang berantakan,
+pengodean bukan lagi penyebabnya — penyedia memang mengetiknya begitu di
+sumbernya. Tidak ada pemutar yang bisa memulihkan teks yang sudah salah sejak
+ditulis.
+
+Kalau begitu, berhenti berusaha membacanya dan
+[masukkan saja yang Anda tonton ke favorit](/id/blog/menata-playlist-besar/). Nama
+tidak perlu terbaca supaya Anda ingat di mana letaknya.
+
+---
+
+Nama yang berantakan bukan kesalahan pemutar. Itu jebakan lama yang sangat biasa
+saat memindahkan teks antar sistem yang tidak sepakat soal abjad. Pilih `.m3u8`,
+simpan berkas dalam UTF-8, dan daftar saluran Anda tetap terbaca dalam bahasa
+apa pun.

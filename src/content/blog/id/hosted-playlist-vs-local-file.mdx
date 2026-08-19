@@ -1,0 +1,107 @@
+---
+title: "Playlist di sebuah tautan atau berkas di perangkat: mana yang tetap mutakhir"
+description: "Setelah termuat keduanya terlihat identik, padahal sama sekali bukan hal yang sama. Yang satu bertanya lagi tiap kali; yang lain beku pada saat Anda menerimanya."
+urlSlug: tautan-playlist-atau-berkas-di-perangkat
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['playlist', 'pengaturan']
+keywords: ['playlist m3u update otomatis', 'playlist iptv tidak diperbarui', 'tautan m3u atau berkas m3u', 'menjaga daftar saluran tetap baru']
+heroImageAlt: "Dua kolom isian playlist berdampingan, satu berisi alamat web dan satu lagi berisi nama berkas di perangkat."
+---
+
+Ada tiga cara memberi playlist ke Vidonzo: kredensial Xtream Codes, sebuah
+tautan M3U, atau berkas M3U yang sudah ada di perangkat Anda.
+
+Dua yang terakhir tampak nyaris sama begitu termuat. Saluran sama, kategori
+sama, pemutaran sama. Tapi keduanya berbeda pada satu hal yang kelak menentukan
+banyak sekali: **apakah daftarnya bisa berubah dengan sendirinya.**
+
+## Berkas adalah potret sesaat
+
+Ketika Anda memilih berkas dari perangkat, yang dibaca Vidonzo adalah sepotong
+teks itu saja. [Isi sebuah playlist](/id/blog/isi-file-m3u/) adalah nama dan
+alamat, tidak lebih — tidak ada sambungan hidup ke penyedia Anda di mana pun di
+dalamnya.
+
+Jadi sebuah berkas beku pada detik Anda menerimanya:
+
+- Saluran yang ditambahkan penyedia belakangan tidak ada di dalamnya.
+- Saluran yang alamatnya diubah penyedia sekadar berhenti bisa dibuka.
+- Kategori yang ditata ulang di sumbernya tetap berbentuk lama di perangkat
+  Anda.
+
+Cuma ada satu cara untuk memajukannya: memperoleh berkas yang lebih baru lalu
+mengganti yang lama sendiri.
+
+## Tautan adalah pertanyaan yang diulang tiap kali
+
+Daftarkan sebuah tautan M3U, dan yang disimpan Vidonzo bukan daftar salurannya —
+melainkan **alamatnya**. Setiap pengambilan mengembalikan apa pun yang ada di
+sana pada saat itu.
+
+- Pemuatan pertama membaca seluruh katalog dan menyusun logo serta kategori.
+  Inilah bagian yang lambat, sekali saja.
+- Setiap pemuatan sesudahnya terbuka seketika dari katalog tersimpan sementara
+  penyegaran berjalan di belakangnya.
+- Menarik ke bawah di layar utama membaca ulang sumbernya, bukan tembolok.
+  Perubahan apa pun di sisi penyedia muncul di situ lebih dulu.
+
+Panel Xtream kadang memberi tautan `get.php` dalam bentuk ringkas yang tak
+membawa logo maupun grup. Vidonzo diam-diam membaca varian yang lebih lengkap,
+jadi Anda tak perlu menyunting tautannya sendiri agar gambarnya muncul.
+
+## Jangan tukar tautan dengan kebaruan
+
+Di sinilah orang keliru. Mendaftarkan tautan tidak menjamin ada yang diperbarui.
+**Kebaruannya datang dari ujung sana tautan itu.**
+
+Tautan yang menunjuk ke berkas yang tak dirawat siapa pun sama tuanya persis
+dengan berkas yang tergeletak di perangkat Anda. Yang Anda beli dengan tautan
+adalah *kemungkinan* perubahan itu sampai — bukan perubahannya itu sendiri.
+
+Kalau Anda mau sumber yang benar-benar terus bergerak,
+[sambungan Xtream](/id/blog/xtream-codes-atau-m3u/) lebih cocok. Ia mengirim katalog
+lewat API alih-alih sebagai berkas datar, sehingga kategori, serial, dan panduan
+acara datang sudah tersusun.
+
+## Memilih di antara keduanya
+
+**Tautan cocok untuk Anda kalau:**
+
+- Penyedia Anda menambah dan mengurangi saluran dan Anda ingin mengikutinya.
+- Tajuknya membawa alamat `url-tvg`, sehingga
+  [panduan acara ikut bepergian bersama daftarnya](/id/blog/panduan-acara-epg-iptv/).
+- Anda memakai daftar yang sama di beberapa perangkat. Ubah di satu tempat, dan
+  semuanya sepakat.
+
+**Berkas cocok untuk Anda kalau:**
+
+- Anda ingin menyunting daftarnya. Itu teks di perangkat Anda — hapus barisnya,
+  ubah urutannya, ganti namanya.
+- Anda tidak ingin ada yang terkirim ke jaringan. Dalam mode ini daftarnya tidak
+  pernah meninggalkan perangkat.
+- Penyedia Anda memang hanya memberi berkas. Ya sudah, pakai saja.
+- Anda sedang
+  [memperbaiki nama saluran yang berantakan](/id/blog/nama-saluran-jadi-simbol-aneh/).
+  Kemampuan membukanya lalu menyimpannya kembali sebagai UTF-8 hanya dimiliki
+  berkas lokal.
+
+## Perlakukan tautan sebagai kata sandi
+
+Satu hal terakhir. Tautan M3U biasanya membawa kredensial yang tertanam di dalam
+alamatnya sendiri. **Siapa pun yang memegang tautan itu memegang langganan
+Anda.**
+
+Itu sebabnya ia bukan sesuatu untuk dibagikan, dan itu sebabnya ada
+[standar tentang bagaimana ia mesti
+disimpan](/id/blog/mengenkripsi-data-login-playlist/). Menempelkannya di obrolan,
+memasangnya di forum, membiarkannya terlihat di tangkapan layar — masing-masing
+sama saja dengan menyerahkan kata sandi.
+
+---
+
+Jadi pilihannya bukan soal mana yang lebih hebat. **Ambil tautan kalau Anda ingin
+perubahan sampai kepada Anda; ambil berkas kalau Anda ingin daftarnya sepenuhnya
+berada di tangan Anda.** [Penyiapannya](/id/blog/menyiapkan-playlist-pertama/)
+menyediakan keduanya, dan tak ada yang melarang Anda menyimpan satu dari
+masing-masing berdampingan.

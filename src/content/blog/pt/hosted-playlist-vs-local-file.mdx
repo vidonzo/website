@@ -1,0 +1,101 @@
+---
+title: "Lista num link ou arquivo no aparelho: qual continua atualizada"
+description: "Depois de carregadas parecem idênticas, e não são a mesma coisa. Uma pergunta de novo toda vez; a outra está congelada no momento em que você a recebeu."
+urlSlug: link-de-lista-ou-arquivo-local
+publishedAt: 2026-08-19
+sourceLocale: ja
+tags: ['listas', 'configuração']
+keywords: ['lista m3u atualizacao automatica', 'lista iptv nao atualiza', 'link m3u ou arquivo m3u', 'manter lista de canais atualizada']
+heroImageAlt: "Dois campos de cadastro de lista lado a lado, um com um endereço da web e outro com o nome de um arquivo do aparelho."
+---
+
+Há três maneiras de dar uma lista ao Vidonzo: credenciais do Xtream Codes, um
+link M3U, ou um arquivo M3U que já está no seu aparelho.
+
+Os dois últimos parecem quase iguais depois de carregados. Mesmos canais, mesmas
+categorias, mesma reprodução. Mas diferem num ponto que decide muita coisa
+depois: **se a lista pode mudar sozinha.**
+
+## Um arquivo é uma fotografia
+
+Quando você escolhe um arquivo do aparelho, o que o Vidonzo lê é aquele pedaço
+de texto. [O conteúdo de uma lista](/pt/blog/dentro-de-um-arquivo-m3u/) são nomes e endereços
+e nada mais — não existe conexão viva com o seu provedor em lugar nenhum dali.
+
+Então um arquivo está congelado no instante em que você o recebeu:
+
+- Canais que o provedor acrescentar depois não estão nele.
+- Canais cujos endereços o provedor mudar simplesmente param de abrir.
+- Categorias reorganizadas na origem mantêm a forma antiga no seu aparelho.
+
+Existe exatamente um jeito de fazê-lo avançar: obter um arquivo mais novo e
+substituir o antigo você mesmo.
+
+## Um link é uma pergunta, refeita a cada vez
+
+Cadastre um link M3U e o que o Vidonzo guarda não é a lista de canais: é o
+**endereço**. Cada busca devolve o que estiver lá naquele momento.
+
+- O primeiro carregamento lê o catálogo inteiro e monta logos e categorias. É a
+  parte lenta, uma única vez.
+- Todo carregamento seguinte abre na hora a partir do catálogo salvo, enquanto
+  uma atualização roda por trás.
+- Puxar para baixo na tela inicial relê a origem em vez do cache. Qualquer
+  mudança feita pelo provedor aparece ali primeiro.
+
+Painéis Xtream às vezes entregam um link `get.php` numa forma reduzida, sem
+logos nem grupos. O Vidonzo lê discretamente a variante mais completa, então
+você não precisa editar o link para as imagens aparecerem.
+
+## Não confunda o link com o frescor
+
+É aqui que se erra. Cadastrar um link não garante que algo se atualize. **O
+frescor vem da outra ponta do link.**
+
+Um link apontando para um arquivo que ninguém mantém está exatamente tão velho
+quanto um arquivo parado no seu aparelho. O que o link compra é a
+*possibilidade* de a mudança chegar — ele não produz a mudança.
+
+Se você quer uma fonte que realmente continue se mexendo,
+[a conexão Xtream](/pt/blog/xtream-codes-ou-m3u/) serve melhor. Ela entrega o catálogo
+por uma API em vez de um arquivo plano, então categorias, séries e guia de
+programação chegam já estruturados.
+
+## Escolhendo entre os dois
+
+**O link combina com você quando:**
+
+- Seu provedor acrescenta e remove canais e você quer acompanhar.
+- O cabeçalho traz um endereço `url-tvg`, de modo que
+  [o guia viaja junto com a lista](/pt/blog/epg-guia-de-programacao/).
+- Você usa a mesma lista em vários aparelhos. Muda num lugar e todos concordam.
+
+**O arquivo combina com você quando:**
+
+- Você quer editar a lista. É texto no seu aparelho — apague linhas, reordene,
+  renomeie.
+- Você não quer que nada seja enviado à rede. Nesse modo a lista nunca sai do
+  aparelho.
+- Seu provedor só te deu um arquivo. Então é só usar.
+- Você está
+  [consertando nomes de canais ilegíveis](/pt/blog/nomes-de-canais-ilegiveis/). Poder abrir
+  e salvar de novo em UTF-8 é algo que só um arquivo local permite.
+
+## Trate o link como uma senha
+
+Uma última coisa. Um link M3U em geral traz as credenciais embutidas no próprio
+endereço. **Quem tem aquele link tem a sua assinatura.**
+
+Por isso ele não é algo para compartilhar, e por isso existe
+[um padrão de como ele deve ser
+guardado](/pt/blog/por-que-criptografar-suas-credenciais/). Colar num chat, publicar num
+fórum, deixar visível numa captura de tela — cada uma dessas coisas é entregar
+uma senha.
+
+---
+
+Então a escolha não é sobre qual opção é mais capaz. **Pegue o link se quiser
+que as mudanças cheguem até você; pegue o arquivo se quiser que a lista fique
+inteiramente nas suas mãos.** A
+[configuração](/pt/blog/configurar-sua-primeira-lista/) oferece as duas, e nada impede que
+você mantenha uma de cada lado a lado.
