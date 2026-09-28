@@ -1,0 +1,147 @@
+---
+title: "¿Qué es un enlace M3U8? Streams HLS y cómo reproducirlos"
+description: "Un enlace .m3u8 es un único stream HLS o una lista de canales guardada en UTF-8. Cómo saber cuál tienes, cómo reproducirlo y por qué deja de funcionar."
+urlSlug: que-es-un-enlace-m3u8
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["listas", "ingeniería"]
+keywords: ["qué es m3u8", "archivo m3u8", "enlace m3u8", "cómo reproducir un m3u8", "m3u8 hls"]
+heroImageAlt: "Una única dirección de stream que se abre en abanico en una fila de segmentos de vídeo cortos, de pocos segundos cada uno."
+---
+
+**Un enlace M3U8 es la dirección de un pequeño archivo de texto en formato M3U,
+guardado en UTF-8.** Nunca contiene vídeo. Lo que lleva dentro decide qué tienes
+entre manos, y en la práctica es una de dos cosas muy distintas:
+
+- **Un stream HLS**: un solo canal o un solo vídeo, descrito como una lista de
+  segmentos cortos que el reproductor va pidiendo por turnos. Es lo que significa
+  la extensión en la mayor parte de la web.
+- **Una lista de canales**: cientos de nombres de canal con sus direcciones de
+  stream, exactamente como un archivo `.m3u`, solo que con el texto en UTF-8.
+  [La diferencia entre M3U y M3U8](/es/blog/diferencia-m3u-y-m3u8/) cubre esa parte.
+
+Las dos se ven idénticas en la barra de direcciones y no se parecen en nada al
+usarlas, así que lo primero es distinguirlas.
+
+## Cómo saber cuál tienes
+
+Abre el enlace en un navegador, o guarda el archivo y ábrelo en un editor de
+texto. Las primeras líneas lo delatan.
+
+Una **lista** se lee como un directorio: un nombre, luego una dirección, y así una
+y otra vez:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="Noticias",Channel One
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Cine",Channel Two
+http://example.com/live/two.m3u8
+```
+
+Un **stream HLS** se lee como un horario. O bien enumera las calidades
+disponibles:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+o bien enumera los propios segmentos:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Nombres de canal y `group-title` significan lista. Líneas `#EXT-X-` significan
+stream.
+
+## Cómo se reproduce de verdad un HLS
+
+HLS —HTTP Live Streaming— es la forma más usada de enviar vídeo por internet, y
+el archivo `.m3u8` es su índice.
+
+El primer archivo, la **lista maestra** (*master playlist*), ofrece el mismo
+programa en varias calidades, cada una con el ancho de banda que necesita. El
+reproductor elige una y abre su **lista de medios** (*media playlist*), que nombra
+los siguientes segmentos, de unos pocos segundos cada uno. Los pide, los
+reproduce y vuelve a leer la lista de medios para encontrar los siguientes. En un
+canal en directo esa lista no deja de avanzar; en una película termina con una
+etiqueta de cierre y el reproductor conoce la duración completa.
+
+Lo ingenioso es que el reproductor puede cambiar de calidad entre un segmento y
+otro. Cuando tu conexión flojea, baja a una versión más ligera en lugar de
+pararse, y vuelve a subir cuando hay margen. Vidonzo arranca un canal en directo
+en la versión más ligera para que la imagen aparezca enseguida, y después sube
+por su cuenta. Hay más sobre HLS frente a sus rivales en
+[la explicación de los protocolos de streaming](/es/blog/protocolos-de-streaming-hls-dash-rtsp/).
+
+## Cómo reproducir un enlace M3U8
+
+**Si es una lista**, su sitio es un reproductor IPTV, que la convertirá en
+canales, categorías y guía. En Vidonzo, elige **Añadir servicio → Enlace M3U** y
+pégala en **URL de lista M3U/M3U8**. Si la lista te llegó como archivo,
+**Archivo M3U** la coge del almacenamiento de tu dispositivo.
+
+**Si es un solo stream**, tienes tres opciones sencillas:
+
+1. **VLC.** Elige *Medio → Abrir ubicación de red* (en Mac, *Archivo → Abrir
+   red*; en un VLC en inglés, *Media → Open Network Stream*), pega el enlace y
+   reproduce. VLC es excelente justo para esto, y
+   [dónde deja de ser suficiente](/es/blog/vlc-como-reproductor-iptv/) es otra
+   cuestión.
+2. **Safari.** Los navegadores de Apple reproducen HLS de forma nativa, así que un
+   enlace `.m3u8` directo suele abrirse tal cual como vídeo. En otros navegadores
+   el soporte varía, y muchos solo lo reproducen dentro de una página web que
+   lleve un reproductor HLS integrado.
+3. **Envuélvelo en una lista.** Un reproductor IPTV espera una lista, y una lista
+   de un solo elemento sigue siendo una lista. Guarda estas tres líneas en un
+   archivo de texto llamado `stream.m3u`, con tu propio nombre y tu dirección:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Mi stream
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo lo lee desde **Archivo M3U** como cualquier otra lista, y el stream
+   queda en tu biblioteca con un nombre, junto a todo lo demás.
+
+## Por qué un enlace M3U8 deja de funcionar
+
+Un enlace que ayer iba y hoy falla suele deberse a una de estas cosas:
+
+- **Tenía caducidad incorporada.** Muchas direcciones de stream llevan un token o
+  una firma en la parte que va después del `?`: `token=`, `expires=`, `sig=`.
+  Valen para una sesión o unas horas y luego el servidor las rechaza con un 403.
+  Tu reproductor no tiene nada roto; la llave simplemente ha caducado.
+- **Solo funciona donde nació.** Algunos servidores comprueban qué app o qué
+  página pregunta y rechazan todo lo demás.
+- **Los segmentos ya pasaron.** Una lista de medios en directo solo nombra los
+  últimos segmentos. Una copia guardada como archivo se queda obsoleta en
+  segundos.
+- **El stream terminó o cambió de sitio.** Un 404 significa que esa dirección ya
+  no existe.
+
+Si una lista entera de canales `.m3u8` carga pero no se reproduce nada, el
+culpable casi nunca es la extensión: son las direcciones de dentro. Y si los
+streams arrancan y mueren a los pocos segundos,
+[eso es una desconexión, no buffering](/es/blog/el-stream-se-corta-a-los-pocos-segundos/),
+y tiene sus propias causas.
+
+## En resumen
+
+Un `.m3u8` es un índice, nunca el vídeo. Si dentro hay nombres de canal, es una
+lista: dásela a un reproductor. Si hay líneas `#EXT-X-`, es un único stream HLS:
+ábrelo en VLC o en Safari, o envuélvelo en una lista de una línea. Y si funcionó
+una vez y ahora falla, mira la caducidad de la dirección antes de buscar en
+ningún otro sitio.

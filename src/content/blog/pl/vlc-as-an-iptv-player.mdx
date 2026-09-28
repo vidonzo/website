@@ -1,11 +1,12 @@
 ---
-title: "Czy VLC może być twoim odtwarzaczem IPTV? Gdzie kończy się odtwarzacz uniwersalny"
-description: "VLC otwiera M3U i odtwarza prawie wszystko, i dla wielu osób to cała odpowiedź. Oto dokładnie, co robi dobrze — i pięć punktów, w których dedykowany odtwarzacz zasługuje na swoje miejsce."
+title: "IPTV w VLC: jak otworzyć playlistę i gdzie VLC nie wystarcza"
+description: "Jak oglądać IPTV przez VLC na komputerze i telefonie w kilku krokach, co VLC robi świetnie i w których pięciu punktach lepszy jest dedykowany odtwarzacz."
 urlSlug: czy-vlc-moze-byc-odtwarzaczem-iptv
 publishedAt: 2026-08-18
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['produkt', 'odtwarzanie']
-keywords: ['vlc iptv', 'vlc playlista m3u', 'vlc jako odtwarzacz iptv', 'vlc czy odtwarzacz iptv']
+keywords: ['vlc iptv', 'jak oglądać iptv na vlc', 'iptv przez vlc', 'vlc playlista m3u', 'vlc jako odtwarzacz iptv', 'vlc czy odtwarzacz iptv']
 heroImageAlt: "Pachołek drogowy obok pilota do telewizora, oba na gładkiej powierzchni."
 ---
 
@@ -27,6 +28,26 @@ opóźnienia, filtry. Do sprawdzenia, czy strumień żyje albo czy link od
 dostawcy jest ważny, nie ma nic szybszego. Wielu użytkowników dedykowanego
 odtwarzacza IPTV trzyma VLC obok właśnie po to.
 
+## Jak oglądać IPTV w VLC krok po kroku
+
+Potrzebujesz linku M3U albo pliku M3U od dostawcy. VLC nie przyjmuje
+bezpośrednio danych logowania Xtream Codes; jeśli tylko je masz,
+[te trzy pola da się zapisać jako link M3U](/pl/blog/dane-logowania-xtream-codes/).
+
+1. **Na Windowsie** wybierz *Media → Otwórz strumień sieciowy*, wklej link M3U
+   i naciśnij *Odtwórz*. **Na Macu** to *File → Open Network*. Plik zapisany na
+   komputerze otwierasz przez *Otwórz plik* albo przeciągając go na okno VLC.
+2. **Otwórz panel listy odtwarzania** — *Widok → Lista odtwarzania* na
+   Windowsie, *Window → Playlist* na Macu. Pojawia się tam każdy kanał z listy.
+3. **Kliknij dwukrotnie kanał**, żeby go odtworzyć. Przyciski następny i
+   poprzedni przechodzą po liście po kolei.
+4. **Na telefonie** mobilna aplikacja VLC ma w menu opcję strumienia
+   sieciowego, która przyjmuje ten sam link.
+
+Duża lista może chwilę zapełniać panel. Jeśli VLC odtwarza jeden kanał i na tym
+koniec, najpewniej wkleiłeś adres pojedynczego strumienia, a nie playlisty —
+[artykuł o M3U8](/pl/blog/co-to-jest-link-m3u8/) pokazuje, jak je odróżnić.
+
 ## Gdzie widać szwy
 
 Playlista IPTV to nie folder z filmami i tu drogi odtwarzacza uniwersalnego i
@@ -46,7 +67,7 @@ lista to coś, co przewija się zawodowo.
 
 VLC nie ma pojęcia o przewodniku po programach, bo film na twoim dysku go nie
 ma. Kanał IPTV ma: [EPG to osobny plik](/pl/blog/epg-jak-dziala-program-telewizyjny/), który
-dedykowany odtwarzacz pobiera, dopasowuje do kanałów po identyfikatorze i
+dedykowany odtwarzacz wczytuje, dopasowuje do kanałów po identyfikatorze i
 pokazuje jako „co jest teraz, co potem”. Bez tego zmieniasz kanał, żeby się
 dowiedzieć, co leci — czyli telewizja z 1985 roku.
 

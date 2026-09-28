@@ -1,19 +1,28 @@
 ---
-title: "In einer M3U-Datei: was jede Zeile tatsächlich sagt"
-description: "Einmal im Texteditor geöffnet, hört das Rätselhafte auf. Vier Arten von Zeilen, eine Handvoll Attribute — und jedes davon erklärt etwas, das Sie im Player schon gesehen haben."
+title: "Was ist eine M3U-Datei? Das Playlist-Format Zeile für Zeile"
+description: "Eine M3U-Datei ist eine Playlist im Klartext: Sendernamen, Streamadressen, ein paar optionale Tags. Was jede Zeile bedeutet und wie ein Player sie liest."
 urlSlug: was-in-einer-m3u-datei-steht
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['playlists', 'technik']
-keywords: ['was ist eine m3u datei', 'm3u dateiformat', 'extinf erklärt', 'm3u tvg-id group-title']
+keywords: ['was ist eine m3u datei', 'm3u datei', 'm3u dateiformat', 'm3u bedeutung', 'extinf erklärt', 'm3u tvg-id group-title']
 heroImageAlt: "Einige Zeilen Text aus einer M3U-Playlist, in denen Kopfzeile, Beschreibungszeile und Streamadresse hervorgehoben sind."
 ---
 
-Die M3U-Datei gilt als technisch, und das zu Unrecht. Sie ist eines der
-einfachsten Formate, die täglich noch im Einsatz sind: eine Liste von Namen,
-eine Liste von Adressen und ein paar optionale Notizen. Man kann sie in einem
-Texteditor lesen, und sobald man das getan hat, wirkt vieles am Verhalten eines
-Players nicht mehr willkürlich.
+**Eine M3U-Datei ist eine Playlist im Klartext.** Jeder Eintrag ist eine
+Adresse — eines Songs, eines Videos oder eines Live-TV-Streams —, meist mit einer
+Zeile davor, die ihn benennt und beschreibt. Die Endung stammt von *MP3 URL*,
+ihrer ursprünglichen Aufgabe; heute ist sie der übliche Weg, auf dem IPTV-Anbieter
+Senderlisten herausgeben, und `.m3u8` ist dasselbe Format, gespeichert als UTF-8.
+
+Das Format gilt als technisch, und das zu Unrecht. Es ist eines der einfachsten,
+die täglich noch im Einsatz sind: eine Liste von Namen, eine Liste von Adressen
+und ein paar optionale Notizen. Man kann eine M3U-Datei in einem Texteditor lesen,
+und sobald man das getan hat, wirkt vieles am Verhalten eines Players nicht mehr
+willkürlich. (Wollen Sie eine nur abspielen, steht
+[das Öffnen einer M3U-Datei](/de/blog/m3u-datei-oeffnen/) in einem
+eigenen, kürzeren Artikel.)
 
 Hier eine vollständige, funktionierende Playlist. Zwei Kanäle, nichts
 weggelassen.

@@ -1,19 +1,29 @@
 ---
-title: "Dans un fichier M3U : ce que dit vraiment chaque ligne"
-description: "Ouvrez-le une fois dans un éditeur de texte et le mystère s’évapore. Quatre types de lignes, une poignée d’attributs, et chacun explique quelque chose que vous avez déjà vu dans un lecteur."
+title: "C’est quoi un fichier M3U ? Le format, ligne par ligne"
+description: "Un fichier M3U est une playlist en texte brut : noms de chaînes, adresses de flux et quelques balises. Ce que dit chaque ligne, et comment vérifier la vôtre."
 urlSlug: dans-un-fichier-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['playlists', 'technique']
-keywords: ['fichier m3u c est quoi', 'format fichier m3u', 'extinf explication', 'm3u tvg-id group-title']
+keywords: ['fichier m3u c est quoi', 'format fichier m3u', 'm3u signification', 'extension m3u', 'extinf explication', 'm3u tvg-id group-title']
 heroImageAlt: "Quelques lignes de texte d’une playlist M3U avec l’en-tête, la ligne de description et l’adresse du flux mises en évidence."
 ---
 
-Le fichier M3U passe pour technique, réputation qu’il ne mérite pas. C’est l’un
-des formats les plus simples encore en usage quotidien : une liste de noms, une
-liste d’adresses et quelques annotations facultatives. Vous pouvez le lire dans
-un éditeur de texte, et dès que c’est fait, beaucoup de comportements du lecteur
-cessent de paraître arbitraires.
+**Un fichier M3U est une playlist en texte brut.** Chaque entrée est une
+adresse — d’une chanson, d’une vidéo ou d’un flux de télévision en direct —
+généralement précédée d’une ligne qui la nomme et la décrit. L’extension vient
+de *MP3 URL*, sa fonction d’origine ; c’est aujourd’hui la façon standard dont
+les fournisseurs IPTV distribuent leurs listes de chaînes, et le `.m3u8` n’est
+rien d’autre que le même format enregistré en UTF-8.
+
+Le format passe pour technique, réputation qu’il ne mérite pas. C’est l’un des
+plus simples encore en usage quotidien : une liste de noms, une liste d’adresses
+et quelques annotations facultatives. Vous pouvez le lire dans un éditeur de
+texte, et dès que c’est fait, beaucoup de comportements du lecteur cessent de
+paraître arbitraires. (Si vous voulez seulement en lire un,
+[ouvrir un fichier M3U](/fr/blog/comment-ouvrir-un-fichier-m3u/) est une autre
+histoire, plus courte.)
 
 Voici une playlist complète et fonctionnelle. Deux chaînes, rien d’omis.
 

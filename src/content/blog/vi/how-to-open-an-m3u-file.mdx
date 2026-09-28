@@ -1,0 +1,112 @@
+---
+title: "Cách mở file M3U trên mọi thiết bị, và mở bằng gì"
+description: "File M3U là một danh sách phát, nên ứng dụng phù hợp tùy vào thứ nó liệt kê. Cách xem bên trong, và cách mở trên Windows, Mac, Android, iPhone và tivi."
+urlSlug: cach-mo-file-m3u
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["danh sách phát", "cài đặt"]
+keywords: ["cách mở file m3u", "file m3u mở bằng gì", "phần mềm mở file m3u", "mở file m3u trên android", "mở file m3u trên điện thoại"]
+heroImageAlt: "Biểu tượng một tệp danh sách phát trên màn hình điện thoại, với các mũi tên chỉ tới một laptop, một máy tính bảng và một chiếc tivi."
+---
+
+**Để mở file M3U, hãy dùng một trình phát đa phương tiện đọc được danh sách phát
+— VLC trên máy tính, hoặc một trình phát IPTV trên điện thoại, máy tính bảng hay
+tivi.** File M3U không phải là video. Nó là một tệp văn bản ngắn liệt kê địa chỉ
+của những thứ cần phát, nên “mở” nó nghĩa là trao danh sách đó cho một ứng dụng
+biết cách lần theo. Bạn cũng có thể mở nó bằng bất kỳ trình soạn thảo văn bản
+nào để xem bên trong có gì, và đó là bước đầu tiên tốt nhất, vì thứ nó liệt kê
+mới quyết định bạn thật sự cần ứng dụng nào.
+
+## Trước hết, hãy nhìn vào bên trong
+
+Mở tệp bằng Notepad trên Windows, TextEdit trên Mac (chọn *Format → Make Plain
+Text* nếu nó hiện lên lạ lạ), hoặc bất kỳ trình xem văn bản nào trên điện thoại.
+Bạn sẽ thấy một trong hai thứ.
+
+**Đường dẫn tới các tệp trên một máy tính** — những dòng như
+`Nhac\Album\01 Bai hat.mp3`. Đây là danh sách nhạc, do một chương trình như
+Winamp, iTunes hay phần mềm của dàn âm thanh ô tô tạo ra. Hãy mở nó bằng trình
+nghe nhạc trên chính chiếc máy tính đó. Nếu chuyển sang thiết bị khác, các đường
+dẫn không còn trỏ tới đâu cả, và nó sẽ mở ra thành một danh sách trống.
+
+**Địa chỉ web, mỗi địa chỉ có một cái tên phía trên** — những dòng bắt đầu bằng
+`#EXTINF`, theo sau là địa chỉ `http://` hoặc `https://`. Đây là danh sách phát
+IPTV: mỗi cặp dòng là một tên kênh và luồng mà kênh đó phát. Nó cần một trình phát
+hiểu được các dòng `#EXTINF`, vì đó là nơi chứa tên kênh, danh mục và mã định danh
+cho lịch phát sóng.
+[Từng dòng của định dạng này được giải thích ở đây.](/vi/blog/ben-trong-tep-m3u/)
+
+Phần còn lại của bài viết nói về loại thứ hai.
+
+## Trên máy tính Windows hoặc Mac
+
+**VLC** là lựa chọn miễn phí đơn giản nhất trên cả hai. Chọn *Media → Open File*
+(trên Mac là *File → Open File*), chọn tệp `.m3u`, và VLC nạp toàn bộ danh sách
+vào bảng playlist của nó; nhấp đúp vào một mục để phát. Kéo thả tệp vào cửa sổ
+VLC cũng cho kết quả y như vậy.
+
+Như thế là đủ để kiểm tra một danh sách hoặc xem vài kênh. Với danh sách đầy đủ
+của nhà cung cấp, bạn sẽ sớm thấy thiếu danh mục, lịch phát sóng và kênh yêu
+thích — đó chính là
+[lúc một trình phát chuyên dụng chứng tỏ giá trị](/vi/blog/vlc-lam-trinh-phat-iptv/).
+
+## Trên điện thoại hoặc máy tính bảng Android
+
+Hãy dùng một trình phát IPTV có thể nhập tệp. Trong Vidonzo:
+
+1. Chọn **Thêm dịch vụ**, rồi chuyển sang thẻ **Tệp M3U**.
+2. Chạm **Chọn tệp M3U** và chọn tệp trong bộ nhớ điện thoại. Tệp có đuôi `.m3u`,
+   `.m3u8` và `.txt` đều được chấp nhận, nên một danh sách phát bị đổi tên thành
+   tệp văn bản trên đường đến tay bạn vẫn dùng được.
+3. Nếu nhà cung cấp có đưa địa chỉ lịch phát sóng, hãy dán vào ô
+   **URL EPG (XMLTV) — tùy chọn**. Sau đó chạm **Kết nối & lưu**.
+
+Danh sách được đọc một lần, rồi các kênh hiện ra, xếp nhóm đúng theo cách tệp đã
+nhóm chúng.
+
+## Trên iPhone hoặc iPad
+
+Trước tiên hãy lưu tệp vào ứng dụng Tệp — từ Mail hay một ứng dụng nhắn tin, mở
+menu chia sẻ của tệp đính kèm và chọn **Lưu vào Tệp**. Sau đó, trong Vidonzo,
+**Thêm dịch vụ → Tệp M3U → Chọn tệp M3U** sẽ mở trình duyệt tệp để bạn chọn nó
+từ đó. Các bước y hệt trên iPad, nơi
+[màn hình lớn hơn giúp duyệt cả thư viện dễ hơn nhiều](/vi/blog/iptv-tren-iphone-va-ipad/).
+
+## Trên tivi
+
+Tivi là trường hợp khó chịu nhất, vì tivi xử lý tệp rất kém: hiếm khi có trình
+quản lý tệp, và đưa một tệp vào tivi thường đồng nghĩa với việc phải dùng USB.
+
+Nếu file M3U vốn đến từ một đường link, **hãy dùng chính đường link đó**. Trên
+Android TV, Google TV hay Fire TV Stick, thêm nó vào Vidonzo dưới dạng
+**Liên kết M3U** thay vì tệp. Gõ một địa chỉ dài bằng remote là phần cực hình, và
+đó là lúc [bàn phím của một chiếc điện thoại đã ghép đôi](/vi/blog/dien-thoai-lam-dieu-khien-tv/)
+cứu bạn: chữ gõ trên điện thoại sẽ hiện thẳng vào ô nhập trên tivi.
+
+Tivi Samsung và LG không chạy Android, nên trình phát nằm trên một chiếc hộp hoặc
+stick cắm vào tivi — [cách sắp xếp hiệu quả được mô tả ở đây](/vi/blog/iptv-tren-smart-tv-samsung-hoac-lg/).
+
+## Tệp, hay đường link mà nó đến từ đó?
+
+Nếu bạn được đưa cả hai, hãy ưu tiên đường link. Một tệp là ảnh chụp danh sách
+vào đúng thời điểm nó được lưu; còn một đường link được đọc lại mỗi khi trình phát
+làm mới, nên những kênh nhà cung cấp thêm vào hay dời đi sẽ tự xuất hiện.
+[Sự đánh đổi được giải thích đầy đủ ở đây](/vi/blog/lien-ket-danh-sach-phat-hay-tep-tren-may/)
+— tệp vẫn có chỗ dùng của nó, kể cả việc chạy được mà không cần tới máy chủ danh
+sách phát của nhà cung cấp.
+
+## Khi mở được nhưng có gì đó sai sai
+
+- **Danh sách trống.** Tệp không có mục `#EXTINF` nào, hoặc các đường dẫn trỏ tới ổ
+  đĩa của một máy tính khác. Hãy nhìn lại bên trong tệp.
+- **Tên kênh thành ký hiệu hoặc dấu hỏi.** Bảng mã văn bản không phải thứ trình
+  phát chờ đợi. [Vì sao tên kênh bị lỗi font](/vi/blog/ten-kenh-bi-loi-font/),
+  và cách sửa tệp.
+- **Danh sách ổn mà không kênh nào phát.** Tên thì đúng nhưng địa chỉ đã chết hoặc
+  hết hạn — đó là vấn đề ở phía nhà cung cấp, không nằm ở tệp hay trình phát.
+- **Báo không tải được danh sách phát.** Một tệp không hỏng theo kiểu một đường
+  link hỏng, nhưng một đường link thì có thể;
+  [năm nguyên nhân nằm ở đây](/vi/blog/danh-sach-phat-khong-tai-duoc/).
+
+File M3U nhỏ, đọc được và dễ tính. Hãy nhìn vào bên trong một lần, chọn ứng dụng
+hợp với thứ nó liệt kê, và nó sẽ mở ra như bất cứ thứ gì khác.

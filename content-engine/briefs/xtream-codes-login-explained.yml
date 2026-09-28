@@ -1,0 +1,19 @@
+key: xtream-codes-login-explained
+title: "Xtream Codes login explained: server URL, username and password"
+sourceLocale: en
+status: published
+riskTier: low
+intent: how-to
+targetQueries: ["xtream codes login", "codici xtream", "xtream iptv url m3u", "xtream playlist iptv", "xtream codes español", "player api", "get.php"]
+audience: Someone with three fields from a provider and a login that will not connect.
+value: The server URL taken apart (scheme, host, port), the get.php link read both ways, and each of the app's real error messages mapped to its cause.
+angle: xtream-codes-vs-m3u is the which-format question; this is the make-it-work one. Error strings quoted are the app's own (lib/core/net_errors.dart).
+evidence: GSC 2026-06-28..2026-09-26 — "codici xtream" 8 impressions (it) plus xtream url/playlist/api queries at 5–108 with no setup page to match.
+productFacts:
+  - Add a service → Xtream Codes → Server URL / Username / Password / Service name (optional) → Connect & save; login checked before saving
+  - adds http:// when missing, strips trailing slashes, keeps the port
+  - a get.php link pasted as an M3U link is read for its credentials and upgraded to a full Xtream source when the login works
+  - error strings: incorrect username or password; could not reach the server; took too long; certificate could not be verified
+  - credentials stored only on the device; encryptable before sync
+constraints: [no-download-or-offline-wording, sell-playback-not-access, never-say-where-to-get-logins]
+internalLinks: [how-vidonzo-encrypts-your-playlists, xtream-codes-vs-m3u, stream-stops-after-a-few-seconds, playlist-link-wont-load]

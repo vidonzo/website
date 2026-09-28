@@ -1,0 +1,138 @@
+---
+title: "Xtream Codes-login: server-URL, gebruikersnaam en wachtwoord"
+description: "Een Xtream Codes-login is drie velden: serveradres met poort, gebruikersnaam en wachtwoord. Hoe elk eruitziet, de bekende typfouten en wat de foutmeldingen zeggen."
+urlSlug: xtream-codes-login-uitgelegd
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["instellen", "afspeellijsten"]
+keywords: ["xtream codes inloggen", "xtream codes inloggegevens", "xtream codes server url", "xtream codes gebruikersnaam wachtwoord", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Drie invoervelden met een label — server, gebruikersnaam, wachtwoord — met het poortnummer in het serveradres uitgelicht."
+---
+
+**Een Xtream Codes-login bestaat uit drie gegevens: een server-URL (meestal met
+een poortnummer, zoals `http://example.com:8080`), een gebruikersnaam en een
+wachtwoord.** Samen laten ze een speler de server van je provider rechtstreeks
+vragen om je live zenders, films, series en programmagids, in plaats van een
+vaste lijst in te lezen. Bijna elk probleem met zo'n login komt doordat een van
+de drie nét verkeerd is overgenomen, en elke vergissing heeft een herkenbaar
+symptoom.
+
+## Waar de drie velden vandaan komen
+
+Je provider stuurt ze, meestal in een bericht dat er ongeveer zo uitziet:
+
+```
+URL:      http://example.com:8080
+Username: jdevries42
+Password: k7Qp9xWz
+```
+
+Soms is er helemaal geen losse login, alleen één lange link. Daar zitten ze alle
+drie in:
+
+```
+http://example.com:8080/get.php?username=jdevries42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Lees hem van links naar rechts: alles vóór `/get.php` is de **server-URL**, de
+waarde na `username=` is de **gebruikersnaam** en de waarde na `password=` is het
+**wachtwoord**. De rest vertelt de server alleen welk afspeellijstformaat hij
+moet sturen.
+
+Het werkt ook andersom. Met de drie velden kun je die link zelf samenstellen —
+server-URL, dan `/get.php?username=`, je gebruikersnaam, `&password=`, je
+wachtwoord, `&type=m3u_plus` — handig voor een speler die alleen M3U-links
+accepteert.
+
+## De server-URL, onderdeel voor onderdeel
+
+`http://example.com:8080` bestaat uit drie delen, en elk ervan telt.
+
+- **Het schema — `http://` of `https://`.** Die zijn niet uitwisselbaar.
+  Gebruik precies wat je provider heeft opgeschreven. Veel Xtream-servers
+  spreken alleen gewoon `http`, en wie om `https` vraagt, krijgt een
+  certificaatfout of helemaal niets.
+- **De host — `example.com`**, of soms een kaal cijferadres zoals
+  `203.0.113.10`. Eén verkeerde letter en de server wordt gewoon nooit gevonden.
+- **De poort — `:8080`.** Het getal na de dubbele punt is een aparte deur naar
+  dezelfde server. `http://example.com` en `http://example.com:8080` zijn
+  verschillende adressen, en de poort weglaten is de meest voorkomende reden dat
+  een login die ‘er goed uitziet’ nergens bij kan.
+
+Wat er **niet** in het veld hoort: alles na de poort. Paden als `/get.php`,
+`/player_api.php` of `/c/` voegt de speler zelf toe.
+
+Vidonzo ruimt de voor de hand liggende gevallen voor je op: het zet er `http://`
+voor als je het schema weglaat, haalt schuine strepen aan het eind weg en laat
+de poort staan die je hebt getypt.
+
+## Gebruikersnaam en wachtwoord
+
+Allebei zijn ze hoofdlettergevoelig, en allebei zijn het meestal gegenereerde
+reeksen waarin `O` en `0`, of `l` en `I`, op elkaar lijken. Dus:
+
+- **Plakken, niet overtypen.** Kopieer ze uit het bericht van je provider.
+- **Let op een spatie aan het eind.** Bij het kopiëren uit een bericht gaat de
+  spatie na het woord vaak mee, en de server ziet die als deel van het
+  wachtwoord.
+- **Verwissel ze niet.** Klinkt vanzelfsprekend; bij twee willekeurige reeksen
+  gebeurt het toch.
+
+Een login is net zo gevoelig als het wachtwoord van je bankapp: wie hem heeft,
+kan je account gebruiken en sluit jou vaak buiten zodra het maximale aantal
+verbindingen is bereikt. Vidonzo bewaart hem alleen op je apparaat en
+[kan hem versleutelen voordat hij ergens heen gaat](/nl/blog/waarom-een-speler-inloggegevens-versleutelt/).
+
+## Wat de speler ermee doet
+
+Bij het verbinden roept de speler `player_api.php` op de server aan met je
+gebruikersnaam en wachtwoord. Het eerste antwoord gaat over het account zelf —
+of de login wordt geaccepteerd, en details zoals hoeveel verbindingen er
+tegelijk mogen. Daarna volgen de categorieën, de zenderlijst, de film- en
+seriecatalogi en de programmagids, elk opgehaald op het moment dat ze nodig
+zijn.
+
+Dat is het verschil met een gewone M3U-link, die één vast bestand is waar niets
+aan te vragen valt.
+[Welke van de twee je gebruikt als je ze allebei hebt](/nl/blog/xtream-codes-of-m3u/),
+hangt vooral af van of je films, series en een gids wilt.
+
+## Invoeren in Vidonzo
+
+1. Kies **Dienst toevoegen** en daarna **Xtream Codes**.
+2. Plak het adres in **Server-URL** — schema, host en poort, verder niets.
+3. Plak de **Gebruikersnaam** en het **Wachtwoord**.
+4. Geef de dienst eventueel een **Dienstnaam** en tik op **Verbinden en
+   opslaan**.
+
+De login wordt gecontroleerd voordat er iets wordt opgeslagen, dus een fout zie
+je meteen, en niet later pas als een lege bibliotheek. Heb je alleen de lange
+`get.php`-link, plak die dan in het tabblad **M3U-link**: Vidonzo haalt de drie
+velden eruit en richt hem, als de login werkt, in als volledige Xtream-dienst
+met films, series en gids.
+
+## Wat de foutmeldingen betekenen
+
+- **‘Gebruikersnaam of wachtwoord is onjuist.’** De server is bereikt en heeft de
+  login geweigerd. Controleer hoofdletters, tekens die op elkaar lijken en de
+  spatie aan het eind. Sommige servers geven hetzelfde antwoord bij een verlopen
+  of geblokkeerd account; weet je het wachtwoord zeker, vraag je provider dan
+  naar de status van je account.
+- **‘Kan de server niet bereiken.’** Op dat adres antwoordde niets. De
+  gebruikelijke verdachten zijn een ontbrekende of verkeerde poort, `https` waar
+  `http` bedoeld was, of een typfout in de host. Een enkele keer blokkeert het
+  netwerk waarop je zit ongebruikelijke poorten; dezelfde login proberen via
+  mobiele data maakt dat snel duidelijk.
+- **‘De server deed er te lang over om te reageren.’** Hij is bereikt, maar was
+  traag. Een heel grote catalogus kan bij de eerste verbinding even duren;
+  probeer het opnieuw voordat je iets verandert.
+- **‘Het beveiligingscertificaat van de server kon niet worden geverifieerd.’**
+  Je gebruikt `https` bij een server met een ongeldig certificaat. Gebruik het
+  schema dat je provider heeft opgegeven.
+
+Wordt de login geaccepteerd maar starten en stoppen de zenders daarna, dan is de
+login niet meer de vraag —
+[dan is het een streamprobleem](/nl/blog/stream-stopt-na-een-paar-seconden/), en
+een verbindingslimiet is een van de gebruikelijke oorzaken. Voor het bredere
+overzicht van manieren waarop een bron niet laadt, zie
+[de vijf storingen achter één nietszeggende foutmelding](/nl/blog/afspeellijst-laadt-niet/).

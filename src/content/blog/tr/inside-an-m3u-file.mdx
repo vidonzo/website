@@ -1,18 +1,28 @@
 ---
-title: "Bir M3U dosyasının içinde: her satır aslında ne diyor"
-description: "Bir kez metin düzenleyicide açın, gizemi biter. Dört tür satır, birkaç öznitelik — ve her biri oynatıcıda gördüğünüz bir şeyi açıklıyor."
+title: "M3U dosyası nedir? Oynatma listesi biçimi, satır satır"
+description: "M3U dosyası düz metin bir oynatma listesidir: kanal adları, yayın adresleri ve birkaç etiket. Her satırın anlamı, oynatıcının onu okuyuşu ve kendi dosyanızı kontrol etmek."
 urlSlug: m3u-dosyasinin-icinde-ne-var
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['oynatma-listesi', 'teknik']
-keywords: ['m3u dosyası nedir', 'm3u dosya biçimi', 'extinf ne demek', 'm3u tvg-id group-title']
+keywords: ['m3u dosyası nedir', 'm3u ne demek', 'm3u dosya biçimi', 'm3u dosyası içeriği', 'extinf ne demek', 'm3u tvg-id group-title']
 heroImageAlt: "Bir M3U oynatma listesinden birkaç satır metin; başlık satırı, açıklama satırı ve yayın adresi ayrı ayrı işaretlenmiş."
 ---
 
-M3U dosyasının teknik olduğu yolunda bir ünü var ve bunu hak etmiyor. Hâlâ her
-gün kullanılan biçimlerin en yalınlarından biri: bir adlar listesi, bir adresler
+**M3U dosyası düz metinden oluşan bir oynatma listesidir.** Her kayıt bir
+adrestir — bir şarkının, bir videonun ya da canlı bir TV yayınının — ve genellikle
+önünde onu adlandıran ve tarif eden bir satır bulunur. Uzantı, dosyanın ilk işi
+olan *MP3 URL*'den gelir; bugün IPTV sağlayıcılarının kanal listelerini dağıtmak
+için kullandığı standart yoldur. `.m3u8` ise aynı biçimin UTF-8 olarak
+kaydedilmiş halidir.
+
+Biçimin teknik olduğu yolunda bir ünü var ve bunu hak etmiyor. Hâlâ her gün
+kullanılan biçimlerin en yalınlarından biri: bir adlar listesi, bir adresler
 listesi ve birkaç isteğe bağlı not. Metin düzenleyicide okuyabilirsiniz; okuduğunuz
-anda oynatıcı davranışlarının çoğu keyfî görünmekten çıkar.
+anda oynatıcı davranışlarının çoğu keyfî görünmekten çıkar. (Yalnızca dosyayı
+oynatmak istiyorsanız, [M3U dosyası nasıl açılır](/tr/blog/m3u-dosyasi-nasil-acilir/)
+ayrı ve daha kısa bir hikâye.)
 
 Aşağıda eksiksiz, çalışan bir oynatma listesi var. İki kanal, hiçbir şey
 atlanmadan.

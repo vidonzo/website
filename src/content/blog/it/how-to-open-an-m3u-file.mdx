@@ -1,0 +1,113 @@
+---
+title: "Come aprire un file M3U su qualsiasi dispositivo, e con cosa"
+description: "Un file M3U è una playlist, quindi l'app giusta dipende da cosa elenca. Come leggerlo e come aprirlo su Windows, Mac, Android, iPhone e televisore."
+urlSlug: come-aprire-un-file-m3u
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlist", "configurazione"]
+keywords: ["come aprire un file m3u", "aprire file m3u", "programma per aprire file m3u", "file m3u con cosa si apre", "aprire m3u su android"]
+heroImageAlt: "L'icona di un file playlist sullo schermo di un telefono, con frecce che puntano verso un portatile, un tablet e un televisore."
+---
+
+**Per aprire un file M3U serve un lettore multimediale che legga le playlist:
+VLC sul computer, oppure un lettore IPTV su telefono, tablet o televisore.** Un
+file M3U non è un video. È un breve file di testo che elenca gli indirizzi di
+cose da riprodurre, quindi «aprirlo» significa consegnare quell'elenco a un'app
+che sappia seguirlo. Puoi anche aprirlo con un qualsiasi editor di testo per
+vedere cosa contiene, ed è il primo passo migliore, perché è proprio ciò che
+elenca a decidere quale app ti serve davvero.
+
+## Prima di tutto, guarda dentro
+
+Apri il file con il Blocco note su Windows, con TextEdit su Mac (se si apre in
+modo strano, scegli *Formato → Converti in formato Solo testo*) o con un
+qualsiasi visualizzatore di testo sul telefono. Vedrai una di due cose.
+
+**Percorsi di file su un computer** — righe come `Musica\Album\01 Brano.mp3`.
+È una playlist musicale, creata da un programma come Winamp, iTunes o il
+software di un'autoradio. Aprila con un lettore musicale sullo stesso computer.
+Se la sposti su un altro dispositivo, i percorsi non puntano più da nessuna
+parte e si aprirà come un elenco vuoto.
+
+**Indirizzi web, con dei nomi sopra** — righe che iniziano con `#EXTINF` seguite
+da indirizzi `http://` o `https://`. È una playlist IPTV: ogni coppia è un nome
+di canale e il flusso che riproduce. Serve un lettore che capisca quelle righe
+`#EXTINF`, perché è lì che vivono nomi dei canali, categorie e identificativi
+della guida. [Ogni riga del formato è spiegata qui.](/it/blog/dentro-un-file-m3u/)
+
+Il resto dell'articolo riguarda il secondo tipo.
+
+## Su un PC Windows o un Mac
+
+**VLC** è l'opzione gratuita più semplice su entrambi. Scegli *Media → Apri
+file* (su Mac, *File → Apri file*), seleziona il `.m3u` e VLC carica l'intero
+elenco nella sua scaletta; fai doppio clic su una voce per riprodurla.
+Trascinare il file sulla finestra di VLC fa la stessa cosa.
+
+Va benissimo per controllare una lista o guardare una manciata di canali. Con la
+lista completa di un fornitore, però, ti mancheranno presto categorie, guida ai
+programmi e preferiti, ed è
+[lì che un lettore dedicato si guadagna il posto](/it/blog/vlc-come-lettore-iptv/).
+
+## Su un telefono o un tablet Android
+
+Usa un lettore IPTV che sappia importare un file. In Vidonzo:
+
+1. Scegli **Aggiungi servizio**, poi la scheda **File M3U**.
+2. Tocca **Scegli un file M3U** e selezionalo dalla memoria del telefono. I file
+   che finiscono in `.m3u`, `.m3u8` e `.txt` sono tutti accettati, quindi
+   funziona anche una playlist che ti è arrivata rinominata come testo.
+3. Se il fornitore ti ha dato un indirizzo per la guida, incollalo in
+   **URL EPG (XMLTV) — facoltativo**. Poi **Connetti e salva**.
+
+La lista viene letta una volta e i canali compaiono, raggruppati come li
+raggruppa il file.
+
+## Su iPhone o iPad
+
+Prima salva il file nell'app File: da Mail o da un'app di messaggistica, apri il
+menu di condivisione dell'allegato e scegli **Salva su File**. Poi, in Vidonzo,
+**Aggiungi servizio → File M3U → Scegli un file M3U** apre il browser di File e
+lo selezioni da lì. Gli stessi passaggi valgono su iPad, dove
+[uno schermo più grande rende tutta la libreria più comoda da sfogliare](/it/blog/iptv-su-iphone-e-ipad/).
+
+## Sul televisore
+
+I televisori sono il caso scomodo, perché con i file se la cavano male: un
+gestore di file c'è di rado, e portarci un file di solito vuol dire una
+chiavetta USB.
+
+Se il file M3U viene da un link, **usa il link**. Su Android TV, Google TV o un
+Fire TV Stick, aggiungilo in Vidonzo come **Link M3U** invece che come file.
+Digitare un indirizzo lungo con il telecomando è la parte noiosa, ed è lì che
+aiuta [la tastiera di un telefono abbinato](/it/blog/telefono-come-telecomando-tv/):
+il testo che scrivi sul telefono finisce nel campo del televisore.
+
+I televisori Samsung e LG non usano Android, quindi il lettore sta su un box o
+una chiavetta collegati alla TV —
+[la configurazione che funziona è descritta qui](/it/blog/iptv-su-smart-tv-samsung-o-lg/).
+
+## Il file, o il link da cui viene?
+
+Se ti hanno dato entrambi, preferisci il link. Un file è un'istantanea della
+lista nel momento in cui è stato salvato; un link viene riletto ogni volta che il
+lettore aggiorna, quindi i canali che il fornitore aggiunge o sposta compaiono da
+soli. [Il compromesso è spiegato per intero qui](/it/blog/link-della-playlist-o-file-locale/)
+— un file ha comunque i suoi usi, compreso funzionare senza il server delle
+playlist del fornitore.
+
+## Quando si apre ma qualcosa non va
+
+- **La lista è vuota.** Il file non ha voci `#EXTINF`, oppure i suoi percorsi
+  puntano al disco di un altro computer. Riguardaci dentro.
+- **I nomi dei canali sono simboli o punti interrogativi.** La codifica del testo
+  non è quella che il lettore si aspettava.
+  [Perché i nomi arrivano illeggibili](/it/blog/nomi-dei-canali-illeggibili/), e
+  come sistemare il file.
+- **La lista è a posto ma non parte niente.** I nomi sono giusti e gli indirizzi
+  sono morti o scaduti: un problema del fornitore, non del file né del lettore.
+- **Dice che la playlist non si può caricare.** Un file non fallisce come un
+  link, ma un link sì; [le cinque cause sono qui](/it/blog/la-playlist-non-si-carica/).
+
+Un file M3U è piccolo, leggibile e tollerante. Guardaci dentro una volta,
+scegli l'app adatta a ciò che elenca, e si apre come qualsiasi altra cosa.

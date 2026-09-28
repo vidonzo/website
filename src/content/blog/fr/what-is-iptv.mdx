@@ -1,0 +1,143 @@
+---
+title: "C'est quoi l'IPTV ? Comment marche la télé par Internet"
+description: "L'IPTV, c'est la télévision reçue par Internet plutôt que par l'antenne, la parabole ou le câble. Son fonctionnement, les trois éléments nécessaires, le rôle du lecteur."
+urlSlug: c-est-quoi-l-iptv
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["television", "playlists"]
+keywords: ["c'est quoi l'iptv", "iptv définition", "iptv comment ça marche", "iptv signification", "que faut-il pour regarder l'iptv"]
+heroImageAlt: "Un téléviseur et un téléphone côte à côte, affichant la même liste de chaînes, reliés par un unique câble réseau."
+---
+
+**IPTV signifie *Internet Protocol Television* : des chaînes en direct, des films
+et des séries acheminés par une connexion Internet plutôt que par l'antenne TNT,
+une parabole ou le câble.** L'image arrive sous forme de flux de données, comme
+une page web ou un appel vidéo, et une application sur votre téléphone, votre
+téléviseur ou votre tablette la retransforme en télévision.
+
+Cette réponse en une phrase cache le point qui déroute le plus de monde :
+« IPTV » désigne une manière d'*acheminer* la télévision, pas un service auquel
+on s'abonne. D'ailleurs, si vous regardez la télé de votre box Internet, vous
+faites déjà de l'IPTV sans le savoir. Une fois qu'on distingue les pièces du
+puzzle, tout le reste — playlists, identifiants, guides, lecteurs — se met en
+place.
+
+## Ce qui change par rapport à l'antenne, au satellite et au câble
+
+La télévision hertzienne envoie toutes les chaînes à tout le monde en même
+temps. Votre téléviseur en capte une dans l'air, et le signal est là, que vous
+regardiez ou non.
+
+L'IPTV fonctionne à l'inverse. Rien n'arrive tant que votre appareil ne l'a pas
+demandé. Quand vous choisissez une chaîne, le lecteur réclame ce flux précis à
+un serveur, et le serveur l'envoie — en général découpé en courts segments de
+quelques secondes, que le lecteur récupère l'un après l'autre et recoud en une
+image continue. [HLS, le protocole le plus répandu](/fr/blog/protocoles-de-streaming-expliques/),
+fonctionne exactement ainsi.
+
+Trois conséquences très concrètes en découlent :
+
+- **Votre connexion, c'est votre antenne.** Une connexion stable donne une image
+  stable ; une connexion faible
+  [se traduit par du buffering](/fr/blog/regler-le-buffering-iptv/), pas par de la
+  neige.
+- **Changer de chaîne est une requête, pas un réglage de fréquence** : cela prend
+  donc un instant de plus que de zapper sur la TNT.
+- **Tout peut devenir à la demande.** Puisque chaque flux est demandé, le même
+  système peut proposer des chaînes en direct, un catalogue de films et
+  l'émission que vous avez ratée hier soir.
+
+## Les trois éléments indispensables
+
+Toute installation IPTV, du décodeur d'un opérateur à une application sur
+téléphone, se ramène aux trois mêmes éléments.
+
+### 1. Un service qui diffuse les chaînes
+
+Quelqu'un doit faire tourner les serveurs d'où partent les flux. Beaucoup
+d'opérateurs télécoms livrent leur propre offre TV de cette façon ; les
+diffuseurs et les services par abonnement aussi. C'est le seul élément qui
+décide *de ce que* vous pouvez regarder.
+
+### 2. Les informations qui y conduisent un lecteur
+
+Un service vous remet l'une de ces deux choses :
+
+- **Une playlist M3U** — un lien ou un petit fichier qui liste le nom de chaque
+  chaîne et l'adresse de son flux. C'est du texte brut que vous pouvez lire
+  vous-même ; [voici ce que signifie chaque ligne](/fr/blog/dans-un-fichier-m3u/).
+- **Des identifiants Xtream Codes** — une adresse de serveur, un identifiant et
+  un mot de passe, qui permettent au lecteur de demander directement au service
+  ses chaînes, ses films, ses séries et son guide.
+  [Les trois champs sont expliqués ici](/fr/blog/identifiants-xtream-codes-expliques/).
+
+Si vous ne savez pas lequel des deux vous avez, ou lequel utiliser quand on vous
+donne les deux, [ce comparatif tranche la question](/fr/blog/xtream-codes-ou-m3u/).
+
+### 3. Un lecteur sur un appareil
+
+Le lecteur est l'application qui lit ces informations et vous montre le
+résultat. Il lit la liste, va chercher le flux que vous choisissez, décode la
+vidéo et dessine autour de tout cela une interface utilisable : catégories,
+favoris, recherche, guide des programmes. Il n'apporte aucune chaîne à lui —
+[ce n'est pas son rôle](/fr/blog/ce-que-fait-un-lecteur-iptv/), et c'est
+justement pour cela que le même lecteur fonctionne avec n'importe quel service.
+
+## Direct, replay et vidéo à la demande
+
+La plupart des services IPTV proposent un mélange de trois choses :
+
+- **Les chaînes en direct**, lues au moment de leur diffusion.
+- **Le replay**, quand le service conserve les émissions récentes quelques jours
+  et que le lecteur peut en demander une depuis le guide. Il n'existe que si le
+  service le prend en charge.
+- **Les films et séries**, livrés via des identifiants Xtream avec affiches,
+  saisons et épisodes — qu'un bon lecteur transforme en
+  [une vraie bibliothèque plutôt qu'en liste de noms de fichiers](/fr/blog/films-et-series-comme-une-bibliotheque/).
+
+Ce qui relie la partie direct, c'est l'**EPG**, le guide électronique des
+programmes : une grille horaire à part qui indique ce qui passe sur chaque chaîne
+maintenant et ensuite.
+[Comment fonctionne le guide, et pourquoi il reste parfois vide](/fr/blog/epg-guide-des-programmes/),
+c'est une autre histoire, courte elle aussi.
+
+## Sur quels appareils regarder l'IPTV
+
+Presque n'importe quel écran doté d'une connexion Internet et de la bonne
+application :
+
+- **Téléphones et tablettes** — Android, iPhone et iPad ;
+  [la tablette est souvent l'écran le plus confortable de tous](/fr/blog/iptv-sur-tablette/).
+- **Téléviseurs et boîtiers Android TV et Google TV**, où
+  [un lecteur pensé pour la télécommande](/fr/blog/lecteur-iptv-sur-android-tv/)
+  fait toute la différence.
+- **Fire TV Stick**, qui tourne sous Android et
+  [accueille un vrai lecteur moyennant une étape d'installation en plus](/fr/blog/lecteur-iptv-sur-fire-tv-stick/).
+- **Smart TV Samsung et LG**, dont les boutiques d'applications sont maigres —
+  [l'installation qui marche](/fr/blog/iptv-sur-smart-tv-samsung-ou-lg/) fait
+  du téléviseur l'écran et confie le lecteur à un autre appareil.
+
+## Ce qui tombe en panne, et où
+
+Comme l'IPTV repose sur trois éléments distincts, un problème se trouve toujours
+dans l'un d'eux, et savoir lequel évite bien des tâtonnements :
+
+- **La liste ne se charge pas** — les informations sont fausses, ou le service
+  est injoignable.
+  [Cinq causes distinctes, cinq signatures](/fr/blog/la-playlist-ne-charge-pas/).
+- **La liste se charge mais une chaîne saccade** — le chemin réseau, presque
+  toujours.
+- **La chaîne se lit mais le guide est vide** — le guide et la liste de chaînes
+  ne sont pas d'accord sur un nom.
+- **Le flux s'arrête au bout de quelques secondes** — une
+  [déconnexion, qui n'est pas la même panne que le buffering](/fr/blog/le-flux-s-arrete-apres-quelques-secondes/).
+
+## Où se place Vidonzo
+
+Vidonzo, c'est le troisième élément : un lecteur. Il ne vend pas de chaînes et
+n'en héberge aucune. Vous ajoutez le lien M3U, le fichier M3U ou les
+identifiants Xtream que votre service vous a donnés, et il construit la télé en
+direct avec un guide qui fonctionne, les films et séries sous forme de
+bibliothèque, et se souvient de l'endroit où vous vous êtes arrêté — sur un
+téléphone, une tablette ou un téléviseur.
+[La première playlist prend environ une minute](/fr/blog/configurer-sa-premiere-playlist/).

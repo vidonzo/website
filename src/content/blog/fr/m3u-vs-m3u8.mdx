@@ -1,11 +1,12 @@
 ---
-title: "M3U ou M3U8 : ce que signifient vraiment ces extensions"
-description: "Le 8 concerne l'encodage du texte, pas la qualité. Voici ce qui sépare réellement les deux formats, et lequel affiche correctement vos noms de chaînes."
+title: "M3U ou M3U8 : la vraie différence (ce n'est pas la qualité)"
+description: "Un M3U8 est une playlist M3U enregistrée en UTF-8 ; le 8 n'a rien à voir avec la qualité. Son effet sur les noms de chaînes, et l'autre .m3u8 : celui du HLS."
 urlSlug: m3u-ou-m3u8
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["playlists", "technique"]
-keywords: ["m3u ou m3u8", "difference m3u m3u8", "fichier m3u8 c'est quoi", "playlist utf-8"]
+keywords: ["m3u ou m3u8", "différence entre m3u et m3u8", "difference m3u m3u8", "fichier m3u8 c'est quoi", "playlist utf-8"]
 heroImageAlt: "La même liste de chaînes affichée deux fois : une première avec des accents déformés, une seconde rendue correctement."
 ---
 
@@ -14,8 +15,11 @@ Les fournisseurs distribuent des liens qui se terminent en `.m3u` et d'autres en
 différence. Les suppositions habituelles — l'un serait plus récent, ou de
 meilleure qualité, ou « celui en HD » — sont toutes fausses.
 
-Le `8`, c'est **UTF-8**. C'est là toute la différence dans le format de fichier,
-et elle est plus petite et plus utile que ne le laisse croire la légende.
+**La réponse courte :** un fichier M3U8 est une playlist M3U dont le texte est
+encodé en **UTF-8** — c'est ce que signifie le `8`, et c'est là toute la
+différence dans le format de fichier. Les deux listent les mêmes chaînes, dans la
+même qualité. La différence est plus petite et plus utile que ne le laisse
+croire la légende.
 
 ## Deux fichiers de même nature
 
@@ -66,7 +70,8 @@ venir sous forme de segments séparés, puis le recharge au fil de la lecture.
 C'est ce qui permet à un direct de démarrer en cours d'émission et de s'adapter
 à votre connexion.
 
-`.m3u8` peut donc désigner deux choses différentes :
+`.m3u8` peut donc désigner deux choses différentes (la seconde a
+[son propre article](/fr/blog/lien-m3u8-c-est-quoi/)) :
 
 - **Votre playlist d'abonnement** — des centaines ou des milliers de chaînes,
   une ligne chacune. C'est le lien que vous collez dans un lecteur.

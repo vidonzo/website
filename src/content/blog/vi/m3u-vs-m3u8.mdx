@@ -1,11 +1,12 @@
 ---
-title: "M3U và M3U8: đuôi tệp thật sự nói lên điều gì"
-description: "Con số 8 nói về bảng mã ký tự chứ không phải chất lượng. Đây là khác biệt thật giữa hai định dạng, và vì sao một trong hai hiển thị đúng tên kênh."
+title: "M3U và M3U8 khác nhau thế nào? (Không phải chất lượng)"
+description: "M3U8 là danh sách phát M3U lưu ở bảng mã UTF-8; số 8 chẳng liên quan gì tới chất lượng hình. Vì sao nó quan trọng với tên kênh, và tệp .m3u8 khác bạn gặp trong luồng HLS."
 urlSlug: m3u-va-m3u8-khac-gi
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["danh sách phát", "kỹ thuật"]
-keywords: ["m3u8 là gì", "m3u và m3u8 khác nhau", "file m3u8", "danh sách phát utf-8"]
+keywords: ["m3u và m3u8 khác nhau", "sự khác nhau giữa m3u và m3u8", "m3u hay m3u8", "file m3u8", "danh sách phát utf-8"]
 heroImageAlt: "Cùng một danh sách kênh hiển thị hai lần: một lần chữ có dấu vỡ thành ký tự lạ, một lần hiện đúng."
 ---
 
@@ -14,8 +15,10 @@ Nhà cung cấp đưa ra đường dẫn kết thúc bằng `.m3u`, có nơi l�
 Những phỏng đoán quen thuộc — rằng cái này mới hơn, hoặc chất lượng cao hơn, hoặc
 “bản HD” — đều sai.
 
-Số `8` là viết tắt của **UTF-8**. Đó là toàn bộ khác biệt trong định dạng tệp, và nó
-vừa nhỏ hơn vừa hữu ích hơn những gì lời đồn gợi ra.
+**Trả lời ngắn gọn:** tệp M3U8 là một danh sách phát M3U có văn bản được mã hóa theo
+**UTF-8** — số `8` là viết tắt của chính điều đó, và đó là toàn bộ khác biệt trong
+định dạng tệp. Cả hai liệt kê cùng những kênh, ở cùng chất lượng. Khác biệt này vừa
+nhỏ hơn vừa hữu ích hơn những gì lời đồn gợi ra.
 
 ## Cả hai đều là cùng một loại tệp
 
@@ -30,7 +33,7 @@ http://example.com/live/one.ts
 
 Hết. Một danh sách phát M3U là bản mục lục văn bản thuần — tên và địa chỉ, không gì
 thêm. Nó không mang video, không mang đăng nhập, và không giữ kết nối trực tiếp nào
-tới nhà cung cấp. Nó là ảnh chụp những gì tồn tại vào đúng lúc bạn tải nó về, và chính
+tới nhà cung cấp. Nó là ảnh chụp những gì tồn tại vào đúng lúc bạn lấy nó về, và chính
 đặc điểm đó mới là thứ phân biệt nó với
 [API Xtream Codes](/vi/blog/xtream-codes-hay-m3u/).
 
@@ -56,17 +59,18 @@ Có một lý do thứ hai, không liên quan, khiến bạn thấy cái đuôi 
 nhầm lẫn thật sự.
 
 **HLS** — giao thức phát trực tuyến mà phần lớn máy chủ IPTV dùng — cũng dùng tệp
-M3U8. Khi bạn mở một kênh, trình phát tải về một tệp kê khai `.m3u8` nhỏ, liệt kê vài
+M3U8. Khi bạn mở một kênh, trình phát lấy về một tệp kê khai `.m3u8` nhỏ, liệt kê vài
 giây video kế tiếp dưới dạng các đoạn riêng lẻ, rồi tải lại tệp đó liên tục trong lúc
 phát. Đây là lý do một luồng trực tiếp có thể bắt đầu từ giữa buổi phát và tự thích
 ứng với đường truyền của bạn.
 
-Vậy `.m3u8` có thể mang hai nghĩa khác nhau:
+Vậy `.m3u8` có thể mang hai nghĩa khác nhau (nghĩa thứ hai có
+[bài giải thích riêng](/vi/blog/link-m3u8-la-gi/)):
 
 - **Danh sách phát của gói cước** — hàng trăm hoặc hàng nghìn kênh, mỗi kênh một dòng.
   Đây là đường dẫn bạn dán vào trình phát.
 - **Tệp kê khai luồng phát** — một kênh duy nhất, liệt kê các đoạn của nó. Trình phát
-  tự tải những tệp này về trong lúc bạn xem; bạn không bao giờ phải dán chúng.
+  tự lấy những tệp này về trong lúc bạn xem; bạn không bao giờ phải dán chúng.
 
 Cả hai đều là tệp văn bản theo định dạng M3U. Nếu bạn dán một tệp kê khai luồng phát
 vào chỗ đáng lẽ là danh sách phát, bạn sẽ nhận được một “danh sách” chỉ có đúng một

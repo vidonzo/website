@@ -1,0 +1,145 @@
+---
+title: "Cos'è un link M3U8: flussi HLS spiegati e come aprirli"
+description: "Un link .m3u8 è un singolo flusso HLS oppure un'intera playlist di canali salvata in UTF-8. Come capire quale hai, come riprodurlo e perché smette di funzionare."
+urlSlug: cos-e-un-link-m3u8
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlist", "tecnica"]
+keywords: ["cos'è un link m3u8", "m3u8 cos'è", "come aprire un link m3u8", "file m3u8", "hls m3u8"]
+heroImageAlt: "Un unico indirizzo di flusso che si apre a ventaglio in una fila di brevi segmenti video, ciascuno di pochi secondi."
+---
+
+**Un link M3U8 è l'indirizzo di un piccolo file di testo in formato M3U, salvato
+in UTF-8.** Dentro non c'è mai il video. È il contenuto del file a dirti che cosa
+hai in mano, e nella pratica si tratta di una di due cose molto diverse:
+
+- **Un flusso HLS** — un canale o un video, descritto come un elenco di segmenti
+  brevi che il lettore va a prendere uno alla volta. È questo il significato
+  dell'estensione quasi ovunque sul web.
+- **Una playlist di canali** — centinaia di nomi di canali con i loro indirizzi,
+  esattamente come un file `.m3u`, solo con il testo in UTF-8.
+  [La differenza tra M3U e M3U8](/it/blog/m3u-o-m3u8/) racconta questo lato.
+
+Nella barra degli indirizzi i due sono identici e si comportano in modo del
+tutto diverso, quindi il primo passo è distinguerli.
+
+## Come capire quale dei due hai
+
+Apri il link nel browser, oppure salva il file e aprilo con un editor di testo.
+Le prime righe lo tradiscono subito.
+
+Una **playlist** si legge come un elenco del telefono — un nome, poi un
+indirizzo, e così via:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="News",Channel One
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Films",Channel Two
+http://example.com/live/two.m3u8
+```
+
+Un **flusso HLS** si legge come un orario dei treni. O elenca le qualità
+disponibili:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+oppure elenca direttamente i segmenti:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Nomi di canali e `group-title` vogliono dire playlist. Righe `#EXT-X-` vogliono
+dire flusso.
+
+## Come si riproduce davvero un flusso HLS
+
+HLS — HTTP Live Streaming — è il sistema più usato per trasmettere video su
+internet, e il file `.m3u8` ne è l'indice.
+
+Il primo file, la **master playlist**, elenca lo stesso programma in diverse
+qualità, ciascuna con la banda che richiede. Il lettore ne sceglie una e apre la
+sua **media playlist**, che nomina i prossimi segmenti di pochi secondi
+ciascuno. Li va a prendere, li riproduce e rilegge la media playlist per trovare
+i successivi. Per un canale in diretta quell'elenco continua ad avanzare; per un
+film si chiude con un tag finale e il lettore conosce la durata intera.
+
+Il trucco sta nel fatto che il lettore può cambiare qualità tra un segmento e
+l'altro. Quando la connessione cala scende a una versione più leggera invece di
+fermarsi, e risale quando c'è di nuovo spazio. Vidonzo fa partire un canale in
+diretta dalla versione più leggera, così l'immagine compare in fretta, poi sale
+da solo. C'è di più su HLS e sui suoi concorrenti nella
+[spiegazione dei protocolli di streaming](/it/blog/protocolli-di-streaming-spiegati/).
+
+## Come aprire un link M3U8
+
+**Se è una playlist**, il suo posto è un lettore IPTV, che la trasformerà in
+canali, categorie e guida. In Vidonzo scegli **Aggiungi servizio → Link M3U** e
+incollala in **URL playlist M3U/M3U8**. Se la playlist ti è arrivata come file,
+**File M3U** la prende dalla memoria del dispositivo.
+
+**Se è un flusso singolo**, hai tre strade semplici:
+
+1. **VLC.** Scegli *Media → Apri flusso di rete* (su Mac, *File → Apri rete*),
+   incolla il link e avvia. VLC in questo è eccellente, e
+   [dove smette di bastare](/it/blog/vlc-come-lettore-iptv/) è un'altra
+   questione.
+2. **Safari.** I browser di Apple riproducono HLS in modo nativo, quindi un link
+   `.m3u8` diretto spesso si apre subito come video. Negli altri browser il
+   supporto varia, e molti lo riproducono solo dentro una pagina web che abbia un
+   lettore HLS integrato.
+3. **Mettilo dentro una playlist.** Un lettore IPTV si aspetta un elenco, e un
+   elenco di una sola voce è pur sempre un elenco. Salva queste tre righe in un
+   file di testo chiamato `stream.m3u`, con il tuo nome e il tuo indirizzo:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Il mio flusso
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo lo legge da **File M3U** come qualsiasi altra playlist, e il flusso
+   finisce nella tua libreria con un nome, accanto a tutto il resto.
+
+## Perché un link M3U8 smette di funzionare
+
+Un link che ieri andava e oggi no, di solito, rientra in uno di questi casi:
+
+- **Aveva una scadenza incorporata.** Molti indirizzi di flusso portano un token
+  o una firma nella parte dopo il `?` — `token=`, `expires=`, `sig=`. Valgono per
+  una sessione o per qualche ora, poi il server li rifiuta con un 403. Il tuo
+  lettore non ha niente che non va: la chiave è semplicemente scaduta.
+- **Funziona solo da dove è arrivato.** Alcuni server controllano quale app o
+  quale pagina sta chiedendo e rifiutano tutto il resto.
+- **I segmenti sono andati avanti.** Una media playlist in diretta nomina solo
+  gli ultimi segmenti. Una copia salvata come file diventa vecchia nel giro di
+  pochi secondi.
+- **Il flusso è finito o si è spostato.** Un 404 vuol dire che l'indirizzo non
+  esiste più.
+
+Se un'intera playlist di canali `.m3u8` si carica ma non parte niente, la colpa
+non è quasi mai dell'estensione: sono gli indirizzi dentro. E se i flussi
+partono e muoiono dopo pochi secondi,
+[è una disconnessione, non buffering](/it/blog/lo-stream-si-ferma-dopo-pochi-secondi/),
+con cause tutte sue.
+
+## In breve
+
+Un `.m3u8` è un indice, mai il video. Nomi di canali dentro vuol dire playlist:
+dalla a un lettore. Righe `#EXT-X-` vogliono dire un singolo flusso HLS: aprilo
+in VLC o in Safari, oppure mettilo in una playlist di una riga. E se una volta
+funzionava e adesso no, guarda la scadenza nell'indirizzo prima di guardare
+altrove.

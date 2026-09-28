@@ -1,0 +1,16 @@
+key: how-to-open-an-m3u-file
+title: "How to open an M3U file on any device, and what to open it with"
+sourceLocale: en
+status: published
+riskTier: low
+intent: how-to
+targetQueries: ["m3u", "how to open m3u file", "m3u datei", "archivo m3u", "playlist m3u", "m3u format", "m3u file type", "m3u listesi"]
+audience: Someone with a .m3u file and no idea which app opens it.
+value: Look inside first (music paths vs web addresses), then per-device steps. Prefers the link over the file and says why.
+angle: inside-an-m3u-file explains the format; this is the task-shaped page for the "open it" intent the bare query "m3u" mostly carries.
+evidence: GSC 2026-06-28..2026-09-26 — "m3u" 40 impressions at position 23.6, the single largest query; plus m3u datei / archivo m3u / playlist m3u at 39–73.
+productFacts:
+  - Add a service → M3U file → Choose an M3U file; accepts .m3u, .m3u8, .txt; optional EPG URL (XMLTV) field
+  - phone-as-remote keyboard types into the TV's text fields (Android TV / Google TV)
+constraints: [no-download-or-offline-wording, sell-playback-not-access]
+internalLinks: [inside-an-m3u-file, vlc-as-an-iptv-player, iptv-on-iphone-and-ipad, your-phone-is-a-better-remote, samsung-lg-smart-tv-iptv-setup, hosted-playlist-vs-local-file, garbled-channel-names, playlist-link-wont-load]

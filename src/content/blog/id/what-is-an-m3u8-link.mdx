@@ -1,0 +1,148 @@
+---
+title: "Apa itu M3U8? Link HLS dijelaskan, dan cara memutarnya"
+description: "Link .m3u8 bisa berupa satu siaran HLS atau seluruh playlist saluran dalam UTF-8. Cara membedakannya, cara memutar masing-masing, dan kenapa link bisa mati."
+urlSlug: apa-itu-m3u8
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlist", "teknis"]
+keywords: ["apa itu m3u8", "link m3u8", "cara memutar m3u8", "file m3u8", "m3u8 hls"]
+heroImageAlt: "Satu alamat siaran yang bercabang menjadi deretan segmen video pendek, masing-masing berdurasi beberapa detik."
+---
+
+**Link M3U8 adalah alamat sebuah berkas teks kecil berformat M3U yang disimpan
+dalam pengodean UTF-8.** Isinya tidak pernah video itu sendiri. Apa yang tertulis
+di dalamnya menentukan apa yang sebenarnya Anda pegang, dan dalam praktik itu
+bisa berarti dua hal yang sangat berbeda:
+
+- **Siaran HLS** — satu saluran atau satu video, yang dijabarkan sebagai daftar
+  segmen pendek untuk diambil pemutar satu per satu. Di sebagian besar web,
+  inilah arti ekstensi tersebut.
+- **Playlist saluran** — ratusan nama saluran beserta alamat siarannya, persis
+  seperti berkas `.m3u`, hanya saja teksnya UTF-8.
+  [Perbedaan M3U dan M3U8](/id/blog/perbedaan-m3u-dan-m3u8/) membahas sisi yang ini.
+
+Keduanya terlihat sama persis di bilah alamat tetapi perilakunya bertolak
+belakang, jadi pekerjaan pertama adalah membedakannya.
+
+## Cara mengetahui mana yang Anda pegang
+
+Buka link itu di peramban, atau simpan berkasnya lalu buka di editor teks.
+Beberapa baris pertamanya langsung membuka kedok.
+
+**Playlist** terbaca seperti buku alamat — sebuah nama, lalu sebuah alamat,
+berulang-ulang:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="Berita",Saluran Satu
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Film",Saluran Dua
+http://example.com/live/two.m3u8
+```
+
+**Siaran HLS** terbaca seperti jadwal keberangkatan. Kadang ia mendaftar pilihan
+kualitas yang tersedia:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+kadang ia langsung mendaftar segmen-segmennya:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Ada nama saluran dan `group-title`, berarti playlist. Ada baris `#EXT-X-`,
+berarti siaran.
+
+## Cara HLS sebenarnya bekerja
+
+HLS — *HTTP Live Streaming* — adalah cara paling luas dipakai untuk mengirim
+video lewat internet, dan berkas `.m3u8` adalah daftar isinya.
+
+Berkas pertama, **master playlist**, mendaftar acara yang sama dalam beberapa
+kualitas, masing-masing dengan kebutuhan bandwidth-nya. Pemutar memilih salah
+satu lalu membuka **media playlist**-nya, yang menyebut beberapa segmen
+berikutnya dengan durasi beberapa detik masing-masing. Pemutar mengambil
+segmen-segmen itu, memutarnya, lalu membaca ulang media playlist untuk menemukan
+segmen selanjutnya. Untuk saluran langsung, daftar itu terus bergeser maju; untuk
+film, daftarnya diakhiri tag penutup sehingga pemutar tahu durasi totalnya.
+
+Bagian yang cerdik: pemutar bisa berganti kualitas di antara dua segmen. Saat
+koneksi Anda melemah, ia turun ke versi yang lebih ringan alih-alih berhenti, dan
+naik lagi ketika ruangnya tersedia. Vidonzo memulai saluran langsung dari versi
+paling ringan supaya gambar cepat muncul, lalu menaikkan kualitasnya sendiri.
+Perbandingan HLS dengan protokol pesaingnya ada di
+[penjelasan protokol streaming](/id/blog/protokol-streaming-hls-dash-rtsp/).
+
+## Cara memutar link M3U8
+
+**Kalau isinya playlist**, tempatnya di pemutar IPTV, yang akan mengubahnya
+menjadi saluran, kategori, dan panduan acara. Di Vidonzo, pilih
+**Tambah layanan → Tautan M3U** lalu tempelkan ke kolom **URL playlist M3U/M3U8**.
+Kalau playlist-nya datang sebagai berkas, tab **File M3U** mengambilnya dari
+perangkat Anda.
+
+**Kalau isinya satu siaran**, ada tiga pilihan yang mudah:
+
+1. **VLC.** Pilih *Media → Open Network Stream* (di Mac, *File → Open Network*),
+   tempelkan link-nya, lalu putar. VLC sangat jago untuk urusan persis seperti
+   ini, dan [kapan VLC tidak lagi cukup](/id/blog/bisakah-vlc-jadi-pemutar-iptv/)
+   adalah pertanyaan tersendiri.
+2. **Safari.** Peramban buatan Apple memutar HLS secara bawaan, jadi link
+   `.m3u8` langsung sering kali terbuka sebagai video. Dukungan di peramban lain
+   berbeda-beda, dan banyak yang hanya memutarnya di dalam halaman web yang sudah
+   punya pemutar HLS.
+3. **Bungkus dalam playlist.** Pemutar IPTV mengharapkan sebuah daftar, dan
+   daftar berisi satu tetaplah daftar. Simpan tiga baris ini dalam berkas teks
+   bernama `stream.m3u`, dengan nama dan alamat milik Anda sendiri:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Siaran saya
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo membacanya lewat **File M3U** seperti playlist lainnya, dan siaran itu
+   lalu duduk di pustaka Anda lengkap dengan nama, di samping semua yang lain.
+
+## Kenapa link M3U8 berhenti berfungsi
+
+Link yang kemarin jalan lalu hari ini gagal biasanya karena salah satu hal ini:
+
+- **Ada masa berlakunya.** Banyak alamat siaran membawa token atau tanda tangan
+  di bagian setelah tanda `?` — `token=`, `expires=`, `sig=`. Alamat seperti itu
+  hanya berlaku untuk satu sesi atau beberapa jam, lalu server menolaknya dengan
+  kode 403. Tidak ada yang salah dengan pemutar Anda; kuncinya saja yang sudah
+  kedaluwarsa.
+- **Hanya jalan di tempat asalnya.** Sebagian server memeriksa aplikasi atau
+  halaman mana yang meminta, dan menolak yang lain.
+- **Segmennya sudah lewat.** Media playlist siaran langsung hanya menyebut
+  beberapa segmen terbaru. Salinan yang disimpan sebagai berkas basi dalam
+  hitungan detik.
+- **Siarannya selesai atau pindah.** Kode 404 berarti alamat itu sudah tidak ada.
+
+Kalau seluruh playlist berisi saluran `.m3u8` berhasil dimuat tetapi tidak ada
+yang mau diputar, kesalahannya hampir tidak pernah pada ekstensinya — melainkan
+pada alamat-alamat di dalamnya. Dan kalau siaran mulai lalu mati setelah beberapa
+detik, [itu koneksi yang putus, bukan buffering](/id/blog/siaran-berhenti-setelah-beberapa-detik/),
+dengan penyebabnya sendiri.
+
+## Versi singkatnya
+
+Berkas `.m3u8` selalu berupa daftar isi, tidak pernah videonya. Ada nama saluran
+di dalamnya, berarti playlist: serahkan ke pemutar. Ada baris `#EXT-X-`, berarti
+satu siaran HLS: buka di VLC atau Safari, atau bungkus dalam playlist satu baris.
+Dan kalau link itu pernah jalan lalu sekarang gagal, periksa masa berlaku di
+alamatnya sebelum mencari ke mana-mana.

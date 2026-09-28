@@ -1,11 +1,12 @@
 ---
-title: "M3U czy M3U8: co naprawdę oznaczają te rozszerzenia"
-description: "Ósemka mówi o kodowaniu tekstu, nie o jakości. Wyjaśniamy, co naprawdę dzieli oba pliki i dlaczego jeden z nich poprawnie pokazuje nazwy kanałów."
+title: "M3U a M3U8: na czym polega różnica (to nie jakość)"
+description: "M3U8 to playlista M3U zapisana w UTF-8 — ósemka nie mówi nic o jakości. Czemu to ważne dla nazw kanałów i czym jest drugie .m3u8, z protokołu HLS."
 urlSlug: m3u-czy-m3u8
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["playlisty", "technikalia"]
-keywords: ["m3u czy m3u8", "różnica m3u m3u8", "plik m3u8 co to", "playlista utf-8"]
+keywords: ["m3u czy m3u8", "m3u a m3u8 różnica", "różnica między m3u a m3u8", "plik m3u8 co to", "playlista utf-8"]
 heroImageAlt: "Ta sama lista kanałów pokazana dwa razy: raz z połamanymi polskimi znakami, raz poprawnie."
 ---
 
@@ -14,7 +15,9 @@ czasem oba do tego samego abonamentu, i rzadko tłumaczą różnicę. Popularne
 domysły — że jeden jest nowszy, lepszej jakości albo „ten w HD” — są po kolei
 błędne.
 
-Ósemka oznacza **UTF-8**. To cała różnica w formacie pliku, mniejsza i bardziej
+**Krótka odpowiedź:** plik M3U8 to playlista M3U, której tekst zakodowano w
+**UTF-8** — to właśnie oznacza ósemka i to cała różnica w formacie pliku. Oba
+wymieniają te same kanały w tej samej jakości. Różnica jest mniejsza i bardziej
 użyteczna, niż sugeruje folklor.
 
 ## Oba to ten sam rodzaj pliku
@@ -30,7 +33,7 @@ http://example.com/live/one.ts
 
 Tyle. Playlista M3U to zwykły tekstowy spis — nazwy i adresy, nic więcej. Nie
 niesie obrazu, nie zawiera logowania i nie utrzymuje żywego połączenia
-z dostawcą. Jest migawką tego, co istniało w chwili pobrania, i właśnie ta cecha
+z dostawcą. Jest migawką tego, co istniało w chwili zapisania, i właśnie ta cecha
 naprawdę odróżnia ją od
 [API Xtream Codes](/pl/blog/xtream-codes-czy-m3u/).
 
@@ -57,17 +60,18 @@ Jest jeszcze jeden powód, całkiem niezwiązany z poprzednim, dla którego widu
 się to rozszerzenie, i to on wywołuje prawdziwe zamieszanie.
 
 **HLS** — protokół, którego do transmisji używa większość serwerów IPTV —
-również korzysta z plików M3U8. Gdy odtwarzasz kanał, odtwarzacz pobiera mały
+również korzysta z plików M3U8. Gdy odtwarzasz kanał, odtwarzacz wczytuje mały
 manifest `.m3u8` wymieniający najbliższe kilka sekund obrazu w postaci osobnych
-segmentów, i pobiera go ponownie w miarę odtwarzania. Dzięki temu transmisja na
+segmentów, i czyta go ponownie w miarę odtwarzania. Dzięki temu transmisja na
 żywo może zacząć się w środku programu i dostosować do Twojego łącza.
 
-`.m3u8` może więc znaczyć dwie różne rzeczy:
+`.m3u8` może więc znaczyć dwie różne rzeczy (ta druga ma
+[osobny artykuł](/pl/blog/co-to-jest-link-m3u8/)):
 
 - **Twoja playlista abonamentowa** — setki albo tysiące kanałów, każdy
   w jednym wierszu. To ten link, który wkleja się do odtwarzacza.
 - **Manifest strumienia** — jeden kanał i lista jego segmentów. Odtwarzacz
-  pobiera je sam podczas oglądania; tego nigdy się nie wkleja.
+  odbiera je sam podczas oglądania; tego nigdy się nie wkleja.
 
 Oba są plikami tekstowymi w formacie M3U. Jeśli wkleisz manifest strumienia tam,
 gdzie powinna być playlista, dostaniesz „playlistę” z jedną pozycją bez nazwy —

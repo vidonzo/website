@@ -1,0 +1,123 @@
+---
+title: "M3U-Datei öffnen: womit und wie, auf jedem Gerät"
+description: "Eine M3U-Datei ist eine Playlist, und welche App passt, hängt vom Inhalt ab. So öffnen Sie sie unter Windows, auf dem Mac, unter Android, am iPhone und am TV."
+urlSlug: m3u-datei-oeffnen
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlists", "einrichtung"]
+keywords: ["m3u datei öffnen", "womit m3u datei öffnen", "m3u datei abspielen", "m3u datei öffnen android", "m3u datei öffnen windows"]
+heroImageAlt: "Ein Playlist-Dateisymbol auf einem Handybildschirm, von dem Pfeile zu einem Laptop, einem Tablet und einem Fernseher zeigen."
+---
+
+**Eine M3U-Datei öffnen Sie mit einem Medienplayer, der Playlists liest — VLC am
+Computer, ein IPTV-Player auf Handy, Tablet oder Fernseher.** Eine M3U-Datei ist
+kein Video. Sie ist eine kurze Textdatei mit den Adressen dessen, was abgespielt
+werden soll; „öffnen“ heißt also, diese Liste an eine App zu übergeben, die ihr
+folgen kann. Sie können sie auch in jedem Texteditor öffnen, um zu sehen, was
+drinsteht — und das ist der beste erste Schritt, denn was die Datei auflistet,
+entscheidet, welche App Sie eigentlich brauchen.
+
+## Zuerst hineinschauen
+
+Öffnen Sie die Datei unter Windows im Editor, auf dem Mac in TextEdit (wirkt die
+Darstellung seltsam, wählen Sie *Format → In reinen Text umwandeln*) oder auf dem
+Handy in einem beliebigen Textbetrachter. Sie sehen eines von zwei Dingen.
+
+**Pfade zu Dateien auf einem Computer** — Zeilen wie `Musik\Album\01 Song.mp3`.
+Das ist eine Musik-Playlist, erstellt von einem Programm wie Winamp, iTunes oder
+der Software eines Autoradios. Öffnen Sie sie in einem Musikplayer auf demselben
+Computer. Auf einem anderen Gerät zeigen die Pfade ins Leere, und die Liste öffnet
+sich leer.
+
+**Webadressen mit Namen darüber** — Zeilen, die mit `#EXTINF` beginnen, gefolgt
+von Adressen mit `http://` oder `https://`. Das ist eine IPTV-Playlist: Jedes
+Paar besteht aus einem Sendernamen und dem Stream, den er abspielt. Dafür brauchen
+Sie einen Player, der diese `#EXTINF`-Zeilen versteht, denn dort stehen
+Sendernamen, Kategorien und Kennungen für den Programmführer.
+[Jede Zeile des Formats ist hier erklärt.](/de/blog/was-in-einer-m3u-datei-steht/)
+
+Um diese zweite Art geht es im Rest des Artikels.
+
+## Am Windows-PC oder Mac
+
+**VLC** ist auf beiden die einfachste kostenlose Lösung. Wählen Sie
+*Medien → Datei öffnen* (auf dem Mac *Ablage → Datei öffnen*), wählen Sie die
+`.m3u`, und VLC übernimmt die ganze Liste in seine Wiedergabeliste; ein
+Doppelklick auf einen Eintrag spielt ihn ab. Die Datei auf das VLC-Fenster zu
+ziehen, hat denselben Effekt.
+
+Um eine Liste zu prüfen oder eine Handvoll Sender zu schauen, reicht das. Bei der
+vollständigen Liste eines Anbieters vermissen Sie aber bald Kategorien, einen
+Programmführer und Favoriten — und das ist
+[der Punkt, an dem ein eigener IPTV-Player seinen Platz verdient](/de/blog/kann-vlc-ihr-iptv-player-sein/).
+
+## Auf dem Android-Handy oder -Tablet
+
+Nehmen Sie einen IPTV-Player, der Dateien importieren kann. In Vidonzo:
+
+1. Wählen Sie **Dienst hinzufügen** und dann den Reiter **M3U-Datei**.
+2. Tippen Sie auf **M3U-Datei auswählen** und wählen Sie die Datei aus dem
+   Speicher Ihres Handys. Dateien mit den Endungen `.m3u`, `.m3u8` und `.txt`
+   werden angenommen — eine Playlist, die als Textdatei umbenannt angekommen ist,
+   funktioniert also trotzdem.
+3. Hat Ihr Anbieter Ihnen eine Adresse für den Programmführer gegeben, fügen Sie
+   sie in **EPG-URL (XMLTV) — optional** ein. Dann **Verbinden & speichern**.
+
+Die Liste wird einmal eingelesen, und Ihre Sender erscheinen — so gruppiert, wie
+die Datei sie gruppiert.
+
+## Auf dem iPhone oder iPad
+
+Sichern Sie die Datei zuerst in der Dateien-App: In Mail oder einem Messenger
+öffnen Sie das Teilen-Menü des Anhangs und wählen **In Dateien sichern**. Danach
+öffnet in Vidonzo **Dienst hinzufügen → M3U-Datei → M3U-Datei auswählen** die
+Dateiauswahl, und Sie wählen die Datei dort aus. Auf dem iPad funktioniert es
+genauso, und dort
+[macht der größere Bildschirm das Stöbern in der Bibliothek deutlich angenehmer](/de/blog/iptv-auf-iphone-und-ipad/).
+
+## Auf dem Fernseher
+
+Fernseher sind der unbequeme Fall, weil sie schlecht mit Dateien umgehen: Einen
+Dateimanager gibt es selten, und eine Datei auf den Fernseher zu bringen, bedeutet
+meist einen USB-Stick.
+
+Stammt die M3U-Datei ursprünglich von einem Link, **nehmen Sie stattdessen den
+Link**. Auf Android TV, Google TV oder einem Fire TV Stick fügen Sie ihn in
+Vidonzo als **M3U-Link** hinzu statt als Datei. Mühsam ist dabei nur, eine lange
+Adresse mit der Fernbedienung einzutippen — und genau da hilft
+[die Tastatur eines gekoppelten Handys](/de/blog/smartphone-als-fernbedienung/):
+Was Sie auf dem Handy tippen, landet im Eingabefeld des Fernsehers.
+
+Samsung- und LG-Geräte laufen nicht mit Android, deshalb sitzt der Player dort
+auf einer Box oder einem Stick am Fernseher —
+[die Lösung, die funktioniert, ist hier beschrieben](/de/blog/iptv-auf-samsung-und-lg-smart-tv/).
+
+## Datei oder der Link, von dem sie stammt?
+
+Haben Sie beides bekommen, nehmen Sie den Link. Eine Datei ist eine Momentaufnahme
+der Liste zum Zeitpunkt des Speicherns; ein Link wird bei jeder Aktualisierung im
+Player neu gelesen, sodass Sender, die Ihr Anbieter hinzufügt oder verschiebt, von
+selbst auftauchen.
+[Die Abwägung ist hier ausführlich erklärt](/de/blog/playlist-link-oder-datei-am-geraet/)
+— eine Datei hat durchaus ihren Nutzen, unter anderem, weil sie ohne den
+Playlist-Server des Anbieters auskommt.
+
+## Wenn sie sich öffnet, aber etwas nicht stimmt
+
+- **Die Liste ist leer.** Die Datei enthält keine `#EXTINF`-Einträge, oder ihre
+  Pfade zeigen auf die Festplatte eines anderen Computers. Schauen Sie noch einmal
+  hinein.
+- **Sendernamen bestehen aus Symbolen oder Fragezeichen.** Die Textkodierung ist
+  nicht die, die der Player erwartet hat.
+  [Warum Namen als kryptische Zeichen ankommen](/de/blog/kanalnamen-werden-kryptisch/)
+  und wie Sie die Datei reparieren.
+- **Die Liste stimmt, aber nichts spielt.** Die Namen sind richtig, die Adressen
+  aber tot oder abgelaufen — ein Problem beim Anbieter, nicht in der Datei und
+  nicht im Player.
+- **Die Meldung sagt, die Playlist könne nicht geladen werden.** Eine Datei
+  scheitert nicht so wie ein Link, ein Link aber schon;
+  [die fünf Ursachen stehen hier](/de/blog/playlist-laedt-nicht/).
+
+Eine M3U-Datei ist klein, lesbar und nachsichtig. Schauen Sie einmal hinein,
+wählen Sie die App, die zu ihrem Inhalt passt, und sie öffnet sich wie jede andere
+Datei auch.

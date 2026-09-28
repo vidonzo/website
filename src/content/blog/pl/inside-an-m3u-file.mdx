@@ -1,18 +1,27 @@
 ---
-title: "Wewnątrz pliku M3U: co naprawdę mówi każdy wiersz"
-description: "Otwórz go raz w edytorze tekstu i przestaje być zagadką. Cztery rodzaje wierszy, garść atrybutów — i każdy z nich tłumaczy coś, co już widziałeś w odtwarzaczu."
+title: "Plik M3U – co to jest? Format playlisty wiersz po wierszu"
+description: "Plik M3U to playlista zapisana zwykłym tekstem: nazwy kanałów, adresy strumieni i kilka znaczników. Co znaczy każdy wiersz i jak czyta go odtwarzacz."
 urlSlug: co-jest-w-pliku-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['playlisty', 'technikalia']
-keywords: ['co to jest plik m3u', 'format pliku m3u', 'extinf wyjaśnienie', 'm3u tvg-id group-title']
+keywords: ['co to jest plik m3u', 'plik m3u co to', 'format pliku m3u', 'm3u co to znaczy', 'extinf wyjaśnienie', 'm3u tvg-id group-title']
 heroImageAlt: "Kilka wierszy tekstu playlisty M3U z wyróżnionym nagłówkiem, wierszem opisu i adresem strumienia."
 ---
 
-Plik M3U ma opinię technicznego, na którą zupełnie nie zasługuje. To jeden z
-najprostszych formatów wciąż używanych codziennie: lista nazw, lista adresów i
-kilka opcjonalnych adnotacji. Można go przeczytać w edytorze tekstu, a gdy się
-to zrobi, wiele zachowań odtwarzacza przestaje wyglądać na przypadkowe.
+**Plik M3U to playlista zapisana zwykłym tekstem.** Każda pozycja to adres —
+utworu, filmu albo strumienia telewizji na żywo — zwykle poprzedzony wierszem,
+który ją nazywa i opisuje. Rozszerzenie wzięło się od *MP3 URL*, bo do tego
+format pierwotnie służył; dziś to standardowy sposób, w jaki dostawcy IPTV
+przekazują listy kanałów, a `.m3u8` to ten sam format zapisany w UTF-8.
+
+Format ma opinię technicznego, na którą zupełnie nie zasługuje. To jeden z
+najprostszych wciąż używanych codziennie: lista nazw, lista adresów i kilka
+opcjonalnych adnotacji. Można go przeczytać w edytorze tekstu, a gdy się to
+zrobi, wiele zachowań odtwarzacza przestaje wyglądać na przypadkowe. (Jeśli
+chcesz go tylko odtworzyć, [otwieranie pliku M3U](/pl/blog/jak-otworzyc-plik-m3u/)
+to osobna, krótsza historia.)
 
 Oto kompletna, działająca playlista. Dwa kanały, nic nie pominięto.
 
@@ -69,7 +78,7 @@ filmie można zobaczyć prawdziwą liczbę.
   się nie dopasowuje.
 - **`tvg-name`** — nazwa kanału na potrzeby dopasowania do programu, nie zawsze
   ta sama, którą widać na ekranie.
-- **`tvg-logo`** — adres logotypu kanału. To obrazy pobierane przez sieć, jeden
+- **`tvg-logo`** — adres logotypu kanału. To obrazy wczytywane przez sieć, jeden
   na kanał, i dlatego duża lista potrzebuje chwili, by za pierwszym razem
   wyglądać na skończoną.
 - **`group-title`** — kategoria, pod którą kanał jest zaszufladkowany. Każdy
@@ -108,7 +117,7 @@ Równie pouczające jest to, czego format nie potrafi pomieścić:
 - **Żadnego logowania.** Tam, gdzie dane dostępu są potrzebne, zwykle wpisano je
   wprost w adresy — i dlatego odnośnik do playlisty należy traktować jak hasło.
 - **Żadnego żywego połączenia.** Plik jest migawką tego, co istniało w chwili
-  pobrania. Kanałów dodanych później w nim nie ma, i to jest prawdziwa różnica
+  zapisania. Kanałów dodanych później w nim nie ma, i to jest prawdziwa różnica
   wobec [interfejsu Xtream Codes](/pl/blog/xtream-codes-czy-m3u/) oraz powód, dla
   którego [liczy się, gdzie mieszka lista](/pl/blog/link-do-playlisty-czy-plik-na-urzadzeniu/).
 - **Żadnej deklaracji alfabetu.** Nic w formacie nie podaje własnego kodowania i

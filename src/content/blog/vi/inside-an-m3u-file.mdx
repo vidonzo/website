@@ -1,19 +1,28 @@
 ---
-title: "Bên trong một tệp M3U: mỗi dòng thực sự nói gì"
-description: "Mở nó một lần bằng trình soạn thảo văn bản là hết bí ẩn. Bốn loại dòng, dăm ba thuộc tính, và mỗi cái đều giải thích một điều bạn từng thấy trong trình phát."
+title: "File M3U là gì? Định dạng danh sách phát, từng dòng một"
+description: "File M3U là danh sách phát dạng văn bản thuần: tên kênh, địa chỉ luồng và vài thẻ tùy chọn. Ý nghĩa từng dòng, cách trình phát đọc nó, và cách tự kiểm tra tệp của bạn."
 urlSlug: ben-trong-tep-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['danh sách phát', 'kỹ thuật']
-keywords: ['tệp m3u là gì', 'định dạng tệp m3u', 'extinf nghĩa là gì', 'm3u tvg-id group-title']
+keywords: ['file m3u là gì', 'tệp m3u là gì', 'định dạng tệp m3u', 'm3u nghĩa là gì', 'extinf nghĩa là gì', 'm3u tvg-id group-title']
 heroImageAlt: "Vài dòng văn bản của một danh sách phát M3U, với dòng tiêu đề, dòng mô tả và địa chỉ luồng được đánh dấu."
 ---
 
-Tệp M3U mang tiếng là thứ kỹ thuật, và nó không đáng bị vậy. Đây là một trong
+**File M3U là một danh sách phát dạng văn bản thuần.** Mỗi mục là một địa chỉ —
+của một bài hát, một video hay một luồng truyền hình trực tiếp — và thường đứng
+trước nó là một dòng đặt tên và mô tả mục đó. Cái đuôi tệp đến từ *MP3 URL*, công
+việc ban đầu của nó; ngày nay đây là cách tiêu chuẩn để các nhà cung cấp IPTV trao
+danh sách kênh, và `.m3u8` chính là cùng định dạng ấy được lưu ở bảng mã UTF-8.
+
+Định dạng này mang tiếng là thứ kỹ thuật, và nó không đáng bị vậy. Đây là một trong
 những định dạng đơn giản nhất vẫn còn dùng hằng ngày: một danh sách tên, một
 danh sách địa chỉ, và vài ghi chú tùy chọn. Bạn đọc được nó bằng trình soạn thảo
 văn bản, và ngay khi đọc xong, phần lớn hành vi của trình phát thôi có vẻ tùy
-tiện.
+tiện. (Nếu bạn chỉ muốn phát nó, thì
+[cách mở file M3U](/vi/blog/cach-mo-file-m3u/) là một câu chuyện riêng,
+ngắn hơn.)
 
 Dưới đây là một danh sách phát hoàn chỉnh và chạy được. Hai kênh, không lược bỏ
 gì.

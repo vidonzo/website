@@ -1,0 +1,133 @@
+---
+title: "IPTV nedir, nasıl çalışır? İzlemek için gereken üç şey"
+description: "IPTV, televizyonun anten, çanak ya da kablo yerine internet bağlantısı üzerinden gelmesidir. Nasıl çalıştığı, gereken üç parça ve oynatıcının işi."
+urlSlug: iptv-nedir-nasil-calisir
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["televizyon", "oynatma-listesi"]
+keywords: ["iptv nedir", "iptv ne demek", "iptv nasıl çalışır", "iptv için ne gerekir", "iptv nasıl izlenir"]
+heroImageAlt: "Yan yana duran bir televizyon ve bir telefon; ikisinde de aynı kanal listesi açık, tek bir ağ kablosuyla birbirine bağlı."
+---
+
+**IPTV, İnternet Protokolü Televizyonu demektir: canlı kanalların, filmlerin ve
+dizilerin anten, çanak ya da kablo kutusu yerine internet bağlantısı üzerinden
+gelmesi.** Görüntü, tıpkı bir web sayfası ya da görüntülü görüşme gibi bir veri
+akışı olarak gelir; telefonunuzdaki, televizyonunuzdaki ya da tabletinizdeki bir
+uygulama da onu yeniden televizyona dönüştürür.
+
+Bu tek cümlelik cevap, insanların kafasını en çok karıştıran noktayı gizler:
+"IPTV" abone olduğunuz bir hizmetin değil, televizyonu *iletme* yönteminin adıdır.
+Parçaları ayrı ayrı gördüğünüzde gerisi — oynatma listeleri, girişler, rehberler,
+oynatıcılar — kendiliğinden yerine oturur.
+
+## Anten, uydu ve kablodan farkı
+
+Karasal ya da uydu yayını her kanalı aynı anda herkese gönderir. Televizyonunuz
+havadan birini seçer; siz izleseniz de izlemeseniz de sinyal oradadır.
+
+IPTV tam tersi çalışır. Cihazınız istemedikçe hiçbir şey gelmez. Bir kanal
+seçtiğinizde oynatıcı o tek yayını bir sunucudan ister, sunucu da gönderir —
+genellikle birkaç saniyelik kısa parçalara bölünmüş olarak; oynatıcı bu
+parçaları arka arkaya çeker ve kesintisiz bir görüntü halinde birleştirir.
+[En yaygın protokol olan HLS](/tr/blog/hls-dash-rtsp-yayin-protokolleri/) tam
+olarak böyle çalışır.
+
+Bundan üç pratik sonuç çıkar:
+
+- **Anteniniz internet bağlantınızdır.** Sağlam bir bağlantı sağlam görüntü
+  verir; zayıf bir bağlantı karlanma olarak değil,
+  [donma ve takılma olarak](/tr/blog/iptv-donma-sorunu-cozumu/) kendini gösterir.
+- **Kanal değiştirmek yeniden ayar değil, bir istektir;** bu yüzden karasal
+  yayında kanal gezmekten bir an daha uzun sürer.
+- **Her şey isteğe bağlı olabilir.** Her yayın istenerek geldiği için aynı sistem
+  canlı kanalları, bir film arşivini ve dün akşam kaçırdığınız programı birlikte
+  sunabilir.
+
+## Gereken üç parça
+
+Bir operatörün set üstü kutusundan telefondaki bir uygulamaya kadar her IPTV
+kurulumu aynı üç parçaya iner.
+
+### 1. Kanalları taşıyan bir hizmet
+
+Yayınların geldiği sunucuları birinin işletmesi gerekir. Pek çok internet ve
+telekom operatörü kendi televizyon hizmetini bu yolla verir; yayıncılar ve
+abonelik hizmetleri de öyle. *Neyi* izleyebileceğinize karar veren tek parça
+budur.
+
+### 2. Oynatıcıyı ona yönlendiren bilgiler
+
+Hizmet size iki şeyden birini verir:
+
+- **Bir M3U oynatma listesi** — her kanalın adını ve yayın adresini sıralayan
+  bir bağlantı ya da küçük bir dosya. Kendiniz de okuyabileceğiniz düz bir
+  metindir; [her satırın ne anlama geldiği burada](/tr/blog/m3u-dosyasinin-icinde-ne-var/).
+- **Bir Xtream Codes girişi** — bir sunucu adresi, bir kullanıcı adı ve bir
+  şifre. Bunlarla oynatıcı kanalları, filmleri, dizileri ve rehberi doğrudan
+  hizmete sorar. [Üç alanın açıklaması burada](/tr/blog/xtream-codes-giris-bilgileri/).
+
+Elinizde hangisinin olduğundan ya da ikisi birden varsa hangisini
+kullanacağınızdan emin değilseniz,
+[bu karşılaştırma meseleyi çözer](/tr/blog/xtream-codes-mi-m3u-mu/).
+
+### 3. Bir cihazda çalışan oynatıcı
+
+Oynatıcı, bu bilgileri okuyup sonucu size gösteren uygulamadır. Listeyi okur,
+seçtiğiniz yayını çeker, videoyu çözer ve hepsinin etrafına kullanışlı bir arayüz
+kurar: kategoriler, sık kullanılanlar, arama, bir yayın rehberi. Kendi kanallarıyla
+gelmez — [bu onun işi değildir](/tr/blog/iptv-oynatici-ne-yapar/) ve aynı
+oynatıcının her hizmetle çalışabilmesinin sebebi de budur.
+
+## Canlı yayın, geri izleme ve isteğe bağlı içerik
+
+IPTV hizmetlerinin çoğu şu üçünü farklı oranlarda sunar:
+
+- **Canlı kanallar**, yayınlandıkları anda oynar.
+- **Geri izleme**: hizmet son birkaç günün programlarını saklar, oynatıcı da
+  rehberden birini isteyebilir. Yalnızca hizmetin desteklediği yerde vardır.
+- **Filmler ve diziler**, Xtream girişiyle afişleri, sezonları ve bölümleriyle
+  gelir — iyi bir oynatıcı bunları
+  [dosya adlarından oluşan bir liste yerine gezilebilir bir kütüphaneye](/tr/blog/filmler-ve-diziler-bir-kutuphane-olarak/)
+  dönüştürür.
+
+Canlı tarafı bir arada tutan şey **EPG**, yani elektronik yayın rehberidir: her
+kanalda şu an ne olduğunu ve sırada ne olduğunu söyleyen ayrı bir yayın akışı.
+[Rehberin nasıl çalıştığı ve neden bazen boş kaldığı](/tr/blog/epg-yayin-rehberi-nedir/)
+ayrı ve kısa bir hikâye.
+
+## IPTV hangi cihazlarda izlenir
+
+İnternete bağlanan ve doğru uygulamayı çalıştıran hemen her ekranda:
+
+- **Telefon ve tabletler** — Android, iPhone ve iPad;
+  [tablet çoğu zaman evin en rahat ekranıdır](/tr/blog/tablette-iptv-izlemek/).
+- **Android TV ve Google TV** televizyonları ve kutuları; burada farkı
+  [kumandaya göre tasarlanmış bir oynatıcı](/tr/blog/android-tv-iptv-oynatici/)
+  yaratır.
+- **Fire TV Stick**; altında Android vardır ve
+  [fazladan tek bir kurulum adımıyla düzgün bir oynatıcı çalıştırır](/tr/blog/fire-tv-stick-iptv-oynatici/).
+- **Samsung ve LG akıllı televizyonlar**; kendi uygulama mağazaları cılızdır —
+  [işe yarayan kurulum](/tr/blog/samsung-ve-lg-akilli-tv-iptv-kurulumu/) televizyonu
+  ekran olarak kullanır, oynatıcıyı başka bir cihaza koyar.
+
+## Ne ters gider ve nerede
+
+IPTV üç ayrı parçadan oluştuğu için bir sorun her zaman bunlardan birinde yaşar;
+hangisinde olduğunu bilmek de sizi pek çok tahminden kurtarır:
+
+- **Liste açılmıyor** — bilgiler yanlış ya da hizmete ulaşılamıyor.
+  [Beş ayrı neden, beş ayrı belirti](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/).
+- **Liste açılıyor ama bir kanal takılıyor** — neredeyse her zaman ağ yolu.
+- **Kanal oynuyor ama rehber boş** — rehberle kanal listesi bir kanal adında
+  anlaşamıyor.
+- **Yayın birkaç saniye sonra duruyor** — bu bir
+  [kopmadır ve donmadan farklı bir arızadır](/tr/blog/yayin-birkac-saniye-sonra-duruyor/).
+
+## Vidonzo'nun yeri
+
+Vidonzo üçüncü parçadır: bir oynatıcı. Kanal satmaz, kanal barındırmaz.
+Hizmetinizin verdiği M3U bağlantısını, M3U dosyasını ya da Xtream girişini
+eklersiniz; Vidonzo çalışan bir rehberle canlı TV'yi, filmleri ve dizileri de bir
+kütüphane olarak kurar ve kaldığınız yeri hatırlar — telefonda, tablette ya da
+televizyonda.
+[İlk oynatma listesi yaklaşık bir dakika sürer](/tr/blog/ilk-oynatma-listesi-kurulumu/).

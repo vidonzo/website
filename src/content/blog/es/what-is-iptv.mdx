@@ -1,0 +1,134 @@
+---
+title: "¿Qué es IPTV? Cómo funciona y qué necesitas para verla"
+description: "IPTV es televisión que llega por internet en lugar de por antena, parabólica o cable. Cómo funciona, las tres piezas que necesitas y qué hace el reproductor."
+urlSlug: que-es-iptv
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["televisión", "listas"]
+keywords: ["qué es iptv", "iptv qué es y cómo funciona", "cómo funciona el iptv", "iptv significado", "qué se necesita para ver iptv"]
+heroImageAlt: "Un televisor y un móvil uno al lado del otro, los dos con la misma lista de canales, unidos por un único cable de red."
+---
+
+**IPTV significa Internet Protocol Television, televisión por protocolo de
+internet: canales en directo, películas y series que llegan por tu conexión a
+internet en lugar de por la antena, la parabólica o el cable.** La imagen viaja
+como un flujo de datos, igual que una página web o una videollamada, y una
+aplicación en tu móvil, tu tele o tu tablet la vuelve a convertir en televisión.
+
+Esa respuesta de una línea esconde lo que más confunde a la gente: «IPTV» es el
+nombre de una forma de *hacer llegar* la televisión, no un servicio al que te
+apuntas. En cuanto ves las piezas por separado, todo lo demás —listas, datos de
+acceso, guías, reproductores— encaja solo.
+
+## En qué se diferencia de la antena, el satélite y el cable
+
+La televisión de toda la vida emite todos los canales para todo el mundo a la
+vez. Tu televisor sintoniza uno de los que están en el aire, y la señal está ahí
+tanto si la ves como si no.
+
+La IPTV funciona al revés. No llega nada hasta que tu dispositivo lo pide. Cuando
+eliges un canal, el reproductor le pide ese stream concreto a un servidor y el
+servidor lo envía, normalmente troceado en segmentos cortos de unos pocos
+segundos que el reproductor va recogiendo uno detrás de otro y cose de nuevo en
+una imagen continua. [HLS, el protocolo más extendido](/es/blog/protocolos-de-streaming-hls-dash-rtsp/),
+funciona exactamente así.
+
+De ahí salen tres consecuencias prácticas:
+
+- **Tu conexión es la antena.** Una conexión estable da una imagen estable; una
+  floja [se nota en forma de cortes y parones](/es/blog/solucionar-cortes-iptv/),
+  no de nieve en la pantalla.
+- **Cambiar de canal es una petición, no una resintonización,** así que tarda un
+  instante más que hacer zapping en la tele por antena.
+- **Todo puede ser a la carta.** Como cada stream se pide, el mismo sistema puede
+  ofrecer canales en directo, un catálogo de películas y el programa que te
+  perdiste anoche.
+
+## Las tres piezas que necesitas
+
+Cualquier montaje de IPTV, desde el descodificador de una operadora hasta una app
+en el móvil, se reduce a las mismas tres piezas.
+
+### 1. Un servicio que emite los canales
+
+Alguien tiene que mantener los servidores de los que salen los streams. Muchas
+operadoras de telecomunicaciones ofrecen su propia televisión así; también lo
+hacen cadenas y servicios de suscripción. Es la única pieza que decide *qué*
+puedes ver.
+
+### 2. Los datos que llevan al reproductor hasta él
+
+Un servicio te da una de estas dos cosas:
+
+- **Una lista M3U**: un enlace o un archivo pequeño con el nombre y la dirección
+  del stream de cada canal. Es texto plano que puedes leer tú mismo;
+  [aquí está lo que significa cada línea](/es/blog/dentro-de-un-archivo-m3u/).
+- **Unos datos de acceso Xtream Codes**: la dirección de un servidor, un usuario
+  y una contraseña, con los que el reproductor le pide al servicio directamente
+  sus canales, películas, series y guía.
+  [Los tres campos, explicados uno a uno](/es/blog/datos-de-acceso-xtream-codes/).
+
+Si no tienes claro cuál de los dos tienes, o cuál usar si te han dado ambos,
+[esta comparación lo resuelve](/es/blog/xtream-codes-o-m3u/).
+
+### 3. Un reproductor en un dispositivo
+
+El reproductor es la app que lee esos datos y te enseña el resultado. Lee la
+lista, pide el stream que eliges, decodifica el vídeo y dibuja alrededor una
+interfaz que se pueda usar: categorías, favoritos, búsqueda, una guía de
+programación. No trae canales propios —
+[ese no es su trabajo](/es/blog/que-hace-un-reproductor-iptv/)—, y por eso el
+mismo reproductor sirve con cualquier servicio.
+
+## Directo, catch-up y contenido a la carta
+
+La mayoría de los servicios IPTV ofrecen alguna combinación de tres cosas:
+
+- **Canales en directo**, que se ven según se emiten.
+- **Catch-up** o televisión en diferido: el servicio guarda los programas
+  recientes durante unos días y el reproductor puede pedir uno desde la guía.
+  Solo existe si el servicio lo admite.
+- **Películas y series**, que llegan a través de unos datos Xtream con carátulas,
+  temporadas y episodios, y que un buen reproductor convierte en
+  [una biblioteca por la que navegar, no en una lista de nombres de archivo](/es/blog/peliculas-y-series-como-biblioteca/).
+
+Lo que da sentido a la parte en directo es la **EPG**, la guía electrónica de
+programación: un horario aparte que dice qué hay ahora y qué viene después en
+cada canal. [Cómo funciona la guía y por qué a veces sale vacía](/es/blog/que-es-la-epg-iptv/)
+es otra historia, y corta.
+
+## En qué dispositivos se puede ver IPTV
+
+En casi cualquier pantalla con conexión a internet y la app adecuada:
+
+- **Móviles y tablets**: Android, iPhone y iPad;
+  [una tablet suele ser la pantalla más cómoda de todas](/es/blog/iptv-en-tablet/).
+- **Televisores y aparatos con Android TV y Google TV**, donde
+  [un reproductor pensado para el mando](/es/blog/reproductor-iptv-en-android-tv/)
+  marca la diferencia.
+- **Fire TV Stick**, que por debajo es Android y
+  [mueve un reproductor serio con un paso de instalación más](/es/blog/reproductor-iptv-en-fire-tv-stick/).
+- **Smart TV Samsung y LG**, cuyas tiendas de apps se quedan cortas: la
+  [configuración que funciona](/es/blog/iptv-en-smart-tv-samsung-o-lg/) usa
+  la tele como pantalla y pone el reproductor en otro aparato.
+
+## Qué falla, y dónde
+
+Como la IPTV tiene tres piezas separadas, un problema siempre vive en una de
+ellas, y saber en cuál ahorra muchas conjeturas:
+
+- **La lista no carga**: los datos están mal o no se llega al servicio.
+  [Cinco causas distintas, cinco síntomas](/es/blog/la-lista-no-carga/).
+- **La lista carga pero un canal se entrecorta**: el camino de red, casi siempre.
+- **El canal se ve pero la guía está vacía**: la guía y la lista de canales no
+  coinciden en un nombre.
+- **El stream se corta a los pocos segundos**: es
+  [una desconexión, un fallo distinto del buffering](/es/blog/el-stream-se-corta-a-los-pocos-segundos/).
+
+## Dónde encaja Vidonzo
+
+Vidonzo es la tercera pieza: un reproductor. No vende canales ni aloja ninguno.
+Añades el enlace M3U, el archivo M3U o los datos Xtream que te dio tu servicio, y
+monta la tele en directo con una guía que funciona, las películas y series como
+una biblioteca, y recuerda dónde te quedaste, ya sea en el móvil, la tablet o el
+televisor. [La primera lista lleva más o menos un minuto](/es/blog/configurar-primera-lista-iptv/).

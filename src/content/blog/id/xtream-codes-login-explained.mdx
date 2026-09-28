@@ -1,0 +1,134 @@
+---
+title: "Login Xtream Codes: URL server, nama pengguna, kata sandi"
+description: "Login Xtream Codes terdiri dari tiga kolom: alamat server dan port-nya, nama pengguna, dan kata sandi. Bentuknya, salah ketik yang umum, dan arti pesan galatnya."
+urlSlug: login-xtream-codes
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["pengaturan", "playlist"]
+keywords: ["login xtream codes", "url server xtream codes", "username dan password xtream codes", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Tiga kolom isian berlabel — server, nama pengguna, kata sandi — dengan nomor port pada alamat server disorot."
+---
+
+**Login Xtream Codes adalah tiga keping informasi: URL server (biasanya lengkap
+dengan nomor port, misalnya `http://example.com:8080`), nama pengguna, dan kata
+sandi.** Bersama-sama, ketiganya memungkinkan pemutar meminta saluran langsung,
+film, serial, dan panduan acara Anda langsung ke server penyedia, alih-alih
+membaca sebuah daftar yang tetap. Hampir semua masalah pada login jenis ini
+berasal dari salah satu dari tiga kolom itu yang tersalin sedikit keliru, dan
+setiap kekeliruan punya gejala yang bisa dikenali.
+
+## Dari mana tiga kolom itu datang
+
+Penyedia Anda mengirimkannya, biasanya dalam pesan yang kira-kira seperti ini:
+
+```
+URL:      http://example.com:8080
+Username: budi42
+Password: k7Qp9xWz
+```
+
+Kadang tidak ada login terpisah sama sekali, hanya satu tautan panjang. Tautan
+itu memuat ketiganya:
+
+```
+http://example.com:8080/get.php?username=budi42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Bacalah dari kiri ke kanan: semua yang ada sebelum `/get.php` adalah
+**URL server**, nilai setelah `username=` adalah **nama pengguna**, dan nilai
+setelah `password=` adalah **kata sandi**. Sisanya hanya memberi tahu server
+format playlist mana yang harus dikirim.
+
+Arah sebaliknya juga berlaku. Dengan tiga kolom itu Anda bisa menyusun tautan
+tersebut sendiri — URL server, lalu `/get.php?username=`, nama pengguna Anda,
+`&password=`, kata sandi Anda, `&type=m3u_plus` — dan itu berguna untuk pemutar
+yang hanya menerima tautan M3U.
+
+## URL server, bagian demi bagian
+
+`http://example.com:8080` terdiri dari tiga bagian, dan masing-masing penting.
+
+- **Skemanya — `http://` atau `https://`.** Keduanya tidak bisa saling
+  menggantikan. Pakai persis seperti yang ditulis penyedia. Banyak server Xtream
+  hanya berbicara `http` biasa, dan meminta `https` hanya menghasilkan galat
+  sertifikat atau tidak ada jawaban sama sekali.
+- **Host-nya — `example.com`**, atau kadang berupa alamat angka seperti
+  `203.0.113.10`. Satu huruf salah dan servernya tidak akan pernah ditemukan.
+- **Port-nya — `:8080`.** Angka setelah titik dua adalah pintu tersendiri di
+  server yang sama. `http://example.com` dan `http://example.com:8080` adalah dua
+  alamat yang berbeda, dan port yang tertinggal adalah alasan paling umum sebuah
+  login yang "kelihatannya benar" tidak bisa menjangkau apa pun.
+
+Yang **tidak** boleh ada di kolom itu: apa pun setelah port. Path seperti
+`/get.php`, `/player_api.php`, atau `/c/` akan ditambahkan pemutar sendiri.
+
+Vidonzo merapikan kasus-kasus yang jelas untuk Anda: menambahkan `http://` kalau
+skemanya Anda lewatkan, membuang garis miring di ujung, dan mempertahankan port
+apa pun yang Anda ketik.
+
+## Nama pengguna dan kata sandi
+
+Keduanya membedakan huruf besar dan kecil, dan keduanya biasanya berupa untaian
+acak tempat `O` dan `0`, atau `l` dan `I`, terlihat mirip. Jadi:
+
+- **Tempel, jangan ketik.** Salin langsung dari pesan penyedia Anda.
+- **Awasi spasi di ujung.** Menyalin dari sebuah pesan sering ikut mengambil spasi
+  setelah katanya, dan server menganggap spasi itu bagian dari kata sandi.
+- **Jangan tertukar.** Kedengarannya sepele; dengan dua untaian acak, hal itu
+  benar-benar terjadi.
+
+Sebuah login sama sensitifnya dengan PIN m-banking: siapa pun yang memegangnya
+bisa memakai akun Anda, dan sering kali membuat Anda sendiri terkunci di luar
+ketika batas koneksinya tercapai. Vidonzo menyimpannya hanya di perangkat Anda,
+dan [bisa mengenkripsinya sebelum ia pergi ke mana pun](/id/blog/mengenkripsi-data-login-playlist/).
+
+## Apa yang dilakukan pemutar dengan data itu
+
+Saat Anda menghubungkan, pemutar memanggil `player_api.php` di server dengan nama
+pengguna dan kata sandi Anda. Jawaban pertama menyangkut akunnya sendiri — apakah
+login diterima, serta detail seperti berapa koneksi yang boleh berjalan
+bersamaan. Setelah itu barulah datang kategori, daftar saluran, katalog film dan
+serial, serta panduan acara, masing-masing diambil saat dibutuhkan.
+
+Itulah bedanya dengan tautan M3U biasa, yang hanya satu berkas tetap tanpa ada
+yang bisa ditanyakan. [Mana yang sebaiknya dipakai kalau Anda punya keduanya](/id/blog/xtream-codes-atau-m3u/)
+terutama bergantung pada apakah Anda menginginkan film, serial, dan panduan acara.
+
+## Memasukkannya di Vidonzo
+
+1. Pilih **Tambah layanan**, lalu **Xtream Codes**.
+2. Tempelkan alamatnya ke **URL server** — skema, host, dan port, tanpa apa pun
+   sesudahnya.
+3. Tempelkan **Nama pengguna** dan **Kata sandi**.
+4. Kalau mau, beri **Nama layanan**, lalu **Hubungkan & simpan**.
+
+Login diperiksa sebelum apa pun disimpan, jadi kesalahan langsung ketahuan saat
+itu juga, bukan belakangan sebagai pustaka yang kosong. Kalau yang Anda pegang
+hanya tautan panjang `get.php`, tempelkan saja di tab **Tautan M3U**: Vidonzo
+membaca tiga kolom itu dari dalamnya dan, kalau login-nya berhasil, menyiapkannya
+sebagai layanan Xtream lengkap dengan film, serial, dan panduan acara.
+
+## Arti pesan galatnya
+
+- **"Nama pengguna atau kata sandi salah."** Server berhasil dihubungi dan
+  menolak login-nya. Periksa huruf besar-kecil, karakter yang mirip, dan spasi di
+  ujung. Sebagian server menjawab akun yang kedaluwarsa atau ditangguhkan dengan
+  cara yang sama, jadi kalau Anda yakin kata sandinya benar, tanyakan status
+  akunnya ke penyedia.
+- **"Tidak dapat menghubungi server."** Tidak ada yang menjawab di alamat itu.
+  Tersangka biasanya port yang hilang atau salah, `https` padahal seharusnya
+  `http`, atau salah ketik di host. Sesekali, jaringan yang sedang Anda pakai
+  memblokir port yang tidak lazim; mencoba login yang sama lewat data seluler
+  cepat memberi jawabannya.
+- **"Server terlalu lama merespons."** Server berhasil dihubungi tetapi lambat.
+  Katalog yang sangat besar bisa butuh waktu pada koneksi pertama; coba lagi
+  sebelum mengubah apa pun.
+- **"Sertifikat keamanan server tidak dapat diverifikasi."** Anda memakai `https`
+  ke server yang sertifikatnya tidak sah. Gunakan skema yang ditentukan penyedia
+  Anda.
+
+Kalau login sudah diterima tetapi saluran kemudian mulai lalu berhenti, login
+bukan lagi persoalannya — [itu masalah siaran](/id/blog/siaran-berhenti-setelah-beberapa-detik/),
+dan batas koneksi adalah salah satu penyebabnya yang biasa. Untuk daftar yang
+lebih luas tentang cara sebuah sumber gagal dimuat, lihat
+[lima kegagalan di balik satu pesan galat yang tidak membantu](/id/blog/playlist-tidak-mau-dimuat/).

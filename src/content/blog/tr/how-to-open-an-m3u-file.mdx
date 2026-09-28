@@ -1,0 +1,118 @@
+---
+title: "M3U dosyası nasıl açılır? Her cihazda hangi programla"
+description: "M3U dosyası bir oynatma listesidir; hangi uygulamayla açılacağı içinde ne olduğuna bağlıdır. Nasıl okunur, Windows, Mac, Android, iPhone ve TV'de nasıl açılır."
+urlSlug: m3u-dosyasi-nasil-acilir
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["oynatma-listesi", "kurulum"]
+keywords: ["m3u dosyası nasıl açılır", "m3u dosyası açma", "m3u hangi programla açılır", "m3u açma programı", "android m3u dosyası açma"]
+heroImageAlt: "Bir telefon ekranında oynatma listesi dosyası simgesi; oklar bir dizüstü bilgisayarı, bir tableti ve bir televizyonu gösteriyor."
+---
+
+**M3U dosyasını açmak için oynatma listelerini okuyabilen bir medya oynatıcısı
+kullanın — bilgisayarda VLC, telefonda, tablette ya da televizyonda bir IPTV
+oynatıcısı.** M3U dosyası bir video değildir. Oynatılacak şeylerin adreslerini
+sıralayan kısa bir metin dosyasıdır; dolayısıyla onu "açmak", bu listeyi takip
+etmeyi bilen bir uygulamaya teslim etmek demektir. İçinde ne olduğunu görmek için
+herhangi bir metin düzenleyicide de açabilirsiniz; ilk adım olarak en iyisi de
+budur, çünkü aslında hangi uygulamaya ihtiyacınız olduğunu listenin içeriği
+belirler.
+
+## Önce içine bakın
+
+Dosyayı Windows'ta Not Defteri'nde, Mac'te TextEdit'te (tuhaf açılırsa
+*Biçim → Düz Metin Yap* seçeneğini kullanın) ya da telefondaki herhangi bir metin
+görüntüleyicide açın. İki şeyden birini görürsünüz.
+
+**Bir bilgisayardaki dosyaların yolları** — `Muzik\Albüm\01 Şarkı.mp3` gibi
+satırlar. Bu bir müzik listesidir; Winamp, iTunes ya da bir araç teybinin
+yazılımı gibi bir programla hazırlanmıştır. Aynı bilgisayardaki bir müzik
+çalarda açın. Dosyayı başka bir cihaza taşırsanız yollar artık hiçbir yeri
+göstermez ve liste boş açılır.
+
+**Üstlerinde adlar olan web adresleri** — `#EXTINF` ile başlayan satırlar ve
+ardından `http://` ya da `https://` adresleri. Bu bir IPTV oynatma listesidir:
+her ikili bir kanal adı ve onun oynattığı yayındır. Bu `#EXTINF` satırlarını
+anlayan bir oynatıcı gerekir, çünkü kanal adları, kategoriler ve rehber
+kimlikleri oradadır.
+[Biçimin her satırı burada açıklanıyor.](/tr/blog/m3u-dosyasinin-icinde-ne-var/)
+
+Bu yazının geri kalanı ikinci türle ilgili.
+
+## Windows bilgisayarda ya da Mac'te
+
+İkisinde de en basit ücretsiz seçenek **VLC**'dir. *Media → Open File* yolunu
+seçin (Türkçe arayüzde *Ortam* menüsünün altında; Mac'te *File → Open File*),
+`.m3u` dosyasını seçin; VLC listenin tamamını oynatma listesi paneline yükler.
+Bir girdiyi oynatmak için üzerine çift tıklayın. Dosyayı VLC penceresinin üzerine
+sürüklemek de aynı işi görür.
+
+Bir listeyi kontrol etmek ya da birkaç kanal oynatmak için bu yeterlidir. Bir
+sağlayıcının tam listesinde ise kısa sürede kategorileri, bir yayın rehberini ve
+sık kullanılanları aramaya başlarsınız;
+[özel bir oynatıcının yerini hak ettiği nokta](/tr/blog/vlc-iptv-oynatici-olabilir-mi/)
+tam da orasıdır.
+
+## Android telefon ya da tablette
+
+Dosya içe aktarabilen bir IPTV oynatıcısı kullanın. Vidonzo'da:
+
+1. **Servis ekle**'yi, ardından **M3U dosyası** sekmesini seçin.
+2. **Bir M3U dosyası seçin**'e dokunun ve dosyayı telefonunuzun depolama
+   alanından seçin. `.m3u`, `.m3u8` ve `.txt` ile biten dosyaların hepsi kabul
+   edilir; yani adı metin dosyası olarak değişmiş bir liste de çalışır.
+3. Sağlayıcınız size bir rehber adresi verdiyse onu
+   **EPG adresi (XMLTV) — isteğe bağlı** alanına yapıştırın. Sonra
+   **Bağlan ve kaydet**.
+
+Liste bir kez okunur ve kanallarınız, dosyada nasıl gruplandıysa öyle görünür.
+
+## iPhone ya da iPad'de
+
+Önce dosyayı Dosyalar uygulamasına kaydedin — Mail'den ya da bir mesajlaşma
+uygulamasından eki açıp paylaş menüsünde **Dosyalar'a Kaydet**'i seçin. Ardından
+Vidonzo'da **Servis ekle → M3U dosyası → Bir M3U dosyası seçin** yolu Dosyalar
+tarayıcısını açar ve dosyayı oradan seçersiniz. Aynı adımlar iPad'de de geçerli;
+orada [daha büyük ekran bütün kütüphaneyi gezmeyi kolaylaştırır](/tr/blog/iphone-ve-ipadde-iptv/).
+
+## Televizyonda
+
+Televizyonlar işin zor kısmıdır, çünkü dosyalarla aralarında pek iyi değildir:
+çoğunda bir dosya yöneticisi yoktur ve bir dosyayı televizyona aktarmak genellikle
+bir USB bellek demektir.
+
+M3U dosyası bir bağlantıdan geldiyse **bağlantıyı kullanın**. Android TV'de,
+Google TV'de ya da Fire TV Stick'te onu Vidonzo'ya dosya olarak değil,
+**M3U bağlantısı** olarak ekleyin. Uzun bir adresi kumandayla yazmak işin sıkıcı
+kısmıdır; [eşleştirilmiş bir telefonun klavyesi](/tr/blog/telefonu-tv-kumandasina-donusturun/)
+burada işe yarar: telefonda yazdığınız metin televizyondaki alana düşer.
+
+Samsung ve LG televizyonlar Android çalıştırmaz; bu yüzden oynatıcı televizyona
+bağlı bir kutu ya da çubukta yaşar —
+[işe yarayan kurulum burada anlatılıyor](/tr/blog/samsung-ve-lg-akilli-tv-iptv-kurulumu/).
+
+## Dosya mı, geldiği bağlantı mı?
+
+İkisi birden verildiyse bağlantıyı tercih edin. Dosya, listenin kaydedildiği
+andaki bir fotoğrafıdır; bağlantı ise oynatıcı her yenilendiğinde yeniden okunur,
+böylece sağlayıcınızın eklediği ya da taşıdığı kanallar kendiliğinden gelir.
+[Artıları ve eksileri burada ayrıntılı olarak anlatılıyor](/tr/blog/liste-baglantisi-mi-cihazdaki-dosya-mi/) —
+dosyanın da işe yaradığı yerler var; sağlayıcının liste sunucusuna ihtiyaç
+duymadan çalışması bunlardan biri.
+
+## Açılıyor ama bir şeyler yanlış
+
+- **Liste boş.** Dosyada hiç `#EXTINF` kaydı yok ya da yollar başka bir
+  bilgisayarın diskini gösteriyor. İçine yeniden bakın.
+- **Kanal adları simge ya da soru işareti olarak görünüyor.** Metin kodlaması
+  oynatıcının beklediği gibi değil.
+  [Adların neden bozuk geldiğini](/tr/blog/kanal-adlari-bozuk-gorunuyor/) ve dosyanın
+  nasıl düzeltileceğini anlattık.
+- **Liste düzgün ama hiçbir şey oynamıyor.** Adlar doğru, adresler ise ölü ya da
+  süresi dolmuş — bu dosyanın ya da oynatıcının değil, sağlayıcının sorunu.
+- **Oynatma listesinin yüklenemediğini söylüyor.** Bir dosya, bağlantının
+  bozulduğu şekilde bozulmaz ama bağlantı bozulabilir;
+  [beş nedeni burada](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/).
+
+M3U dosyası küçük, okunabilir ve hoşgörülüdür. Bir kez içine bakın, listelediği
+şeye uygun uygulamayı seçin; diğer her dosya gibi açılır.

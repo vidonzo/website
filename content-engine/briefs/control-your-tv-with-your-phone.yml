@@ -1,0 +1,17 @@
+key: control-your-tv-with-your-phone
+title: "How to control your TV with your phone: three ways that work"
+sourceLocale: en
+status: published
+riskTier: low
+intent: how-to
+targetQueries: ["control tv with phone", "use phone as tv remote", "sterowanie telewizorem przez telefon", "mit dem handy den fernseher bedienen", "сопряжение телефона с телевизором"]
+audience: Someone who wants their phone to replace the TV remote, on any television.
+value: The three genuinely different mechanisms (platform app over Wi-Fi, IR blaster, in-app pairing) and which job each is good at; plus the discovery failures they share.
+angle: Generic how-to first; Vidonzo's remote appears as the third kind, stated plainly as controlling the app, not the set. your-phone-is-a-better-remote stays the product-specific page.
+evidence: GSC 2026-06-28..2026-09-26 — pl/de/ru phone-remote queries landed on the help guide and the product article at positions 36–56; neither answers the generic question.
+productFacts:
+  - remote controls only Vidonzo, hosted on Android TV / Google TV; volume is the player's
+  - pairing via QR "Scan to connect" or a renewing six-digit code, approved on the TV; playback-only or full control
+  - phone/tablet get d-pad, touchpad, keyboard into TV fields, library search, favourites, continue watching, live, queue
+constraints: [no-download-or-offline-wording, fair-to-platform-apps]
+internalLinks: [your-phone-is-a-better-remote, iptv-player-on-android-tv, fix-iptv-freezing-on-wifi]

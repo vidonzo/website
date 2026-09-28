@@ -1,10 +1,11 @@
 ---
-title: "M3U vs M3U8: what the file extensions actually mean"
-description: "The extra 8 is about text encoding, not quality. Here is what really separates the two, and why one of them shows your channel names correctly."
+title: "M3U vs M3U8: the real difference (it is not quality)"
+description: "M3U8 is an M3U playlist saved as UTF-8; the 8 has nothing to do with picture quality. Why it matters for channel names, and the other .m3u8 you meet in HLS streams."
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['playlists', 'engineering']
-keywords: ['m3u vs m3u8', 'm3u8 file', 'difference m3u m3u8', 'utf-8 playlist']
+keywords: ['m3u vs m3u8', 'difference between m3u and m3u8', 'm3u8 file', 'utf-8 playlist']
 heroImageAlt: "The same channel list shown twice, once with mangled accented characters and once rendered correctly."
 ---
 
@@ -12,8 +13,10 @@ Providers hand out links ending in `.m3u` and links ending in `.m3u8`, sometimes
 both for the same subscription, and rarely explain the difference. The common
 guesses — that one is newer, or higher quality, or "the HD one" — are all wrong.
 
-The `8` stands for **UTF-8**. That is the entire difference in the file format,
-and it is smaller and more useful than the folklore suggests.
+**The short answer:** an M3U8 file is an M3U playlist whose text is encoded as
+**UTF-8** — that is what the `8` stands for, and it is the entire difference in
+the file format. Both list the same channels at the same quality. The difference
+is smaller and more useful than the folklore suggests.
 
 ## Both are the same kind of file
 
@@ -59,10 +62,11 @@ next few seconds of video as separate segments, and re-fetches it as playback
 continues. This is why a live stream can start mid-broadcast and adapt to your
 connection.
 
-So `.m3u8` can mean two different things:
+So `.m3u8` can mean two different things (the second has
+[its own explainer](/blog/what-is-an-m3u8-link/)):
 
-- **Your subscription playlist** — hundreds or thousands of channels, one line
-  each. This is the link you paste into a player.
+- **Your subscription playlist** — one line per channel, however long the list
+  is. This is the link you paste into a player.
 - **A stream manifest** — one channel, listing its segments. The player fetches
   these itself while you watch; you never paste one.
 

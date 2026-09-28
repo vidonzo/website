@@ -1,0 +1,119 @@
+---
+title: "Cómo abrir un archivo M3U y con qué programa hacerlo"
+description: "Un archivo M3U es una lista de reproducción: la app adecuada depende de lo que contenga. Cómo leerlo y cómo abrirlo en Windows, Mac, Android, iPhone y la tele."
+urlSlug: como-abrir-un-archivo-m3u
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["listas", "configuración"]
+keywords: ["cómo abrir un archivo m3u", "abrir archivo m3u", "con qué programa abrir un m3u", "abrir m3u en android", "archivo m3u"]
+heroImageAlt: "El icono de un archivo de lista en la pantalla de un móvil, con flechas que apuntan a un portátil, una tablet y un televisor."
+---
+
+**Para abrir un archivo M3U necesitas un reproductor que lea listas: VLC en el
+ordenador, o un reproductor IPTV en el móvil, la tablet o la tele.** Un archivo
+M3U no es un vídeo. Es un archivo de texto corto con las direcciones de lo que
+hay que reproducir, así que «abrirlo» significa entregarle esa lista a una app
+que sepa seguirla. También puedes abrirlo en cualquier editor de texto para ver
+qué lleva dentro, y ese es el mejor primer paso, porque lo que contiene decide
+qué app quieres en realidad.
+
+## Primero, mira dentro
+
+Ábrelo con el Bloc de notas en Windows, con TextEdit en un Mac (elige *Formato →
+Convertir a texto normal* si se abre raro) o con cualquier visor de texto en el
+móvil. Verás una de estas dos cosas.
+
+**Rutas a archivos de un ordenador**: líneas como `Música\Álbum\01 Canción.mp3`.
+Es una lista de música, creada por un programa como Winamp, iTunes o el software
+de un equipo de música del coche. Ábrela con un reproductor de música en ese
+mismo ordenador. Si la pasas a otro dispositivo, las rutas ya no apuntan a
+ningún sitio y se abrirá como una lista vacía.
+
+**Direcciones web con nombres encima**: líneas que empiezan por `#EXTINF`
+seguidas de direcciones `http://` o `https://`. Es una lista IPTV: cada pareja es
+el nombre de un canal y el stream que reproduce. Necesita un reproductor que
+entienda esas líneas `#EXTINF`, porque es ahí donde viven los nombres de los
+canales, las categorías y los identificadores de la guía.
+[Aquí se explica cada línea del formato.](/es/blog/dentro-de-un-archivo-m3u/)
+
+El resto del artículo va del segundo tipo.
+
+## En un PC con Windows o en un Mac
+
+**VLC** es la opción gratuita más sencilla en los dos. Elige *Medio → Abrir
+archivo* (en Mac, *Archivo → Abrir archivo*), selecciona el `.m3u` y VLC carga la
+lista completa en su panel de lista de reproducción; haz doble clic en una
+entrada para reproducirla. Arrastrar el archivo a la ventana de VLC hace lo
+mismo.
+
+Para comprobar una lista o ver un puñado de canales, basta. Con la lista
+completa de un proveedor pronto echarás en falta categorías, una guía de
+programación y favoritos, y ese es
+[el punto en el que un reproductor dedicado se gana su sitio](/es/blog/vlc-como-reproductor-iptv/).
+
+## En un móvil o una tablet Android
+
+Usa un reproductor IPTV que pueda importar un archivo. En Vidonzo:
+
+1. Elige **Añadir servicio** y luego la pestaña **Archivo M3U**.
+2. Toca **Elegir un archivo M3U** y selecciónalo en el almacenamiento del móvil.
+   Acepta archivos terminados en `.m3u`, `.m3u8` y `.txt`, así que una lista que
+   te llegó renombrada como texto también funciona.
+3. Si tu proveedor te dio una dirección de guía, pégala en
+   **URL de EPG (XMLTV) — opcional**. Después, **Conectar y guardar**.
+
+La lista se lee una vez y tus canales aparecen agrupados como los agrupa el
+archivo.
+
+## En un iPhone o un iPad
+
+Primero guarda el archivo en la app Archivos: desde Mail o una app de mensajería,
+abre el menú de compartir del adjunto y elige **Guardar en Archivos**. Después,
+en Vidonzo, **Añadir servicio → Archivo M3U → Elegir un archivo M3U** abre el
+explorador de Archivos y lo eliges desde ahí. Los mismos pasos sirven en un
+iPad, donde
+[una pantalla más grande hace más cómodo recorrer toda la biblioteca](/es/blog/iptv-en-iphone-y-ipad/).
+
+## En la tele
+
+Los televisores son el caso incómodo, porque se les dan mal los archivos: casi
+nunca tienen un gestor de archivos, y pasarles uno suele significar un pendrive
+USB.
+
+Si el archivo M3U salió de un enlace, **usa el enlace**. En Android TV, Google TV
+o un Fire TV Stick, añádelo en Vidonzo como **Enlace M3U** en lugar de como
+archivo. Escribir una dirección larga con el mando es lo pesado, y ahí es donde
+ayuda [el teclado de un móvil emparejado](/es/blog/movil-como-mando-de-tv/):
+lo que escribes en el móvil aparece en el campo de la tele.
+
+Las teles Samsung y LG no usan Android, así que el reproductor vive en una cajita
+o un stick conectado al televisor:
+[aquí se describe la configuración que funciona](/es/blog/iptv-en-smart-tv-samsung-o-lg/).
+
+## ¿El archivo o el enlace del que salió?
+
+Si te dieron las dos cosas, quédate con el enlace. Un archivo es una foto fija de
+la lista en el momento en que se guardó; un enlace se vuelve a leer cada vez que
+el reproductor actualiza, así que los canales que tu proveedor añade o cambia de
+sitio aparecen solos.
+[Aquí se explica el equilibrio completo](/es/blog/enlace-de-lista-o-archivo-local/);
+un archivo también tiene sus usos, entre ellos funcionar aunque el servidor de
+listas del proveedor no responda.
+
+## Cuando se abre pero algo no cuadra
+
+- **La lista está vacía.** El archivo no tiene entradas `#EXTINF`, o sus rutas
+  apuntan al disco de otro ordenador. Vuelve a mirar dentro.
+- **Los nombres de los canales salen como símbolos o interrogantes.** La
+  codificación del texto no es la que esperaba el reproductor.
+  [Por qué los nombres llegan ilegibles](/es/blog/nombres-de-canales-ilegibles/), y
+  cómo arreglar el archivo.
+- **La lista está bien pero no se reproduce nada.** Los nombres son correctos y
+  las direcciones están muertas o caducadas: un problema del proveedor, no del
+  archivo ni del reproductor.
+- **Dice que la lista no se puede cargar.** Un archivo no falla como falla un
+  enlace, pero un enlace sí puede fallar;
+  [las cinco causas están aquí](/es/blog/la-lista-no-carga/).
+
+Un archivo M3U es pequeño, legible y agradecido. Míralo por dentro una vez, elige
+la app que corresponde a lo que contiene y se abrirá como cualquier otra cosa.

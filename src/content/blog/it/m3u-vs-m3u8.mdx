@@ -1,11 +1,12 @@
 ---
-title: "M3U o M3U8: che cosa significano davvero le due estensioni"
-description: "L'8 in più riguarda la codifica del testo, non la qualità. Ecco che cosa distingue davvero i due formati e perché uno mostra i nomi dei canali come si deve."
+title: "Differenza tra M3U e M3U8: quella vera (non è la qualità)"
+description: "M3U8 è una playlist M3U salvata in UTF-8: l'8 non c'entra con la qualità dell'immagine. Perché conta per i nomi dei canali, e l'altro .m3u8 dei flussi HLS."
 urlSlug: m3u-o-m3u8
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["playlist", "tecnica"]
-keywords: ["differenza m3u e m3u8", "file m3u8", "m3u o m3u8", "playlist utf-8"]
+keywords: ["differenza m3u e m3u8", "differenza tra m3u e m3u8", "m3u o m3u8", "file m3u8", "playlist utf-8"]
 heroImageAlt: "La stessa lista di canali mostrata due volte, una con le lettere accentate rovinate e una resa correttamente."
 ---
 
@@ -14,8 +15,10 @@ I fornitori distribuiscono link che finiscono in `.m3u` e link che finiscono in
 differenza. Le ipotesi che si sentono più spesso — che uno sia più recente, o di
 qualità migliore, o «quello HD» — sono tutte sbagliate.
 
-L'`8` sta per **UTF-8**. Nel formato del file la differenza è tutta lì, ed è più
-piccola e più utile di quanto racconti la leggenda.
+**La risposta breve:** un file M3U8 è una playlist M3U il cui testo è codificato
+in **UTF-8**: è questo che indica l'`8`, e nel formato del file la differenza è
+tutta lì. Entrambi elencano gli stessi canali alla stessa qualità. La differenza
+è più piccola e più utile di quanto racconti la leggenda.
 
 ## Sono lo stesso tipo di file
 
@@ -31,7 +34,7 @@ http://example.com/live/one.ts
 Tutto qui. Una playlist M3U è un indice in testo semplice: nomi e indirizzi,
 niente di più. Non contiene video, non contiene un accesso e non tiene aperta
 nessuna connessione con il fornitore. È un'istantanea di quello che esisteva nel
-momento in cui l'hai scaricata, ed è proprio questo il tratto che la distingue
+momento in cui l'hai ricevuta, ed è proprio questo il tratto che la distingue
 dall'[API Xtream Codes](/it/blog/xtream-codes-o-m3u/).
 
 ## Che cosa cambia l'8
@@ -57,17 +60,18 @@ C'è un secondo motivo, del tutto scollegato, per cui si vede questa estensione,
 crea confusione vera.
 
 **HLS** — il protocollo di streaming che usa la maggior parte dei server IPTV —
-si serve anch'esso di file M3U8. Quando riproduci un canale, il lettore scarica
+si serve anch'esso di file M3U8. Quando riproduci un canale, il lettore recupera
 un piccolo manifesto `.m3u8` che elenca i prossimi secondi di video come segmenti
-separati, e lo riscarica mentre la riproduzione va avanti. È per questo che una
+separati, e lo richiede di nuovo mentre la riproduzione prosegue. È per questo che una
 diretta può partire a trasmissione già iniziata e adattarsi alla tua connessione.
 
-Quindi `.m3u8` può voler dire due cose diverse:
+Quindi `.m3u8` può voler dire due cose diverse (la seconda ha
+[una spiegazione tutta sua](/it/blog/cos-e-un-link-m3u8/)):
 
 - **La tua playlist di abbonamento** — centinaia o migliaia di canali, una riga
   ciascuno. È il link che incolli nel lettore.
 - **Un manifesto di flusso** — un solo canale, con l'elenco dei suoi segmenti.
-  È il lettore a scaricarseli da sé mentre guardi; tu non ne incolli mai uno.
+  È il lettore ad andarseli a prendere da sé mentre guardi; tu non ne incolli mai uno.
 
 Entrambi sono file di testo in formato M3U. Se incolli un manifesto di flusso
 dove andrebbe una playlist, ottieni una «playlist» con una sola voce senza nome:

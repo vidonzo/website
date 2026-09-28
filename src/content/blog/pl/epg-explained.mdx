@@ -1,29 +1,40 @@
 ---
-title: "EPG: jak działa program telewizyjny na ekranie"
-description: "Siatka z programem to osobny plik, pobierany niezależnie od listy kanałów i w innym rytmie. To tłumaczy każde dziwne zachowanie przewodnika."
+title: "EPG – co to jest? Program TV na ekranie i czemu bywa pusty"
+description: "EPG to elektroniczny przewodnik po programach: rozkład tego, co leci teraz i za chwilę. Jak działa w telewizorze, na pilocie i w IPTV oraz dlaczego bywa pusty."
 urlSlug: epg-jak-dziala-program-telewizyjny
 publishedAt: 2026-07-21
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["telewizja", "playlisty"]
-keywords: ["co to jest epg", "program telewizyjny iptv", "xmltv epg", "brak epg w iptv"]
+keywords: ["co to jest epg", "epg co to", "epg na pilocie", "epg na pilocie co to znaczy", "epg w telewizorze", "program telewizyjny iptv", "xmltv epg", "brak epg w iptv"]
 heroImageAlt: "Wiersz kanałów i siatka audycji narysowane jako dwie osobne kartki, połączone jednym pasującym identyfikatorem."
 ---
 
-Siatka pokazująca, co leci teraz, co będzie dalej i co szło godzinę temu, nosi
-nazwę **EPG** — elektroniczny przewodnik po programach. W dekoderze satelitarnym
-przychodzi wewnątrz sygnału. W odtwarzaczu IPTV nie przychodzi, a ta różnica
-tłumaczy prawie każde dziwne zachowanie przewodnika.
+**EPG to skrót od Electronic Programme Guide, czyli elektroniczny przewodnik po
+programach**: wyświetlana na ekranie siatka, która kanał po kanale pokazuje, co
+leci teraz, co będzie dalej i co szło godzinę temu. W telewizorze z anteną
+naziemną albo satelitarną przychodzi wewnątrz nadawanego sygnału. W odtwarzaczu
+IPTV nie przychodzi, a ta różnica tłumaczy prawie każde dziwne zachowanie
+przewodnika.
+
+## EPG na pilocie: co oznacza ten przycisk
+
+Na większości pilotów przycisk jest podpisany **EPG** albo **Guide** i
+otwiera tę siatkę nad tym, co właśnie oglądasz. W telewizorze odbierającym
+kanały z anteny działa od razu, bo nadawca wysyła rozkład razem z kanałami. Naciśnij ten sam przycisk w aplikacji IPTV, a siatka
+pojawi się tylko wtedy, gdy aplikacja wcześniej wczytała program z innego
+źródła — i właśnie o tym jest reszta artykułu.
 
 ## To drugi plik, a nie część listy kanałów
 
 Lista kanałów mówi, *gdzie są strumienie*. EPG mówi, *co na nich leci i kiedy*.
-To osobne dokumenty, pobierane osobno i aktualizowane w innych rytmach.
+To osobne dokumenty, wczytywane osobno i aktualizowane w innych rytmach.
 
 Zwykłym formatem jest **XMLTV**: plik XML wymieniający kanały, a potem audycje
 z odwołaniem do kanału, godziną początku, godziną końca,
 [tytułem i często opisem](/pl/blog/ogladanie-we-wlasnym-jezyku/). Program
 obejmujący kilkaset kanałów na tydzień to duży plik —
-kilkadziesiąt megabajtów to norma — i dlatego odtwarzacz pobiera go w tle, a nie
+kilkadziesiąt megabajtów to norma — i dlatego odtwarzacz wczytuje go w tle, a nie
 w chwili, w której naciskasz przycisk programu.
 
 Przy [Xtream Codes](/pl/blog/xtream-codes-czy-m3u/) przewodnik zwykle przychodzi
@@ -74,13 +85,13 @@ Kiedy identyfikatory pasują, EPG przestaje być ozdobą:
 
 Po kolei:
 
-1. **Poczekaj.** Po dodaniu playlisty pierwsze pobranie EPG trwa chwilę. Przez
+1. **Poczekaj.** Po dodaniu playlisty pierwsze wczytanie EPG trwa chwilę. Przez
    pierwsze kilka minut nic złego się nie dzieje.
 2. **Sprawdź, czy program w ogóle jest.** Przy źródle M3U, jeśli nikt nie podał
    Ci adresu EPG, nie ma czego wyświetlić. Poproś o niego dostawcę.
 3. **Porównaj jeden kanał ze wszystkimi.** Kilka pustych kanałów to niezgodność
-   identyfikatorów. Wszystkie puste to problem z pobraniem.
-4. **Odśwież przewodnik**, jeśli odtwarzacz to udostępnia — to pobiera plik na
+   identyfikatorów. Wszystkie puste to problem z wczytaniem.
+4. **Odśwież przewodnik**, jeśli odtwarzacz to udostępnia — to wczytuje plik na
    nowo, zamiast czytać go z pamięci podręcznej.
 5. **Weź pod uwagę zakres.** Część dostawców publikuje wąskie okno — tylko dziś
    i jutro — i przy przewijaniu daleko w przód wygląda ono na puste.
@@ -99,7 +110,7 @@ kilkuset kanałów bez zamienienia interfejsu w coś nieużywalnego to prawdziwa
 robota — i akurat taka, [za jaką odtwarzacz naprawdę odpowiada](/pl/blog/co-robi-odtwarzacz-iptv/),
 w odróżnieniu od zawartości samego programu.
 
-To także miejsce, w którym po cichu liczy się prywatność. Pobranie programu to
+To także miejsce, w którym po cichu liczy się prywatność. Odczyt programu to
 zapytanie pod adres Twojego dostawcy i pod żaden inny; odtwarzacz, który
 raportowałby, jakie audycje mijasz w przewijaniu, zbierałby wyjątkowo
 szczegółowy obraz Twojego wieczoru — bez żadnego powodu związanego

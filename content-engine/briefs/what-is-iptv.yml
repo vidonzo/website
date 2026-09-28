@@ -1,0 +1,16 @@
+key: what-is-iptv
+title: "What is IPTV? How internet TV works, and what you need to watch it"
+sourceLocale: en
+status: published
+riskTier: medium
+intent: informational
+targetQueries: ["what is iptv", "iptv meaning", "how does iptv work", "iptv 日本", "listas iptv", "iptv плейлисты"]
+audience: Someone who has met the word IPTV and wants the concept before any setup detail.
+value: The pillar page the cluster was missing — delivery vs service vs player, and which piece a given problem lives in. Links into every setup, device and troubleshooting article.
+angle: IPTV is a delivery technology, not a service. Explains the three pieces without ever saying where channels come from.
+evidence: GSC 2026-06-28..2026-09-26 — generic IPTV queries across ja/es/ru with no definitional page to land on; the site has no hub linking its 40 articles by topic.
+productFacts:
+  - Vidonzo is a player; it does not sell or host channels
+  - three source kinds (Xtream Codes, M3U link, M3U file), catch-up attributes read, films and series as a library
+constraints: [sell-playback-not-access, no-download-or-offline-wording, no-channel-names, no-legal-disclaimer-as-shield]
+internalLinks: [streaming-protocols-explained, fix-iptv-buffering, inside-an-m3u-file, xtream-codes-login-explained, xtream-codes-vs-m3u, what-an-iptv-player-does, films-and-series-as-a-library, epg-explained, iptv-on-a-tablet, iptv-player-on-android-tv, iptv-player-on-fire-tv-stick, samsung-lg-smart-tv-iptv-setup, playlist-link-wont-load, stream-stops-after-a-few-seconds, set-up-your-first-playlist]

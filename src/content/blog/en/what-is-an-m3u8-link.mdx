@@ -1,0 +1,137 @@
+---
+title: "What is an M3U8 link? HLS streams explained, and how to play one"
+description: "An .m3u8 link is either one HLS stream or a whole channel playlist saved as UTF-8. How to tell which you have, how to play each, and why a link stops working."
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlists", "engineering"]
+keywords: ["what is m3u8", "m3u8 link", "how to play m3u8", "m3u8 file", "hls m3u8"]
+heroImageAlt: "A single stream address fanning out into a row of short video segments, each a few seconds long."
+---
+
+**An M3U8 link is the address of a small text file in M3U format, saved as
+UTF-8.** It never contains video itself. What it contains decides what you are
+holding, and in practice it is one of two very different things:
+
+- **An HLS stream** — one channel or one video, described as a list of short
+  segments the player fetches in turn. This is what the extension means on most
+  of the web.
+- **A channel playlist** — hundreds of channel names and their stream addresses,
+  exactly like an `.m3u` file, just with UTF-8 text.
+  [The M3U vs M3U8 difference](/blog/m3u-vs-m3u8/) covers that side.
+
+The two look identical in an address bar and behave nothing alike, so the first
+job is to tell them apart.
+
+## How to tell which one you have
+
+Open the link in a browser or save the file and open it in a text editor. The
+first few lines give it away.
+
+A **playlist** reads like a directory — a name, then an address, over and over:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="News",Channel One
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Films",Channel Two
+http://example.com/live/two.m3u8
+```
+
+An **HLS stream** reads like a timetable. Either it lists the qualities on offer:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+or it lists the segments themselves:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Channel names and `group-title` mean a playlist. `#EXT-X-` lines mean a stream.
+
+## How HLS actually plays
+
+HLS — HTTP Live Streaming — is the most widely used way to deliver video over the
+internet, and the `.m3u8` file is its index.
+
+The first file, the **master playlist**, lists the same programme at several
+qualities, each with the bandwidth it needs. The player picks one and opens its
+**media playlist**, which names the next few segments of a few seconds each. It
+fetches those, plays them, and re-reads the media playlist to find the next ones.
+For a live channel that list keeps moving forward; for a film it ends with a
+closing tag and the player knows the whole length.
+
+The clever part is that the player can switch qualities between segments. When
+your connection dips it steps down to a lighter version instead of stopping, and
+steps back up when there is room. Vidonzo starts a live channel on the lightest
+version so the picture appears quickly, then moves up on its own. There is more
+on HLS against its rivals in
+[the streaming protocols explainer](/blog/streaming-protocols-explained/).
+
+## How to play an M3U8 link
+
+**If it is a playlist**, it belongs in an IPTV player, which will turn it into
+channels, categories and a guide. In Vidonzo, choose **Add a service → M3U link**
+and paste it into **M3U/M3U8 playlist URL**. If the playlist came as a file,
+**M3U file** takes it from your device.
+
+**If it is a single stream**, you have three straightforward options:
+
+1. **VLC.** Choose *Media → Open Network Stream* (on a Mac, *File → Open
+   Network*), paste the link, and play. VLC is excellent at exactly this, and
+   [where it stops being enough](/blog/vlc-as-an-iptv-player/) is a separate
+   question.
+2. **Safari.** Apple's browsers play HLS natively, so a direct `.m3u8` link
+   often opens straight into a video. Support in other browsers varies, and
+   many only play it inside a web page that has an HLS player built in.
+3. **Wrap it in a playlist.** An IPTV player expects a list, and a list of one
+   is still a list. Save these three lines in a text file named `stream.m3u`,
+   with your own name and address:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,My stream
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo reads it through **M3U file** like any other playlist, and the stream
+   then sits in your library with a name, next to everything else.
+
+## Why an M3U8 link stops working
+
+A link that played yesterday and fails today is usually one of these:
+
+- **It had an expiry built in.** Many stream addresses carry a token or a
+  signature in the part after the `?` — `token=`, `expires=`, `sig=`. They are
+  valid for one session or a few hours and then the server refuses them with a
+  403. Nothing is wrong with your player; the key has simply run out.
+- **It only works where it came from.** Some servers check which app or page is
+  asking and refuse everything else.
+- **The segments moved on.** A live media playlist only names the latest few
+  segments. A copy saved as a file goes stale within seconds.
+- **The stream ended or moved.** A 404 means the address no longer exists.
+
+If a whole playlist of `.m3u8` channels loads but nothing plays, the fault is
+almost never the extension — it is the addresses inside. And if streams start
+and die after a few seconds,
+[that is a disconnect, not buffering](/blog/stream-stops-after-a-few-seconds/),
+with its own causes.
+
+## The short version
+
+An `.m3u8` is an index, never the video. Channel names inside mean a playlist:
+give it to a player. `#EXT-X-` lines mean a single HLS stream: open it in VLC or
+Safari, or wrap it in a one-line playlist. And if it worked once and fails now,
+look at the expiry in the address before you look anywhere else.

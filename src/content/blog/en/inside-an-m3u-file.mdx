@@ -1,18 +1,27 @@
 ---
-title: "Inside an M3U file: what every line actually says"
-description: "Open one in a text editor and it stops being mysterious. Four kinds of line, a handful of attributes, and every one of them explains something you have seen in a player."
+title: "What is an M3U file? The playlist format, line by line"
+description: "An M3U file is a plain-text playlist: channel names, stream addresses and a few optional tags. What every line means, how a player reads it, and how to check your own."
 urlSlug: inside-an-m3u-file
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["playlists", "engineering"]
-keywords: ["what is an m3u file", "m3u file format", "extinf explained", "m3u tvg-id group-title"]
+keywords: ["what is an m3u file", "m3u file format", "m3u meaning", "extinf explained", "m3u tvg-id group-title"]
 heroImageAlt: "A few lines of M3U playlist text with the header, the description line and the stream address picked out."
 ---
 
-An M3U file has a reputation for being technical, which it does not deserve. It
-is one of the simplest formats still in daily use: a list of names, a list of
+**An M3U file is a plain-text playlist.** Each entry is an address — of a
+song, a video, or a live TV stream — usually preceded by a line that names and
+describes it. The extension comes from *MP3 URL*, its original job; today it is
+the standard way IPTV providers hand out channel lists, and `.m3u8` is the same
+format saved as UTF-8.
+
+The format has a reputation for being technical, which it does not deserve. It
+is one of the simplest still in daily use: a list of names, a list of
 addresses, and a few optional notes. You can read one in a text editor, and once
-you have, a lot of player behaviour stops looking arbitrary.
+you have, a lot of player behaviour stops looking arbitrary. (If you only want to
+play one, [opening an M3U file](/blog/how-to-open-an-m3u-file/) is a separate,
+shorter story.)
 
 Here is a complete, working playlist. Two channels, nothing omitted.
 

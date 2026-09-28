@@ -1,0 +1,148 @@
+---
+title: "M3U8 nedir? M3U8 linki nasıl açılır ve oynatılır"
+description: "M3U8 linki ya tek bir HLS yayınıdır ya da UTF-8 olarak kaydedilmiş bir kanal listesi. Hangisi olduğunu anlamak, ikisini oynatmak ve link neden bozulur."
+urlSlug: m3u8-nedir-nasil-oynatilir
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["oynatma-listesi", "teknik"]
+keywords: ["m3u8 nedir", "m3u8 linki nedir", "m3u8 nasıl açılır", "m3u8 nasıl oynatılır", "hls m3u8 nedir"]
+heroImageAlt: "Tek bir yayın adresinden yelpaze gibi açılan, her biri birkaç saniyelik kısa video parçalarından oluşan bir sıra."
+---
+
+**M3U8 linki, M3U biçiminde yazılmış ve UTF-8 olarak kaydedilmiş küçük bir metin
+dosyasının adresidir.** İçinde hiçbir zaman videonun kendisi yoktur. Elinizde ne
+olduğunu içindekiler belirler ve pratikte bu, birbirinden çok farklı iki şeyden
+biridir:
+
+- **Bir HLS yayını** — tek bir kanal ya da tek bir video; oynatıcının sırayla
+  çektiği kısa parçaların listesi olarak tarif edilir. Web'in büyük bölümünde bu
+  uzantı bunu ifade eder.
+- **Bir kanal listesi** — yüzlerce kanal adı ve yayın adresi; tıpkı bir `.m3u`
+  dosyası, yalnızca metni UTF-8. O tarafı
+  [M3U ile M3U8 arasındaki fark](/tr/blog/m3u-ile-m3u8-farki/) yazısı anlatıyor.
+
+İkisi adres çubuğunda aynı görünür ama hiç de aynı davranmaz; bu yüzden ilk iş
+onları birbirinden ayırmaktır.
+
+## Elinizdekinin hangisi olduğunu anlamak
+
+Linki bir tarayıcıda açın ya da dosyayı kaydedip bir metin düzenleyicide açın.
+İlk birkaç satır her şeyi ele verir.
+
+**Kanal listesi** bir rehber gibi okunur — bir ad, ardından bir adres, tekrar
+tekrar:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="News",Channel One
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Films",Channel Two
+http://example.com/live/two.m3u8
+```
+
+**HLS yayını** ise bir tarife gibi okunur. Ya sunulan kaliteleri sıralar:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+ya da parçaların kendisini:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Kanal adları ve `group-title` görüyorsanız bu bir kanal listesidir. `#EXT-X-` ile
+başlayan satırlar görüyorsanız tek bir yayındır.
+
+## HLS aslında nasıl oynar
+
+HLS — HTTP Live Streaming — internet üzerinden video iletmenin en yaygın yoludur
+ve `.m3u8` dosyası onun içindekiler sayfasıdır.
+
+İlk dosya olan **ana liste** (master playlist), aynı programı birkaç farklı
+kalitede, her birinin ihtiyaç duyduğu bant genişliğiyle birlikte sıralar.
+Oynatıcı birini seçer ve onun **medya listesini** açar; bu liste her biri birkaç
+saniyelik sonraki birkaç parçanın adını verir. Oynatıcı bunları çeker, oynatır ve
+sıradakileri bulmak için medya listesini yeniden okur. Canlı bir kanalda bu liste
+sürekli ileri kayar; bir filmde ise bir kapanış etiketiyle biter ve oynatıcı
+toplam süreyi bilir.
+
+İşin akıllıca kısmı, oynatıcının parçalar arasında kalite değiştirebilmesidir.
+Bağlantınız zayıfladığında durmak yerine daha hafif bir sürüme iner, yer açılınca
+yeniden yükselir. Vidonzo canlı bir kanalı görüntü hızlı gelsin diye en hafif
+sürümle başlatır, ardından kendiliğinden yukarı çıkar. HLS'nin rakipleri
+karşısındaki durumunu
+[yayın protokolleri yazısında](/tr/blog/hls-dash-rtsp-yayin-protokolleri/)
+bulabilirsiniz.
+
+## M3U8 linki nasıl oynatılır
+
+**Bir kanal listesiyse**, yeri bir IPTV oynatıcısıdır; oynatıcı onu kanallara,
+kategorilere ve bir rehbere dönüştürür. Vidonzo'da **Servis ekle → M3U bağlantısı**
+yolunu seçin ve linki **M3U/M3U8 oynatma listesi adresi** alanına yapıştırın.
+Liste size dosya olarak geldiyse **M3U dosyası** sekmesi onu cihazınızdan alır.
+
+**Tek bir yayınsa**, üç kolay seçeneğiniz var:
+
+1. **VLC.** *Media → Open Network Stream* (Türkçe arayüzde *Ortam* menüsünün
+   altında; Mac'te *File → Open Network*) yolunu seçin, linki yapıştırın ve
+   oynatın. VLC tam da bu işte mükemmeldir;
+   [nerede yetersiz kaldığı](/tr/blog/vlc-iptv-oynatici-olabilir-mi/) ise ayrı bir
+   soru.
+2. **Safari.** Apple'ın tarayıcıları HLS'yi doğal olarak oynatır; bu yüzden
+   doğrudan bir `.m3u8` linki çoğu zaman düz bir videoya açılır. Diğer
+   tarayıcılarda destek değişir; birçoğu onu yalnızca içinde HLS oynatıcısı olan
+   bir web sayfasında oynatır.
+3. **Onu bir listeye sarın.** IPTV oynatıcısı bir liste bekler; tek kayıtlı bir
+   liste de sonuçta listedir. Aşağıdaki üç satırı kendi adınız ve adresinizle
+   `yayin.m3u` adlı bir metin dosyasına kaydedin:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Benim yayınım
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo onu **M3U dosyası** üzerinden her liste gibi okur; yayın da artık bir
+   adla, her şeyin yanında kütüphanenizde durur.
+
+## M3U8 linki neden çalışmayı bırakır
+
+Dün oynayıp bugün açılmayan bir link genellikle şunlardan birine takılmıştır:
+
+- **İçine bir son kullanma tarihi gömülüydü.** Pek çok yayın adresi `?`
+  işaretinden sonraki kısımda bir anahtar ya da imza taşır — `token=`,
+  `expires=`, `sig=`. Bunlar tek bir oturum ya da birkaç saat geçerlidir, sonra
+  sunucu 403 hatasıyla reddeder. Oynatıcınızda bir sorun yok; anahtarın süresi
+  dolmuştur, o kadar.
+- **Yalnızca geldiği yerde çalışıyor.** Bazı sunucular isteğin hangi uygulamadan
+  ya da sayfadan geldiğine bakar ve gerisini reddeder.
+- **Parçalar ilerledi.** Canlı bir medya listesi yalnızca en son birkaç parçayı
+  sayar. Dosya olarak kaydedilmiş bir kopyası saniyeler içinde bayatlar.
+- **Yayın bitti ya da taşındı.** 404 hatası, adresin artık var olmadığı
+  anlamına gelir.
+
+Adresleri `.m3u8` ile biten kanallardan oluşan bütün bir liste açılıyor ama hiçbiri oynamıyorsa, suç
+neredeyse hiçbir zaman uzantıda değildir — içindeki adreslerdedir. Yayınlar
+başlayıp birkaç saniye sonra ölüyorsa da
+[bu bir kopmadır, donma değil](/tr/blog/yayin-birkac-saniye-sonra-duruyor/);
+kendi nedenleri vardır.
+
+## Kısacası
+
+Bir `.m3u8` bir içindekiler sayfasıdır, asla videonun kendisi değildir. İçinde
+kanal adları varsa bu bir listedir: bir oynatıcıya verin. `#EXT-X-` satırları
+varsa tek bir HLS yayınıdır: VLC'de ya da Safari'de açın veya tek satırlık bir
+listeye sarın. Bir kez çalışıp şimdi çalışmıyorsa, başka yere bakmadan önce
+adresteki son kullanma bilgisine bakın.

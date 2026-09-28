@@ -79,8 +79,16 @@ const articleSchema = {
   description: data.description,
   datePublished: data.publishedAt.toISOString(),
   dateModified: (data.updatedAt ?? data.publishedAt).toISOString(),
-  author: { '@type': 'Organization', name: data.author },
-  publisher: { '@type': 'Organization', name: site.name },
+  // The social card is 1200×630 and in the page's own language — the size and
+  // the headline Google's article guidelines ask the image to carry.
+  image: [new URL(image.social, site.url).toString()],
+  author: { '@type': 'Organization', name: data.author, url: site.url },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    logo: { '@type': 'ImageObject', url: new URL('/icon-512.png', site.url).toString() },
+  },
   inLanguage: post.isFallback ? 'en' : locale,
   mainEntityOfPage: new URL(localizedPath(locale, 'blog', slug), site.url).toString(),
 };

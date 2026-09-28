@@ -1,0 +1,17 @@
+key: what-is-an-m3u8-link
+title: "What is an M3U8 link? HLS streams explained, and how to play one"
+sourceLocale: en
+status: published
+riskTier: low
+intent: informational
+targetQueries: ["m3u8", "what is m3u8", "m3u8 means", "what is m3u8 stream", "m3u8 file", "apa itu m3u8", "m3u8 뜻", "archivo m3u8", "m3u8 datei"]
+audience: Someone holding a .m3u8 address who does not know whether it is a stream or a playlist.
+value: The two meanings of .m3u8 told apart by their first lines, how HLS actually plays, and three honest ways to play a lone stream.
+angle: m3u-vs-m3u8 answers the encoding question; this answers the HLS one. The one-line playlist wrapper is true of the app (M3U file source reads any valid playlist).
+evidence: GSC 2026-06-28..2026-09-26 — "m3u8" 8 impressions at position 53, plus a long tail of m3u8-meaning queries in en/id/ko/es/de/tr ranking 10–85 against a page that only answers the encoding question.
+productFacts:
+  - no single-stream source kind — an M3U link is always parsed as a playlist (hence the wrapper)
+  - M3U file picker accepts .m3u, .m3u8, .txt
+  - live HLS opens at the lowest rendition (hls-bitrate=min) and steps up automatically; no manual quality picker
+constraints: [no-download-or-offline-wording, sell-playback-not-access, no-channel-names]
+internalLinks: [m3u-vs-m3u8, streaming-protocols-explained, vlc-as-an-iptv-player, stream-stops-after-a-few-seconds]
