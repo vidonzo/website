@@ -1,0 +1,143 @@
+---
+title: "Identifiants Xtream Codes : URL, identifiant et mot de passe"
+description: "Xtream Codes, c'est trois champs : l'URL du serveur avec son port, un identifiant et un mot de passe. Leur format, les fautes classiques, le sens des erreurs."
+urlSlug: identifiants-xtream-codes-expliques
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["configuration", "playlists"]
+keywords: ["identifiants xtream codes", "url serveur xtream codes", "xtream codes identifiant mot de passe", "connexion xtream codes", "xtream codes get.php"]
+heroImageAlt: "Trois champs de saisie légendés — serveur, identifiant, mot de passe — avec le numéro de port de l'adresse du serveur mis en évidence."
+---
+
+**Des identifiants Xtream Codes, ce sont trois informations : une URL de serveur
+(généralement avec un numéro de port, comme `http://example.com:8080`), un
+identifiant et un mot de passe.** Ensemble, elles permettent à un lecteur de
+demander directement au serveur de votre fournisseur vos chaînes en direct, vos
+films, vos séries et votre guide des programmes, au lieu de lire une liste
+figée. Presque tous les problèmes avec ce type de connexion viennent de l'une
+des trois, recopiée légèrement de travers — et chaque erreur a un symptôme
+reconnaissable.
+
+## D'où viennent les trois champs
+
+Votre fournisseur vous les envoie, en général dans un message qui ressemble à
+ceci :
+
+```
+URL :          http://example.com:8080
+Identifiant :  jdupont42
+Mot de passe : k7Qp9xWz
+```
+
+Parfois, il n'y a pas d'identifiants séparés, juste un long lien. Ce lien
+contient les trois :
+
+```
+http://example.com:8080/get.php?username=jdupont42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Lisez-le de gauche à droite : tout ce qui précède `/get.php` est l'**URL du
+serveur**, la valeur après `username=` est l'**identifiant**, et la valeur après
+`password=` est le **mot de passe**. Le reste indique seulement au serveur quel
+format de playlist envoyer.
+
+Cela marche aussi dans l'autre sens. Avec les trois champs, vous pouvez écrire ce
+lien vous-même — l'URL du serveur, puis `/get.php?username=`, votre identifiant,
+`&password=`, votre mot de passe, `&type=m3u_plus` — ce qui dépanne avec un
+lecteur qui n'accepte que des liens M3U.
+
+## L'URL du serveur, pièce par pièce
+
+`http://example.com:8080` se compose de trois parties, et chacune compte.
+
+- **Le schéma — `http://` ou `https://`.** Ils ne sont pas interchangeables.
+  Utilisez exactement ce que votre fournisseur a écrit. Beaucoup de serveurs
+  Xtream ne parlent que le `http` simple, et demander du `https` vous vaut une
+  erreur de certificat, ou rien du tout.
+- **L'hôte — `example.com`**, ou parfois une adresse purement numérique comme
+  `203.0.113.10`. Une seule lettre fausse, et le serveur reste introuvable.
+- **Le port — `:8080`.** Le nombre après les deux-points est une porte distincte
+  sur le même serveur. `http://example.com` et `http://example.com:8080` sont deux
+  adresses différentes, et oublier le port est la raison la plus fréquente pour
+  laquelle des identifiants « qui ont l'air bons » n'atteignent rien.
+
+Ce qui n'a **pas** sa place dans le champ : tout ce qui suit le port. Les chemins
+comme `/get.php`, `/player_api.php` ou `/c/` sont ajoutés par le lecteur
+lui-même.
+
+Vidonzo fait le ménage dans les cas évidents : il ajoute `http://` si vous
+omettez le schéma, retire les barres obliques finales et conserve le port que
+vous avez saisi.
+
+## L'identifiant et le mot de passe
+
+Tous deux sont sensibles à la casse, et ce sont d'ordinaire des chaînes générées
+où `O` et `0`, ou `l` et `I`, se confondent. Donc :
+
+- **Collez plutôt que de taper.** Copiez depuis le message de votre fournisseur.
+- **Méfiez-vous de l'espace final.** En copiant depuis un message, on embarque
+  souvent l'espace qui suit le mot, et le serveur le considère comme faisant
+  partie du mot de passe.
+- **Ne les inversez pas.** Ça paraît évident ; avec deux chaînes aléatoires, ça
+  arrive.
+
+Des identifiants sont aussi sensibles qu'un mot de passe bancaire : quiconque
+les détient peut utiliser votre compte, et vous en bloquer souvent l'accès
+quand la limite de connexions est atteinte. Vidonzo ne les stocke que sur votre
+appareil, et
+[peut les chiffrer avant qu'ils n'aillent où que ce soit](/fr/blog/pourquoi-chiffrer-vos-identifiants/).
+
+## Ce que le lecteur en fait
+
+Quand vous vous connectez, le lecteur appelle le `player_api.php` du serveur avec
+votre identifiant et votre mot de passe. La première réponse concerne le compte
+lui-même — si la connexion est acceptée, et des détails comme le nombre de
+connexions simultanées autorisées. Viennent ensuite les catégories, la liste des
+chaînes, les catalogues de films et de séries, et le guide des programmes,
+chacun récupéré à la demande.
+
+C'est toute la différence avec un simple lien M3U, qui est un fichier figé sans
+rien à demander.
+[Lequel des deux utiliser quand vous avez les deux](/fr/blog/xtream-codes-ou-m3u/)
+dépend surtout de votre envie d'avoir films, séries et guide.
+
+## Les saisir dans Vidonzo
+
+1. Choisissez **Ajouter un service**, puis **Xtream Codes**.
+2. Collez l'adresse dans **URL du serveur** — schéma, hôte et port, rien après.
+3. Collez l'**Identifiant** et le **Mot de passe**.
+4. Donnez-lui éventuellement un **Nom du service**, puis
+   **Connecter et enregistrer**.
+
+Les identifiants sont vérifiés avant tout enregistrement : une erreur se voit
+donc tout de suite, et non plus tard sous la forme d'une bibliothèque vide. Si
+vous n'avez que le long lien `get.php`, collez-le plutôt dans l'onglet
+**Lien M3U** : Vidonzo en extrait les trois champs et, si la connexion
+fonctionne, le configure comme un service Xtream complet, avec films, séries et
+guide.
+
+## Ce que veulent dire les messages d'erreur
+
+- **« Nom d'utilisateur ou mot de passe incorrect. »** Le serveur a été atteint
+  et il a refusé la connexion. Vérifiez la casse, les caractères qui se
+  ressemblent et l'espace final. Certains serveurs répondent de la même façon
+  pour un compte expiré ou suspendu : si vous êtes sûr du mot de passe,
+  interrogez votre fournisseur sur l'état du compte.
+- **« Impossible de joindre le serveur. »** Rien n'a répondu à cette adresse.
+  Les suspects habituels : un port manquant ou faux, du `https` là où il fallait
+  du `http`, ou une faute de frappe dans l'hôte. Plus rarement, le réseau sur
+  lequel vous êtes bloque les ports inhabituels ; essayer les mêmes identifiants
+  en données mobiles vous fixe rapidement.
+- **« Le serveur a mis trop de temps à répondre. »** Il a été atteint, mais il
+  était lent. Un très gros catalogue peut prendre un moment à la première
+  connexion ; réessayez avant de changer quoi que ce soit.
+- **« Le certificat de sécurité du serveur n'a pas pu être vérifié. »** Vous
+  utilisez `https` avec un serveur dont le certificat n'est pas valide. Utilisez
+  le schéma indiqué par votre fournisseur.
+
+Quand la connexion est acceptée mais que les chaînes démarrent puis s'arrêtent,
+les identifiants ne sont plus en cause —
+[c'est un problème de flux](/fr/blog/le-flux-s-arrete-apres-quelques-secondes/), et
+une limite de connexions en est l'une des causes habituelles. Pour la liste
+complète des façons dont une source peut refuser de se charger, voyez
+[les cinq pannes derrière un seul message d'erreur peu parlant](/fr/blog/la-playlist-ne-charge-pas/).

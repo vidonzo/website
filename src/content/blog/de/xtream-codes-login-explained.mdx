@@ -1,0 +1,140 @@
+---
+title: "Xtream Codes Login: Server-URL, Benutzername und Passwort"
+description: "Ein Xtream-Codes-Login besteht aus drei Feldern: Serveradresse mit Port, Benutzername und Passwort. Typische Tippfehler und was die Fehlermeldungen heißen."
+urlSlug: xtream-codes-login-erklaert
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["einrichtung", "playlists"]
+keywords: ["xtream codes login", "xtream codes server url", "xtream codes benutzername passwort", "xtream codes zugangsdaten eingeben", "xtream codes get.php"]
+heroImageAlt: "Drei beschriftete Eingabefelder — Server, Benutzername, Passwort —, in der Serveradresse ist die Portnummer hervorgehoben."
+---
+
+**Ein Xtream-Codes-Login besteht aus drei Angaben: einer Server-URL (meist mit
+Portnummer, etwa `http://example.com:8080`), einem Benutzernamen und einem
+Passwort.** Zusammen erlauben sie einem Player, den Server Ihres Anbieters direkt
+nach Live-Sendern, Filmen, Serien und Programmführer zu fragen, statt eine starre
+Liste einzulesen. Fast jedes Problem mit dieser Art Login kommt daher, dass eine
+der drei Angaben leicht falsch übernommen wurde — und jeder dieser Fehler hat ein
+typisches Erkennungszeichen.
+
+## Woher die drei Felder kommen
+
+Ihr Anbieter schickt sie Ihnen, meist in einer Nachricht, die ungefähr so aussieht:
+
+```
+URL:      http://example.com:8080
+Username: jsmith42
+Password: k7Qp9xWz
+```
+
+Manchmal gibt es gar kein eigenes Login, sondern nur einen langen Link. Der
+enthält alle drei:
+
+```
+http://example.com:8080/get.php?username=jsmith42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Lesen Sie ihn von links nach rechts: Alles vor `/get.php` ist die **Server-URL**,
+der Wert nach `username=` ist der **Benutzername**, der Wert nach `password=` das
+**Passwort**. Der Rest sagt dem Server nur, in welchem Playlist-Format er antworten
+soll.
+
+Das funktioniert auch umgekehrt. Mit den drei Feldern können Sie diesen Link
+selbst zusammensetzen — Server-URL, dann `/get.php?username=`, Ihr Benutzername,
+`&password=`, Ihr Passwort, `&type=m3u_plus` —, was bei einem Player nützlich ist,
+der nur M3U-Links annimmt.
+
+## Die Server-URL, Stück für Stück
+
+`http://example.com:8080` besteht aus drei Teilen, und jeder zählt.
+
+- **Das Schema — `http://` oder `https://`.** Die beiden sind nicht austauschbar.
+  Nehmen Sie genau das, was Ihr Anbieter geschrieben hat. Viele Xtream-Server
+  sprechen nur schlichtes `http`, und wer `https` verlangt, bekommt einen
+  Zertifikatsfehler oder gar nichts.
+- **Der Host — `example.com`**, manchmal auch eine reine Zahlenadresse wie
+  `203.0.113.10`. Ein falscher Buchstabe, und der Server wird schlicht nie
+  gefunden.
+- **Der Port — `:8080`.** Die Zahl nach dem Doppelpunkt ist eine eigene Tür zum
+  selben Server. `http://example.com` und `http://example.com:8080` sind
+  verschiedene Adressen, und ein vergessener Port ist der häufigste Grund, warum
+  ein Login, das „richtig aussieht“, nichts erreicht.
+
+Was **nicht** ins Feld gehört: alles nach dem Port. Pfade wie `/get.php`,
+`/player_api.php` oder `/c/` hängt der Player selbst an.
+
+Vidonzo räumt die offensichtlichen Fälle für Sie auf: Es ergänzt `http://`, wenn
+Sie das Schema weglassen, entfernt Schrägstriche am Ende und behält den Port bei,
+den Sie eingegeben haben.
+
+## Benutzername und Passwort
+
+Bei beiden zählt die Groß- und Kleinschreibung, und beide sind meist erzeugte
+Zeichenfolgen, in denen sich `O` und `0` oder `l` und `I` zum Verwechseln ähneln.
+Deshalb:
+
+- **Einfügen statt tippen.** Kopieren Sie direkt aus der Nachricht Ihres Anbieters.
+- **Auf ein Leerzeichen am Ende achten.** Beim Kopieren aus einer Nachricht rutscht
+  oft das Leerzeichen hinter dem Wort mit, und der Server hält es für einen Teil
+  des Passworts.
+- **Nicht vertauschen.** Klingt selbstverständlich; bei zwei zufälligen
+  Zeichenfolgen passiert es trotzdem.
+
+Ein Login ist so heikel wie ein Bankpasswort: Wer es hat, kann Ihr Konto nutzen und
+Sie oft aussperren, sobald die erlaubte Zahl gleichzeitiger Verbindungen erreicht
+ist. Vidonzo speichert es nur auf Ihrem Gerät und
+[kann es verschlüsseln, bevor es irgendwohin geht](/de/blog/playlist-zugangsdaten-verschluesseln/).
+
+## Was der Player damit macht
+
+Beim Verbinden ruft der Player die Adresse `player_api.php` des Servers mit Ihrem
+Benutzernamen und Passwort auf. Die erste Antwort betrifft das Konto selbst — ob
+das Login akzeptiert wird, und Angaben wie die Zahl der erlaubten gleichzeitigen
+Verbindungen. Danach folgen Kategorien, Senderliste, Film- und Serienkataloge und
+der Programmführer, jeweils bei Bedarf abgerufen.
+
+Das ist der Unterschied zu einem schlichten M3U-Link, der eine einzige feste Datei
+ist, bei der es nichts zu fragen gibt.
+[Welche der beiden Varianten Sie nehmen, wenn Sie beide haben](/de/blog/xtream-codes-oder-m3u/),
+hängt vor allem davon ab, ob Sie Filme, Serien und einen Programmführer möchten.
+
+## Eingabe in Vidonzo
+
+1. Wählen Sie **Dienst hinzufügen** und dann **Xtream Codes**.
+2. Fügen Sie die Adresse in **Server-URL** ein — Schema, Host und Port, sonst
+   nichts.
+3. Fügen Sie **Benutzername** und **Passwort** ein.
+4. Tragen Sie bei Bedarf einen Namen unter **Dienstname (optional)** ein und
+   tippen Sie dann auf **Verbinden & speichern**.
+
+Das Login wird geprüft, bevor irgendetwas gespeichert wird; ein Fehler zeigt sich
+also sofort und nicht erst später als leere Bibliothek. Haben Sie nur den langen
+`get.php`-Link, fügen Sie ihn stattdessen im Reiter **M3U-Link** ein: Vidonzo liest
+die drei Felder daraus aus und richtet ihn, wenn das Login funktioniert, als
+vollwertigen Xtream-Dienst mit Filmen, Serien und Programmführer ein.
+
+## Was die Fehlermeldungen bedeuten
+
+- **„Benutzername oder Passwort ist falsch.“** Der Server wurde erreicht und hat
+  das Login abgelehnt. Prüfen Sie Groß- und Kleinschreibung, verwechselbare
+  Zeichen und das Leerzeichen am Ende. Manche Server antworten bei einem
+  abgelaufenen oder gesperrten Konto genauso; sind Sie sich beim Passwort sicher,
+  fragen Sie Ihren Anbieter nach dem Status des Kontos.
+- **„Server nicht erreichbar.“** Unter dieser Adresse hat nichts geantwortet. Die
+  üblichen Verdächtigen: ein fehlender oder falscher Port, `https` statt `http`
+  oder ein Tippfehler im Host. Selten sperrt das Netz, in dem Sie gerade sind,
+  ungewöhnliche Ports; dasselbe Login über mobile Daten zu versuchen, bringt
+  schnell Klarheit.
+- **„Der Server hat zu lange nicht geantwortet.“** Er wurde erreicht, war aber
+  langsam. Ein sehr großer Katalog kann beim ersten Verbinden eine Weile brauchen;
+  versuchen Sie es erneut, bevor Sie etwas ändern.
+- **„Das Sicherheitszertifikat des Servers konnte nicht überprüft werden.“** Sie
+  nutzen `https` bei einem Server, dessen Zertifikat ungültig ist. Nehmen Sie das
+  Schema, das Ihr Anbieter angegeben hat.
+
+Wird das Login akzeptiert, aber Sender starten und brechen dann ab, geht es nicht
+mehr um das Login —
+[das ist ein Stream-Problem](/de/blog/stream-stoppt-nach-sekunden/), und
+ein Verbindungslimit ist eine seiner üblichen Ursachen. Die ganze Liste der
+Gründe, warum eine Quelle nicht lädt, finden Sie unter
+[fünf Fehler hinter einer nichtssagenden Meldung](/de/blog/playlist-laedt-nicht/).

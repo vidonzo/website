@@ -1,11 +1,12 @@
 ---
-title: "M3U oder M3U8: Was die Dateiendungen wirklich bedeuten"
-description: "Die 8 steht für die Textkodierung, nicht für die Qualität. Was die beiden wirklich unterscheidet und warum eine davon Ihre Sendernamen richtig anzeigt."
+title: "M3U vs. M3U8: der echte Unterschied (nicht die Qualität)"
+description: "M3U8 ist eine M3U-Playlist in UTF-8 – mit Bildqualität hat die 8 nichts zu tun. Warum das für Sendernamen zählt, und die andere .m3u8 bei HLS-Streams."
 urlSlug: m3u-oder-m3u8
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["playlists", "technik"]
-keywords: ["m3u oder m3u8", "unterschied m3u m3u8", "m3u8 datei", "iptv playlist umlaute"]
+keywords: ["m3u oder m3u8", "unterschied zwischen m3u und m3u8", "m3u vs m3u8", "m3u8 datei", "iptv playlist umlaute"]
 heroImageAlt: "Dieselbe Senderliste zweimal untereinander, oben mit zerschossenen Umlauten, unten korrekt dargestellt."
 ---
 
@@ -14,8 +15,10 @@ enden, für dasselbe Abo manchmal beide — und erklären den Unterschied selten
 verbreiteten Vermutungen, das eine sei neuer, hochwertiger oder „das mit HD“,
 sind allesamt falsch.
 
-Die `8` steht für **UTF-8**. Das ist der gesamte Unterschied im Dateiformat, und
-er ist kleiner und nützlicher, als der Volksglaube nahelegt.
+**Die kurze Antwort:** Eine M3U8-Datei ist eine M3U-Playlist, deren Text als
+**UTF-8** kodiert ist — dafür steht die `8`, und das ist der gesamte Unterschied im
+Dateiformat. Beide listen dieselben Sender in derselben Qualität. Der Unterschied
+ist kleiner und nützlicher, als der Volksglaube nahelegt.
 
 ## Beides ist dieselbe Art Datei
 
@@ -65,7 +68,8 @@ Segmente auflistet, und lädt es während der Wiedergabe immer wieder neu. Desha
 kann ein Livestream mitten in der laufenden Sendung einsteigen und sich an Ihre
 Verbindung anpassen.
 
-`.m3u8` kann also zweierlei bedeuten:
+`.m3u8` kann also zweierlei bedeuten (für die zweite Bedeutung gibt es
+[eine eigene Erklärung](/de/blog/was-ist-ein-m3u8-link/)):
 
 - **Ihre Abo-Playlist** — hunderte oder tausende Sender, je eine Zeile. Das ist
   der Link, den Sie in einen Player einfügen.

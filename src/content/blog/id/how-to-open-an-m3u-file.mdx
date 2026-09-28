@@ -1,0 +1,118 @@
+---
+title: "Cara membuka file M3U di HP, PC, dan TV: pakai aplikasi apa"
+description: "File M3U adalah playlist, jadi aplikasi yang tepat bergantung pada isinya. Cara membacanya, lalu cara membukanya di Windows, Mac, Android, iPhone, dan TV."
+urlSlug: cara-membuka-file-m3u
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["playlist", "pengaturan"]
+keywords: ["cara membuka file m3u", "buka file m3u", "aplikasi pembuka file m3u", "file m3u dibuka pakai apa", "buka file m3u di android"]
+heroImageAlt: "Ikon berkas playlist di layar ponsel, dengan anak panah yang mengarah ke laptop, tablet, dan televisi."
+---
+
+**Untuk membuka file M3U, gunakan pemutar media yang bisa membaca playlist —
+VLC di komputer, atau pemutar IPTV di HP, tablet, maupun TV.** File M3U bukan
+video. Ia berkas teks pendek yang mendaftar alamat hal-hal yang akan diputar, jadi
+"membukanya" berarti menyerahkan daftar itu ke aplikasi yang tahu cara
+mengikutinya. Anda juga bisa membukanya di editor teks apa saja untuk melihat
+isinya, dan justru itulah langkah pertama terbaik, karena isinya menentukan
+aplikasi mana yang sebenarnya Anda perlukan.
+
+## Pertama, intip isinya
+
+Buka berkasnya di Notepad di Windows, TextEdit di Mac (pilih *Format → Make Plain
+Text* kalau tampilannya aneh), atau penampil teks apa pun di HP. Anda akan melihat
+salah satu dari dua hal.
+
+**Lokasi berkas di sebuah komputer** — baris seperti `Musik\Album\01 Lagu.mp3`.
+Ini playlist musik, dibuat oleh program seperti Winamp, iTunes, atau perangkat
+lunak head unit mobil. Bukalah di pemutar musik di komputer yang sama. Kalau
+dipindah ke perangkat lain, lokasi-lokasi itu tidak lagi menunjuk ke mana pun,
+dan playlist-nya akan terbuka sebagai daftar kosong.
+
+**Alamat web, dengan nama di atasnya** — baris yang diawali `#EXTINF` lalu diikuti
+alamat `http://` atau `https://`. Ini playlist IPTV: setiap pasangan adalah nama
+saluran dan siaran yang diputarnya. Playlist seperti ini butuh pemutar yang
+memahami baris `#EXTINF`, karena di situlah nama saluran, kategori, dan penanda
+panduan acara tersimpan.
+[Setiap baris formatnya dijelaskan di sini.](/id/blog/isi-file-m3u/)
+
+Sisa artikel ini membahas jenis yang kedua.
+
+## Di PC Windows atau Mac
+
+**VLC** adalah pilihan gratis yang paling sederhana di keduanya. Pilih
+*Media → Open File* (di Mac, *File → Open File*), pilih berkas `.m3u`-nya, dan VLC
+memuat seluruh daftar ke panel playlist-nya; klik dua kali sebuah entri untuk
+memutarnya. Menyeret berkas itu ke jendela VLC hasilnya sama.
+
+Cara itu cukup untuk mengecek sebuah daftar atau memutar segelintir saluran.
+Untuk daftar lengkap dari penyedia, Anda akan segera merindukan kategori, panduan
+acara, dan favorit — dan di titik itulah
+[pemutar khusus layak mendapat tempatnya](/id/blog/bisakah-vlc-jadi-pemutar-iptv/).
+
+## Di HP atau tablet Android
+
+Gunakan pemutar IPTV yang bisa mengimpor berkas. Di Vidonzo:
+
+1. Pilih **Tambah layanan**, lalu tab **File M3U**.
+2. Ketuk **Pilih file M3U** dan ambil berkasnya dari penyimpanan HP. Berkas
+   berakhiran `.m3u`, `.m3u8`, dan `.txt` semuanya diterima, jadi playlist yang
+   sampai dengan nama berakhiran teks tetap bisa dipakai.
+3. Kalau penyedia Anda memberi alamat panduan acara, tempelkan ke kolom
+   **URL EPG (XMLTV) — opsional**. Lalu **Hubungkan & simpan**.
+
+Daftarnya dibaca sekali, lalu saluran-saluran Anda muncul, dikelompokkan sesuai
+pengelompokan di dalam berkasnya.
+
+## Di iPhone atau iPad
+
+Simpan dulu berkasnya ke app File — dari Mail atau aplikasi pesan, buka menu
+bagikan pada lampirannya lalu pilih **Simpan ke File**. Kemudian, di Vidonzo,
+**Tambah layanan → File M3U → Pilih file M3U** membuka penjelajah File dan Anda
+tinggal memilihnya dari sana. Langkah yang sama berlaku di iPad, tempat
+[layar yang lebih lebar membuat seluruh pustaka lebih enak dijelajahi](/id/blog/iptv-di-iphone-dan-ipad/).
+
+## Di TV
+
+Televisi adalah kasus yang merepotkan, karena televisi payah dalam urusan berkas:
+jarang ada pengelola berkas, dan memindahkan berkas ke sana biasanya berarti
+memakai flashdisk.
+
+Kalau file M3U itu berasal dari sebuah tautan, **pakai tautannya saja**. Di
+Android TV, Google TV, atau Fire TV Stick, tambahkan di Vidonzo sebagai
+**Tautan M3U**, bukan sebagai berkas. Mengetik alamat panjang dengan remote adalah
+bagian yang melelahkan, dan di situlah
+[keyboard HP yang sudah dipasangkan](/id/blog/ponsel-sebagai-remot-tv/)
+membantu: teks yang diketik di HP langsung masuk ke kolom di TV.
+
+Televisi Samsung dan LG tidak menjalankan Android, jadi pemutarnya tinggal di
+sebuah kotak atau stik yang dicolokkan ke TV —
+[penyiapan yang berhasil dijelaskan di sini](/id/blog/iptv-di-smart-tv-samsung-atau-lg/).
+
+## Berkasnya, atau tautan asalnya?
+
+Kalau Anda diberi keduanya, utamakan tautannya. Berkas adalah potret daftar pada
+saat berkas itu disimpan; tautan dibaca ulang setiap kali pemutar memperbarui
+daftarnya, jadi saluran yang ditambahkan atau dipindahkan penyedia muncul dengan
+sendirinya.
+[Untung-ruginya dijelaskan lengkap di sini](/id/blog/tautan-playlist-atau-berkas-di-perangkat/) —
+berkas tetap punya kegunaan, termasuk tetap bisa dipakai tanpa server playlist
+milik penyedia.
+
+## Kalau terbuka tetapi ada yang janggal
+
+- **Daftarnya kosong.** Berkas itu tidak punya entri `#EXTINF`, atau lokasinya
+  menunjuk ke disk komputer lain. Intip lagi isinya.
+- **Nama saluran berupa simbol atau tanda tanya.** Pengodean teksnya tidak sesuai
+  dengan yang diharapkan pemutar.
+  [Kenapa nama bisa datang berantakan](/id/blog/nama-saluran-jadi-simbol-aneh/), dan
+  cara memperbaiki berkasnya.
+- **Daftarnya benar tetapi tidak ada yang mau diputar.** Namanya tepat, tetapi
+  alamatnya mati atau kedaluwarsa — masalah di sisi penyedia, bukan di berkas
+  atau di pemutar.
+- **Muncul pesan bahwa playlist tidak bisa dimuat.** Berkas tidak gagal dengan
+  cara yang sama seperti tautan, tetapi tautan bisa;
+  [lima penyebabnya ada di sini](/id/blog/playlist-tidak-mau-dimuat/).
+
+File M3U itu kecil, mudah dibaca, dan pemaaf. Intip isinya sekali, pilih aplikasi
+yang cocok dengan isinya, dan ia akan terbuka seperti berkas lainnya.

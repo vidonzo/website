@@ -1,0 +1,132 @@
+---
+title: "Xtream Codes girişi: sunucu adresi, kullanıcı adı ve şifre"
+description: "Xtream Codes girişi üç alandır: portuyla birlikte sunucu adresi, kullanıcı adı ve şifre. Her biri neye benzer, sık yapılan hatalar ve hata mesajları ne anlatır."
+urlSlug: xtream-codes-giris-bilgileri
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["kurulum", "oynatma-listesi"]
+keywords: ["xtream codes giriş", "xtream codes sunucu adresi", "xtream codes kullanıcı adı şifre", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Etiketli üç giriş alanı — sunucu, kullanıcı adı, şifre — ve sunucu adresindeki port numarası vurgulanmış."
+---
+
+**Xtream Codes girişi üç bilgiden oluşur: bir sunucu adresi (genellikle
+`http://example.com:8080` gibi bir port numarasıyla), bir kullanıcı adı ve bir
+şifre.** Bu üçü birlikte, oynatıcının sabit bir listeyi okumak yerine canlı
+kanallarınızı, filmlerinizi, dizilerinizi ve yayın rehberinizi doğrudan
+sağlayıcınızın sunucusuna sormasını sağlar. Bu tür girişlerde yaşanan sorunların
+neredeyse tamamı, üçünden birinin biraz yanlış kopyalanmasından kaynaklanır ve
+her hatanın tanınabilir bir belirtisi vardır.
+
+## Üç alan nereden gelir
+
+Sağlayıcınız bunları gönderir; genellikle aşağıdakine benzer bir mesajla:
+
+```
+URL:      http://example.com:8080
+Username: ayilmaz42
+Password: k7Qp9xWz
+```
+
+Bazen ayrı bir giriş bilgisi hiç yoktur, yalnızca uzun bir link vardır. O link
+üçünü de içerir:
+
+```
+http://example.com:8080/get.php?username=ayilmaz42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Soldan sağa okuyun: `/get.php` öncesindeki her şey **sunucu adresidir**,
+`username=` sonrasındaki değer **kullanıcı adıdır**, `password=` sonrasındaki
+değer de **şifredir**. Geri kalanı yalnızca sunucuya hangi liste biçimini
+göndereceğini söyler.
+
+Ters yönde de işler. Üç alan elinizdeyse bu linki kendiniz yazabilirsiniz —
+sunucu adresi, ardından `/get.php?username=`, kullanıcı adınız, `&password=`,
+şifreniz, `&type=m3u_plus` — ki bu, yalnızca M3U linki kabul eden bir oynatıcı
+için işe yarar.
+
+## Sunucu adresi, parça parça
+
+`http://example.com:8080` üç parçadan oluşur ve her biri önemlidir.
+
+- **Şema — `http://` ya da `https://`.** Birbirinin yerine geçmezler.
+  Sağlayıcınız ne yazdıysa tam olarak onu kullanın. Birçok Xtream sunucusu
+  yalnızca düz `http` konuşur; `https` istemek size bir sertifika hatası getirir
+  ya da hiçbir şey getirmez.
+- **Ana makine — `example.com`**, bazen de `203.0.113.10` gibi çıplak bir sayı
+  adresi. Tek bir yanlış harf ve sunucu hiç bulunamaz.
+- **Port — `:8080`.** İki noktadan sonraki sayı, aynı sunucudaki ayrı bir
+  kapıdır. `http://example.com` ile `http://example.com:8080` farklı adreslerdir;
+  "doğru görünen" bir girişin hiçbir yere ulaşamamasının en yaygın nedeni portun
+  unutulmasıdır.
+
+Alana **ait olmayan** şey: porttan sonraki her şey. `/get.php`,
+`/player_api.php` ya da `/c/` gibi yolları oynatıcı kendisi ekler.
+
+Vidonzo bariz durumları sizin yerinize toparlar: şemayı yazmazsanız `http://`
+ekler, sondaki eğik çizgileri siler ve yazdığınız portu olduğu gibi korur.
+
+## Kullanıcı adı ve şifre
+
+İkisi de büyük-küçük harfe duyarlıdır ve ikisi de genellikle `O` ile `0`, `l` ile
+`I` gibi birbirine benzeyen karakterler içeren, rastgele üretilmiş dizilerdir.
+O yüzden:
+
+- **Yazmayın, yapıştırın.** Sağlayıcınızın mesajından kopyalayın.
+- **Sondaki boşluğa dikkat edin.** Bir mesajdan kopyalarken kelimenin
+  arkasındaki boşluk da çoğu zaman gelir ve sunucu onu şifrenin parçası sayar.
+- **İkisinin yerini karıştırmayın.** Kulağa bariz geliyor; iki rastgele diziyle
+  uğraşırken oluyor.
+
+Bir giriş bilgisi banka şifresi kadar hassastır: elinde tutan herkes hesabınızı
+kullanabilir ve bağlantı sınırı dolduğunda çoğu zaman sizi dışarıda bırakır.
+Vidonzo onu yalnızca cihazınızda saklar ve
+[herhangi bir yere gitmeden önce şifreleyebilir](/tr/blog/giris-bilgileri-neden-sifrelenmeli/).
+
+## Oynatıcı bu bilgilerle ne yapar
+
+Bağlandığınızda oynatıcı, kullanıcı adınız ve şifrenizle sunucunun
+`player_api.php` adresini çağırır. İlk cevap hesabın kendisiyle ilgilidir —
+girişin kabul edilip edilmediği ve aynı anda kaç bağlantıya izin verildiği gibi
+ayrıntılar. Ardından kategoriler, kanal listesi, film ve dizi katalogları ve
+yayın rehberi gelir; her biri ihtiyaç duyuldukça çekilir.
+
+Sorulacak hiçbir şeyi olmayan, tek ve sabit bir dosya olan düz M3U linkinden farkı
+budur. [İkisi birden elinizdeyse hangisini kullanacağınız](/tr/blog/xtream-codes-mi-m3u-mu/)
+büyük ölçüde filmleri, dizileri ve bir rehberi isteyip istemediğinize bağlıdır.
+
+## Vidonzo'ya girmek
+
+1. **Servis ekle**'yi, ardından **Xtream Codes**'u seçin.
+2. Adresi **Sunucu adresi** alanına yapıştırın — şema, ana makine ve port;
+   sonrasında hiçbir şey.
+3. **Kullanıcı adı** ve **Şifre**'yi yapıştırın.
+4. İsterseniz bir **Servis adı** verin, sonra **Bağlan ve kaydet**.
+
+Giriş, bir şey kaydedilmeden önce kontrol edilir; böylece bir hata sonradan boş
+bir kütüphane olarak değil, hemen ortaya çıkar. Elinizde yalnızca uzun `get.php`
+linki varsa onu **M3U bağlantısı** sekmesine yapıştırın: Vidonzo üç alanı linkin
+içinden okur ve giriş çalışıyorsa onu filmleri, dizileri ve rehberiyle tam bir
+Xtream servisi olarak kurar.
+
+## Hata mesajları ne anlatır
+
+- **"Kullanıcı adı veya şifre hatalı."** Sunucuya ulaşıldı ve giriş reddedildi.
+  Büyük-küçük harfi, birbirine benzeyen karakterleri ve sondaki boşluğu kontrol
+  edin. Bazı sunucular süresi dolmuş ya da askıya alınmış bir hesaba da aynı
+  cevabı verir; şifreden eminseniz hesabın durumunu sağlayıcınıza sorun.
+- **"Sunucuya ulaşılamadı."** O adreste hiçbir şey cevap vermedi. Olağan
+  şüpheliler: eksik ya da yanlış port, `http` yerine `https` veya ana makine
+  adında bir yazım hatası. Nadiren de bağlı olduğunuz ağ alışılmadık portları
+  engeller; aynı girişi mobil veriyle denemek bunu hızla ortaya çıkarır.
+- **"Sunucu yanıt vermekte çok gecikti."** Sunucuya ulaşıldı ama yavaştı. Çok
+  büyük bir katalog ilk bağlantıda biraz zaman alabilir; bir şeyi değiştirmeden
+  önce yeniden deneyin.
+- **"Sunucunun güvenlik sertifikası doğrulanamadı."** Sertifikası geçersiz bir
+  sunucuyla `https` kullanıyorsunuz. Sağlayıcınızın belirttiği şemayı kullanın.
+
+Giriş kabul edildiği halde kanallar açılıp kapanıyorsa sorun artık giriş
+değildir — [bu bir yayın sorunudur](/tr/blog/yayin-birkac-saniye-sonra-duruyor/)
+ve bağlantı sınırı bilinen nedenlerinden biridir. Bir kaynağın yüklenememesinin
+diğer yolları için
+[tek bir yardımsız hata mesajının arkasındaki beş arızaya](/tr/blog/oynatma-listesi-baglantisi-acilmiyor/)
+bakın.

@@ -1,19 +1,30 @@
 ---
-title: "L'EPG expliqué : comment fonctionne le guide des programmes"
-description: "La grille des programmes est un fichier distinct de votre liste de chaînes, avec son propre rythme. Cela explique presque toutes ses bizarreries."
+title: "C'est quoi l'EPG ? Le guide TV, et pourquoi il reste vide"
+description: "L'EPG, c'est le guide électronique des programmes : ce qui passe maintenant et ensuite. Comment il marche à la télé et en IPTV, et pourquoi il reste vide."
 urlSlug: epg-guide-des-programmes
 publishedAt: 2026-07-21
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["television", "playlists"]
-keywords: ["c'est quoi l'epg", "guide des programmes iptv", "epg xmltv", "epg qui ne s'affiche pas"]
+keywords: ["c'est quoi l'epg", "epg définition", "touche epg télécommande", "bouton guide télécommande", "guide des programmes iptv", "epg xmltv", "epg qui ne s'affiche pas"]
 heroImageAlt: "Une rangée de chaînes et une grille de programmes dessinées comme deux feuilles distinctes, reliées par un unique identifiant commun."
 ---
 
-Le guide — la grille qui montre ce qui passe maintenant, ce qui suit et ce qui
-passait il y a une heure — s'appelle l'**EPG**, pour *electronic programme
-guide*, le guide électronique des programmes. Sur un décodeur satellite, il
-arrive à l'intérieur du signal diffusé. Dans un lecteur IPTV, non, et cette
-différence explique presque toutes les bizarreries que peut avoir un guide.
+**L'EPG, c'est le guide électronique des programmes** (*electronic programme
+guide*) : la grille à l'écran qui montre, chaîne par chaîne, ce qui passe
+maintenant, ce qui suit et ce qui passait il y a une heure. Sur un téléviseur
+branché à l'antenne TNT ou à une parabole, il arrive à l'intérieur du signal
+diffusé. Dans un lecteur IPTV, non, et cette différence explique presque toutes
+les bizarreries que peut avoir un guide.
+
+## La touche EPG de votre télécommande
+
+Sur la plupart des télécommandes, la touche s'appelle **EPG** ou **Guide**, et
+elle ouvre cette grille par-dessus ce que vous regardez. Sur un téléviseur qui
+reçoit la TNT, elle fonctionne immédiatement, parce que le diffuseur envoie le
+programme en même temps que les chaînes. Appuyez sur la même touche dans une
+application IPTV, et la grille n'apparaît que si l'application a d'abord
+récupéré un guide ailleurs — ce dont parle justement la suite de cet article.
 
 ## C'est un second fichier, pas une partie de la liste de chaînes
 
@@ -89,8 +100,8 @@ Dans l'ordre :
 3. **Comparez une chaîne et l'ensemble des chaînes.** Quelques chaînes vides,
    c'est un identifiant qui ne correspond pas. Toutes les chaînes vides, c'est
    un problème de récupération.
-4. **Rafraîchissez le guide** si le lecteur le propose : cela retélécharge le
-   fichier au lieu de relire le cache.
+4. **Rafraîchissez le guide** si le lecteur le propose : cela récupère de
+   nouveau le fichier au lieu de relire le cache.
 5. **Pensez à l'horizon couvert.** Certains fournisseurs ne publient qu'une
    fenêtre étroite — aujourd'hui et demain — et le guide paraît vide si vous
    avancez loin.

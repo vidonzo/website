@@ -1,19 +1,29 @@
 ---
-title: "Dentro de un archivo M3U: qué dice en realidad cada línea"
-description: "Ábrelo una vez en un editor de texto y deja de ser un misterio. Cuatro tipos de línea, un puñado de atributos, y cada uno explica algo que ya has visto en el reproductor."
+title: "¿Qué es un archivo M3U? El formato de lista, línea a línea"
+description: "Un archivo M3U es una lista en texto plano: nombres de canal y direcciones de stream. Qué significa cada línea, cómo la lee un reproductor y cómo revisar la tuya."
 urlSlug: dentro-de-un-archivo-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['listas', 'ingeniería']
-keywords: ['que es un archivo m3u', 'formato archivo m3u', 'extinf explicado', 'm3u tvg-id group-title']
+keywords: ['que es un archivo m3u', 'que es m3u', 'archivo m3u', 'formato archivo m3u', 'para qué sirve un archivo m3u', 'extinf explicado', 'm3u tvg-id group-title']
 heroImageAlt: "Unas líneas de texto de una lista M3U con la cabecera, la línea de descripción y la dirección del stream destacadas."
 ---
 
-El archivo M3U tiene fama de técnico, y no se la merece. Es uno de los formatos
-más simples que siguen en uso diario: una lista de nombres, una lista de
-direcciones y unas cuantas anotaciones opcionales. Puedes leerlo en un editor de
-texto y, en cuanto lo haces, mucho del comportamiento del reproductor deja de
-parecer arbitrario.
+**Un archivo M3U es una lista de reproducción en texto plano.** Cada entrada es
+una dirección —de una canción, de un vídeo o de un stream de televisión en
+directo—, normalmente precedida de una línea que le pone nombre y la describe. La
+extensión viene de *MP3 URL*, su primer oficio; hoy es la forma estándar en que
+los proveedores de IPTV entregan sus listas de canales, y `.m3u8` es el mismo
+formato guardado en UTF-8.
+
+El formato tiene fama de técnico, y no se la merece. Es uno de los más simples
+que siguen en uso diario: una lista de nombres, una lista de direcciones y unas
+cuantas anotaciones opcionales. Puedes leerlo en un editor de texto y, en cuanto
+lo haces, mucho del comportamiento del reproductor deja de parecer arbitrario.
+(Si solo quieres reproducir uno,
+[cómo abrir un archivo M3U](/es/blog/como-abrir-un-archivo-m3u/) es otra
+historia, más corta.)
 
 Esta es una lista completa y funcional. Dos canales, sin omitir nada.
 
@@ -70,7 +80,7 @@ sigue y sigue. En una película puedes ver un número real.
 - **`tvg-name`** — el nombre del canal a efectos de emparejarlo con la guía, que
   no siempre es el nombre que ves en pantalla.
 - **`tvg-logo`** — la dirección del logo del canal. Son imágenes que se
-  descargan por red, una por canal, y por eso una lista grande tarda un momento
+  piden por red, una por canal, y por eso una lista grande tarda un momento
   en verse terminada la primera vez.
 - **`group-title`** — la categoría bajo la que se archiva el canal. Cada
   encabezado de categoría por el que pasas en el reproductor se escribió aquí,

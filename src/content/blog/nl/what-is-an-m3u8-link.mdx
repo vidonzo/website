@@ -1,0 +1,149 @@
+---
+title: "Wat is een M3U8-link? HLS-streams uitgelegd en afspelen"
+description: "Een .m3u8-link is óf één HLS-stream, óf een hele zenderlijst opgeslagen als UTF-8. Zo zie je welke je hebt, speel je ze af en snap je waarom een link stopt."
+urlSlug: wat-is-een-m3u8-link
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["afspeellijsten", "techniek"]
+keywords: ["wat is m3u8", "m3u8 link", "m3u8 afspelen", "m3u8 link openen", "hls m3u8"]
+heroImageAlt: "Eén streamadres dat uitwaaiert in een rij korte videosegmenten van elk een paar seconden."
+---
+
+**Een M3U8-link is het adres van een klein tekstbestand in M3U-formaat,
+opgeslagen als UTF-8.** Er zit zelf nooit video in. Wat er wél in staat, bepaalt
+wat je in handen hebt, en in de praktijk is dat een van twee heel verschillende
+dingen:
+
+- **Een HLS-stream** — één zender of één video, beschreven als een lijst korte
+  segmenten die de speler een voor een ophaalt. Dit is wat de extensie op het
+  grootste deel van het web betekent.
+- **Een zenderlijst** — honderden zendernamen met hun streamadressen, precies
+  zoals een `.m3u`-bestand, alleen met UTF-8-tekst.
+  [Het verschil tussen M3U en M3U8](/nl/blog/m3u-of-m3u8-verschil/) behandelt die
+  kant.
+
+In de adresbalk zien ze er hetzelfde uit en ze gedragen zich totaal anders, dus
+de eerste klus is ze uit elkaar houden.
+
+## Zo zie je welke je hebt
+
+Open de link in een browser, of sla het bestand op en open het in een
+teksteditor. De eerste paar regels verraden het meteen.
+
+Een **zenderlijst** leest als een telefoonboek — een naam, dan een adres, keer
+op keer:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="Nieuws",Kanaal Een
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Films",Kanaal Twee
+http://example.com/live/two.m3u8
+```
+
+Een **HLS-stream** leest als een dienstregeling. Óf hij somt de beschikbare
+kwaliteiten op:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+óf hij noemt de segmenten zelf:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Zendernamen en `group-title` betekenen een zenderlijst. Regels die beginnen met
+`#EXT-X-` betekenen een stream.
+
+## Hoe HLS eigenlijk afspeelt
+
+HLS — HTTP Live Streaming — is de meest gebruikte manier om video over internet
+te bezorgen, en het `.m3u8`-bestand is de inhoudsopgave ervan.
+
+Het eerste bestand, de **master playlist**, noemt hetzelfde programma in een paar
+kwaliteiten, elk met de bandbreedte die het nodig heeft. De speler kiest er één
+en opent de bijbehorende **media playlist**, die de volgende segmenten van elk
+een paar seconden noemt. Die haalt hij op, speelt hij af, en daarna leest hij de
+media playlist opnieuw om de volgende te vinden. Bij een live zender schuift die
+lijst steeds verder op; bij een film eindigt hij met een afsluitende tag en weet
+de speler hoe lang het geheel is.
+
+Het slimme is dat de speler tussen twee segmenten van kwaliteit kan wisselen.
+Zakt je verbinding in, dan stapt hij over op een lichtere versie in plaats van
+te stoppen, en hij klimt weer terug zodra er ruimte is. Vidonzo start een live
+zender op de lichtste versie, zodat er snel beeld is, en schakelt daarna vanzelf
+op. Hoe HLS zich verhoudt tot zijn concurrenten lees je in
+[de uitleg over streamingprotocollen](/nl/blog/streamingprotocollen-uitgelegd/).
+
+## Zo speel je een M3U8-link af
+
+**Is het een zenderlijst**, dan hoort hij in een IPTV-speler, die er zenders,
+categorieën en een gids van maakt. Kies in Vidonzo **Dienst toevoegen →
+M3U-link** en plak hem in **M3U/M3U8-playlist-URL**. Kreeg je de lijst als
+bestand, dan haalt **M3U-bestand** hem van je apparaat.
+
+**Is het één stream**, dan heb je drie eenvoudige mogelijkheden:
+
+1. **VLC.** Kies *Media → Open Network Stream* (op een Mac *File → Open
+   Network*), plak de link en speel af. VLC is juist hier uitstekend in, en
+   [waar hij tekortschiet](/nl/blog/kan-vlc-je-iptv-speler-zijn/) is een andere
+   vraag.
+2. **Safari.** De browsers van Apple spelen HLS van zichzelf af, dus een
+   rechtstreekse `.m3u8`-link opent vaak meteen als video. In andere browsers
+   wisselt dat, en veel spelen hem alleen af binnen een webpagina met een
+   ingebouwde HLS-speler.
+3. **Verpak hem in een afspeellijst.** Een IPTV-speler verwacht een lijst, en
+   een lijst van één is nog steeds een lijst. Zet deze drie regels, met je eigen
+   naam en adres, in een tekstbestand met de naam `stream.m3u`:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Mijn stream
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo leest dat via **M3U-bestand** zoals elke andere afspeellijst, en de
+   stream staat daarna met een naam in je bibliotheek, tussen al het andere.
+
+## Waarom een M3U8-link ineens niet meer werkt
+
+Een link die gisteren speelde en vandaag weigert, valt meestal in een van deze
+gevallen:
+
+- **Er zat een houdbaarheidsdatum in.** Veel streamadressen dragen een token of
+  handtekening in het deel na het `?` — `token=`, `expires=`, `sig=`. Die zijn
+  één sessie of een paar uur geldig, daarna weigert de server ze met een 403.
+  Er is niets mis met je speler; de sleutel is gewoon verlopen.
+- **Hij werkt alleen waar hij vandaan kwam.** Sommige servers kijken welke app
+  of pagina erom vraagt en weigeren al het andere.
+- **De segmenten zijn doorgeschoven.** Een live media playlist noemt alleen de
+  nieuwste paar segmenten. Een kopie die je als bestand bewaart, is binnen een
+  paar seconden verouderd.
+- **De stream is afgelopen of verhuisd.** Een 404 betekent dat het adres niet
+  meer bestaat.
+
+Laadt een hele lijst met `.m3u8`-zenders wel, maar speelt er niets, dan ligt het
+bijna nooit aan de extensie — het ligt aan de adressen die erin staan. En starten
+streams en vallen ze na een paar seconden weg,
+[dan is dat een verbroken verbinding, geen bufferen](/nl/blog/stream-stopt-na-een-paar-seconden/),
+met eigen oorzaken.
+
+## Kort samengevat
+
+Een `.m3u8` is een inhoudsopgave, nooit de video zelf. Staan er zendernamen in,
+dan is het een zenderlijst: geef hem aan een speler. Staan er `#EXT-X-`-regels
+in, dan is het één HLS-stream: open hem in VLC of Safari, of verpak hem in een
+afspeellijst van één regel. En werkte hij eerst wel en nu niet, kijk dan naar de
+vervaldatum in het adres voordat je ergens anders gaat zoeken.

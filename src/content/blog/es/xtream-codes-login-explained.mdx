@@ -1,0 +1,135 @@
+---
+title: "Xtream Codes explicado: URL del servidor, usuario y contraseña"
+description: "Unos datos Xtream Codes son tres campos: servidor con su puerto, usuario y contraseña. Cómo es cada uno, los fallos típicos y qué significa cada error."
+urlSlug: datos-de-acceso-xtream-codes
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["configuración", "listas"]
+keywords: ["xtream codes explicado", "cómo configurar xtream codes", "url del servidor xtream codes", "usuario y contraseña xtream codes", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Tres campos de texto con su etiqueta —servidor, usuario, contraseña— con el número de puerto de la dirección del servidor resaltado."
+---
+
+**Unos datos de acceso Xtream Codes son tres cosas: una URL de servidor
+(normalmente con número de puerto, como `http://example.com:8080`), un usuario y
+una contraseña.** Juntos permiten que un reproductor le pida directamente al
+servidor de tu proveedor tus canales en directo, películas, series y guía de
+programación, en lugar de leer una lista fija. Casi todos los problemas con este
+tipo de acceso vienen de que uno de los tres se copió ligeramente mal, y cada
+error tiene un síntoma reconocible.
+
+## De dónde salen los tres campos
+
+Te los envía tu proveedor, normalmente en un mensaje parecido a este:
+
+```
+URL:      http://example.com:8080
+Usuario:  jgarcia42
+Password: k7Qp9xWz
+```
+
+A veces no hay unos datos separados, sino un único enlace largo. Ese enlace
+contiene los tres:
+
+```
+http://example.com:8080/get.php?username=jgarcia42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Léelo de izquierda a derecha: todo lo que va antes de `/get.php` es la **URL del
+servidor**, lo que va después de `username=` es el **usuario** y lo que va
+después de `password=` es la **contraseña**. El resto solo le dice al servidor en
+qué formato de lista debe enviarla.
+
+También funciona al revés. Con los tres campos puedes escribir tú mismo ese
+enlace —URL del servidor, luego `/get.php?username=`, tu usuario, `&password=`,
+tu contraseña, `&type=m3u_plus`—, algo útil para un reproductor que solo acepta
+enlaces M3U.
+
+## La URL del servidor, pieza a pieza
+
+`http://example.com:8080` tiene tres partes, y cada una importa.
+
+- **El esquema: `http://` o `https://`.** No son intercambiables. Usa exactamente
+  lo que escribió tu proveedor. Muchos servidores Xtream solo hablan `http` a
+  secas, y si pides `https` obtienes un error de certificado o nada en absoluto.
+- **El host: `example.com`**, o a veces una dirección solo con números, como
+  `203.0.113.10`. Una letra mal y el servidor, sencillamente, no aparece nunca.
+- **El puerto: `:8080`.** El número que va después de los dos puntos es una
+  puerta distinta del mismo servidor. `http://example.com` y
+  `http://example.com:8080` son direcciones diferentes, y olvidarse del puerto es
+  el motivo más común de que unos datos que «parecen correctos» no lleguen a
+  ninguna parte.
+
+Lo que **no** va en el campo: nada de lo que sigue al puerto. Rutas como
+`/get.php`, `/player_api.php` o `/c/` las añade el propio reproductor.
+
+Vidonzo arregla por ti los casos evidentes: añade `http://` si omites el esquema,
+quita las barras finales y respeta el puerto que hayas escrito.
+
+## Usuario y contraseña
+
+Los dos distinguen mayúsculas de minúsculas, y los dos suelen ser cadenas
+generadas en las que la `O` y el `0`, o la `l` y la `I`, se parecen. Así que:
+
+- **Pega en lugar de escribir.** Cópialos del mensaje de tu proveedor.
+- **Ojo con el espacio final.** Al copiar de un mensaje es fácil llevarse también
+  el espacio que va detrás de la palabra, y el servidor lo toma como parte de la
+  contraseña.
+- **No los intercambies.** Parece obvio, pero con dos cadenas aleatorias pasa.
+
+Unos datos de acceso son tan delicados como la contraseña del banco: quien los
+tenga puede usar tu cuenta, y a menudo te deja fuera cuando se alcanza el límite
+de conexiones. Vidonzo los guarda solo en tu dispositivo y
+[puede cifrarlos antes de que vayan a ninguna parte](/es/blog/por-que-cifrar-tus-credenciales/).
+
+## Qué hace el reproductor con ellos
+
+Al conectar, el reproductor llama al `player_api.php` del servidor con tu usuario
+y tu contraseña. La primera respuesta es sobre la cuenta en sí: si el acceso se
+acepta y detalles como cuántas conexiones simultáneas permite. Después llegan las
+categorías, la lista de canales, los catálogos de películas y series y la guía de
+programación, cada cosa pedida cuando hace falta.
+
+Esa es la diferencia con un enlace M3U normal, que es un archivo fijo al que no
+hay nada que preguntarle.
+[Cuál de los dos usar si tienes ambos](/es/blog/xtream-codes-o-m3u/)
+depende sobre todo de si quieres películas, series y guía.
+
+## Cómo introducirlos en Vidonzo
+
+1. Elige **Añadir servicio** y luego **Xtream Codes**.
+2. Pega la dirección en **URL del servidor**: esquema, host y puerto, nada más.
+3. Pega el **Usuario** y la **Contraseña**.
+4. Si quieres, rellena **Nombre del servicio (opcional)** y pulsa **Conectar y
+   guardar**.
+
+Los datos se comprueban antes de guardar nada, así que un error se ve al momento
+y no más tarde en forma de biblioteca vacía. Si solo tienes el enlace largo con
+`get.php`, pégalo en la pestaña **Enlace M3U**: Vidonzo saca de él los tres
+campos y, si el acceso funciona, lo configura como un servicio Xtream completo,
+con películas, series y guía.
+
+## Qué significan los mensajes de error
+
+- **«El nombre de usuario o la contraseña son incorrectos.»** Se llegó al
+  servidor y rechazó el acceso. Revisa las mayúsculas, los caracteres que se
+  parecen y el espacio final. Algunos servidores responden igual cuando la cuenta
+  está caducada o suspendida, así que, si estás seguro de la contraseña,
+  pregúntale a tu proveedor por el estado de la cuenta.
+- **«No se pudo conectar con el servidor.»** Nada respondió en esa dirección. Los
+  sospechosos habituales son un puerto que falta o está mal, `https` donde iba
+  `http`, o una errata en el host. Rara vez, la red en la que estás bloquea
+  puertos poco habituales; probar el mismo acceso con los datos móviles te lo
+  dice enseguida.
+- **«El servidor tardó demasiado en responder.»** Se llegó a él, pero iba lento.
+  Un catálogo muy grande puede tardar un rato en la primera conexión; vuelve a
+  intentarlo antes de cambiar nada.
+- **«No se pudo verificar el certificado de seguridad del servidor.»** Estás
+  usando `https` con un servidor cuyo certificado no es válido. Usa el esquema
+  que indicó tu proveedor.
+
+Cuando el acceso se acepta pero luego los canales arrancan y se paran, el
+problema ya no son los datos:
+[es un problema del stream](/es/blog/el-stream-se-corta-a-los-pocos-segundos/), y un
+límite de conexiones es una de sus causas habituales. Para la lista más amplia de
+formas en que una fuente puede no cargar, mira
+[los cinco fallos que hay detrás de un único error poco útil](/es/blog/la-lista-no-carga/).

@@ -1,0 +1,119 @@
+---
+title: "M3U-bestand openen op elk apparaat, en met welke app"
+description: "Een M3U-bestand is een afspeellijst, dus de juiste app hangt af van wat erin staat. Zo lees je het en open je het op Windows, Mac, Android, iPhone en tv."
+urlSlug: m3u-bestand-openen
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["afspeellijsten", "instellen"]
+keywords: ["m3u bestand openen", "waarmee open je een m3u bestand", "m3u openen", "m3u openen op android", "m3u bestand openen iphone"]
+heroImageAlt: "Het pictogram van een afspeellijstbestand op een telefoonscherm, met pijlen naar een laptop, een tablet en een televisie."
+---
+
+**Een M3U-bestand open je met een mediaspeler die afspeellijsten leest — VLC op
+een computer, of een IPTV-speler op een telefoon, tablet of tv.** Een
+M3U-bestand is geen video. Het is een kort tekstbestand met de adressen van
+dingen om af te spelen, dus ‘openen’ betekent: die lijst overhandigen aan een app
+die hem kan volgen. Je kunt het ook in elke teksteditor openen om te zien wat
+erin staat, en dat is de beste eerste stap, want wat erin staat bepaalt welke app
+je eigenlijk nodig hebt.
+
+## Kijk eerst wat erin staat
+
+Open het bestand in Kladblok op Windows, in TextEdit op een Mac (kies *Format →
+Make Plain Text* als het er vreemd uitziet) of in een willekeurige
+tekstviewer op je telefoon. Je ziet dan een van twee dingen.
+
+**Paden naar bestanden op een computer** — regels als `Muziek\Album\01 Nummer.mp3`.
+Dit is een muziekafspeellijst, gemaakt door een programma als Winamp, iTunes of
+de software van een autoradio. Open hem in een muziekspeler op dezelfde
+computer. Zet je hem op een ander apparaat, dan wijzen de paden nergens meer
+naar en opent hij als een lege lijst.
+
+**Webadressen, met namen erboven** — regels die beginnen met `#EXTINF`, gevolgd
+door adressen met `http://` of `https://`. Dit is een IPTV-afspeellijst: elk
+paar is een zendernaam en de stream die erbij hoort. Daar heb je een speler voor
+nodig die die `#EXTINF`-regels begrijpt, want daarin staan de zendernamen, de
+categorieën en de gids-id's.
+[Elke regel van het formaat wordt hier uitgelegd.](/nl/blog/in-een-m3u-bestand/)
+
+De rest van dit artikel gaat over die tweede soort.
+
+## Op een Windows-pc of een Mac
+
+**VLC** is op allebei de eenvoudigste gratis keuze. Kies *Media → Open File* (op
+een Mac *File → Open File*), selecteer het `.m3u`-bestand, en VLC zet de hele
+lijst in zijn afspeellijstpaneel; dubbelklik op een item om het af te spelen. Het
+bestand op het VLC-venster slepen werkt net zo goed.
+
+Om een lijst te controleren of een handvol zenders te kijken is dat prima. Bij
+de volledige lijst van een provider ga je al snel categorieën, een
+programmagids en favorieten missen, en dat is
+[het punt waarop een speciale speler zijn plek verdient](/nl/blog/kan-vlc-je-iptv-speler-zijn/).
+
+## Op een Android-telefoon of -tablet
+
+Gebruik een IPTV-speler die een bestand kan importeren. In Vidonzo:
+
+1. Kies **Dienst toevoegen** en daarna het tabblad **M3U-bestand**.
+2. Tik op **Kies een M3U-bestand** en selecteer het in de opslag van je
+   telefoon. Bestanden die eindigen op `.m3u`, `.m3u8` en `.txt` worden allemaal
+   geaccepteerd, dus een afspeellijst die als tekstbestand binnenkwam, werkt
+   gewoon.
+3. Heeft je provider je een gidsadres gegeven, plak dat dan in
+   **EPG-URL (XMLTV) — optioneel**. Tik daarna op **Verbinden en opslaan**.
+
+De lijst wordt één keer ingelezen en je zenders verschijnen, gegroepeerd zoals
+het bestand ze groepeert.
+
+## Op een iPhone of iPad
+
+Zet het bestand eerst in de app Bestanden — open vanuit Mail of een chatapp het
+deelmenu van de bijlage en kies **Bewaar in Bestanden**. Daarna opent **Dienst
+toevoegen → M3U-bestand → Kies een M3U-bestand** in Vidonzo de bestandsbrowser en
+kies je het daar. Op een iPad werkt het precies zo, en daar
+[maakt het grotere scherm de hele bibliotheek makkelijker te doorbladeren](/nl/blog/iptv-op-iphone-en-ipad/).
+
+## Op een tv
+
+Televisies zijn het lastige geval, want ze zijn slecht in bestanden: er is
+zelden een bestandsbeheerder, en een bestand erop zetten betekent meestal een
+usb-stick.
+
+Kwam het M3U-bestand van een link, **gebruik dan de link**. Op Android TV,
+Google TV of een Fire TV Stick voeg je hem in Vidonzo toe als **M3U-link** in
+plaats van als bestand. Een lang adres intypen met een afstandsbediening is het
+vervelende deel, en daar helpt
+[het toetsenbord van een gekoppelde telefoon](/nl/blog/telefoon-als-afstandsbediening-tv/):
+wat je op de telefoon typt, komt in het veld op de tv terecht.
+
+Samsung- en LG-toestellen draaien geen Android, dus daar staat de speler op een
+kastje of stick die op de tv is aangesloten —
+[de opstelling die werkt lees je hier](/nl/blog/iptv-op-samsung-of-lg-smart-tv/).
+
+## Een bestand, of de link waar het vandaan kwam?
+
+Heb je ze allebei gekregen, kies dan de link. Een bestand is een momentopname
+van de lijst op het moment dat hij werd opgeslagen; een link wordt opnieuw
+gelezen telkens als de speler ververst, zodat zenders die je provider toevoegt of
+verplaatst vanzelf verschijnen.
+[De afweging staat hier volledig uitgelegd](/nl/blog/afspeellijst-url-of-bestand-op-je-toestel/) —
+een bestand heeft wel degelijk zijn nut, onder meer omdat het werkt zonder de
+afspeellijstserver van je provider.
+
+## Als het opent, maar er iets niet klopt
+
+- **De lijst is leeg.** Het bestand heeft geen `#EXTINF`-regels, of de paden
+  wijzen naar de schijf van een andere computer. Kijk er nog eens in.
+- **Zendernamen bestaan uit symbolen of vraagtekens.** De tekstcodering is niet
+  wat de speler verwachtte.
+  [Waarom namen verhaspeld binnenkomen](/nl/blog/kanaalnamen-vol-vreemde-tekens/), en hoe
+  je het bestand repareert.
+- **De lijst klopt, maar er speelt niets.** De namen zijn goed en de adressen
+  zijn dood of verlopen — een probleem bij de provider, niet in het bestand of de
+  speler.
+- **Je krijgt de melding dat de afspeellijst niet kan worden geladen.** Een
+  bestand faalt niet zoals een link, maar een link kan dat wel;
+  [de vijf oorzaken staan hier](/nl/blog/afspeellijst-laadt-niet/).
+
+Een M3U-bestand is klein, leesbaar en vergevingsgezind. Kijk er één keer in,
+kies de app die past bij wat erin staat, en het opent zoals elk ander bestand.

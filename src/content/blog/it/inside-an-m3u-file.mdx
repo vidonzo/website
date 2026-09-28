@@ -1,18 +1,29 @@
 ---
-title: "Dentro un file M3U: cosa dice davvero ogni riga"
-description: "Aprilo una volta in un editor di testo e smette di essere misterioso. Quattro tipi di riga, una manciata di attributi, e ognuno spiega qualcosa che hai già visto nel lettore."
+title: "Cos'è un file M3U: il formato della playlist, riga per riga"
+description: "Un file M3U è una playlist in testo semplice: nomi dei canali, indirizzi dei flussi e qualche tag facoltativo. Cosa significa ogni riga e come la legge un lettore."
 urlSlug: dentro-un-file-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['playlist', 'ingegneria']
-keywords: ['cos e un file m3u', 'formato file m3u', 'extinf spiegato', 'm3u tvg-id group-title']
+keywords: ['cos e un file m3u', 'file m3u cos è', 'formato file m3u', 'm3u significato', 'extinf spiegato', 'm3u tvg-id group-title']
 heroImageAlt: "Alcune righe di testo di una playlist M3U con evidenziati l’intestazione, la riga di descrizione e l’indirizzo del flusso."
 ---
 
-Il file M3U ha fama di essere tecnico, e non se la merita. È uno dei formati più
-semplici ancora in uso quotidiano: un elenco di nomi, un elenco di indirizzi e
-qualche annotazione facoltativa. Lo puoi leggere in un editor di testo e, una
-volta fatto, molti comportamenti del lettore smettono di sembrare arbitrari.
+**Un file M3U è una playlist in testo semplice.** Ogni voce è un indirizzo — di
+una canzone, di un video o di un flusso TV in diretta — di solito preceduto da
+una riga che gli dà un nome e lo descrive. L'estensione viene da *MP3 URL*, il
+suo compito originale; oggi è il modo standard con cui i fornitori IPTV
+consegnano gli elenchi dei canali, e `.m3u8` è lo stesso formato salvato in
+UTF-8.
+
+Il formato ha fama di essere tecnico, e non se la merita. È uno dei più semplici
+ancora in uso quotidiano: un elenco di nomi, un elenco di indirizzi e qualche
+annotazione facoltativa. Lo puoi leggere in un editor di testo e, una volta
+fatto, molti comportamenti del lettore smettono di sembrare arbitrari. (Se ti
+interessa solo riprodurne uno,
+[aprire un file M3U](/it/blog/come-aprire-un-file-m3u/) è un'altra storia, più
+breve.)
 
 Ecco una playlist completa e funzionante. Due canali, senza omettere nulla.
 

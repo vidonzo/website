@@ -1,11 +1,12 @@
 ---
-title: "M3U ou M3U8: o que a extensão do arquivo realmente significa"
-description: "O 8 a mais é sobre codificação de texto, não sobre qualidade. Veja o que de fato separa os dois e por que um deles exibe os nomes certos."
+title: "M3U ou M3U8: a diferença real (e não é qualidade)"
+description: "M3U8 é uma lista M3U salva em UTF-8; o 8 não tem nada a ver com qualidade de imagem. Por que isso importa nos nomes dos canais, e o outro .m3u8 do HLS."
 urlSlug: m3u-ou-m3u8
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["listas", "engenharia"]
-keywords: ["m3u ou m3u8", "diferença entre m3u e m3u8", "arquivo m3u8 o que é", "lista m3u8 utf-8"]
+keywords: ["m3u ou m3u8", "diferença entre m3u e m3u8", "m3u e m3u8 qual a diferença", "arquivo m3u8 o que é", "lista m3u8 utf-8"]
 heroImageAlt: "A mesma lista de canais mostrada duas vezes: uma com os acentos embaralhados e outra com os nomes exibidos corretamente."
 ---
 
@@ -14,8 +15,10 @@ Os provedores entregam links terminados em `.m3u` e links terminados em
 diferença. Os palpites de sempre — que um é mais novo, ou de melhor qualidade,
 ou “o de HD” — estão todos errados.
 
-O `8` vem de **UTF-8**. Essa é a diferença inteira no formato do arquivo, e ela
-é menor e mais útil do que o folclore sugere.
+**A resposta curta:** um arquivo M3U8 é uma lista M3U cujo texto está
+codificado em **UTF-8** — é isso que o `8` quer dizer, e essa é a diferença
+inteira no formato do arquivo. Os dois listam os mesmos canais, na mesma
+qualidade. A diferença é menor e mais útil do que o folclore sugere.
 
 ## Os dois são o mesmo tipo de arquivo
 
@@ -31,7 +34,7 @@ http://example.com/live/one.ts
 
 É isso. Uma lista M3U é um índice de texto puro — nomes e endereços, nada além.
 Ela não carrega vídeo, não carrega login e não mantém conexão viva com o seu
-provedor. É uma fotografia do que existia no momento em que você a baixou, e é
+provedor. É uma fotografia do que existia no momento em que você a buscou, e é
 esse traço que de fato a separa da
 [API do Xtream Codes](/pt/blog/xtream-codes-ou-m3u/).
 
@@ -64,7 +67,8 @@ separados, e busca esse manifesto de novo conforme a reprodução avança. É po
 isso que um stream ao vivo consegue começar no meio da transmissão e se adaptar
 à sua conexão.
 
-Ou seja, `.m3u8` pode significar duas coisas diferentes:
+Ou seja, `.m3u8` pode significar duas coisas diferentes (a segunda tem
+[um artigo só dela](/pt/blog/o-que-e-link-m3u8/)):
 
 - **A lista da sua assinatura** — centenas ou milhares de canais, uma linha
   cada. É esse o link que você cola no player.

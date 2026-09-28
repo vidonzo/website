@@ -1,0 +1,132 @@
+---
+title: "Login Xtream Codes: URL do servidor, usuário e senha"
+description: "Um login Xtream Codes são três campos: endereço do servidor com porta, usuário e senha. Como cada um deve ser, os erros comuns e o que cada mensagem significa."
+urlSlug: login-xtream-codes-explicado
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["configuração", "listas"]
+keywords: ["login xtream codes", "url do servidor xtream codes", "xtream codes usuário e senha", "como configurar xtream codes", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Três campos de preenchimento com rótulos — servidor, usuário, senha — com o número da porta destacado no endereço do servidor."
+---
+
+**Um login Xtream Codes são três informações: a URL do servidor (normalmente
+com um número de porta, como `http://example.com:8080`), um usuário e uma
+senha.** Juntas, elas deixam o player pedir diretamente ao servidor do seu
+provedor os seus canais ao vivo, filmes, séries e o guia de programação, em vez
+de ler uma lista fixa. Quase todo problema com esse tipo de login vem de um dos
+três ter sido copiado um pouquinho errado, e cada erro tem um sintoma
+reconhecível.
+
+## De onde vêm os três campos
+
+O seu provedor manda os três, geralmente numa mensagem mais ou menos assim:
+
+```
+URL:      http://example.com:8080
+Usuário:  jsilva42
+Senha:    k7Qp9xWz
+```
+
+Às vezes não existe um login separado, só um link comprido. Esse link contém os
+três:
+
+```
+http://example.com:8080/get.php?username=jsilva42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Leia da esquerda para a direita: tudo antes de `/get.php` é a **URL do
+servidor**, o valor depois de `username=` é o **usuário**, e o valor depois de
+`password=` é a **senha**. O resto só diz ao servidor em que formato de lista
+ele deve responder.
+
+Também funciona no sentido contrário. Com os três campos você mesmo monta esse
+link — URL do servidor, depois `/get.php?username=`, o seu usuário,
+`&password=`, a sua senha, `&type=m3u_plus` —, o que é útil num player que só
+aceita links M3U.
+
+## A URL do servidor, parte por parte
+
+`http://example.com:8080` tem três partes, e cada uma importa.
+
+- **O protocolo — `http://` ou `https://`.** Não são intercambiáveis. Use
+  exatamente o que o provedor escreveu. Muitos servidores Xtream só falam `http`
+  simples, e pedir `https` rende um erro de certificado ou simplesmente nada.
+- **O host — `example.com`**, ou às vezes um endereço só de números, como
+  `203.0.113.10`. Uma letra errada e o servidor nunca é encontrado.
+- **A porta — `:8080`.** O número depois dos dois-pontos é uma porta separada no
+  mesmo servidor. `http://example.com` e `http://example.com:8080` são endereços
+  diferentes, e esquecer a porta é o motivo mais comum de um login que "parece
+  certo" não alcançar nada.
+
+O que **não** vai no campo: qualquer coisa depois da porta. Caminhos como
+`/get.php`, `/player_api.php` ou `/c/` são o próprio player que acrescenta.
+
+O Vidonzo arruma os casos óbvios para você: acrescenta `http://` se você deixar
+o protocolo de fora, tira barras sobrando no final e mantém a porta que você
+digitou.
+
+## Usuário e senha
+
+Os dois diferenciam maiúsculas de minúsculas, e os dois costumam ser sequências
+geradas em que `O` e `0`, ou `l` e `I`, parecem iguais. Então:
+
+- **Cole em vez de digitar.** Copie da mensagem do provedor.
+- **Cuidado com o espaço no final.** Copiar de uma mensagem muitas vezes leva
+  junto o espaço depois da palavra, e o servidor entende esse espaço como parte
+  da senha.
+- **Não inverta os dois.** Parece óbvio; com duas sequências aleatórias,
+  acontece.
+
+Um login é tão sensível quanto a senha do banco: quem tiver os dados consegue
+usar a sua conta, muitas vezes deixando você de fora quando o limite de conexões
+é atingido. O Vidonzo guarda o login só no seu aparelho, e
+[pode criptografá-lo antes que ele vá para qualquer lugar](/pt/blog/por-que-criptografar-suas-credenciais/).
+
+## O que o player faz com ele
+
+Quando você conecta, o player chama o `player_api.php` do servidor com o seu
+usuário e a sua senha. A primeira resposta é sobre a conta em si — se o login
+foi aceito e detalhes como quantas conexões simultâneas ela permite. Depois vêm
+as categorias, a lista de canais, os catálogos de filmes e séries e o guia de
+programação, cada um buscado quando é preciso.
+
+Essa é a diferença para um link M3U simples, que é um arquivo fixo sem nada para
+perguntar. [Qual dos dois usar, quando você tem ambos](/pt/blog/xtream-codes-ou-m3u/),
+depende principalmente de você querer filmes, séries e guia.
+
+## Como colocar no Vidonzo
+
+1. Escolha **Adicionar serviço** e depois **Xtream Codes**.
+2. Cole o endereço em **URL do servidor** — protocolo, host e porta, nada depois.
+3. Cole o **Usuário** e a **Senha**.
+4. Se quiser, dê um **Nome do serviço** e toque em **Conectar e salvar**.
+
+O login é verificado antes de qualquer coisa ser salva, então um erro aparece na
+hora, e não como uma biblioteca vazia mais tarde. Se você só tem o link comprido
+do `get.php`, cole na aba **Link M3U**: o Vidonzo tira os três campos de dentro
+dele e, se o login funcionar, configura tudo como um serviço Xtream completo,
+com filmes, séries e guia.
+
+## O que as mensagens de erro significam
+
+- **"Usuário ou senha incorretos."** O servidor foi alcançado e recusou o login.
+  Confira maiúsculas e minúsculas, os caracteres parecidos e o espaço no final.
+  Alguns servidores respondem do mesmo jeito a uma conta vencida ou suspensa,
+  então, se você tem certeza da senha, pergunte ao provedor como está a conta.
+- **"Não foi possível conectar ao servidor."** Nada respondeu naquele endereço.
+  Os suspeitos de sempre são uma porta faltando ou errada, `https` onde deveria
+  ser `http`, ou um erro de digitação no host. De vez em quando, a rede em que
+  você está bloqueia portas incomuns; testar o mesmo login nos dados móveis tira
+  a dúvida rapidinho.
+- **"O servidor demorou muito para responder."** Ele foi alcançado, mas estava
+  lento. Um catálogo muito grande pode demorar na primeira conexão; tente de novo
+  antes de mudar qualquer coisa.
+- **"Não foi possível verificar o certificado de segurança do servidor."** Você
+  está usando `https` com um servidor cujo certificado é inválido. Use o
+  protocolo que o provedor indicou.
+
+Quando o login é aceito mas os canais começam e param, o login deixou de ser a
+questão — [isso é problema de stream](/pt/blog/o-stream-para-depois-de-alguns-segundos/),
+e o limite de conexões é uma das causas de sempre. Para a lista mais ampla de
+jeitos como uma fonte pode deixar de carregar, veja
+[as cinco falhas por trás de uma mensagem de erro que não ajuda](/pt/blog/a-lista-nao-carrega/).

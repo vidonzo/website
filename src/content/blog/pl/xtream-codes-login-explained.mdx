@@ -1,0 +1,130 @@
+---
+title: "Logowanie Xtream Codes: adres serwera, login i hasło"
+description: "Dane Xtream Codes to trzy pola: adres serwera z portem, login i hasło. Jak wygląda każde z nich, gdzie zdarzają się literówki i co znaczą komunikaty błędów."
+urlSlug: dane-logowania-xtream-codes
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["konfiguracja", "playlisty"]
+keywords: ["xtream codes logowanie", "xtream codes adres serwera", "xtream codes login i hasło", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Trzy podpisane pola — serwer, nazwa użytkownika, hasło — z wyróżnionym numerem portu w adresie serwera."
+---
+
+**Dane logowania Xtream Codes to trzy informacje: URL serwera (zwykle z numerem
+portu, np. `http://example.com:8080`), nazwa użytkownika i hasło.** Razem
+pozwalają odtwarzaczowi pytać serwer dostawcy wprost o Twoje kanały na żywo,
+filmy, seriale i program telewizyjny, zamiast czytać sztywną listę. Niemal każdy
+problem z takim logowaniem bierze się z tego, że jedno z trzech pól zostało
+przepisane odrobinę inaczej — a każdy taki błąd ma rozpoznawalny objaw.
+
+## Skąd biorą się te trzy pola
+
+Przysyła je dostawca, zwykle w wiadomości wyglądającej mniej więcej tak:
+
+```
+URL:      http://example.com:8080
+Username: jkowalski42
+Password: k7Qp9xWz
+```
+
+Czasem nie ma osobnych danych logowania, tylko jeden długi link. Ten link
+zawiera wszystkie trzy:
+
+```
+http://example.com:8080/get.php?username=jkowalski42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Czytaj go od lewej: wszystko przed `/get.php` to **URL serwera**, wartość po
+`username=` to **nazwa użytkownika**, a wartość po `password=` to **hasło**.
+Reszta mówi serwerowi tylko, w jakim formacie ma wysłać playlistę.
+
+Działa to też w drugą stronę. Mając trzy pola, możesz taki link złożyć sam — URL
+serwera, potem `/get.php?username=`, Twoja nazwa użytkownika, `&password=`,
+Twoje hasło, `&type=m3u_plus` — co przydaje się w odtwarzaczu, który przyjmuje
+wyłącznie linki M3U.
+
+## URL serwera kawałek po kawałku
+
+`http://example.com:8080` ma trzy części i każda się liczy.
+
+- **Schemat — `http://` albo `https://`.** Nie są wymienne. Użyj dokładnie tego,
+  co napisał dostawca. Wiele serwerów Xtream mówi tylko zwykłym `http`, a prośba
+  o `https` kończy się błędem certyfikatu albo niczym.
+- **Host — `example.com`**, czasem sam adres liczbowy, np. `203.0.113.10`. Jedna
+  zła litera i serwera po prostu nie da się znaleźć.
+- **Port — `:8080`.** Liczba po dwukropku to osobne drzwi do tego samego
+  serwera. `http://example.com` i `http://example.com:8080` to różne adresy, a
+  pominięty port to najczęstszy powód, dla którego login, który „wygląda
+  dobrze”, nigdzie się nie łączy.
+
+Czego w tym polu **nie** wpisujesz: niczego po porcie. Ścieżki takie jak
+`/get.php`, `/player_api.php` czy `/c/` odtwarzacz dopisuje sam.
+
+Oczywiste przypadki Vidonzo porządkuje za Ciebie: dopisuje `http://`, jeśli
+pominiesz schemat, usuwa ukośniki na końcu i zostawia port, który wpisałeś.
+
+## Nazwa użytkownika i hasło
+
+W obu liczy się wielkość liter i oba są zwykle wygenerowanymi ciągami znaków, w
+których `O` i `0` albo `l` i `I` wyglądają tak samo. Dlatego:
+
+- **Wklejaj, zamiast przepisywać.** Skopiuj z wiadomości od dostawcy.
+- **Uważaj na spację na końcu.** Kopiując z wiadomości, łatwo zabrać też spację
+  po wyrazie, a serwer uzna ją za część hasła.
+- **Nie zamień ich miejscami.** Brzmi oczywiście, ale przy dwóch losowych ciągach
+  zdarza się często.
+
+Dane logowania są tak wrażliwe jak hasło do banku: każdy, kto je ma, może
+korzystać z Twojego konta i często Cię z niego wypycha, gdy zostanie osiągnięty
+limit połączeń. Vidonzo przechowuje je wyłącznie na Twoim urządzeniu i
+[potrafi je zaszyfrować, zanim trafią gdziekolwiek dalej](/pl/blog/dlaczego-szyfrowac-dane-logowania/).
+
+## Co odtwarzacz z nimi robi
+
+Przy łączeniu odtwarzacz wywołuje na serwerze `player_api.php` z Twoją nazwą
+użytkownika i hasłem. Pierwsza odpowiedź dotyczy samego konta — czy login
+został przyjęty i jakie ma parametry, np. ile połączeń naraz dopuszcza. Potem
+przychodzą kategorie, lista kanałów, katalogi filmów i seriali oraz program
+telewizyjny, każde odczytywane wtedy, gdy jest potrzebne.
+
+Na tym polega różnica wobec zwykłego linku M3U, który jest jednym, stałym plikiem
+i nie ma o co pytać.
+[Który z nich wybrać, gdy masz oba](/pl/blog/xtream-codes-czy-m3u/), zależy
+głównie od tego, czy zależy Ci na filmach, serialach i programie.
+
+## Wpisywanie danych w Vidonzo
+
+1. Wybierz **Dodaj usługę**, a potem **Xtream Codes**.
+2. Wklej adres w pole **URL serwera** — schemat, host i port, nic więcej.
+3. Wklej **Nazwę użytkownika** i **Hasło**.
+4. Opcjonalnie wpisz **Nazwę usługi**, potem **Połącz i zapisz**.
+
+Dane są sprawdzane, zanim cokolwiek zostanie zapisane, więc pomyłka wychodzi od
+razu, a nie jako pusta biblioteka później. Jeśli masz tylko długi link
+`get.php`, wklej go w zakładce **Link M3U**: Vidonzo odczyta z niego trzy pola i,
+jeśli logowanie się powiedzie, skonfiguruje pełną usługę Xtream z filmami,
+serialami i programem.
+
+## Co znaczą komunikaty o błędach
+
+- **„Nieprawidłowa nazwa użytkownika lub hasło.”** Serwer odpowiedział i odrzucił
+  login. Sprawdź wielkość liter, podobne do siebie znaki i spację na końcu. Część
+  serwerów tak samo odpowiada na konto wygasłe albo zawieszone, więc jeśli masz
+  pewność co do hasła, zapytaj dostawcę o status konta.
+- **„Nie udało się połączyć z serwerem.”** Pod tym adresem nic nie odpowiedziało.
+  Zwykli podejrzani to brakujący albo zły port, `https` tam, gdzie miało być
+  `http`, albo literówka w hoście. Rzadziej sieć, w której jesteś, blokuje
+  nietypowe porty; ten sam login sprawdzony na danych mobilnych szybko to
+  wyjaśni.
+- **„Serwer zbyt długo nie odpowiadał.”** Serwer odpowiedział, ale powoli. Duży
+  katalog potrafi przy pierwszym połączeniu potrzebować chwili; spróbuj
+  ponownie, zanim cokolwiek zmienisz.
+- **„Nie udało się zweryfikować certyfikatu bezpieczeństwa serwera.”** Używasz
+  `https` z serwerem, którego certyfikat jest nieważny. Użyj schematu podanego
+  przez dostawcę.
+
+Gdy login zostaje przyjęty, a kanały potem startują i gasną, to już nie jest
+kwestia logowania —
+[to problem ze strumieniem](/pl/blog/strumien-urywa-sie-po-kilku-sekundach/), a
+limit połączeń to jedna z jego typowych przyczyn. Szerszą listę sposobów, na
+jakie źródło może się nie wczytać, znajdziesz w artykule
+[o pięciu usterkach kryjących się za jednym mało pomocnym błędem](/pl/blog/playlista-sie-nie-wczytuje/).

@@ -1,0 +1,145 @@
+---
+title: "Link M3U8 là gì? Luồng HLS và cách mở một link m3u8"
+description: "Link .m3u8 hoặc là một luồng HLS, hoặc là cả một danh sách kênh lưu ở dạng UTF-8. Cách nhận ra bạn đang cầm loại nào, cách phát từng loại, và vì sao link hết chạy."
+urlSlug: link-m3u8-la-gi
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["danh sách phát", "kỹ thuật"]
+keywords: ["m3u8 là gì", "link m3u8 là gì", "cách mở link m3u8", "file m3u8", "hls m3u8"]
+heroImageAlt: "Một địa chỉ luồng phát duy nhất tỏa ra thành một hàng những đoạn video ngắn, mỗi đoạn dài vài giây."
+---
+
+**Link M3U8 là địa chỉ của một tệp văn bản nhỏ theo định dạng M3U, được lưu ở
+bảng mã UTF-8.** Bản thân nó không bao giờ chứa video. Nội dung bên trong mới
+quyết định bạn đang cầm thứ gì, và trên thực tế đó là một trong hai thứ rất khác
+nhau:
+
+- **Một luồng HLS** — một kênh hoặc một video, được mô tả thành danh sách các
+  đoạn ngắn để trình phát lần lượt lấy về. Trên phần lớn các trang web, đuôi tệp
+  này mang nghĩa đó.
+- **Một danh sách kênh** — hàng trăm tên kênh cùng địa chỉ luồng phát của chúng,
+  y hệt một tệp `.m3u`, chỉ khác là văn bản ở dạng UTF-8.
+  [Khác biệt giữa M3U và M3U8](/vi/blog/m3u-va-m3u8-khac-gi/) nói kỹ về vế này.
+
+Trên thanh địa chỉ, hai loại trông giống hệt nhau nhưng cư xử chẳng giống chút
+nào, nên việc đầu tiên là phân biệt được chúng.
+
+## Cách biết mình đang có loại nào
+
+Mở link trong trình duyệt, hoặc lưu tệp lại rồi mở bằng một trình soạn thảo văn
+bản. Vài dòng đầu tiên sẽ tự tố cáo.
+
+Một **danh sách phát** đọc giống như danh bạ — một cái tên, rồi một địa chỉ, cứ
+thế lặp lại:
+
+```
+#EXTM3U
+#EXTINF:-1 tvg-id="one.example" group-title="Thời sự",Kênh Một
+http://example.com/live/one.m3u8
+#EXTINF:-1 tvg-id="two.example" group-title="Phim",Kênh Hai
+http://example.com/live/two.m3u8
+```
+
+Một **luồng HLS** thì đọc giống như bảng giờ tàu. Hoặc nó liệt kê các mức chất
+lượng có sẵn:
+
+```
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
+720p/index.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=6000000,RESOLUTION=1920x1080
+1080p/index.m3u8
+```
+
+hoặc nó liệt kê chính các đoạn video:
+
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:6
+#EXT-X-MEDIA-SEQUENCE:48213
+#EXTINF:6.0,
+segment48213.ts
+#EXTINF:6.0,
+segment48214.ts
+```
+
+Có tên kênh và `group-title` nghĩa là danh sách phát. Có những dòng `#EXT-X-`
+nghĩa là một luồng phát.
+
+## HLS thật ra phát như thế nào
+
+HLS — HTTP Live Streaming — là cách truyền video qua internet được dùng rộng rãi
+nhất, và tệp `.m3u8` chính là mục lục của nó.
+
+Tệp đầu tiên, gọi là **master playlist** (danh sách chính), liệt kê cùng một
+chương trình ở nhiều mức chất lượng, mỗi mức ghi kèm băng thông cần có. Trình
+phát chọn một mức rồi mở **media playlist** (danh sách đoạn) của mức đó, nơi ghi
+tên vài đoạn kế tiếp, mỗi đoạn dài vài giây. Nó lấy các đoạn ấy về, phát, rồi đọc
+lại danh sách đoạn để tìm những đoạn tiếp theo. Với kênh trực tiếp, danh sách này
+cứ trôi dần về phía trước; với một bộ phim, nó kết thúc bằng một thẻ đóng và
+trình phát biết được toàn bộ độ dài.
+
+Phần thông minh là trình phát có thể đổi mức chất lượng giữa hai đoạn. Khi mạng
+yếu đi, nó hạ xuống một bản nhẹ hơn thay vì đứng hình, rồi nâng trở lại khi đường
+truyền rộng rãi hơn. Vidonzo mở một kênh trực tiếp ở bản nhẹ nhất để hình hiện ra
+thật nhanh, rồi tự nâng dần lên. So sánh HLS với các giao thức khác có trong
+[bài giải thích về giao thức streaming](/vi/blog/giao-thuc-streaming-la-gi/).
+
+## Cách mở một link M3U8
+
+**Nếu đó là danh sách phát**, chỗ của nó là trong một trình phát IPTV, nơi nó
+được biến thành kênh, danh mục và lịch phát sóng. Trong Vidonzo, chọn **Thêm dịch
+vụ → Liên kết M3U** rồi dán vào ô **URL danh sách M3U/M3U8**. Nếu danh sách đến
+dưới dạng tệp, thẻ **Tệp M3U** sẽ lấy nó từ bộ nhớ thiết bị của bạn.
+
+**Nếu đó là một luồng đơn lẻ**, bạn có ba cách đơn giản:
+
+1. **VLC.** Chọn *Media → Open Network Stream* (trên Mac là *File → Open
+   Network*), dán link vào và phát. VLC làm việc này xuất sắc, còn
+   [khi nào VLC không còn đủ](/vi/blog/vlc-lam-trinh-phat-iptv/) là một câu hỏi
+   khác.
+2. **Safari.** Trình duyệt của Apple phát HLS sẵn, nên một link `.m3u8` trực tiếp
+   thường mở thẳng ra video. Các trình duyệt khác thì tùy, và nhiều trình duyệt
+   chỉ phát được khi link nằm trong một trang web có sẵn trình phát HLS.
+3. **Gói nó vào một danh sách phát.** Trình phát IPTV chờ một danh sách, và một
+   danh sách chỉ có một mục vẫn là danh sách. Lưu ba dòng sau vào một tệp văn bản
+   tên `stream.m3u`, thay bằng tên và địa chỉ của bạn:
+
+   ```
+   #EXTM3U
+   #EXTINF:-1,Luồng của tôi
+   https://example.com/live/index.m3u8
+   ```
+
+   Vidonzo đọc tệp này qua **Tệp M3U** như mọi danh sách phát khác, và luồng đó
+   sẽ nằm trong thư viện của bạn với một cái tên hẳn hoi, cạnh mọi thứ khác.
+
+## Vì sao link M3U8 hết chạy
+
+Một link hôm qua còn phát mà hôm nay hỏng thường rơi vào một trong mấy trường
+hợp sau:
+
+- **Nó có sẵn hạn dùng.** Nhiều địa chỉ luồng mang theo một token hoặc chữ ký ở
+  phần sau dấu `?` — `token=`, `expires=`, `sig=`. Chúng chỉ có hiệu lực trong một
+  phiên hoặc vài giờ, sau đó máy chủ từ chối bằng lỗi 403. Trình phát của bạn
+  chẳng có vấn đề gì; chỉ là chiếc chìa khóa đã hết hạn.
+- **Nó chỉ chạy ở nơi nó xuất phát.** Một số máy chủ kiểm tra xem ứng dụng hay
+  trang web nào đang hỏi và từ chối tất cả những nơi khác.
+- **Các đoạn đã trôi qua.** Danh sách đoạn của một kênh trực tiếp chỉ ghi vài
+  đoạn mới nhất. Một bản sao lưu thành tệp sẽ lỗi thời chỉ sau vài giây.
+- **Luồng đã kết thúc hoặc đã chuyển đi.** Lỗi 404 nghĩa là địa chỉ đó không còn
+  tồn tại.
+
+Nếu cả một danh sách kênh `.m3u8` tải được mà không kênh nào phát, lỗi gần như
+không bao giờ nằm ở đuôi tệp — mà ở những địa chỉ bên trong. Còn nếu luồng bắt
+đầu phát rồi tắt sau vài giây,
+[đó là đứt kết nối, không phải giật lag](/vi/blog/luong-dung-sau-vai-giay/),
+với những nguyên nhân riêng.
+
+## Tóm lại
+
+Một tệp `.m3u8` là mục lục, không bao giờ là video. Bên trong có tên kênh thì đó
+là danh sách phát: đưa nó cho trình phát. Có những dòng `#EXT-X-` thì đó là một
+luồng HLS đơn lẻ: mở bằng VLC hoặc Safari, hoặc gói nó vào một danh sách phát một
+dòng. Và nếu nó từng chạy mà giờ không chạy, hãy xem hạn dùng trong địa chỉ trước
+khi tìm ở bất cứ đâu khác.

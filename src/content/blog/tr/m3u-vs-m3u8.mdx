@@ -1,11 +1,12 @@
 ---
-title: "M3U ile M3U8 arasındaki fark: uzantı aslında ne anlatır"
-description: "Sondaki 8 kaliteyle değil, metin kodlamasıyla ilgili. İkisini gerçekte ne ayırıyor ve neden biri kanal adlarınızı doğru gösteriyor?"
+title: "M3U ile M3U8 farkı: asıl fark kalite değil"
+description: "M3U8, UTF-8 olarak kaydedilmiş bir M3U listesidir; 8'in görüntü kalitesiyle ilgisi yok. Kanal adları için neden önemli ve HLS yayınlarındaki öteki .m3u8."
 urlSlug: m3u-ile-m3u8-farki
 publishedAt: 2026-07-24
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["oynatma-listesi", "teknik"]
-keywords: ["m3u m3u8 farkı", "m3u8 nedir", "m3u dosyası nedir", "iptv m3u8 bağlantısı"]
+keywords: ["m3u m3u8 farkı", "m3u ile m3u8 arasındaki fark", "m3u8 nedir", "m3u8 utf-8", "iptv m3u8 bağlantısı"]
 heroImageAlt: "Aynı kanal listesi iki kez gösteriliyor: birinde Türkçe harfler bozuk çıkmış, diğerinde düzgün görünüyor."
 ---
 
@@ -13,8 +14,10 @@ Sağlayıcılar bazen aynı abonelik için hem `.m3u` hem `.m3u8` ile biten
 bağlantılar verir ve aradaki farkı pek açıklamaz. Yaygın tahminler — birinin daha
 yeni, daha kaliteli ya da “HD olanı” olduğu — hepsi yanlış.
 
-`8`, **UTF-8** demek. Dosya biçimindeki farkın tamamı bu; ortalıkta dolaşan
-söylentilerin ima ettiğinden hem daha küçük hem daha işe yarar bir fark.
+**Kısa cevap:** M3U8 dosyası, metni **UTF-8** ile kodlanmış bir M3U oynatma
+listesidir — `8` bunu ifade eder ve dosya biçimindeki farkın tamamı budur. İkisi
+de aynı kanalları aynı kalitede listeler. Fark, ortalıkta dolaşan söylentilerin
+ima ettiğinden hem daha küçük hem daha işe yarar.
 
 ## İkisi de aynı türden dosya
 
@@ -62,7 +65,8 @@ ayrı parçalar halinde listeleyen küçük bir `.m3u8` manifesti çeker ve izle
 sürdükçe onu yeniden çeker. Canlı bir yayının, yayın çoktan başlamışken araya
 girebilmesinin ve bağlantınıza uyum sağlayabilmesinin sebebi budur.
 
-Yani `.m3u8` iki ayrı şey anlamına gelebilir:
+Yani `.m3u8` iki ayrı şey anlamına gelebilir (ikincisinin
+[kendi açıklama yazısı var](/tr/blog/m3u8-nedir-nasil-oynatilir/)):
 
 - **Abonelik listeniz** — yüzlerce ya da binlerce kanal, her biri tek satır.
   Oynatıcıya yapıştırdığınız bağlantı budur.

@@ -1,0 +1,134 @@
+---
+title: "Codici Xtream: URL del server, nome utente e password"
+description: "I codici Xtream sono tre campi: indirizzo del server con la porta, nome utente e password. Come sono fatti, gli errori tipici e cosa dicono i messaggi."
+urlSlug: codici-xtream-spiegati
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["configurazione", "playlist"]
+keywords: ["codici xtream", "codici xtream codes", "xtream codes url server", "xtream codes nome utente e password", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Tre campi di inserimento con etichetta — server, nome utente, password — con il numero di porta dell'indirizzo del server evidenziato."
+---
+
+**I codici Xtream sono tre informazioni: un URL del server (di solito con un
+numero di porta, per esempio `http://example.com:8080`), un nome utente e una
+password.** Insieme permettono a un lettore di chiedere direttamente al server
+del tuo fornitore i canali in diretta, i film, le serie e la guida ai programmi,
+invece di leggere un elenco fisso. Quasi tutti i problemi con questo tipo di
+accesso nascono da uno dei tre dati copiato in modo leggermente sbagliato, e
+ogni errore ha un sintomo riconoscibile.
+
+## Da dove arrivano i tre campi
+
+Te li manda il fornitore, di solito in un messaggio più o meno così:
+
+```
+URL:      http://example.com:8080
+Username: mrossi42
+Password: k7Qp9xWz
+```
+
+A volte non c'è un accesso separato, ma solo un link lungo. Quel link li
+contiene tutti e tre:
+
+```
+http://example.com:8080/get.php?username=mrossi42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Leggilo da sinistra a destra: tutto ciò che viene prima di `/get.php` è l'**URL
+del server**, il valore dopo `username=` è il **nome utente** e il valore dopo
+`password=` è la **password**. Il resto dice soltanto al server in quale formato
+mandare la playlist.
+
+Funziona anche al contrario. Con i tre campi puoi scriverti quel link da solo —
+URL del server, poi `/get.php?username=`, il tuo nome utente, `&password=`, la
+tua password, `&type=m3u_plus` — e ti torna utile con un lettore che accetta
+solo link M3U.
+
+## L'URL del server, pezzo per pezzo
+
+`http://example.com:8080` ha tre parti, e ognuna conta.
+
+- **Lo schema — `http://` o `https://`.** Non sono intercambiabili. Usa
+  esattamente quello che ha scritto il fornitore. Molti server Xtream parlano
+  solo `http` semplice, e chiedere `https` ti porta un errore di certificato o
+  nessuna risposta.
+- **L'host — `example.com`**, oppure a volte un indirizzo solo numerico come
+  `203.0.113.10`. Una lettera sbagliata e il server non viene mai trovato.
+- **La porta — `:8080`.** Il numero dopo i due punti è una porta a sé sullo
+  stesso server. `http://example.com` e `http://example.com:8080` sono indirizzi
+  diversi, e dimenticare la porta è il motivo più comune per cui un accesso che
+  «sembra giusto» non raggiunge niente.
+
+Cosa **non** va nel campo: tutto ciò che viene dopo la porta. Percorsi come
+`/get.php`, `/player_api.php` o `/c/` li aggiunge il lettore da sé.
+
+Vidonzo sistema da solo i casi ovvi: aggiunge `http://` se ometti lo schema,
+toglie le barre finali e mantiene la porta che hai scritto.
+
+## Nome utente e password
+
+Entrambi distinguono tra maiuscole e minuscole, ed entrambi sono di solito
+stringhe generate in cui `O` e `0`, o `l` e `I`, si somigliano. Quindi:
+
+- **Incolla invece di digitare.** Copia dal messaggio del fornitore.
+- **Occhio allo spazio finale.** Copiando da un messaggio capita spesso di
+  prendere anche lo spazio dopo la parola, e il server lo considera parte della
+  password.
+- **Non scambiarli.** Sembra ovvio; con due stringhe casuali succede.
+
+Un accesso è delicato quanto la password della banca: chiunque lo abbia può usare
+il tuo account, e spesso ti lascia fuori quando si raggiunge il limite di
+connessioni. Vidonzo lo conserva solo sul tuo dispositivo, e
+[può cifrarlo prima che vada da qualsiasi parte](/it/blog/perche-cifrare-le-credenziali/).
+
+## Cosa ci fa il lettore
+
+Quando ti colleghi, il lettore chiama `player_api.php` sul server con il tuo
+nome utente e la tua password. La prima risposta riguarda l'account stesso — se
+l'accesso è accettato, e dettagli come quante connessioni contemporanee
+consente. Poi arrivano le categorie, l'elenco dei canali, i cataloghi di film e
+serie e la guida ai programmi, ciascuno richiesto quando serve.
+
+È questa la differenza con un semplice link M3U, che è un file fisso a cui non
+c'è niente da chiedere. [Quale dei due usare, quando li hai entrambi](/it/blog/xtream-codes-o-m3u/),
+dipende soprattutto da quanto ti interessano film, serie e guida.
+
+## Inserirli in Vidonzo
+
+1. Scegli **Aggiungi servizio**, poi **Xtream Codes**.
+2. Incolla l'indirizzo in **URL del server** — schema, host e porta, niente
+   dopo.
+3. Incolla **Nome utente** e **Password**.
+4. Se vuoi, dai un **Nome servizio**, poi **Connetti e salva**.
+
+L'accesso viene verificato prima di salvare qualsiasi cosa, quindi un errore
+salta fuori subito invece che più tardi come una libreria vuota. Se hai solo il
+link lungo con `get.php`, incollalo invece nella scheda **Link M3U**: Vidonzo ne
+ricava i tre campi e, se l'accesso funziona, lo configura come servizio Xtream
+completo, con film, serie e guida.
+
+## Cosa significano i messaggi di errore
+
+- **«Nome utente o password errati.»** Il server è stato raggiunto e ha rifiutato
+  l'accesso. Controlla maiuscole e minuscole, i caratteri che si somigliano e lo
+  spazio finale. Alcuni server rispondono allo stesso modo per un account scaduto
+  o sospeso, quindi se sei sicuro della password chiedi al fornitore lo stato
+  dell'account.
+- **«Impossibile raggiungere il server.»** A quell'indirizzo non ha risposto
+  nessuno. I soliti sospettati sono una porta mancante o sbagliata, `https` al
+  posto di `http`, o un errore di battitura nell'host. Più di rado, la rete su cui
+  sei blocca le porte insolite; provare lo stesso accesso con i dati mobili te lo
+  dice in fretta.
+- **«Il server ha impiegato troppo tempo a rispondere.»** È stato raggiunto ma era
+  lento. Un catalogo molto grande può richiedere un po' al primo collegamento;
+  riprova prima di cambiare qualcosa.
+- **«Impossibile verificare il certificato di sicurezza del server.»** Stai usando
+  `https` con un server il cui certificato non è valido. Usa lo schema indicato
+  dal fornitore.
+
+Quando l'accesso viene accettato ma poi i canali partono e si fermano, il
+problema non è più l'accesso —
+[è una questione di flusso](/it/blog/lo-stream-si-ferma-dopo-pochi-secondi/), e un
+limite di connessioni è una delle sue cause abituali. Per l'elenco completo dei
+modi in cui una sorgente può non caricarsi, vedi
+[i cinque guasti dietro un unico errore poco utile](/it/blog/la-playlist-non-si-carica/).

@@ -1,0 +1,129 @@
+---
+title: "What is IPTV? How internet TV works, and what you need to watch it"
+description: "IPTV is television delivered over an internet connection instead of an aerial, a dish or a cable. How it works, the three pieces you need, and what the player does."
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["television", "playlists"]
+keywords: ["what is iptv", "iptv meaning", "how does iptv work", "what do you need for iptv"]
+heroImageAlt: "A television and a phone side by side, both showing the same channel list, joined by a single network cable."
+---
+
+**IPTV stands for Internet Protocol Television: live channels, films and series
+delivered over an internet connection instead of an aerial, a satellite dish or
+a cable box.** The picture arrives as a stream of data, the same way a web page
+or a video call does, and an app on your phone, television or tablet turns it
+back into television.
+
+That one-sentence answer hides the part that confuses most people, which is that
+"IPTV" names a way of *delivering* television, not a service you sign up to.
+Once you see the pieces separately, everything else — playlists, logins, guides,
+players — falls into place.
+
+## How it differs from aerial, satellite and cable
+
+Broadcast television sends every channel to everyone at once. Your set picks one
+out of the air, and the signal is there whether you watch or not.
+
+IPTV works the other way round. Nothing arrives until your device asks for it.
+When you choose a channel, the player requests that one stream from a server,
+and the server sends it — usually cut into short segments of a few seconds each,
+which the player fetches one after another and stitches back into a continuous
+picture. [HLS, the most common protocol](/blog/streaming-protocols-explained/),
+works exactly like this.
+
+Three practical consequences follow:
+
+- **Your connection is the aerial.** A steady connection gives a steady picture;
+  a weak one [shows up as buffering](/blog/fix-iptv-buffering/), not as snow.
+- **Changing channel is a request, not a retune,** so it takes a moment longer
+  than flicking through broadcast channels.
+- **Anything can be on demand.** Because every stream is requested, the same
+  system can offer live channels, a film library and the programme you missed
+  last night.
+
+## The three pieces you need
+
+Every IPTV setup, from a telecom operator's set-top box to an app on a phone,
+comes down to the same three pieces.
+
+### 1. A service that carries the channels
+
+Somebody has to run the servers that the streams come from. Many telecom
+operators deliver their own TV this way; so do broadcasters and subscription
+services. This is the only piece that decides *what* you can watch.
+
+### 2. The details that point a player at it
+
+A service gives you one of two things:
+
+- **An M3U playlist** — a link or a small file listing each channel's name and
+  stream address. It is plain text you can read yourself;
+  [here is what every line means](/blog/inside-an-m3u-file/).
+- **An Xtream Codes login** — a server address, a username and a password, which
+  let a player ask the service for its channels, films, series and guide
+  directly. [The three fields are explained here](/blog/xtream-codes-login-explained/).
+
+If you are unsure which you have, or which to use when you have both,
+[this comparison settles it](/blog/xtream-codes-vs-m3u/).
+
+### 3. A player on a device
+
+The player is the app that reads those details and shows you the result. It
+reads the list, fetches the stream you pick, decodes the video, and draws a
+usable interface around all of it: categories, favourites, search, a programme
+guide. It does not come with channels of its own —
+[that is not its job](/blog/what-an-iptv-player-does/), and it is why the same
+player works with any service.
+
+## Live TV, catch-up and on demand
+
+Most IPTV services offer some mix of three things:
+
+- **Live channels**, which play as they are broadcast.
+- **Catch-up**, where the service keeps recent programmes for a few days and the
+  player can request one from the guide. It only exists where the service
+  supports it.
+- **Films and series**, delivered through an Xtream login with posters, seasons
+  and episodes — which a good player turns into
+  [a browsable library rather than a list of file names](/blog/films-and-series-as-a-library/).
+
+Tying the live part together is the **EPG**, the electronic programme guide: a
+separate schedule that says what is on each channel now and next.
+[How the guide works, and why it sometimes goes blank](/blog/epg-explained/),
+is its own short story.
+
+## Which devices can play IPTV
+
+Almost any screen with an internet connection and the right app:
+
+- **Phones and tablets** — Android, iPhone and iPad;
+  [a tablet is often the most comfortable screen of all](/blog/iptv-on-a-tablet/).
+- **Android TV and Google TV** televisions and boxes, where
+  [a player built for the remote](/blog/iptv-player-on-android-tv/) makes the
+  difference.
+- **Fire TV Stick**, which is Android underneath and
+  [runs a proper player with one extra install step](/blog/iptv-player-on-fire-tv-stick/).
+- **Samsung and LG smart TVs**, whose own app stores are thin — the
+  [setup that works](/blog/samsung-lg-smart-tv-iptv-setup/) uses the TV as the
+  screen and puts the player on something else.
+
+## What goes wrong, and where
+
+Because IPTV has three separate pieces, a problem always lives in one of them,
+and knowing which saves a lot of guessing:
+
+- **The list will not load** — the details are wrong, or the service cannot be
+  reached. [Five distinct causes, five signatures](/blog/playlist-link-wont-load/).
+- **The list loads but a channel stutters** — the network path, almost always.
+- **The channel plays but the guide is empty** — the guide and the channel list
+  disagree about a name.
+- **The stream stops after a few seconds** — a
+  [disconnect, which is a different fault from buffering](/blog/stream-stops-after-a-few-seconds/).
+
+## Where Vidonzo fits
+
+Vidonzo is the third piece: a player. It does not sell channels and does not
+host any. You add the M3U link, the M3U file or the Xtream login your service
+gave you, and it builds live TV with a working guide and films and series as a
+library, and remembers where you stopped — on a phone, a tablet or a television.
+[The first playlist takes about a minute](/blog/set-up-your-first-playlist/).

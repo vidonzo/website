@@ -1,0 +1,132 @@
+---
+title: "Đăng nhập Xtream Codes: URL máy chủ, tên đăng nhập, mật khẩu"
+description: "Đăng nhập Xtream Codes gồm ba trường: URL máy chủ kèm cổng, tên đăng nhập và mật khẩu. Mỗi trường trông ra sao, lỗi gõ hay gặp và thông báo lỗi nghĩa là gì."
+urlSlug: dang-nhap-xtream-codes
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["cài đặt", "danh sách phát"]
+keywords: ["đăng nhập xtream codes", "url máy chủ xtream codes", "tài khoản xtream codes", "xtream codes get.php", "player_api.php"]
+heroImageAlt: "Ba ô nhập có nhãn — máy chủ, tên đăng nhập, mật khẩu — với số cổng trong địa chỉ máy chủ được làm nổi bật."
+---
+
+**Thông tin đăng nhập Xtream Codes gồm ba thứ: một URL máy chủ (thường kèm số
+cổng, ví dụ `http://example.com:8080`), một tên đăng nhập và một mật khẩu.** Gộp
+lại, chúng cho phép trình phát hỏi thẳng máy chủ của nhà cung cấp về kênh trực
+tiếp, phim lẻ, phim bộ và lịch phát sóng của bạn, thay vì đọc một danh sách cố
+định. Gần như mọi trục trặc với kiểu đăng nhập này đều đến từ việc một trong ba
+trường bị chép sai một chút, và mỗi lỗi có một triệu chứng dễ nhận ra.
+
+## Ba trường này từ đâu ra
+
+Nhà cung cấp gửi chúng cho bạn, thường trong một tin nhắn trông kiểu như sau:
+
+```
+URL:      http://example.com:8080
+Username: nguyenvan42
+Password: k7Qp9xWz
+```
+
+Đôi khi chẳng có thông tin đăng nhập riêng nào, chỉ có một đường link dài. Đường
+link đó chứa cả ba:
+
+```
+http://example.com:8080/get.php?username=nguyenvan42&password=k7Qp9xWz&type=m3u_plus&output=ts
+```
+
+Đọc từ trái sang phải: mọi thứ đứng trước `/get.php` là **URL máy chủ**, giá trị
+sau `username=` là **tên đăng nhập**, và giá trị sau `password=` là **mật khẩu**.
+Phần còn lại chỉ báo cho máy chủ biết cần gửi danh sách phát theo định dạng nào.
+
+Chiều ngược lại cũng được. Có ba trường trong tay, bạn tự viết được đường link đó —
+URL máy chủ, rồi `/get.php?username=`, tên đăng nhập, `&password=`, mật khẩu,
+`&type=m3u_plus` — rất tiện khi gặp một trình phát chỉ nhận link M3U.
+
+## URL máy chủ, tách từng phần
+
+`http://example.com:8080` có ba phần, và phần nào cũng quan trọng.
+
+- **Giao thức — `http://` hoặc `https://`.** Hai cái này không thay thế được cho
+  nhau. Hãy dùng đúng thứ nhà cung cấp đã ghi. Nhiều máy chủ Xtream chỉ nói
+  `http` thuần, và nếu bạn gọi bằng `https` thì sẽ gặp lỗi chứng chỉ hoặc chẳng
+  nhận được gì.
+- **Tên máy chủ — `example.com`**, hoặc đôi khi chỉ là một địa chỉ số như
+  `203.0.113.10`. Sai một chữ là máy chủ đơn giản không bao giờ được tìm thấy.
+- **Cổng — `:8080`.** Con số sau dấu hai chấm là một cánh cửa riêng trên cùng một
+  máy chủ. `http://example.com` và `http://example.com:8080` là hai địa chỉ khác
+  nhau, và quên số cổng là lý do phổ biến nhất khiến một thông tin đăng nhập “nhìn
+  thì đúng” mà không kết nối được tới đâu.
+
+Thứ **không** được nằm trong ô này: bất cứ gì sau số cổng. Những đường dẫn như
+`/get.php`, `/player_api.php` hay `/c/` là phần trình phát tự thêm vào.
+
+Vidonzo tự dọn giúp bạn những trường hợp hiển nhiên: nó thêm `http://` nếu bạn bỏ
+trống phần giao thức, bỏ các dấu gạch chéo thừa ở cuối, và giữ nguyên số cổng bạn
+đã gõ.
+
+## Tên đăng nhập và mật khẩu
+
+Cả hai đều phân biệt chữ hoa chữ thường, và thường là những chuỗi ký tự ngẫu nhiên
+nơi `O` với `0`, hay `l` với `I`, trông y như nhau. Vậy nên:
+
+- **Dán thay vì gõ.** Sao chép thẳng từ tin nhắn của nhà cung cấp.
+- **Coi chừng dấu cách thừa ở cuối.** Sao chép từ tin nhắn hay kéo theo cả dấu cách
+  sau chữ, và máy chủ coi nó là một phần của mật khẩu. Bộ gõ tiếng Việt với chế độ
+  tự sửa cũng có thể lặng lẽ đổi ký tự khi bạn gõ tay.
+- **Đừng nhập đảo hai ô.** Nghe thì hiển nhiên; nhưng với hai chuỗi ngẫu nhiên thì
+  chuyện này vẫn xảy ra.
+
+Một thông tin đăng nhập nhạy cảm như mật khẩu ngân hàng: ai cầm nó đều dùng được
+tài khoản của bạn, và thường khiến chính bạn bị chặn khi số kết nối đạt giới hạn.
+Vidonzo chỉ lưu nó trên thiết bị của bạn, và
+[có thể mã hóa nó trước khi nó đi đến bất cứ đâu](/vi/blog/ma-hoa-thong-tin-dang-nhap/).
+
+## Trình phát làm gì với ba trường đó
+
+Khi bạn kết nối, trình phát gọi tới `player_api.php` của máy chủ kèm tên đăng nhập
+và mật khẩu. Câu trả lời đầu tiên nói về chính tài khoản — thông tin đăng nhập có
+được chấp nhận không, và những chi tiết như tài khoản cho phép bao nhiêu kết nối
+cùng lúc. Sau đó mới đến danh mục, danh sách kênh, kho phim lẻ và phim bộ, và lịch
+phát sóng, mỗi thứ được lấy khi cần.
+
+Đó là khác biệt so với một link M3U thuần, vốn là một tệp cố định chẳng có gì để
+hỏi. [Nên dùng cái nào khi có cả hai](/vi/blog/xtream-codes-hay-m3u/) chủ yếu tùy
+vào việc bạn có muốn phim lẻ, phim bộ và lịch phát sóng hay không.
+
+## Nhập vào Vidonzo
+
+1. Chọn **Thêm dịch vụ**, rồi **Xtream Codes**.
+2. Dán địa chỉ vào ô **URL máy chủ** — giao thức, tên máy chủ và cổng, không thêm gì
+   phía sau.
+3. Dán **Tên đăng nhập** và **Mật khẩu**.
+4. Nếu muốn, điền **Tên dịch vụ (tùy chọn)**, rồi chạm **Kết nối & lưu**.
+
+Thông tin đăng nhập được kiểm tra trước khi lưu bất cứ thứ gì, nên sai sót lộ ra
+ngay lập tức chứ không phải thành một thư viện trống về sau. Nếu bạn chỉ có đường
+link `get.php` dài, hãy dán nó vào thẻ **Liên kết M3U**: Vidonzo đọc ra ba trường
+từ đó và, nếu đăng nhập thành công, thiết lập nó thành một dịch vụ Xtream đầy đủ
+với phim lẻ, phim bộ và lịch phát sóng.
+
+## Các thông báo lỗi nghĩa là gì
+
+- **“Tên đăng nhập hoặc mật khẩu không đúng.”** Đã liên lạc được với máy chủ và
+  máy chủ từ chối đăng nhập. Hãy kiểm tra chữ hoa chữ thường, các ký tự trông giống
+  nhau và dấu cách thừa ở cuối. Một số máy chủ trả lời y hệt như vậy khi tài khoản
+  đã hết hạn hoặc bị tạm ngưng, nên nếu chắc chắn mật khẩu đúng, hãy hỏi nhà cung
+  cấp về tình trạng tài khoản.
+- **“Không thể kết nối tới máy chủ.”** Không có gì trả lời ở địa chỉ đó. Nghi phạm
+  quen thuộc là thiếu hoặc sai số cổng, dùng `https` trong khi phải là `http`, hoặc
+  gõ sai tên máy chủ. Hiếm hơn, mạng bạn đang dùng chặn các cổng không thông dụng;
+  thử cùng thông tin đăng nhập đó bằng dữ liệu di động sẽ cho bạn câu trả lời rất
+  nhanh.
+- **“Máy chủ phản hồi quá lâu.”** Đã liên lạc được nhưng máy chủ chậm. Một kho nội
+  dung rất lớn có thể mất một lúc ở lần kết nối đầu; hãy thử lại trước khi thay đổi
+  bất cứ thứ gì.
+- **“Không thể xác minh chứng chỉ bảo mật của máy chủ.”** Bạn đang dùng `https`
+  với một máy chủ có chứng chỉ không hợp lệ. Hãy dùng đúng giao thức nhà cung cấp
+  đã ghi.
+
+Khi đăng nhập đã được chấp nhận mà kênh vẫn phát rồi tắt, câu hỏi không còn nằm ở
+thông tin đăng nhập nữa — [đó là vấn đề của luồng phát](/vi/blog/luong-dung-sau-vai-giay/),
+và giới hạn số kết nối là một trong những nguyên nhân quen thuộc. Còn danh sách đầy
+đủ hơn về những kiểu một nguồn không tải được, hãy xem
+[năm kiểu hỏng đằng sau cùng một thông báo lỗi chẳng giúp được gì](/vi/blog/danh-sach-phat-khong-tai-duoc/).

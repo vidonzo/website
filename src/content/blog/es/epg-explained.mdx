@@ -1,30 +1,40 @@
 ---
-title: "La EPG explicada: cómo funciona la guía de programación en pantalla"
-description: "La rejilla de programas es un archivo aparte de tus canales y va a su propio ritmo. Saberlo explica cualquier rareza que llegue a hacer una guía."
+title: "¿Qué es la EPG? La guía de TV explicada y por qué sale vacía"
+description: "EPG es la guía electrónica de programación: el horario en pantalla de qué hay ahora y después. Cómo funciona en la tele y en IPTV, y por qué a veces sale vacía."
 urlSlug: que-es-la-epg-iptv
 publishedAt: 2026-07-21
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ["televisión", "listas"]
-keywords: ["qué es la epg", "guía de programación iptv", "epg xmltv", "no aparece la epg"]
+keywords: ["qué es la epg", "epg qué significa", "botón epg del mando", "para qué sirve el botón guide", "guía de programación iptv", "epg xmltv", "no aparece la epg"]
 heroImageAlt: "Una fila de canales y una rejilla de programas dibujadas como dos hojas separadas, unidas por un único identificador coincidente."
 ---
 
-La guía —la rejilla que muestra qué hay ahora, qué viene después y qué hubo hace una
-hora— se llama **EPG**, de guía electrónica de programación. En un descodificador de
-satélite llega dentro de la propia señal. En un reproductor IPTV no, y esa diferencia
-explica casi cualquier rareza que haga una guía.
+**EPG son las siglas de guía electrónica de programación** (*Electronic Program
+Guide*): la rejilla en pantalla que muestra, canal por canal, qué hay ahora, qué
+viene después y qué hubo hace una hora. En una tele por antena o por satélite llega
+dentro de la propia señal. En un reproductor IPTV no, y esa diferencia explica casi
+cualquier rareza que haga una guía.
+
+## El botón EPG de tu mando
+
+En la mayoría de los mandos el botón se llama **EPG** o **Guide** (a veces **Guía**),
+y abre esa rejilla encima de lo que estés viendo. En una tele sintonizada funciona al
+instante, porque la cadena envía el horario junto con los canales. Pulsa el mismo
+botón dentro de una app IPTV y la rejilla solo aparece si la app ha ido antes a buscar
+una guía a otro sitio, que es justo de lo que trata el resto de este artículo.
 
 ## Es un segundo archivo, no parte de la lista de canales
 
 Tu lista de canales dice *dónde están los streams*. La EPG dice *qué hay en ellos y
-cuándo*. Son documentos separados, que se descargan por separado y se actualizan a
+cuándo*. Son documentos separados, que se piden por separado y se actualizan a
 ritmos distintos.
 
 El formato habitual es **XMLTV**: un archivo XML que enumera canales y después
 programas con una referencia al canal, una hora de inicio, una hora de fin,
 [un título y a menudo una descripción](/es/blog/ver-en-tu-idioma/). Una guía que
 cubre unos cientos de canales durante una semana es un archivo grande —decenas de
-megabytes es lo corriente—, y por eso el reproductor la descarga en segundo plano y
+megabytes es lo corriente—, y por eso el reproductor la trae en segundo plano y
 no en el momento en que pulsas el botón de la guía.
 
 Si usas [Xtream Codes](/es/blog/xtream-codes-o-m3u/), la guía suele venir sola: la API
@@ -74,14 +84,14 @@ En cuanto empareja bien, la EPG deja de ser un adorno:
 
 Repasándolo por orden:
 
-1. **Espera.** Después de añadir una lista, la primera descarga de la EPG tarda un
+1. **Espera.** Después de añadir una lista, la primera carga de la EPG tarda un
    rato. Durante los primeros minutos no pasa nada malo.
 2. **Comprueba que hay guía siquiera.** Con un origen M3U, si nunca te dieron una URL
    de EPG, no hay nada que mostrar. Pídesela a tu proveedor.
 3. **Mira un canal frente a todos los canales.** Unos pocos canales en blanco son un
    desajuste de identificadores. Todos los canales en blanco son un problema de
-   descarga.
-4. **Actualiza la guía** si el reproductor lo ofrece, lo que vuelve a descargarla en
+   carga de la guía.
+4. **Actualiza la guía** si el reproductor lo ofrece, lo que vuelve a pedirla en
    lugar de releer la caché.
 5. **Ten en cuenta el momento.** Algunos proveedores publican una ventana estrecha
    —solo hoy y mañana— y parece vacía si avanzas mucho.
@@ -99,7 +109,7 @@ sin que la interfaz se vuelva inservible es trabajo de verdad, y es justo la cla
 trabajo [de la que sí responde un reproductor](/es/blog/que-hace-un-reproductor-iptv/),
 al contrario que el contenido de la guía.
 
-También es un sitio donde la privacidad importa en silencio. Descargar la guía es una
+También es un sitio donde la privacidad importa en silencio. Traer la guía es una
 petición a la URL de tu proveedor y a ningún sitio más; un reproductor que informara de
 qué programas has pasado por delante estaría reuniendo un retrato notablemente detallado
 de tu noche sin ningún motivo relacionado con mostrarte una rejilla.

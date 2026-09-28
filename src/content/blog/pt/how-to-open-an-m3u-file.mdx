@@ -1,0 +1,117 @@
+---
+title: "Como abrir arquivo M3U em qualquer aparelho (e com qual app)"
+description: "Um arquivo M3U é uma lista de reprodução, e o app certo depende do que ela lista. Como ler o arquivo e abrir no Windows, Mac, Android, iPhone e na TV."
+urlSlug: como-abrir-arquivo-m3u
+publishedAt: 2026-09-29
+sourceLocale: en
+tags: ["listas", "configuração"]
+keywords: ["como abrir arquivo m3u", "abrir arquivo m3u", "programa para abrir m3u", "qual app abre m3u", "abrir m3u no android", "abrir m3u no celular"]
+heroImageAlt: "O ícone de um arquivo de lista na tela de um celular, com setas apontando para um notebook, um tablet e uma televisão."
+---
+
+**Para abrir um arquivo M3U, use um player de mídia que leia listas de
+reprodução — o VLC no computador, ou um player de IPTV no celular, no tablet ou
+na TV.** Um arquivo M3U não é um vídeo. É um arquivo de texto curto com os
+endereços do que deve ser reproduzido, então "abrir" significa entregar essa
+lista a um aplicativo que saiba segui-la. Você também pode abrir o arquivo em
+qualquer editor de texto para ver o que tem dentro — e esse é o melhor primeiro
+passo, porque é o conteúdo que decide qual aplicativo você realmente quer.
+
+## Primeiro, olhe o que tem dentro
+
+Abra o arquivo no Bloco de Notas do Windows, no TextEdit do Mac (se ele abrir
+esquisito, escolha *Formatar → Converter em Texto Simples*) ou em qualquer
+visualizador de texto no celular. Você vai ver uma de duas coisas.
+
+**Caminhos para arquivos de um computador** — linhas como
+`Musicas\Album\01 Faixa.mp3`. Isso é uma lista de músicas, criada por um
+programa como o Winamp, o iTunes ou o software de uma central multimídia de
+carro. Abra num player de música no mesmo computador. Se você levar o arquivo
+para outro aparelho, os caminhos deixam de apontar para qualquer coisa, e ele
+abre como uma lista vazia.
+
+**Endereços da web, com nomes em cima** — linhas começando com `#EXTINF`
+seguidas de endereços `http://` ou `https://`. Isso é uma lista de IPTV: cada par
+é o nome de um canal e o stream que ele reproduz. Ela precisa de um player que
+entenda essas linhas `#EXTINF`, porque é nelas que moram os nomes dos canais, as
+categorias e os identificadores do guia.
+[Cada linha do formato é explicada aqui.](/pt/blog/dentro-de-um-arquivo-m3u/)
+
+O resto deste artigo trata do segundo tipo.
+
+## No PC com Windows ou no Mac
+
+O **VLC** é a opção gratuita mais simples nos dois. Escolha *Media → Open File*
+(no VLC em português, *Mídia → Abrir arquivo*; no Mac, *File → Open File*),
+selecione o `.m3u`, e o VLC carrega a lista inteira no painel de lista de
+reprodução; dê dois cliques numa entrada para tocar. Arrastar o arquivo para a
+janela do VLC faz a mesma coisa.
+
+Isso resolve para conferir uma lista ou assistir a meia dúzia de canais. Com a
+lista completa de um provedor, logo você sente falta de categorias, de um guia
+de programação e de favoritos, que é
+[o ponto em que um player dedicado vale a pena](/pt/blog/vlc-como-player-iptv/).
+
+## No celular ou tablet Android
+
+Use um player de IPTV que importe arquivos. No Vidonzo:
+
+1. Escolha **Adicionar serviço** e depois a aba **Arquivo M3U**.
+2. Toque em **Escolher um arquivo M3U** e selecione o arquivo no armazenamento do
+   celular. Arquivos terminados em `.m3u`, `.m3u8` e `.txt` são todos aceitos,
+   então uma lista que chegou renomeada como texto também funciona.
+3. Se o seu provedor passou um endereço de guia, cole em
+   **URL do EPG (XMLTV) — opcional**. Depois toque em **Conectar e salvar**.
+
+A lista é lida uma vez e os seus canais aparecem, agrupados do jeito que o
+arquivo os agrupa.
+
+## No iPhone ou iPad
+
+Primeiro salve o arquivo no app Arquivos — no Mail ou num aplicativo de
+mensagens, abra o menu de compartilhar do anexo e escolha **Salvar em Arquivos**.
+Depois, no Vidonzo, **Adicionar serviço → Arquivo M3U → Escolher um arquivo M3U**
+abre o navegador do Arquivos, e você seleciona o arquivo por lá. Os mesmos passos
+valem no iPad, onde
+[uma tela maior deixa a biblioteca inteira mais fácil de navegar](/pt/blog/iptv-no-iphone-e-no-ipad/).
+
+## Na TV
+
+Televisões são o caso chato, porque lidam mal com arquivos: raramente há um
+gerenciador de arquivos, e colocar um arquivo nelas costuma exigir um pendrive.
+
+Se o arquivo M3U veio de um link, **use o link no lugar dele**. Na Android TV, na
+Google TV ou num Fire TV Stick, adicione no Vidonzo como **Link M3U**, e não como
+arquivo. Digitar um endereço comprido com o controle remoto é a parte tediosa, e
+é aí que [o teclado de um celular pareado](/pt/blog/celular-como-controle-da-tv/)
+ajuda: o texto digitado no celular cai direto no campo da TV.
+
+TVs Samsung e LG não rodam Android, então o player fica numa caixinha ou num
+stick ligado à TV — [a configuração que funciona está descrita aqui](/pt/blog/iptv-na-smart-tv-samsung-ou-lg/).
+
+## Arquivo ou o link de onde ele veio?
+
+Se você recebeu os dois, prefira o link. Um arquivo é uma foto da lista no
+momento em que foi salvo; um link é relido sempre que o player atualiza, então os
+canais que o provedor acrescenta ou muda de lugar aparecem sozinhos.
+[A troca está explicada por inteiro aqui](/pt/blog/link-de-lista-ou-arquivo-local/)
+— o arquivo tem, sim, as suas vantagens, entre elas funcionar sem depender do
+servidor de listas do provedor.
+
+## Quando abre, mas alguma coisa está errada
+
+- **A lista está vazia.** O arquivo não tem entradas `#EXTINF`, ou os caminhos
+  apontam para o disco de outro computador. Olhe o conteúdo de novo.
+- **Os nomes dos canais viraram símbolos ou pontos de interrogação.** A
+  codificação do texto não é a que o player esperava.
+  [Por que os nomes chegam embaralhados](/pt/blog/nomes-de-canais-ilegiveis/), e
+  como consertar o arquivo.
+- **A lista está certa, mas nada toca.** Os nomes estão corretos e os endereços
+  estão mortos ou vencidos — um problema no provedor, não no arquivo nem no
+  player.
+- **Aparece que a lista não pode ser carregada.** Um arquivo não falha do jeito
+  que um link falha, mas um link pode;
+  [as cinco causas estão aqui](/pt/blog/a-lista-nao-carrega/).
+
+Um arquivo M3U é pequeno, legível e tolerante. Olhe o conteúdo uma vez, escolha
+o aplicativo que combina com o que ele lista, e ele abre como qualquer outro.

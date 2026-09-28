@@ -1,18 +1,28 @@
 ---
-title: "Dentro de um arquivo M3U: o que cada linha realmente diz"
-description: "Abra uma vez num editor de texto e o mistério acaba. Quatro tipos de linha, um punhado de atributos, e cada um explica algo que você já viu no player."
+title: "O que é um arquivo M3U? O formato da lista, linha por linha"
+description: "Um arquivo M3U é uma lista em texto puro: nomes de canais, endereços de stream e algumas tags opcionais. O que cada linha significa e como conferir a sua."
 urlSlug: dentro-de-um-arquivo-m3u
 publishedAt: 2026-08-08
+updatedAt: 2026-09-29
 sourceLocale: en
 tags: ['listas', 'engenharia']
-keywords: ['o que e um arquivo m3u', 'formato de arquivo m3u', 'extinf explicado', 'm3u tvg-id group-title']
+keywords: ['o que e um arquivo m3u', 'arquivo m3u o que é', 'm3u significado', 'formato de arquivo m3u', 'extinf explicado', 'm3u tvg-id group-title']
 heroImageAlt: "Algumas linhas de texto de uma lista M3U com o cabeçalho, a linha de descrição e o endereço do stream destacados."
 ---
 
-O arquivo M3U tem fama de técnico, e não merece. É um dos formatos mais simples
-ainda em uso diário: uma lista de nomes, uma lista de endereços e algumas notas
-opcionais. Dá para ler num editor de texto e, feito isso, boa parte do
-comportamento do player deixa de parecer arbitrária.
+**Um arquivo M3U é uma lista de reprodução em texto puro.** Cada entrada é um
+endereço — de uma música, de um vídeo ou de um stream de TV ao vivo —,
+normalmente precedido de uma linha que dá nome e descreve o item. A extensão vem
+de *MP3 URL*, a função original do formato; hoje é o jeito padrão de os
+provedores de IPTV entregarem listas de canais, e o `.m3u8` é o mesmo formato
+salvo em UTF-8.
+
+O formato tem fama de técnico, e não merece. É um dos mais simples ainda em uso
+diário: uma lista de nomes, uma lista de endereços e algumas notas opcionais. Dá
+para ler num editor de texto e, feito isso, boa parte do comportamento do player
+deixa de parecer arbitrária. (Se você só quer reproduzir um,
+[abrir um arquivo M3U](/pt/blog/como-abrir-arquivo-m3u/) é outra história,
+mais curta.)
 
 Esta é uma lista completa e funcional. Dois canais, sem omitir nada.
 

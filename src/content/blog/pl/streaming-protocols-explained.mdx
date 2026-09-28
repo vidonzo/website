@@ -1,11 +1,11 @@
 ---
-title: "HLS, DASH i RTSP: protokoły stojące za Twoim strumieniem, po ludzku"
-description: "Litery na końcu adresu strumienia decydują, jak blisko „na żywo” jesteś, jak szybko rusza kanał i co się dzieje, gdy sieć czknie."
+title: "HLS, DASH i RTSP – co to jest? Protokoły streamingu po ludzku"
+description: "HLS, DASH i RTSP to sposoby dostarczania strumienia. Od nich zależy, jak blisko „na żywo” jesteś, jak szybko rusza kanał i co się dzieje, gdy sieć czknie."
 urlSlug: protokoly-streamingu-hls-dash-rtsp
 publishedAt: 2026-08-02
 sourceLocale: en
 tags: ["technikalia", "odtwarzanie"]
-keywords: ["hls czy dash", "co to jest hls", "rtsp czy hls", "protokoły streamingu iptv"]
+keywords: ["co to jest hls", "hls dash rtsp co to jest", "hls czy dash", "rtsp czy hls", "protokoły streamingu iptv"]
 heroImageAlt: "Trzy rurociągi narysowane obok siebie: jeden niesie rządek małych paczek, drugi podpisane pudełka, trzeci nieprzerwaną, płynącą linię."
 ---
 
@@ -22,10 +22,10 @@ Staroświecki streaming działał jak rozmowa telefoniczna: serwer i odtwarzacz
 trzymały otwarte połączenie, a wideo płynęło nim nieprzerwanie. Nowoczesny
 streaming działa raczej jak firma kurierska. Wideo jest cięte na małe
 segmenty — po kilka sekund każdy — odkładane na zwykłym serwerze WWW,
-a odtwarzacz ściąga je jeden po drugim, tak samo jak przeglądarka ściąga
+a odtwarzacz odbiera je jeden po drugim, tak samo jak przeglądarka wczytuje
 obrazki.
 
-Ta jedna decyzja projektowa tłumaczy bardzo wiele. Paczki można ściągać
+Ta jedna decyzja projektowa tłumaczy bardzo wiele. Paczki można odbierać
 z wyprzedzeniem, więc odtwarzacz utrzymuje poduszkę na wypadek
 [chwiejnej sieci](/pl/blog/iptv-zacina-sie-na-wifi/). Paczki mogą istnieć
 w kilku poziomach jakości, więc gdy pasmo spada, odtwarzacz schodzi stopień
@@ -49,7 +49,8 @@ Dla kanałów na żywo playlista roluje się w przód bez końca. Dla catch-upu
 i filmów jest to kompletna lista z początkiem i końcem — dlatego przewijanie
 działa tam, a nie działa w telewizji na żywo. HLS wyrósł na telefonach i dziś
 jest wszędzie; jeśli adres Twojego strumienia kończy się na `.m3u8`, to właśnie
-masz.
+masz — a [jak odczytać i odtworzyć link M3U8](/pl/blog/co-to-jest-link-m3u8/),
+opisujemy osobno.
 
 ## DASH: ten sam pomysł, inna papierologia
 
@@ -67,7 +68,7 @@ o rozpoczęcie nadawania, a wideo płynie trzymanym otwarcie połączeniem niema
 bez opóźnienia. Ta natychmiastowość to powód, dla którego wciąż mówią nim
 kamery monitoringu — i niektóre źródła IPTV też.
 
-Jego słabości są lustrem jego siły. Nie ma poduszki ze ściągniętych paczek,
+Jego słabości są lustrem jego siły. Nie ma poduszki z odebranych zawczasu paczek,
 więc czknięcie sieci czuć od razu; nie ma drabinki jakości, po której można
 zejść; a typy połączeń, których używa, to dokładnie te, których nie lubią
 restrykcyjne zapory i sieci współdzielone. Kiedy strumień RTSP działa, jest

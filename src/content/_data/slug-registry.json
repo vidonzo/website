@@ -52,6 +52,31 @@
         "ko": "재생목록을-직접-가져오는-플레이어"
       }
     },
+    "control-your-tv-with-your-phone": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "control-your-tv-with-your-phone",
+        "fa": "کنترل-تلویزیون-با-گوشی",
+        "ar": "التحكم-في-التلفزيون-من-الهاتف",
+        "es": "controlar-la-tele-con-el-movil",
+        "tr": "telefonla-televizyon-kontrol-etme",
+        "fr": "controler-sa-tv-avec-son-telephone",
+        "de": "mit-dem-handy-den-fernseher-bedienen",
+        "pt": "controlar-a-tv-pelo-celular",
+        "ru": "как-управлять-телевизором-с-телефона",
+        "id": "cara-mengontrol-tv-dengan-hp",
+        "it": "controllare-la-tv-con-il-telefono",
+        "vi": "dieu-khien-tivi-bang-dien-thoai",
+        "pl": "sterowanie-telewizorem-przez-telefon",
+        "nl": "tv-bedienen-met-je-telefoon",
+        "hi": "फोन-से-टीवी-कैसे-चलाएं",
+        "bn": "মোবাইল-দিয়ে-টিভি-কন্ট্রোল",
+        "th": "วิธีควบคุมทีวี-ด้วยมือถือ",
+        "ur": "فون-سے-ٹی-وی-کنٹرول-کریں",
+        "ja": "スマホ-で-テレビ-を-操作する-方法",
+        "ko": "휴대폰으로-tv-조작하는-법"
+      }
+    },
     "epg-empty-or-wrong-times": {
       "sourceLocale": "en",
       "locales": {
@@ -250,6 +275,31 @@
         "ur": "iptv-پلیئر-کیسے-چنیں",
         "ja": "iptv-プレイヤー-の-選び方",
         "ko": "iptv-플레이어-고르는-법"
+      }
+    },
+    "how-to-open-an-m3u-file": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "how-to-open-an-m3u-file",
+        "fa": "باز-کردن-فایل-m3u",
+        "ar": "كيف-تفتح-ملف-m3u",
+        "es": "como-abrir-un-archivo-m3u",
+        "tr": "m3u-dosyasi-nasil-acilir",
+        "fr": "comment-ouvrir-un-fichier-m3u",
+        "de": "m3u-datei-oeffnen",
+        "pt": "como-abrir-arquivo-m3u",
+        "ru": "как-открыть-файл-m3u",
+        "id": "cara-membuka-file-m3u",
+        "it": "come-aprire-un-file-m3u",
+        "vi": "cach-mo-file-m3u",
+        "pl": "jak-otworzyc-plik-m3u",
+        "nl": "m3u-bestand-openen",
+        "hi": "m3u-फाइल-कैसे-खोलें",
+        "bn": "m3u-ফাইল-কীভাবে-খুলবেন",
+        "th": "วิธีเปิดไฟล์-m3u",
+        "ur": "m3u-فائل-کیسے-کھولیں",
+        "ja": "m3u-ファイル-の-開き方",
+        "ko": "m3u-파일-여는-법"
       }
     },
     "how-vidonzo-encrypts-your-playlists": {
@@ -950,6 +1000,81 @@
         "ur": "iptv-پلیئر-کیا-کرتا-ہے",
         "ja": "iptv-プレイヤー-の-役割",
         "ko": "iptv-플레이어가-하는-일"
+      }
+    },
+    "what-is-an-m3u8-link": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "what-is-an-m3u8-link",
+        "fa": "لینک-m3u8-چیست",
+        "ar": "ما-هو-رابط-m3u8",
+        "es": "que-es-un-enlace-m3u8",
+        "tr": "m3u8-nedir-nasil-oynatilir",
+        "fr": "lien-m3u8-c-est-quoi",
+        "de": "was-ist-ein-m3u8-link",
+        "pt": "o-que-e-link-m3u8",
+        "ru": "что-такое-ссылка-m3u8",
+        "id": "apa-itu-m3u8",
+        "it": "cos-e-un-link-m3u8",
+        "vi": "link-m3u8-la-gi",
+        "pl": "co-to-jest-link-m3u8",
+        "nl": "wat-is-een-m3u8-link",
+        "hi": "m3u8-लिंक-क्या-है",
+        "bn": "m3u8-লিংক-কী",
+        "th": "ลิงก์-m3u8-คืออะไร",
+        "ur": "m3u8-لنک-کیا-ہے",
+        "ja": "m3u8-とは-再生方法",
+        "ko": "m3u8-링크란-무엇인가"
+      }
+    },
+    "what-is-iptv": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "what-is-iptv",
+        "fa": "iptv-چیست",
+        "ar": "ما-هو-iptv-وكيف-يعمل",
+        "es": "que-es-iptv",
+        "tr": "iptv-nedir-nasil-calisir",
+        "fr": "c-est-quoi-l-iptv",
+        "de": "was-ist-iptv",
+        "pt": "o-que-e-iptv",
+        "ru": "что-такое-iptv",
+        "id": "apa-itu-iptv",
+        "it": "cos-e-l-iptv",
+        "vi": "iptv-la-gi",
+        "pl": "co-to-jest-iptv",
+        "nl": "wat-is-iptv",
+        "hi": "iptv-क्या-है",
+        "bn": "iptv-কী-কীভাবে-কাজ-করে",
+        "th": "iptv-คืออะไร",
+        "ur": "iptv-کیا-ہے",
+        "ja": "iptv-とは",
+        "ko": "iptv란-무엇인가"
+      }
+    },
+    "xtream-codes-login-explained": {
+      "sourceLocale": "en",
+      "locales": {
+        "en": "xtream-codes-login-explained",
+        "fa": "ورود-به-اکستریم-کدز",
+        "ar": "شرح-بيانات-دخول-اكستريم-كودز",
+        "es": "datos-de-acceso-xtream-codes",
+        "tr": "xtream-codes-giris-bilgileri",
+        "fr": "identifiants-xtream-codes-expliques",
+        "de": "xtream-codes-login-erklaert",
+        "pt": "login-xtream-codes-explicado",
+        "ru": "логин-xtream-codes-сервер-имя-и-пароль",
+        "id": "login-xtream-codes",
+        "it": "codici-xtream-spiegati",
+        "vi": "dang-nhap-xtream-codes",
+        "pl": "dane-logowania-xtream-codes",
+        "nl": "xtream-codes-login-uitgelegd",
+        "hi": "xtream-codes-लॉगिन-डिटेल्स",
+        "bn": "xtream-codes-লগইন-সার্ভার-url-ইউজারনেম-পাসওয়ার্ড",
+        "th": "ล็อกอิน-xtream-codes-กรอกอย่างไร",
+        "ur": "xtream-codes-لاگ-ان-کی-وضاحت",
+        "ja": "xtream-codes-ログイン-の-入力方法",
+        "ko": "xtream-codes-로그인-정리"
       }
     },
     "xtream-codes-vs-m3u": {
